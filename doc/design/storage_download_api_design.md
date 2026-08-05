@@ -10,7 +10,7 @@ Provide a language-idiomatic, memory-safe, high-performance, and resilient API f
 
 ## 1. Client Surface & Async Streaming Interface
 
-We want to expose a simple, intuitive client interface for reading object contents while leveraging Swift Concurrency's `AsyncSequence` for streaming data.
+We want to expose a simple, intuitive client interface for reading object contents while leveraging Swift Concurrency's `AsyncSequence` for streaming data and immediately returning initial object metadata.
 
 ### Decision
 The primary client method for downloading object content is `readObject`:
@@ -20,23 +20,39 @@ func readObject(
   from bucket: String,
   object: String,
   options: ReadObjectOptions = .init()
-) -> ReadObjectSequence
+) async throws -> ReadObjectResponse
 ```
 
-- **Return Type:** Returns a custom struct `ReadObjectSequence` that conforms to `AsyncSequence` where `Element == Data`.
-- **Non-blocking Initialization:** Calling `readObject` immediately returns the `ReadObjectSequence` handle without blocking. Network requests and data streaming begin when the caller iterates over the sequence.
+- **Return Container Struct (`ReadObjectResponse`):** `readObject` is an `async throws` function that performs the initial HTTP handshake and returns a container struct holding both the object metadata and the streaming body:
+  ```swift
+  public struct ReadObjectResponse: Sendable {
+    /// Object metadata populated from response headers upon request initiation.
+    public let metadata: ReadObjectMetadata
+
+    /// An asynchronous sequence of `Data` chunks for the object payload.
+    public let body: ReadObjectSequence
+  }
+  ```
+- **Immediate Metadata Availability:** Upon `await client.readObject(...)` returning, response headers (`Content-Length`, `x-goog-generation`, `x-goog-hash`, `Content-Type`, etc.) are parsed and made available in `response.metadata` before the application consumes the payload stream.
+- **Lazy Payload Consumption:** The `response.body` (`ReadObjectSequence`) streams raw data chunks lazily as the caller iterates over it.
 
 ### Example Usage
 
-### Basic download with default options:
+#### Basic download with metadata access:
 
 ```swift
-for try await chunk in client.readObject(from: "my-bucket", object: "file.txt") {
+let response = try await client.readObject(from: "my-bucket", object: "file.txt")
+
+print("File Size: \(response.metadata.size) bytes")
+print("Generation: \(response.metadata.generation)")
+print("Content Type: \(response.metadata.contentType ?? "unknown")")
+
+for try await chunk in response.body {
   // process Data chunk
 }
 ```
 
-### Custom download options:
+#### Custom download options with ranged reads:
 
 ```swift
 let options = ReadObjectOptions().with {
@@ -44,7 +60,11 @@ let options = ReadObjectOptions().with {
   $0.autoResume = true
 }
 
-for try await chunk in client.readObject(from: "my-bucket", object: "file.txt", options: options) {
+let response = try await client.readObject(from: "my-bucket", object: "file.txt", options: options)
+
+print("Downloaded range size: \(response.metadata.size) bytes")
+
+for try await chunk in response.body {
   // process Data chunk
 }
 ```
@@ -237,9 +257,26 @@ public enum DownloadError: Error, Sendable, Equatable {
 }
 ```
 
-### Stream Sequence
+### Stream Sequence & Response Container
 
 ```swift
+/// Metadata attributes for an object returned in response headers during a download.
+public struct ReadObjectMetadata: Sendable, Hashable, Equatable {
+  public let bucket: String
+  public let object: String
+  public let size: Int64
+  public let generation: Int64
+  public let metageneration: Int64?
+  public let etag: String?
+  public let crc32c: String?
+  public let md5Hash: String?
+  public let contentType: String?
+  public let contentEncoding: String?
+  public let contentDisposition: String?
+  public let storageClass: String?
+  public let updated: Date?
+}
+
 /// An asynchronous sequence of `Data` chunks representing an object payload being downloaded.
 public struct ReadObjectSequence: AsyncSequence, Sendable {
   public typealias Element = Data
@@ -255,6 +292,15 @@ public struct ReadObjectSequence: AsyncSequence, Sendable {
 
   public func makeAsyncIterator() -> AsyncIterator
 }
+
+/// Container object returned by `readObject` containing metadata and the streaming body sequence.
+public struct ReadObjectResponse: Sendable {
+  /// Object metadata extracted from initial HTTP response headers.
+  public let metadata: ReadObjectMetadata
+
+  /// Asynchronous sequence yielding chunks of binary data payload.
+  public let body: ReadObjectSequence
+}
 ```
 
 ### StorageClient Extensions & Protocols
@@ -265,15 +311,15 @@ public protocol StorageClientProtocol {
     from bucket: String,
     object: String,
     options: ReadObjectOptions
-  ) -> ReadObjectSequence
+  ) async throws -> ReadObjectResponse
 }
 
 extension StorageClientProtocol {
   public func readObject(
     from bucket: String,
     object: String
-  ) -> ReadObjectSequence {
-    readObject(from: bucket, object: object, options: .init())
+  ) async throws -> ReadObjectResponse {
+    try await readObject(from: bucket, object: object, options: .init())
   }
 }
 
@@ -282,8 +328,10 @@ extension StorageClient {
     from bucket: String,
     object: String,
     options: ReadObjectOptions = .init()
-  ) -> ReadObjectSequence {
-    ReadObjectSequence(bucket: bucket, object: object, options: options)
+  ) async throws -> ReadObjectResponse {
+    // 1. Send initial GET request header handshake
+    // 2. Parse response headers into ReadObjectMetadata
+    // 3. Construct and return ReadObjectResponse(metadata: metadata, body: sequence)
   }
 }
 ```
@@ -310,3 +358,7 @@ extension StorageClient {
   - *Pros:* Hides internal implementation details and allows changing the underlying stream implementation in future releases without breaking API signature compatibility.
   - *Cons:* In Swift protocol declarations (`StorageClientProtocol`), returning `some` forces all conforming implementations (including test mocks) to use the exact same underlying concrete type, or requires adding an `associatedtype` requirement to the protocol.
 - *Recommendation:* If `StorageClientProtocol` needs flexibility across different mock implementations without complex protocol generic constraints, returning `ReadObjectSequence` or `any AsyncSequence<Data, any Error> & Sendable` (or an `AsyncThrowingStream<Data, Error>`) is preferable.
+
+### Option E: Returning `ReadObjectSequence` Directly (Without Metadata Container)
+- *Description:* Return `ReadObjectSequence` directly from `readObject` non-asynchronously without an initial handshake, deferring HTTP connection until iteration starts.
+- *Why Rejected:* **Delayed Metadata Access.** Returning `ReadObjectSequence` directly prevents developers from inspecting object metadata (`size`, `generation`, `contentType`, `etag`) before starting payload iteration. Returning `ReadObjectResponse` via `await client.readObject(...)` (matching Rust's `(metadata, stream)` container pattern) performs the initial HTTP response header handshake immediately, allowing callers to inspect `response.metadata` prior to body iteration.
