@@ -192,8 +192,8 @@ Transient network failures during large object downloads should not require rest
 ### Resumption Protocol Strategy
 1. **Offset Tracking:** As chunks of `Data` are yielded by the `AsyncIterator`, the iterator tracks total `bytesReceived`.
 2. **Re-connection Range:** On a transient connection drop or socket error, if `autoResume` is enabled (default `true`), the iterator transparently initiates a new HTTP GET request requesting range `bytes={rangeStart + bytesReceived}-`.
-3. **Generation Lock:** To avoid reading corrupted or mismatched data if the object was updated mid-download, the resumption request includes `ifGenerationMatch={generation}` using the object's generation returned in the initial response header.
-4. **Failure Handling:** If resumption fails (e.g., generation changed, object deleted, non-retryable status), a `DownloadError.resumeFailed` error is thrown through the stream.
+3. **Generation Pinning (`generation=X`):** Upon receiving the initial HTTP response, the client captures the object's exact `generation` (`X`) from response headers (or `metadata.generation`). If a transient failure occurs and resumption is triggered, all subsequent range requests explicitly set the `generation=X` parameter. This guarantees that even if the object is overwritten, updated, or soft-deleted in GCS mid-download, the client continues downloading the original version `X` seamlessly without encountering `412 Precondition Failed` errors.
+4. **Failure Handling:** If resumption fails (e.g., generation `X` expired/purged, non-retryable status), a `DownloadError.resumeFailed` error is thrown through the stream.
 
 ---
 
