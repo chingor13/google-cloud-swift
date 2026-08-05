@@ -83,6 +83,9 @@ public enum ReadRange: Sendable, Hashable, Equatable {
   /// Read all bytes starting from `offset` to the end of the object (HTTP `bytes=N-`).
   case fromOffset(UInt64)
 
+  /// Read the first `count` bytes of the object (HTTP `bytes=0-N`).
+  case prefix(UInt64)
+
   /// Read the last `count` bytes of the object (HTTP `bytes=-N`).
   case suffix(UInt64)
 
