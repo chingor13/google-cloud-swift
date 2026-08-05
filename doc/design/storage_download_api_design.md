@@ -59,7 +59,7 @@ Developers need full control over target object selection, precondition checks, 
 1. **Target Object Identification:**
    - `bucket`: Bucket name containing the object.
    - `object`: Object name/path within the bucket.
-   - `generation`: Optional object generation (`Int64?`) to read a specific revision of an object.
+   - `generation`: Optional object generation (`UInt64?`) to read a specific revision of an object.
 2. **Preconditions:**
    - Leverages `StoragePreconditions` (`ifGenerationMatch`, `ifGenerationNotMatch`, `ifMetagenerationMatch`, `ifMetagenerationNotMatch`) to ensure operations execute only when condition constraints pass.
 3. **Customer-Supplied Encryption Keys (CSEK):**
@@ -81,16 +81,16 @@ public enum ReadRange: Sendable, Hashable, Equatable {
   case entire
 
   /// Read all bytes starting from `offset` to the end of the object (HTTP `bytes=N-`).
-  case fromOffset(Int64)
+  case fromOffset(UInt64)
 
   /// Read the last `count` bytes of the object (HTTP `bytes=-N`).
-  case suffix(Int64)
+  case suffix(UInt64)
 
   /// Read a bounded range of bytes from `start` to `end` inclusive (HTTP `bytes=start-end`).
-  case bounded(start: Int64, end: Int64)
+  case bounded(start: UInt64, end: UInt64)
 
-  /// Convenience initializer for Swift `ClosedRange<Int64>`.
-  public init(_ range: ClosedRange<Int64>) {
+  /// Convenience initializer for Swift `ClosedRange<UInt64>`.
+  public init(_ range: ClosedRange<UInt64>) {
     self = .bounded(start: range.lowerBound, end: range.upperBound)
   }
 
@@ -184,11 +184,11 @@ Below is the complete proposed public API surface for object downloads in `Googl
 /// Specifies a byte range for ranged reads.
 public enum ReadRange: Sendable, Hashable, Equatable {
   case entire
-  case fromOffset(Int64)
-  case suffix(Int64)
-  case bounded(start: Int64, end: Int64)
+  case fromOffset(UInt64)
+  case suffix(UInt64)
+  case bounded(start: UInt64, end: UInt64)
 
-  public init(_ range: ClosedRange<Int64>)
+  public init(_ range: ClosedRange<UInt64>)
   public var headerValue: String? { get }
 }
 
@@ -206,7 +206,7 @@ public struct DownloadChecksumOptions: Sendable, Hashable, Equatable {
 
 /// Configuration options for object download (`readObject`) requests.
 public struct ReadObjectOptions: Sendable {
-  public var generation: Int64?
+  public var generation: UInt64?
   public var preconditions: StoragePreconditions?
   public var customerEncryptionKey: CustomerEncryptionKeyOptions?
   public var range: ReadRange = .entire
@@ -229,7 +229,7 @@ public struct ReadObjectOptions: Sendable {
 public enum DownloadError: Error, Sendable, Equatable {
   case checksumMismatch(expected: String, actual: String, algorithm: String)
   case invalidRange(String)
-  case resumeFailed(bytesReceived: Int64, message: String)
+  case resumeFailed(bytesReceived: UInt64, message: String)
   case unexpectedServerResponse(statusCode: Int, message: String)
 }
 ```
