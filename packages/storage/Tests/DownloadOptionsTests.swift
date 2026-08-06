@@ -34,7 +34,7 @@ import Testing
     #expect(defaultOptions.preconditions == nil)
     #expect(defaultOptions.customerEncryptionKey == nil)
     #expect(defaultOptions.range == .entire)
-    #expect(defaultOptions.disableDecompressiveTranscoding == false)
+    #expect(defaultOptions.enableDecompressiveTranscoding == true)
     #expect(defaultOptions.checksums == .default)
     #expect(defaultOptions.autoResume == true)
 
@@ -45,7 +45,7 @@ import Testing
       $0.generation = 456
       $0.preconditions = preconditions
       $0.range = .bounded(start: 0, end: 1024)
-      $0.disableDecompressiveTranscoding = true
+      $0.enableDecompressiveTranscoding = false
       $0.checksums = .none
       $0.autoResume = false
     }
@@ -53,7 +53,7 @@ import Testing
     #expect(options.generation == 456)
     #expect(options.preconditions?.ifGenerationMatch == 123)
     #expect(options.range == .bounded(start: 0, end: 1024))
-    #expect(options.disableDecompressiveTranscoding == true)
+    #expect(options.enableDecompressiveTranscoding == false)
     #expect(options.checksums == .none)
     #expect(options.autoResume == false)
   }

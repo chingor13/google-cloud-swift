@@ -140,9 +140,9 @@ public enum ReadRange: Sendable, Hashable, Equatable {
 Objects uploaded to GCS with `Content-Encoding: gzip` are automatically decompressed by GCS during download (decompressive transcoding) unless the client explicitly disables it.
 
 ### Decision
-The `ReadObjectOptions` struct provides a `disableDecompressiveTranscoding: Bool` flag (default `false`):
-- When `false` (default): GCS decompresses the object on-the-fly before sending payload bytes to the client.
-- When `true`: The client adds `Accept-Encoding: gzip` to request headers. GCS delivers the raw compressed bytes without decompressing.
+The `ReadObjectOptions` struct provides an `enableDecompressiveTranscoding: Bool` flag (default `true`):
+- When `true` (default): GCS decompresses the object on-the-fly before sending payload bytes to the client.
+- When `false`: The client adds `Accept-Encoding: gzip` to request headers. GCS delivers the raw compressed bytes without decompressing.
 
 ---
 
@@ -225,7 +225,7 @@ public struct ReadObjectOptions: Sendable {
   public var preconditions: StoragePreconditions?
   public var customerEncryptionKey: CustomerEncryptionKeyOptions?
   public var range: ReadRange = .entire
-  public var disableDecompressiveTranscoding: Bool = false
+  public var enableDecompressiveTranscoding: Bool = true
   public var checksums: ChecksumOptions = .default
   public var autoResume: Bool = true
 

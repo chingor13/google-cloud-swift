@@ -67,8 +67,8 @@ public struct ReadObjectOptions: Sendable {
   /// Byte range for partial/ranged reads. Defaults to `.entire`.
   public var range: ReadRange = .entire
 
-  /// Flag to disable automatic decompressive transcoding by GCS. Defaults to `false`.
-  public var disableDecompressiveTranscoding: Bool = false
+  /// Flag to enable automatic decompressive transcoding by GCS. Defaults to `true`.
+  public var enableDecompressiveTranscoding: Bool = true
 
   /// Configuration options for download checksum validation.
   public var checksums: ChecksumOptions = .default
