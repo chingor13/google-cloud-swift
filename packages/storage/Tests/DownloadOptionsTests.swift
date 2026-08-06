@@ -60,21 +60,21 @@ import Testing
 
   @Test func readObjectMetadataProperties() {
     let now = Date()
-    let metadata = ReadObjectMetadata(
-      bucket: "my-bucket",
-      object: "my-object.txt",
-      size: 2048,
-      generation: 10,
-      metageneration: 2,
-      etag: "etag-123",
-      crc32c: "crc-456",
-      md5Hash: "md5-789",
-      contentType: "text/plain",
-      contentEncoding: "gzip",
-      contentDisposition: "inline",
-      storageClass: "STANDARD",
-      updated: now
-    )
+    let metadata = ReadObjectMetadata().with {
+      $0.bucket = "my-bucket"
+      $0.object = "my-object.txt"
+      $0.size = 2048
+      $0.generation = 10
+      $0.metageneration = 2
+      $0.etag = "etag-123"
+      $0.crc32c = "crc-456"
+      $0.md5Hash = "md5-789"
+      $0.contentType = "text/plain"
+      $0.contentEncoding = "gzip"
+      $0.contentDisposition = "inline"
+      $0.storageClass = "STANDARD"
+      $0.updated = now
+    }
 
     #expect(metadata.bucket == "my-bucket")
     #expect(metadata.object == "my-object.txt")
@@ -92,7 +92,10 @@ import Testing
   }
 
   @Test func readObjectSequenceAndResponse() async throws {
-    let metadata = ReadObjectMetadata(bucket: "bkt", object: "obj")
+    let metadata = ReadObjectMetadata().with {
+      $0.bucket = "bkt"
+      $0.object = "obj"
+    }
     let options = ReadObjectOptions().with { $0.autoResume = false }
     let sequence = ReadObjectSequence(bucket: "bkt", object: "obj", options: options)
 

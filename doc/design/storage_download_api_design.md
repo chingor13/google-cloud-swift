@@ -254,20 +254,29 @@ public enum DownloadError: Error, Sendable, Equatable {
 ```swift
 /// Metadata attributes for an object returned in response headers during a download.
 public struct ReadObjectMetadata: Sendable, Hashable, Equatable {
-  public let bucket: String
-  public let object: String
-  public let size: Int64
-  public let generation: Int64
-  public let metageneration: Int64?
-  public let etag: String?
-  public let crc32c: String?
-  public let md5Hash: String?
-  public let contentType: String?
-  public let contentEncoding: String?
-  public let contentDisposition: String?
-  public let storageClass: String?
-  public let updated: Date?
+  public var bucket: String = ""
+  public var object: String = ""
+  public var size: Int64 = 0
+  public var generation: Int64 = 0
+  public var metageneration: Int64?
+  public var etag: String?
+  public var crc32c: String?
+  public var md5Hash: String?
+  public var contentType: String?
+  public var contentEncoding: String?
+  public var contentDisposition: String?
+  public var storageClass: String?
+  public var updated: Date?
+
+  public init() {}
+
+  public func with(_ config: (inout Self) -> Void) -> Self {
+    var copy = self
+    config(&copy)
+    return copy
+  }
 }
+
 
 /// An asynchronous sequence of `Data` chunks representing an object payload being downloaded.
 public struct ReadObjectSequence: AsyncSequence, Sendable {

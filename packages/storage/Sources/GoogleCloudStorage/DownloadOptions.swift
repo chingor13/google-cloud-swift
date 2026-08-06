@@ -91,48 +91,26 @@ public struct ReadObjectOptions: Sendable {
 
 /// Metadata attributes for an object returned in response headers during a download.
 public struct ReadObjectMetadata: Sendable, Hashable, Equatable {
-  public let bucket: String
-  public let object: String
-  public let size: Int64
-  public let generation: Int64
-  public let metageneration: Int64?
-  public let etag: String?
-  public let crc32c: String?
-  public let md5Hash: String?
-  public let contentType: String?
-  public let contentEncoding: String?
-  public let contentDisposition: String?
-  public let storageClass: String?
-  public let updated: Date?
+  public var bucket: String = ""
+  public var object: String = ""
+  public var size: Int64 = 0
+  public var generation: Int64 = 0
+  public var metageneration: Int64?
+  public var etag: String?
+  public var crc32c: String?
+  public var md5Hash: String?
+  public var contentType: String?
+  public var contentEncoding: String?
+  public var contentDisposition: String?
+  public var storageClass: String?
+  public var updated: Date?
 
-  public init(
-    bucket: String,
-    object: String,
-    size: Int64 = 0,
-    generation: Int64 = 0,
-    metageneration: Int64? = nil,
-    etag: String? = nil,
-    crc32c: String? = nil,
-    md5Hash: String? = nil,
-    contentType: String? = nil,
-    contentEncoding: String? = nil,
-    contentDisposition: String? = nil,
-    storageClass: String? = nil,
-    updated: Date? = nil
-  ) {
-    self.bucket = bucket
-    self.object = object
-    self.size = size
-    self.generation = generation
-    self.metageneration = metageneration
-    self.etag = etag
-    self.crc32c = crc32c
-    self.md5Hash = md5Hash
-    self.contentType = contentType
-    self.contentEncoding = contentEncoding
-    self.contentDisposition = contentDisposition
-    self.storageClass = storageClass
-    self.updated = updated
+  public init() {}
+
+  public func with(_ config: (inout Self) -> Void) -> Self {
+    var copy = self
+    config(&copy)
+    return copy
   }
 }
 
