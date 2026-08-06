@@ -79,6 +79,7 @@ public struct ReadObjectOptions: Sendable {
   /// Default configuration options.
   public static var `default`: ReadObjectOptions { ReadObjectOptions() }
 
+  /// Creates a new `ReadObjectOptions` instance.
   public init() {}
 
   /// Builder pattern helper to modify configuration in place.
@@ -91,22 +92,49 @@ public struct ReadObjectOptions: Sendable {
 
 /// Metadata attributes for an object returned in response headers during a download.
 public struct ReadObjectMetadata: Sendable, Hashable, Equatable {
+  /// Name of the bucket containing the object.
   public var bucket: String = ""
+
+  /// Name of the object.
   public var object: String = ""
+
+  /// Content size of the object payload in bytes.
   public var size: Int64 = 0
+
+  /// Generation revision number of the object.
   public var generation: Int64 = 0
+
+  /// Metageneration revision number of the object metadata.
   public var metageneration: Int64?
+
+  /// HTTP ETag representing the object's entity state.
   public var etag: String?
+
+  /// Base64-encoded CRC32C checksum of the object content.
   public var crc32c: String?
+
+  /// Base64-encoded MD5 hash of the object content.
   public var md5Hash: String?
+
+  /// Content-Type MIME type of the object data (e.g., "text/plain", "image/png").
   public var contentType: String?
+
+  /// Content-Encoding header of the object data (e.g., "gzip").
   public var contentEncoding: String?
+
+  /// Content-Disposition header of the object data (e.g., "inline", "attachment; filename=...").
   public var contentDisposition: String?
+
+  /// Storage class of the object (e.g., "STANDARD", "NEARLINE", "COLDLINE", "ARCHIVE").
   public var storageClass: String?
+
+  /// Modification timestamp of the object.
   public var updated: Date?
 
+  /// Creates a new `ReadObjectMetadata` instance.
   public init() {}
 
+  /// Builder pattern helper to modify configuration in place.
   public func with(_ config: (inout Self) -> Void) -> Self {
     var copy = self
     config(&copy)
@@ -118,10 +146,16 @@ public struct ReadObjectMetadata: Sendable, Hashable, Equatable {
 public struct ReadObjectSequence: AsyncSequence, Sendable {
   public typealias Element = Data
 
+  /// Name of the bucket containing the object being read.
   public let bucket: String
+
+  /// Name of the object being read.
   public let object: String
+
+  /// Configuration options used for this object download.
   public let options: ReadObjectOptions
 
+  /// Creates a new `ReadObjectSequence` instance.
   public init(
     bucket: String,
     object: String,
@@ -132,15 +166,18 @@ public struct ReadObjectSequence: AsyncSequence, Sendable {
     self.options = options
   }
 
+  /// An asynchronous iterator for iterating over chunks of downloaded object payload data.
   public struct AsyncIterator: AsyncIteratorProtocol, Sendable {
     public typealias Element = Data
 
+    /// Advances to the next `Data` chunk in the downloaded object payload stream.
     public mutating func next() async throws -> Data? {
       // Stub implementation
       return nil
     }
   }
 
+  /// Creates an asynchronous iterator for iterating over object payload chunks.
   public func makeAsyncIterator() -> AsyncIterator {
     AsyncIterator()
   }
@@ -154,6 +191,7 @@ public struct ReadObjectResponse: Sendable {
   /// Asynchronous sequence yielding chunks of binary data payload.
   public let body: ReadObjectSequence
 
+  /// Creates a new `ReadObjectResponse` instance.
   public init(metadata: ReadObjectMetadata, body: ReadObjectSequence) {
     self.metadata = metadata
     self.body = body
