@@ -569,4 +569,3 @@ extension CustomerEncryption {
     }
   }
 }
-
