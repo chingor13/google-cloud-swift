@@ -129,13 +129,24 @@ import Testing
     #expect(downloaded == payload)
   }
 
-  @Test func downloadObjectWithSlashesInPath() async throws {
+  @Test(arguments: [
+    ("folder/subfolder/file.json", "folder%2Fsubfolder%2Ffile.json"),
+    ("file with spaces.txt", "file%20with%20spaces.txt"),
+    ("file&name.txt", "file&name.txt"),
+    ("file?name.txt", "file%3Fname.txt"),
+    ("file#name.txt", "file%23name.txt"),
+    (
+      "folder/subfolder/file with & and ?.json",
+      "folder%2Fsubfolder%2Ffile%20with%20&%20and%20%3F.json"
+    ),
+  ])
+  func downloadObjectWithSpecialCharactersInPath(
+    objectName: String, encodedObjectName: String
+  ) async throws {
     let registry = MockRegistry.create()
     let bucket = "test-bucket"
-    let objectName = "folder/subfolder/file.json"
     let payload = Data("{}".utf8)
 
-    let encodedObjectName = "folder%2Fsubfolder%2Ffile.json"
     let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(encodedObjectName)?alt=media")
 
     registry.register(
