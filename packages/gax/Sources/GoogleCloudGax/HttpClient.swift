@@ -59,12 +59,28 @@ public struct HTTPClient {
 
   public func Request(path: String, query: [URLQueryItem]) async throws -> URLRequest {
     var components = self.baseURL
+    components.path = path
+    components.queryItems = query
+    guard let url = components.url else {
+      throw RequestError.binding("bad URL for path=\(path), baseURL=\(self.baseURL)")
+    }
+    var request = URLRequest(url: url)
+    let headers = try await self.credentials.headers()
+    for (key, value) in headers {
+      request.setValue(value, forHTTPHeaderField: key)
+    }
+    return request
+  }
+
+  public func Request(percentEncodedPath: String, query: [URLQueryItem]) async throws -> URLRequest
+  {
+    var components = self.baseURL
     if !query.isEmpty {
       components.queryItems = query
     }
     components.percentEncodedPath = percentEncodedPath
     guard let url = components.url else {
-      throw RequestError.binding("bad URL for path=\(path), baseURL=\(self.baseURL)")
+      throw RequestError.binding("bad URL for path=\(percentEncodedPath), baseURL=\(self.baseURL)")
     }
     var request = URLRequest(url: url)
     let headers = try await self.credentials.headers()

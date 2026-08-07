@@ -89,7 +89,7 @@ extension HTTPClient {
     let encodedBucket =
       bucket.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? bucket
     var request = try await self.Request(
-      path: "/storage/v1/b/\(encodedBucket)/o/\(encodedObject)", query: queryItems)
+      percentEncodedPath: "/storage/v1/b/\(encodedBucket)/o/\(encodedObject)", query: queryItems)
     request.httpMethod = "GET"
 
     request.applyCustomerSuppliedEncryptionHeaders(options.customerEncryptionKey)
