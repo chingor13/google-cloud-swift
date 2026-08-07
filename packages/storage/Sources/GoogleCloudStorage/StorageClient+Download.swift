@@ -31,12 +31,9 @@ extension StorageClient {
     object: String,
     options: ReadObjectOptions = .init()
   ) async throws -> ReadObjectResult {
-    let clientOptions = self.options.client
-    let httpClient = try HTTPClient(
-      from: clientOptions, withDefaultEndpoint: StorageClient.defaultEndpoint)
-    let request = try await httpClient.buildReadObjectRequest(
+    let request = try await inner.buildReadObjectRequest(
       bucket: bucket, object: object, options: options)
-    let (data, response) = try await httpClient.data(for: request)
+    let (data, response) = try await inner.data(for: request)
 
     guard (200..<300).contains(response.statusCode) else {
       let message = String(data: data, encoding: .utf8) ?? ""
@@ -44,7 +41,7 @@ extension StorageClient {
         statusCode: response.statusCode, message: message)
     }
 
-    let metadata = httpClient.parseReadObjectMetadata(
+    let metadata = inner.parseReadObjectMetadata(
       from: response, bucket: bucket, object: object)
 
     let stream = AsyncThrowingStream<Data, Error> { continuation in
