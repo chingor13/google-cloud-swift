@@ -54,13 +54,3 @@ public protocol StorageClientProtocol {
     options: ReadObjectOptions
   ) async throws -> ReadObjectResult
 }
-
-extension StorageClientProtocol {
-  /// Reads (downloads) an object from Cloud Storage using default options.
-  public func readObject(
-    from bucket: String,
-    object: String
-  ) async throws -> ReadObjectResult {
-    try await readObject(from: bucket, object: object, options: .init())
-  }
-}
