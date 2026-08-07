@@ -15,7 +15,7 @@
 import Foundation
 
 /// Specifies a byte range for ranged reads.
-public enum ReadRange: Sendable, Hashable, Equatable {
+public enum ReadObjectRange: Sendable, Hashable, Equatable {
   /// Read the entire object (default).
   case entire
 
@@ -65,7 +65,7 @@ public struct ReadObjectOptions: Sendable {
   public var customerEncryptionKey: CustomerEncryptionKeyOptions?
 
   /// Byte range for partial/ranged reads. Defaults to `.entire`.
-  public var range: ReadRange = .entire
+  public var range: ReadObjectRange = .entire
 
   /// Flag to enable automatic decompressive transcoding by GCS. Defaults to `true`.
   public var enableDecompressiveTranscoding: Bool = true
@@ -184,14 +184,14 @@ public struct ReadObjectSequence: AsyncSequence, Sendable {
 }
 
 /// Container object returned by `readObject` containing metadata and the streaming body sequence.
-public struct ReadObjectResponse: Sendable {
+public struct ReadObjectResult: Sendable {
   /// Object metadata extracted from initial HTTP response headers.
   public let metadata: ReadObjectMetadata
 
   /// Asynchronous sequence yielding chunks of binary data payload.
   public let body: ReadObjectSequence
 
-  /// Creates a new `ReadObjectResponse` instance.
+  /// Creates a new `ReadObjectResult` instance.
   public init(metadata: ReadObjectMetadata, body: ReadObjectSequence) {
     self.metadata = metadata
     self.body = body

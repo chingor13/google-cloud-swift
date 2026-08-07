@@ -18,14 +18,14 @@ import Testing
 
 @Suite struct DownloadOptionsTests {
   @Test func readRangeHeaderValues() {
-    #expect(ReadRange.entire.headerValue == nil)
-    #expect(ReadRange.fromOffset(1024).headerValue == "bytes=1024-")
-    #expect(ReadRange.prefix(500).headerValue == "bytes=0-499")
-    #expect(ReadRange.prefix(0).headerValue == "bytes=0-0")
-    #expect(ReadRange.suffix(100).headerValue == "bytes=-100")
-    #expect(ReadRange.bounded(start: 10, end: 50).headerValue == "bytes=10-50")
-    #expect(ReadRange(10...50).headerValue == "bytes=10-50")
-    #expect(ReadRange(10...50) == ReadRange.bounded(start: 10, end: 50))
+    #expect(ReadObjectRange.entire.headerValue == nil)
+    #expect(ReadObjectRange.fromOffset(1024).headerValue == "bytes=1024-")
+    #expect(ReadObjectRange.prefix(500).headerValue == "bytes=0-499")
+    #expect(ReadObjectRange.prefix(0).headerValue == "bytes=0-0")
+    #expect(ReadObjectRange.suffix(100).headerValue == "bytes=-100")
+    #expect(ReadObjectRange.bounded(start: 10, end: 50).headerValue == "bytes=10-50")
+    #expect(ReadObjectRange(10...50).headerValue == "bytes=10-50")
+    #expect(ReadObjectRange(10...50) == ReadObjectRange.bounded(start: 10, end: 50))
   }
 
   @Test func readObjectOptionsDefaultsAndWithBuilder() throws {
@@ -107,7 +107,7 @@ import Testing
     let firstChunk = try await iterator.next()
     #expect(firstChunk == nil)
 
-    let response = ReadObjectResponse(metadata: metadata, body: sequence)
+    let response = ReadObjectResult(metadata: metadata, body: sequence)
     #expect(response.metadata.bucket == "bkt")
     #expect(response.metadata.object == "obj")
     #expect(response.body.bucket == "bkt")

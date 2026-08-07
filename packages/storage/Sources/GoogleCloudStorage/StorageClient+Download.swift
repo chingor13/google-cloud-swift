@@ -21,12 +21,12 @@ extension StorageClient {
   ///   - bucket: The GCS bucket name.
   ///   - object: The GCS object name.
   ///   - options: Configuration options for the read operation.
-  /// - Returns: A `ReadObjectResponse` containing initial object metadata and streaming body sequence.
+  /// - Returns: A `ReadObjectResult` containing initial object metadata and streaming body sequence.
   public func readObject(
     from bucket: String,
     object: String,
     options: ReadObjectOptions = .init()
-  ) async throws -> ReadObjectResponse {
+  ) async throws -> ReadObjectResult {
     fatalError("Unimplemented")
   }
 }

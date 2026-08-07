@@ -20,12 +20,12 @@ func readObject(
   from bucket: String,
   object: String,
   options: ReadObjectOptions = .init()
-) async throws -> ReadObjectResponse
+) async throws -> ReadObjectResult
 ```
 
-- **Return Container Struct (`ReadObjectResponse`):** `readObject` is an `async throws` function that performs the initial HTTP handshake and returns a container struct holding both the object metadata and the streaming body:
+- **Return Container Struct (`ReadObjectResult`):** `readObject` is an `async throws` function that performs the initial HTTP handshake and returns a container struct holding both the object metadata and the streaming body:
   ```swift
-  public struct ReadObjectResponse: Sendable {
+  public struct ReadObjectResult: Sendable {
     /// Object metadata populated from response headers upon request initiation.
     public let metadata: ReadObjectMetadata
 
@@ -33,6 +33,7 @@ func readObject(
     public let body: ReadObjectSequence
   }
   ```
+
 - **Immediate Metadata Availability:** Upon `await client.readObject(...)` returning, response headers (`Content-Length`, `x-goog-generation`, `x-goog-hash`, `Content-Type`, etc.) are parsed and made available in `response.metadata` before the application consumes the payload stream.
 - **Lazy Payload Consumption:** The `response.body` (`ReadObjectSequence`) streams raw data chunks lazily as the caller iterates over it.
 
@@ -91,12 +92,12 @@ Developers need full control over target object selection, precondition checks, 
 
 To support partial object downloads, parallel chunk downloads, or reading file footers (e.g. Parquet metadata), the API must support flexible ranged reads.
 
-### The `ReadRange` Abstraction
+### The `ReadObjectRange` Abstraction
 
-Ranged reads are configured via the `ReadRange` enum:
+Ranged reads are configured via the `ReadObjectRange` enum:
 
 ```swift
-public enum ReadRange: Sendable, Hashable, Equatable {
+public enum ReadObjectRange: Sendable, Hashable, Equatable {
   /// Read the entire object (default).
   case entire
 
@@ -209,7 +210,7 @@ Below is the complete proposed public API surface for object downloads in `Googl
 
 ```swift
 /// Specifies a byte range for ranged reads.
-public enum ReadRange: Sendable, Hashable, Equatable {
+public enum ReadObjectRange: Sendable, Hashable, Equatable {
   case entire
   case fromOffset(UInt64)
   case suffix(UInt64)
@@ -224,7 +225,8 @@ public struct ReadObjectOptions: Sendable {
   public var generation: UInt64?
   public var preconditions: StoragePreconditions?
   public var customerEncryptionKey: CustomerEncryptionKeyOptions?
-  public var range: ReadRange = .entire
+  public var range: ReadObjectRange = .entire
+
   public var enableDecompressiveTranscoding: Bool = true
   public var checksums: ChecksumOptions = .default
   public var autoResume: Bool = true
@@ -295,7 +297,7 @@ public struct ReadObjectSequence: AsyncSequence, Sendable {
 }
 
 /// Container object returned by `readObject` containing metadata and the streaming body sequence.
-public struct ReadObjectResponse: Sendable {
+public struct ReadObjectResult: Sendable {
   /// Object metadata extracted from initial HTTP response headers.
   public let metadata: ReadObjectMetadata
 
@@ -312,14 +314,14 @@ public protocol StorageClientProtocol {
     from bucket: String,
     object: String,
     options: ReadObjectOptions
-  ) async throws -> ReadObjectResponse
+  ) async throws -> ReadObjectResult
 }
 
 extension StorageClientProtocol {
   public func readObject(
     from bucket: String,
     object: String
-  ) async throws -> ReadObjectResponse {
+  ) async throws -> ReadObjectResult {
     try await readObject(from: bucket, object: object, options: .init())
   }
 }
@@ -329,13 +331,14 @@ extension StorageClient {
     from bucket: String,
     object: String,
     options: ReadObjectOptions = .init()
-  ) async throws -> ReadObjectResponse {
+  ) async throws -> ReadObjectResult {
     // 1. Send initial GET request header handshake
     // 2. Parse response headers into ReadObjectMetadata
-    // 3. Construct and return ReadObjectResponse(metadata: metadata, body: sequence)
+    // 3. Construct and return ReadObjectResult(metadata: metadata, body: sequence)
   }
 }
 ```
+
 
 ---
 
