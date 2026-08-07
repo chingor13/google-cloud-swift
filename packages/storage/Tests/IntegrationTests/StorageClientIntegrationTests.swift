@@ -56,6 +56,41 @@ import Testing
       print("Upload successful: \(object)")
     }
 
+    @Test func testFileDownload() async throws {
+      guard ProcessInfo.processInfo.environment["GOOGLE_CLOUD_PROJECT"] != nil else {
+        Issue.record("GOOGLE_CLOUD_PROJECT environment variable not set")
+        return
+      }
+      let bucketName =
+        ProcessInfo.processInfo.environment["GOOGLE_CLOUD_SWIFT_TEST_BUCKET"] ?? "test-bucket"
+      let objectName = "test-download-\(UUID().uuidString).txt"
+      let content = "Hello Google Cloud Storage file download integration test!"
+      let data = Data(content.utf8)
+
+      let storage = try StorageClient()
+
+      let uploadTask = storage.upload(data, to: bucketName, as: objectName)
+      let uploadedObject = try await uploadTask.value
+      #expect(uploadedObject.bucket == bucketName)
+      #expect(uploadedObject.name == objectName)
+
+      let result = try await storage.readObject(from: bucketName, object: objectName)
+      #expect(result.metadata.bucket == bucketName)
+      #expect(result.metadata.object == objectName)
+      #expect(result.metadata.size == Int64(data.count))
+      #expect(result.metadata.generation == uploadedObject.generation)
+
+      var downloadedData = Data()
+      for try await chunk in result.body {
+        downloadedData.append(chunk)
+      }
+      #expect(downloadedData == data)
+      let downloadedString = String(data: downloadedData, encoding: .utf8)
+      #expect(downloadedString == content)
+
+      print("File download integration test successful: \(result.metadata)")
+    }
+
     @Test func testLargeFileUpload() async throws {
       guard ProcessInfo.processInfo.environment["GOOGLE_CLOUD_PROJECT"] != nil else {
         Issue.record("GOOGLE_CLOUD_PROJECT environment variable not set")
@@ -308,7 +343,7 @@ import Testing
       #expect(object.bucket == bucketName)
       #expect(object.name == objectName)
       #expect(object.size == Int64(fileSize))
-      #expect(object.crc32c != nil)
+      #expect(object.checksums?.crc32C != nil)
       print("Resumed upload with new source instance and CRC32C checksumming successful: \(object)")
     }
 
