@@ -64,9 +64,11 @@ public struct ChecksumOptions: Sendable, Hashable {
 
   /// Creates a new `ChecksumOptions` configuration for validating data with Google Cloud Storage.
   ///
-  /// You can configure automatic on-the-fly calculation (`.auto`), pre-computed values (e.g., `.value("...")` or a string literal `"..."`),
-  /// or enable multiple checksum types simultaneously in a single request. `crc32c` is the default and recommended checksum option,
-  /// as it provides better computational performance compared to MD5.
+  /// You can configure:
+  /// - `.auto`: automatic on-the-fly calculation,
+  /// - `.value("...")` or a string literal `"..."`: pre-computed values
+  ///
+  /// You can also enable both crc32c and md5  checksums simultaneously.
   public init(crc32c: ChecksumValue? = .auto, md5: ChecksumValue? = nil) {
     self.crc32c = crc32c
     self.md5 = md5
