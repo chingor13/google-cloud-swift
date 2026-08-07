@@ -41,7 +41,7 @@ extension StorageClient {
         statusCode: response.statusCode, message: message)
     }
 
-    let metadata = inner.parseReadObjectMetadata(
+    let metadata = Self.parseReadObjectMetadata(
       from: response, bucket: bucket, object: object)
 
     let stream = AsyncThrowingStream<Data, Error> { continuation in
@@ -62,39 +62,8 @@ extension StorageClient {
       $0.body = sequence
     }
   }
-}
 
-extension HTTPClient {
-  fileprivate func buildReadObjectRequest(
-    bucket: String,
-    object: String,
-    options: ReadObjectOptions
-  ) async throws -> URLRequest {
-    var queryItems = [URLQueryItem(name: "alt", value: "media")]
-
-    if let generation = options.generation {
-      queryItems.append(URLQueryItem(name: "generation", value: String(generation)))
-    }
-    if let preconditions = options.preconditions {
-      queryItems.append(contentsOf: preconditions.queryItems)
-    }
-
-    let allowedObjectCharacters = CharacterSet.urlPathAllowed.subtracting(
-      CharacterSet(charactersIn: "/"))
-    let encodedObject =
-      object.addingPercentEncoding(withAllowedCharacters: allowedObjectCharacters) ?? object
-    let encodedBucket =
-      bucket.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? bucket
-    var request = try await self.Request(
-      percentEncodedPath: "/storage/v1/b/\(encodedBucket)/o/\(encodedObject)", query: queryItems)
-    request.httpMethod = "GET"
-
-    request.applyCustomerSuppliedEncryptionHeaders(options.customerEncryptionKey)
-
-    return request
-  }
-
-  fileprivate func parseReadObjectMetadata(
+  fileprivate static func parseReadObjectMetadata(
     from response: HTTPURLResponse,
     bucket: String,
     object: String
@@ -149,7 +118,7 @@ extension HTTPClient {
     return metadata
   }
 
-  fileprivate func parseGoogHash(_ headerValue: String) -> (crc32c: String?, md5: String?) {
+  fileprivate static func parseGoogHash(_ headerValue: String) -> (crc32c: String?, md5: String?) {
     var crc32c: String?
     var md5: String?
     let parts = headerValue.split(separator: ",")
@@ -164,7 +133,7 @@ extension HTTPClient {
     return (crc32c, md5)
   }
 
-  fileprivate func parseHTTPDate(_ string: String) -> Date? {
+  fileprivate static func parseHTTPDate(_ string: String) -> Date? {
     let formatter = DateFormatter()
     formatter.locale = Locale(identifier: "en_US_POSIX")
     formatter.timeZone = TimeZone(secondsFromGMT: 0)
@@ -180,5 +149,36 @@ extension HTTPClient {
     }
     isoFormatter.formatOptions = [.withInternetDateTime]
     return isoFormatter.date(from: string)
+  }
+}
+
+extension HTTPClient {
+  fileprivate func buildReadObjectRequest(
+    bucket: String,
+    object: String,
+    options: ReadObjectOptions
+  ) async throws -> URLRequest {
+    var queryItems = [URLQueryItem(name: "alt", value: "media")]
+
+    if let generation = options.generation {
+      queryItems.append(URLQueryItem(name: "generation", value: String(generation)))
+    }
+    if let preconditions = options.preconditions {
+      queryItems.append(contentsOf: preconditions.queryItems)
+    }
+
+    let allowedObjectCharacters = CharacterSet.urlPathAllowed.subtracting(
+      CharacterSet(charactersIn: "/"))
+    let encodedObject =
+      object.addingPercentEncoding(withAllowedCharacters: allowedObjectCharacters) ?? object
+    let encodedBucket =
+      bucket.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? bucket
+    var request = try await self.Request(
+      percentEncodedPath: "/storage/v1/b/\(encodedBucket)/o/\(encodedObject)", query: queryItems)
+    request.httpMethod = "GET"
+
+    request.applyCustomerSuppliedEncryptionHeaders(options.customerEncryptionKey)
+
+    return request
   }
 }
