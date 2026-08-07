@@ -81,10 +81,4 @@ public struct ChecksumOptions: Sendable, Hashable {
   public static var none: ChecksumOptions {
     ChecksumOptions(crc32c: nil, md5: nil)
   }
-
-  public var hasUserProvidedChecksum: Bool {
-    if case .value = crc32c { return true }
-    if case .value = md5 { return true }
-    return false
-  }
 }
