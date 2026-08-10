@@ -112,7 +112,7 @@ public struct HTTPClient {
     return (data, httpResponse)
   }
 
-  static func parseError(data: Data, response: HTTPURLResponse) -> RequestError {
+  public static func parseError(data: Data, response: HTTPURLResponse) -> RequestError {
     if let s = response.value(forHTTPHeaderField: "Content-Type"), s.contains("application/json") {
       if let w = ErrorWrapper(data: data, response: response) {
         return RequestError.service(ServiceError(wrapper: w))
