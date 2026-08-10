@@ -22,7 +22,7 @@ import Foundation
 ///
 /// In between calls the function waits the amount of time prescribed by the backoff policy, using
 /// `sleep` to implement any sleep.
-public struct _RetryLoop {
+public struct _RetryLoop: Sendable {
   let retryPolicy: any RetryPolicy
   let backoffPolicy: any BackoffPolicy
   let retryThrottler: any RetryThrottler
@@ -121,7 +121,9 @@ public struct _RetryLoop {
         retryThrottler.onSuccess()
         return response
       } catch {
-        let requestError = (error as? RequestError) ?? .unimplemented
+        guard let requestError = error as? RequestError else {
+          throw error
+        }
         let flow = retryPolicy.onError(state: state, error: requestError)
         nextDelay = backoffPolicy.backoffDelay(for: state)
         retryThrottler.onRetryFailure(flow: flow)

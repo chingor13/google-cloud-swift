@@ -60,6 +60,24 @@ import Testing
     }
   }
 
+  struct CustomDomainError: Error, Equatable {}
+
+  @Test func nonRequestErrorThrownDirectly() async throws {
+    let loop = _RetryLoop(
+      retryPolicy: MockPolicy(onError: { _, e in .retry(e) }),
+      backoffPolicy: MockBackoff(),
+      retryThrottler: MockThrottler(),
+      idempotent: true
+    )
+
+    await #expect(throws: CustomDomainError.self) {
+      try await loop.run(
+        inner: { _ in throw CustomDomainError() },
+        sleep: { _ in }
+      )
+    }
+  }
+
   @Test func retrySuccess() async throws {
     let transientError = transient()
     var attempts = 0
