@@ -55,7 +55,6 @@ package struct ObjectV1Response: Decodable, Sendable {
   package var bucket: String?
   package var etag: String?
   package var generation: StringOrInt64?
-  package var restoreToken: String?
   package var metageneration: StringOrInt64?
   package var storageClass: String?
   package var size: StringOrInt64?
@@ -64,15 +63,13 @@ package struct ObjectV1Response: Decodable, Sendable {
   package var cacheControl: String?
   package var acl: [ObjectAccessControl]?
   package var contentLanguage: String?
-  package var timeDeleted: GoogleCloudWkt.Timestamp?
-  package var finalizeTime: GoogleCloudWkt.Timestamp?
   package var contentType: String?
   package var timeCreated: GoogleCloudWkt.Timestamp?
   package var componentCount: StringOrInt32?
   package var crc32c: String?
   package var md5Hash: String?
   package var updated: GoogleCloudWkt.Timestamp?
-  package var kmsKey: String?
+  package var kmsKeyName: String?
   package var timeStorageClassUpdated: GoogleCloudWkt.Timestamp?
   package var temporaryHold: Bool?
   package var retentionExpirationTime: GoogleCloudWkt.Timestamp?
@@ -82,8 +79,6 @@ package struct ObjectV1Response: Decodable, Sendable {
   package var owner: Owner?
   package var customerEncryption: CustomerEncryption?
   package var customTime: GoogleCloudWkt.Timestamp?
-  package var softDeleteTime: GoogleCloudWkt.Timestamp?
-  package var hardDeleteTime: GoogleCloudWkt.Timestamp?
   package var retention: RetentionV1?
 
   package init() {}
@@ -94,7 +89,6 @@ package struct ObjectV1Response: Decodable, Sendable {
     obj.bucket = bucket ?? ""
     obj.etag = etag ?? ""
     obj.generation = generation?.value ?? 0
-    obj.restoreToken = restoreToken
     obj.metageneration = metageneration?.value ?? 0
     obj.storageClass = storageClass ?? ""
     obj.size = size?.value ?? 0
@@ -103,8 +97,6 @@ package struct ObjectV1Response: Decodable, Sendable {
     obj.cacheControl = cacheControl ?? ""
     obj.acl = acl ?? []
     obj.contentLanguage = contentLanguage ?? ""
-    obj.deleteTime = timeDeleted
-    obj.finalizeTime = finalizeTime
     obj.contentType = contentType ?? ""
     obj.createTime = timeCreated
     obj.componentCount = componentCount?.value ?? 0
@@ -132,7 +124,7 @@ package struct ObjectV1Response: Decodable, Sendable {
     }
 
     obj.updateTime = updated
-    obj.kmsKey = kmsKey ?? ""
+    obj.kmsKey = kmsKeyName ?? ""
     obj.updateStorageClassTime = timeStorageClassUpdated
     obj.temporaryHold = temporaryHold ?? false
     obj.retentionExpireTime = retentionExpirationTime
@@ -142,8 +134,6 @@ package struct ObjectV1Response: Decodable, Sendable {
     obj.owner = owner
     obj.customerEncryption = customerEncryption
     obj.customTime = customTime
-    obj.softDeleteTime = softDeleteTime
-    obj.hardDeleteTime = hardDeleteTime
 
     if let retention = retention {
       var r = Object.Retention()

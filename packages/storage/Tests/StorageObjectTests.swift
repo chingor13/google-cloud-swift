@@ -135,7 +135,6 @@ import Testing
         "contentType": "application/json",
         "timeCreated": "1970-01-01T00:00:01.000000002Z",
         "updated": "1970-01-01T00:00:01.000000002Z",
-        "timeDeleted": "1970-01-01T00:00:02.000000000Z",
         "timeStorageClassUpdated": "1970-01-01T00:00:03.000000000Z",
         "retentionExpirationTime": "1970-01-01T00:00:04.000000000Z",
         "crc32c": "AAAAAA==",
@@ -159,7 +158,6 @@ import Testing
     #expect(object.contentType == "application/json")
     #expect(object.createTime != nil)
     #expect(object.updateTime != nil)
-    #expect(object.deleteTime != nil)
     #expect(object.updateStorageClassTime != nil)
     #expect(object.retentionExpireTime != nil)
     #expect(object.checksums != nil)

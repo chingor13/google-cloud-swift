@@ -68,7 +68,6 @@ import Testing
         "bucket": "my-bucket",
         "etag": "etag-12345",
         "generation": "1234567890",
-        "restoreToken": "restore-token-abc",
         "metageneration": "3",
         "storageClass": "STANDARD",
         "size": "2048",
@@ -87,15 +86,13 @@ import Testing
           }
         ],
         "contentLanguage": "en",
-        "timeDeleted": "2026-01-01T00:00:01Z",
-        "finalizeTime": "2026-01-01T00:00:02Z",
         "contentType": "image/png",
         "timeCreated": "2026-01-01T00:00:03Z",
         "componentCount": "4",
         "crc32c": "AAAAAA==",
         "md5Hash": "1B2M2Y8AsgTpgAmY7PhCfg==",
         "updated": "2026-01-01T00:00:04Z",
-        "kmsKey": "projects/p/locations/l/keyRings/r/cryptoKeys/k",
+        "kmsKeyName": "projects/p/locations/l/keyRings/r/cryptoKeys/k",
         "timeStorageClassUpdated": "2026-01-01T00:00:05Z",
         "temporaryHold": true,
         "retentionExpirationTime": "2027-01-01T00:00:00Z",
@@ -119,8 +116,6 @@ import Testing
           "encryptionAlgorithm": "AES256"
         },
         "customTime": "2026-06-01T00:00:00Z",
-        "softDeleteTime": "2026-07-01T00:00:00Z",
-        "hardDeleteTime": "2026-08-01T00:00:00Z",
         "retention": {
           "mode": "Unlocked",
           "retainUntilTime": "2028-01-01T00:00:00Z"
@@ -137,7 +132,6 @@ import Testing
     #expect(object.bucket == "my-bucket")
     #expect(object.etag == "etag-12345")
     #expect(object.generation == 1234567890)
-    #expect(object.restoreToken == "restore-token-abc")
     #expect(object.metageneration == 3)
     #expect(object.storageClass == "STANDARD")
     #expect(object.size == 2048)
@@ -153,8 +147,6 @@ import Testing
     #expect(object.acl[1].entity == "allUsers")
 
     #expect(object.contentLanguage == "en")
-    #expect(object.deleteTime != nil)
-    #expect(object.finalizeTime != nil)
     #expect(object.contentType == "image/png")
     #expect(object.createTime != nil)
     #expect(object.componentCount == 4)
@@ -180,8 +172,6 @@ import Testing
 
     #expect(object.customerEncryption?.encryptionAlgorithm == "AES256")
     #expect(object.customTime != nil)
-    #expect(object.softDeleteTime != nil)
-    #expect(object.hardDeleteTime != nil)
 
     #expect(object.retention?.mode == .unlocked)
     #expect(object.retention?.retainUntilTime != nil)
