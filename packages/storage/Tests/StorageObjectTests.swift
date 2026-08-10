@@ -148,7 +148,8 @@ import Testing
     }
 
     let decoder = GoogleCloudWkt._ProtoJSONDecoder()
-    let object = try decoder.decode(Object.self, from: data)
+    let v1Object = try decoder.decode(ObjectV1Response.self, from: data)
+    let object = v1Object.toObject()
 
     #expect(object.bucket == "test-bucket")
     #expect(object.name == "folder/test.json")

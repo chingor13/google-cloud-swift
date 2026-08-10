@@ -585,7 +585,8 @@ extension HTTPClient {
         statusCode: response.statusCode, message: message)
     }
     let decoder = GoogleCloudWkt._ProtoJSONDecoder()
-    return try decoder.decode(Object.self, from: data)
+    let v1Object = try decoder.decode(ObjectV1Response.self, from: data)
+    return v1Object.toObject()
   }
 }
 
@@ -598,13 +599,7 @@ extension StorageClient {
     if let crcOption = options.crc32c {
       switch crcOption {
       case .auto:
-        let crc = _CRC32C.compute(data)
-        let bigEndian = crc.bigEndian
-        var bytes = [UInt8]()
-        withUnsafeBytes(of: bigEndian) {
-          bytes = Array($0)
-        }
-        parts.append("crc32c=" + Data(bytes).base64EncodedString())
+        break
       case .value(let val):
         let formatted = val.hasPrefix("crc32c=") ? val : "crc32c=" + val
         parts.append(formatted)
@@ -614,8 +609,7 @@ extension StorageClient {
     if let md5Option = options.md5 {
       switch md5Option {
       case .auto:
-        let digest = Insecure.MD5.hash(data: data)
-        parts.append("md5=" + Data(digest).base64EncodedString())
+        break
       case .value(let val):
         let formatted = val.hasPrefix("md5=") ? val : "md5=" + val
         parts.append(formatted)
