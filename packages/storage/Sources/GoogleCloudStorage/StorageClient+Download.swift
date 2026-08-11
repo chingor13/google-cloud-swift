@@ -44,11 +44,27 @@ extension StorageClient {
     let metadata = Self.parseReadObjectMetadata(
       from: response, bucket: bucket, object: object)
 
+    let isPartialContent = response.statusCode == 206 || options.range != .entire
+    let isDecompressed = response.value(forHTTPHeaderField: "x-goog-stored-content-length") != nil
+
+    var checksummer = DownloadChecksummer(
+      options: options.checksums,
+      metadata: metadata,
+      isPartialContent: isPartialContent,
+      isDecompressivelyTranscoded: isDecompressed
+    )
+
     let stream = AsyncThrowingStream<Data, Error> { continuation in
-      if !data.isEmpty {
-        continuation.yield(data)
+      do {
+        if !data.isEmpty {
+          checksummer.update(data)
+          continuation.yield(data)
+        }
+        try checksummer.validate()
+        continuation.finish()
+      } catch {
+        continuation.finish(throwing: error)
       }
-      continuation.finish()
     }
 
     let sequence = ReadObjectSequence().with {

@@ -57,7 +57,7 @@ import Testing
       "x-goog-generation": "17123456789",
       "x-goog-metageneration": "3",
       "ETag": "\"CPv1234\"",
-      "x-goog-hash": "crc32c=mcw+ng==, md5=N1YvABC==",
+      "x-goog-hash": "crc32c=AdiAvw==, md5=yTML28a3b45rOPOl4WI23Q==",
       "x-goog-storage-class": "STANDARD",
       "Last-Modified": "Fri, 07 Aug 2026 01:00:00 GMT",
     ]
@@ -76,8 +76,8 @@ import Testing
     #expect(result.metadata.generation == 17123456789)
     #expect(result.metadata.metageneration == 3)
     #expect(result.metadata.etag == "\"CPv1234\"")
-    #expect(result.metadata.crc32c == "mcw+ng==")
-    #expect(result.metadata.md5Hash == "N1YvABC==")
+    #expect(result.metadata.crc32c == "AdiAvw==")
+    #expect(result.metadata.md5Hash == "yTML28a3b45rOPOl4WI23Q==")
     #expect(result.metadata.contentType == "text/plain; charset=utf-8")
     #expect(result.metadata.storageClass == "STANDARD")
     #expect(result.metadata.updated != nil)
@@ -191,5 +191,250 @@ import Testing
     } else {
       Issue.record("Expected unexpectedServerResponse error")
     }
+  }
+
+  @Test func downloadWithAutoCRC32CSuccess() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "crc-success.txt"
+    let payload = Data("Hello, World!".utf8)  // CRC32C: TVUQaA==
+
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+    let headers = ["x-goog-hash": "crc32c=TVUQaA=="]
+
+    registry.register(
+      response: .success(statusCode: 200, data: payload, headers: headers),
+      for: downloadUrl
+    )
+
+    let client = try makeClient(endpoint: registry.endpoint)
+    let options = ReadObjectOptions().with {
+      $0.checksums = ChecksumOptions(crc32c: .auto)
+    }
+
+    let result = try await client.readObject(from: bucket, object: objectName, options: options)
+    var downloaded = Data()
+    for try await chunk in result.body {
+      downloaded.append(chunk)
+    }
+    #expect(downloaded == payload)
+  }
+
+  @Test func downloadWithAutoCRC32CMismatch() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "crc-mismatch.txt"
+    let payload = Data("Hello, World!".utf8)  // CRC32C: TVUQaA==
+
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+    let headers = ["x-goog-hash": "crc32c=invalid_crc=="]
+
+    registry.register(
+      response: .success(statusCode: 200, data: payload, headers: headers),
+      for: downloadUrl
+    )
+
+    let client = try makeClient(endpoint: registry.endpoint)
+    let options = ReadObjectOptions().with {
+      $0.checksums = ChecksumOptions(crc32c: .auto)
+    }
+
+    let result = try await client.readObject(from: bucket, object: objectName, options: options)
+
+    let err = await expectError(DownloadError.self) {
+      var downloaded = Data()
+      for try await chunk in result.body {
+        downloaded.append(chunk)
+      }
+      return downloaded
+    }
+
+    if case .checksumMismatch(let expected, let actual, let algorithm) = err {
+      #expect(expected == "invalid_crc==")
+      #expect(actual == "TVUQaA==")
+      #expect(algorithm == "crc32c")
+    } else {
+      Issue.record("Expected checksumMismatch error, got \(String(describing: err))")
+    }
+  }
+
+  @Test func downloadWithAutoMD5Success() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "md5-success.txt"
+    let payload = Data("Hello, World!".utf8)  // MD5: ZajifYh5KDgxtmS9i38K1A==
+
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+    let headers = ["x-goog-hash": "md5=ZajifYh5KDgxtmS9i38K1A=="]
+
+    registry.register(
+      response: .success(statusCode: 200, data: payload, headers: headers),
+      for: downloadUrl
+    )
+
+    let client = try makeClient(endpoint: registry.endpoint)
+    let options = ReadObjectOptions().with {
+      $0.checksums = ChecksumOptions(crc32c: nil, md5: .auto)
+    }
+
+    let result = try await client.readObject(from: bucket, object: objectName, options: options)
+    var downloaded = Data()
+    for try await chunk in result.body {
+      downloaded.append(chunk)
+    }
+    #expect(downloaded == payload)
+  }
+
+  @Test func downloadWithAutoMD5Mismatch() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "md5-mismatch.txt"
+    let payload = Data("Hello, World!".utf8)  // MD5: ZajifYh5KDgxtmS9i38K1A==
+
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+    let headers = ["x-goog-hash": "md5=wrong_md5=="]
+
+    registry.register(
+      response: .success(statusCode: 200, data: payload, headers: headers),
+      for: downloadUrl
+    )
+
+    let client = try makeClient(endpoint: registry.endpoint)
+    let options = ReadObjectOptions().with {
+      $0.checksums = ChecksumOptions(crc32c: nil, md5: .auto)
+    }
+
+    let result = try await client.readObject(from: bucket, object: objectName, options: options)
+
+    let err = await expectError(DownloadError.self) {
+      var downloaded = Data()
+      for try await chunk in result.body {
+        downloaded.append(chunk)
+      }
+      return downloaded
+    }
+
+    if case .checksumMismatch(let expected, let actual, let algorithm) = err {
+      #expect(expected == "wrong_md5==")
+      #expect(actual == "ZajifYh5KDgxtmS9i38K1A==")
+      #expect(algorithm == "md5")
+    } else {
+      Issue.record("Expected checksumMismatch error, got \(String(describing: err))")
+    }
+  }
+
+  @Test func downloadWithProvidedCRC32CValue() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "provided-crc.txt"
+    let payload = Data("Hello, World!".utf8)  // CRC32C: TVUQaA==
+
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+
+    registry.register(
+      response: .success(statusCode: 200, data: payload, headers: nil),
+      for: downloadUrl
+    )
+
+    let client = try makeClient(endpoint: registry.endpoint)
+    let options = ReadObjectOptions().with {
+      $0.checksums = ChecksumOptions(crc32c: "TVUQaA==")
+    }
+
+    let result = try await client.readObject(from: bucket, object: objectName, options: options)
+    var downloaded = Data()
+    for try await chunk in result.body {
+      downloaded.append(chunk)
+    }
+    #expect(downloaded == payload)
+  }
+
+  @Test func downloadWithProvidedCRC32CValueMismatch() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "provided-crc-mismatch.txt"
+    let payload = Data("Hello, World!".utf8)
+
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+
+    registry.register(
+      response: .success(statusCode: 200, data: payload, headers: nil),
+      for: downloadUrl
+    )
+
+    let client = try makeClient(endpoint: registry.endpoint)
+    let options = ReadObjectOptions().with {
+      $0.checksums = ChecksumOptions(crc32c: "bad_crc")
+    }
+
+    let result = try await client.readObject(from: bucket, object: objectName, options: options)
+
+    let err = await expectError(DownloadError.self) {
+      var downloaded = Data()
+      for try await chunk in result.body {
+        downloaded.append(chunk)
+      }
+      return downloaded
+    }
+
+    if case .checksumMismatch(let expected, let actual, let algorithm) = err {
+      #expect(expected == "bad_crc")
+      #expect(actual == "TVUQaA==")
+      #expect(algorithm == "crc32c")
+    } else {
+      Issue.record("Expected checksumMismatch error")
+    }
+  }
+
+  @Test func downloadWithProvidedCRC32CWithPrefix() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "prefix-crc.txt"
+    let payload = Data("Hello, World!".utf8)
+
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+
+    registry.register(
+      response: .success(statusCode: 200, data: payload, headers: nil),
+      for: downloadUrl
+    )
+
+    let client = try makeClient(endpoint: registry.endpoint)
+    let options = ReadObjectOptions().with {
+      $0.checksums = ChecksumOptions(crc32c: "crc32c=TVUQaA==")
+    }
+
+    let result = try await client.readObject(from: bucket, object: objectName, options: options)
+    var downloaded = Data()
+    for try await chunk in result.body {
+      downloaded.append(chunk)
+    }
+    #expect(downloaded == payload)
+  }
+
+  @Test func downloadWithProvidedMD5Value() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "provided-md5.txt"
+    let payload = Data("Hello, World!".utf8)  // MD5: ZajifYh5KDgxtmS9i38K1A==
+
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+
+    registry.register(
+      response: .success(statusCode: 200, data: payload, headers: nil),
+      for: downloadUrl
+    )
+
+    let client = try makeClient(endpoint: registry.endpoint)
+    let options = ReadObjectOptions().with {
+      $0.checksums = ChecksumOptions(crc32c: nil, md5: "ZajifYh5KDgxtmS9i38K1A==")
+    }
+
+    let result = try await client.readObject(from: bucket, object: objectName, options: options)
+    var downloaded = Data()
+    for try await chunk in result.body {
+      downloaded.append(chunk)
+    }
+    #expect(downloaded == payload)
   }
 }
