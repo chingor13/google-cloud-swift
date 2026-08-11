@@ -47,15 +47,13 @@ fi
 for dir in packages/*; do
     [[ -f "${dir}/Package.swift" ]] || continue
     count=$((count + 1))
-    pushd "${dir}"
     echo "--- Running ${dir} integration tests ---"
-    if swift test "${flags[@]}" --quiet --traits IntegrationTests; then
+    if swift test "${flags[@]}" --quiet --package-path "${dir}" --enable-all-traits; then
         echo; echo "✓ ${dir} passed"
     else
         echo; echo "✗ ${dir} failed"
         errors=$((errors + 1))
     fi
-    popd
 done
 
 echo; echo; echo "${count} local package(s) tested, ${errors} failure(s)."
