@@ -72,7 +72,7 @@ import Testing
 
     #expect(result.metadata.bucket == bucket)
     #expect(result.metadata.object == objectName)
-    #expect(result.metadata.size == Int64(payload.count))
+    #expect(result.metadata.size == UInt64(payload.count))
     #expect(result.metadata.generation == 17123456789)
     #expect(result.metadata.metageneration == 3)
     #expect(result.metadata.etag == "\"CPv1234\"")
@@ -191,5 +191,240 @@ import Testing
     } else {
       Issue.record("Expected unexpectedServerResponse error")
     }
+  }
+
+  @Test func downloadObjectWithRangeFromOffset() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "range-offset.txt"
+    let fullPayload = Data((0..<50).map { UInt8($0) })
+    let rangePayload = fullPayload.subdata(in: 10..<50)
+
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+
+    registry.register(
+      response: .success(
+        statusCode: 206,
+        data: rangePayload,
+        headers: [
+          "Content-Range": "bytes 10-49/50",
+          "Content-Length": String(rangePayload.count),
+          "x-goog-generation": "123",
+        ]
+      ),
+      for: downloadUrl
+    )
+
+    let client = try makeClient(endpoint: registry.endpoint)
+    let options = ReadObjectOptions().with {
+      $0.range = .fromOffset(10)
+    }
+
+    let result = try await client.readObject(from: bucket, object: objectName, options: options)
+    #expect(result.metadata.size == 50)
+    #expect(result.metadata.generation == 123)
+
+    let lastReq = registry.lastRequest(for: downloadUrl)
+    #expect(lastReq?.value(forHTTPHeaderField: "Range") == "bytes=10-")
+
+    var downloaded = Data()
+    for try await chunk in result.body {
+      downloaded.append(chunk)
+    }
+    #expect(downloaded == rangePayload)
+  }
+
+  @Test func downloadObjectWithRangePrefix() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "range-prefix.txt"
+    let fullPayload = Data((0..<50).map { UInt8($0) })
+    let rangePayload = fullPayload.subdata(in: 0..<20)
+
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+
+    registry.register(
+      response: .success(
+        statusCode: 206,
+        data: rangePayload,
+        headers: [
+          "Content-Range": "bytes 0-19/50",
+          "Content-Length": String(rangePayload.count),
+          "x-goog-generation": "124",
+        ]
+      ),
+      for: downloadUrl
+    )
+
+    let client = try makeClient(endpoint: registry.endpoint)
+    let options = ReadObjectOptions().with {
+      $0.range = .prefix(20)
+    }
+
+    let result = try await client.readObject(from: bucket, object: objectName, options: options)
+    #expect(result.metadata.size == 50)
+
+    let lastReq = registry.lastRequest(for: downloadUrl)
+    #expect(lastReq?.value(forHTTPHeaderField: "Range") == "bytes=0-19")
+
+    var downloaded = Data()
+    for try await chunk in result.body {
+      downloaded.append(chunk)
+    }
+    #expect(downloaded == rangePayload)
+  }
+
+  @Test func downloadObjectWithRangeSuffix() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "range-suffix.txt"
+    let fullPayload = Data((0..<50).map { UInt8($0) })
+    let rangePayload = fullPayload.subdata(in: 35..<50)
+
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+
+    registry.register(
+      response: .success(
+        statusCode: 206,
+        data: rangePayload,
+        headers: [
+          "Content-Range": "bytes 35-49/50",
+          "Content-Length": String(rangePayload.count),
+          "x-goog-generation": "125",
+        ]
+      ),
+      for: downloadUrl
+    )
+
+    let client = try makeClient(endpoint: registry.endpoint)
+    let options = ReadObjectOptions().with {
+      $0.range = .suffix(15)
+    }
+
+    let result = try await client.readObject(from: bucket, object: objectName, options: options)
+    #expect(result.metadata.size == 50)
+
+    let lastReq = registry.lastRequest(for: downloadUrl)
+    #expect(lastReq?.value(forHTTPHeaderField: "Range") == "bytes=-15")
+
+    var downloaded = Data()
+    for try await chunk in result.body {
+      downloaded.append(chunk)
+    }
+    #expect(downloaded == rangePayload)
+  }
+
+  @Test func downloadObjectWithRangeBounded() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "range-bounded.txt"
+    let fullPayload = Data((0..<50).map { UInt8($0) })
+    let rangePayload = fullPayload.subdata(in: 10..<30)
+
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+
+    registry.register(
+      response: .success(
+        statusCode: 206,
+        data: rangePayload,
+        headers: [
+          "Content-Range": "bytes 10-29/50",
+          "Content-Length": String(rangePayload.count),
+          "x-goog-generation": "126",
+        ]
+      ),
+      for: downloadUrl
+    )
+
+    let client = try makeClient(endpoint: registry.endpoint)
+    let options = ReadObjectOptions().with {
+      $0.range = .bounded(start: 10, end: 29)
+    }
+
+    let result = try await client.readObject(from: bucket, object: objectName, options: options)
+    #expect(result.metadata.size == 50)
+
+    let lastReq = registry.lastRequest(for: downloadUrl)
+    #expect(lastReq?.value(forHTTPHeaderField: "Range") == "bytes=10-29")
+
+    var downloaded = Data()
+    for try await chunk in result.body {
+      downloaded.append(chunk)
+    }
+    #expect(downloaded == rangePayload)
+  }
+
+  @Test func downloadObjectWithClosedRange() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "range-closed.txt"
+    let payload = Data("0123456789".utf8)
+
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+    let client = try makeClient(endpoint: registry.endpoint)
+
+    registry.register(
+      response: .success(
+        statusCode: 206,
+        data: payload,
+        headers: ["Content-Range": "bytes 0-9/10"]
+      ),
+      for: downloadUrl
+    )
+
+    _ = try await client.readObject(
+      from: bucket, object: objectName,
+      options: ReadObjectOptions().with { $0.range = ReadObjectRange(10...29) })
+    #expect(
+      registry.lastRequest(for: downloadUrl)?.value(forHTTPHeaderField: "Range") == "bytes=10-29")
+  }
+
+  @Test func rangedDownloadInvalidRangeThrows() async throws {
+    let registry = MockRegistry.create()
+    let client = try makeClient(endpoint: registry.endpoint)
+    let options = ReadObjectOptions().with {
+      $0.range = .bounded(start: 30, end: 10)
+    }
+
+    do {
+      _ = try await client.readObject(from: "test-bucket", object: "test.txt", options: options)
+      Issue.record("Expected invalidRangeHeader error to be thrown")
+    } catch let DownloadError.invalidRangeHeader(msg) {
+      #expect(msg.contains("30"))
+      #expect(msg.contains("10"))
+    } catch {
+      Issue.record("Expected invalidRangeHeader, but got \(error)")
+    }
+  }
+
+  @Test func rangedDownloadZeroCountRanges() async throws {
+    let registry = MockRegistry.create()
+    let client = try makeClient(endpoint: registry.endpoint)
+
+    // Prefix 0
+    let prefixResult = try await client.readObject(
+      from: "test-bucket",
+      object: "test.txt",
+      options: ReadObjectOptions().with { $0.range = .prefix(0) }
+    )
+    #expect(prefixResult.metadata.size == 0)
+    var prefixData = Data()
+    for try await chunk in prefixResult.body {
+      prefixData.append(chunk)
+    }
+    #expect(prefixData.isEmpty)
+
+    // Suffix 0
+    let suffixResult = try await client.readObject(
+      from: "test-bucket",
+      object: "test.txt",
+      options: ReadObjectOptions().with { $0.range = .suffix(0) }
+    )
+    #expect(suffixResult.metadata.size == 0)
+    var suffixData = Data()
+    for try await chunk in suffixResult.body {
+      suffixData.append(chunk)
+    }
+    #expect(suffixData.isEmpty)
   }
 }
