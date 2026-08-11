@@ -400,9 +400,11 @@ import Testing
   @Test func rangedDownloadZeroCountRanges() async throws {
     let registry = MockRegistry.create()
     let bucket = "test-bucket"
-    let objectName = "test.txt"
-    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+    let client = try makeClient(endpoint: registry.endpoint)
 
+    // Prefix 0
+    let prefixObject = "test-prefix.txt"
+    let prefixUrl = registry.url("/storage/v1/b/\(bucket)/o/\(prefixObject)?alt=media")
     registry.register(
       response: .success(
         statusCode: 206,
@@ -412,21 +414,18 @@ import Testing
           "x-goog-generation": "123",
         ]
       ),
-      for: downloadUrl
+      for: prefixUrl
     )
 
-    let client = try makeClient(endpoint: registry.endpoint)
-
-    // Prefix 0
     let prefixResult = try await client.readObject(
       from: bucket,
-      object: objectName,
+      object: prefixObject,
       options: ReadObjectOptions().with { $0.range = .prefix(0) }
     )
     #expect(prefixResult.metadata.size == 50)
     #expect(prefixResult.metadata.generation == 123)
     #expect(
-      registry.lastRequest(for: downloadUrl)?.value(forHTTPHeaderField: "Range") == "bytes=0-0")
+      registry.lastRequest(for: prefixUrl)?.value(forHTTPHeaderField: "Range") == "bytes=0-0")
 
     var prefixData = Data()
     for try await chunk in prefixResult.body {
@@ -435,15 +434,29 @@ import Testing
     #expect(prefixData.isEmpty)
 
     // Suffix 0
+    let suffixObject = "test-suffix.txt"
+    let suffixUrl = registry.url("/storage/v1/b/\(bucket)/o/\(suffixObject)?alt=media")
+    registry.register(
+      response: .success(
+        statusCode: 206,
+        data: Data([0x42]),
+        headers: [
+          "Content-Range": "bytes 0-0/50",
+          "x-goog-generation": "123",
+        ]
+      ),
+      for: suffixUrl
+    )
+
     let suffixResult = try await client.readObject(
       from: bucket,
-      object: objectName,
+      object: suffixObject,
       options: ReadObjectOptions().with { $0.range = .suffix(0) }
     )
     #expect(suffixResult.metadata.size == 50)
     #expect(suffixResult.metadata.generation == 123)
     #expect(
-      registry.lastRequest(for: downloadUrl)?.value(forHTTPHeaderField: "Range") == "bytes=-0")
+      registry.lastRequest(for: suffixUrl)?.value(forHTTPHeaderField: "Range") == "bytes=-0")
 
     var suffixData = Data()
     for try await chunk in suffixResult.body {

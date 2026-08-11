@@ -97,8 +97,6 @@ import Testing
       (ReadObjectRange.prefix(10), "0123456789"),
       (ReadObjectRange.suffix(10), "QRSTUVWXYZ"),
       (ReadObjectRange(5...15), "56789abcdef"),
-      (ReadObjectRange.prefix(0), ""),
-      (ReadObjectRange.suffix(0), ""),
       (ReadObjectRange.entire, "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"),
     ])
     func testRangedDownload(range: ReadObjectRange, expectedContent: String) async throws {
@@ -135,21 +133,54 @@ import Testing
       }
       let downloadedString = String(data: downloadedData, encoding: .utf8) ?? ""
       #expect(downloadedString == expectedContent)
+    }
+
+    @Test func testRangedDownloadZeroPrefix() async throws {
+      guard ProcessInfo.processInfo.environment["GOOGLE_CLOUD_PROJECT"] != nil else {
+        Issue.record("GOOGLE_CLOUD_PROJECT environment variable not set")
+        return
+      }
+      let bucketName =
+        ProcessInfo.processInfo.environment["GOOGLE_CLOUD_SWIFT_TEST_BUCKET"] ?? "test-bucket"
+      let objectName = "test-ranged-zero-prefix-\(UUID().uuidString).txt"
+      let content = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      let data = Data(content.utf8)
+      let totalSize = UInt64(data.count)
+
+      let storage = try StorageClient()
+
+      let uploadTask = storage.upload(data, to: bucketName, as: objectName)
+      let uploadedObject = try await uploadTask.value
+      #expect(uploadedObject.bucket == bucketName)
+      #expect(uploadedObject.name == objectName)
+
+      let options = ReadObjectOptions().with {
+        $0.range = .prefix(0)
+      }
+      let result = try await storage.readObject(
+        from: bucketName, object: objectName, options: options)
+
+      #expect(result.metadata.size == totalSize)
+      #expect(result.metadata.generation == UInt64(uploadedObject.generation))
+
+      var downloadedData = Data()
+      for try await chunk in result.body {
+        downloadedData.append(chunk)
+      }
+      #expect(downloadedData.isEmpty)
 
       // Verify reading 0 bytes on a non-existent object still executes the request and throws 404
-      if case .prefix(0) = range {
-        do {
-          _ = try await storage.readObject(
-            from: bucketName,
-            object: "non-existent-\(UUID().uuidString).txt",
-            options: options
-          )
-          Issue.record("Expected reading non-existent object to throw 404")
-        } catch DownloadError.unexpectedServerResponse(let statusCode, _) {
-          #expect(statusCode == 404)
-        } catch {
-          Issue.record("Expected DownloadError.unexpectedServerResponse, got \(error)")
-        }
+      do {
+        _ = try await storage.readObject(
+          from: bucketName,
+          object: "non-existent-\(UUID().uuidString).txt",
+          options: options
+        )
+        Issue.record("Expected reading non-existent object to throw 404")
+      } catch DownloadError.unexpectedServerResponse(let statusCode, _) {
+        #expect(statusCode == 404)
+      } catch {
+        Issue.record("Expected DownloadError.unexpectedServerResponse, got \(error)")
       }
     }
 
