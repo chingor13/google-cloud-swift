@@ -19,7 +19,7 @@ public enum DownloadError: Error, Sendable, Equatable {
   /// The downloaded payload checksum did not match the expected checksum.
   case checksumMismatch(expected: String, actual: String, algorithm: String)
 
-  /// The range header returned by GCS is invalid or malformed.
+  /// The range header returned by Cloud Storage is invalid or malformed.
   case invalidRangeHeader(String)
 
   /// Transparent download auto-resumption failed after a network interruption.
