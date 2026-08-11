@@ -38,14 +38,6 @@ extension StorageClient {
       }
     }
 
-    // short-circuit if no data is needed
-    if case .prefix(0) = options.range {
-      return emptyReadResult(bucket: bucket, object: object, options: options)
-    }
-    if case .suffix(0) = options.range {
-      return emptyReadResult(bucket: bucket, object: object, options: options)
-    }
-
     let request = try await inner.buildReadObjectRequest(
       bucket: bucket, object: object, options: options)
     let (data, response) = try await inner.data(for: request)
@@ -66,31 +58,6 @@ extension StorageClient {
       continuation.finish()
     }
 
-    let sequence = ReadObjectSequence().with {
-      $0.bucket = bucket
-      $0.object = object
-      $0.options = options
-      $0.stream = stream
-    }
-    return ReadObjectResult().with {
-      $0.metadata = metadata
-      $0.body = sequence
-    }
-  }
-
-  fileprivate func emptyReadResult(
-    bucket: String,
-    object: String,
-    options: ReadObjectOptions
-  ) -> ReadObjectResult {
-    let metadata = ReadObjectMetadata().with {
-      $0.bucket = bucket
-      $0.object = object
-      $0.size = 0
-    }
-    let stream = AsyncThrowingStream<Data, Error> { continuation in
-      continuation.finish()
-    }
     let sequence = ReadObjectSequence().with {
       $0.bucket = bucket
       $0.object = object

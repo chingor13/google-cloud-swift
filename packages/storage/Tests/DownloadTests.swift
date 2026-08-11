@@ -399,15 +399,35 @@ import Testing
 
   @Test func rangedDownloadZeroCountRanges() async throws {
     let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "test.txt"
+    let downloadUrl = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+
+    registry.register(
+      response: .success(
+        statusCode: 206,
+        data: Data([0x42]),
+        headers: [
+          "Content-Range": "bytes 0-0/50",
+          "x-goog-generation": "123",
+        ]
+      ),
+      for: downloadUrl
+    )
+
     let client = try makeClient(endpoint: registry.endpoint)
 
     // Prefix 0
     let prefixResult = try await client.readObject(
-      from: "test-bucket",
-      object: "test.txt",
+      from: bucket,
+      object: objectName,
       options: ReadObjectOptions().with { $0.range = .prefix(0) }
     )
-    #expect(prefixResult.metadata.size == 0)
+    #expect(prefixResult.metadata.size == 50)
+    #expect(prefixResult.metadata.generation == 123)
+    #expect(
+      registry.lastRequest(for: downloadUrl)?.value(forHTTPHeaderField: "Range") == "bytes=0-0")
+
     var prefixData = Data()
     for try await chunk in prefixResult.body {
       prefixData.append(chunk)
@@ -416,15 +436,38 @@ import Testing
 
     // Suffix 0
     let suffixResult = try await client.readObject(
-      from: "test-bucket",
-      object: "test.txt",
+      from: bucket,
+      object: objectName,
       options: ReadObjectOptions().with { $0.range = .suffix(0) }
     )
-    #expect(suffixResult.metadata.size == 0)
+    #expect(suffixResult.metadata.size == 50)
+    #expect(suffixResult.metadata.generation == 123)
+    #expect(
+      registry.lastRequest(for: downloadUrl)?.value(forHTTPHeaderField: "Range") == "bytes=-0")
+
     var suffixData = Data()
     for try await chunk in suffixResult.body {
       suffixData.append(chunk)
     }
     #expect(suffixData.isEmpty)
+
+    // 0-byte read on non-existent object throws 404
+    let notFoundUrl = registry.url("/storage/v1/b/\(bucket)/o/nonexistent.txt?alt=media")
+    registry.register(
+      response: .success(statusCode: 404, data: Data("Not Found".utf8), headers: nil),
+      for: notFoundUrl
+    )
+    do {
+      _ = try await client.readObject(
+        from: bucket,
+        object: "nonexistent.txt",
+        options: ReadObjectOptions().with { $0.range = .prefix(0) }
+      )
+      Issue.record("Expected unexpectedServerResponse error to be thrown for 404")
+    } catch DownloadError.unexpectedServerResponse(let statusCode, _) {
+      #expect(statusCode == 404)
+    } catch {
+      Issue.record("Expected unexpectedServerResponse, got \(error)")
+    }
   }
 }

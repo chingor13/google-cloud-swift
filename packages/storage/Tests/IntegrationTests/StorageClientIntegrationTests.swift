@@ -126,14 +126,8 @@ import Testing
       let result = try await storage.readObject(
         from: bucketName, object: objectName, options: options)
 
-      if case .prefix(0) = range {
-        #expect(result.metadata.size == 0)
-      } else if case .suffix(0) = range {
-        #expect(result.metadata.size == 0)
-      } else {
-        #expect(result.metadata.size == totalSize)
-        #expect(result.metadata.generation == UInt64(uploadedObject.generation))
-      }
+      #expect(result.metadata.size == totalSize)
+      #expect(result.metadata.generation == UInt64(uploadedObject.generation))
 
       var downloadedData = Data()
       for try await chunk in result.body {
@@ -141,6 +135,22 @@ import Testing
       }
       let downloadedString = String(data: downloadedData, encoding: .utf8) ?? ""
       #expect(downloadedString == expectedContent)
+
+      // Verify reading 0 bytes on a non-existent object still executes the request and throws 404
+      if case .prefix(0) = range {
+        do {
+          _ = try await storage.readObject(
+            from: bucketName,
+            object: "non-existent-\(UUID().uuidString).txt",
+            options: options
+          )
+          Issue.record("Expected reading non-existent object to throw 404")
+        } catch DownloadError.unexpectedServerResponse(let statusCode, _) {
+          #expect(statusCode == 404)
+        } catch {
+          Issue.record("Expected DownloadError.unexpectedServerResponse, got \(error)")
+        }
+      }
     }
 
     @Test(arguments: [
