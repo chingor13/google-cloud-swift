@@ -52,7 +52,11 @@ extension StorageClient {
       from: response, bucket: bucket, object: object)
 
     let stream = AsyncThrowingStream<Data, Error> { continuation in
-      if !data.isEmpty {
+      if case .prefix(0) = options.range {
+        // Requested 0 bytes
+      } else if case .suffix(0) = options.range {
+        // Requested 0 bytes
+      } else if !data.isEmpty {
         continuation.yield(data)
       }
       continuation.finish()
