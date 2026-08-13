@@ -23,7 +23,7 @@ import struct Logging.Logger
 /// The generated code uses this type directly. It exposes the methods we
 /// need, and nothing else.
 @_spi(GoogleCloudInternal) public struct _HTTPClientRequest {
-  let client: any HTTPClientProtocol
+  let client: any _HTTPClientProtocol
   var components: URLComponents
   var headers: NIOHTTP1.HTTPHeaders
   var method: NIOHTTP1.HTTPMethod = .GET
@@ -33,7 +33,7 @@ import struct Logging.Logger
   // expectation is that any RPC that takes this long or longer should be an LRO.
   static let defaultTimeout: Duration = .seconds(60)
 
-  init(_ client: HTTPClientProtocol, url: URLComponents) {
+  init(_ client: any _HTTPClientProtocol, url: URLComponents) {
     self.client = client
     self.components = url
     self.headers = NIOHTTP1.HTTPHeaders()
@@ -47,12 +47,20 @@ import struct Logging.Logger
     self.headers.add(name: name, value: value)
   }
 
-  public mutating func setBody(data: Data, ofContentType: String) {
-    self.body = data
-    self.headers.add(name: "Content-Type", value: ofContentType)
+  public mutating func setHeader(name: String, value: String) {
+    self.headers.replaceOrAdd(name: name, value: value)
   }
 
-  consuming func execute(timeout: Duration) async throws
+  public mutating func setBody(data: Data) {
+    self.body = data
+  }
+
+  public mutating func setBody(data: Data, ofContentType: String) {
+    self.body = data
+    self.headers.replaceOrAdd(name: "Content-Type", value: ofContentType)
+  }
+
+  public consuming func execute(timeout: Duration) async throws
     -> _HTTPClientResponse
   {
     guard let url = self.components.url else {
@@ -66,6 +74,10 @@ import struct Logging.Logger
     }
     let response = try await self.client.execute(request: request, timeout: timeout)
     return _HTTPClientResponse(response)
+  }
+
+  public consuming func execute() async throws -> _HTTPClientResponse {
+    try await execute(timeout: Self.defaultTimeout)
   }
 
   public consuming func rpc<R>(_ type: R.Type, timeout: Duration? = nil) async

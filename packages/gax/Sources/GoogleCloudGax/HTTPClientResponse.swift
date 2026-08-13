@@ -31,7 +31,7 @@ import struct NIOCore.ByteBuffer
 
   let response: AsyncHTTPClient.HTTPClientResponse
 
-  init(_ response: AsyncHTTPClient.HTTPClientResponse) {
+  public init(_ response: AsyncHTTPClient.HTTPClientResponse) {
     self.response = response
   }
 
@@ -48,11 +48,15 @@ import struct NIOCore.ByteBuffer
     return Data(buffer: buffer)
   }
 
-  func isError() -> Bool {
+  public func data() async throws -> Data {
+    try await data(upTo: Self.defaultMaximumResponseSize)
+  }
+
+  public func isError() -> Bool {
     !(200...300).contains(self.response.status.code)
   }
 
-  consuming func decodeError() async -> RequestError {
+  public consuming func decodeError() async -> RequestError {
     let data: Data
     do {
       let buffer = try await self.response.body.collect(upTo: Self.defaultMaximumResponseSize)
@@ -80,7 +84,7 @@ import struct NIOCore.ByteBuffer
       ))
   }
 
-  func decode<R>(_ type: R.Type) async throws -> Result<R, RequestError> where R: Decodable {
+  public func decode<R>(_ type: R.Type) async throws -> Result<R, RequestError> where R: Decodable {
     let buffer: NIOCore.ByteBuffer
     do {
       buffer = try await self.response.body.collect(upTo: Self.defaultMaximumResponseSize)
