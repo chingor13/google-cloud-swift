@@ -43,6 +43,10 @@ import struct NIOCore.ByteBuffer
     self.response.headers
   }
 
+  public var body: _HTTPResponseBody {
+    _HTTPResponseBody(self.response.body)
+  }
+
   public func data(upTo: Int) async throws -> Data {
     let buffer = try await self.response.body.collect(upTo: upTo)
     return Data(buffer: buffer)
