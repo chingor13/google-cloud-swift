@@ -1338,6 +1338,8 @@ libraries:
   - name: google-longrunning
     version: 0.1.0-preview
     copyright_year: "2026"
+    keep:
+      - Sources/GoogleLongRunning/Operation+Additions.swift
     swift:
       library_name_override: GoogleLongRunning
   - name: google-monitoring-dashboard-v1
