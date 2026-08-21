@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: swift
-version: v0.38.1-0.20260821183352-4eaeba5d8e1a
+version: v0.38.1-0.20260821212628-a96752a0feec
 repo: googleapis/google-cloud-swift
 sources:
   conformance:
@@ -43,10 +43,6 @@ tools:
       version: 1.38.1
       repo: https://github.com/apple/swift-protobuf.git
       product: protoc-gen-swift
-    - name: protoc-gen-grpc-swift
-      version: 1.23.0
-      repo: https://github.com/grpc/grpc-swift.git
-      product: protoc-gen-grpc-swift
 default:
   output: generated/
   swift:
