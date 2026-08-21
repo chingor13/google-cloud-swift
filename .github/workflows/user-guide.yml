@@ -32,20 +32,45 @@ jobs:
         uses: ./.github/actions/install-swift
       - name: Build Documentation
         run: |
-          swift package --allow-writing-to-package-directory \
-            generate-documentation --target UserGuide \
-            --hosting-base-path google-cloud-swift \
-            --transform-for-static-hosting \
-            --disable-indexing \
-            --output-path ./.render
+          set -ev
+          args=(
+            --transform-for-static-hosting
+            --disable-indexing
+          )
+          declare -A targets=(
+            [UserGuide]=guide
+            [GoogleCloudWkt]=wkt
+            [GoogleCloudGax]=gax
+            [GoogleCloudAuth]=auth
+            [GoogleCloudStorage]=storage
+            [GoogleCloudSecretManagerV1]=google-cloud-secretmanager-v1
+          )
+          echo DEBBUG DEBUG "${!targets[@]}"
+          mkdir -p .render
+          for target in "${!targets[@]}"; do
+            dir="${target[${target}]}"
+            swift package \
+              --allow-writing-to-directory .render/${dir} \
+              generate-documentation "${args[@]}" \
+              --target ${target} \
+              --hosting-base-path google-cloud-swift/${target} \
+              --output-path .render/${dir}
+          done
           # Replace the top-level index file with a redirect, as we only host
           # one target. Otherwise users have to find the hidden directory.
           cat >.render/index.html <<_EOF_
           <!DOCTYPE html>
           <html>
           <head>
-              <meta http-equiv="refresh" content="0; url=./documentation/userguide">
+              <meta http-equiv="refresh" content="10; url=./UserGuide/documentation/userguide">
           </head>
+          <body>
+          _EOF_
+          for target in "${!targets[@]}"; do
+            printf '  <li><a href=\"%s/documentation/%s\">%s</a></li>\n' "${target}" "${target,,}" "${target}" >>.render/index.html
+          done
+          cat >>.render/index.html <<_EOF_
+          </body>
           </html>
           _EOF_
       - name: Upload user guide
