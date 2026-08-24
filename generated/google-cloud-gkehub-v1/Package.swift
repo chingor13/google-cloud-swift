@@ -31,7 +31,7 @@ let package = Package(
     .package(path: "../../packages/gax"),
     .package(path: "../../packages/wkt"),
     .package(path: "../../generated/google-longrunning"),
-    .package(path: "../../generated/google-rpc"),
+    .package(url: "https://github.com/chingor13/swift-rpc", from: "0.1.0"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
@@ -51,7 +51,7 @@ let package = Package(
         .product(name: "GoogleCloudGax", package: "gax"),
         .product(name: "GoogleCloudWkt", package: "wkt"),
         .product(name: "GoogleLongRunning", package: "google-longrunning"),
-        .product(name: "GoogleRpc", package: "google-rpc"),
+        .product(name: "GoogleRpc", package: "swift-rpc"),
         .product(name: "Logging", package: "swift-log"),
       ],
     )

@@ -26,7 +26,7 @@ let package = Package(
   dependencies: [
     .package(path: "../../packages/wkt"),
     .package(path: "../../generated/google-iam-v1"),
-    .package(path: "../../generated/google-rpc"),
+    .package(url: "https://github.com/chingor13/swift-rpc", from: "0.1.0"),
   ],
   targets: [
     .target(
@@ -34,7 +34,7 @@ let package = Package(
       dependencies: [
         .product(name: "GoogleCloudWkt", package: "wkt"),
         .product(name: "GoogleIAMV1", package: "google-iam-v1"),
-        .product(name: "GoogleRpc", package: "google-rpc"),
+        .product(name: "GoogleRpc", package: "swift-rpc"),
       ],
     )
   ]

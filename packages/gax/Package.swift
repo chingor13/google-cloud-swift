@@ -27,7 +27,7 @@ let package = Package(
   ],
   dependencies: [
     .package(path: "../auth"),
-    .package(path: "../../generated/google-rpc"),
+    .package(url: "https://github.com/chingor13/swift-rpc", from: "0.1.0"),
     .package(url: "https://github.com/apple/swift-log", from: "1.14.0"),
     .package(url: "https://github.com/apple/swift-collections", from: "1.6.0"),
     .package(url: "https://github.com/apple/swift-nio", from: "2.101.0"),
@@ -41,7 +41,7 @@ let package = Package(
       dependencies: [
         .product(name: "AsyncHTTPClient", package: "async-http-client"),
         .product(name: "GoogleCloudAuth", package: "auth"),
-        .product(name: "GoogleRpc", package: "google-rpc"),
+        .product(name: "GoogleRpc", package: "swift-rpc"),
         .product(name: "Logging", package: "swift-log"),
         .product(name: "NIOCore", package: "swift-nio"),
         .product(name: "NIOFoundationCompat", package: "swift-nio"),
@@ -63,7 +63,7 @@ let package = Package(
         "GoogleCloudGax",
         "GoogleCloudGaxGRPC",
         .product(name: "DequeModule", package: "swift-collections"),
-        .product(name: "GoogleRpc", package: "google-rpc"),
+        .product(name: "GoogleRpc", package: "swift-rpc"),
       ],
       path: "Tests",
     ),
