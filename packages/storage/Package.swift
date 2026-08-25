@@ -29,7 +29,7 @@ let package = Package(
     .package(path: "../gax"),
     .package(path: "../wkt"),
     .package(path: "../../generated/google-iam-v1"),
-    .package(url: "https://github.com/chingor13/swift-rpc", from: "0.1.0"),
+    .package(url: "https://github.com/chingor13/swift-rpc", from: "0.1.0-preview"),
     .package(path: "../../generated/google-longrunning"),
     .package(path: "../../generated/google-type"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),

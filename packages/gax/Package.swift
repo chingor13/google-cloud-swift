@@ -27,7 +27,7 @@ let package = Package(
   ],
   dependencies: [
     .package(path: "../auth"),
-    .package(url: "https://github.com/chingor13/swift-rpc", from: "0.1.0"),
+    .package(url: "https://github.com/chingor13/swift-rpc", from: "0.1.0-preview"),
     .package(url: "https://github.com/apple/swift-log", from: "1.14.0"),
     .package(url: "https://github.com/apple/swift-collections", from: "1.6.0"),
     .package(url: "https://github.com/apple/swift-nio", from: "2.101.0"),
