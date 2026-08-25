@@ -17,6 +17,17 @@ import struct AsyncHTTPClient.HTTPClientRequest
 import struct NIOHTTP1.HTTPHeaders
 import enum NIOHTTP1.HTTPMethod
 import struct Logging.Logger
+import struct NIOCore.ByteBuffer
+
+/// Represents the body of an HTTP request.
+@_spi(GoogleCloudInternal) public enum _HTTPRequestBody: Sendable {
+  case byteBuffer(NIOCore.ByteBuffer)
+  case data(Foundation.Data)
+  case stream(
+    @Sendable () -> (any AsyncSequence<NIOCore.ByteBuffer, any Error> & Sendable),
+    length: Int64?
+  )
+}
 
 /// Represents an HTTP request.
 ///
@@ -27,7 +38,7 @@ import struct Logging.Logger
   var components: URLComponents
   var headers: NIOHTTP1.HTTPHeaders
   var method: NIOHTTP1.HTTPMethod = .GET
-  var body: Data? = nil
+  var body: _HTTPRequestBody? = nil
 
   // If the application and retry policy does not set a limit for each attempt we use this. The
   // expectation is that any RPC that takes this long or longer should be an LRO.
@@ -52,11 +63,36 @@ import struct Logging.Logger
   }
 
   public mutating func setBody(data: Data) {
-    self.body = data
+    self.body = .data(data)
   }
 
   public mutating func setBody(data: Data, ofContentType: String) {
-    self.body = data
+    self.body = .data(data)
+    self.headers.replaceOrAdd(name: "Content-Type", value: ofContentType)
+  }
+
+  public mutating func setBody(buffer: NIOCore.ByteBuffer) {
+    self.body = .byteBuffer(buffer)
+  }
+
+  public mutating func setBody(buffer: NIOCore.ByteBuffer, ofContentType: String) {
+    self.body = .byteBuffer(buffer)
+    self.headers.replaceOrAdd(name: "Content-Type", value: ofContentType)
+  }
+
+  public mutating func setBody(
+    stream: @escaping @Sendable () -> (any AsyncSequence<NIOCore.ByteBuffer, any Error> & Sendable),
+    length: Int64? = nil
+  ) {
+    self.body = .stream(stream, length: length)
+  }
+
+  public mutating func setBody(
+    stream: @escaping @Sendable () -> (any AsyncSequence<NIOCore.ByteBuffer, any Error> & Sendable),
+    length: Int64? = nil,
+    ofContentType: String
+  ) {
+    self.body = .stream(stream, length: length)
     self.headers.replaceOrAdd(name: "Content-Type", value: ofContentType)
   }
 
@@ -70,7 +106,17 @@ import struct Logging.Logger
     request.headers = self.headers
     request.method = self.method
     if let b = self.body {
-      request.body = .bytes(.init(data: b))
+      switch b {
+      case .byteBuffer(let buffer):
+        request.body = .bytes(buffer)
+      case .data(let data):
+        request.body = .bytes(.init(data: data))
+      case .stream(let streamFactory, let length):
+        let stream = streamFactory()
+        let streamLength: AsyncHTTPClient.HTTPClientRequest.Body.Length =
+          length.map { .known($0) } ?? .unknown
+        request.body = .stream(stream, length: streamLength)
+      }
     }
     let response = try await self.client.execute(request: request, timeout: timeout)
     return _HTTPClientResponse(response)

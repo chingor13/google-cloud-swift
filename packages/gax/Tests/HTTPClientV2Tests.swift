@@ -80,7 +80,107 @@ import NIOHTTP1
     request.setBody(data: Data("test".utf8))
     #expect(request.components.url?.absoluteString == uri)
     #expect(request.headers["X-Test-Header"] == ["TestValue"])
-    #expect(request.body == Data("test".utf8))
+    if case .data(let data) = request.body {
+      #expect(data == Data("test".utf8))
+    } else {
+      Issue.record("Expected .data body")
+    }
+  }
+
+  @Test func requestWithByteBuffer() async throws {
+    let endpoint = "http://localhost:1234"
+    let credentials = try Credentials(configuration: .anonymous)
+    let options = ClientOptions().with { $0.credentials = credentials }
+    let client = try _HTTPClient(from: options, withDefaultEndpoint: endpoint)
+    let uri = "https://storage.googleapis.com/upload/storage/v1/b/my-bucket/o?upload_id=12345"
+    var request = try await client.newRequest(uri: uri)
+    let buffer = ByteBuffer(string: "test-buffer")
+    request.setBody(buffer: buffer, ofContentType: "application/octet-stream")
+    #expect(request.components.url?.absoluteString == uri)
+    #expect(request.headers["Content-Type"] == ["application/octet-stream"])
+    if case .byteBuffer(let bodyBuffer) = request.body {
+      #expect(bodyBuffer == buffer)
+    } else {
+      Issue.record("Expected .byteBuffer body")
+    }
+  }
+
+  @Test func postRequestWithByteBuffer() async throws {
+    let mock = MockHTTPClient { (request, timeout) in
+      #expect(timeout == .seconds(1))
+      #expect(request.method == .POST)
+      #expect(request.url == "http://localhost:8080/v1/projects/my-project/secrets?$alt=json")
+      if let body = request.body {
+        let collected = try await body.collect(upTo: 1024)
+        #expect(collected == ByteBuffer(string: "{\"key\":\"value\"}"))
+      } else {
+        Issue.record("Expected request body")
+      }
+
+      return HTTPClientResponse(
+        version: .http1_1,
+        status: .ok,
+        body: .bytes(.init(string: "{}"))
+      )
+    }
+
+    let endpoint = "http://localhost:8080"
+    let path = "/v1/projects/my-project/secrets"
+    let client = try _HTTPClient(mock, endpoint: endpoint)
+    var request = try await client.newRequest(
+      path: path,
+      query: [URLQueryItem(name: "$alt", value: "json")],
+    )
+    request.setMethod(.POST)
+    request.setBody(
+      buffer: ByteBuffer(string: "{\"key\":\"value\"}"),
+      ofContentType: "application/json"
+    )
+    let response = try await request.execute(timeout: .seconds(1))
+    #expect(response.status == .ok)
+  }
+
+  @Test func postRequestWithStreamBody() async throws {
+    let mock = MockHTTPClient { (request, timeout) in
+      #expect(timeout == .seconds(1))
+      #expect(request.method == .POST)
+      if let body = request.body {
+        let collected = try await body.collect(upTo: 1024)
+        #expect(collected == ByteBuffer(string: "chunk1chunk2"))
+      } else {
+        Issue.record("Expected request body")
+      }
+
+      return HTTPClientResponse(
+        version: .http1_1,
+        status: .ok,
+        body: .bytes(.init(string: "{}"))
+      )
+    }
+
+    let endpoint = "http://localhost:8080"
+    let path = "/v1/projects/my-project/secrets"
+    let client = try _HTTPClient(mock, endpoint: endpoint)
+    var request = try await client.newRequest(
+      path: path,
+      query: [URLQueryItem(name: "$alt", value: "json")],
+    )
+    request.setMethod(.POST)
+    let chunks = [ByteBuffer(string: "chunk1"), ByteBuffer(string: "chunk2")]
+    request.setBody(
+      stream: {
+        AsyncThrowingStream<ByteBuffer, any Error> { continuation in
+          for chunk in chunks {
+            continuation.yield(chunk)
+          }
+          continuation.finish()
+        }
+      },
+      length: 12,
+      ofContentType: "application/octet-stream"
+    )
+    let response = try await request.execute(timeout: .seconds(1))
+    #expect(response.status == .ok)
   }
 
   @Test(arguments: [

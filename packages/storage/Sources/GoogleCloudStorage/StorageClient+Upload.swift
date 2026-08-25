@@ -21,6 +21,7 @@ import GoogleCloudGax
 @_spi(GoogleCloudInternal) import struct GoogleCloudGax._CRC32C
 import Crypto
 @_spi(GoogleCloudInternal) import GoogleCloudGax
+import NIOCore
 import NIOHTTP1
 
 package enum ResumableUploadStatus: Sendable {
@@ -797,22 +798,24 @@ extension StorageClient {
     let boundary = "Boundary-\(UUID().uuidString)"
     request.setHeader(name: "Content-Type", value: "multipart/related; boundary=\(boundary)")
 
-    var body = Data()
-    body.append(Data("--\(boundary)\r\n".utf8))
-    body.append(Data("Content-Type: application/json; charset=UTF-8\r\n\r\n".utf8))
     let metadataJson = try JSONEncoder().encode(metadata ?? UploadMetadata())
-    body.append(metadataJson)
-    body.append(Data("\r\n".utf8))
-
-    body.append(Data("--\(boundary)\r\n".utf8))
     let dataPartContentType = metadata?.contentType ?? "application/octet-stream"
-    body.append(Data("Content-Type: \(dataPartContentType)\r\n\r\n".utf8))
-    body.append(data)
-    body.append(Data("\r\n".utf8))
 
-    body.append(Data("--\(boundary)--\r\n".utf8))
+    let part1Header = "--\(boundary)\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n"
+    let part2Header = "\r\n--\(boundary)\r\nContent-Type: \(dataPartContentType)\r\n\r\n"
+    let footer = "\r\n--\(boundary)--\r\n"
 
-    request.setBody(data: body)
+    let totalCapacity =
+      part1Header.utf8.count + metadataJson.count + part2Header.utf8.count + data.count
+      + footer.utf8.count
+    var body = ByteBufferAllocator().buffer(capacity: totalCapacity)
+    body.writeString(part1Header)
+    body.writeBytes(metadataJson)
+    body.writeString(part2Header)
+    body.writeBytes(data)
+    body.writeString(footer)
+
+    request.setBody(buffer: body)
     return request
   }
 
@@ -845,7 +848,9 @@ extension StorageClient {
     request.applyCustomerSuppliedEncryptionHeaders(options.customerEncryptionKey)
 
     let metadataJson = try JSONEncoder().encode(metadata ?? UploadMetadata())
-    request.setBody(data: metadataJson)
+    var buffer = ByteBufferAllocator().buffer(capacity: metadataJson.count)
+    buffer.writeBytes(metadataJson)
+    request.setBody(buffer: buffer)
     return request
   }
 
@@ -891,7 +896,9 @@ extension StorageClient {
       let end = offset + Int64(data.count) - 1
       request.setHeader(name: "Content-Range", value: "bytes \(offset)-\(end)/\(totalStr)")
     }
-    request.setBody(data: data)
+    var buffer = ByteBufferAllocator().buffer(capacity: data.count)
+    buffer.writeBytes(data)
+    request.setBody(buffer: buffer)
     return request
   }
 
