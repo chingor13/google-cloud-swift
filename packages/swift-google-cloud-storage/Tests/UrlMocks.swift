@@ -367,18 +367,19 @@ final class RecordingDownloadObserver: DownloadObserver, @unchecked Sendable {
   }
 }
 
-final class RecordingOperationObserver<Progress: Sendable, Result: Sendable>: OperationObserver,
+final class RecordingOperationObserver<Context: Sendable, Progress: Sendable, Result: Sendable>:
+  OperationObserver,
   @unchecked Sendable
 {
   private let lock = NSLock()
 
-  var startedContexts: [OperationContext] = []
+  var startedContexts: [Context] = []
   var progressUpdates: [Progress] = []
   var retries: [(attempt: Int, error: any Error, backoff: Duration)] = []
   var completedResults: [(result: Result, totalDuration: Duration)] = []
   var failures: [any Error] = []
 
-  func operationDidStart(context: OperationContext) {
+  func operationDidStart(context: Context) {
     lock.lock()
     defer { lock.unlock() }
     startedContexts.append(context)

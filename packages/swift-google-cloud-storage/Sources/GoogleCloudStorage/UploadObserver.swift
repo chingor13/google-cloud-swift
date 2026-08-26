@@ -16,7 +16,7 @@ import Foundation
 
 /// A protocol for observing lifecycle, progress, and resilience events during Cloud Storage uploads.
 public protocol UploadObserver: OperationObserver
-where Progress == UploadProgress, Result == Object {
+where Context == StorageOperationContext, Progress == UploadProgress, Result == Object {
   /// Called when an upload operation begins or a session is established.
   ///
   /// - Parameters:

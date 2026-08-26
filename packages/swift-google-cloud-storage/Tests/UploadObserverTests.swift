@@ -310,4 +310,32 @@ import Testing
     #expect(downloadProgress.totalBytes == 100)
     #expect(downloadProgress.fractionCompleted == 0.8)
   }
+
+  @Test func genericOperationObserverWithCustomContext() {
+    struct CustomContext: Sendable, Equatable {
+      let operationName: String
+    }
+    struct CustomProgress: Sendable, Equatable {
+      let step: Int
+    }
+    struct CustomResult: Sendable, Equatable {
+      let success: Bool
+    }
+
+    let observer = RecordingOperationObserver<CustomContext, CustomProgress, CustomResult>()
+    observer.operationDidStart(context: CustomContext(operationName: "custom-job"))
+    observer.progressUpdated(CustomProgress(step: 1))
+    observer.operationDidRetry(
+      attempt: 1, error: RequestError.http(HTTPDetails(http_status_code: 503, headers: [:])),
+      backoff: .seconds(1))
+    observer.operationDidComplete(result: CustomResult(success: true), totalDuration: .seconds(5))
+
+    #expect(observer.startedContexts.count == 1)
+    #expect(observer.startedContexts.first?.operationName == "custom-job")
+    #expect(observer.progressUpdates.count == 1)
+    #expect(observer.progressUpdates.first?.step == 1)
+    #expect(observer.retries.count == 1)
+    #expect(observer.completedResults.count == 1)
+    #expect(observer.completedResults.first?.result.success == true)
+  }
 }

@@ -15,7 +15,7 @@
 import Foundation
 
 /// Contextual information about a Cloud Storage operation.
-public struct OperationContext: Sendable, Equatable {
+public struct StorageOperationContext: Sendable, Equatable {
   /// The target Cloud Storage bucket name.
   public var bucket: String
 
@@ -25,13 +25,16 @@ public struct OperationContext: Sendable, Equatable {
   /// An optional session ID (e.g. GCS Resumable Upload URI).
   public var sessionId: String?
 
-  /// Creates a new `OperationContext` instance.
+  /// Creates a new `StorageOperationContext` instance.
   public init(bucket: String, object: String, sessionId: String? = nil) {
     self.bucket = bucket
     self.object = object
     self.sessionId = sessionId
   }
 }
+
+/// Typealias for storage operation context.
+public typealias OperationContext = StorageOperationContext
 
 /// Progress information for a data transfer operation (such as an upload or download).
 public struct TransferProgress: Sendable, Equatable {
@@ -80,17 +83,18 @@ public typealias UploadProgress = TransferProgress
 /// Typealias for download progress information.
 public typealias DownloadProgress = TransferProgress
 
-/// A generic protocol for observing lifecycle, progress, and resilience events during Cloud Storage operations.
-public protocol OperationObserver<Progress, Result>: Sendable {
+/// A generic protocol for observing lifecycle, progress, and resilience events during multi-step or resumable operations.
+public protocol OperationObserver<Context, Progress, Result>: Sendable {
+  associatedtype Context: Sendable
   associatedtype Progress: Sendable
   associatedtype Result: Sendable
 
   /// Called when an operation begins or a session is established.
   ///
   /// - Parameter context: Contextual details identifying the operation.
-  func operationDidStart(context: OperationContext)
+  func operationDidStart(context: Context)
 
-  /// Called whenever transfer progress advances.
+  /// Called whenever transfer or operation progress advances.
   ///
   /// - Parameter progress: The current progress details.
   func progressUpdated(_ progress: Progress)
@@ -117,7 +121,7 @@ public protocol OperationObserver<Progress, Result>: Sendable {
 }
 
 extension OperationObserver {
-  public func operationDidStart(context: OperationContext) {}
+  public func operationDidStart(context: Context) {}
   public func progressUpdated(_ progress: Progress) {}
   public func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {}
   public func operationDidComplete(result: Result, totalDuration: Duration) {}

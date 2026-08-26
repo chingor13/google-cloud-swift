@@ -16,7 +16,8 @@ import Foundation
 
 /// A protocol for observing lifecycle, progress, and resilience events during Cloud Storage downloads.
 public protocol DownloadObserver: OperationObserver
-where Progress == DownloadProgress, Result == ReadObjectMetadata {
+where Context == StorageOperationContext, Progress == DownloadProgress, Result == ReadObjectMetadata
+{
   /// Called when a download operation begins or headers are parsed.
   ///
   /// - Parameters:
