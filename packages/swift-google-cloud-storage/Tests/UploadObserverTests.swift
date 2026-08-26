@@ -285,5 +285,29 @@ import Testing
     observer.uploadDidComplete(object: Object(), totalDuration: .zero)
     observer.uploadDidFail(
       error: RequestError.http(HTTPDetails(http_status_code: 400, headers: [:])))
+
+    // Test OperationObserver default bridges
+    observer.operationDidStart(context: OperationContext(bucket: "b", object: "o"))
+    observer.progressUpdated(TransferProgress(bytesTransferred: 20))
+    observer.operationDidRetry(
+      attempt: 2, error: RequestError.http(HTTPDetails(http_status_code: 503, headers: [:])),
+      backoff: .zero)
+    observer.operationDidComplete(result: Object(), totalDuration: .zero)
+    observer.operationDidFail(
+      error: RequestError.http(HTTPDetails(http_status_code: 500, headers: [:])))
+  }
+
+  @Test func transferProgressProperties() {
+    let uploadProgress = TransferProgress(bytesUploaded: 50, totalBytes: 100)
+    #expect(uploadProgress.bytesUploaded == 50)
+    #expect(uploadProgress.bytesTransferred == 50)
+    #expect(uploadProgress.totalBytes == 100)
+    #expect(uploadProgress.fractionCompleted == 0.5)
+
+    let downloadProgress = TransferProgress(bytesDownloaded: 80, totalBytes: 100)
+    #expect(downloadProgress.bytesDownloaded == 80)
+    #expect(downloadProgress.bytesTransferred == 80)
+    #expect(downloadProgress.totalBytes == 100)
+    #expect(downloadProgress.fractionCompleted == 0.8)
   }
 }

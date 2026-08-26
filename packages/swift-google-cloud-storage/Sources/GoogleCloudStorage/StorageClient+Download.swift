@@ -40,12 +40,16 @@ extension StorageClient {
       backoffPolicy: effectiveBackoffPolicy
     )
 
+    let effectiveObservers = self.options.download.observers + options.observers
+    let observer = _CompositeDownloadObserver(effectiveObservers)
+
     let coordinator = ReadObjectCoordinator(
       bucket: bucket,
       object: object,
       options: options,
       httpClient: inner,
-      resumeLoop: resumeLoop
+      resumeLoop: resumeLoop,
+      observer: observer
     )
     return ReadObjectTask(coordinator: coordinator)
   }

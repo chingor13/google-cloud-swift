@@ -319,3 +319,92 @@ final class RecordingUploadObserver: UploadObserver, @unchecked Sendable {
     failures.append(error)
   }
 }
+
+final class RecordingDownloadObserver: DownloadObserver, @unchecked Sendable {
+  private let lock = NSLock()
+
+  var startedCalls: [(bucket: String, object: String)] = []
+  var progressUpdates: [DownloadProgress] = []
+  var receivedChunks: [(bytes: Int, totalReceived: Int64)] = []
+  var retries: [(attempt: Int, error: any Error, backoff: Duration)] = []
+  var completedMetadata: [(metadata: ReadObjectMetadata, totalDuration: Duration)] = []
+  var failures: [any Error] = []
+
+  func downloadDidStart(bucket: String, object: String) {
+    lock.lock()
+    defer { lock.unlock() }
+    startedCalls.append((bucket: bucket, object: object))
+  }
+
+  func downloadProgressUpdated(_ progress: DownloadProgress) {
+    lock.lock()
+    defer { lock.unlock() }
+    progressUpdates.append(progress)
+  }
+
+  func chunkDidReceive(bytes: Int, totalReceived: Int64) {
+    lock.lock()
+    defer { lock.unlock() }
+    receivedChunks.append((bytes: bytes, totalReceived: totalReceived))
+  }
+
+  func downloadDidRetry(attempt: Int, error: any Error, backoff: Duration) {
+    lock.lock()
+    defer { lock.unlock() }
+    retries.append((attempt: attempt, error: error, backoff: backoff))
+  }
+
+  func downloadDidComplete(metadata: ReadObjectMetadata, totalDuration: Duration) {
+    lock.lock()
+    defer { lock.unlock() }
+    completedMetadata.append((metadata: metadata, totalDuration: totalDuration))
+  }
+
+  func downloadDidFail(error: any Error) {
+    lock.lock()
+    defer { lock.unlock() }
+    failures.append(error)
+  }
+}
+
+final class RecordingOperationObserver<Progress: Sendable, Result: Sendable>: OperationObserver,
+  @unchecked Sendable
+{
+  private let lock = NSLock()
+
+  var startedContexts: [OperationContext] = []
+  var progressUpdates: [Progress] = []
+  var retries: [(attempt: Int, error: any Error, backoff: Duration)] = []
+  var completedResults: [(result: Result, totalDuration: Duration)] = []
+  var failures: [any Error] = []
+
+  func operationDidStart(context: OperationContext) {
+    lock.lock()
+    defer { lock.unlock() }
+    startedContexts.append(context)
+  }
+
+  func progressUpdated(_ progress: Progress) {
+    lock.lock()
+    defer { lock.unlock() }
+    progressUpdates.append(progress)
+  }
+
+  func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {
+    lock.lock()
+    defer { lock.unlock() }
+    retries.append((attempt: attempt, error: error, backoff: backoff))
+  }
+
+  func operationDidComplete(result: Result, totalDuration: Duration) {
+    lock.lock()
+    defer { lock.unlock() }
+    completedResults.append((result: result, totalDuration: totalDuration))
+  }
+
+  func operationDidFail(error: any Error) {
+    lock.lock()
+    defer { lock.unlock() }
+    failures.append(error)
+  }
+}

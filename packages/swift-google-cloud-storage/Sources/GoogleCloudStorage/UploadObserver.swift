@@ -14,33 +14,9 @@
 
 import Foundation
 
-/// Progress information for an ongoing upload operation.
-public struct UploadProgress: Sendable, Equatable {
-  /// The number of bytes successfully uploaded or committed so far.
-  public let bytesUploaded: Int64
-
-  /// The total size of the object being uploaded in bytes, if known.
-  public let totalBytes: Int64?
-
-  /// The fraction of the upload completed (0.0 to 1.0), or `nil` if the total size is unknown.
-  public var fractionCompleted: Double? {
-    guard let totalBytes = totalBytes, totalBytes > 0 else { return nil }
-    return Double(bytesUploaded) / Double(totalBytes)
-  }
-
-  /// Creates a new `UploadProgress` instance.
-  ///
-  /// - Parameters:
-  ///   - bytesUploaded: The number of bytes uploaded so far.
-  ///   - totalBytes: The total number of bytes to upload, if known.
-  public init(bytesUploaded: Int64, totalBytes: Int64? = nil) {
-    self.bytesUploaded = bytesUploaded
-    self.totalBytes = totalBytes
-  }
-}
-
 /// A protocol for observing lifecycle, progress, and resilience events during Cloud Storage uploads.
-public protocol UploadObserver: Sendable {
+public protocol UploadObserver: OperationObserver
+where Progress == UploadProgress, Result == Object {
   /// Called when an upload operation begins or a session is established.
   ///
   /// - Parameters:
@@ -90,9 +66,29 @@ extension UploadObserver {
   public func uploadDidRetry(attempt: Int, error: any Error, backoff: Duration) {}
   public func uploadDidComplete(object: Object, totalDuration: Duration) {}
   public func uploadDidFail(error: any Error) {}
+
+  public func operationDidStart(context: OperationContext) {
+    uploadDidStart(bucket: context.bucket, object: context.object, uploadId: context.sessionId)
+  }
+
+  public func progressUpdated(_ progress: UploadProgress) {
+    uploadProgressUpdated(progress)
+  }
+
+  public func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {
+    uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+  }
+
+  public func operationDidComplete(result: Object, totalDuration: Duration) {
+    uploadDidComplete(object: result, totalDuration: totalDuration)
+  }
+
+  public func operationDidFail(error: any Error) {
+    uploadDidFail(error: error)
+  }
 }
 
-/// Composite observer that dispatches events to multiple observers.
+/// Composite observer that dispatches events to multiple upload observers.
 package struct _CompositeUploadObserver: UploadObserver, Sendable {
   package let observers: [any UploadObserver]
 
@@ -100,9 +96,21 @@ package struct _CompositeUploadObserver: UploadObserver, Sendable {
     self.observers = observers
   }
 
+  package func operationDidStart(context: OperationContext) {
+    for observer in observers {
+      observer.operationDidStart(context: context)
+    }
+  }
+
   package func uploadDidStart(bucket: String, object: String, uploadId: String?) {
     for observer in observers {
       observer.uploadDidStart(bucket: bucket, object: object, uploadId: uploadId)
+    }
+  }
+
+  package func progressUpdated(_ progress: UploadProgress) {
+    for observer in observers {
+      observer.progressUpdated(progress)
     }
   }
 
@@ -118,15 +126,33 @@ package struct _CompositeUploadObserver: UploadObserver, Sendable {
     }
   }
 
+  package func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {
+    for observer in observers {
+      observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
+    }
+  }
+
   package func uploadDidRetry(attempt: Int, error: any Error, backoff: Duration) {
     for observer in observers {
       observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
     }
   }
 
+  package func operationDidComplete(result: Object, totalDuration: Duration) {
+    for observer in observers {
+      observer.operationDidComplete(result: result, totalDuration: totalDuration)
+    }
+  }
+
   package func uploadDidComplete(object: Object, totalDuration: Duration) {
     for observer in observers {
       observer.uploadDidComplete(object: object, totalDuration: totalDuration)
+    }
+  }
+
+  package func operationDidFail(error: any Error) {
+    for observer in observers {
+      observer.operationDidFail(error: error)
     }
   }
 

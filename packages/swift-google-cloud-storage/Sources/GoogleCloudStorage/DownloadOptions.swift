@@ -238,6 +238,16 @@ public struct ReadObjectOptions: Sendable {
   /// Overrides the backoff policy for this download.
   public var backoffPolicy: (any BackoffPolicy)? = nil
 
+  /// Observers to monitor lifecycle, progress, and resilience events during the download.
+  public var observers: [any DownloadObserver] = []
+
+  /// Adds an observer to monitor the download operation.
+  ///
+  /// - Parameter observer: The download observer to register.
+  public mutating func addObserver(_ observer: any DownloadObserver) {
+    observers.append(observer)
+  }
+
   /// Default configuration options.
   public static var `default`: ReadObjectOptions { ReadObjectOptions() }
 
@@ -381,8 +391,11 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
   let options: ReadObjectOptions
   let httpClient: GoogleCloudGax._HTTPClient
   let resumeLoop: _ResumeLoop<DownloadDetails>
+  let observer: any DownloadObserver
 
   private let lock = NSLock()
+  private let clock = ContinuousClock()
+  private let startTime: ContinuousClock.Instant
   private var isInitialFetched: Bool = false
   private var initialFetchTask: Task<ReadObjectMetadata, Error>?
   private var metadata: ReadObjectMetadata?
@@ -401,13 +414,16 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
     object: String,
     options: ReadObjectOptions,
     httpClient: GoogleCloudGax._HTTPClient,
-    resumeLoop: _ResumeLoop<DownloadDetails>
+    resumeLoop: _ResumeLoop<DownloadDetails>,
+    observer: any DownloadObserver = _CompositeDownloadObserver([])
   ) {
     self.bucket = bucket
     self.object = object
     self.options = options
     self.httpClient = httpClient
     self.resumeLoop = resumeLoop
+    self.observer = observer
+    self.startTime = ContinuousClock().now
     self.resumeState = ResumeState(details: DownloadDetails())
     if options.checksums.crc32c != nil {
       self.crc32cCalculator = CRC32CCalculator()
@@ -423,20 +439,27 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
         return existing
       }
       let newTask = Task { () throws -> ReadObjectMetadata in
-        let (response, metadata) = try await Self.fetchInitial(
-          httpClient: self.httpClient,
-          bucket: self.bucket,
-          object: self.object,
-          options: self.options,
-          resumeLoop: self.resumeLoop,
-          resumeState: self.resumeState
-        )
-        self.lock.withLock {
-          self.metadata = metadata
-          self.bodyIterator = response.body.makeAsyncIterator()
-          self.isInitialFetched = true
+        do {
+          let (response, metadata) = try await Self.fetchInitial(
+            httpClient: self.httpClient,
+            bucket: self.bucket,
+            object: self.object,
+            options: self.options,
+            resumeLoop: self.resumeLoop,
+            resumeState: self.resumeState
+          )
+          self.lock.withLock {
+            self.metadata = metadata
+            self.bodyIterator = response.body.makeAsyncIterator()
+            self.isInitialFetched = true
+          }
+          self.observer.operationDidStart(
+            context: OperationContext(bucket: self.bucket, object: self.object))
+          return metadata
+        } catch {
+          self.observer.operationDidFail(error: error)
+          throw error
         }
-        return metadata
       }
       self.initialFetchTask = newTask
       return newTask
@@ -456,10 +479,16 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
 
     if case .prefix(0) = options.range {
       isFinished = true
+      let totalDuration = clock.now - startTime
+      observer.operationDidComplete(
+        result: self.metadata ?? ReadObjectMetadata(), totalDuration: totalDuration)
       return nil
     }
     if case .suffix(0) = options.range {
       isFinished = true
+      let totalDuration = clock.now - startTime
+      observer.operationDidComplete(
+        result: self.metadata ?? ReadObjectMetadata(), totalDuration: totalDuration)
       return nil
     }
 
@@ -474,11 +503,19 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
             bytesReceived += UInt64(chunk.readableBytes)
             resumeState.details.bytesDownloaded = bytesReceived
             resumeLoop.onProgress(state: &resumeState)
+            observer.chunkDidReceive(
+              bytes: chunk.readableBytes, totalReceived: Int64(bytesReceived))
+            let totalSize = metadata.map { Int64($0.size) }
+            observer.progressUpdated(
+              DownloadProgress(bytesDownloaded: Int64(bytesReceived), totalBytes: totalSize))
             updateChecksums(with: chunk)
             return chunk
           } else {
             try validateChecksumsAtEOF()
             isFinished = true
+            let totalDuration = clock.now - startTime
+            observer.operationDidComplete(
+              result: self.metadata ?? ReadObjectMetadata(), totalDuration: totalDuration)
             return nil
           }
         } else if var it = bodyIterator {
@@ -488,39 +525,71 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
             bytesReceived += UInt64(chunk.readableBytes)
             resumeState.details.bytesDownloaded = bytesReceived
             resumeLoop.onProgress(state: &resumeState)
+            observer.chunkDidReceive(
+              bytes: chunk.readableBytes, totalReceived: Int64(bytesReceived))
+            let totalSize = metadata.map { Int64($0.size) }
+            observer.progressUpdated(
+              DownloadProgress(bytesDownloaded: Int64(bytesReceived), totalBytes: totalSize))
             updateChecksums(with: chunk)
             return chunk
           } else {
             try validateChecksumsAtEOF()
             isFinished = true
+            let totalDuration = clock.now - startTime
+            observer.operationDidComplete(
+              result: self.metadata ?? ReadObjectMetadata(), totalDuration: totalDuration)
             return nil
           }
         } else {
           try validateChecksumsAtEOF()
           isFinished = true
+          let totalDuration = clock.now - startTime
+          observer.operationDidComplete(
+            result: self.metadata ?? ReadObjectMetadata(), totalDuration: totalDuration)
           return nil
         }
       } catch {
         if error is DownloadError {
           isFinished = true
+          observer.operationDidFail(error: error)
           throw error
         }
 
         let reqError = (error as? RequestError) ?? .io(error)
         do {
-          try await resumeLoop.handleError(state: &resumeState, error: reqError)
+          try await resumeLoop.handleError(
+            state: &resumeState,
+            error: reqError,
+            onRetry: { attempt, err, backoff in
+              self.observer.operationDidRetry(attempt: attempt, error: err, backoff: backoff)
+            }
+          )
         } catch let err as RequestError {
           isFinished = true
+          let finalError: any Error
           if case .http(let details) = err {
             let message = String(data: details.payload, encoding: .utf8) ?? ""
-            throw DownloadError.unexpectedServerResponse(
+            finalError = DownloadError.unexpectedServerResponse(
               statusCode: details.http_status_code, message: message)
+          } else {
+            finalError = DownloadError.resumeFailed(
+              bytesReceived: bytesReceived, message: err.localizedDescription)
           }
-          throw DownloadError.resumeFailed(
-            bytesReceived: bytesReceived, message: err.localizedDescription)
+          observer.operationDidFail(error: finalError)
+          throw finalError
+        } catch {
+          isFinished = true
+          observer.operationDidFail(error: error)
+          throw error
         }
 
-        try await resumeDownload(underlyingError: reqError)
+        do {
+          try await resumeDownload(underlyingError: reqError)
+        } catch {
+          isFinished = true
+          observer.operationDidFail(error: error)
+          throw error
+        }
       }
     }
 
