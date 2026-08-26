@@ -58,40 +58,54 @@ extension StorageClient {
       options.resumableUploadThreshold ?? self.options.upload.resumableUploadThreshold
         ?? UploadOptions.defaultResumableUploadThreshold)
     let httpClient = self.inner
-    return UploadTask.create { continuation in
+    let effectiveObservers = self.options.upload.observers + options.observers
+    let observer = _CompositeUploadObserver(effectiveObservers)
+    let clock = ContinuousClock()
+    let startTime = clock.now
+    observer.uploadDidStart(bucket: bucket, object: objectName, uploadId: nil)
+    return UploadTask.create {
       var source = source
       let totalSize = source.totalSize
 
       // Determine if simple or resumable
       let useResumable = totalSize == nil || totalSize! >= effectiveThreshold
 
-      if !useResumable {
-        return try await Self.performSimpleUpload(
-          httpClient: httpClient,
-          source: &source,
-          bucket: bucket,
-          objectName: objectName,
-          metadata: options.metadata,
-          options: options,
-          totalSize: totalSize,
-          continuation: continuation,
-          resumeLoop: resumeLoop
-        )
-      } else {
-        return try await Self.continueStreamingUpload(
-          httpClient: httpClient,
-          source: &source,
-          bucket: bucket,
-          objectName: objectName,
-          metadata: options.metadata,
-          uploadId: nil,
-          initialStatus: .inprogress(0),
-          chunkSize: options.chunkSize,
-          totalSize: totalSize,
-          options: options,
-          continuation: continuation,
-          resumeLoop: resumeLoop
-        )
+      do {
+        let result: Object
+        if !useResumable {
+          result = try await Self.performSimpleUpload(
+            httpClient: httpClient,
+            source: &source,
+            bucket: bucket,
+            objectName: objectName,
+            metadata: options.metadata,
+            options: options,
+            totalSize: totalSize,
+            resumeLoop: resumeLoop,
+            observer: observer
+          )
+        } else {
+          result = try await Self.continueStreamingUpload(
+            httpClient: httpClient,
+            source: &source,
+            bucket: bucket,
+            objectName: objectName,
+            metadata: options.metadata,
+            uploadId: nil,
+            initialStatus: .inprogress(0),
+            chunkSize: options.chunkSize,
+            totalSize: totalSize,
+            options: options,
+            resumeLoop: resumeLoop,
+            observer: observer
+          )
+        }
+        let totalDuration = clock.now - startTime
+        observer.uploadDidComplete(object: result, totalDuration: totalDuration)
+        return result
+      } catch {
+        observer.uploadDidFail(error: error)
+        throw error
       }
     }
   }
@@ -127,40 +141,54 @@ extension StorageClient {
       options.resumableUploadThreshold ?? self.options.upload.resumableUploadThreshold
         ?? UploadOptions.defaultResumableUploadThreshold)
     let httpClient = self.inner
-    return UploadTask.create { continuation in
+    let effectiveObservers = self.options.upload.observers + options.observers
+    let observer = _CompositeUploadObserver(effectiveObservers)
+    let clock = ContinuousClock()
+    let startTime = clock.now
+    observer.uploadDidStart(bucket: bucket, object: objectName, uploadId: nil)
+    return UploadTask.create {
       var source = source
       let totalSize = source.totalSize
 
       // Determine if simple or resumable
       let useResumable = totalSize == nil || totalSize! >= effectiveThreshold
 
-      if !useResumable {
-        return try await Self.performSimpleUpload(
-          httpClient: httpClient,
-          source: &source,
-          bucket: bucket,
-          objectName: objectName,
-          metadata: options.metadata,
-          options: options,
-          totalSize: totalSize,
-          continuation: continuation,
-          resumeLoop: resumeLoop
-        )
-      } else {
-        return try await Self.continueResumableSeekableUpload(
-          httpClient: httpClient,
-          source: &source,
-          bucket: bucket,
-          objectName: objectName,
-          metadata: options.metadata,
-          uploadId: nil,
-          initialStatus: .inprogress(0),
-          chunkSize: options.chunkSize,
-          totalSize: totalSize,
-          options: options,
-          continuation: continuation,
-          resumeLoop: resumeLoop
-        )
+      do {
+        let result: Object
+        if !useResumable {
+          result = try await Self.performSimpleUpload(
+            httpClient: httpClient,
+            source: &source,
+            bucket: bucket,
+            objectName: objectName,
+            metadata: options.metadata,
+            options: options,
+            totalSize: totalSize,
+            resumeLoop: resumeLoop,
+            observer: observer
+          )
+        } else {
+          result = try await Self.continueResumableSeekableUpload(
+            httpClient: httpClient,
+            source: &source,
+            bucket: bucket,
+            objectName: objectName,
+            metadata: options.metadata,
+            uploadId: nil,
+            initialStatus: .inprogress(0),
+            chunkSize: options.chunkSize,
+            totalSize: totalSize,
+            options: options,
+            resumeLoop: resumeLoop,
+            observer: observer
+          )
+        }
+        let totalDuration = clock.now - startTime
+        observer.uploadDidComplete(object: result, totalDuration: totalDuration)
+        return result
+      } catch {
+        observer.uploadDidFail(error: error)
+        throw error
       }
     }
   }
@@ -173,8 +201,8 @@ extension StorageClient {
     metadata: UploadMetadata?,
     options: UploadOptions,
     totalSize: Int64?,
-    continuation: AsyncStream<UploadStatus>.Continuation,
-    resumeLoop: _ResumeLoop<UploadDetails>
+    resumeLoop: _ResumeLoop<UploadDetails>,
+    observer: any UploadObserver
   ) async throws -> Object {
     var data = Data()
     if let total = totalSize {
@@ -208,7 +236,12 @@ extension StorageClient {
     )
 
     let resumeState = ResumeState(details: UploadDetails(bytesUploaded: 0, totalBytes: totalSize))
-    return try await resumeLoop.run(state: resumeState) { _ in
+    return try await resumeLoop.run(
+      state: resumeState,
+      onRetry: { attempt, error, backoff in
+        observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+      }
+    ) { _ in
       let response: _HTTPClientResponse
       do {
         response = try await request.execute()
@@ -222,9 +255,8 @@ extension StorageClient {
         throw await response.decodeError()
       }
       let object = try await handleObjectResponse(response: response)
-      continuation.yield(
-        UploadStatus(
-          bytesUploaded: Int64(data.count), totalBytes: totalSize))
+      let progress = UploadProgress(bytesUploaded: Int64(data.count), totalBytes: totalSize)
+      observer.uploadProgressUpdated(progress)
       return object
     }
   }
@@ -302,10 +334,11 @@ extension StorageClient {
     checksummedSource: inout ChecksummedSource<S>,
     uploadId: String,
     committedBytes: UInt64,
+    chunkIndex: Int,
     chunkSize: Int,
     totalSize: Int64?,
     options: UploadOptions,
-    continuation: AsyncStream<UploadStatus>.Continuation
+    observer: any UploadObserver
   ) async throws -> (status: ResumableUploadStatus, crc32cSeed: UInt32?) {
     let chunkInfo = try await checksummedSource.readChunk(maxBytes: chunkSize)
     let chunk: Data
@@ -334,6 +367,8 @@ extension StorageClient {
       checksum: checksum
     )
 
+    let clock = ContinuousClock()
+    let chunkStart = clock.now
     let uploadResponse: _HTTPClientResponse
     do {
       uploadResponse = try await uploadRequest.execute()
@@ -343,17 +378,16 @@ extension StorageClient {
       }
       throw RequestError.io(error)
     }
+    let chunkDuration = clock.now - chunkStart
 
     let statusCode = Int(uploadResponse.status.code)
     if statusCode == 200 || statusCode == 201 {
       let object = try await handleObjectResponse(response: uploadResponse)
-      continuation.yield(
-        UploadStatus(
-          bytesUploaded: Int64(committedBytes) + Int64(chunk.count),
-          totalBytes: effectiveTotalSize,
-          uploadId: uploadId
-        )
-      )
+      let byteRange = Int64(committedBytes)..<(Int64(committedBytes) + Int64(chunk.count))
+      observer.chunkDidComplete(index: chunkIndex, byteRange: byteRange, duration: chunkDuration)
+      let totalUploaded = Int64(committedBytes) + Int64(chunk.count)
+      let progress = UploadProgress(bytesUploaded: totalUploaded, totalBytes: effectiveTotalSize)
+      observer.uploadProgressUpdated(progress)
       return (.done(object), nil)
     } else if statusCode == 308 {
       let nextOffset: Int64
@@ -366,13 +400,10 @@ extension StorageClient {
       if let runningHashHeader = uploadResponse.headers.first(name: "x-goog-running-hash") {
         crc32cSeed = parseCRC32CFromRunningHash(runningHashHeader)
       }
-      continuation.yield(
-        UploadStatus(
-          bytesUploaded: nextOffset,
-          totalBytes: totalSize,
-          uploadId: uploadId
-        )
-      )
+      let byteRange = Int64(committedBytes)..<(Int64(committedBytes) + Int64(chunk.count))
+      observer.chunkDidComplete(index: chunkIndex, byteRange: byteRange, duration: chunkDuration)
+      let progress = UploadProgress(bytesUploaded: nextOffset, totalBytes: totalSize)
+      observer.uploadProgressUpdated(progress)
       return (.inprogress(UInt64(nextOffset)), crc32cSeed)
     } else if uploadResponse.isError() {
       throw await uploadResponse.decodeError()
@@ -396,14 +427,15 @@ extension StorageClient {
     chunkSize: Int,
     totalSize: Int64?,
     options: UploadOptions,
-    continuation: AsyncStream<UploadStatus>.Continuation,
-    resumeLoop: _ResumeLoop<UploadDetails>
+    resumeLoop: _ResumeLoop<UploadDetails>,
+    observer: any UploadObserver
   ) async throws -> Object {
     var options = options
     var uploadStatus = initialStatus
     var currentUploadId = uploadId
     var checksummedSource: ChecksummedSource<S>? = nil
     var lastCommittedBytes: UInt64 = 0
+    var chunkIndex = 0
     let initialBytes: UInt64
     if case .inprogress(let b) = initialStatus {
       initialBytes = b
@@ -426,7 +458,12 @@ extension StorageClient {
           throw UploadError.internalError(
             "Missing bucket or object name to start resumable upload")
         }
-        let location = try await resumeLoop.run(state: &resumeState) { _ in
+        let location = try await resumeLoop.run(
+          state: &resumeState,
+          onRetry: { attempt, error, backoff in
+            observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+          }
+        ) { _ in
           try await startResumableSession(
             httpClient: httpClient,
             bucket: bucket,
@@ -437,9 +474,7 @@ extension StorageClient {
         }
         currentUploadId = location
         activeUploadId = location
-        continuation.yield(
-          UploadStatus(
-            bytesUploaded: 0, totalBytes: totalSize, uploadId: location))
+        observer.uploadDidStart(bucket: bucket, object: objectName, uploadId: location)
       }
 
       if case .unknown = uploadStatus {
@@ -452,13 +487,18 @@ extension StorageClient {
               resumeState.details.bytesUploaded = committedBytes
               resumeLoop.onProgress(state: &resumeState)
             }
-            continuation.yield(
-              UploadStatus(
-                bytesUploaded: Int64(committedBytes), totalBytes: totalSize,
-                uploadId: activeUploadId))
+            let progress = UploadProgress(
+              bytesUploaded: Int64(committedBytes), totalBytes: totalSize)
+            observer.uploadProgressUpdated(progress)
           }
         } catch {
-          try await resumeLoop.handleError(state: &resumeState, error: error)
+          try await resumeLoop.handleError(
+            state: &resumeState,
+            error: error,
+            onRetry: { attempt, error, backoff in
+              observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+            }
+          )
           continue
         }
       }
@@ -467,11 +507,9 @@ extension StorageClient {
       case .unknown:
         throw UploadError.internalError("queryUploadStatus returned unknown status")
       case .done(let object):
-        continuation.yield(
-          UploadStatus(
-            bytesUploaded: totalSize ?? Int64(object.size),
-            totalBytes: totalSize ?? Int64(object.size),
-            uploadId: activeUploadId))
+        let finalBytes = totalSize ?? Int64(object.size)
+        let progress = UploadProgress(bytesUploaded: finalBytes, totalBytes: finalBytes)
+        observer.uploadProgressUpdated(progress)
         return object
       case .inprogress(let committedBytes):
         if let total = totalSize, Int64(committedBytes) > total {
@@ -503,13 +541,21 @@ extension StorageClient {
             checksummedSource: &checksummedSource!,
             uploadId: activeUploadId,
             committedBytes: committedBytes,
+            chunkIndex: chunkIndex,
             chunkSize: chunkSize,
             totalSize: totalSize,
             options: options,
-            continuation: continuation
+            observer: observer
           )
+          chunkIndex += 1
         } catch {
-          try await resumeLoop.handleError(state: &resumeState, error: error)
+          try await resumeLoop.handleError(
+            state: &resumeState,
+            error: error,
+            onRetry: { attempt, error, backoff in
+              observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+            }
+          )
           continue
         }
 
@@ -540,14 +586,15 @@ extension StorageClient {
     chunkSize: Int,
     totalSize: Int64?,
     options: UploadOptions,
-    continuation: AsyncStream<UploadStatus>.Continuation,
-    resumeLoop: _ResumeLoop<UploadDetails>
+    resumeLoop: _ResumeLoop<UploadDetails>,
+    observer: any UploadObserver
   ) async throws -> Object {
     var options = options
     var uploadStatus = initialStatus
     var currentUploadId = uploadId
     var crc32cSeed = initialCrc32cSeed
     var checksummedSource: ChecksummedSource<S>? = nil
+    var chunkIndex = 0
     let initialBytes: UInt64
     if case .inprogress(let b) = initialStatus {
       initialBytes = b
@@ -570,7 +617,12 @@ extension StorageClient {
           throw UploadError.internalError(
             "Missing bucket or object name to start resumable upload")
         }
-        let location = try await resumeLoop.run(state: &resumeState) { _ in
+        let location = try await resumeLoop.run(
+          state: &resumeState,
+          onRetry: { attempt, error, backoff in
+            observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+          }
+        ) { _ in
           try await startResumableSession(
             httpClient: httpClient,
             bucket: bucket,
@@ -581,9 +633,7 @@ extension StorageClient {
         }
         currentUploadId = location
         activeUploadId = location
-        continuation.yield(
-          UploadStatus(
-            bytesUploaded: 0, totalBytes: totalSize, uploadId: location))
+        observer.uploadDidStart(bucket: bucket, object: objectName, uploadId: location)
       }
 
       if case .unknown = uploadStatus {
@@ -599,13 +649,18 @@ extension StorageClient {
               resumeState.details.bytesUploaded = committedBytes
               resumeLoop.onProgress(state: &resumeState)
             }
-            continuation.yield(
-              UploadStatus(
-                bytesUploaded: Int64(committedBytes), totalBytes: totalSize,
-                uploadId: activeUploadId))
+            let progress = UploadProgress(
+              bytesUploaded: Int64(committedBytes), totalBytes: totalSize)
+            observer.uploadProgressUpdated(progress)
           }
         } catch {
-          try await resumeLoop.handleError(state: &resumeState, error: error)
+          try await resumeLoop.handleError(
+            state: &resumeState,
+            error: error,
+            onRetry: { attempt, error, backoff in
+              observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+            }
+          )
           continue
         }
       }
@@ -614,11 +669,9 @@ extension StorageClient {
       case .unknown:
         throw UploadError.internalError("queryUploadStatus returned unknown status")
       case .done(let object):
-        continuation.yield(
-          UploadStatus(
-            bytesUploaded: totalSize ?? Int64(object.size),
-            totalBytes: totalSize ?? Int64(object.size),
-            uploadId: activeUploadId))
+        let finalBytes = totalSize ?? Int64(object.size)
+        let progress = UploadProgress(bytesUploaded: finalBytes, totalBytes: finalBytes)
+        observer.uploadProgressUpdated(progress)
         return object
       case .inprogress(let committedBytes):
         if let total = totalSize, Int64(committedBytes) > total {
@@ -653,13 +706,21 @@ extension StorageClient {
             checksummedSource: &checksummedSource!,
             uploadId: activeUploadId,
             committedBytes: committedBytes,
+            chunkIndex: chunkIndex,
             chunkSize: chunkSize,
             totalSize: totalSize,
             options: options,
-            continuation: continuation
+            observer: observer
           )
+          chunkIndex += 1
         } catch {
-          try await resumeLoop.handleError(state: &resumeState, error: error)
+          try await resumeLoop.handleError(
+            state: &resumeState,
+            error: error,
+            onRetry: { attempt, error, backoff in
+              observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+            }
+          )
           continue
         }
 
@@ -706,24 +767,37 @@ extension StorageClient {
       backoffPolicy: effectiveBackoffPolicy
     )
     let httpClient = self.inner
-    return UploadTask.create { continuation in
+    let effectiveObservers = self.options.upload.observers + options.observers
+    let observer = _CompositeUploadObserver(effectiveObservers)
+    let clock = ContinuousClock()
+    let startTime = clock.now
+    observer.uploadDidStart(bucket: "", object: "", uploadId: uploadId)
+    return UploadTask.create {
       var source = source
       let totalSize = source.totalSize
 
-      return try await Self.continueResumableSeekableUpload(
-        httpClient: httpClient,
-        source: &source,
-        bucket: nil,
-        objectName: nil,
-        metadata: nil,
-        uploadId: uploadId,
-        initialStatus: .unknown,
-        chunkSize: options.chunkSize,
-        totalSize: totalSize,
-        options: options,
-        continuation: continuation,
-        resumeLoop: resumeLoop
-      )
+      do {
+        let result = try await Self.continueResumableSeekableUpload(
+          httpClient: httpClient,
+          source: &source,
+          bucket: nil,
+          objectName: nil,
+          metadata: nil,
+          uploadId: uploadId,
+          initialStatus: .unknown,
+          chunkSize: options.chunkSize,
+          totalSize: totalSize,
+          options: options,
+          resumeLoop: resumeLoop,
+          observer: observer
+        )
+        let totalDuration = clock.now - startTime
+        observer.uploadDidComplete(object: result, totalDuration: totalDuration)
+        return result
+      } catch {
+        observer.uploadDidFail(error: error)
+        throw error
+      }
     }
   }
 

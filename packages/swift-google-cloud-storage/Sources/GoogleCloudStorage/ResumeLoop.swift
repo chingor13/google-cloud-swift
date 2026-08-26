@@ -48,11 +48,13 @@ package struct _ResumeLoop<Details: Sendable>: Sendable {
   /// - Parameters:
   ///   - state: The `ResumeState` to update.
   ///   - error: The error encountered.
+  ///   - onRetry: Optional closure invoked when a recoverable error triggers a retry/resume.
   ///   - sleep: The sleep closure used to apply backoff delay. Defaults to `Task.sleep(for:)`.
   /// - Throws: The error if non-recoverable, or if the policy limits are exhausted.
   package func handleError(
     state: inout ResumeState<Details>,
     error: any Error,
+    onRetry: ((Int, any Error, Duration) -> Void)? = nil,
     sleep: (Duration) async throws -> Void = { (d: Duration) in try await Task.sleep(for: d) }
   ) async throws {
     guard let requestError = error as? RequestError else {
@@ -75,6 +77,7 @@ package struct _ResumeLoop<Details: Sendable>: Sendable {
       if let remaining = remainingTime, remaining < delay {
         throw e
       }
+      onRetry?(Int(state.consecutiveErrorCount), error, delay)
       if delay > .zero {
         try await sleep(delay)
       }
@@ -85,21 +88,24 @@ package struct _ResumeLoop<Details: Sendable>: Sendable {
   ///
   /// - Parameters:
   ///   - state: The `ResumeState` updated across attempts.
+  ///   - onRetry: Optional closure invoked when a recoverable error triggers a retry/resume.
   ///   - attempt: The closure to execute. It receives the remaining duration (if time-bounded).
   /// - Returns: The value returned by the successful attempt.
   /// - Throws: The error if non-recoverable or if the resume policy is exhausted.
   package func run<Response>(
     state: inout ResumeState<Details>,
+    onRetry: ((Int, any Error, Duration) -> Void)? = nil,
     attempt: (_ remainingTime: Duration?) async throws -> Response
   ) async throws -> Response {
     try await run(
-      state: &state, attempt: attempt,
+      state: &state, onRetry: onRetry, attempt: attempt,
       sleep: { (d: Duration) in try await Task.sleep(for: d) })
   }
 
   /// Runs an async attempt closure with a custom sleep function.
   package func run<Response>(
     state: inout ResumeState<Details>,
+    onRetry: ((Int, any Error, Duration) -> Void)? = nil,
     attempt: (_ remainingTime: Duration?) async throws -> Response,
     sleep: (Duration) async throws -> Void
   ) async throws -> Response {
@@ -109,7 +115,7 @@ package struct _ResumeLoop<Details: Sendable>: Sendable {
         let response = try await attempt(remainingTime)
         return response
       } catch {
-        try await handleError(state: &state, error: error, sleep: sleep)
+        try await handleError(state: &state, error: error, onRetry: onRetry, sleep: sleep)
       }
     }
   }
@@ -117,20 +123,22 @@ package struct _ResumeLoop<Details: Sendable>: Sendable {
   /// Runs an async attempt closure with a value-passed `ResumeState`.
   package func run<Response>(
     state: ResumeState<Details>,
+    onRetry: ((Int, any Error, Duration) -> Void)? = nil,
     attempt: (_ remainingTime: Duration?) async throws -> Response
   ) async throws -> Response {
     var state = state
-    return try await run(state: &state, attempt: attempt)
+    return try await run(state: &state, onRetry: onRetry, attempt: attempt)
   }
 
   /// Runs an async attempt closure with a value-passed `ResumeState` and custom sleep function.
   package func run<Response>(
     state: ResumeState<Details>,
+    onRetry: ((Int, any Error, Duration) -> Void)? = nil,
     attempt: (_ remainingTime: Duration?) async throws -> Response,
     sleep: (Duration) async throws -> Void
   ) async throws -> Response {
     var state = state
-    return try await run(state: &state, attempt: attempt, sleep: sleep)
+    return try await run(state: &state, onRetry: onRetry, attempt: attempt, sleep: sleep)
   }
 }
 

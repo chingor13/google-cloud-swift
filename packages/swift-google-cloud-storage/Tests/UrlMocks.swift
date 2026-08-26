@@ -272,3 +272,50 @@ final class MockRegistry: _HTTPClientProtocol, @unchecked Sendable {
     }
   }
 }
+
+final class MockUploadObserver: UploadObserver, @unchecked Sendable {
+  private let lock = NSLock()
+
+  var startedCalls: [(bucket: String, object: String, uploadId: String?)] = []
+  var progressUpdates: [UploadProgress] = []
+  var completedChunks: [(index: Int, byteRange: Range<Int64>, duration: Duration)] = []
+  var retries: [(attempt: Int, error: any Error, backoff: Duration)] = []
+  var completedObjects: [(object: Object, totalDuration: Duration)] = []
+  var failures: [any Error] = []
+
+  func uploadDidStart(bucket: String, object: String, uploadId: String?) {
+    lock.lock()
+    defer { lock.unlock() }
+    startedCalls.append((bucket: bucket, object: object, uploadId: uploadId))
+  }
+
+  func uploadProgressUpdated(_ progress: UploadProgress) {
+    lock.lock()
+    defer { lock.unlock() }
+    progressUpdates.append(progress)
+  }
+
+  func chunkDidComplete(index: Int, byteRange: Range<Int64>, duration: Duration) {
+    lock.lock()
+    defer { lock.unlock() }
+    completedChunks.append((index: index, byteRange: byteRange, duration: duration))
+  }
+
+  func uploadDidRetry(attempt: Int, error: any Error, backoff: Duration) {
+    lock.lock()
+    defer { lock.unlock() }
+    retries.append((attempt: attempt, error: error, backoff: backoff))
+  }
+
+  func uploadDidComplete(object: Object, totalDuration: Duration) {
+    lock.lock()
+    defer { lock.unlock() }
+    completedObjects.append((object: object, totalDuration: totalDuration))
+  }
+
+  func uploadDidFail(error: any Error) {
+    lock.lock()
+    defer { lock.unlock() }
+    failures.append(error)
+  }
+}

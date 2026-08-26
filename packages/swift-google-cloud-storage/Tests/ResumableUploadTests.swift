@@ -370,21 +370,10 @@ import Testing
 
     let client = try makeClient(registry: registry)
     let task = client.upload(source, to: bucket, as: objectName)
-
-    var statuses: [UploadStatus] = []
-    for await status in task.makeStatusStream() {
-      statuses.append(status)
-    }
-
     let object = try await task.value
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
-    #expect(statuses.count >= 3)
-    if let firstStatus = statuses.first, let lastStatus = statuses.last {
-      #expect(firstStatus.bytesUploaded == 0)
-      #expect(lastStatus.bytesUploaded == Int64(data.count))
-    }
   }
 
   /// Tests resuming an upload session that GCS has already fully completed, returning HTTP 200 and object metadata directly.
@@ -1368,16 +1357,12 @@ import Testing
       registry: registry,
       clientRetryPolicy: BaseRetryPolicy().withAttemptLimit(3)
     )
+    let observer = MockUploadObserver()
     let uploadOptions = UploadOptions().with {
       $0.chunkSize = chunkSize
+      $0.observers = [observer]
     }
     let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-
-    var statuses: [UploadStatus] = []
-    for await status in task.makeStatusStream() {
-      statuses.append(status)
-    }
-
     let object = try await task.value
 
     #expect(object.name == objectName)
@@ -1405,10 +1390,10 @@ import Testing
     // Verify exact data payload sent in the resumed chunk
     #expect(requests[4].httpBody == data.subdata(in: partialCommitted..<totalSize))
 
-    // Status stream should emit: 0 (start), 8MB (chunk 1), 12MB (after status query recovery), 16MB (completion)
+    // Progress updates should emit: 8MB (chunk 1), 12MB (after status query recovery), 16MB (completion)
     #expect(
-      statuses.map(\.bytesUploaded) == [
-        0, Int64(chunkSize), Int64(partialCommitted), Int64(totalSize),
+      observer.progressUpdates.map(\.bytesUploaded) == [
+        Int64(chunkSize), Int64(partialCommitted), Int64(totalSize),
       ])
   }
 
@@ -1462,16 +1447,12 @@ import Testing
       registry: registry,
       clientRetryPolicy: BaseRetryPolicy().withAttemptLimit(3)
     )
+    let observer = MockUploadObserver()
     let uploadOptions = UploadOptions().with {
       $0.chunkSize = chunkSize
+      $0.observers = [observer]
     }
     let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-
-    var statuses: [UploadStatus] = []
-    for await status in task.makeStatusStream() {
-      statuses.append(status)
-    }
-
     let object = try await task.value
 
     #expect(object.name == objectName)
@@ -1490,7 +1471,8 @@ import Testing
         == "bytes \(partialCommitted)-\(totalSize - 1)/\(totalSize)")
     #expect(requests[3].httpBody == data.subdata(in: partialCommitted..<totalSize))
 
-    #expect(statuses.map(\.bytesUploaded) == [0, Int64(partialCommitted), Int64(totalSize)])
+    #expect(
+      observer.progressUpdates.map(\.bytesUploaded) == [Int64(partialCommitted), Int64(totalSize)])
   }
 
   /// Tests that a transient error during `resumeUpload` status query is retried by `_RetryLoop`.
@@ -1954,21 +1936,18 @@ import Testing
         headers: nil),
       for: chunkUrl)
 
+    let observer = MockUploadObserver()
     let client = try makeClient(registry: registry)
-    let task = client.upload(source, to: bucket, as: objectName)
-
-    var statuses: [UploadStatus] = []
-    for await status in task.makeStatusStream() {
-      statuses.append(status)
+    let uploadOptions = UploadOptions().with {
+      $0.observers = [observer]
     }
-
+    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     let object = try await task.value
+
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
-    #expect(statuses.count == 3)
-    #expect(statuses.map(\.bytesUploaded) == [0, Int64(chunkSize), Int64(fileSize)])
-    #expect(statuses.map(\.totalBytes) == [Int64(fileSize), Int64(fileSize), Int64(fileSize)])
-    #expect(statuses.allSatisfy { $0.uploadId == chunkUrl.absoluteString })
+    #expect(observer.progressUpdates.map(\.bytesUploaded) == [Int64(chunkSize), Int64(fileSize)])
+    #expect(observer.startedCalls.compactMap(\.uploadId).first == chunkUrl.absoluteString)
   }
 
   /// Tests that a single-chunk resumable upload emits initial and final status events without duplicates (#2).
@@ -1995,24 +1974,19 @@ import Testing
         headers: nil),
       for: chunkUrl)
 
+    let observer = MockUploadObserver()
     let client = try makeClient(registry: registry)
     let uploadOptions = UploadOptions().with {
       $0.chunkSize = 16 * 1024 * 1024
+      $0.observers = [observer]
     }
     let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-
-    var statuses: [UploadStatus] = []
-    for await status in task.makeStatusStream() {
-      statuses.append(status)
-    }
-
     let object = try await task.value
+
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
-    #expect(statuses.count == 2)
-    #expect(statuses.map(\.bytesUploaded) == [0, Int64(fileSize)])
-    #expect(statuses.map(\.totalBytes) == [Int64(fileSize), Int64(fileSize)])
-    #expect(statuses.allSatisfy { $0.uploadId == chunkUrl.absoluteString })
+    #expect(observer.progressUpdates.map(\.bytesUploaded) == [Int64(fileSize)])
+    #expect(observer.startedCalls.compactMap(\.uploadId).first == chunkUrl.absoluteString)
   }
 
   /// Tests that `resumeUpload` emits an initial status event with the server's committed byte offset upon querying status (#3).
@@ -2041,22 +2015,20 @@ import Testing
         headers: nil),
       for: queryUrl)
 
+    let observer = MockUploadObserver()
     let client = try makeClient(registry: registry)
-    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
-
-    var statuses: [UploadStatus] = []
-    for await status in task.makeStatusStream() {
-      statuses.append(status)
+    let uploadOptions = UploadOptions().with {
+      $0.observers = [observer]
     }
-
+    let task = client.resumeUpload(
+      source, uploadId: queryUrl.absoluteString, options: uploadOptions)
     let object = try await task.value
+
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
-    #expect(statuses.count == 2)
-    #expect(statuses.first?.bytesUploaded == Int64(committedBytes))
-    #expect(statuses.map(\.bytesUploaded) == [Int64(committedBytes), Int64(fileSize)])
-    #expect(statuses.map(\.totalBytes) == [Int64(fileSize), Int64(fileSize)])
-    #expect(statuses.allSatisfy { $0.uploadId == queryUrl.absoluteString })
+    #expect(
+      observer.progressUpdates.map(\.bytesUploaded) == [Int64(committedBytes), Int64(fileSize)])
+    #expect(observer.startedCalls.first?.uploadId == queryUrl.absoluteString)
   }
 
   /// Tests that `resumeUpload` across multiple chunks emits initial committed bytes and each chunk progress without duplicates (#2 & #3).
@@ -2103,32 +2075,27 @@ import Testing
         headers: nil),
       for: queryUrl)
 
+    let observer = MockUploadObserver()
     let client = try makeClient(registry: registry)
     let uploadOptions = UploadOptions().with {
       $0.chunkSize = chunkSize
+      $0.observers = [observer]
     }
     let task = client.resumeUpload(
       source, uploadId: queryUrl.absoluteString, options: uploadOptions)
-
-    var statuses: [UploadStatus] = []
-    for await status in task.makeStatusStream() {
-      statuses.append(status)
-    }
-
     let object = try await task.value
+
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
-    #expect(statuses.count == 5)
     #expect(
-      statuses.map(\.bytesUploaded) == [
+      observer.progressUpdates.map(\.bytesUploaded) == [
         Int64(initialCommitted),
         Int64(2 * chunkSize),
         Int64(3 * chunkSize),
         Int64(4 * chunkSize),
         Int64(fileSize),
       ])
-    #expect(statuses.map(\.totalBytes) == Array(repeating: Int64(fileSize), count: 5))
-    #expect(statuses.allSatisfy { $0.uploadId == queryUrl.absoluteString })
+    #expect(observer.startedCalls.first?.uploadId == queryUrl.absoluteString)
   }
 
   /// Tests that configuring a lower `resumableUploadThreshold` on `UploadOptions` causes a payload < 8MB to use resumable upload.

@@ -513,6 +513,14 @@ public struct UploadOptions: Sendable {
   /// Overrides the backoff policy for this upload.
   public var backoffPolicy: (any BackoffPolicy)? = nil
 
+  /// Observers registered to receive lifecycle, progress, and resilience events for this upload.
+  public var observers: [any UploadObserver] = []
+
+  /// Adds an observer to the list of upload observers.
+  public mutating func addObserver(_ observer: any UploadObserver) {
+    observers.append(observer)
+  }
+
   /// Legacy validation enum property for backward compatibility.
   public var validation: ChecksumValidation {
     get {
