@@ -62,22 +62,38 @@ struct ChecksummedSource<S: UploadSource> {
     let endOffset = startOffset + Int64(data.count)
     guard endOffset > bytesHashed else { return }
 
-    let unhashedData: Data
-    if startOffset >= bytesHashed {
-      unhashedData = data
-    } else {
-      let offsetInChunk = Int(bytesHashed - startOffset)
-      unhashedData = data.subdata(in: offsetInChunk..<data.count)
-    }
+    let offsetInChunk = max(0, Int(bytesHashed - startOffset))
+    let countToHash = data.count - offsetInChunk
 
-    for i in calculators.indices {
-      calculators[i].update(unhashedData)
+    data.withUnsafeBytes { rawBuffer in
+      guard let baseAddress = rawBuffer.baseAddress, countToHash > 0 else { return }
+      let slice = UnsafeRawBufferPointer(start: baseAddress + offsetInChunk, count: countToHash)
+      for i in calculators.indices {
+        calculators[i].update(slice)
+      }
     }
 
     bytesHashed = endOffset
   }
 
   mutating func readChunk(maxBytes: Int) async throws -> ChunkInfo? {
+    if let total = source.totalSize {
+      guard nextChunkOffset < total else { return nil }
+      guard let currentChunk = try await source.read(maxBytes: maxBytes), !currentChunk.isEmpty
+      else {
+        return nil
+      }
+
+      let currentChunkOffset = nextChunkOffset
+      nextChunkOffset += Int64(currentChunk.count)
+      let isLast = nextChunkOffset >= total
+
+      updateChecksums(data: currentChunk, startOffset: currentChunkOffset)
+
+      let checksumStr = isLast ? finalizeChecksum() : nil
+      return ChunkInfo(data: currentChunk, isLast: isLast, checksum: checksumStr)
+    }
+
     if !isInitialized {
       nextChunk = try await source.read(maxBytes: maxBytes)
       isInitialized = true
@@ -95,11 +111,7 @@ struct ChecksummedSource<S: UploadSource> {
 
     updateChecksums(data: currentChunk, startOffset: currentChunkOffset)
 
-    var checksumStr: String? = nil
-    if isLast {
-      checksumStr = finalizeChecksum()
-    }
-
+    let checksumStr = isLast ? finalizeChecksum() : nil
     return ChunkInfo(data: currentChunk, isLast: isLast, checksum: checksumStr)
   }
 

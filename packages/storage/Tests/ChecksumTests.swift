@@ -350,4 +350,88 @@ import Testing
     let header = calcs.map { "\($0.algorithmName)=\($0.finalize())" }.joined(separator: ", ")
     #expect(header == "crc32c=TVUQaA==, md5=user_md5==")
   }
+
+  @Test func testChecksummedSourceKnownSizeNoLookahead() async throws {
+    final class MockCounter: @unchecked Sendable {
+      var readCount = 0
+    }
+    let counter = MockCounter()
+
+    struct CountingSource: UploadSource {
+      let chunks: [Data]
+      let counter: MockCounter
+      var totalSize: Int64?
+
+      mutating func read(maxBytes: Int) async throws -> Data? {
+        counter.readCount += 1
+        guard counter.readCount - 1 < chunks.count else { return nil }
+        return chunks[counter.readCount - 1]
+      }
+    }
+
+    let chunk1 = Data("chunk-one".utf8)
+    let chunk2 = Data("chunk-two".utf8)
+    let totalSize = Int64(chunk1.count + chunk2.count)
+
+    let source = CountingSource(chunks: [chunk1, chunk2], counter: counter, totalSize: totalSize)
+    var checksummedSource = ChecksummedSource(source: source, options: .default)
+
+    // After 1st readChunk, readCount must be exactly 1 (no lookahead!)
+    let read1 = try await checksummedSource.readChunk(maxBytes: 100)
+    #expect(read1?.data == chunk1)
+    #expect(read1?.isLast == false)
+    #expect(counter.readCount == 1)
+
+    // After 2nd readChunk, readCount must be exactly 2
+    let read2 = try await checksummedSource.readChunk(maxBytes: 100)
+    #expect(read2?.data == chunk2)
+    #expect(read2?.isLast == true)
+    #expect(counter.readCount == 2)
+
+    // 3rd readChunk returns nil without extra reads
+    let read3 = try await checksummedSource.readChunk(maxBytes: 100)
+    #expect(read3 == nil)
+    #expect(counter.readCount == 2)
+  }
+
+  @Test func testChecksummedSourceUnknownSizeUsesLookahead() async throws {
+    final class MockCounter: @unchecked Sendable {
+      var readCount = 0
+    }
+    let counter = MockCounter()
+
+    struct CountingSource: UploadSource {
+      let chunks: [Data]
+      let counter: MockCounter
+      var totalSize: Int64? { nil }
+
+      mutating func read(maxBytes: Int) async throws -> Data? {
+        counter.readCount += 1
+        guard counter.readCount - 1 < chunks.count else { return nil }
+        return chunks[counter.readCount - 1]
+      }
+    }
+
+    let chunk1 = Data("chunk-one".utf8)
+    let chunk2 = Data("chunk-two".utf8)
+
+    let source = CountingSource(chunks: [chunk1, chunk2], counter: counter)
+    var checksummedSource = ChecksummedSource(source: source, options: .default)
+
+    // For unknown size, 1st readChunk reads chunk1 and looks ahead to read chunk2 (readCount == 2)
+    let read1 = try await checksummedSource.readChunk(maxBytes: 100)
+    #expect(read1?.data == chunk1)
+    #expect(read1?.isLast == false)
+    #expect(counter.readCount == 2)
+
+    // 2nd readChunk uses chunk2 and reads ahead to EOF (readCount == 3)
+    let read2 = try await checksummedSource.readChunk(maxBytes: 100)
+    #expect(read2?.data == chunk2)
+    #expect(read2?.isLast == true)
+    #expect(counter.readCount == 3)
+
+    // 3rd readChunk returns nil
+    let read3 = try await checksummedSource.readChunk(maxBytes: 100)
+    #expect(read3 == nil)
+  }
 }
