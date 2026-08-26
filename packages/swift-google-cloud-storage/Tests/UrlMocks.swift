@@ -273,7 +273,7 @@ final class MockRegistry: _HTTPClientProtocol, @unchecked Sendable {
   }
 }
 
-final class MockUploadObserver: UploadObserver, @unchecked Sendable {
+final class RecordingUploadObserver: UploadObserver, @unchecked Sendable {
   private let lock = NSLock()
 
   var startedCalls: [(bucket: String, object: String, uploadId: String?)] = []

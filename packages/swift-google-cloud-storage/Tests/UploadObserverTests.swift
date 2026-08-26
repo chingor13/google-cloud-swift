@@ -65,7 +65,7 @@ import Testing
         headers: ["Content-Type": "application/json"]),
       for: simpleUploadUrl)
 
-    let observer = MockUploadObserver()
+    let observer = RecordingUploadObserver()
     let client = try makeClient(registry: registry)
 
     let options = UploadOptions().with {
@@ -130,7 +130,7 @@ import Testing
       for: sessionUri
     )
 
-    let observer = MockUploadObserver()
+    let observer = RecordingUploadObserver()
     let client = try makeClient(registry: registry)
 
     let options = UploadOptions().with {
@@ -185,7 +185,7 @@ import Testing
         headers: ["Content-Type": "application/json"]),
       for: simpleUploadUrl)
 
-    let observer = MockUploadObserver()
+    let observer = RecordingUploadObserver()
     let client = try makeClient(registry: registry)
 
     let options = UploadOptions().with {
@@ -221,7 +221,7 @@ import Testing
         headers: nil),
       for: simpleUploadUrl)
 
-    let observer = MockUploadObserver()
+    let observer = RecordingUploadObserver()
     let client = try makeClient(registry: registry)
 
     let options = UploadOptions().with {
@@ -255,8 +255,8 @@ import Testing
         headers: ["Content-Type": "application/json"]),
       for: simpleUploadUrl)
 
-    let clientObserver = MockUploadObserver()
-    let requestObserver = MockUploadObserver()
+    let clientObserver = RecordingUploadObserver()
+    let requestObserver = RecordingUploadObserver()
 
     let client = try makeClient(registry: registry, clientObservers: [clientObserver])
 

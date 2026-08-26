@@ -1357,7 +1357,7 @@ import Testing
       registry: registry,
       clientRetryPolicy: BaseRetryPolicy().withAttemptLimit(3)
     )
-    let observer = MockUploadObserver()
+    let observer = RecordingUploadObserver()
     let uploadOptions = UploadOptions().with {
       $0.chunkSize = chunkSize
       $0.observers = [observer]
@@ -1447,7 +1447,7 @@ import Testing
       registry: registry,
       clientRetryPolicy: BaseRetryPolicy().withAttemptLimit(3)
     )
-    let observer = MockUploadObserver()
+    let observer = RecordingUploadObserver()
     let uploadOptions = UploadOptions().with {
       $0.chunkSize = chunkSize
       $0.observers = [observer]
@@ -1936,7 +1936,7 @@ import Testing
         headers: nil),
       for: chunkUrl)
 
-    let observer = MockUploadObserver()
+    let observer = RecordingUploadObserver()
     let client = try makeClient(registry: registry)
     let uploadOptions = UploadOptions().with {
       $0.observers = [observer]
@@ -1974,7 +1974,7 @@ import Testing
         headers: nil),
       for: chunkUrl)
 
-    let observer = MockUploadObserver()
+    let observer = RecordingUploadObserver()
     let client = try makeClient(registry: registry)
     let uploadOptions = UploadOptions().with {
       $0.chunkSize = 16 * 1024 * 1024
@@ -2015,7 +2015,7 @@ import Testing
         headers: nil),
       for: queryUrl)
 
-    let observer = MockUploadObserver()
+    let observer = RecordingUploadObserver()
     let client = try makeClient(registry: registry)
     let uploadOptions = UploadOptions().with {
       $0.observers = [observer]
@@ -2075,7 +2075,7 @@ import Testing
         headers: nil),
       for: queryUrl)
 
-    let observer = MockUploadObserver()
+    let observer = RecordingUploadObserver()
     let client = try makeClient(registry: registry)
     let uploadOptions = UploadOptions().with {
       $0.chunkSize = chunkSize
