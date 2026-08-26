@@ -287,7 +287,7 @@ import Testing
       error: RequestError.http(HTTPDetails(http_status_code: 400, headers: [:])))
 
     // Test OperationObserver default bridges
-    observer.operationDidStart(context: OperationContext(bucket: "b", object: "o"))
+    observer.operationDidStart(context: StorageOperationContext(bucket: "b", object: "o"))
     observer.progressUpdated(TransferProgress(bytesTransferred: 20))
     observer.operationDidRetry(
       attempt: 2, error: RequestError.http(HTTPDetails(http_status_code: 503, headers: [:])),

@@ -66,7 +66,7 @@ extension DownloadObserver {
   public func downloadDidComplete(metadata: ReadObjectMetadata, totalDuration: Duration) {}
   public func downloadDidFail(error: any Error) {}
 
-  public func operationDidStart(context: OperationContext) {
+  public func operationDidStart(context: StorageOperationContext) {
     downloadDidStart(bucket: context.bucket, object: context.object)
   }
 
@@ -95,7 +95,7 @@ package struct _CompositeDownloadObserver: DownloadObserver, Sendable {
     self.observers = observers
   }
 
-  package func operationDidStart(context: OperationContext) {
+  package func operationDidStart(context: StorageOperationContext) {
     for observer in observers {
       observer.operationDidStart(context: context)
     }

@@ -67,7 +67,7 @@ extension UploadObserver {
   public func uploadDidComplete(object: Object, totalDuration: Duration) {}
   public func uploadDidFail(error: any Error) {}
 
-  public func operationDidStart(context: OperationContext) {
+  public func operationDidStart(context: StorageOperationContext) {
     uploadDidStart(bucket: context.bucket, object: context.object, uploadId: context.sessionId)
   }
 
@@ -96,7 +96,7 @@ package struct _CompositeUploadObserver: UploadObserver, Sendable {
     self.observers = observers
   }
 
-  package func operationDidStart(context: OperationContext) {
+  package func operationDidStart(context: StorageOperationContext) {
     for observer in observers {
       observer.operationDidStart(context: context)
     }

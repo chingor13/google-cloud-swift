@@ -454,7 +454,7 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
             self.isInitialFetched = true
           }
           self.observer.operationDidStart(
-            context: OperationContext(bucket: self.bucket, object: self.object))
+            context: StorageOperationContext(bucket: self.bucket, object: self.object))
           return metadata
         } catch {
           self.observer.operationDidFail(error: error)
