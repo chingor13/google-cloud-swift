@@ -16,19 +16,7 @@ import Foundation
 
 /// A protocol for observing lifecycle, progress, and resilience events during Cloud Storage uploads.
 public protocol UploadObserver: OperationObserver
-where Context == StorageOperationContext, Progress == UploadProgress, Result == Object {
-  /// Called when a single chunk upload completes successfully in a resumable upload.
-  ///
-  /// - Parameters:
-  ///   - index: The zero-based index of the chunk uploaded in this session.
-  ///   - byteRange: The byte range uploaded in this chunk (e.g. `0..<8388608`).
-  ///   - duration: The time taken to upload this chunk.
-  func chunkDidComplete(index: Int, byteRange: Range<Int64>, duration: Duration)
-}
-
-extension UploadObserver {
-  public func chunkDidComplete(index: Int, byteRange: Range<Int64>, duration: Duration) {}
-}
+where Context == StorageOperationContext, Progress == UploadProgress, Result == Object {}
 
 /// Composite observer that dispatches events to multiple upload observers.
 package struct _CompositeUploadObserver: UploadObserver, Sendable {
@@ -47,12 +35,6 @@ package struct _CompositeUploadObserver: UploadObserver, Sendable {
   package func progressUpdated(_ progress: UploadProgress) {
     for observer in observers {
       observer.progressUpdated(progress)
-    }
-  }
-
-  package func chunkDidComplete(index: Int, byteRange: Range<Int64>, duration: Duration) {
-    for observer in observers {
-      observer.chunkDidComplete(index: index, byteRange: byteRange, duration: duration)
     }
   }
 

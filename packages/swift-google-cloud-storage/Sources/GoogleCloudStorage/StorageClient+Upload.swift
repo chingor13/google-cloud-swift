@@ -334,7 +334,6 @@ extension StorageClient {
     checksummedSource: inout ChecksummedSource<S>,
     uploadId: String,
     committedBytes: UInt64,
-    chunkIndex: Int,
     chunkSize: Int,
     totalSize: Int64?,
     options: UploadOptions,
@@ -367,8 +366,6 @@ extension StorageClient {
       checksum: checksum
     )
 
-    let clock = ContinuousClock()
-    let chunkStart = clock.now
     let uploadResponse: _HTTPClientResponse
     do {
       uploadResponse = try await uploadRequest.execute()
@@ -378,13 +375,10 @@ extension StorageClient {
       }
       throw RequestError.io(error)
     }
-    let chunkDuration = clock.now - chunkStart
 
     let statusCode = Int(uploadResponse.status.code)
     if statusCode == 200 || statusCode == 201 {
       let object = try await handleObjectResponse(response: uploadResponse)
-      let byteRange = Int64(committedBytes)..<(Int64(committedBytes) + Int64(chunk.count))
-      observer.chunkDidComplete(index: chunkIndex, byteRange: byteRange, duration: chunkDuration)
       let totalUploaded = Int64(committedBytes) + Int64(chunk.count)
       let progress = UploadProgress(bytesUploaded: totalUploaded, totalBytes: effectiveTotalSize)
       observer.progressUpdated(progress)
@@ -400,8 +394,6 @@ extension StorageClient {
       if let runningHashHeader = uploadResponse.headers.first(name: "x-goog-running-hash") {
         crc32cSeed = parseCRC32CFromRunningHash(runningHashHeader)
       }
-      let byteRange = Int64(committedBytes)..<(Int64(committedBytes) + Int64(chunk.count))
-      observer.chunkDidComplete(index: chunkIndex, byteRange: byteRange, duration: chunkDuration)
       let progress = UploadProgress(bytesUploaded: nextOffset, totalBytes: totalSize)
       observer.progressUpdated(progress)
       return (.inprogress(UInt64(nextOffset)), crc32cSeed)
@@ -435,7 +427,6 @@ extension StorageClient {
     var currentUploadId = uploadId
     var checksummedSource: ChecksummedSource<S>? = nil
     var lastCommittedBytes: UInt64 = 0
-    var chunkIndex = 0
     let initialBytes: UInt64
     if case .inprogress(let b) = initialStatus {
       initialBytes = b
@@ -542,13 +533,11 @@ extension StorageClient {
             checksummedSource: &checksummedSource!,
             uploadId: activeUploadId,
             committedBytes: committedBytes,
-            chunkIndex: chunkIndex,
             chunkSize: chunkSize,
             totalSize: totalSize,
             options: options,
             observer: observer
           )
-          chunkIndex += 1
         } catch {
           try await resumeLoop.handleError(
             state: &resumeState,
@@ -595,7 +584,6 @@ extension StorageClient {
     var currentUploadId = uploadId
     var crc32cSeed = initialCrc32cSeed
     var checksummedSource: ChecksummedSource<S>? = nil
-    var chunkIndex = 0
     let initialBytes: UInt64
     if case .inprogress(let b) = initialStatus {
       initialBytes = b
@@ -708,13 +696,11 @@ extension StorageClient {
             checksummedSource: &checksummedSource!,
             uploadId: activeUploadId,
             committedBytes: committedBytes,
-            chunkIndex: chunkIndex,
             chunkSize: chunkSize,
             totalSize: totalSize,
             options: options,
             observer: observer
           )
-          chunkIndex += 1
         } catch {
           try await resumeLoop.handleError(
             state: &resumeState,

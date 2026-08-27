@@ -144,12 +144,6 @@ import Testing
     #expect(observer.startedCalls.count >= 1)
     #expect(observer.startedCalls.contains { $0.sessionId == sessionUri.absoluteString })
 
-    #expect(observer.completedChunks.count == 2)
-    #expect(observer.completedChunks[0].index == 0)
-    #expect(observer.completedChunks[0].byteRange == 0..<Int64(chunkSize))
-    #expect(observer.completedChunks[1].index == 1)
-    #expect(observer.completedChunks[1].byteRange == Int64(chunkSize)..<Int64(totalBytes))
-
     #expect(observer.progressUpdates.count >= 2)
     #expect(observer.progressUpdates.last?.bytesUploaded == Int64(totalBytes))
 
@@ -272,7 +266,6 @@ import Testing
     let observer = EmptyObserver()
     observer.operationDidStart(context: StorageOperationContext(bucket: "b", object: "o"))
     observer.progressUpdated(UploadProgress(bytesUploaded: 10))
-    observer.chunkDidComplete(index: 0, byteRange: 0..<10, duration: .zero)
     observer.operationDidRetry(
       attempt: 1, error: RequestError.http(HTTPDetails(http_status_code: 500, headers: [:])),
       backoff: .zero)

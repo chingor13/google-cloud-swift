@@ -503,8 +503,6 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
             bytesReceived += UInt64(chunk.readableBytes)
             resumeState.details.bytesDownloaded = bytesReceived
             resumeLoop.onProgress(state: &resumeState)
-            observer.chunkDidReceive(
-              bytes: chunk.readableBytes, totalReceived: Int64(bytesReceived))
             let totalSize = metadata.map { Int64($0.size) }
             observer.progressUpdated(
               DownloadProgress(bytesDownloaded: Int64(bytesReceived), totalBytes: totalSize))
@@ -525,8 +523,6 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
             bytesReceived += UInt64(chunk.readableBytes)
             resumeState.details.bytesDownloaded = bytesReceived
             resumeLoop.onProgress(state: &resumeState)
-            observer.chunkDidReceive(
-              bytes: chunk.readableBytes, totalReceived: Int64(bytesReceived))
             let totalSize = metadata.map { Int64($0.size) }
             observer.progressUpdated(
               DownloadProgress(bytesDownloaded: Int64(bytesReceived), totalBytes: totalSize))

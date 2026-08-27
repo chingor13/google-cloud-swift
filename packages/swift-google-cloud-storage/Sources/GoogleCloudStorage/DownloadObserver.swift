@@ -17,18 +17,7 @@ import Foundation
 /// A protocol for observing lifecycle, progress, and resilience events during Cloud Storage downloads.
 public protocol DownloadObserver: OperationObserver
 where Context == StorageOperationContext, Progress == DownloadProgress, Result == ReadObjectMetadata
-{
-  /// Called when a chunk of data is received during a streaming download.
-  ///
-  /// - Parameters:
-  ///   - bytes: The number of bytes in the received chunk.
-  ///   - totalReceived: The total number of bytes received so far.
-  func chunkDidReceive(bytes: Int, totalReceived: Int64)
-}
-
-extension DownloadObserver {
-  public func chunkDidReceive(bytes: Int, totalReceived: Int64) {}
-}
+{}
 
 /// Composite observer that dispatches events to multiple download observers.
 package struct _CompositeDownloadObserver: DownloadObserver, Sendable {
@@ -47,12 +36,6 @@ package struct _CompositeDownloadObserver: DownloadObserver, Sendable {
   package func progressUpdated(_ progress: DownloadProgress) {
     for observer in observers {
       observer.progressUpdated(progress)
-    }
-  }
-
-  package func chunkDidReceive(bytes: Int, totalReceived: Int64) {
-    for observer in observers {
-      observer.chunkDidReceive(bytes: bytes, totalReceived: totalReceived)
     }
   }
 

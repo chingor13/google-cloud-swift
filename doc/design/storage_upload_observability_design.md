@@ -166,10 +166,7 @@ public protocol OperationObserver<Context, Progress, Result>: Sendable {
 }
 
 public protocol UploadObserver: OperationObserver
-where Context == StorageOperationContext, Progress == UploadProgress, Result == Object {
-    /// Called when a single chunk upload completes successfully.
-    func chunkDidComplete(index: Int, byteRange: Range<Int64>, duration: Duration)
-}
+where Context == StorageOperationContext, Progress == UploadProgress, Result == Object {}
 ```
 
 #### Multi-Observer Registration
@@ -189,8 +186,8 @@ public struct UploadOptions: Sendable {
 struct UploadMetricsObserver: UploadObserver {
     let meter: any MetricsMeter
     
-    func chunkDidComplete(index: Int, byteRange: Range<Int64>, duration: Duration) {
-        meter.recordHistogram("gcs.upload.chunk_duration", duration.seconds)
+    func progressUpdated(_ progress: UploadProgress) {
+        meter.recordGauge("gcs.upload.bytes_uploaded", progress.bytesUploaded)
     }
     
     func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {

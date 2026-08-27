@@ -278,7 +278,6 @@ final class RecordingUploadObserver: UploadObserver, @unchecked Sendable {
 
   var startedCalls: [StorageOperationContext] = []
   var progressUpdates: [UploadProgress] = []
-  var completedChunks: [(index: Int, byteRange: Range<Int64>, duration: Duration)] = []
   var retries: [(attempt: Int, error: any Error, backoff: Duration)] = []
   var completedObjects: [(object: Object, totalDuration: Duration)] = []
   var failures: [any Error] = []
@@ -293,12 +292,6 @@ final class RecordingUploadObserver: UploadObserver, @unchecked Sendable {
     lock.lock()
     defer { lock.unlock() }
     progressUpdates.append(progress)
-  }
-
-  func chunkDidComplete(index: Int, byteRange: Range<Int64>, duration: Duration) {
-    lock.lock()
-    defer { lock.unlock() }
-    completedChunks.append((index: index, byteRange: byteRange, duration: duration))
   }
 
   func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {
@@ -325,7 +318,6 @@ final class RecordingDownloadObserver: DownloadObserver, @unchecked Sendable {
 
   var startedCalls: [StorageOperationContext] = []
   var progressUpdates: [DownloadProgress] = []
-  var receivedChunks: [(bytes: Int, totalReceived: Int64)] = []
   var retries: [(attempt: Int, error: any Error, backoff: Duration)] = []
   var completedMetadata: [(metadata: ReadObjectMetadata, totalDuration: Duration)] = []
   var failures: [any Error] = []
@@ -340,12 +332,6 @@ final class RecordingDownloadObserver: DownloadObserver, @unchecked Sendable {
     lock.lock()
     defer { lock.unlock() }
     progressUpdates.append(progress)
-  }
-
-  func chunkDidReceive(bytes: Int, totalReceived: Int64) {
-    lock.lock()
-    defer { lock.unlock() }
-    receivedChunks.append((bytes: bytes, totalReceived: totalReceived))
   }
 
   func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {

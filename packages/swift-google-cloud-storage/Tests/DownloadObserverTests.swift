@@ -72,7 +72,6 @@ import Testing
     #expect(observer.startedCalls.first?.bucket == bucket)
     #expect(observer.startedCalls.first?.object == objectName)
 
-    #expect(!observer.receivedChunks.isEmpty)
     #expect(observer.progressUpdates.last?.bytesDownloaded == Int64(data.count))
     #expect(observer.progressUpdates.last?.totalBytes == Int64(data.count))
     #expect(observer.progressUpdates.last?.fractionCompleted == 1.0)
@@ -153,7 +152,6 @@ import Testing
     let observer = EmptyObserver()
     observer.operationDidStart(context: StorageOperationContext(bucket: "b", object: "o"))
     observer.progressUpdated(DownloadProgress(bytesDownloaded: 10))
-    observer.chunkDidReceive(bytes: 10, totalReceived: 10)
     observer.operationDidRetry(
       attempt: 1, error: RequestError.http(HTTPDetails(http_status_code: 500, headers: [:])),
       backoff: .zero)
