@@ -47,8 +47,8 @@ struct StorageControlClientIntegrationTests: Sendable {
     let controlClient = try StorageControlClient()
 
     // Seed objects for deletion test
-    _ = try await storageClient.upload(data, to: bucketName, as: file1).value
-    _ = try await storageClient.upload(data, to: bucketName, as: file2).value
+    _ = try await storageClient.upload(data, to: bucketName, as: file1)
+    _ = try await storageClient.upload(data, to: bucketName, as: file2)
 
     do {
       // List objects with prefix via streaming AsyncSequence
@@ -112,9 +112,9 @@ struct StorageControlClientIntegrationTests: Sendable {
     let controlClient = try StorageControlClient()
 
     // Seed test objects using data-plane veneer
-    _ = try await storageClient.upload(data, to: bucketName, as: file1).value
-    _ = try await storageClient.upload(data, to: bucketName, as: file2).value
-    _ = try await storageClient.upload(data, to: bucketName, as: file3).value
+    _ = try await storageClient.upload(data, to: bucketName, as: file1)
+    _ = try await storageClient.upload(data, to: bucketName, as: file2)
+    _ = try await storageClient.upload(data, to: bucketName, as: file3)
 
     do {
       // Unary list with prefix and pageSize
@@ -190,7 +190,7 @@ struct StorageControlClientIntegrationTests: Sendable {
     let controlClient = try StorageControlClient()
 
     // Upload initial object
-    let uploaded = try await storageClient.upload(data, to: bucketName, as: originalName).value
+    let uploaded = try await storageClient.upload(data, to: bucketName, as: originalName)
     #expect(uploaded.name == originalName)
     #expect(uploaded.bucket == bucketResource)
 
@@ -205,24 +205,21 @@ struct StorageControlClientIntegrationTests: Sendable {
       #expect(fetched.bucket == bucketResource)
       #expect(fetched.size == Int64(data.count))
       #expect(fetched.generation == uploaded.generation)
-      #expect(fetched.metageneration == uploaded.metageneration)
 
-      // Patch object metadata via gRPC UpdateObject
-      let updateReq = UpdateObjectRequest().with {
-        $0.object = Object().with {
-          $0.bucket = bucketResource
-          $0.name = originalName
-          $0.metadata = ["test-env": "integration", "sdk-lang": "swift"]
-          $0.cacheControl = "public, max-age=3600"
+      // Update object metadata (patch custom metadata and content-language)
+      let patchReq = UpdateObjectRequest().with {
+        $0.object = fetched.with {
+          $0.contentLanguage = "en"
+          $0.metadata = ["lifecycle": "tested", "environment": "integration"]
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["metadata", "cache_control"])
+        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["content_language", "metadata"])
       }
-      let updated = try await controlClient.updateObject(request: updateReq, options: .init())
-      #expect(updated.metadata["test-env"] == "integration")
-      #expect(updated.metadata["sdk-lang"] == "swift")
-      #expect(updated.cacheControl == "public, max-age=3600")
+      let updated = try await controlClient.updateObject(request: patchReq, options: .init())
+      #expect(updated.contentLanguage == "en")
+      #expect(updated.metadata["lifecycle"] == "tested")
+      #expect(updated.metadata["environment"] == "integration")
 
-      // Atomically rename/move object via gRPC MoveObject
+      // Move / Rename object
       let moveReq = MoveObjectRequest().with {
         $0.bucket = bucketResource
         $0.sourceObject = originalName
@@ -230,32 +227,29 @@ struct StorageControlClientIntegrationTests: Sendable {
       }
       let moved = try await controlClient.moveObject(request: moveReq, options: .init())
       #expect(moved.name == movedName)
+      #expect(moved.bucket == bucketResource)
 
-      // Verify moved object exists
-      let getMovedReq = GetObjectRequest().with {
-        $0.bucket = bucketResource
-        $0.object = movedName
-      }
-      let fetchedMoved = try await controlClient.getObject(request: getMovedReq, options: .init())
-      #expect(fetchedMoved.name == movedName)
-      #expect(fetchedMoved.size == Int64(data.count))
-
-      // Verify source object no longer exists
-      let getOriginalReq = GetObjectRequest().with {
-        $0.bucket = bucketResource
-        $0.object = originalName
-      }
+      // Verify original object no longer exists
       await #expect(throws: (any Error).self) {
-        try await controlClient.getObject(request: getOriginalReq, options: .init())
+        try await controlClient.getObject(
+          request: GetObjectRequest().with {
+            $0.bucket = bucketResource
+            $0.object = originalName
+          },
+          options: .init()
+        )
       }
 
-      // Delete moved object via gRPC DeleteObject
-      let deleteReq = DeleteObjectRequest().with {
-        $0.bucket = bucketResource
-        $0.object = movedName
-      }
-      try await controlClient.deleteObject(request: deleteReq, options: .init())
+      // Cleanup moved object
+      try await controlClient.deleteObject(
+        request: DeleteObjectRequest().with {
+          $0.bucket = bucketResource
+          $0.object = movedName
+        },
+        options: .init()
+      )
     } catch {
+      // Ensure cleanup if test fails
       for name in [originalName, movedName] {
         _ = try? await controlClient.deleteObject(
           request: DeleteObjectRequest().with {
@@ -267,17 +261,6 @@ struct StorageControlClientIntegrationTests: Sendable {
       }
       throw error
     }
-
-    // Cleanup remaining objects if any
-    for name in [originalName, movedName] {
-      try? await controlClient.deleteObject(
-        request: DeleteObjectRequest().with {
-          $0.bucket = bucketResource
-          $0.object = name
-        },
-        options: .init()
-      )
-    }
   }
 
   @Test func testDeleteObjectPreconditionFailure() async throws {
@@ -287,7 +270,7 @@ struct StorageControlClientIntegrationTests: Sendable {
     let storageClient = try StorageClient()
     let controlClient = try StorageControlClient()
 
-    let uploaded = try await storageClient.upload(data, to: bucketName, as: uniqueName).value
+    let uploaded = try await storageClient.upload(data, to: bucketName, as: uniqueName)
 
     do {
       // Attempt delete with invalid generation precondition

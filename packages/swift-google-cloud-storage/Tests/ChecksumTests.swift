@@ -143,7 +143,7 @@ import Testing
 
     let client = try StorageClient(options, mock: registry)
     let uploadOptions = UploadOptions().with { $0.validation = .md5 }
-    let error2 = await expectError(RequestError.self) {
+    let error = await expectError(RequestError.self) {
       try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     }
     if case .http(let details) = error {
