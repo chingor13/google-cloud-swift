@@ -99,10 +99,8 @@ import Testing
 
     let client = try StorageClient(options, mock: registry)
     let uploadOptions = UploadOptions().with { $0.validation = .crc32c }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-
     let error = await expectError(RequestError.self) {
-      try await task.value
+      try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     }
     if case .http(let details) = error {
       #expect(details.http_status_code == 400)
@@ -145,10 +143,8 @@ import Testing
 
     let client = try StorageClient(options, mock: registry)
     let uploadOptions = UploadOptions().with { $0.validation = .md5 }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-
-    let error = await expectError(RequestError.self) {
-      try await task.value
+    let error2 = await expectError(RequestError.self) {
+      try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     }
     if case .http(let details) = error {
       #expect(details.http_status_code == 400)

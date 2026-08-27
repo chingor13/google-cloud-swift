@@ -63,8 +63,8 @@ struct StorageClientIntegrationTests {
     let storage = try StorageClient()
     let observer = TestUploadObserver()
     let options = UploadOptions().with { $0.observers = [observer] }
-    let task = storage.upload(fileURL, to: bucketName, as: objectName, options: options)
-    let object = try await task.value
+    let object = try await storage.upload(
+      fileURL, to: bucketName, as: objectName, options: options)
 
     #expect(object.bucket == bucketResource)
     #expect(object.name == objectName)
@@ -82,8 +82,7 @@ struct StorageClientIntegrationTests {
 
     let storage = try StorageClient()
 
-    let uploadTask = storage.upload(data, to: bucketName, as: objectName)
-    let uploadedObject = try await uploadTask.value
+    let uploadedObject = try await storage.upload(data, to: bucketName, as: objectName)
     #expect(uploadedObject.bucket == bucketResource)
     #expect(uploadedObject.name == objectName)
 
@@ -112,8 +111,7 @@ struct StorageClientIntegrationTests {
 
     let storage = try StorageClient()
 
-    let uploadTask = storage.upload(data, to: bucketName, as: objectName)
-    let uploadedObject = try await uploadTask.value
+    let uploadedObject = try await storage.upload(data, to: bucketName, as: objectName)
     #expect(uploadedObject.bucket == bucketResource)
     #expect(uploadedObject.name == objectName)
 
@@ -152,8 +150,7 @@ struct StorageClientIntegrationTests {
 
     let storage = try StorageClient()
 
-    let uploadTask = storage.upload(data, to: bucketName, as: objectName)
-    let uploadedObject = try await uploadTask.value
+    let uploadedObject = try await storage.upload(data, to: bucketName, as: objectName)
     #expect(uploadedObject.bucket == bucketResource)
     #expect(uploadedObject.name == objectName)
     #expect(uploadedObject.size == Int64(data.count))
@@ -189,8 +186,8 @@ struct StorageClientIntegrationTests {
     let storage = try StorageClient()
     let observer = TestUploadObserver()
     let options = UploadOptions().with { $0.observers = [observer] }
-    let task = storage.upload(fileURL, to: bucketName, as: objectName, options: options)
-    let object = try await task.value
+    let object = try await storage.upload(
+      fileURL, to: bucketName, as: objectName, options: options)
 
     #expect(object.bucket == bucketResource)
     #expect(object.name == objectName)
@@ -225,11 +222,10 @@ struct StorageClientIntegrationTests {
     }
     let failingSource = FailingUploadSource(fileURL: fileURL, failAfterBytes: failAfterBytes)
 
-    let task = storage.upload(failingSource, to: bucketName, as: objectName, options: options)
-
-    // Verify that upload task failed with SimulatedUploadError
+    // Verify that upload fails with SimulatedUploadError
     do {
-      _ = try await task.value
+      _ = try await storage.upload(
+        failingSource, to: bucketName, as: objectName, options: options)
       Issue.record("Expected upload to fail, but it succeeded")
     } catch is FailingUploadSource.SimulatedUploadError {
       // Expected error
@@ -260,8 +256,8 @@ struct StorageClientIntegrationTests {
       $0.observers = [resumeObserver]
     }
     let fileSource = FileSource(fileURL: fileURL)
-    let resumeTask = storage.resumeUpload(fileSource, uploadId: uploadId, options: resumeOptions)
-    let object = try await resumeTask.value
+    let object = try await storage.resumeUpload(
+      fileSource, uploadId: uploadId, options: resumeOptions)
 
     #expect(object.bucket == bucketResource)
     #expect(object.name == objectName)
@@ -299,11 +295,9 @@ struct StorageClientIntegrationTests {
     }
     let failingSource = FailingUploadSource(fileURL: fileURL, failAfterBytes: failAfterBytes)
 
-    let task = storage.upload(
-      failingSource, to: bucketName, as: objectName, options: uploadOptions)
-
     do {
-      _ = try await task.value
+      _ = try await storage.upload(
+        failingSource, to: bucketName, as: objectName, options: uploadOptions)
       Issue.record("Expected upload to fail, but it succeeded")
     } catch is FailingUploadSource.SimulatedUploadError {
       // Expected error
@@ -322,9 +316,9 @@ struct StorageClientIntegrationTests {
       $0.chunkSize = chunkSize
     }
     let fileSource = FileSource(fileURL: fileURL)
-    let resumeTask = storage.resumeUpload(fileSource, uploadId: uploadId, options: resumeOptions)
+    let object = try await storage.resumeUpload(
+      fileSource, uploadId: uploadId, options: resumeOptions)
 
-    let object = try await resumeTask.value
     #expect(object.bucket == bucketResource)
     #expect(object.name == objectName)
     #expect(object.size == Int64(fileSize))
@@ -354,11 +348,9 @@ struct StorageClientIntegrationTests {
     }
     let failingSource = FailingUploadSource(fileURL: fileURL, failAfterBytes: failAfterBytes)
 
-    let task = storage.upload(
-      failingSource, to: bucketName, as: objectName, options: uploadOptions)
-
     do {
-      _ = try await task.value
+      _ = try await storage.upload(
+        failingSource, to: bucketName, as: objectName, options: uploadOptions)
       Issue.record("Expected upload to fail, but it succeeded")
     } catch is FailingUploadSource.SimulatedUploadError {
       // Expected error
@@ -373,10 +365,9 @@ struct StorageClientIntegrationTests {
 
     // Resume upload with a brand new source instance referencing the same file
     let newSourceInstance = FileSource(fileURL: fileURL)
-    let resumeTask = storage.resumeUpload(
+    let object = try await storage.resumeUpload(
       newSourceInstance, uploadId: uploadId, options: uploadOptions)
 
-    let object = try await resumeTask.value
     #expect(object.bucket == bucketResource)
     #expect(object.name == objectName)
     #expect(object.size == Int64(fileSize))
@@ -397,9 +388,9 @@ struct StorageClientIntegrationTests {
       }
 
       let options = UploadOptions().with { $0.validation = validation }
-      let task = storage.upload(fileURL, to: bucketName, as: objectName, options: options)
+      let object = try await storage.upload(
+        fileURL, to: bucketName, as: objectName, options: options)
 
-      let object = try await task.value
       #expect(object.bucket == bucketResource)
       #expect(object.name == objectName)
       #expect(object.size == Int64(content.utf8.count))
@@ -425,9 +416,9 @@ struct StorageClientIntegrationTests {
       }
 
       let options = UploadOptions().with { $0.validation = validation }
-      let task = storage.upload(fileURL, to: bucketName, as: objectName, options: options)
+      let object = try await storage.upload(
+        fileURL, to: bucketName, as: objectName, options: options)
 
-      let object = try await task.value
       #expect(object.bucket == bucketResource)
       #expect(object.name == objectName)
       #expect(object.size == Int64(fileSize))
@@ -450,9 +441,9 @@ struct StorageClientIntegrationTests {
     let options = UploadOptions().with {
       $0.checksums = ChecksumOptions(crc32c: .auto, md5: .auto)
     }
-    let task = storage.upload(fileURL, to: bucketName, as: objectName, options: options)
+    let object = try await storage.upload(
+      fileURL, to: bucketName, as: objectName, options: options)
 
-    let object = try await task.value
     #expect(object.bucket == bucketResource)
     #expect(object.name == objectName)
     #expect(object.size == Int64(content.utf8.count))
@@ -477,10 +468,9 @@ struct StorageClientIntegrationTests {
     let options = UploadOptions().with {
       $0.checksums = ChecksumOptions(crc32c: "AAAAAA==")
     }
-    let task = storage.upload(fileURL, to: bucketName, as: objectName, options: options)
 
     do {
-      _ = try await task.value
+      _ = try await storage.upload(fileURL, to: bucketName, as: objectName, options: options)
       Issue.record("Expected GCS to reject upload with bad checksum, but it succeeded")
     } catch RequestError.service(let serviceError) {
       #expect(serviceError.message.contains("doesn't match"))
@@ -509,8 +499,8 @@ struct StorageClientIntegrationTests {
     let uploadOptions = UploadOptions().with {
       $0.customerEncryptionKey = csek
     }
-    let uploadTask = storage.upload(data, to: bucketName, as: objectName, options: uploadOptions)
-    let uploadedObject = try await uploadTask.value
+    let uploadedObject = try await storage.upload(
+      data, to: bucketName, as: objectName, options: uploadOptions)
     #expect(uploadedObject.bucket == bucketResource)
     #expect(uploadedObject.name == objectName)
     #expect(uploadedObject.size == Int64(data.count))
@@ -566,9 +556,9 @@ struct StorageClientIntegrationTests {
     let options = UploadOptions().with {
       $0.customerEncryptionKey = csek
     }
-    let task = storage.upload(fileURL, to: bucketName, as: objectName, options: options)
+    let object = try await storage.upload(
+      fileURL, to: bucketName, as: objectName, options: options)
 
-    let object = try await task.value
     #expect(object.bucket == bucketResource)
     #expect(object.name == objectName)
     #expect(object.size == Int64(content.utf8.count))
@@ -595,9 +585,9 @@ struct StorageClientIntegrationTests {
     let options = UploadOptions().with {
       $0.customerEncryptionKey = csek
     }
-    let task = storage.upload(fileURL, to: bucketName, as: objectName, options: options)
+    let object = try await storage.upload(
+      fileURL, to: bucketName, as: objectName, options: options)
 
-    let object = try await task.value
     #expect(object.bucket == bucketResource)
     #expect(object.name == objectName)
     #expect(object.size == Int64(fileSize))
@@ -642,9 +632,9 @@ struct StorageClientIntegrationTests {
       $0.metadata = metadata
     }
 
-    let task = storage.upload(fileURL, to: bucketName, as: objectName, options: options)
+    let object = try await storage.upload(
+      fileURL, to: bucketName, as: objectName, options: options)
 
-    let object = try await task.value
     #expect(object.bucket == bucketResource)
     #expect(object.name == objectName)
     #expect(object.contentType == "text/plain")
@@ -675,9 +665,9 @@ struct StorageClientIntegrationTests {
       }
     }
 
-    let task = storage.upload(fileURL, to: bucketName, as: objectName, options: options)
+    let object = try await storage.upload(
+      fileURL, to: bucketName, as: objectName, options: options)
 
-    let object = try await task.value
     #expect(object.bucket == bucketResource)
     #expect(object.name == objectName)
     #expect(object.contexts?.custom["environment"]?.value == "integration-test")
@@ -693,9 +683,8 @@ struct StorageClientIntegrationTests {
       chunkSize: 4 * 1024 * 1024, totalChunks: 0, totalSize: nil)
 
     let storage = try StorageClient()
-    let task = storage.upload(source, to: bucketName, as: objectName)
+    let object = try await storage.upload(source, to: bucketName, as: objectName)
 
-    let object = try await task.value
     #expect(object.bucket == bucketResource)
     #expect(object.name == objectName)
     #expect(object.size == 0)
@@ -715,9 +704,9 @@ struct StorageClientIntegrationTests {
 
     let storage = try StorageClient()
     let options = UploadOptions().with { $0.chunkSize = chunkSize }
-    let task = storage.upload(source, to: bucketName, as: objectName, options: options)
+    let object = try await storage.upload(
+      source, to: bucketName, as: objectName, options: options)
 
-    let object = try await task.value
     #expect(object.bucket == bucketResource)
     #expect(object.name == objectName)
     #expect(object.size == expectedTotalSize)
@@ -760,9 +749,8 @@ struct StorageClientGzipDownloadIntegrationTests {
       $0.metadata = uploadMetadata
     }
 
-    let uploadTask = storage.upload(
+    let uploadedObject = try await storage.upload(
       Self.compressedGzipData, to: bucketName, as: objectName, options: uploadOptions)
-    let uploadedObject = try await uploadTask.value
     #expect(uploadedObject.bucket == bucketResource)
     #expect(uploadedObject.name == objectName)
     #expect(uploadedObject.contentEncoding == "gzip")
@@ -801,9 +789,8 @@ struct StorageClientGzipDownloadIntegrationTests {
       $0.metadata = uploadMetadata
     }
 
-    let uploadTask = storage.upload(
+    let uploadedObject = try await storage.upload(
       Self.compressedGzipData, to: bucketName, as: objectName, options: uploadOptions)
-    let uploadedObject = try await uploadTask.value
     #expect(uploadedObject.bucket == bucketResource)
     #expect(uploadedObject.name == objectName)
     #expect(uploadedObject.contentEncoding == "gzip")
@@ -845,9 +832,8 @@ struct StorageClientGzipDownloadIntegrationTests {
       $0.metadata = uploadMetadata
     }
 
-    let uploadTask = storage.upload(
+    let uploadedObject = try await storage.upload(
       Self.compressedGzipData, to: bucketName, as: objectName, options: uploadOptions)
-    let uploadedObject = try await uploadTask.value
     #expect(uploadedObject.bucket == bucketResource)
     #expect(uploadedObject.name == objectName)
     #expect(uploadedObject.contentEncoding == "gzip")
@@ -893,8 +879,7 @@ struct StorageClientRangedDownloadIntegrationTests {
     let data = Data(content.utf8)
 
     let storageClient = try StorageClient()
-    let uploadTask = storageClient.upload(data, to: bucket, as: objName)
-    let obj = try await uploadTask.value
+    let obj = try await storageClient.upload(data, to: bucket, as: objName)
     #expect(obj.bucket == "projects/_/buckets/\(bucket)")
     #expect(obj.name == objName)
 

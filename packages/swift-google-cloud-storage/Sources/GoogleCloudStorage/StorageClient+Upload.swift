@@ -37,13 +37,13 @@ extension StorageClient {
   ///   - bucket: The destination GCS bucket name.
   ///   - objectName: The destination GCS object name.
   ///   - options: Configuration options for the upload.
-  /// - Returns: An `UploadTask` to monitor and control the upload.
+  /// - Returns: The created `Object` metadata upon successful upload.
   public func upload(
     _ source: some UploadSource,
     to bucket: String,
     as objectName: String,
     options: UploadOptions = .default
-  ) -> UploadTask {
+  ) async throws -> Object {
     let clientOptions = self.options.client
     let effectiveBackoffPolicy =
       options.backoffPolicy ?? self.options.upload.backoffPolicy ?? clientOptions.backoffPolicy
@@ -63,50 +63,49 @@ extension StorageClient {
     let clock = ContinuousClock()
     let startTime = clock.now
     observer.uploadDidStart(bucket: bucket, object: objectName, uploadId: nil)
-    return UploadTask.create {
-      var source = source
-      let totalSize = source.totalSize
 
-      // Determine if simple or resumable
-      let useResumable = totalSize == nil || totalSize! >= effectiveThreshold
+    var source = source
+    let totalSize = source.totalSize
 
-      do {
-        let result: Object
-        if !useResumable {
-          result = try await Self.performSimpleUpload(
-            httpClient: httpClient,
-            source: &source,
-            bucket: bucket,
-            objectName: objectName,
-            metadata: options.metadata,
-            options: options,
-            totalSize: totalSize,
-            resumeLoop: resumeLoop,
-            observer: observer
-          )
-        } else {
-          result = try await Self.continueStreamingUpload(
-            httpClient: httpClient,
-            source: &source,
-            bucket: bucket,
-            objectName: objectName,
-            metadata: options.metadata,
-            uploadId: nil,
-            initialStatus: .inprogress(0),
-            chunkSize: options.chunkSize,
-            totalSize: totalSize,
-            options: options,
-            resumeLoop: resumeLoop,
-            observer: observer
-          )
-        }
-        let totalDuration = clock.now - startTime
-        observer.uploadDidComplete(object: result, totalDuration: totalDuration)
-        return result
-      } catch {
-        observer.uploadDidFail(error: error)
-        throw error
+    // Determine if simple or resumable
+    let useResumable = totalSize == nil || totalSize! >= effectiveThreshold
+
+    do {
+      let result: Object
+      if !useResumable {
+        result = try await Self.performSimpleUpload(
+          httpClient: httpClient,
+          source: &source,
+          bucket: bucket,
+          objectName: objectName,
+          metadata: options.metadata,
+          options: options,
+          totalSize: totalSize,
+          resumeLoop: resumeLoop,
+          observer: observer
+        )
+      } else {
+        result = try await Self.continueStreamingUpload(
+          httpClient: httpClient,
+          source: &source,
+          bucket: bucket,
+          objectName: objectName,
+          metadata: options.metadata,
+          uploadId: nil,
+          initialStatus: .inprogress(0),
+          chunkSize: options.chunkSize,
+          totalSize: totalSize,
+          options: options,
+          resumeLoop: resumeLoop,
+          observer: observer
+        )
       }
+      let totalDuration = clock.now - startTime
+      observer.uploadDidComplete(object: result, totalDuration: totalDuration)
+      return result
+    } catch {
+      observer.uploadDidFail(error: error)
+      throw error
     }
   }
 
@@ -117,13 +116,13 @@ extension StorageClient {
   ///   - bucket: The destination GCS bucket name.
   ///   - objectName: The destination GCS object name.
   ///   - options: Configuration options for the upload.
-  /// - Returns: An `UploadTask` to monitor and control the upload.
+  /// - Returns: The created `Object` metadata upon successful upload.
   public func upload(
     _ source: some SeekableUploadSource,
     to bucket: String,
     as objectName: String,
     options: UploadOptions = .default
-  ) -> UploadTask {
+  ) async throws -> Object {
     let clientOptions = self.options.client
     let effectiveBackoffPolicy =
       options.backoffPolicy ?? self.options.upload.backoffPolicy ?? clientOptions.backoffPolicy
@@ -146,50 +145,49 @@ extension StorageClient {
     let clock = ContinuousClock()
     let startTime = clock.now
     observer.uploadDidStart(bucket: bucket, object: objectName, uploadId: nil)
-    return UploadTask.create {
-      var source = source
-      let totalSize = source.totalSize
 
-      // Determine if simple or resumable
-      let useResumable = totalSize == nil || totalSize! >= effectiveThreshold
+    var source = source
+    let totalSize = source.totalSize
 
-      do {
-        let result: Object
-        if !useResumable {
-          result = try await Self.performSimpleUpload(
-            httpClient: httpClient,
-            source: &source,
-            bucket: bucket,
-            objectName: objectName,
-            metadata: options.metadata,
-            options: options,
-            totalSize: totalSize,
-            resumeLoop: resumeLoop,
-            observer: observer
-          )
-        } else {
-          result = try await Self.continueResumableSeekableUpload(
-            httpClient: httpClient,
-            source: &source,
-            bucket: bucket,
-            objectName: objectName,
-            metadata: options.metadata,
-            uploadId: nil,
-            initialStatus: .inprogress(0),
-            chunkSize: options.chunkSize,
-            totalSize: totalSize,
-            options: options,
-            resumeLoop: resumeLoop,
-            observer: observer
-          )
-        }
-        let totalDuration = clock.now - startTime
-        observer.uploadDidComplete(object: result, totalDuration: totalDuration)
-        return result
-      } catch {
-        observer.uploadDidFail(error: error)
-        throw error
+    // Determine if simple or resumable
+    let useResumable = totalSize == nil || totalSize! >= effectiveThreshold
+
+    do {
+      let result: Object
+      if !useResumable {
+        result = try await Self.performSimpleUpload(
+          httpClient: httpClient,
+          source: &source,
+          bucket: bucket,
+          objectName: objectName,
+          metadata: options.metadata,
+          options: options,
+          totalSize: totalSize,
+          resumeLoop: resumeLoop,
+          observer: observer
+        )
+      } else {
+        result = try await Self.continueResumableSeekableUpload(
+          httpClient: httpClient,
+          source: &source,
+          bucket: bucket,
+          objectName: objectName,
+          metadata: options.metadata,
+          uploadId: nil,
+          initialStatus: .inprogress(0),
+          chunkSize: options.chunkSize,
+          totalSize: totalSize,
+          options: options,
+          resumeLoop: resumeLoop,
+          observer: observer
+        )
       }
+      let totalDuration = clock.now - startTime
+      observer.uploadDidComplete(object: result, totalDuration: totalDuration)
+      return result
+    } catch {
+      observer.uploadDidFail(error: error)
+      throw error
     }
   }
 
@@ -747,12 +745,12 @@ extension StorageClient {
   ///   - source: The seekable upload source (must match the original source).
   ///   - uploadId: The saved GCS Upload ID (Session URI).
   ///   - options: Configuration options for the upload.
-  /// - Returns: An `UploadTask` to monitor and control the resumed upload.
+  /// - Returns: The created `Object` metadata upon successful upload.
   public func resumeUpload(
     _ source: some SeekableUploadSource,
     uploadId: String,
     options: UploadOptions = .default
-  ) -> UploadTask {
+  ) async throws -> Object {
     let clientOptions = self.options.client
     let effectiveBackoffPolicy =
       options.backoffPolicy ?? self.options.upload.backoffPolicy ?? clientOptions.backoffPolicy
@@ -772,32 +770,31 @@ extension StorageClient {
     let clock = ContinuousClock()
     let startTime = clock.now
     observer.uploadDidStart(bucket: "", object: "", uploadId: uploadId)
-    return UploadTask.create {
-      var source = source
-      let totalSize = source.totalSize
 
-      do {
-        let result = try await Self.continueResumableSeekableUpload(
-          httpClient: httpClient,
-          source: &source,
-          bucket: nil,
-          objectName: nil,
-          metadata: nil,
-          uploadId: uploadId,
-          initialStatus: .unknown,
-          chunkSize: options.chunkSize,
-          totalSize: totalSize,
-          options: options,
-          resumeLoop: resumeLoop,
-          observer: observer
-        )
-        let totalDuration = clock.now - startTime
-        observer.uploadDidComplete(object: result, totalDuration: totalDuration)
-        return result
-      } catch {
-        observer.uploadDidFail(error: error)
-        throw error
-      }
+    var source = source
+    let totalSize = source.totalSize
+
+    do {
+      let result = try await Self.continueResumableSeekableUpload(
+        httpClient: httpClient,
+        source: &source,
+        bucket: nil,
+        objectName: nil,
+        metadata: nil,
+        uploadId: uploadId,
+        initialStatus: .unknown,
+        chunkSize: options.chunkSize,
+        totalSize: totalSize,
+        options: options,
+        resumeLoop: resumeLoop,
+        observer: observer
+      )
+      let totalDuration = clock.now - startTime
+      observer.uploadDidComplete(object: result, totalDuration: totalDuration)
+      return result
+    } catch {
+      observer.uploadDidFail(error: error)
+      throw error
     }
   }
 
@@ -809,8 +806,8 @@ extension StorageClient {
     to bucket: String,
     as objectName: String,
     options: UploadOptions = .default
-  ) -> UploadTask {
-    return self.upload(
+  ) async throws -> Object {
+    return try await self.upload(
       FileSource(fileURL: fileURL), to: bucket, as: objectName, options: options)
   }
 
@@ -820,8 +817,8 @@ extension StorageClient {
     to bucket: String,
     as objectName: String,
     options: UploadOptions = .default
-  ) -> UploadTask {
-    return self.upload(
+  ) async throws -> Object {
+    return try await self.upload(
       BytesSource(data: data), to: bucket, as: objectName, options: options)
   }
 }

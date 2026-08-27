@@ -77,8 +77,7 @@ import Testing
       for: chunkUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.upload(source, to: bucket, as: objectName)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName)
 
     #expect(object.name == objectName)
     let requests = registry.recordedRequests()
@@ -102,10 +101,9 @@ import Testing
 
     let client = try makeClient(
       registry: registry, uploadResumePolicy: NeverResume<UploadDetails>())
-    let task = client.upload(source, to: bucket, as: objectName)
 
     let error = await expectError(RequestError.self) {
-      _ = try await task.value
+      _ = try await client.upload(source, to: bucket, as: objectName)
     }
     if case .io(let underlying as URLError) = error {
       #expect(underlying.code == URLError.cannotConnectToHost)
@@ -134,10 +132,9 @@ import Testing
       for: startUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.upload(source, to: bucket, as: objectName)
 
     await #expect(throws: DummyError.self) {
-      _ = try await task.value
+      _ = try await client.upload(source, to: bucket, as: objectName)
     }
   }
 
@@ -157,10 +154,9 @@ import Testing
       for: startUrl)
 
     let client = try makeClient(registry: registry, uploadResumePolicy: NeverResume())
-    let task = client.upload(source, to: bucket, as: objectName)
 
     let error = await expectError(RequestError.self) {
-      _ = try await task.value
+      _ = try await client.upload(source, to: bucket, as: objectName)
     }
     if case .io(let underlying as URLError) = error {
       #expect(underlying.code == .cannotConnectToHost)
@@ -193,10 +189,9 @@ import Testing
       for: chunkUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.upload(source, to: bucket, as: objectName)
 
     let error = await expectError(RequestError.self) {
-      try await task.value
+      _ = try await client.upload(source, to: bucket, as: objectName)
     }
     if case .http(let details) = error {
       #expect(details.http_status_code == 500)
@@ -239,8 +234,7 @@ import Testing
       for: queryUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
-    let object = try await task.value
+    let object = try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -296,9 +290,7 @@ import Testing
       for: queryUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
-
-    let object = try await task.value
+    let object = try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
     #expect(object.name == objectName)
 
     let requests = registry.recordedRequests()
@@ -325,10 +317,9 @@ import Testing
       for: queryUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
 
     await #expect(throws: DummyError.self) {
-      _ = try await task.value
+      _ = try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
     }
   }
 
@@ -369,8 +360,7 @@ import Testing
       for: chunkUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.upload(source, to: bucket, as: objectName)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -393,8 +383,7 @@ import Testing
       for: queryUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
-    let object = try await task.value
+    let object = try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -422,8 +411,7 @@ import Testing
       for: queryUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
-    let object = try await task.value
+    let object = try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -445,10 +433,9 @@ import Testing
       for: queryUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
 
     let error = await expectError(RequestError.self) {
-      try await task.value
+      _ = try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
     }
     if case .http(let details) = error {
       #expect(details.http_status_code == 404)
@@ -475,10 +462,9 @@ import Testing
       for: startUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.upload(source, to: bucket, as: objectName)
 
     let error = await expectUploadError {
-      try await task.value
+      _ = try await client.upload(source, to: bucket, as: objectName)
     }
     if case .unexpectedServerResponse(let statusCode, let message) = error {
       #expect(statusCode == 200)
@@ -504,10 +490,9 @@ import Testing
       for: queryUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
 
     let error = await expectError(RequestError.self) {
-      try await task.value
+      _ = try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
     }
     if case .http(let details) = error {
       #expect(details.http_status_code == 499)
@@ -532,10 +517,9 @@ import Testing
       for: queryUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
 
     let error = await expectUploadError {
-      try await task.value
+      _ = try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
     }
     if case .localSourceTooSmall(let localSize, let gcsOffset) = error {
       #expect(localSize == 100)
@@ -587,8 +571,7 @@ import Testing
 
     let client = try makeClient(registry: registry)
     let uploadOptions = UploadOptions().with { $0.customerEncryptionKey = csek }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.customerEncryption?.keySha256 == sample.keyHashBase64)
@@ -639,8 +622,7 @@ import Testing
       for: chunkUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.upload(source, to: bucket, as: objectName)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -673,8 +655,7 @@ import Testing
       for: queryUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
-    let object = try await task.value
+    let object = try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -722,8 +703,7 @@ import Testing
       for: chunkUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.upload(source, to: bucket, as: objectName)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -760,8 +740,7 @@ import Testing
       for: queryUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
-    let object = try await task.value
+    let object = try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -804,8 +783,7 @@ import Testing
       for: chunkUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.upload(source, to: bucket, as: objectName)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -850,8 +828,7 @@ import Testing
 
     let client = try makeClient(registry: registry)
     let uploadOptions = UploadOptions().with { $0.chunkSize = chunkSize }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -895,8 +872,7 @@ import Testing
       for: queryUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
-    let object = try await task.value
+    let object = try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -935,8 +911,7 @@ import Testing
       for: chunkUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.upload(source, to: bucket, as: objectName)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -973,8 +948,7 @@ import Testing
       for: chunkUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.upload(source, to: bucket, as: objectName)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -1007,8 +981,7 @@ import Testing
       for: chunkUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.upload(source, to: bucket, as: objectName)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -1064,8 +1037,7 @@ import Testing
 
     let client = try makeClient(registry: registry)
     let uploadOptions = UploadOptions().with { $0.chunkSize = 5 * 1024 * 1024 }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -1103,8 +1075,7 @@ import Testing
       for: chunkUrl)
 
     let client = try makeClient(registry: registry)
-    let task = client.upload(source, to: bucket, as: objectName)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -1155,9 +1126,8 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.checksums = ChecksumOptions(crc32c: nil, md5: .auto)
     }
-    let task = client.resumeUpload(
+    let object = try await client.resumeUpload(
       source, uploadId: queryUrl.absoluteString, options: uploadOptions)
-    let object = try await task.value
 
     #expect(object.name == objectName)
 
@@ -1207,9 +1177,8 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.checksums = ChecksumOptions(crc32c: nil, md5: .auto)
     }
-    let task = client.resumeUpload(
+    let object = try await client.resumeUpload(
       source, uploadId: queryUrl.absoluteString, options: uploadOptions)
-    let object = try await task.value
 
     #expect(object.name == objectName)
 
@@ -1277,8 +1246,7 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.chunkSize = 8 * 1024 * 1024
     }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -1362,8 +1330,7 @@ import Testing
       $0.chunkSize = chunkSize
       $0.observers = [observer]
     }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -1452,8 +1419,7 @@ import Testing
       $0.chunkSize = chunkSize
       $0.observers = [observer]
     }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -1512,8 +1478,7 @@ import Testing
       registry: registry,
       clientRetryPolicy: BaseRetryPolicy().withAttemptLimit(3)
     )
-    let task = client.resumeUpload(source, uploadId: queryUrl.absoluteString)
-    let object = try await task.value
+    let object = try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -1567,8 +1532,7 @@ import Testing
       registry: registry,
       clientRetryPolicy: BaseRetryPolicy().withAttemptLimit(3)
     )
-    let task = client.upload(source, to: bucket, as: objectName)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -1660,8 +1624,7 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.chunkSize = chunkSize
     }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -1757,8 +1720,7 @@ import Testing
       registry: registry,
       clientRetryPolicy: BaseRetryPolicy().withAttemptLimit(4)
     )
-    let task = client.upload(source, to: bucket, as: objectName)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -1827,8 +1789,7 @@ import Testing
       registry: registry,
       clientRetryPolicy: BaseRetryPolicy().withAttemptLimit(4)
     )
-    let task = client.upload(source, to: bucket, as: objectName)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -1866,10 +1827,9 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.resumePolicy = NeverResume()
     }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     let error = await expectError(RequestError.self) {
-      try await task.value
+      _ = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     }
     #expect(error != nil)
     let requests = registry.recordedRequests()
@@ -1896,10 +1856,9 @@ import Testing
 
     let client = try makeClient(
       registry: registry, uploadResumePolicy: NeverResume<UploadDetails>())
-    let task = client.upload(source, to: bucket, as: objectName)
 
     let error = await expectError(RequestError.self) {
-      try await task.value
+      _ = try await client.upload(source, to: bucket, as: objectName)
     }
     #expect(error != nil)
     let requests = registry.recordedRequests()
@@ -1941,8 +1900,7 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.observers = [observer]
     }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -1980,8 +1938,7 @@ import Testing
       $0.chunkSize = 16 * 1024 * 1024
       $0.observers = [observer]
     }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -2020,9 +1977,8 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.observers = [observer]
     }
-    let task = client.resumeUpload(
+    let object = try await client.resumeUpload(
       source, uploadId: queryUrl.absoluteString, options: uploadOptions)
-    let object = try await task.value
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -2081,9 +2037,8 @@ import Testing
       $0.chunkSize = chunkSize
       $0.observers = [observer]
     }
-    let task = client.resumeUpload(
+    let object = try await client.resumeUpload(
       source, uploadId: queryUrl.absoluteString, options: uploadOptions)
-    let object = try await task.value
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -2139,8 +2094,7 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.resumableUploadThreshold = 512 * 1024  // 512KB threshold
     }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -2191,8 +2145,7 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.resumableUploadThreshold = 0
     }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -2240,8 +2193,7 @@ import Testing
       for: sessionUrl)
 
     let client = try makeClient(registry: registry, uploadThreshold: 512 * 1024)
-    let task = client.upload(source, to: bucket, as: objectName)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -2293,8 +2245,7 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.resumableUploadThreshold = 1 * 1024 * 1024
     }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -2333,8 +2284,7 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.resumableUploadThreshold = 0
     }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -2378,8 +2328,7 @@ import Testing
         $0.ifGenerationMatch = 0
       }
     }
-    let task = client.upload(data, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(data, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -2423,8 +2372,8 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.resumableUploadThreshold = 0
     }
-    let task = client.upload(fileURL, to: bucket, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(
+      fileURL, to: bucket, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
@@ -2467,8 +2416,8 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.resumableUploadThreshold = 0
     }
-    let task = client.upload(source, to: bucketResource, as: objectName, options: uploadOptions)
-    let object = try await task.value
+    let object = try await client.upload(
+      source, to: bucketResource, as: objectName, options: uploadOptions)
 
     #expect(object.name == objectName)
     #expect(object.bucket == bucketResource)

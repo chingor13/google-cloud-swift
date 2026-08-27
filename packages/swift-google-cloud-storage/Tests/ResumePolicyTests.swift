@@ -250,10 +250,8 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.resumePolicy = NeverResume()
     }
-    let task = client.upload(source, to: bucket, as: objectName, options: uploadOptions)
-
     let error = await expectError(RequestError.self) {
-      try await task.value
+      _ = try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     }
     if case .http(let details) = error {
       #expect(details.http_status_code == 503)

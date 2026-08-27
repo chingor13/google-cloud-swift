@@ -72,8 +72,7 @@ import Testing
       $0.observers = [observer]
     }
 
-    let task = client.upload(source, to: bucket, as: objectName, options: options)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: options)
 
     #expect(object.name == objectName)
     #expect(observer.startedCalls.count >= 1)
@@ -139,8 +138,7 @@ import Testing
       $0.observers = [observer]
     }
 
-    let task = client.upload(source, to: bucket, as: objectName, options: options)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: options)
 
     #expect(object.name == objectName)
     #expect(observer.startedCalls.count >= 1)
@@ -193,8 +191,7 @@ import Testing
       $0.backoffPolicy = LinearBackoffPolicy(delay: .milliseconds(1))
     }
 
-    let task = client.upload(source, to: bucket, as: objectName, options: options)
-    let object = try await task.value
+    let object = try await client.upload(source, to: bucket, as: objectName, options: options)
 
     #expect(object.name == objectName)
     #expect(observer.retries.count == 1)
@@ -228,10 +225,8 @@ import Testing
       $0.observers = [observer]
     }
 
-    let task = client.upload(source, to: bucket, as: objectName, options: options)
-
     await expectError(RequestError.self) {
-      try await task.value
+      _ = try await client.upload(source, to: bucket, as: objectName, options: options)
     }
 
     #expect(observer.failures.count == 1)
@@ -264,8 +259,7 @@ import Testing
       $0.addObserver(requestObserver)
     }
 
-    let task = client.upload(source, to: bucket, as: objectName, options: options)
-    let _ = try await task.value
+    _ = try await client.upload(source, to: bucket, as: objectName, options: options)
 
     #expect(clientObserver.completedObjects.count == 1)
     #expect(requestObserver.completedObjects.count == 1)
