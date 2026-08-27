@@ -107,8 +107,60 @@ import Testing
       for try await _ in task.body {}
     }
 
+    #expect(observer.startedCalls.count == 1)
     #expect(observer.failures.count >= 1)
     #expect(observer.completedMetadata.isEmpty)
+  }
+
+  @Test func downloadObserverRetryNotification() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "retry-test.txt"
+    let content = "Retry Download Content"
+    let data = Data(content.utf8)
+
+    let url = registry.url("/storage/v1/b/\(bucket)/o/\(objectName)?alt=media")
+    // First attempt fails with 503, second succeeds with 200
+    registry.register(
+      response: .success(
+        statusCode: 503,
+        data: Data("Service Unavailable".utf8),
+        headers: ["Content-Type": "text/plain"]
+      ),
+      for: url
+    )
+    registry.register(
+      response: .success(
+        statusCode: 200,
+        data: data,
+        headers: [
+          "Content-Length": String(data.count),
+          "Content-Type": "text/plain",
+          "ETag": "etag-retry-123",
+        ]
+      ),
+      for: url
+    )
+
+    let observer = RecordingDownloadObserver()
+    let client = try makeClient(registry: registry)
+    let options = ReadObjectOptions().with {
+      $0.observers = [observer]
+      $0.backoffPolicy = LinearBackoffPolicy(delay: .milliseconds(1))
+    }
+
+    let task = client.readObject(from: bucket, object: objectName, options: options)
+    var downloadedData = Data()
+    for try await chunk in task.body {
+      downloadedData.append(contentsOf: chunk.readableBytesView)
+    }
+
+    #expect(downloadedData == data)
+    #expect(observer.startedCalls.count == 1)
+    #expect(observer.retries.count == 1)
+    #expect(observer.retries.first?.attempt == 1)
+    #expect(observer.completedMetadata.count == 1)
+    #expect(observer.failures.isEmpty)
   }
 
   @Test func multipleDownloadObserversCombinedFromClientAndOptions() async throws {

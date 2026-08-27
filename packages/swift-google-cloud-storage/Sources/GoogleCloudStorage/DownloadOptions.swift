@@ -423,7 +423,7 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
     self.httpClient = httpClient
     self.resumeLoop = resumeLoop
     self.observer = observer
-    self.startTime = ContinuousClock().now
+    self.startTime = self.clock.now
     self.resumeState = ResumeState(details: DownloadDetails())
     if options.checksums.crc32c != nil {
       self.crc32cCalculator = CRC32CCalculator()
@@ -439,6 +439,8 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
         return existing
       }
       let newTask = Task { () throws -> ReadObjectMetadata in
+        self.observer.operationDidStart(
+          context: StorageOperationContext(bucket: self.bucket, object: self.object))
         do {
           let (response, metadata) = try await Self.fetchInitial(
             httpClient: self.httpClient,
@@ -446,15 +448,16 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
             object: self.object,
             options: self.options,
             resumeLoop: self.resumeLoop,
-            resumeState: self.resumeState
+            resumeState: self.resumeState,
+            onRetry: { attempt, error, backoff in
+              self.observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
+            }
           )
           self.lock.withLock {
             self.metadata = metadata
             self.bodyIterator = response.body.makeAsyncIterator()
             self.isInitialFetched = true
           }
-          self.observer.operationDidStart(
-            context: StorageOperationContext(bucket: self.bucket, object: self.object))
           return metadata
         } catch {
           self.observer.operationDidFail(error: error)
@@ -737,10 +740,15 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
     object: String,
     options: ReadObjectOptions,
     resumeLoop: _ResumeLoop<DownloadDetails>,
-    resumeState: ResumeState<DownloadDetails>
+    resumeState: ResumeState<DownloadDetails>,
+    onRetry: @Sendable @escaping (_ attempt: Int, _ error: any Error, _ backoff: Duration) -> Void =
+      { _, _, _ in }
   ) async throws -> (_HTTPClientResponse, ReadObjectMetadata) {
     do {
-      return try await resumeLoop.run(state: resumeState) { _ in
+      return try await resumeLoop.run(
+        state: resumeState,
+        onRetry: onRetry
+      ) { _ in
         let request = try await httpClient.buildReadObjectRequest(
           bucket: bucket, object: object, options: options)
         let response: _HTTPClientResponse
