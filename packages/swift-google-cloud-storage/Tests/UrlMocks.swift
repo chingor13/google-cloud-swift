@@ -278,7 +278,7 @@ final class RecordingUploadObserver: UploadObserver, @unchecked Sendable {
 
   var startedCalls: [StorageOperationContext] = []
   var progressUpdates: [UploadProgress] = []
-  var retries: [(attempt: Int, error: any Error, backoff: Duration)] = []
+  var retries: [RetryDetails] = []
   var completedObjects: [(object: Object, totalDuration: Duration)] = []
   var failures: [any Error] = []
 
@@ -294,10 +294,10 @@ final class RecordingUploadObserver: UploadObserver, @unchecked Sendable {
     progressUpdates.append(progress)
   }
 
-  func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {
+  func operationDidRetry(_ retry: RetryDetails) {
     lock.lock()
     defer { lock.unlock() }
-    retries.append((attempt: attempt, error: error, backoff: backoff))
+    retries.append(retry)
   }
 
   func operationDidComplete(result: Object, totalDuration: Duration) {
@@ -318,7 +318,7 @@ final class RecordingDownloadObserver: DownloadObserver, @unchecked Sendable {
 
   var startedCalls: [StorageOperationContext] = []
   var progressUpdates: [DownloadProgress] = []
-  var retries: [(attempt: Int, error: any Error, backoff: Duration)] = []
+  var retries: [RetryDetails] = []
   var completedMetadata: [(metadata: ReadObjectMetadata, totalDuration: Duration)] = []
   var failures: [any Error] = []
 
@@ -334,10 +334,10 @@ final class RecordingDownloadObserver: DownloadObserver, @unchecked Sendable {
     progressUpdates.append(progress)
   }
 
-  func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {
+  func operationDidRetry(_ retry: RetryDetails) {
     lock.lock()
     defer { lock.unlock() }
-    retries.append((attempt: attempt, error: error, backoff: backoff))
+    retries.append(retry)
   }
 
   func operationDidComplete(result: ReadObjectMetadata, totalDuration: Duration) {
@@ -361,7 +361,7 @@ final class RecordingOperationObserver<Context: Sendable, Progress: Sendable, Re
 
   var startedContexts: [Context] = []
   var progressUpdates: [Progress] = []
-  var retries: [(attempt: Int, error: any Error, backoff: Duration)] = []
+  var retries: [RetryDetails] = []
   var completedResults: [(result: Result, totalDuration: Duration)] = []
   var failures: [any Error] = []
 
@@ -377,10 +377,10 @@ final class RecordingOperationObserver<Context: Sendable, Progress: Sendable, Re
     progressUpdates.append(progress)
   }
 
-  func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {
+  func operationDidRetry(_ retry: RetryDetails) {
     lock.lock()
     defer { lock.unlock() }
-    retries.append((attempt: attempt, error: error, backoff: backoff))
+    retries.append(retry)
   }
 
   func operationDidComplete(result: Result, totalDuration: Duration) {

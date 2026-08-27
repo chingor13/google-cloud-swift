@@ -450,7 +450,8 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
             resumeLoop: self.resumeLoop,
             resumeState: self.resumeState,
             onRetry: { attempt, error, backoff in
-              self.observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
+              self.observer.operationDidRetry(
+                RetryDetails(attempt: attempt, error: error, backoff: backoff))
             }
           )
           self.lock.withLock {
@@ -560,7 +561,8 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
             state: &resumeState,
             error: reqError,
             onRetry: { attempt, err, backoff in
-              self.observer.operationDidRetry(attempt: attempt, error: err, backoff: backoff)
+              self.observer.operationDidRetry(
+                RetryDetails(attempt: attempt, error: err, backoff: backoff))
             }
           )
         } catch let err as RequestError {

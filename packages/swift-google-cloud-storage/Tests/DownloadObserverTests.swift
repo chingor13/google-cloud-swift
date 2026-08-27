@@ -205,8 +205,9 @@ import Testing
     observer.operationDidStart(context: StorageOperationContext(bucket: "b", object: "o"))
     observer.progressUpdated(DownloadProgress(bytesDownloaded: 10))
     observer.operationDidRetry(
-      attempt: 1, error: RequestError.http(HTTPDetails(http_status_code: 500, headers: [:])),
-      backoff: .zero)
+      RetryDetails(
+        attempt: 1, error: RequestError.http(HTTPDetails(http_status_code: 500, headers: [:])),
+        backoff: .zero))
     observer.operationDidComplete(result: ReadObjectMetadata(), totalDuration: .zero)
     observer.operationDidFail(
       error: RequestError.http(HTTPDetails(http_status_code: 400, headers: [:])))

@@ -153,6 +153,18 @@ Define a generic `OperationObserver` protocol and specialized `UploadObserver` f
 #### Proposed Interface
 
 ```swift
+public struct RetryDetails: Sendable {
+    public var attempt: Int
+    public var error: any Error
+    public var backoff: Duration
+
+    public init(attempt: Int, error: any Error, backoff: Duration) {
+        self.attempt = attempt
+        self.error = error
+        self.backoff = backoff
+    }
+}
+
 public protocol OperationObserver<Context, Progress, Result>: Sendable {
     associatedtype Context: Sendable
     associatedtype Progress: Sendable
@@ -160,7 +172,7 @@ public protocol OperationObserver<Context, Progress, Result>: Sendable {
 
     func operationDidStart(context: Context)
     func progressUpdated(_ progress: Progress)
-    func operationDidRetry(attempt: Int, error: any Error, backoff: Duration)
+    func operationDidRetry(_ retry: RetryDetails)
     func operationDidComplete(result: Result, totalDuration: Duration)
     func operationDidFail(error: any Error)
 }
@@ -190,7 +202,7 @@ struct UploadMetricsObserver: UploadObserver {
         meter.recordGauge("gcs.upload.bytes_uploaded", progress.bytesUploaded)
     }
     
-    func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {
+    func operationDidRetry(_ retry: RetryDetails) {
         meter.incrementCounter("gcs.upload.retries")
     }
 }

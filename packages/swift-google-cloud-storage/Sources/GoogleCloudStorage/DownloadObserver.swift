@@ -39,9 +39,9 @@ package struct _CompositeDownloadObserver: DownloadObserver, Sendable {
     }
   }
 
-  package func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {
+  package func operationDidRetry(_ retry: RetryDetails) {
     for observer in observers {
-      observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
+      observer.operationDidRetry(retry)
     }
   }
 

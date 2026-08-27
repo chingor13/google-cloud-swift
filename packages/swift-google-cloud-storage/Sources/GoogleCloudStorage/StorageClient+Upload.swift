@@ -239,7 +239,8 @@ extension StorageClient {
     return try await resumeLoop.run(
       state: resumeState,
       onRetry: { attempt, error, backoff in
-        observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
+        observer.operationDidRetry(
+          RetryDetails(attempt: attempt, error: error, backoff: backoff))
       }
     ) { _ in
       let response: _HTTPClientResponse
@@ -452,7 +453,8 @@ extension StorageClient {
         let location = try await resumeLoop.run(
           state: &resumeState,
           onRetry: { attempt, error, backoff in
-            observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
+            observer.operationDidRetry(
+              RetryDetails(attempt: attempt, error: error, backoff: backoff))
           }
         ) { _ in
           try await startResumableSession(
@@ -488,7 +490,8 @@ extension StorageClient {
             state: &resumeState,
             error: error,
             onRetry: { attempt, error, backoff in
-              observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
+              observer.operationDidRetry(
+                RetryDetails(attempt: attempt, error: error, backoff: backoff))
             }
           )
           continue
@@ -543,7 +546,8 @@ extension StorageClient {
             state: &resumeState,
             error: error,
             onRetry: { attempt, error, backoff in
-              observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
+              observer.operationDidRetry(
+                RetryDetails(attempt: attempt, error: error, backoff: backoff))
             }
           )
           continue
@@ -609,7 +613,8 @@ extension StorageClient {
         let location = try await resumeLoop.run(
           state: &resumeState,
           onRetry: { attempt, error, backoff in
-            observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
+            observer.operationDidRetry(
+              RetryDetails(attempt: attempt, error: error, backoff: backoff))
           }
         ) { _ in
           try await startResumableSession(
@@ -648,7 +653,8 @@ extension StorageClient {
             state: &resumeState,
             error: error,
             onRetry: { attempt, error, backoff in
-              observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
+              observer.operationDidRetry(
+                RetryDetails(attempt: attempt, error: error, backoff: backoff))
             }
           )
           continue
@@ -706,7 +712,8 @@ extension StorageClient {
             state: &resumeState,
             error: error,
             onRetry: { attempt, error, backoff in
-              observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
+              observer.operationDidRetry(
+                RetryDetails(attempt: attempt, error: error, backoff: backoff))
             }
           )
           continue
