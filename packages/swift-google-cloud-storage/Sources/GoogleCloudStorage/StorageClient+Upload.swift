@@ -62,7 +62,8 @@ extension StorageClient {
     let observer = _CompositeUploadObserver(effectiveObservers)
     let clock = ContinuousClock()
     let startTime = clock.now
-    observer.uploadDidStart(bucket: bucket, object: objectName, uploadId: nil)
+    observer.operationDidStart(
+      context: StorageOperationContext(bucket: bucket, object: objectName, sessionId: nil))
 
     var source = source
     let totalSize = source.totalSize
@@ -101,10 +102,10 @@ extension StorageClient {
         )
       }
       let totalDuration = clock.now - startTime
-      observer.uploadDidComplete(object: result, totalDuration: totalDuration)
+      observer.operationDidComplete(result: result, totalDuration: totalDuration)
       return result
     } catch {
-      observer.uploadDidFail(error: error)
+      observer.operationDidFail(error: error)
       throw error
     }
   }
@@ -144,7 +145,8 @@ extension StorageClient {
     let observer = _CompositeUploadObserver(effectiveObservers)
     let clock = ContinuousClock()
     let startTime = clock.now
-    observer.uploadDidStart(bucket: bucket, object: objectName, uploadId: nil)
+    observer.operationDidStart(
+      context: StorageOperationContext(bucket: bucket, object: objectName, sessionId: nil))
 
     var source = source
     let totalSize = source.totalSize
@@ -183,10 +185,10 @@ extension StorageClient {
         )
       }
       let totalDuration = clock.now - startTime
-      observer.uploadDidComplete(object: result, totalDuration: totalDuration)
+      observer.operationDidComplete(result: result, totalDuration: totalDuration)
       return result
     } catch {
-      observer.uploadDidFail(error: error)
+      observer.operationDidFail(error: error)
       throw error
     }
   }
@@ -237,7 +239,7 @@ extension StorageClient {
     return try await resumeLoop.run(
       state: resumeState,
       onRetry: { attempt, error, backoff in
-        observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+        observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
       }
     ) { _ in
       let response: _HTTPClientResponse
@@ -254,7 +256,7 @@ extension StorageClient {
       }
       let object = try await handleObjectResponse(response: response)
       let progress = UploadProgress(bytesUploaded: Int64(data.count), totalBytes: totalSize)
-      observer.uploadProgressUpdated(progress)
+      observer.progressUpdated(progress)
       return object
     }
   }
@@ -385,7 +387,7 @@ extension StorageClient {
       observer.chunkDidComplete(index: chunkIndex, byteRange: byteRange, duration: chunkDuration)
       let totalUploaded = Int64(committedBytes) + Int64(chunk.count)
       let progress = UploadProgress(bytesUploaded: totalUploaded, totalBytes: effectiveTotalSize)
-      observer.uploadProgressUpdated(progress)
+      observer.progressUpdated(progress)
       return (.done(object), nil)
     } else if statusCode == 308 {
       let nextOffset: Int64
@@ -401,7 +403,7 @@ extension StorageClient {
       let byteRange = Int64(committedBytes)..<(Int64(committedBytes) + Int64(chunk.count))
       observer.chunkDidComplete(index: chunkIndex, byteRange: byteRange, duration: chunkDuration)
       let progress = UploadProgress(bytesUploaded: nextOffset, totalBytes: totalSize)
-      observer.uploadProgressUpdated(progress)
+      observer.progressUpdated(progress)
       return (.inprogress(UInt64(nextOffset)), crc32cSeed)
     } else if uploadResponse.isError() {
       throw await uploadResponse.decodeError()
@@ -459,7 +461,7 @@ extension StorageClient {
         let location = try await resumeLoop.run(
           state: &resumeState,
           onRetry: { attempt, error, backoff in
-            observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+            observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
           }
         ) { _ in
           try await startResumableSession(
@@ -472,7 +474,8 @@ extension StorageClient {
         }
         currentUploadId = location
         activeUploadId = location
-        observer.uploadDidStart(bucket: bucket, object: objectName, uploadId: location)
+        observer.operationDidStart(
+          context: StorageOperationContext(bucket: bucket, object: objectName, sessionId: location))
       }
 
       if case .unknown = uploadStatus {
@@ -487,14 +490,14 @@ extension StorageClient {
             }
             let progress = UploadProgress(
               bytesUploaded: Int64(committedBytes), totalBytes: totalSize)
-            observer.uploadProgressUpdated(progress)
+            observer.progressUpdated(progress)
           }
         } catch {
           try await resumeLoop.handleError(
             state: &resumeState,
             error: error,
             onRetry: { attempt, error, backoff in
-              observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+              observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
             }
           )
           continue
@@ -507,7 +510,7 @@ extension StorageClient {
       case .done(let object):
         let finalBytes = totalSize ?? Int64(object.size)
         let progress = UploadProgress(bytesUploaded: finalBytes, totalBytes: finalBytes)
-        observer.uploadProgressUpdated(progress)
+        observer.progressUpdated(progress)
         return object
       case .inprogress(let committedBytes):
         if let total = totalSize, Int64(committedBytes) > total {
@@ -551,7 +554,7 @@ extension StorageClient {
             state: &resumeState,
             error: error,
             onRetry: { attempt, error, backoff in
-              observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+              observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
             }
           )
           continue
@@ -618,7 +621,7 @@ extension StorageClient {
         let location = try await resumeLoop.run(
           state: &resumeState,
           onRetry: { attempt, error, backoff in
-            observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+            observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
           }
         ) { _ in
           try await startResumableSession(
@@ -631,7 +634,8 @@ extension StorageClient {
         }
         currentUploadId = location
         activeUploadId = location
-        observer.uploadDidStart(bucket: bucket, object: objectName, uploadId: location)
+        observer.operationDidStart(
+          context: StorageOperationContext(bucket: bucket, object: objectName, sessionId: location))
       }
 
       if case .unknown = uploadStatus {
@@ -649,14 +653,14 @@ extension StorageClient {
             }
             let progress = UploadProgress(
               bytesUploaded: Int64(committedBytes), totalBytes: totalSize)
-            observer.uploadProgressUpdated(progress)
+            observer.progressUpdated(progress)
           }
         } catch {
           try await resumeLoop.handleError(
             state: &resumeState,
             error: error,
             onRetry: { attempt, error, backoff in
-              observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+              observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
             }
           )
           continue
@@ -669,7 +673,7 @@ extension StorageClient {
       case .done(let object):
         let finalBytes = totalSize ?? Int64(object.size)
         let progress = UploadProgress(bytesUploaded: finalBytes, totalBytes: finalBytes)
-        observer.uploadProgressUpdated(progress)
+        observer.progressUpdated(progress)
         return object
       case .inprogress(let committedBytes):
         if let total = totalSize, Int64(committedBytes) > total {
@@ -716,7 +720,7 @@ extension StorageClient {
             state: &resumeState,
             error: error,
             onRetry: { attempt, error, backoff in
-              observer.uploadDidRetry(attempt: attempt, error: error, backoff: backoff)
+              observer.operationDidRetry(attempt: attempt, error: error, backoff: backoff)
             }
           )
           continue
@@ -769,7 +773,8 @@ extension StorageClient {
     let observer = _CompositeUploadObserver(effectiveObservers)
     let clock = ContinuousClock()
     let startTime = clock.now
-    observer.uploadDidStart(bucket: "", object: "", uploadId: uploadId)
+    observer.operationDidStart(
+      context: StorageOperationContext(bucket: "", object: "", sessionId: uploadId))
 
     var source = source
     let totalSize = source.totalSize
@@ -790,10 +795,10 @@ extension StorageClient {
         observer: observer
       )
       let totalDuration = clock.now - startTime
-      observer.uploadDidComplete(object: result, totalDuration: totalDuration)
+      observer.operationDidComplete(result: result, totalDuration: totalDuration)
       return result
     } catch {
-      observer.uploadDidFail(error: error)
+      observer.operationDidFail(error: error)
       throw error
     }
   }

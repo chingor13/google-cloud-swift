@@ -276,20 +276,20 @@ final class MockRegistry: _HTTPClientProtocol, @unchecked Sendable {
 final class RecordingUploadObserver: UploadObserver, @unchecked Sendable {
   private let lock = NSLock()
 
-  var startedCalls: [(bucket: String, object: String, uploadId: String?)] = []
+  var startedCalls: [StorageOperationContext] = []
   var progressUpdates: [UploadProgress] = []
   var completedChunks: [(index: Int, byteRange: Range<Int64>, duration: Duration)] = []
   var retries: [(attempt: Int, error: any Error, backoff: Duration)] = []
   var completedObjects: [(object: Object, totalDuration: Duration)] = []
   var failures: [any Error] = []
 
-  func uploadDidStart(bucket: String, object: String, uploadId: String?) {
+  func operationDidStart(context: StorageOperationContext) {
     lock.lock()
     defer { lock.unlock() }
-    startedCalls.append((bucket: bucket, object: object, uploadId: uploadId))
+    startedCalls.append(context)
   }
 
-  func uploadProgressUpdated(_ progress: UploadProgress) {
+  func progressUpdated(_ progress: UploadProgress) {
     lock.lock()
     defer { lock.unlock() }
     progressUpdates.append(progress)
@@ -301,19 +301,19 @@ final class RecordingUploadObserver: UploadObserver, @unchecked Sendable {
     completedChunks.append((index: index, byteRange: byteRange, duration: duration))
   }
 
-  func uploadDidRetry(attempt: Int, error: any Error, backoff: Duration) {
+  func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {
     lock.lock()
     defer { lock.unlock() }
     retries.append((attempt: attempt, error: error, backoff: backoff))
   }
 
-  func uploadDidComplete(object: Object, totalDuration: Duration) {
+  func operationDidComplete(result: Object, totalDuration: Duration) {
     lock.lock()
     defer { lock.unlock() }
-    completedObjects.append((object: object, totalDuration: totalDuration))
+    completedObjects.append((object: result, totalDuration: totalDuration))
   }
 
-  func uploadDidFail(error: any Error) {
+  func operationDidFail(error: any Error) {
     lock.lock()
     defer { lock.unlock() }
     failures.append(error)
@@ -323,20 +323,20 @@ final class RecordingUploadObserver: UploadObserver, @unchecked Sendable {
 final class RecordingDownloadObserver: DownloadObserver, @unchecked Sendable {
   private let lock = NSLock()
 
-  var startedCalls: [(bucket: String, object: String)] = []
+  var startedCalls: [StorageOperationContext] = []
   var progressUpdates: [DownloadProgress] = []
   var receivedChunks: [(bytes: Int, totalReceived: Int64)] = []
   var retries: [(attempt: Int, error: any Error, backoff: Duration)] = []
   var completedMetadata: [(metadata: ReadObjectMetadata, totalDuration: Duration)] = []
   var failures: [any Error] = []
 
-  func downloadDidStart(bucket: String, object: String) {
+  func operationDidStart(context: StorageOperationContext) {
     lock.lock()
     defer { lock.unlock() }
-    startedCalls.append((bucket: bucket, object: object))
+    startedCalls.append(context)
   }
 
-  func downloadProgressUpdated(_ progress: DownloadProgress) {
+  func progressUpdated(_ progress: DownloadProgress) {
     lock.lock()
     defer { lock.unlock() }
     progressUpdates.append(progress)
@@ -348,19 +348,19 @@ final class RecordingDownloadObserver: DownloadObserver, @unchecked Sendable {
     receivedChunks.append((bytes: bytes, totalReceived: totalReceived))
   }
 
-  func downloadDidRetry(attempt: Int, error: any Error, backoff: Duration) {
+  func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {
     lock.lock()
     defer { lock.unlock() }
     retries.append((attempt: attempt, error: error, backoff: backoff))
   }
 
-  func downloadDidComplete(metadata: ReadObjectMetadata, totalDuration: Duration) {
+  func operationDidComplete(result: ReadObjectMetadata, totalDuration: Duration) {
     lock.lock()
     defer { lock.unlock() }
-    completedMetadata.append((metadata: metadata, totalDuration: totalDuration))
+    completedMetadata.append((metadata: result, totalDuration: totalDuration))
   }
 
-  func downloadDidFail(error: any Error) {
+  func operationDidFail(error: any Error) {
     lock.lock()
     defer { lock.unlock() }
     failures.append(error)

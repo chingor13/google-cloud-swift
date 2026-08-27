@@ -147,4 +147,18 @@ import Testing
     #expect(clientObserver.completedMetadata.count == 1)
     #expect(requestObserver.completedMetadata.count == 1)
   }
+
+  @Test func defaultObserverMethodsNoOp() {
+    struct EmptyObserver: DownloadObserver {}
+    let observer = EmptyObserver()
+    observer.operationDidStart(context: StorageOperationContext(bucket: "b", object: "o"))
+    observer.progressUpdated(DownloadProgress(bytesDownloaded: 10))
+    observer.chunkDidReceive(bytes: 10, totalReceived: 10)
+    observer.operationDidRetry(
+      attempt: 1, error: RequestError.http(HTTPDetails(http_status_code: 500, headers: [:])),
+      backoff: .zero)
+    observer.operationDidComplete(result: ReadObjectMetadata(), totalDuration: .zero)
+    observer.operationDidFail(
+      error: RequestError.http(HTTPDetails(http_status_code: 400, headers: [:])))
+  }
 }

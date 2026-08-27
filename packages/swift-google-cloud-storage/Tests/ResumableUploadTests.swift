@@ -1905,7 +1905,7 @@ import Testing
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
     #expect(observer.progressUpdates.map(\.bytesUploaded) == [Int64(chunkSize), Int64(fileSize)])
-    #expect(observer.startedCalls.compactMap(\.uploadId).first == chunkUrl.absoluteString)
+    #expect(observer.startedCalls.compactMap(\.sessionId).first == chunkUrl.absoluteString)
   }
 
   /// Tests that a single-chunk resumable upload emits initial and final status events without duplicates (#2).
@@ -1943,7 +1943,7 @@ import Testing
     #expect(object.name == objectName)
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
     #expect(observer.progressUpdates.map(\.bytesUploaded) == [Int64(fileSize)])
-    #expect(observer.startedCalls.compactMap(\.uploadId).first == chunkUrl.absoluteString)
+    #expect(observer.startedCalls.compactMap(\.sessionId).first == chunkUrl.absoluteString)
   }
 
   /// Tests that `resumeUpload` emits an initial status event with the server's committed byte offset upon querying status (#3).
@@ -1984,7 +1984,7 @@ import Testing
     #expect(object.bucket == "projects/_/buckets/\(bucket)")
     #expect(
       observer.progressUpdates.map(\.bytesUploaded) == [Int64(committedBytes), Int64(fileSize)])
-    #expect(observer.startedCalls.first?.uploadId == queryUrl.absoluteString)
+    #expect(observer.startedCalls.first?.sessionId == queryUrl.absoluteString)
   }
 
   /// Tests that `resumeUpload` across multiple chunks emits initial committed bytes and each chunk progress without duplicates (#2 & #3).
@@ -2050,7 +2050,7 @@ import Testing
         Int64(4 * chunkSize),
         Int64(fileSize),
       ])
-    #expect(observer.startedCalls.first?.uploadId == queryUrl.absoluteString)
+    #expect(observer.startedCalls.first?.sessionId == queryUrl.absoluteString)
   }
 
   /// Tests that configuring a lower `resumableUploadThreshold` on `UploadOptions` causes a payload < 8MB to use resumable upload.

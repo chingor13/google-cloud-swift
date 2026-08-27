@@ -28,15 +28,15 @@ final class TestUploadObserver: UploadObserver, @unchecked Sendable {
   var uploadIds = [String]()
   var progressUpdates = [UploadProgress]()
 
-  func uploadDidStart(bucket: String, object: String, uploadId: String?) {
+  func operationDidStart(context: StorageOperationContext) {
     lock.lock()
     defer { lock.unlock() }
-    if let uploadId {
+    if let uploadId = context.sessionId {
       uploadIds.append(uploadId)
     }
   }
 
-  func uploadProgressUpdated(_ progress: UploadProgress) {
+  func progressUpdated(_ progress: UploadProgress) {
     lock.lock()
     defer { lock.unlock() }
     progressUpdates.append(progress)

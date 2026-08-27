@@ -148,39 +148,27 @@ let object = try await storageClient.upload(fileURL, to: "my-bucket", as: "file.
 
 ### Option 2: Protocol-Based Listener (`UploadObserver`)
 
-Define a pluggable `UploadObserver` protocol for listening to all lifecycle, progress, and diagnostic events. Built-in observers can be provided for common integrations (`LoggingUploadObserver`, `MetricsUploadObserver`).
+Define a generic `OperationObserver` protocol and specialized `UploadObserver` for listening to lifecycle, progress, and resilience events.
 
 #### Proposed Interface
 
 ```swift
-public protocol UploadObserver: Sendable {
-    /// Called when an upload operation begins.
-    func uploadDidStart(bucket: String, object: String, uploadId: String?)
-    
-    /// Called whenever byte progress advances.
-    func uploadProgressUpdated(_ progress: UploadProgress)
-    
-    /// Called when a single chunk upload completes successfully.
-    func chunkDidComplete(index: Int, byteRange: Range<Int64>, duration: Duration)
-    
-    /// Called when an upload encounters a transient error and enters a retry/resume cycle.
-    func uploadDidRetry(attempt: Int, error: Error, backoff: Duration)
-    
-    /// Called when the entire upload operation completes.
-    func uploadDidComplete(object: Object, totalDuration: Duration)
-    
-    /// Called when the upload fails permanently.
-    func uploadDidFail(error: Error)
+public protocol OperationObserver<Context, Progress, Result>: Sendable {
+    associatedtype Context: Sendable
+    associatedtype Progress: Sendable
+    associatedtype Result: Sendable
+
+    func operationDidStart(context: Context)
+    func progressUpdated(_ progress: Progress)
+    func operationDidRetry(attempt: Int, error: any Error, backoff: Duration)
+    func operationDidComplete(result: Result, totalDuration: Duration)
+    func operationDidFail(error: any Error)
 }
 
-// Default implementations to make protocol methods optional
-extension UploadObserver {
-    public func uploadDidStart(bucket: String, object: String, uploadId: String?) {}
-    public func uploadProgressUpdated(_ progress: UploadProgress) {}
-    public func chunkDidComplete(index: Int, byteRange: Range<Int64>, duration: Duration) {}
-    public func uploadDidRetry(attempt: Int, error: Error, backoff: Duration) {}
-    public func uploadDidComplete(object: Object, totalDuration: Duration) {}
-    public func uploadDidFail(error: Error) {}
+public protocol UploadObserver: OperationObserver
+where Context == StorageOperationContext, Progress == UploadProgress, Result == Object {
+    /// Called when a single chunk upload completes successfully.
+    func chunkDidComplete(index: Int, byteRange: Range<Int64>, duration: Duration)
 }
 ```
 
@@ -205,7 +193,7 @@ struct UploadMetricsObserver: UploadObserver {
         meter.recordHistogram("gcs.upload.chunk_duration", duration.seconds)
     }
     
-    func uploadDidRetry(attempt: Int, error: Error, backoff: Duration) {
+    func operationDidRetry(attempt: Int, error: any Error, backoff: Duration) {
         meter.incrementCounter("gcs.upload.retries")
     }
 }

@@ -142,7 +142,7 @@ import Testing
 
     #expect(object.name == objectName)
     #expect(observer.startedCalls.count >= 1)
-    #expect(observer.startedCalls.contains { $0.uploadId == sessionUri.absoluteString })
+    #expect(observer.startedCalls.contains { $0.sessionId == sessionUri.absoluteString })
 
     #expect(observer.completedChunks.count == 2)
     #expect(observer.completedChunks[0].index == 0)
@@ -270,25 +270,15 @@ import Testing
   @Test func defaultObserverMethodsNoOp() {
     struct EmptyObserver: UploadObserver {}
     let observer = EmptyObserver()
-    observer.uploadDidStart(bucket: "b", object: "o", uploadId: nil)
-    observer.uploadProgressUpdated(UploadProgress(bytesUploaded: 10))
-    observer.chunkDidComplete(index: 0, byteRange: 0..<10, duration: .zero)
-    observer.uploadDidRetry(
-      attempt: 1, error: RequestError.http(HTTPDetails(http_status_code: 500, headers: [:])),
-      backoff: .zero)
-    observer.uploadDidComplete(object: Object(), totalDuration: .zero)
-    observer.uploadDidFail(
-      error: RequestError.http(HTTPDetails(http_status_code: 400, headers: [:])))
-
-    // Test OperationObserver default bridges
     observer.operationDidStart(context: StorageOperationContext(bucket: "b", object: "o"))
-    observer.progressUpdated(TransferProgress(bytesTransferred: 20))
+    observer.progressUpdated(UploadProgress(bytesUploaded: 10))
+    observer.chunkDidComplete(index: 0, byteRange: 0..<10, duration: .zero)
     observer.operationDidRetry(
-      attempt: 2, error: RequestError.http(HTTPDetails(http_status_code: 503, headers: [:])),
+      attempt: 1, error: RequestError.http(HTTPDetails(http_status_code: 500, headers: [:])),
       backoff: .zero)
     observer.operationDidComplete(result: Object(), totalDuration: .zero)
     observer.operationDidFail(
-      error: RequestError.http(HTTPDetails(http_status_code: 500, headers: [:])))
+      error: RequestError.http(HTTPDetails(http_status_code: 400, headers: [:])))
   }
 
   @Test func transferProgressProperties() {
