@@ -755,9 +755,9 @@ extension StorageClient {
     var buffer = ByteBufferAllocator().buffer(capacity: totalCapacity)
 
     buffer.writeString(preamble)
-    metadataJson.withUnsafeBytes { buffer.writeBytes($0) }
+    _ = metadataJson.withUnsafeBytes { buffer.writeBytes($0) }
     buffer.writeString(middle)
-    data.withUnsafeBytes { buffer.writeBytes($0) }
+    _ = data.withUnsafeBytes { buffer.writeBytes($0) }
     buffer.writeString(epilogue)
 
     request.setBody(buffer: buffer)
@@ -794,7 +794,7 @@ extension StorageClient {
 
     let metadataJson = try JSONEncoder().encode(metadata ?? UploadMetadata())
     var buffer = ByteBufferAllocator().buffer(capacity: metadataJson.count)
-    metadataJson.withUnsafeBytes { buffer.writeBytes($0) }
+    _ = metadataJson.withUnsafeBytes { buffer.writeBytes($0) }
     request.setBody(buffer: buffer)
     return request
   }
@@ -842,7 +842,7 @@ extension StorageClient {
       request.setHeader(name: "Content-Range", value: "bytes \(offset)-\(end)/\(totalStr)")
     }
     var buffer = ByteBufferAllocator().buffer(capacity: data.count)
-    data.withUnsafeBytes { buffer.writeBytes($0) }
+    _ = data.withUnsafeBytes { buffer.writeBytes($0) }
     request.setBody(buffer: buffer)
     return request
   }
