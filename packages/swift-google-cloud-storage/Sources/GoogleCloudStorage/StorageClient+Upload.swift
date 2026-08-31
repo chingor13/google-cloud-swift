@@ -187,9 +187,12 @@ extension StorageClient {
     let boundary = "Boundary-\(UUID().uuidString)"
     let metadataJson = try JSONEncoder().encode(metadata ?? UploadMetadata())
     let dataPartContentType = metadata?.contentType ?? "application/octet-stream"
-    let (preparedSource, effectiveTotalSize, checksum) =
-      try await prepareSimpleUploadSource(
+    let (stream, checksum, effectiveTotalSize) =
+      try await MultipartUploadStream.prepare(
         source: source,
+        boundary: boundary,
+        metadataJson: metadataJson,
+        contentType: dataPartContentType,
         totalSize: totalSize,
         options: options.checksums
       )
@@ -197,7 +200,7 @@ extension StorageClient {
     let resumeState = ResumeState(
       details: UploadDetails(bytesUploaded: 0, totalBytes: effectiveTotalSize))
     return try await resumeLoop.run(state: resumeState) { _ in
-      if var seekable = preparedSource as? (any SeekableUploadSource) {
+      if var seekable = stream.source as? (any SeekableUploadSource) {
         try await seekable.seek(to: 0)
       }
 
@@ -210,27 +213,7 @@ extension StorageClient {
       request.applyCustomerSuppliedEncryptionHeaders(options.customerEncryptionKey)
       request.setHeader(name: "Content-Type", value: "multipart/related; boundary=\(boundary)")
 
-      let stream = MultipartUploadStream(
-        source: preparedSource,
-        boundary: boundary,
-        metadataJson: metadataJson,
-        contentType: dataPartContentType,
-        totalSize: effectiveTotalSize
-      )
-
-      let bodyLength: _HTTPBodyLength
-      if let total = effectiveTotalSize {
-        let preambleLen =
-          "--\(boundary)\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n".utf8.count
-          + metadataJson.count
-          + "\r\n--\(boundary)\r\nContent-Type: \(dataPartContentType)\r\n\r\n".utf8.count
-        let epilogueLen = "\r\n--\(boundary)--\r\n".utf8.count
-        bodyLength = .known(Int64(preambleLen) + total + Int64(epilogueLen))
-      } else {
-        bodyLength = .unknown
-      }
-
-      request.setBody(stream: stream, length: bodyLength)
+      request.setBody(stream: stream, length: stream.bodyLength)
 
       let response: _HTTPClientResponse
       do {
@@ -867,97 +850,5 @@ extension StorageClient {
     let decoder = GoogleCloudWKT._ProtoJSONDecoder()
     let v1Object = try decoder.decode(ObjectV1Response.self, from: data)
     return v1Object.toObject()
-  }
-
-  /// Prepares an upload source for a simple multipart upload by calculating or extracting the `x-goog-hash` header.
-  ///
-  /// The GCS JSON API simple upload endpoint requires the `x-goog-hash` header to be sent in the initial HTTP request
-  /// headers before the request body is received. This helper computes or extracts the required checksum and ensures
-  /// the source is ready to be streamed.
-  fileprivate static func prepareSimpleUploadSource<S: UploadSource>(
-    source: S,
-    totalSize: Int64?,
-    options: ChecksumOptions
-  ) async throws -> (source: any UploadSource, totalSize: Int64?, checksum: String?) {
-    var calculators = options.makeUploadCalculators()
-
-    // 1. Checksum validation disabled: No checksum header needed, stream source directly with zero overhead.
-    guard !calculators.isEmpty else {
-      return (source, totalSize, nil)
-    }
-
-    // 2. Precomputed / user-provided checksums: Values are already known upfront from options,
-    // so format the header immediately without reading or inspecting the source data.
-    let autoCalculators = calculators.filter { !($0 is ProvidedChecksumCalculator) }
-    if autoCalculators.isEmpty {
-      let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
-        separator: ", ")
-      return (source, totalSize, checksumStr)
-    }
-
-    // 3. In-memory data (BytesSource): Hash the buffer directly in memory without extra copies or stream consumption.
-    if let bytesSource = source as? BytesSource {
-      for i in calculators.indices {
-        calculators[i].update(bytesSource.buffer)
-      }
-      let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
-        separator: ", ")
-      return (bytesSource, totalSize ?? Int64(bytesSource.buffer.count), checksumStr)
-    }
-
-    // 4. 0-byte payload: Compute the hash of an empty buffer immediately without reading from the source.
-    if source.totalSize == 0 {
-      for i in calculators.indices {
-        calculators[i].update(ByteBuffer())
-      }
-      let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
-        separator: ", ")
-      return (source, totalSize ?? 0, checksumStr)
-    }
-
-    // 5. Seekable source (e.g. FileSource): Read and hash chunks in a pre-read pass, then rewind
-    // to offset 0 with seek(to:) so the source can be streamed directly from disk with O(1) memory.
-    if var seekable = source as? (any SeekableUploadSource) {
-      do {
-        while let chunk = try await seekable.read(maxBytes: 64 * 1024) {
-          for i in calculators.indices {
-            calculators[i].update(chunk)
-          }
-        }
-        try await seekable.seek(to: 0)
-      } catch {
-        if let uploadError = error as? UploadError {
-          throw uploadError
-        }
-        throw UploadError.sourceReadFailed(underlyingError: error)
-      }
-      let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
-        separator: ", ")
-      return (seekable, totalSize ?? seekable.totalSize, checksumStr)
-    }
-
-    // 6. Non-seekable stream (e.g. StreamSource): Since non-seekable streams cannot be rewound and simple uploads
-    // are bounded by the simple upload threshold (<= 8 MiB), buffer the chunks into memory while computing the hash,
-    // then stream the resulting BytesSource.
-    var nonSeekable = source
-    var buffer = NIOCore.ByteBuffer()
-    do {
-      while let chunk = try await nonSeekable.read(maxBytes: 64 * 1024) {
-        for i in calculators.indices {
-          calculators[i].update(chunk)
-        }
-        var nio = chunk.byteBuffer
-        buffer.writeBuffer(&nio)
-      }
-    } catch {
-      if let uploadError = error as? UploadError {
-        throw uploadError
-      }
-      throw UploadError.sourceReadFailed(underlyingError: error)
-    }
-    let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
-      separator: ", ")
-    let bytesSource = BytesSource(buffer: ByteBuffer(buffer))
-    return (bytesSource, Int64(buffer.readableBytes), checksumStr)
   }
 }
