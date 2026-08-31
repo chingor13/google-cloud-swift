@@ -14,9 +14,26 @@
 
 import Foundation
 import struct AsyncHTTPClient.HTTPClientRequest
+import struct NIOCore.ByteBuffer
 import struct NIOHTTP1.HTTPHeaders
 import enum NIOHTTP1.HTTPMethod
 import struct Logging.Logger
+import NIOFoundationCompat
+
+/// Represents the body of an HTTP request, encapsulating either `Foundation.Data`
+/// or `NIOCore.ByteBuffer` without premature conversion or copying.
+@_spi(GoogleCloudInternal) public enum _RequestBody: Sendable, Equatable {
+  case data(Data)
+  case byteBuffer(NIOCore.ByteBuffer)
+
+  public init(_ data: Data) {
+    self = .data(data)
+  }
+
+  public init(_ buffer: NIOCore.ByteBuffer) {
+    self = .byteBuffer(buffer)
+  }
+}
 
 /// Represents an HTTP request.
 ///
@@ -27,7 +44,7 @@ import struct Logging.Logger
   var components: URLComponents
   var headers: NIOHTTP1.HTTPHeaders
   var method: NIOHTTP1.HTTPMethod = .GET
-  var body: Data? = nil
+  var body: _RequestBody? = nil
 
   // If the application and retry policy does not set a limit for each attempt we use this. The
   // expectation is that any RPC that takes this long or longer should be an LRO.
@@ -52,11 +69,29 @@ import struct Logging.Logger
   }
 
   public mutating func setBody(data: Data) {
-    self.body = data
+    self.body = .data(data)
   }
 
   public mutating func setBody(data: Data, ofContentType: String) {
-    self.body = data
+    self.body = .data(data)
+    self.headers.replaceOrAdd(name: "Content-Type", value: ofContentType)
+  }
+
+  public mutating func setBody(buffer: NIOCore.ByteBuffer) {
+    self.body = .byteBuffer(buffer)
+  }
+
+  public mutating func setBody(buffer: NIOCore.ByteBuffer, ofContentType: String) {
+    self.body = .byteBuffer(buffer)
+    self.headers.replaceOrAdd(name: "Content-Type", value: ofContentType)
+  }
+
+  public mutating func setBody(_ body: _RequestBody) {
+    self.body = body
+  }
+
+  public mutating func setBody(_ body: _RequestBody, ofContentType: String) {
+    self.body = body
     self.headers.replaceOrAdd(name: "Content-Type", value: ofContentType)
   }
 
@@ -69,8 +104,13 @@ import struct Logging.Logger
     var request = AsyncHTTPClient.HTTPClientRequest(url: url.absoluteString)
     request.headers = self.headers
     request.method = self.method
-    if let b = self.body {
-      request.body = .bytes(.init(data: b))
+    switch self.body {
+    case .byteBuffer(let b):
+      request.body = .bytes(b)
+    case .data(let d):
+      request.body = .bytes(.init(data: d))
+    case nil:
+      break
     }
     let response = try await self.client.execute(request: request, timeout: timeout)
     return _HTTPClientResponse(response)
