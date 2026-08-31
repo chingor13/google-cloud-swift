@@ -129,6 +129,22 @@ extension ByteBuffer {
   public var byteArray: [UInt8] {
     withUnsafeBytes { Array($0) }
   }
+
+  /// Returns a sub-buffer containing the bytes in the specified range.
+  @inlinable
+  public func subdata(in range: Range<Int>) -> ByteBuffer {
+    switch storage {
+    case .data(let data):
+      return ByteBuffer(data.subdata(in: range))
+    case .byteBuffer(let buffer):
+      var slice = buffer
+      slice.moveReaderIndex(to: buffer.readerIndex + range.lowerBound)
+      if let subSlice = slice.readSlice(length: range.count) {
+        return ByteBuffer(subSlice)
+      }
+      return ByteBuffer()
+    }
+  }
 }
 
 // MARK: - RandomAccessCollection Conformance

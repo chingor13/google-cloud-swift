@@ -80,12 +80,20 @@ import NIOHTTP1
     request.setBody(data: Data("test".utf8))
     #expect(request.components.url?.absoluteString == uri)
     #expect(request.headers["X-Test-Header"] == ["TestValue"])
-    #expect(request.body == .data(Data("test".utf8)))
+    #expect(request.body != nil)
 
     var buffer = ByteBufferAllocator().buffer(capacity: 4)
     buffer.writeString("test2")
     request.setBody(buffer: buffer)
-    #expect(request.body == .byteBuffer(buffer))
+    #expect(request.body != nil)
+
+    let stream = AsyncStream<NIOCore.ByteBuffer> { continuation in
+      continuation.yield(buffer)
+      continuation.finish()
+    }
+    request.setBody(stream: stream, length: .known(5), ofContentType: "text/plain")
+    #expect(request.headers["Content-Type"] == ["text/plain"])
+    #expect(request.body != nil)
   }
 
   @Test(arguments: [

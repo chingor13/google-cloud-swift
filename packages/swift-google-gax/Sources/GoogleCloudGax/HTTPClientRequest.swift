@@ -20,11 +20,18 @@ import enum NIOHTTP1.HTTPMethod
 import struct Logging.Logger
 import NIOFoundationCompat
 
-/// Represents the body of an HTTP request, encapsulating either `Foundation.Data`
-/// or `NIOCore.ByteBuffer` without premature conversion or copying.
-enum _RequestBody: Sendable, Equatable {
+/// Represents the length of a streaming HTTP request body.
+@_spi(GoogleCloudInternal) public enum _HTTPBodyLength: Sendable {
+  case known(Int64)
+  case unknown
+}
+
+/// Represents the body of an HTTP request, encapsulating either `Foundation.Data`,
+/// `NIOCore.ByteBuffer`, or a custom `AsyncHTTPClient.HTTPClientRequest.Body`.
+enum _RequestBody: Sendable {
   case data(Data)
   case byteBuffer(NIOCore.ByteBuffer)
+  case custom(AsyncHTTPClient.HTTPClientRequest.Body)
 }
 
 /// Represents an HTTP request.
@@ -78,6 +85,29 @@ enum _RequestBody: Sendable, Equatable {
     self.headers.replaceOrAdd(name: "Content-Type", value: ofContentType)
   }
 
+  public mutating func setBody<S: AsyncSequence & Sendable>(
+    stream: S,
+    length: _HTTPBodyLength = .unknown
+  ) where S.Element == NIOCore.ByteBuffer {
+    let ahcLength: AsyncHTTPClient.HTTPClientRequest.Body.Length
+    switch length {
+    case .known(let len):
+      ahcLength = .known(len)
+    case .unknown:
+      ahcLength = .unknown
+    }
+    self.body = .custom(.stream(stream, length: ahcLength))
+  }
+
+  public mutating func setBody<S: AsyncSequence & Sendable>(
+    stream: S,
+    length: _HTTPBodyLength = .unknown,
+    ofContentType: String
+  ) where S.Element == NIOCore.ByteBuffer {
+    self.setBody(stream: stream, length: length)
+    self.headers.replaceOrAdd(name: "Content-Type", value: ofContentType)
+  }
+
   public consuming func execute(timeout: Duration) async throws
     -> _HTTPClientResponse
   {
@@ -92,6 +122,8 @@ enum _RequestBody: Sendable, Equatable {
       request.body = .bytes(b)
     case .data(let d):
       request.body = .bytes(.init(data: d))
+    case .custom(let body):
+      request.body = body
     case nil:
       break
     }

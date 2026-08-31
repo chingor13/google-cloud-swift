@@ -160,9 +160,9 @@ extension StorageClient {
     }
   }
 
-  fileprivate static func performSimpleUpload(
+  fileprivate static func performSimpleUpload<S: UploadSource>(
     httpClient: GoogleCloudGax._HTTPClient,
-    source: inout some UploadSource,
+    source: inout S,
     bucket: String,
     objectName: String,
     metadata: UploadMetadata?,
@@ -170,44 +170,72 @@ extension StorageClient {
     totalSize: Int64?,
     resumeLoop: _ResumeLoop<UploadDetails>
   ) async throws -> Object {
-    var data = Data()
-    if let total = totalSize {
-      if total < 0 {
-        throw UploadError.internalError("Invalid source total size: \(total)")
-      }
-      data.reserveCapacity(Int(total))
-      while data.count < Int(total) {
-        let remaining = Int(total) - data.count
-        guard let chunk = try await source.read(maxBytes: remaining), !chunk.isEmpty else {
-          break
-        }
-        data.append(chunk)
-      }
-      if data.count < Int(total) {
-        throw UploadError.internalError("Failed to read data from source")
-      }
-    } else {
-      while let chunk = try await source.read(maxBytes: 1024 * 1024), !chunk.isEmpty {
-        data.append(chunk)
-      }
+    var queryItems = [URLQueryItem(name: "uploadType", value: "multipart")]
+    queryItems.append(URLQueryItem(name: "name", value: objectName))
+
+    if let kmsKeyName = options.kmsKeyName {
+      queryItems.append(URLQueryItem(name: "kmsKeyName", value: kmsKeyName))
     }
-    let checksum = try computeSimpleChecksum(data, options: options.checksums)
-    let request = try await buildSimpleUploadRequest(
-      httpClient: httpClient,
-      bucket: bucket,
-      objectName: objectName,
-      data: data,
-      metadata: metadata,
-      options: options,
-      checksum: checksum
-    )
+    if let predefinedAcl = options.predefinedAcl {
+      queryItems.append(URLQueryItem(name: "predefinedAcl", value: predefinedAcl.rawValue))
+    }
+    if let preconditions = options.preconditions {
+      queryItems.append(contentsOf: preconditions.queryItems)
+    }
+
+    let bucketId = BucketName.extractBucketName(bucket)
+    let boundary = "Boundary-\(UUID().uuidString)"
+    let metadataJson = try JSONEncoder().encode(metadata ?? UploadMetadata())
+    let dataPartContentType = metadata?.contentType ?? "application/octet-stream"
+
+    let checksum = try computeSimpleChecksum(source: source, options: options.checksums)
 
     let resumeState = ResumeState(details: UploadDetails(bytesUploaded: 0, totalBytes: totalSize))
     return try await resumeLoop.run(state: resumeState) { _ in
+      if var seekable = source as? (any SeekableUploadSource) {
+        try await seekable.seek(to: 0)
+      }
+
+      var request = try await httpClient.newRequest(
+        path: "/upload/storage/v1/b/\(bucketId)/o", query: queryItems)
+      request.setMethod(.POST)
+      if let checksum = checksum {
+        request.setHeader(name: "x-goog-hash", value: checksum)
+      }
+      request.applyCustomerSuppliedEncryptionHeaders(options.customerEncryptionKey)
+      request.setHeader(name: "Content-Type", value: "multipart/related; boundary=\(boundary)")
+
+      let errorHolder = StreamErrorHolder()
+      let stream = MultipartUploadStream(
+        source: source,
+        boundary: boundary,
+        metadataJson: metadataJson,
+        contentType: dataPartContentType,
+        totalSize: totalSize,
+        errorHolder: errorHolder
+      )
+
+      let bodyLength: _HTTPBodyLength
+      if let total = totalSize {
+        let preambleLen =
+          "--\(boundary)\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n".utf8.count
+          + metadataJson.count
+          + "\r\n--\(boundary)\r\nContent-Type: \(dataPartContentType)\r\n\r\n".utf8.count
+        let epilogueLen = "\r\n--\(boundary)--\r\n".utf8.count
+        bodyLength = .known(Int64(preambleLen) + total + Int64(epilogueLen))
+      } else {
+        bodyLength = .unknown
+      }
+
+      request.setBody(stream: stream, length: bodyLength)
+
       let response: _HTTPClientResponse
       do {
         response = try await request.execute()
       } catch {
+        if let streamError = errorHolder.streamError {
+          throw streamError
+        }
         if let reqError = error as? RequestError {
           throw reqError
         }
@@ -298,7 +326,7 @@ extension StorageClient {
     options: UploadOptions
   ) async throws -> (status: ResumableUploadStatus, crc32cSeed: UInt32?) {
     let chunkInfo = try await checksummedSource.readChunk(maxBytes: chunkSize)
-    let chunk: Data
+    let chunk: ByteBuffer
     let effectiveTotalSize: Int64?
     let checksum: String?
 
@@ -309,7 +337,7 @@ extension StorageClient {
       effectiveTotalSize =
         (isLast && totalSize == nil) ? (Int64(committedBytes) + Int64(chunk.count)) : totalSize
     } else {
-      chunk = Data()
+      chunk = ByteBuffer()
       effectiveTotalSize = totalSize ?? Int64(committedBytes)
       checksum = checksummedSource.finalizeChecksum()
     }
@@ -699,6 +727,136 @@ extension StorageClient {
 
 // --- Helper Methods Extension ---
 
+/// A thread-safe container to capture errors occurring inside streaming sequences.
+final class StreamErrorHolder: @unchecked Sendable {
+  var streamError: (any Error)?
+}
+
+/// An AsyncSequence that frames an UploadSource with multipart/related boundaries on the fly.
+struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
+  typealias Element = NIOCore.ByteBuffer
+
+  let source: S
+  let boundary: String
+  let metadataJson: Data
+  let contentType: String
+  let totalSize: Int64?
+  let errorHolder: StreamErrorHolder?
+  let chunkSize: Int
+
+  init(
+    source: S,
+    boundary: String,
+    metadataJson: Data,
+    contentType: String,
+    totalSize: Int64? = nil,
+    errorHolder: StreamErrorHolder? = nil,
+    chunkSize: Int = 64 * 1024
+  ) {
+    self.source = source
+    self.boundary = boundary
+    self.metadataJson = metadataJson
+    self.contentType = contentType
+    self.totalSize = totalSize
+    self.errorHolder = errorHolder
+    self.chunkSize = chunkSize
+  }
+
+  struct AsyncIterator: AsyncIteratorProtocol {
+    private enum State {
+      case preamble
+      case body
+      case epilogue
+      case done
+    }
+
+    private var state: State = .preamble
+    private var source: S
+    private let boundary: String
+    private let metadataJson: Data
+    private let contentType: String
+    private let totalSize: Int64?
+    private let errorHolder: StreamErrorHolder?
+    private let chunkSize: Int
+    private var bytesYielded: Int64 = 0
+
+    init(
+      source: S,
+      boundary: String,
+      metadataJson: Data,
+      contentType: String,
+      totalSize: Int64?,
+      errorHolder: StreamErrorHolder?,
+      chunkSize: Int
+    ) {
+      self.source = source
+      self.boundary = boundary
+      self.metadataJson = metadataJson
+      self.contentType = contentType
+      self.totalSize = totalSize
+      self.errorHolder = errorHolder
+      self.chunkSize = chunkSize
+    }
+
+    mutating func next() async throws -> NIOCore.ByteBuffer? {
+      switch state {
+      case .preamble:
+        state = .body
+        let preamble = "--\(boundary)\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n"
+        let middle = "\r\n--\(boundary)\r\nContent-Type: \(contentType)\r\n\r\n"
+        let capacity = preamble.utf8.count + metadataJson.count + middle.utf8.count
+        var buffer = ByteBufferAllocator().buffer(capacity: capacity)
+        buffer.writeString(preamble)
+        _ = metadataJson.withUnsafeBytes { buffer.writeBytes($0) }
+        buffer.writeString(middle)
+        return buffer
+
+      case .body:
+        let chunk: ByteBuffer?
+        do {
+          chunk = try await source.read(maxBytes: chunkSize)
+        } catch {
+          errorHolder?.streamError = error
+          throw error
+        }
+        if let chunk = chunk, !chunk.isEmpty {
+          bytesYielded += Int64(chunk.count)
+          return chunk.byteBuffer
+        }
+        if let total = totalSize, bytesYielded < total {
+          let err = UploadError.internalError("Failed to read data from source")
+          errorHolder?.streamError = err
+          throw err
+        }
+        state = .epilogue
+        return try await next()
+
+      case .epilogue:
+        state = .done
+        let epilogue = "\r\n--\(boundary)--\r\n"
+        var buffer = ByteBufferAllocator().buffer(capacity: epilogue.utf8.count)
+        buffer.writeString(epilogue)
+        return buffer
+
+      case .done:
+        return nil
+      }
+    }
+  }
+
+  func makeAsyncIterator() -> AsyncIterator {
+    AsyncIterator(
+      source: source,
+      boundary: boundary,
+      metadataJson: metadataJson,
+      contentType: contentType,
+      totalSize: totalSize,
+      errorHolder: errorHolder,
+      chunkSize: chunkSize
+    )
+  }
+}
+
 /// Status returned by GCS when querying an in-progress resumable upload.
 struct ResumableUploadQueryStatus: Sendable {
   let nextOffset: Int64
@@ -706,64 +864,6 @@ struct ResumableUploadQueryStatus: Sendable {
 }
 
 extension StorageClient {
-  fileprivate static func buildSimpleUploadRequest(
-    httpClient: GoogleCloudGax._HTTPClient,
-    bucket: String,
-    objectName: String,
-    data: Data,
-    metadata: UploadMetadata?,
-    options: UploadOptions,
-    checksum: String? = nil
-  ) async throws -> GoogleCloudGax._HTTPClientRequest {
-    var queryItems = [URLQueryItem(name: "uploadType", value: "multipart")]
-    queryItems.append(URLQueryItem(name: "name", value: objectName))
-
-    if let kmsKeyName = options.kmsKeyName {
-      queryItems.append(URLQueryItem(name: "kmsKeyName", value: kmsKeyName))
-    }
-    if let predefinedAcl = options.predefinedAcl {
-      queryItems.append(URLQueryItem(name: "predefinedAcl", value: predefinedAcl.rawValue))
-    }
-    if let preconditions = options.preconditions {
-      queryItems.append(contentsOf: preconditions.queryItems)
-    }
-
-    let bucketId = BucketName.extractBucketName(bucket)
-    var request = try await httpClient.newRequest(
-      path: "/upload/storage/v1/b/\(bucketId)/o", query: queryItems)
-    request.setMethod(.POST)
-
-    if let checksum = checksum {
-      request.setHeader(name: "x-goog-hash", value: checksum)
-    }
-
-    request.applyCustomerSuppliedEncryptionHeaders(options.customerEncryptionKey)
-
-    let boundary = "Boundary-\(UUID().uuidString)"
-    request.setHeader(name: "Content-Type", value: "multipart/related; boundary=\(boundary)")
-
-    let metadataJson = try JSONEncoder().encode(metadata ?? UploadMetadata())
-    let dataPartContentType = metadata?.contentType ?? "application/octet-stream"
-
-    let preamble = "--\(boundary)\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n"
-    let middle = "\r\n--\(boundary)\r\nContent-Type: \(dataPartContentType)\r\n\r\n"
-    let epilogue = "\r\n--\(boundary)--\r\n"
-
-    let totalCapacity =
-      preamble.utf8.count + metadataJson.count + middle.utf8.count + data.count
-      + epilogue.utf8.count
-    var buffer = ByteBufferAllocator().buffer(capacity: totalCapacity)
-
-    buffer.writeString(preamble)
-    _ = metadataJson.withUnsafeBytes { buffer.writeBytes($0) }
-    buffer.writeString(middle)
-    _ = data.withUnsafeBytes { buffer.writeBytes($0) }
-    buffer.writeString(epilogue)
-
-    request.setBody(buffer: buffer)
-    return request
-  }
-
   fileprivate static func buildStartResumableUploadRequest(
     httpClient: GoogleCloudGax._HTTPClient,
     bucket: String,
@@ -818,7 +918,7 @@ extension StorageClient {
   fileprivate static func buildUploadChunkRequest(
     httpClient: GoogleCloudGax._HTTPClient,
     uploadId: String,
-    data: Data,
+    data: ByteBuffer,
     offset: Int64,
     totalSize: Int64?,
     options: UploadOptions,
@@ -841,9 +941,7 @@ extension StorageClient {
       let end = offset + Int64(data.count) - 1
       request.setHeader(name: "Content-Range", value: "bytes \(offset)-\(end)/\(totalStr)")
     }
-    var buffer = ByteBufferAllocator().buffer(capacity: data.count)
-    _ = data.withUnsafeBytes { buffer.writeBytes($0) }
-    request.setBody(buffer: buffer)
+    request.setBody(buffer: data.byteBuffer)
     return request
   }
 
@@ -890,14 +988,31 @@ extension StorageClient {
     return v1Object.toObject()
   }
 
-  fileprivate static func computeSimpleChecksum(_ data: Data, options: ChecksumOptions) throws
-    -> String?
-  {
-    var calculators = options.makeUploadCalculators()
-    guard !calculators.isEmpty else { return nil }
-    for i in calculators.indices {
-      calculators[i].update(data)
+  fileprivate static func computeSimpleChecksum(
+    source: some UploadSource,
+    options: ChecksumOptions
+  ) throws -> String? {
+    if let bytesSource = source as? BytesSource {
+      var calculators = options.makeUploadCalculators()
+      guard !calculators.isEmpty else { return nil }
+      for i in calculators.indices {
+        calculators[i].update(bytesSource.buffer)
+      }
+      return calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(separator: ", ")
     }
-    return calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(separator: ", ")
+    if source.totalSize == 0 {
+      var calculators = options.makeUploadCalculators()
+      guard !calculators.isEmpty else { return nil }
+      for i in calculators.indices {
+        calculators[i].update(ByteBuffer())
+      }
+      return calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(separator: ", ")
+    }
+    let calculators = options.makeUploadCalculators()
+    let providedOnly = calculators.filter { $0 is ProvidedChecksumCalculator }
+    if !providedOnly.isEmpty && providedOnly.count == calculators.count {
+      return providedOnly.map { "\($0.algorithmName)=\($0.finalize())" }.joined(separator: ", ")
+    }
+    return nil
   }
 }
