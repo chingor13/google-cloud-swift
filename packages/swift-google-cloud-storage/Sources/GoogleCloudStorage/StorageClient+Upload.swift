@@ -869,16 +869,25 @@ extension StorageClient {
     return v1Object.toObject()
   }
 
+  /// Prepares an upload source for a simple multipart upload by calculating or extracting the `x-goog-hash` header.
+  ///
+  /// The GCS JSON API simple upload endpoint requires the `x-goog-hash` header to be sent in the initial HTTP request
+  /// headers before the request body is received. This helper computes or extracts the required checksum and ensures
+  /// the source is ready to be streamed.
   fileprivate static func prepareSimpleUploadSource<S: UploadSource>(
     source: S,
     totalSize: Int64?,
     options: ChecksumOptions
   ) async throws -> (source: any UploadSource, totalSize: Int64?, checksum: String?) {
     var calculators = options.makeUploadCalculators()
+
+    // 1. Checksum validation disabled: No checksum header needed, stream source directly with zero overhead.
     guard !calculators.isEmpty else {
       return (source, totalSize, nil)
     }
 
+    // 2. Precomputed / user-provided checksums: Values are already known upfront from options,
+    // so format the header immediately without reading or inspecting the source data.
     let autoCalculators = calculators.filter { !($0 is ProvidedChecksumCalculator) }
     if autoCalculators.isEmpty {
       let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
@@ -886,6 +895,7 @@ extension StorageClient {
       return (source, totalSize, checksumStr)
     }
 
+    // 3. In-memory data (BytesSource): Hash the buffer directly in memory without extra copies or stream consumption.
     if let bytesSource = source as? BytesSource {
       for i in calculators.indices {
         calculators[i].update(bytesSource.buffer)
@@ -895,6 +905,7 @@ extension StorageClient {
       return (bytesSource, totalSize ?? Int64(bytesSource.buffer.count), checksumStr)
     }
 
+    // 4. 0-byte payload: Compute the hash of an empty buffer immediately without reading from the source.
     if source.totalSize == 0 {
       for i in calculators.indices {
         calculators[i].update(ByteBuffer())
@@ -904,6 +915,8 @@ extension StorageClient {
       return (source, totalSize ?? 0, checksumStr)
     }
 
+    // 5. Seekable source (e.g. FileSource): Read and hash chunks in a pre-read pass, then rewind
+    // to offset 0 with seek(to:) so the source can be streamed directly from disk with O(1) memory.
     if var seekable = source as? (any SeekableUploadSource) {
       do {
         while let chunk = try await seekable.read(maxBytes: 64 * 1024) {
@@ -923,6 +936,9 @@ extension StorageClient {
       return (seekable, totalSize ?? seekable.totalSize, checksumStr)
     }
 
+    // 6. Non-seekable stream (e.g. StreamSource): Since non-seekable streams cannot be rewound and simple uploads
+    // are bounded by the simple upload threshold (<= 8 MiB), buffer the chunks into memory while computing the hash,
+    // then stream the resulting BytesSource.
     var nonSeekable = source
     var buffer = NIOCore.ByteBuffer()
     do {
