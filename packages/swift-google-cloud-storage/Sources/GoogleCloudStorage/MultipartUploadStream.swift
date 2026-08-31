@@ -15,11 +15,6 @@
 import Foundation
 import NIOCore
 
-/// A thread-safe container to capture errors occurring inside streaming sequences.
-final class StreamErrorHolder: @unchecked Sendable {
-  var streamError: (any Error)?
-}
-
 /// An AsyncSequence that frames an UploadSource with multipart/related boundaries on the fly.
 struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
   typealias Element = NIOCore.ByteBuffer
@@ -29,7 +24,6 @@ struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
   let metadataJson: Data
   let contentType: String
   let totalSize: Int64?
-  let errorHolder: StreamErrorHolder?
   let chunkSize: Int
 
   init(
@@ -38,7 +32,6 @@ struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
     metadataJson: Data,
     contentType: String,
     totalSize: Int64? = nil,
-    errorHolder: StreamErrorHolder? = nil,
     chunkSize: Int = 64 * 1024
   ) {
     self.source = source
@@ -46,7 +39,6 @@ struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
     self.metadataJson = metadataJson
     self.contentType = contentType
     self.totalSize = totalSize
-    self.errorHolder = errorHolder
     self.chunkSize = chunkSize
   }
 
@@ -64,7 +56,6 @@ struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
     private let metadataJson: Data
     private let contentType: String
     private let totalSize: Int64?
-    private let errorHolder: StreamErrorHolder?
     private let chunkSize: Int
     private var bytesYielded: Int64 = 0
 
@@ -74,7 +65,6 @@ struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
       metadataJson: Data,
       contentType: String,
       totalSize: Int64?,
-      errorHolder: StreamErrorHolder?,
       chunkSize: Int
     ) {
       self.source = source
@@ -82,7 +72,6 @@ struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
       self.metadataJson = metadataJson
       self.contentType = contentType
       self.totalSize = totalSize
-      self.errorHolder = errorHolder
       self.chunkSize = chunkSize
     }
 
@@ -104,17 +93,17 @@ struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
         do {
           chunk = try await source.read(maxBytes: chunkSize)
         } catch {
-          errorHolder?.streamError = error
-          throw error
+          if let uploadError = error as? UploadError {
+            throw uploadError
+          }
+          throw UploadError.sourceReadFailed(underlyingError: error)
         }
         if let chunk = chunk, !chunk.isEmpty {
           bytesYielded += Int64(chunk.count)
           return chunk.byteBuffer
         }
         if let total = totalSize, bytesYielded < total {
-          let err = UploadError.internalError("Failed to read data from source")
-          errorHolder?.streamError = err
-          throw err
+          throw UploadError.internalError("Failed to read data from source")
         }
         state = .epilogue
         return try await next()
@@ -139,7 +128,6 @@ struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
       metadataJson: metadataJson,
       contentType: contentType,
       totalSize: totalSize,
-      errorHolder: errorHolder,
       chunkSize: chunkSize
     )
   }

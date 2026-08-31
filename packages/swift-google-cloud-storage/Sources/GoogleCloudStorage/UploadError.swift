@@ -37,4 +37,7 @@ public enum UploadError: Error, Sendable {
 
   /// The range header returned by GCS is invalid.
   case invalidRangeHeader(String)
+
+  /// An error occurred while reading from the underlying upload source.
+  case sourceReadFailed(underlyingError: Error)
 }

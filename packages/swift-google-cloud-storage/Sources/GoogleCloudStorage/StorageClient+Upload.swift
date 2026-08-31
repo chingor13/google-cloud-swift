@@ -205,14 +205,12 @@ extension StorageClient {
       request.applyCustomerSuppliedEncryptionHeaders(options.customerEncryptionKey)
       request.setHeader(name: "Content-Type", value: "multipart/related; boundary=\(boundary)")
 
-      let errorHolder = StreamErrorHolder()
       let stream = MultipartUploadStream(
         source: source,
         boundary: boundary,
         metadataJson: metadataJson,
         contentType: dataPartContentType,
-        totalSize: totalSize,
-        errorHolder: errorHolder
+        totalSize: totalSize
       )
 
       let bodyLength: _HTTPBodyLength
@@ -233,8 +231,8 @@ extension StorageClient {
       do {
         response = try await request.execute()
       } catch {
-        if let streamError = errorHolder.streamError {
-          throw streamError
+        if let uploadError = error as? UploadError {
+          throw uploadError
         }
         if let reqError = error as? RequestError {
           throw reqError
@@ -325,7 +323,15 @@ extension StorageClient {
     totalSize: Int64?,
     options: UploadOptions
   ) async throws -> (status: ResumableUploadStatus, crc32cSeed: UInt32?) {
-    let chunkInfo = try await checksummedSource.readChunk(maxBytes: chunkSize)
+    let chunkInfo: ChunkInfo?
+    do {
+      chunkInfo = try await checksummedSource.readChunk(maxBytes: chunkSize)
+    } catch {
+      if let uploadError = error as? UploadError {
+        throw uploadError
+      }
+      throw UploadError.sourceReadFailed(underlyingError: error)
+    }
     let chunk: ByteBuffer
     let effectiveTotalSize: Int64?
     let checksum: String?

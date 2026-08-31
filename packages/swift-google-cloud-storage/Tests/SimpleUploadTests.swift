@@ -83,13 +83,18 @@ import Testing
     let bucket = "test-bucket"
     let objectName = "test-object"
     let data = Data(repeating: 1, count: 1 * 1024 * 1024)
-    struct DummyError: Error {}
+    struct DummyError: Error, Sendable {}
     let source = MockUploadSource(data: data, readError: DummyError())
 
     let client = try makeClient(registry: registry)
 
-    await expectError(DummyError.self) {
+    let error = await expectUploadError {
       try await client.upload(source, to: bucket, as: objectName)
+    }
+    if case .sourceReadFailed(let underlying) = error {
+      #expect(underlying is DummyError)
+    } else {
+      Issue.record("Expected .sourceReadFailed, got \(String(describing: error))")
     }
   }
 
