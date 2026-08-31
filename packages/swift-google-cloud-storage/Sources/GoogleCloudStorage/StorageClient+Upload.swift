@@ -21,6 +21,7 @@ import GoogleCloudGax
 @_spi(GoogleCloudInternal) import struct GoogleCloudGax._CRC32C
 import Crypto
 @_spi(GoogleCloudInternal) import GoogleCloudGax
+import NIOCore
 import NIOHTTP1
 
 package enum ResumableUploadStatus: Sendable {
@@ -174,6 +175,7 @@ extension StorageClient {
       if total < 0 {
         throw UploadError.internalError("Invalid source total size: \(total)")
       }
+      data.reserveCapacity(Int(total))
       while data.count < Int(total) {
         let remaining = Int(total) - data.count
         guard let chunk = try await source.read(maxBytes: remaining), !chunk.isEmpty else {
@@ -740,22 +742,25 @@ extension StorageClient {
     let boundary = "Boundary-\(UUID().uuidString)"
     request.setHeader(name: "Content-Type", value: "multipart/related; boundary=\(boundary)")
 
-    var body = Data()
-    body.append(Data("--\(boundary)\r\n".utf8))
-    body.append(Data("Content-Type: application/json; charset=UTF-8\r\n\r\n".utf8))
     let metadataJson = try JSONEncoder().encode(metadata ?? UploadMetadata())
-    body.append(metadataJson)
-    body.append(Data("\r\n".utf8))
-
-    body.append(Data("--\(boundary)\r\n".utf8))
     let dataPartContentType = metadata?.contentType ?? "application/octet-stream"
-    body.append(Data("Content-Type: \(dataPartContentType)\r\n\r\n".utf8))
-    body.append(data)
-    body.append(Data("\r\n".utf8))
 
-    body.append(Data("--\(boundary)--\r\n".utf8))
+    let preamble = "--\(boundary)\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n"
+    let middle = "\r\n--\(boundary)\r\nContent-Type: \(dataPartContentType)\r\n\r\n"
+    let epilogue = "\r\n--\(boundary)--\r\n"
 
-    request.setBody(data: body)
+    let totalCapacity =
+      preamble.utf8.count + metadataJson.count + middle.utf8.count + data.count
+      + epilogue.utf8.count
+    var buffer = ByteBufferAllocator().buffer(capacity: totalCapacity)
+
+    buffer.writeString(preamble)
+    metadataJson.withUnsafeBytes { buffer.writeBytes($0) }
+    buffer.writeString(middle)
+    data.withUnsafeBytes { buffer.writeBytes($0) }
+    buffer.writeString(epilogue)
+
+    request.setBody(buffer: buffer)
     return request
   }
 
@@ -788,7 +793,9 @@ extension StorageClient {
     request.applyCustomerSuppliedEncryptionHeaders(options.customerEncryptionKey)
 
     let metadataJson = try JSONEncoder().encode(metadata ?? UploadMetadata())
-    request.setBody(data: metadataJson)
+    var buffer = ByteBufferAllocator().buffer(capacity: metadataJson.count)
+    metadataJson.withUnsafeBytes { buffer.writeBytes($0) }
+    request.setBody(buffer: buffer)
     return request
   }
 
@@ -834,7 +841,9 @@ extension StorageClient {
       let end = offset + Int64(data.count) - 1
       request.setHeader(name: "Content-Range", value: "bytes \(offset)-\(end)/\(totalStr)")
     }
-    request.setBody(data: data)
+    var buffer = ByteBufferAllocator().buffer(capacity: data.count)
+    data.withUnsafeBytes { buffer.writeBytes($0) }
+    request.setBody(buffer: buffer)
     return request
   }
 

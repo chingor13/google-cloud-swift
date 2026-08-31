@@ -86,9 +86,6 @@ import NIOHTTP1
     buffer.writeString("test2")
     request.setBody(buffer: buffer)
     #expect(request.body == .byteBuffer(buffer))
-
-    request.setBody(_RequestBody(Data("test3".utf8)))
-    #expect(request.body == .data(Data("test3".utf8)))
   }
 
   @Test(arguments: [

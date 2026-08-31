@@ -22,17 +22,9 @@ import NIOFoundationCompat
 
 /// Represents the body of an HTTP request, encapsulating either `Foundation.Data`
 /// or `NIOCore.ByteBuffer` without premature conversion or copying.
-@_spi(GoogleCloudInternal) public enum _RequestBody: Sendable, Equatable {
+enum _RequestBody: Sendable, Equatable {
   case data(Data)
   case byteBuffer(NIOCore.ByteBuffer)
-
-  public init(_ data: Data) {
-    self = .data(data)
-  }
-
-  public init(_ buffer: NIOCore.ByteBuffer) {
-    self = .byteBuffer(buffer)
-  }
 }
 
 /// Represents an HTTP request.
@@ -83,15 +75,6 @@ import NIOFoundationCompat
 
   public mutating func setBody(buffer: NIOCore.ByteBuffer, ofContentType: String) {
     self.body = .byteBuffer(buffer)
-    self.headers.replaceOrAdd(name: "Content-Type", value: ofContentType)
-  }
-
-  public mutating func setBody(_ body: _RequestBody) {
-    self.body = body
-  }
-
-  public mutating func setBody(_ body: _RequestBody, ofContentType: String) {
-    self.body = body
     self.headers.replaceOrAdd(name: "Content-Type", value: ofContentType)
   }
 
