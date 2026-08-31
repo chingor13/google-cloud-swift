@@ -90,14 +90,6 @@ public struct BytesSource: SeekableUploadSource {
     self.buffer = ByteBuffer(data)
   }
 
-  public init(byteBuffer: NIOCore.ByteBuffer) {
-    self.buffer = ByteBuffer(byteBuffer)
-  }
-
-  public init(_ bytes: [UInt8]) {
-    self.buffer = ByteBuffer(bytes)
-  }
-
   public var data: Data {
     buffer.data
   }
