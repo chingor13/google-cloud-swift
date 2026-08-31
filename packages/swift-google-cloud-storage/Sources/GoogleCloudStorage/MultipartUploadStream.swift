@@ -16,10 +16,10 @@ import Foundation
 import NIOCore
 
 /// An AsyncSequence that frames an UploadSource with multipart/related boundaries on the fly.
-struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
+struct MultipartUploadStream: AsyncSequence, Sendable {
   typealias Element = NIOCore.ByteBuffer
 
-  let source: S
+  let source: any UploadSource
   let boundary: String
   let metadataJson: Data
   let contentType: String
@@ -27,7 +27,7 @@ struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
   let chunkSize: Int
 
   init(
-    source: S,
+    source: any UploadSource,
     boundary: String,
     metadataJson: Data,
     contentType: String,
@@ -51,7 +51,7 @@ struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
     }
 
     private var state: State = .preamble
-    private var source: S
+    private var source: any UploadSource
     private let boundary: String
     private let metadataJson: Data
     private let contentType: String
@@ -60,7 +60,7 @@ struct MultipartUploadStream<S: UploadSource>: AsyncSequence, Sendable {
     private var bytesYielded: Int64 = 0
 
     init(
-      source: S,
+      source: any UploadSource,
       boundary: String,
       metadataJson: Data,
       contentType: String,

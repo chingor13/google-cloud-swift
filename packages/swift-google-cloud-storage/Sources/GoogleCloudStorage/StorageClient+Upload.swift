@@ -187,12 +187,17 @@ extension StorageClient {
     let boundary = "Boundary-\(UUID().uuidString)"
     let metadataJson = try JSONEncoder().encode(metadata ?? UploadMetadata())
     let dataPartContentType = metadata?.contentType ?? "application/octet-stream"
+    let (preparedSource, effectiveTotalSize, checksum) =
+      try await prepareSimpleUploadSource(
+        source: source,
+        totalSize: totalSize,
+        options: options.checksums
+      )
 
-    let checksum = try computeSimpleChecksum(source: source, options: options.checksums)
-
-    let resumeState = ResumeState(details: UploadDetails(bytesUploaded: 0, totalBytes: totalSize))
+    let resumeState = ResumeState(
+      details: UploadDetails(bytesUploaded: 0, totalBytes: effectiveTotalSize))
     return try await resumeLoop.run(state: resumeState) { _ in
-      if var seekable = source as? (any SeekableUploadSource) {
+      if var seekable = preparedSource as? (any SeekableUploadSource) {
         try await seekable.seek(to: 0)
       }
 
@@ -206,15 +211,15 @@ extension StorageClient {
       request.setHeader(name: "Content-Type", value: "multipart/related; boundary=\(boundary)")
 
       let stream = MultipartUploadStream(
-        source: source,
+        source: preparedSource,
         boundary: boundary,
         metadataJson: metadataJson,
         contentType: dataPartContentType,
-        totalSize: totalSize
+        totalSize: effectiveTotalSize
       )
 
       let bodyLength: _HTTPBodyLength
-      if let total = totalSize {
+      if let total = effectiveTotalSize {
         let preambleLen =
           "--\(boundary)\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n".utf8.count
           + metadataJson.count
@@ -864,31 +869,79 @@ extension StorageClient {
     return v1Object.toObject()
   }
 
-  fileprivate static func computeSimpleChecksum(
-    source: some UploadSource,
+  fileprivate static func prepareSimpleUploadSource<S: UploadSource>(
+    source: S,
+    totalSize: Int64?,
     options: ChecksumOptions
-  ) throws -> String? {
+  ) async throws -> (source: any UploadSource, totalSize: Int64?, checksum: String?) {
+    var calculators = options.makeUploadCalculators()
+    guard !calculators.isEmpty else {
+      return (source, totalSize, nil)
+    }
+
+    let autoCalculators = calculators.filter { !($0 is ProvidedChecksumCalculator) }
+    if autoCalculators.isEmpty {
+      let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
+        separator: ", ")
+      return (source, totalSize, checksumStr)
+    }
+
     if let bytesSource = source as? BytesSource {
-      var calculators = options.makeUploadCalculators()
-      guard !calculators.isEmpty else { return nil }
       for i in calculators.indices {
         calculators[i].update(bytesSource.buffer)
       }
-      return calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(separator: ", ")
+      let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
+        separator: ", ")
+      return (bytesSource, totalSize ?? Int64(bytesSource.buffer.count), checksumStr)
     }
+
     if source.totalSize == 0 {
-      var calculators = options.makeUploadCalculators()
-      guard !calculators.isEmpty else { return nil }
       for i in calculators.indices {
         calculators[i].update(ByteBuffer())
       }
-      return calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(separator: ", ")
+      let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
+        separator: ", ")
+      return (source, totalSize ?? 0, checksumStr)
     }
-    let calculators = options.makeUploadCalculators()
-    let providedOnly = calculators.filter { $0 is ProvidedChecksumCalculator }
-    if !providedOnly.isEmpty && providedOnly.count == calculators.count {
-      return providedOnly.map { "\($0.algorithmName)=\($0.finalize())" }.joined(separator: ", ")
+
+    if var seekable = source as? (any SeekableUploadSource) {
+      do {
+        while let chunk = try await seekable.read(maxBytes: 64 * 1024) {
+          for i in calculators.indices {
+            calculators[i].update(chunk)
+          }
+        }
+        try await seekable.seek(to: 0)
+      } catch {
+        if let uploadError = error as? UploadError {
+          throw uploadError
+        }
+        throw UploadError.sourceReadFailed(underlyingError: error)
+      }
+      let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
+        separator: ", ")
+      return (seekable, totalSize ?? seekable.totalSize, checksumStr)
     }
-    return nil
+
+    var nonSeekable = source
+    var buffer = NIOCore.ByteBuffer()
+    do {
+      while let chunk = try await nonSeekable.read(maxBytes: 64 * 1024) {
+        for i in calculators.indices {
+          calculators[i].update(chunk)
+        }
+        var nio = chunk.byteBuffer
+        buffer.writeBuffer(&nio)
+      }
+    } catch {
+      if let uploadError = error as? UploadError {
+        throw uploadError
+      }
+      throw UploadError.sourceReadFailed(underlyingError: error)
+    }
+    let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
+      separator: ", ")
+    let bytesSource = BytesSource(buffer: ByteBuffer(buffer))
+    return (bytesSource, Int64(buffer.readableBytes), checksumStr)
   }
 }
