@@ -61,12 +61,9 @@ extension StorageClient {
     let httpClient = self.inner
 
     var source = source
-    let totalSize = source.totalSize
 
     // Determine if simple or resumable
-    let useResumable = totalSize == nil || totalSize! >= effectiveThreshold
-
-    if !useResumable {
+    if let totalSize = source.totalSize, totalSize < effectiveThreshold {
       return try await Self.performSimpleUpload(
         httpClient: httpClient,
         source: &source,
@@ -87,7 +84,7 @@ extension StorageClient {
         uploadId: nil,
         initialStatus: .inprogress(0),
         chunkSize: options.chunkSize,
-        totalSize: totalSize,
+        totalSize: source.totalSize,
         options: options,
         resumeLoop: resumeLoop
       )
@@ -127,12 +124,9 @@ extension StorageClient {
     let httpClient = self.inner
 
     var source = source
-    let totalSize = source.totalSize
 
     // Determine if simple or resumable
-    let useResumable = totalSize == nil || totalSize! >= effectiveThreshold
-
-    if !useResumable {
+    if let totalSize = source.totalSize, totalSize < effectiveThreshold {
       return try await Self.performSimpleUpload(
         httpClient: httpClient,
         source: &source,
@@ -153,7 +147,7 @@ extension StorageClient {
         uploadId: nil,
         initialStatus: .inprogress(0),
         chunkSize: options.chunkSize,
-        totalSize: totalSize,
+        totalSize: source.totalSize,
         options: options,
         resumeLoop: resumeLoop
       )
@@ -167,7 +161,7 @@ extension StorageClient {
     objectName: String,
     metadata: UploadMetadata?,
     options: UploadOptions,
-    totalSize: Int64?,
+    totalSize: Int64,
     resumeLoop: _ResumeLoop<UploadDetails>
   ) async throws -> Object {
     var queryItems = [URLQueryItem(name: "uploadType", value: "multipart")]
@@ -187,7 +181,7 @@ extension StorageClient {
     let boundary = "Boundary-\(UUID().uuidString)"
     let metadataJson = try JSONEncoder().encode(metadata ?? UploadMetadata())
     let dataPartContentType = metadata?.contentType ?? "application/octet-stream"
-    let (stream, checksum, effectiveTotalSize) =
+    let (stream, checksum) =
       try await MultipartUploadStream.prepare(
         source: source,
         boundary: boundary,
@@ -198,7 +192,7 @@ extension StorageClient {
       )
 
     let resumeState = ResumeState(
-      details: UploadDetails(bytesUploaded: 0, totalBytes: effectiveTotalSize))
+      details: UploadDetails(bytesUploaded: 0, totalBytes: totalSize))
     return try await resumeLoop.run(state: resumeState) { _ in
       if var seekable = stream.source as? (any SeekableUploadSource) {
         try await seekable.seek(to: 0)

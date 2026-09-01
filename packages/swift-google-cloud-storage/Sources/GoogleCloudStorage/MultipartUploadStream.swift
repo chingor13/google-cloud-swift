@@ -24,7 +24,7 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
   let boundary: String
   let metadataJson: Data
   let contentType: String
-  let totalSize: Int64?
+  let totalSize: Int64
   let chunkSize: Int
 
   init(
@@ -32,7 +32,7 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
     boundary: String,
     metadataJson: Data,
     contentType: String,
-    totalSize: Int64? = nil,
+    totalSize: Int64,
     chunkSize: Int = 64 * 1024
   ) {
     self.source = source
@@ -43,15 +43,14 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
     self.chunkSize = chunkSize
   }
 
-  /// Computes the exact Content-Length for the multipart request body, if the total size is known.
+  /// Computes the exact Content-Length for the multipart request body.
   var bodyLength: _HTTPBodyLength {
-    guard let total = totalSize else { return .unknown }
     let preambleLen =
       "--\(boundary)\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n".utf8.count
       + metadataJson.count
       + "\r\n--\(boundary)\r\nContent-Type: \(contentType)\r\n\r\n".utf8.count
     let epilogueLen = "\r\n--\(boundary)--\r\n".utf8.count
-    return .known(Int64(preambleLen) + total + Int64(epilogueLen))
+    return .known(Int64(preambleLen) + totalSize + Int64(epilogueLen))
   }
 
   /// Prepares an upload source for a simple multipart upload by calculating or extracting the `x-goog-hash` header.
@@ -64,10 +63,10 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
     boundary: String,
     metadataJson: Data,
     contentType: String,
-    totalSize: Int64?,
+    totalSize: Int64,
     options: ChecksumOptions,
     chunkSize: Int = 64 * 1024
-  ) async throws -> (stream: MultipartUploadStream, checksum: String?, totalSize: Int64?) {
+  ) async throws -> (stream: MultipartUploadStream, checksum: String?) {
     var calculators = options.makeUploadCalculators()
 
     // 1. Checksum validation disabled: No checksum header needed, stream source directly with zero overhead.
@@ -80,7 +79,7 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
         totalSize: totalSize,
         chunkSize: chunkSize
       )
-      return (stream, nil, totalSize)
+      return (stream, nil)
     }
 
     // 2. Precomputed / user-provided checksums: Values are already known upfront from options,
@@ -97,7 +96,7 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
         totalSize: totalSize,
         chunkSize: chunkSize
       )
-      return (stream, checksumStr, totalSize)
+      return (stream, checksumStr)
     }
 
     // 3. In-memory data (BytesSource): Hash the buffer directly in memory without extra copies or stream consumption.
@@ -107,35 +106,33 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
       }
       let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
         separator: ", ")
-      let effectiveTotal = totalSize ?? Int64(bytesSource.buffer.count)
       let stream = MultipartUploadStream(
         source: bytesSource,
         boundary: boundary,
         metadataJson: metadataJson,
         contentType: contentType,
-        totalSize: effectiveTotal,
+        totalSize: totalSize,
         chunkSize: chunkSize
       )
-      return (stream, checksumStr, effectiveTotal)
+      return (stream, checksumStr)
     }
 
     // 4. 0-byte payload: Compute the hash of an empty buffer immediately without reading from the source.
-    if source.totalSize == 0 {
+    if totalSize == 0 {
       for i in calculators.indices {
         calculators[i].update(ByteBuffer())
       }
       let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
         separator: ", ")
-      let effectiveTotal = totalSize ?? 0
       let stream = MultipartUploadStream(
         source: source,
         boundary: boundary,
         metadataJson: metadataJson,
         contentType: contentType,
-        totalSize: effectiveTotal,
+        totalSize: 0,
         chunkSize: chunkSize
       )
-      return (stream, checksumStr, effectiveTotal)
+      return (stream, checksumStr)
     }
 
     // 5. Seekable source (e.g. FileSource): Read and hash chunks in a pre-read pass, then rewind
@@ -156,16 +153,15 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
       }
       let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
         separator: ", ")
-      let effectiveTotal = totalSize ?? seekable.totalSize
       let stream = MultipartUploadStream(
         source: seekable,
         boundary: boundary,
         metadataJson: metadataJson,
         contentType: contentType,
-        totalSize: effectiveTotal,
+        totalSize: totalSize,
         chunkSize: chunkSize
       )
-      return (stream, checksumStr, effectiveTotal)
+      return (stream, checksumStr)
     }
 
     // 6. Non-seekable stream (e.g. StreamSource): Since non-seekable streams cannot be rewound and simple uploads
@@ -190,16 +186,15 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
     let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
       separator: ", ")
     let bytesSource = BytesSource(buffer: ByteBuffer(buffer))
-    let effectiveTotal = Int64(buffer.readableBytes)
     let stream = MultipartUploadStream(
       source: bytesSource,
       boundary: boundary,
       metadataJson: metadataJson,
       contentType: contentType,
-      totalSize: effectiveTotal,
+      totalSize: totalSize,
       chunkSize: chunkSize
     )
-    return (stream, checksumStr, effectiveTotal)
+    return (stream, checksumStr)
   }
 
   struct AsyncIterator: AsyncIteratorProtocol {
@@ -215,7 +210,7 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
     private let boundary: String
     private let metadataJson: Data
     private let contentType: String
-    private let totalSize: Int64?
+    private let totalSize: Int64
     private let chunkSize: Int
     private var bytesYielded: Int64 = 0
 
@@ -224,7 +219,7 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
       boundary: String,
       metadataJson: Data,
       contentType: String,
-      totalSize: Int64?,
+      totalSize: Int64,
       chunkSize: Int
     ) {
       self.source = source
@@ -262,7 +257,7 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
           bytesYielded += Int64(chunk.count)
           return chunk.byteBuffer
         }
-        if let total = totalSize, bytesYielded < total {
+        if bytesYielded < totalSize {
           throw UploadError.internalError("Failed to read data from source")
         }
         state = .epilogue
