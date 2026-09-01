@@ -90,10 +90,6 @@ public struct BytesSource: SeekableUploadSource {
     self.buffer = ByteBuffer(data)
   }
 
-  public var data: Data {
-    buffer.data
-  }
-
   public mutating func read(maxBytes: Int) async throws -> ByteBuffer? {
     guard maxBytes > 0, offset < buffer.count else { return nil }
     let end = min(offset + Int64(maxBytes), Int64(buffer.count))
