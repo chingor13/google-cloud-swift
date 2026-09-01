@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// [START storage_create_bucket]
+// [START storage_create_bucket_turbo_replication]
 import GoogleCloudStorage
 
-public func createBucket(
+public func createBucketTurboReplication(
   client: StorageControlClient, projectId: String, bucketId: String
 ) async throws {
   let bucket =
@@ -26,8 +26,10 @@ public func createBucket(
         $0.bucketId = bucketId
         $0.bucket = .init().with { bucket in
           bucket.project = "projects/\(projectId)"
+          bucket.location = "NAM4"
+          bucket.rpo = "ASYNC_TURBO"
         }
       }, options: .init())
   print("successfully created bucket \(bucket)")
 }
-// [END storage_create_bucket]
+// [END storage_create_bucket_turbo_replication]

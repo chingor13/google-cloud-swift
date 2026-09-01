@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// [START storage_create_bucket]
+// [START storage_create_bucket_hierarchical_namespace]
 import GoogleCloudStorage
 
-public func createBucket(
+public func createBucketHierarchicalNamespace(
   client: StorageControlClient, projectId: String, bucketId: String
 ) async throws {
   let bucket =
@@ -26,8 +26,16 @@ public func createBucket(
         $0.bucketId = bucketId
         $0.bucket = .init().with { bucket in
           bucket.project = "projects/\(projectId)"
+          bucket.hierarchicalNamespace = .init().with { hns in
+            hns.enabled = true
+          }
+          bucket.iamConfig = .init().with { iamc in
+            iamc.uniformBucketLevelAccess = .init().with { ubla in
+              ubla.enabled = true
+            }
+          }
         }
       }, options: .init())
   print("successfully created bucket \(bucket)")
 }
-// [END storage_create_bucket]
+// [END storage_create_bucket_hierarchical_namespace]

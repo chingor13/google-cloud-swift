@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// [START storage_create_bucket]
+// [START storage_create_bucket_dual_region]
 import GoogleCloudStorage
 
-public func createBucket(
+public func createBucketDualRegion(
   client: StorageControlClient, projectId: String, bucketId: String
 ) async throws {
   let bucket =
@@ -26,8 +26,11 @@ public func createBucket(
         $0.bucketId = bucketId
         $0.bucket = .init().with { bucket in
           bucket.project = "projects/\(projectId)"
+          bucket.customPlacementConfig = .init().with { placementConfig in
+            placementConfig.dataLocations = ["US-EAST4", "US-CENTRAL1"]
+          }
         }
       }, options: .init())
   print("successfully created bucket \(bucket)")
 }
-// [END storage_create_bucket]
+// [END storage_create_bucket_dual_region]
