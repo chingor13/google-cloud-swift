@@ -80,12 +80,20 @@ import NIOHTTP1
     request.setBody(data: Data("test".utf8))
     #expect(request.components.url?.absoluteString == uri)
     #expect(request.headers["X-Test-Header"] == ["TestValue"])
-    #expect(request.body == .data(Data("test".utf8)))
+    guard case .data(let data) = request.body else {
+      Issue.record("expected .data body")
+      return
+    }
+    #expect(data == Data("test".utf8))
 
     var buffer = ByteBufferAllocator().buffer(capacity: 4)
     buffer.writeString("test2")
     request.setBody(buffer: buffer)
-    #expect(request.body == .byteBuffer(buffer))
+    guard case .byteBuffer(let buf) = request.body else {
+      Issue.record("expected .byteBuffer body")
+      return
+    }
+    #expect(buf == buffer)
   }
 
   @Test(arguments: [
@@ -528,6 +536,76 @@ import NIOHTTP1
     #expect(httpError.http_status_code == HTTPResponseStatus.forbidden.code)
     #expect(httpError.payload == Data(responsePayload.utf8))
     #expect(httpError.headers["x-goog-test-only"] == "test-header")
+  }
+
+  @Test func streamingBodyByteBuffer() async throws {
+    let chunks = ["Hello, ", "world", "!"].map { str -> NIOCore.ByteBuffer in
+      var buf = ByteBufferAllocator().buffer(capacity: str.utf8.count)
+      buf.writeString(str)
+      return buf
+    }
+
+    let stream = AsyncStream<NIOCore.ByteBuffer> { continuation in
+      for chunk in chunks {
+        continuation.yield(chunk)
+      }
+      continuation.finish()
+    }
+
+    let mock = MockHTTPClient { (request, timeout) in
+      #expect(request.method == .POST)
+      #expect(request.url == "http://localhost:8080/upload")
+      let body = try #require(request.body)
+      let collected = try await body.collect(upTo: 1024)
+      #expect(String(buffer: collected) == "Hello, world!")
+
+      return HTTPClientResponse(
+        version: .http1_1,
+        status: .ok,
+        body: .bytes(.init(string: "{}"))
+      )
+    }
+
+    let client = try _HTTPClient(mock, endpoint: "http://localhost:8080")
+    var request = try await client.newRequest(uri: "http://localhost:8080/upload")
+    request.setMethod(.POST)
+    request.setBody(stream: stream, ofContentType: "application/octet-stream", length: 13)
+
+    let response = try await request.execute()
+    #expect(response.status == .ok)
+  }
+
+  @Test func streamingBodyData() async throws {
+    let chunks = ["Chunk1", "Chunk2"].map { Data($0.utf8) }
+
+    let stream = AsyncStream<Data> { continuation in
+      for chunk in chunks {
+        continuation.yield(chunk)
+      }
+      continuation.finish()
+    }
+
+    let mock = MockHTTPClient { (request, timeout) in
+      #expect(request.method == .PUT)
+      #expect(request.url == "http://localhost:8080/upload")
+      let body = try #require(request.body)
+      let collected = try await body.collect(upTo: 1024)
+      #expect(String(buffer: collected) == "Chunk1Chunk2")
+
+      return HTTPClientResponse(
+        version: .http1_1,
+        status: .ok,
+        body: .bytes(.init(string: "{}"))
+      )
+    }
+
+    let client = try _HTTPClient(mock, endpoint: "http://localhost:8080")
+    var request = try await client.newRequest(uri: "http://localhost:8080/upload")
+    request.setMethod(.PUT)
+    request.setBody(stream: stream)
+
+    let response = try await request.execute()
+    #expect(response.status == .ok)
   }
 
   /// A test response type.
