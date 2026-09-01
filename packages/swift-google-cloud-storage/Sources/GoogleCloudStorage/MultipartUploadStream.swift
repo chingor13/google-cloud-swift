@@ -68,133 +68,54 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
     chunkSize: Int = 64 * 1024
   ) async throws -> (stream: MultipartUploadStream, checksum: String?) {
     var calculators = options.makeUploadCalculators()
+    var preparedSource: any UploadSource = source
 
-    // 1. Checksum validation disabled: No checksum header needed, stream source directly with zero overhead.
-    guard !calculators.isEmpty else {
-      let stream = MultipartUploadStream(
-        source: source,
-        boundary: boundary,
-        metadataJson: metadataJson,
-        contentType: contentType,
-        totalSize: totalSize,
-        chunkSize: chunkSize
-      )
-      return (stream, nil)
-    }
-
-    // 2. Precomputed / user-provided checksums: Values are already known upfront from options,
-    // so format the header immediately without reading or inspecting the source data.
+    // Only inspect/read the source if automatic checksum computation is needed.
     let autoCalculators = calculators.filter { !($0 is ProvidedChecksumCalculator) }
-    if autoCalculators.isEmpty {
-      let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
-        separator: ", ")
-      let stream = MultipartUploadStream(
-        source: source,
-        boundary: boundary,
-        metadataJson: metadataJson,
-        contentType: contentType,
-        totalSize: totalSize,
-        chunkSize: chunkSize
-      )
-      return (stream, checksumStr)
-    }
-
-    // 3. In-memory data (BytesSource): Hash the buffer directly in memory without extra copies or stream consumption.
-    if let bytesSource = source as? BytesSource {
-      for i in calculators.indices {
-        calculators[i].update(bytesSource.buffer)
-      }
-      let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
-        separator: ", ")
-      let stream = MultipartUploadStream(
-        source: bytesSource,
-        boundary: boundary,
-        metadataJson: metadataJson,
-        contentType: contentType,
-        totalSize: totalSize,
-        chunkSize: chunkSize
-      )
-      return (stream, checksumStr)
-    }
-
-    // 4. 0-byte payload: Compute the hash of an empty buffer immediately without reading from the source.
-    if totalSize == 0 {
-      for i in calculators.indices {
-        calculators[i].update(ByteBuffer())
-      }
-      let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
-        separator: ", ")
-      let stream = MultipartUploadStream(
-        source: source,
-        boundary: boundary,
-        metadataJson: metadataJson,
-        contentType: contentType,
-        totalSize: 0,
-        chunkSize: chunkSize
-      )
-      return (stream, checksumStr)
-    }
-
-    // 5. Seekable source (e.g. FileSource): Read and hash chunks in a pre-read pass, then rewind
-    // to offset 0 with seek(to:) so the source can be streamed directly from disk with O(1) memory.
-    if var seekable = source as? (any SeekableUploadSource) {
+    if !autoCalculators.isEmpty {
       do {
-        while let chunk = try await seekable.read(maxBytes: 64 * 1024) {
-          for i in calculators.indices {
-            calculators[i].update(chunk)
+        if var seekable = source as? (any SeekableUploadSource) {
+          while let chunk = try await seekable.read(maxBytes: chunkSize) {
+            for i in calculators.indices {
+              calculators[i].update(chunk)
+            }
           }
+          try await seekable.seek(to: 0)
+          preparedSource = seekable
+        } else {
+          var nonSeekable = source
+          var buffer = NIOCore.ByteBuffer()
+          while let chunk = try await nonSeekable.read(maxBytes: chunkSize) {
+            for i in calculators.indices {
+              calculators[i].update(chunk)
+            }
+            var nio = chunk.byteBuffer
+            buffer.writeBuffer(&nio)
+          }
+          preparedSource = BytesSource(buffer: ByteBuffer(buffer))
         }
-        try await seekable.seek(to: 0)
       } catch {
         if let uploadError = error as? UploadError {
           throw uploadError
         }
         throw UploadError.sourceReadFailed(underlyingError: error)
       }
-      let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
-        separator: ", ")
-      let stream = MultipartUploadStream(
-        source: seekable,
-        boundary: boundary,
-        metadataJson: metadataJson,
-        contentType: contentType,
-        totalSize: totalSize,
-        chunkSize: chunkSize
-      )
-      return (stream, checksumStr)
     }
 
-    // 6. Non-seekable stream (e.g. StreamSource): Since non-seekable streams cannot be rewound and simple uploads
-    // are bounded by the simple upload threshold (<= 8 MiB), buffer the chunks into memory while computing the hash,
-    // then stream the resulting BytesSource.
-    var nonSeekable = source
-    var buffer = NIOCore.ByteBuffer()
-    do {
-      while let chunk = try await nonSeekable.read(maxBytes: 64 * 1024) {
-        for i in calculators.indices {
-          calculators[i].update(chunk)
-        }
-        var nio = chunk.byteBuffer
-        buffer.writeBuffer(&nio)
-      }
-    } catch {
-      if let uploadError = error as? UploadError {
-        throw uploadError
-      }
-      throw UploadError.sourceReadFailed(underlyingError: error)
-    }
-    let checksumStr = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(
-      separator: ", ")
-    let bytesSource = BytesSource(buffer: ByteBuffer(buffer))
+    let checksum =
+      calculators.isEmpty
+      ? nil
+      : calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(separator: ", ")
+
     let stream = MultipartUploadStream(
-      source: bytesSource,
+      source: preparedSource,
       boundary: boundary,
       metadataJson: metadataJson,
       contentType: contentType,
       totalSize: totalSize,
       chunkSize: chunkSize
     )
-    return (stream, checksumStr)
+    return (stream, checksum)
   }
 
   struct AsyncIterator: AsyncIteratorProtocol {
