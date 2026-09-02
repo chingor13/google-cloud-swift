@@ -45,6 +45,24 @@ extension StorageClient {
     as objectName: String,
     options: UploadOptions = .default
   ) async throws -> Object {
+    do {
+      return try await uploadInternal(
+        source,
+        to: bucket,
+        as: objectName,
+        options: options
+      )
+    } catch {
+      throw Self.mapToUploadError(error)
+    }
+  }
+
+  private func uploadInternal(
+    _ source: some UploadSource,
+    to bucket: String,
+    as objectName: String,
+    options: UploadOptions
+  ) async throws -> Object {
     let clientOptions = self.options.client
     let effectiveBackoffPolicy =
       options.backoffPolicy ?? self.options.upload.backoffPolicy ?? clientOptions.backoffPolicy
@@ -104,6 +122,24 @@ extension StorageClient {
     to bucket: String,
     as objectName: String,
     options: UploadOptions = .default
+  ) async throws -> Object {
+    do {
+      return try await uploadInternal(
+        source,
+        to: bucket,
+        as: objectName,
+        options: options
+      )
+    } catch {
+      throw Self.mapToUploadError(error)
+    }
+  }
+
+  private func uploadInternal(
+    _ source: some SeekableUploadSource,
+    to bucket: String,
+    as objectName: String,
+    options: UploadOptions
   ) async throws -> Object {
     let clientOptions = self.options.client
     let effectiveBackoffPolicy =
@@ -221,6 +257,9 @@ extension StorageClient {
         if let uploadError = error as? UploadError {
           throw uploadError
         }
+        if let sourceError = error as? UploadSourceError {
+          throw sourceError
+        }
         if let reqError = error as? RequestError {
           throw reqError
         }
@@ -247,6 +286,12 @@ extension StorageClient {
     do {
       startResponse = try await startRequest.execute()
     } catch {
+      if let uploadError = error as? UploadError {
+        throw uploadError
+      }
+      if let sourceError = error as? UploadSourceError {
+        throw sourceError
+      }
       if let reqError = error as? RequestError {
         throw reqError
       }
@@ -278,6 +323,12 @@ extension StorageClient {
     do {
       queryResponse = try await queryRequest.execute()
     } catch {
+      if let uploadError = error as? UploadError {
+        throw uploadError
+      }
+      if let sourceError = error as? UploadSourceError {
+        throw sourceError
+      }
       if let reqError = error as? RequestError {
         throw reqError
       }
@@ -291,6 +342,13 @@ extension StorageClient {
     } else if statusCode == 308 {
       let queryStatus = try parseResumableUploadQueryStatus(from: queryResponse.headers)
       return (.inprogress(UInt64(queryStatus.nextOffset)), queryStatus.crc32cSeed)
+    } else if statusCode == 404 || statusCode == 410 {
+      let queryData = try await queryResponse.data()
+      let msg = String(data: queryData, encoding: .utf8) ?? ""
+      throw UploadError.sessionExpired(
+        uploadId: uploadId,
+        underlyingError: UploadError.unexpectedServerResponse(statusCode: statusCode, message: msg)
+      )
     } else if queryResponse.isError() {
       throw await queryResponse.decodeError()
     } else {
@@ -341,6 +399,12 @@ extension StorageClient {
     do {
       uploadResponse = try await uploadRequest.execute()
     } catch {
+      if let uploadError = error as? UploadError {
+        throw uploadError
+      }
+      if let sourceError = error as? UploadSourceError {
+        throw sourceError
+      }
       if let reqError = error as? RequestError {
         throw reqError
       }
@@ -363,6 +427,13 @@ extension StorageClient {
         crc32cSeed = parseCRC32CFromRunningHash(runningHashHeader)
       }
       return (.inprogress(UInt64(nextOffset)), crc32cSeed)
+    } else if statusCode == 404 || statusCode == 410 {
+      let uploadData = try await uploadResponse.data()
+      let msg = String(data: uploadData, encoding: .utf8) ?? ""
+      throw UploadError.sessionExpired(
+        uploadId: uploadId,
+        underlyingError: UploadError.unexpectedServerResponse(statusCode: statusCode, message: msg)
+      )
     } else if uploadResponse.isError() {
       throw await uploadResponse.decodeError()
     } else {
@@ -653,6 +724,22 @@ extension StorageClient {
     uploadId: String,
     options: UploadOptions = .default
   ) async throws -> Object {
+    do {
+      return try await resumeUploadInternal(
+        source,
+        uploadId: uploadId,
+        options: options
+      )
+    } catch {
+      throw Self.mapToUploadError(error, uploadId: uploadId)
+    }
+  }
+
+  private func resumeUploadInternal(
+    _ source: some SeekableUploadSource,
+    uploadId: String,
+    options: UploadOptions
+  ) async throws -> Object {
     let clientOptions = self.options.client
     let effectiveBackoffPolicy =
       options.backoffPolicy ?? self.options.upload.backoffPolicy ?? clientOptions.backoffPolicy
@@ -839,7 +926,76 @@ extension StorageClient {
     }
     let data = try await response.data()
     let decoder = GoogleCloudWKT._ProtoJSONDecoder()
-    let v1Object = try decoder.decode(ObjectV1Response.self, from: data)
-    return v1Object.toObject()
+    do {
+      let v1Object = try decoder.decode(ObjectV1Response.self, from: data)
+      return v1Object.toObject()
+    } catch {
+      let message = String(data: data, encoding: .utf8) ?? error.localizedDescription
+      throw UploadError.unexpectedServerResponse(
+        statusCode: Int(response.status.code),
+        message: message
+      )
+    }
+  }
+
+  package static func mapToUploadError(_ error: any Error, uploadId: String? = nil) -> UploadError {
+    if let uploadError = error as? UploadError {
+      return uploadError
+    }
+    if let sourceError = error as? UploadSourceError {
+      return .uploadSourceError(underlyingError: sourceError)
+    }
+    if error is CancellationError {
+      return .cancelled
+    }
+    if let urlError = error as? URLError {
+      if urlError.code == .cancelled {
+        return .cancelled
+      }
+      return .networkError(underlyingError: urlError)
+    }
+    if let requestError = error as? RequestError {
+      return mapRequestError(requestError, uploadId: uploadId)
+    }
+    return .internalError(error.localizedDescription)
+  }
+
+  private static func mapRequestError(
+    _ requestError: RequestError, uploadId: String? = nil
+  ) -> UploadError {
+    switch requestError {
+    case .io(let underlying):
+      if let uploadError = underlying as? UploadError {
+        return uploadError
+      }
+      if let sourceError = underlying as? UploadSourceError {
+        return .uploadSourceError(underlyingError: sourceError)
+      }
+      if underlying is CancellationError {
+        return .cancelled
+      }
+      if let urlError = underlying as? URLError, urlError.code == .cancelled {
+        return .cancelled
+      }
+      return .networkError(underlyingError: underlying)
+    case .http(let details):
+      let message = String(data: details.payload, encoding: .utf8) ?? ""
+      if let uploadId = uploadId,
+        (details.http_status_code == 404 || details.http_status_code == 410)
+      {
+        return .sessionExpired(uploadId: uploadId, underlyingError: requestError)
+      }
+      return .unexpectedServerResponse(statusCode: details.http_status_code, message: message)
+    case .service(let details):
+      return .unexpectedServerResponse(statusCode: 500, message: details.message)
+    case .exhausted(let details):
+      return mapRequestError(details.source, uploadId: uploadId)
+    case .binding(let message):
+      return .internalError(message)
+    case .malformedResponse(let message):
+      return .unexpectedServerResponse(statusCode: 200, message: message)
+    case .unimplemented:
+      return .internalError("Unimplemented")
+    }
   }
 }

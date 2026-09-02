@@ -33,16 +33,22 @@ public struct FileSource: SeekableUploadSource {
   }
 
   public mutating func read(maxBytes: Int) async throws -> ByteBuffer? {
-    let handle = try FileHandle(forReadingFrom: fileURL)
-    defer {
-      try? handle.close()
+    do {
+      let handle = try FileHandle(forReadingFrom: fileURL)
+      defer {
+        try? handle.close()
+      }
+      try handle.seek(toOffset: UInt64(offset))
+      guard let data = try handle.read(upToCount: maxBytes), !data.isEmpty else {
+        return nil
+      }
+      offset += Int64(data.count)
+      return ByteBuffer(data)
+    } catch let error as UploadSourceError {
+      throw error
+    } catch {
+      throw UploadSourceError.readError(underlyingError: error)
     }
-    try handle.seek(toOffset: UInt64(offset))
-    guard let data = try handle.read(upToCount: maxBytes), !data.isEmpty else {
-      return nil
-    }
-    offset += Int64(data.count)
-    return ByteBuffer(data)
   }
 
   public mutating func seek(to offset: Int64) async throws {

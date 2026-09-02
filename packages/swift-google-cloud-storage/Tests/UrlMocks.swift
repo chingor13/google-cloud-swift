@@ -86,7 +86,10 @@ struct MockUploadSource: SeekableUploadSource {
 
   mutating func read(maxBytes: Int) async throws -> GoogleCloudStorage.ByteBuffer? {
     if let error = readError {
-      throw error
+      if let sourceError = error as? UploadSourceError {
+        throw sourceError
+      }
+      throw UploadSourceError.readError(underlyingError: error)
     }
     guard offset < data.count else { return nil }
     let end = min(offset + Int64(maxBytes), Int64(data.count))

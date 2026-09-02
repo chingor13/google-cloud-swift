@@ -92,4 +92,30 @@ import Testing
     let chunk = try await source.read(maxBytes: 10)
     #expect(chunk == nil)
   }
+
+  /// Tests that reading from an AsyncThrowingStream that throws an error throws `UploadSourceError`.
+  @Test func throwingSequenceThrowsUploadSourceError() async throws {
+    struct CustomSequenceError: Error, Equatable {}
+    let stream = AsyncThrowingStream<Data, any Error> { continuation in
+      continuation.yield(Data([1, 2, 3]))
+      continuation.finish(throwing: CustomSequenceError())
+    }
+
+    var source = StreamSource(sequence: stream)
+    let chunk1 = try await source.read(maxBytes: 3)
+    #expect(chunk1 == [1, 2, 3])
+
+    let error = await expectError(UploadSourceError.self) {
+      try await source.read(maxBytes: 3)
+    }
+    guard let error else {
+      Issue.record("Expected UploadSourceError to be thrown")
+      return
+    }
+    if case .readError(let underlying) = error {
+      #expect(underlying is CustomSequenceError)
+    } else {
+      Issue.record("Expected .readError, got \(String(describing: error))")
+    }
+  }
 }

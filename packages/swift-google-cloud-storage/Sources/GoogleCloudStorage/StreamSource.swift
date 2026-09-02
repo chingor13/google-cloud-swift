@@ -68,11 +68,19 @@ public struct StreamSource: UploadSource {
   public mutating func read(maxBytes: Int) async throws -> ByteBuffer? {
     guard maxBytes > 0 else { return nil }
     while buffer.readableBytes < maxBytes {
-      guard let nextChunk = try await stateBox.nextChunk() else {
+      let nextChunk: NIOCore.ByteBuffer?
+      do {
+        nextChunk = try await stateBox.nextChunk()
+      } catch let error as UploadSourceError {
+        throw error
+      } catch {
+        throw UploadSourceError.readError(underlyingError: error)
+      }
+      guard let next = nextChunk else {
         break
       }
-      var next = nextChunk
-      buffer.writeBuffer(&next)
+      var nextCopy = next
+      buffer.writeBuffer(&nextCopy)
     }
 
     guard buffer.readableBytes > 0 else {

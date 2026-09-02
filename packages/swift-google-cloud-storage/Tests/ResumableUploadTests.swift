@@ -102,13 +102,13 @@ import Testing
     let client = try makeClient(
       registry: registry, uploadResumePolicy: NeverResume<UploadDetails>())
 
-    let error = await expectError(RequestError.self) {
+    let error = await expectUploadError {
       _ = try await client.upload(source, to: bucket, as: objectName)
     }
-    if case .io(let underlying as URLError) = error {
+    if case .networkError(let underlying as URLError) = error {
       #expect(underlying.code == URLError.cannotConnectToHost)
     } else {
-      Issue.record("Expected RequestError.io(URLError), got \(String(describing: error))")
+      Issue.record("Expected UploadError.networkError(URLError), got \(String(describing: error))")
     }
   }
 
@@ -133,9 +133,18 @@ import Testing
 
     let client = try makeClient(registry: registry)
 
-    await #expect(throws: DummyError.self) {
+    let error = await expectUploadError {
       _ = try await client.upload(source, to: bucket, as: objectName)
     }
+    guard case .uploadSourceError(let sourceError) = error else {
+      Issue.record("Expected .uploadSourceError, got \(String(describing: error))")
+      return
+    }
+    guard case .readError(let underlying) = sourceError else {
+      Issue.record("Expected .readError, got \(String(describing: sourceError))")
+      return
+    }
+    #expect(underlying is DummyError)
   }
 
   /// Tests error propagation when network connection fails during resumable session initialization.
@@ -155,13 +164,13 @@ import Testing
 
     let client = try makeClient(registry: registry, uploadResumePolicy: NeverResume())
 
-    let error = await expectError(RequestError.self) {
+    let error = await expectUploadError {
       _ = try await client.upload(source, to: bucket, as: objectName)
     }
-    if case .io(let underlying as URLError) = error {
+    if case .networkError(let underlying as URLError) = error {
       #expect(underlying.code == .cannotConnectToHost)
     } else {
-      Issue.record("Expected RequestError.io(URLError), got \(String(describing: error))")
+      Issue.record("Expected UploadError.networkError(URLError), got \(String(describing: error))")
     }
   }
 
@@ -190,13 +199,15 @@ import Testing
 
     let client = try makeClient(registry: registry)
 
-    let error = await expectError(RequestError.self) {
+    let error = await expectUploadError {
       try await client.upload(source, to: bucket, as: objectName)
     }
-    if case .http(let details) = error {
-      #expect(details.http_status_code == 500)
+    if case .unexpectedServerResponse(let statusCode, let message) = error {
+      #expect(statusCode == 500)
+      #expect(message == "Internal Server Error")
     } else {
-      Issue.record("Expected .http RequestError, got \(String(describing: error))")
+      Issue.record(
+        "Expected UploadError.unexpectedServerResponse, got \(String(describing: error))")
     }
   }
 
@@ -318,9 +329,10 @@ import Testing
 
     let client = try makeClient(registry: registry)
 
-    await #expect(throws: DummyError.self) {
+    let error = await expectUploadError {
       _ = try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
     }
+    #expect(error != nil)
   }
 
   /// Tests a multi-chunk resumable upload (20MB payload) streaming progress updates and uploading across multiple intermediate 308 Range acknowledgments.
@@ -434,13 +446,13 @@ import Testing
 
     let client = try makeClient(registry: registry)
 
-    let error = await expectError(RequestError.self) {
+    let error = await expectUploadError {
       try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
     }
-    if case .http(let details) = error {
-      #expect(details.http_status_code == 404)
+    if case .sessionExpired(let uploadId, _) = error {
+      #expect(uploadId == queryUrl.absoluteString)
     } else {
-      Issue.record("Expected .http RequestError, got \(String(describing: error))")
+      Issue.record("Expected UploadError.sessionExpired, got \(String(describing: error))")
     }
   }
 
@@ -491,13 +503,15 @@ import Testing
 
     let client = try makeClient(registry: registry)
 
-    let error = await expectError(RequestError.self) {
+    let error = await expectUploadError {
       try await client.resumeUpload(source, uploadId: queryUrl.absoluteString)
     }
-    if case .http(let details) = error {
-      #expect(details.http_status_code == 499)
+    if case .unexpectedServerResponse(let statusCode, let message) = error {
+      #expect(statusCode == 499)
+      #expect(message == "Client Closed Request")
     } else {
-      Issue.record("Expected .http RequestError, got \(String(describing: error))")
+      Issue.record(
+        "Expected UploadError.unexpectedServerResponse, got \(String(describing: error))")
     }
   }
 
@@ -1816,10 +1830,14 @@ import Testing
     let uploadOptions = UploadOptions().with {
       $0.resumePolicy = NeverResume()
     }
-    let error = await expectError(RequestError.self) {
+    let error = await expectUploadError {
       try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     }
-    #expect(error != nil)
+    if case .unexpectedServerResponse(let statusCode, _) = error {
+      #expect(statusCode == 503)
+    } else {
+      Issue.record("Expected .unexpectedServerResponse(503), got \(String(describing: error))")
+    }
     let requests = registry.recordedRequests()
     #expect(requests.count == 1)
   }
@@ -1844,10 +1862,14 @@ import Testing
 
     let client = try makeClient(
       registry: registry, uploadResumePolicy: NeverResume<UploadDetails>())
-    let error = await expectError(RequestError.self) {
+    let error = await expectUploadError {
       try await client.upload(source, to: bucket, as: objectName)
     }
-    #expect(error != nil)
+    if case .unexpectedServerResponse(let statusCode, _) = error {
+      #expect(statusCode == 503)
+    } else {
+      Issue.record("Expected .unexpectedServerResponse(503), got \(String(describing: error))")
+    }
     let requests = registry.recordedRequests()
     #expect(requests.count == 1)
   }

@@ -265,6 +265,10 @@ struct StorageClientIntegrationTests {
     do {
       _ = try await storage.upload(fileURL, to: bucketName, as: objectName, options: options)
       Issue.record("Expected GCS to reject upload with bad checksum, but it succeeded")
+    } catch UploadError.unexpectedServerResponse(let statusCode, let message) {
+      #expect(statusCode == 400)
+      #expect(message.contains("doesn't match"))
+      print("GCS correctly rejected bad checksum: \(message)")
     } catch RequestError.service(let serviceError) {
       #expect(serviceError.message.contains("doesn't match"))
       print("GCS correctly rejected bad checksum: \(serviceError.message)")
@@ -274,7 +278,7 @@ struct StorageClientIntegrationTests {
         "GCS correctly rejected bad checksum: \(String(data: details.payload, encoding: .utf8) ?? "")"
       )
     } catch {
-      Issue.record("Expected RequestError, but got \(error)")
+      Issue.record("Expected UploadError.unexpectedServerResponse, but got \(error)")
     }
   }
 

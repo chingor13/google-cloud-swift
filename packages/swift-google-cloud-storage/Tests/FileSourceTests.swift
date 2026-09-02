@@ -77,4 +77,23 @@ import Testing
     let third = try await source.read(maxBytes: 10)
     #expect(third == nil)
   }
+
+  /// Tests that reading from a non-existent file throws `UploadSourceError`.
+  @Test func readNonExistentFileThrowsUploadSourceError() async throws {
+    let fileURL = URL(fileURLWithPath: "/nonexistent/path/\(UUID().uuidString).txt")
+    var source = FileSource(fileURL: fileURL)
+
+    let error = await expectError(UploadSourceError.self) {
+      try await source.read(maxBytes: 100)
+    }
+    guard let error else {
+      Issue.record("Expected UploadSourceError to be thrown")
+      return
+    }
+    if case .readError(let underlying) = error {
+      #expect(underlying is CocoaError)
+    } else {
+      Issue.record("Expected .readError, got \(String(describing: error))")
+    }
+  }
 }
