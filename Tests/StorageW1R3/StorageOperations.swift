@@ -83,7 +83,7 @@ enum StorageOperations {
 
   /// Deletes a batch of objects in parallel using StorageControlClient.
   static func batchDelete(
-    credentials: Credentials,
+    client: StorageControlClient,
     batch: [GoogleCloudStorage.Object]
   ) async throws {
     guard !batch.isEmpty else { return }
@@ -91,8 +91,6 @@ enum StorageOperations {
     try await withThrowingTaskGroup(of: Void.self) { group in
       for object in batch {
         group.addTask {
-          let client = try StorageControlClient(
-            ClientOptions().with { $0.credentials = credentials })
           let deleteReq = DeleteObjectRequest().with {
             $0.bucket = object.bucket
             $0.object = object.name
