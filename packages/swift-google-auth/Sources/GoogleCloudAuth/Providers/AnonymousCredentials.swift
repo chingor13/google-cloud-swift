@@ -21,8 +21,7 @@ import Foundation
 /// An empty credentials source for unauthenticated requests.
 struct AnonymousCredentials: CredentialsProvider {
   func headers() async throws -> AuthHeaders {
-    // Dummy empty implementation for skeleton phase
-    return []
+    throw CredentialsError.notSupported("Anonymous credentials cannot provide auth headers")
   }
 
   func universeDomain() async -> String? {
