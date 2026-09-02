@@ -53,10 +53,10 @@ public struct FileSource: SeekableUploadSource {
 
   public mutating func seek(to offset: Int64) async throws {
     guard offset >= 0 else {
-      throw UploadError.internalError("Invalid seek offset: \(offset)")
+      throw UploadSourceError.invalidSeekOffset(offset)
     }
     if let size = totalSize, offset > size {
-      throw UploadError.localSourceTooSmall(localSize: size, gcsOffset: offset)
+      throw UploadSourceError.fileTooSmall(fileSize: size, offset: offset)
     }
     self.offset = offset
   }

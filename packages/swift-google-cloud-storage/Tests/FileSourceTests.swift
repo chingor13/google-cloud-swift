@@ -36,24 +36,28 @@ import Testing
     #expect(chunk?.count == 50)
 
     // Seek to negative offset
-    let negativeErr = await expectError(UploadError.self) {
+    let negativeErr = await expectError(UploadSourceError.self) {
       try await source.seek(to: -5)
     }
-    if case .internalError(let message) = negativeErr {
-      #expect(message == "Invalid seek offset: -5")
+    if case .invalidSeekOffset(let offset) = negativeErr {
+      #expect(offset == -5)
+      #expect(negativeErr?.description == "invalidSeekOffset(-5)")
     } else {
-      Issue.record("Expected .internalError, got \(String(describing: negativeErr))")
+      Issue.record("Expected .invalidSeekOffset, got \(String(describing: negativeErr))")
     }
 
     // Seek past end of file
-    let pastEndErr = await expectError(UploadError.self) {
+    let pastEndErr = await expectError(UploadSourceError.self) {
       try await source.seek(to: 200)
     }
-    if case .localSourceTooSmall(let localSize, let gcsOffset) = pastEndErr {
-      #expect(localSize == 100)
-      #expect(gcsOffset == 200)
+    if case .fileTooSmall(let fileSize, let offset) = pastEndErr {
+      #expect(fileSize == 100)
+      #expect(offset == 200)
+      #expect(
+        pastEndErr?.description
+          == "fileTooSmall(fileSize: 100, offset: 200)")
     } else {
-      Issue.record("Expected .localSourceTooSmall, got \(String(describing: pastEndErr))")
+      Issue.record("Expected .fileTooSmall, got \(String(describing: pastEndErr))")
     }
   }
 
