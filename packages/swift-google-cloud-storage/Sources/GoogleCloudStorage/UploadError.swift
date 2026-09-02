@@ -37,38 +37,4 @@ public enum UploadError: Error, Sendable {
 
   /// The range header returned by GCS is invalid.
   case invalidRangeHeader(String)
-
-  /// An error occurred while reading from the upload source.
-  case uploadSourceError(underlyingError: UploadSourceError)
-}
-
-extension UploadError {
-  /// Creates an `UploadError.uploadSourceError` with the given upload source error.
-  public static func uploadSourceError(_ error: UploadSourceError) -> UploadError {
-    .uploadSourceError(underlyingError: error)
-  }
-}
-
-extension UploadError: CustomStringConvertible {
-  public var description: String {
-    switch self {
-    case .localSourceTooSmall(let localSize, let gcsOffset):
-      return "localSourceTooSmall(localSize: \(localSize), gcsOffset: \(gcsOffset))"
-    case .sessionExpired(let uploadId, let underlyingError):
-      return
-        "sessionExpired(uploadId: \(uploadId), underlyingError: \(String(describing: underlyingError)))"
-    case .cancelled:
-      return "cancelled"
-    case .unexpectedServerResponse(let statusCode, let message):
-      return "unexpectedServerResponse(statusCode: \(statusCode), message: \(message))"
-    case .networkError(let underlyingError):
-      return "networkError(\(underlyingError))"
-    case .internalError(let message):
-      return "internalError(\(message))"
-    case .invalidRangeHeader(let header):
-      return "invalidRangeHeader(\(header))"
-    case .uploadSourceError(let underlyingError):
-      return "uploadSourceError(\(underlyingError))"
-    }
-  }
 }

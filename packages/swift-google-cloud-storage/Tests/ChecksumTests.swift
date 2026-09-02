@@ -100,15 +100,14 @@ import Testing
     let client = try StorageClient(options, mock: registry)
     let uploadOptions = UploadOptions().with { $0.validation = .crc32c }
 
-    let error = await expectUploadError {
+    let error = await expectError(RequestError.self) {
       try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     }
-    if case .unexpectedServerResponse(let statusCode, let message) = error {
-      #expect(statusCode == 400)
-      #expect(message == errorMessage)
+    if case .http(let details) = error {
+      #expect(details.http_status_code == 400)
+      #expect(String(data: details.payload, encoding: .utf8) == errorMessage)
     } else {
-      Issue.record(
-        "Expected UploadError.unexpectedServerResponse, got \(String(describing: error))")
+      Issue.record("Expected .http RequestError, got \(String(describing: error))")
     }
   }
 
@@ -146,15 +145,14 @@ import Testing
     let client = try StorageClient(options, mock: registry)
     let uploadOptions = UploadOptions().with { $0.validation = .md5 }
 
-    let error = await expectUploadError {
+    let error = await expectError(RequestError.self) {
       try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     }
-    if case .unexpectedServerResponse(let statusCode, let message) = error {
-      #expect(statusCode == 400)
-      #expect(message == errorMessage)
+    if case .http(let details) = error {
+      #expect(details.http_status_code == 400)
+      #expect(String(data: details.payload, encoding: .utf8) == errorMessage)
     } else {
-      Issue.record(
-        "Expected UploadError.unexpectedServerResponse, got \(String(describing: error))")
+      Issue.record("Expected .http RequestError, got \(String(describing: error))")
     }
   }
 

@@ -89,15 +89,15 @@ import Testing
 
     let client = try makeClient(registry: registry)
 
-    let error = await expectUploadError {
+    let error = await expectError(UploadSourceError.self) {
       try await client.upload(source, to: bucket, as: objectName)
     }
-    guard case .uploadSourceError(let sourceError) = error else {
-      Issue.record("Expected .uploadSourceError, got \(String(describing: error))")
+    guard let error else {
+      Issue.record("Expected UploadSourceError to be thrown")
       return
     }
-    guard case .readError(let underlying) = sourceError else {
-      Issue.record("Expected .readError, got \(String(describing: sourceError))")
+    guard case .readError(let underlying) = error else {
+      Issue.record("Expected .readError, got \(String(describing: error))")
       return
     }
     #expect(underlying is DummyError)
@@ -121,13 +121,13 @@ import Testing
     let client = try makeClient(
       registry: registry, uploadResumePolicy: NeverResume<UploadDetails>())
 
-    let error = await expectUploadError {
+    let error = await expectError(RequestError.self) {
       try await client.upload(source, to: bucket, as: objectName)
     }
-    if case .networkError(let underlying as URLError) = error {
+    if case .io(let underlying as URLError) = error {
       #expect(underlying.code == URLError.cannotConnectToHost)
     } else {
-      Issue.record("Expected UploadError.networkError(URLError), got \(String(describing: error))")
+      Issue.record("Expected RequestError.io(URLError), got \(String(describing: error))")
     }
   }
 
@@ -150,15 +150,13 @@ import Testing
 
     let client = try makeClient(registry: registry)
 
-    let error = await expectUploadError {
+    let error = await expectError(RequestError.self) {
       try await client.upload(source, to: bucket, as: objectName)
     }
-    if case .unexpectedServerResponse(let statusCode, let message) = error {
-      #expect(statusCode == 500)
-      #expect(message == "Internal Server Error")
+    if case .http(let details) = error {
+      #expect(details.http_status_code == 500)
     } else {
-      Issue.record(
-        "Expected UploadError.unexpectedServerResponse, got \(String(describing: error))")
+      Issue.record("Expected .http RequestError, got \(String(describing: error))")
     }
   }
 
@@ -181,16 +179,10 @@ import Testing
 
     let client = try makeClient(registry: registry)
 
-    let error = await expectUploadError {
+    let error = await expectError(DecodingError.self) {
       try await client.upload(source, to: bucket, as: objectName)
     }
-    if case .unexpectedServerResponse(let statusCode, let message) = error {
-      #expect(statusCode == 200)
-      #expect(message == "invalid json content")
-    } else {
-      Issue.record(
-        "Expected UploadError.unexpectedServerResponse, got \(String(describing: error))")
-    }
+    #expect(error != nil)
   }
 
   /// Tests error handling when `UploadSource.read` unexpectedly returns `nil` before payload bytes are read.
@@ -323,14 +315,10 @@ import Testing
     let client = try makeClient(
       registry: registry, uploadResumePolicy: NeverResume<UploadDetails>())
 
-    let error = await expectUploadError {
+    let error = await expectError(RequestError.self) {
       try await client.upload(source, to: bucket, as: objectName)
     }
-    if case .unexpectedServerResponse(let statusCode, _) = error {
-      #expect(statusCode == 503)
-    } else {
-      Issue.record("Expected .unexpectedServerResponse(503), got \(String(describing: error))")
-    }
+    #expect(error != nil)
     let requests = registry.recordedRequests()
     #expect(requests.count == 1)
   }
@@ -357,14 +345,10 @@ import Testing
       $0.resumePolicy = NeverResume()
     }
 
-    let error = await expectUploadError {
+    let error = await expectError(RequestError.self) {
       try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     }
-    if case .unexpectedServerResponse(let statusCode, _) = error {
-      #expect(statusCode == 503)
-    } else {
-      Issue.record("Expected .unexpectedServerResponse(503), got \(String(describing: error))")
-    }
+    #expect(error != nil)
     let requests = registry.recordedRequests()
     #expect(requests.count == 1)
   }

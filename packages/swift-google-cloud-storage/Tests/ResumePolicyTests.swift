@@ -251,14 +251,13 @@ import Testing
       $0.resumePolicy = NeverResume()
     }
 
-    let error = await expectUploadError {
+    let error = await expectError(RequestError.self) {
       try await client.upload(source, to: bucket, as: objectName, options: uploadOptions)
     }
-    if case .unexpectedServerResponse(let statusCode, _) = error {
-      #expect(statusCode == 503)
+    if case .http(let details) = error {
+      #expect(details.http_status_code == 503)
     } else {
-      Issue.record(
-        "Expected UploadError.unexpectedServerResponse(503), got \(String(describing: error))")
+      Issue.record("Expected .http 503 RequestError, got \(String(describing: error))")
     }
   }
 

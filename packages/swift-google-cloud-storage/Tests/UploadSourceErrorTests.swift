@@ -32,22 +32,4 @@ import Testing
     #expect(caught is TestError)
     #expect(error.description == "readError(test error description)")
   }
-
-  @Test func testUploadErrorWrapsUploadSourceError() {
-    let underlying = TestError()
-    let sourceError = UploadSourceError.readError(underlying)
-    let uploadError = UploadError.uploadSourceError(sourceError)
-
-    guard case .uploadSourceError(let caughtSourceError) = uploadError else {
-      Issue.record("Expected .uploadSourceError, got \(uploadError)")
-      return
-    }
-    guard case .readError(let caughtUnderlying) = caughtSourceError else {
-      Issue.record("Expected .readError, got \(caughtSourceError)")
-      return
-    }
-    #expect(caughtUnderlying is TestError)
-    #expect(
-      uploadError.description.contains("uploadSourceError(readError(test error description))"))
-  }
 }
