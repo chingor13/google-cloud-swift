@@ -289,6 +289,102 @@ import Testing
     #expect(finalChecksum == "crc32c=TVUQaA==")
   }
 
+  /// Tests that ChecksummedSource reads exactly one chunk from the underlying source per readChunk call without lookahead.
+  @Test func testChecksummedSourceAvoidsLookahead() async throws {
+    final class CountingSource: UploadSource, @unchecked Sendable {
+      let chunks: [Data]
+      var readCount = 0
+      var currentIndex = 0
+
+      init(chunks: [Data]) {
+        self.chunks = chunks
+      }
+
+      var totalSize: Int64? {
+        Int64(chunks.reduce(0) { $0 + $1.count })
+      }
+
+      func read(maxBytes: Int) async throws -> ByteBuffer? {
+        readCount += 1
+        guard currentIndex < chunks.count else { return nil }
+        let data = chunks[currentIndex]
+        currentIndex += 1
+        return ByteBuffer(data)
+      }
+    }
+
+    let source = CountingSource(chunks: [
+      Data("Hello, ".utf8),
+      Data("World!".utf8),
+    ])
+    var checksummedSource = ChecksummedSource(source: source, validation: .crc32c)
+
+    // Reading chunk 1 should invoke source.read exactly ONCE (no lookahead read of chunk 2)
+    let chunk1 = try await checksummedSource.readChunk(maxBytes: 100)
+    #expect(chunk1 != nil)
+    #expect(chunk1?.data == ByteBuffer(Data("Hello, ".utf8)))
+    #expect(chunk1?.isLast == false)
+    #expect(source.readCount == 1)
+
+    // Reading chunk 2 should invoke source.read a second time
+    let chunk2 = try await checksummedSource.readChunk(maxBytes: 100)
+    #expect(chunk2 != nil)
+    #expect(chunk2?.data == ByteBuffer(Data("World!".utf8)))
+    #expect(chunk2?.isLast == true)
+    #expect(chunk2?.checksum == "crc32c=TVUQaA==")
+    #expect(source.readCount == 2)
+
+    // Reading past EOF invokes source.read a third time and returns nil
+    let chunk3 = try await checksummedSource.readChunk(maxBytes: 100)
+    #expect(chunk3 == nil)
+    #expect(source.readCount == 3)
+  }
+
+  /// Tests ChecksummedSource behavior when totalSize is unknown (nil).
+  @Test func testChecksummedSourceUnknownTotalSize() async throws {
+    final class UnknownSizeSource: UploadSource, @unchecked Sendable {
+      let chunks: [Data]
+      var currentIndex = 0
+
+      init(chunks: [Data]) {
+        self.chunks = chunks
+      }
+
+      var totalSize: Int64? { nil }
+
+      func read(maxBytes: Int) async throws -> ByteBuffer? {
+        guard currentIndex < chunks.count else { return nil }
+        let data = chunks[currentIndex]
+        currentIndex += 1
+        return ByteBuffer(data)
+      }
+    }
+
+    let chunk1Data = Data("chunk1 ".utf8)
+    let chunk2Data = Data("chunk2".utf8)
+    let source = UnknownSizeSource(chunks: [chunk1Data, chunk2Data])
+    var checksummedSource = ChecksummedSource(source: source, validation: .crc32c)
+
+    // For unknown total size without lookahead, intermediate chunks have isLast == false
+    let chunk1 = try await checksummedSource.readChunk(maxBytes: 100)
+    #expect(chunk1 != nil)
+    #expect(chunk1?.isLast == false)
+    #expect(chunk1?.checksum == nil)
+
+    let chunk2 = try await checksummedSource.readChunk(maxBytes: 100)
+    #expect(chunk2 != nil)
+    #expect(chunk2?.isLast == false)
+    #expect(chunk2?.checksum == nil)
+
+    let chunk3 = try await checksummedSource.readChunk(maxBytes: 100)
+    #expect(chunk3 == nil)
+
+    var expectedCalc = CRC32CCalculator()
+    expectedCalc.update(chunk1Data + chunk2Data)
+    let finalChecksum = checksummedSource.finalizeChecksum()
+    #expect(finalChecksum == "crc32c=\(expectedCalc.finalize())")
+  }
+
   @Test func testCRC32CCalculator() {
     var calculator = CRC32CCalculator()
     #expect(calculator.algorithmName == "crc32c")

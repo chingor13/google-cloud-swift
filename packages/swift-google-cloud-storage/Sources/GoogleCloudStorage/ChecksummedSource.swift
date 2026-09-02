@@ -24,11 +24,9 @@ struct ChecksummedSource<S: UploadSource> {
   var source: S
   let options: ChecksumOptions
   private var calculators: [any ChecksumCalculator] = []
-  private var nextChunk: ByteBuffer? = nil
-  private var isInitialized = false
-  private var isFinished = false
   private var bytesHashed: Int64 = 0
-  private var nextChunkOffset: Int64 = 0
+  private var currentOffset: Int64 = 0
+  private var finalizedChecksum: String? = nil
 
   init(source: S, options: ChecksumOptions) {
     self.source = source
@@ -53,6 +51,7 @@ struct ChecksummedSource<S: UploadSource> {
     if let idx = calculators.firstIndex(where: { $0 is CRC32CCalculator }) {
       calculators[idx] = CRC32CCalculator(seed: seed)
       self.bytesHashed = bytesHashed
+      self.currentOffset = bytesHashed
     }
   }
 
@@ -78,45 +77,34 @@ struct ChecksummedSource<S: UploadSource> {
   }
 
   mutating func readChunk(maxBytes: Int) async throws -> ChunkInfo? {
-    if !isInitialized {
-      nextChunk = try await source.read(maxBytes: maxBytes)
-      isInitialized = true
-    }
-
-    guard let currentChunk = nextChunk, !currentChunk.isEmpty else {
+    guard let chunk = try await source.read(maxBytes: maxBytes), !chunk.isEmpty else {
       return nil
     }
 
-    let currentChunkOffset = nextChunkOffset
-    nextChunkOffset += Int64(currentChunk.count)
+    let chunkOffset = currentOffset
+    currentOffset += Int64(chunk.count)
+    updateChecksums(data: chunk, startOffset: chunkOffset)
 
-    nextChunk = try await source.read(maxBytes: maxBytes)
-    let isLast = nextChunk == nil || nextChunk!.isEmpty
-
-    updateChecksums(data: currentChunk, startOffset: currentChunkOffset)
-
-    var checksumStr: String? = nil
-    if isLast {
-      checksumStr = finalizeChecksum()
-    }
-
-    return ChunkInfo(data: currentChunk, isLast: isLast, checksum: checksumStr)
+    let isLast = source.totalSize.map { currentOffset >= $0 } ?? false
+    let checksum = isLast ? finalizeChecksum() : nil
+    return ChunkInfo(data: chunk, isLast: isLast, checksum: checksum)
   }
 
   mutating func finalizeChecksum() -> String? {
-    guard !isFinished else { return nil }
-    isFinished = true
+    if let finalized = finalizedChecksum {
+      return finalized
+    }
     guard !calculators.isEmpty else { return nil }
-    return calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(separator: ", ")
+    let result = calculators.map { "\($0.algorithmName)=\($0.finalize())" }.joined(separator: ", ")
+    finalizedChecksum = result
+    return result
   }
 }
 
 extension ChecksummedSource where S: SeekableUploadSource {
   mutating func seek(to offset: Int64) async throws {
-    nextChunk = nil
-    isInitialized = false
-    isFinished = false
-    nextChunkOffset = offset
+    finalizedChecksum = nil
+    currentOffset = offset
 
     guard offset > bytesHashed && !calculators.isEmpty else {
       try await source.seek(to: offset)
@@ -137,5 +125,6 @@ extension ChecksummedSource where S: SeekableUploadSource {
       currentSeekOffset += Int64(chunk.count)
       bytesRemaining -= Int64(chunk.count)
     }
+    try await source.seek(to: offset)
   }
 }

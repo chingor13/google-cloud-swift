@@ -818,7 +818,13 @@ import Testing
         statusCode: 308, data: Data(),
         headers: ["Range": "bytes=0-\(chunkSize - 1)"]),
       for: chunkUrl)
-    // Chunk 2 (final chunk -> 200 OK)
+    // Chunk 2 (intermediate chunk -> 308)
+    registry.register(
+      response: .success(
+        statusCode: 308, data: Data(),
+        headers: ["Range": "bytes=0-\(expectedTotalSize - 1)"]),
+      for: chunkUrl)
+    // Final empty chunk (0 bytes) specifying final total size -> 200 OK
     registry.register(
       response: .success(
         statusCode: 200,
@@ -835,14 +841,18 @@ import Testing
     #expect(object.size == expectedTotalSize)
 
     let requests = registry.recordedRequests()
-    #expect(requests.count == 3)
+    #expect(requests.count == 4)
     // Request 0 is start resumable
     // Request 1 is chunk 1 (intermediate, total length *)
     #expect(requests[1].value(forHTTPHeaderField: "Content-Range") == "bytes 0-\(chunkSize - 1)/*")
-    // Request 2 is chunk 2 (final chunk, specifies final total length)
+    // Request 2 is chunk 2 (intermediate, total length *)
     #expect(
       requests[2].value(forHTTPHeaderField: "Content-Range")
-        == "bytes \(chunkSize)-\(expectedTotalSize - 1)/\(expectedTotalSize)")
+        == "bytes \(chunkSize)-\(expectedTotalSize - 1)/*")
+    // Request 3 is final empty chunk (specifies final total length)
+    #expect(
+      requests[3].value(forHTTPHeaderField: "Content-Range")
+        == "bytes */\(expectedTotalSize)")
   }
 
   /// Tests resuming an interrupted upload for a seekable computational source.

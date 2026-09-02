@@ -317,8 +317,10 @@ extension StorageClient {
 
     if let chunkInfo = chunkInfo, !chunkInfo.data.isEmpty {
       chunk = chunkInfo.data
-      let isLast = chunkInfo.isLast
-      checksum = isLast ? chunkInfo.checksum : nil
+      let isLast =
+        chunkInfo.isLast
+        || (totalSize != nil && (Int64(committedBytes) + Int64(chunk.count)) >= totalSize!)
+      checksum = isLast ? (chunkInfo.checksum ?? checksummedSource.finalizeChecksum()) : nil
       effectiveTotalSize =
         (isLast && totalSize == nil) ? (Int64(committedBytes) + Int64(chunk.count)) : totalSize
     } else {
