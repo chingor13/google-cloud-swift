@@ -19,21 +19,14 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
-echo "--- SWIFT VERSION ---"
-swift --version
-echo "--- VERSIONS ---"
+source "${SCRIPT_DIR}/fetch.sh"
+source "${SCRIPT_DIR}/build-flags.sh"
 
 errors=0
 count=0
 
-flags=(
-    -Xswiftc -warnings-as-errors
-    -Xswiftc -Wwarning
-    -Xswiftc DeprecatedDeclaration
-    --scratch-path "/workspace/.build-cache"
-    --build-path   "/workspace/.build"
-)
-mapfile -t packages < <(find . -type f -name 'Package.swift' | grep -v /generated/ | xargs -I{} dirname {} | sort)
+flags=("${build_flags[@]}")
+mapfile -t packages < <(find . \( -name Sources -o -name .build -o -name .build-cache -o -name generated \) -prune -o -type f -name Package.swift -exec dirname {} \; | sort -u)
 for dir in "${packages[@]}"; do
     [[ -f "${dir}/Package.swift" ]] || continue
     count=$((count + 1))
