@@ -54,11 +54,11 @@ public struct BytesSource: SeekableUploadSource {
 
   public mutating func seek(to offset: Int64) async throws {
     guard offset >= 0 else {
-      throw UploadError.internalError("Invalid seek offset: \(offset)")
+      throw UploadSourceError.invalidSeekOffset(offset)
     }
     let size = Int64(buffer.count)
     guard offset <= size else {
-      throw UploadError.localSourceTooSmall(localSize: size, gcsOffset: offset)
+      throw UploadSourceError.sourceTooSmall(size: size, offset: offset)
     }
     self.offset = offset
   }

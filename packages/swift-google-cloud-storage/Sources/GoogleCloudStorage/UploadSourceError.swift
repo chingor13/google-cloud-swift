@@ -24,22 +24,15 @@ public enum UploadSourceError: Error, Sendable {
 
   /// The requested seek offset exceeds the file size.
   case fileTooSmall(fileSize: Int64, offset: Int64)
+
+  /// The requested seek offset exceeds the source size.
+  case sourceTooSmall(size: Int64, offset: Int64)
 }
 
 extension UploadSourceError {
   /// Creates an `UploadSourceError.readError` with the given underlying error.
   public static func readError(_ error: any Error) -> UploadSourceError {
     .readError(underlyingError: error)
-  }
-
-  /// Creates an `UploadSourceError.invalidSeekOffset` with the given offset.
-  public static func invalidSeekOffset(_ offset: Int64) -> UploadSourceError {
-    .invalidSeekOffset(offset)
-  }
-
-  /// Creates an `UploadSourceError.fileTooSmall` with the given file size and offset.
-  public static func fileTooSmall(fileSize: Int64, offset: Int64) -> UploadSourceError {
-    .fileTooSmall(fileSize: fileSize, offset: offset)
   }
 }
 
@@ -52,6 +45,8 @@ extension UploadSourceError: CustomStringConvertible {
       return "invalidSeekOffset(\(offset))"
     case .fileTooSmall(let fileSize, let offset):
       return "fileTooSmall(fileSize: \(fileSize), offset: \(offset))"
+    case .sourceTooSmall(let size, let offset):
+      return "sourceTooSmall(size: \(size), offset: \(offset))"
     }
   }
 }

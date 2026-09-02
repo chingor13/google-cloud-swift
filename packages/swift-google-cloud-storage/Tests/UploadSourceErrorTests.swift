@@ -53,4 +53,15 @@ import Testing
     #expect(offset == 200)
     #expect(error.description == "fileTooSmall(fileSize: 100, offset: 200)")
   }
+
+  @Test func testSourceTooSmall() {
+    let error = UploadSourceError.sourceTooSmall(size: 10, offset: 20)
+    guard case .sourceTooSmall(let size, let offset) = error else {
+      Issue.record("Expected .sourceTooSmall, got \(error)")
+      return
+    }
+    #expect(size == 10)
+    #expect(offset == 20)
+    #expect(error.description == "sourceTooSmall(size: 10, offset: 20)")
+  }
 }
