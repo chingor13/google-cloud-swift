@@ -50,14 +50,14 @@ import Testing
     let pastEndErr = await expectError(UploadSourceError.self) {
       try await source.seek(to: 200)
     }
-    if case .fileTooSmall(let fileSize, let offset) = pastEndErr {
-      #expect(fileSize == 100)
+    if case .sourceTooSmall(let size, let offset) = pastEndErr {
+      #expect(size == 100)
       #expect(offset == 200)
       #expect(
         pastEndErr?.description
-          == "fileTooSmall(fileSize: 100, offset: 200)")
+          == "sourceTooSmall(size: 100, offset: 200)")
     } else {
-      Issue.record("Expected .fileTooSmall, got \(String(describing: pastEndErr))")
+      Issue.record("Expected .sourceTooSmall, got \(String(describing: pastEndErr))")
     }
   }
 

@@ -56,7 +56,7 @@ public struct FileSource: SeekableUploadSource {
       throw UploadSourceError.invalidSeekOffset(offset)
     }
     if let size = totalSize, offset > size {
-      throw UploadSourceError.fileTooSmall(fileSize: size, offset: offset)
+      throw UploadSourceError.sourceTooSmall(size: size, offset: offset)
     }
     self.offset = offset
   }

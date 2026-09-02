@@ -22,9 +22,6 @@ public enum UploadSourceError: Error, Sendable {
   /// The seek offset is invalid (e.g. negative).
   case invalidSeekOffset(Int64)
 
-  /// The requested seek offset exceeds the file size.
-  case fileTooSmall(fileSize: Int64, offset: Int64)
-
   /// The requested seek offset exceeds the source size.
   case sourceTooSmall(size: Int64, offset: Int64)
 }
@@ -43,8 +40,6 @@ extension UploadSourceError: CustomStringConvertible {
       return "readError(\(underlyingError))"
     case .invalidSeekOffset(let offset):
       return "invalidSeekOffset(\(offset))"
-    case .fileTooSmall(let fileSize, let offset):
-      return "fileTooSmall(fileSize: \(fileSize), offset: \(offset))"
     case .sourceTooSmall(let size, let offset):
       return "sourceTooSmall(size: \(size), offset: \(offset))"
     }

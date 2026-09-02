@@ -43,17 +43,6 @@ import Testing
     #expect(error.description == "invalidSeekOffset(-10)")
   }
 
-  @Test func testFileTooSmall() {
-    let error = UploadSourceError.fileTooSmall(fileSize: 100, offset: 200)
-    guard case .fileTooSmall(let fileSize, let offset) = error else {
-      Issue.record("Expected .fileTooSmall, got \(error)")
-      return
-    }
-    #expect(fileSize == 100)
-    #expect(offset == 200)
-    #expect(error.description == "fileTooSmall(fileSize: 100, offset: 200)")
-  }
-
   @Test func testSourceTooSmall() {
     let error = UploadSourceError.sourceTooSmall(size: 10, offset: 20)
     guard case .sourceTooSmall(let size, let offset) = error else {
