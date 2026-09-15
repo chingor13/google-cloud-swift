@@ -39,6 +39,9 @@ echo "--- Building ${#clean_targets[@]} targets with warnings as errors"
 swift package edit --path "${REPO_ROOT}/pkgs/swift-google-wkt"  swift-google-wkt
 swift package edit --path "${REPO_ROOT}/pkgs/swift-google-auth" swift-google-auth
 swift package edit --path "${REPO_ROOT}/pkgs/swift-google-gax"  swift-google-gax
+swift package edit --path "${REPO_ROOT}/generated/swift-google-iam-v1"  swift-google-iam-v1
+swift package edit --path "${REPO_ROOT}/generated/swift-google-longrunning"  swift-google-longrunning
+swift package edit --path "${REPO_ROOT}/generated/swift-google-cloud-location"  swift-google-cloud-location
 for target in "${clean_targets[@]}"; do
     count=$((count + 1))
 
