@@ -45,6 +45,11 @@ package struct StringOrInt32: Decodable, Sendable {
   }
 }
 
+package struct CustomerEncryptionV1: Decodable, Sendable {
+  package var encryptionAlgorithm: String?
+  package var keySha256: String?
+}
+
 package struct RetentionV1: Decodable, Sendable {
   package var mode: String?
   package var retainUntilTime: GoogleCloudWKT.Timestamp?
@@ -77,7 +82,7 @@ package struct ObjectV1Response: Decodable, Sendable {
   package var contexts: ObjectContexts?
   package var eventBasedHold: Bool?
   package var owner: Owner?
-  package var customerEncryption: CustomerEncryption?
+  package var customerEncryption: CustomerEncryptionV1?
   package var customTime: GoogleCloudWKT.Timestamp?
   package var retention: RetentionV1?
 
@@ -132,7 +137,14 @@ package struct ObjectV1Response: Decodable, Sendable {
     obj.contexts = contexts
     obj.eventBasedHold = eventBasedHold
     obj.owner = owner
-    obj.customerEncryption = customerEncryption
+    if let c = customerEncryption {
+      var ce = CustomerEncryption()
+      ce.encryptionAlgorithm = c.encryptionAlgorithm ?? ""
+      if let b64 = c.keySha256, let data = Data(base64Encoded: b64) {
+        ce.keySha256Bytes = data
+      }
+      obj.customerEncryption = ce
+    }
     obj.customTime = customTime
 
     if let retention = retention {
