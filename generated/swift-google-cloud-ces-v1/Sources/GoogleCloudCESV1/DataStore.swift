@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A DataStore resource in Vertex AI Search.
-public struct DataStore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataStore: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Full resource name of the DataStore.
@@ -39,12 +39,12 @@ public struct DataStore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var displayName: Swift.String = Swift.String()
 
   /// Output only. Timestamp when the data store was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The connector config for the data store connection.
   public var connectorConfig: DataStore.ConnectorConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataStore`.
   public init() {}
@@ -101,13 +101,12 @@ public struct DataStore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
       self.displayName = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.connectorConfig = try container.decodeIfPresent(
       DataStore.ConnectorConfig.self, forKey: .connectorConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -125,7 +124,7 @@ public struct DataStore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The connector config for the data store connection.
-  public struct ConnectorConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConnectorConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Resource name of the collection the data store belongs to.
@@ -138,7 +137,7 @@ public struct DataStore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Example: `salesforce`, `jira`, `confluence`, `bigquery`.
     public var dataSource: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConnectorConfig`.
     public init() {}
@@ -188,7 +187,7 @@ public struct DataStore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -205,11 +204,11 @@ public struct DataStore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.DataStore.ConnectorConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -442,10 +441,10 @@ public struct DataStore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.DataStore"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

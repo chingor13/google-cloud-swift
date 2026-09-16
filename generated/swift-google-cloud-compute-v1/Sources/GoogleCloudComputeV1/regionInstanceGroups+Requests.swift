@@ -16,13 +16,13 @@
 
 #if RegionInstanceGroups
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   extension RegionInstanceGroupsClient {
     /// Synthetic request message for the [get()][google.cloud.compute.v1.regionInstanceGroups.get] method.
     ///
     /// [google.cloud.compute.v1.regionInstanceGroups.get]: <doc:RegionInstanceGroupsClient/`get`(request:options:)>
-    public struct GetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance group resource to return.
@@ -34,7 +34,7 @@
       /// Name of the region scoping this request.
       public var region: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetRequest`.
       public init() {}
@@ -82,7 +82,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -99,18 +99,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroups.getRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [list()][google.cloud.compute.v1.regionInstanceGroups.list] method.
     ///
     /// [google.cloud.compute.v1.regionInstanceGroups.list]: <doc:RegionInstanceGroupsClient/list(request:options:)>
-    public struct ListRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ListRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -212,7 +212,7 @@
       /// with an error code.
       public var returnPartialSuccess: Swift.Bool? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListRequest`.
       public init() {}
@@ -271,7 +271,7 @@
           Swift.Bool.self, forKey: .returnPartialSuccess)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -292,18 +292,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroups.listRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [listInstances()][google.cloud.compute.v1.regionInstanceGroups.listInstances] method.
     ///
     /// [google.cloud.compute.v1.regionInstanceGroups.listInstances]: <doc:RegionInstanceGroupsClient/listInstances(request:options:)>
-    public struct ListInstancesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ListInstancesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -414,7 +414,7 @@
       /// [google.cloud.compute.v1.regionInstanceGroups.listInstances]: <doc:RegionInstanceGroupsClient/listInstances(request:options:)>
       public var body: RegionInstanceGroupsListInstancesRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListInstancesRequest`.
       public init() {}
@@ -482,7 +482,7 @@
           RegionInstanceGroupsListInstancesRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -506,18 +506,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroups.listInstancesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setNamedPorts()][google.cloud.compute.v1.regionInstanceGroups.setNamedPorts] method.
     ///
     /// [google.cloud.compute.v1.regionInstanceGroups.setNamedPorts]: <doc:RegionInstanceGroupsClient/setNamedPorts(request:options:)>
-    public struct SetNamedPortsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetNamedPortsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the regional instance group where the named ports are updated.
@@ -549,7 +549,7 @@
       /// [google.cloud.compute.v1.regionInstanceGroups.setNamedPorts]: <doc:RegionInstanceGroupsClient/setNamedPorts(request:options:)>
       public var body: RegionInstanceGroupsSetNamedPortsRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetNamedPortsRequest`.
       public init() {}
@@ -604,7 +604,7 @@
           RegionInstanceGroupsSetNamedPortsRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -624,18 +624,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroups.setNamedPortsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [testIamPermissions()][google.cloud.compute.v1.regionInstanceGroups.testIamPermissions] method.
     ///
     /// [google.cloud.compute.v1.regionInstanceGroups.testIamPermissions]: <doc:RegionInstanceGroupsClient/testIamPermissions(request:options:)>
-    public struct TestIamPermissionsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct TestIamPermissionsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Project ID for this request.
@@ -652,7 +652,7 @@
       /// [google.cloud.compute.v1.regionInstanceGroups.testIamPermissions]: <doc:RegionInstanceGroupsClient/testIamPermissions(request:options:)>
       public var body: TestPermissionsRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `TestIamPermissionsRequest`.
       public init() {}
@@ -703,7 +703,7 @@
         self.body = try container.decodeIfPresent(TestPermissionsRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -722,11 +722,11 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.regionInstanceGroups.testIamPermissionsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
   }

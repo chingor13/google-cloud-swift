@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An MCP tool.
 /// See https://modelcontextprotocol.io/specification/2025-06-18/server/tools for
 /// more details.
-public struct McpTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct McpTool: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the MCP tool.
@@ -73,7 +73,7 @@ public struct McpTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// server.
   public var state: McpTool.State = McpTool.State()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `McpTool`.
   public init() {}
@@ -155,7 +155,7 @@ public struct McpTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -294,10 +294,10 @@ public struct McpTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.McpTool"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

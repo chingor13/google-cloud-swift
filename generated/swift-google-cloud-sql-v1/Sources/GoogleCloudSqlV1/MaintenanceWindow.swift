@@ -16,20 +16,20 @@
 
 #if SqlBackupsService || SqlInstancesService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Maintenance window. This specifies when a Cloud SQL instance is
   /// restarted for system maintenance purposes.
-  public struct MaintenanceWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MaintenanceWindow: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Hour of day - 0 to 23. Specify in the UTC time zone.
-    public var hour: GoogleCloudWKT.Int32Value? = nil
+    public var hour: GoogleWKT.Int32Value? = nil
 
     /// Day of week - `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`,
     /// `SATURDAY`, or `SUNDAY`. Specify in the UTC time zone.
     /// Returned in output as an integer, 1 to 7, where `1` equals Monday.
-    public var day: GoogleCloudWKT.Int32Value? = nil
+    public var day: GoogleWKT.Int32Value? = nil
 
     /// Maintenance timing settings: `canary`, `stable`, or `week5`.
     /// For more information, see [About maintenance on Cloud SQL
@@ -39,7 +39,7 @@
     /// This is always `sql#maintenanceWindow`.
     public var kind: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MaintenanceWindow`.
     public init() {}
@@ -78,8 +78,8 @@
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.hour = try container.decodeIfPresent(GoogleCloudWKT.Int32Value.self, forKey: .hour)
-      self.day = try container.decodeIfPresent(GoogleCloudWKT.Int32Value.self, forKey: .day)
+      self.hour = try container.decodeIfPresent(GoogleWKT.Int32Value.self, forKey: .hour)
+      self.day = try container.decodeIfPresent(GoogleWKT.Int32Value.self, forKey: .day)
       if let value = try container.decodeIfPresent(SqlUpdateTrack.self, forKey: .updateTrack) {
         self.updateTrack = value
       }
@@ -88,7 +88,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -106,11 +106,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.MaintenanceWindow"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

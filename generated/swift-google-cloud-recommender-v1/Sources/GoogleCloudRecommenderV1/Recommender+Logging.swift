@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func listInsights(
-      request: ListInsightsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInsightsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.ListInsightsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listInsights",
         action: {
-          (r: ListInsightsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListInsightsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecommenderV1.ListInsightsResponse
           in
           return try await self.inner.listInsights(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func getInsight(
-      request: GetInsightRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInsightRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Insight {
       try await self._intercept(
         request: request,
         options: options,
         name: "getInsight",
         action: {
-          (r: GetInsightRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetInsightRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecommenderV1.Insight
           in
           return try await self.inner.getInsight(request: r, options: o)
@@ -87,14 +87,14 @@ extension Clients {
     }
 
     public func markInsightAccepted(
-      request: MarkInsightAcceptedRequest, options: GoogleCloudGax.RequestOptions
+      request: MarkInsightAcceptedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Insight {
       try await self._intercept(
         request: request,
         options: options,
         name: "markInsightAccepted",
         action: {
-          (r: MarkInsightAcceptedRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: MarkInsightAcceptedRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecommenderV1.Insight
           in
           return try await self.inner.markInsightAccepted(request: r, options: o)
@@ -102,14 +102,14 @@ extension Clients {
     }
 
     public func listRecommendations(
-      request: ListRecommendationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRecommendationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.ListRecommendationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listRecommendations",
         action: {
-          (r: ListRecommendationsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListRecommendationsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecommenderV1.ListRecommendationsResponse
           in
           return try await self.inner.listRecommendations(request: r, options: o)
@@ -117,14 +117,14 @@ extension Clients {
     }
 
     public func getRecommendation(
-      request: GetRecommendationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRecommendationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Recommendation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getRecommendation",
         action: {
-          (r: GetRecommendationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetRecommendationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecommenderV1.Recommendation
           in
           return try await self.inner.getRecommendation(request: r, options: o)
@@ -132,14 +132,14 @@ extension Clients {
     }
 
     public func markRecommendationDismissed(
-      request: MarkRecommendationDismissedRequest, options: GoogleCloudGax.RequestOptions
+      request: MarkRecommendationDismissedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Recommendation {
       try await self._intercept(
         request: request,
         options: options,
         name: "markRecommendationDismissed",
         action: {
-          (r: MarkRecommendationDismissedRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: MarkRecommendationDismissedRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecommenderV1.Recommendation
           in
           return try await self.inner.markRecommendationDismissed(request: r, options: o)
@@ -147,14 +147,14 @@ extension Clients {
     }
 
     public func markRecommendationClaimed(
-      request: MarkRecommendationClaimedRequest, options: GoogleCloudGax.RequestOptions
+      request: MarkRecommendationClaimedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Recommendation {
       try await self._intercept(
         request: request,
         options: options,
         name: "markRecommendationClaimed",
         action: {
-          (r: MarkRecommendationClaimedRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: MarkRecommendationClaimedRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecommenderV1.Recommendation
           in
           return try await self.inner.markRecommendationClaimed(request: r, options: o)
@@ -162,14 +162,14 @@ extension Clients {
     }
 
     public func markRecommendationSucceeded(
-      request: MarkRecommendationSucceededRequest, options: GoogleCloudGax.RequestOptions
+      request: MarkRecommendationSucceededRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Recommendation {
       try await self._intercept(
         request: request,
         options: options,
         name: "markRecommendationSucceeded",
         action: {
-          (r: MarkRecommendationSucceededRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: MarkRecommendationSucceededRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecommenderV1.Recommendation
           in
           return try await self.inner.markRecommendationSucceeded(request: r, options: o)
@@ -177,14 +177,14 @@ extension Clients {
     }
 
     public func markRecommendationFailed(
-      request: MarkRecommendationFailedRequest, options: GoogleCloudGax.RequestOptions
+      request: MarkRecommendationFailedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Recommendation {
       try await self._intercept(
         request: request,
         options: options,
         name: "markRecommendationFailed",
         action: {
-          (r: MarkRecommendationFailedRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: MarkRecommendationFailedRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecommenderV1.Recommendation
           in
           return try await self.inner.markRecommendationFailed(request: r, options: o)
@@ -192,14 +192,14 @@ extension Clients {
     }
 
     public func getRecommenderConfig(
-      request: GetRecommenderConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRecommenderConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.RecommenderConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "getRecommenderConfig",
         action: {
-          (r: GetRecommenderConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetRecommenderConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecommenderV1.RecommenderConfig
           in
           return try await self.inner.getRecommenderConfig(request: r, options: o)
@@ -207,14 +207,14 @@ extension Clients {
     }
 
     public func updateRecommenderConfig(
-      request: UpdateRecommenderConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRecommenderConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.RecommenderConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateRecommenderConfig",
         action: {
-          (r: UpdateRecommenderConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateRecommenderConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecommenderV1.RecommenderConfig
           in
           return try await self.inner.updateRecommenderConfig(request: r, options: o)
@@ -222,14 +222,14 @@ extension Clients {
     }
 
     public func getInsightTypeConfig(
-      request: GetInsightTypeConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInsightTypeConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.InsightTypeConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "getInsightTypeConfig",
         action: {
-          (r: GetInsightTypeConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetInsightTypeConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecommenderV1.InsightTypeConfig
           in
           return try await self.inner.getInsightTypeConfig(request: r, options: o)
@@ -237,14 +237,14 @@ extension Clients {
     }
 
     public func updateInsightTypeConfig(
-      request: UpdateInsightTypeConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateInsightTypeConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.InsightTypeConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateInsightTypeConfig",
         action: {
-          (r: UpdateInsightTypeConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateInsightTypeConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecommenderV1.InsightTypeConfig
           in
           return try await self.inner.updateInsightTypeConfig(request: r, options: o)

@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleIAMV1
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents the action responsible for access control list management
 /// operations.
-public struct AccessControlAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AccessControlAction: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifies the type of operation.
@@ -31,7 +31,7 @@ public struct AccessControlAction: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// 10s of KB.
   public var policy: GoogleIAMV1.Policy? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AccessControlAction`.
   public init() {}
@@ -74,7 +74,7 @@ public struct AccessControlAction: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.policy = try container.decodeIfPresent(GoogleIAMV1.Policy.self, forKey: .policy)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -202,10 +202,10 @@ public struct AccessControlAction: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contentwarehouse.v1.AccessControlAction"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

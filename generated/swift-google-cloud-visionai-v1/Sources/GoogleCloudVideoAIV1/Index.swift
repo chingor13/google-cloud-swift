@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An Index is a resource in Corpus. It contains an indexed version of the
 /// assets and annotations. When deployed to an endpoint, it will allow users to
 /// search the Index.
-public struct Index: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Index: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Resource name of the Index resource.
@@ -38,10 +38,10 @@ public struct Index: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var state: Index.State = Index.State()
 
   /// Output only. The create timestamp.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The update timestamp.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. References to the deployed index instance.
   /// Index of VIDEO_ON_DEMAND corpus can have at most one deployed index.
@@ -64,7 +64,7 @@ public struct Index: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// with latest assets, including their analyzed data and annotations.
   public var assetFilter: OneOf_AssetFilter? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Index`.
   public init() {}
@@ -127,10 +127,8 @@ public struct Index: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Index.State.self, forKey: .state) {
       self.state = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(
       [DeployedIndexReference].self, forKey: .deployedIndexes)
     {
@@ -155,7 +153,7 @@ public struct Index: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.assetFilter = assetFilter
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -307,10 +305,10 @@ public struct Index: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.Index"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

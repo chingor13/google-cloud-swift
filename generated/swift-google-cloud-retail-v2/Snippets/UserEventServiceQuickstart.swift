@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudRetailV2
 import GoogleApi
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample() async throws {
   let client = try GoogleCloudRetailV2.UserEventServiceClient()

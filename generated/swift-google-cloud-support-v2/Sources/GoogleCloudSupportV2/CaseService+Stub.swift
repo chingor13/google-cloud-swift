@@ -15,41 +15,41 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CaseServiceStub: Sendable {
     func getCase(
-      request: GetCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Case
 
     func listCases(
-      request: ListCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.ListCasesResponse
 
     func searchCases(
-      request: SearchCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchCasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SearchCasesResponse
 
     func createCase(
-      request: CreateCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Case
 
     func updateCase(
-      request: UpdateCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Case
 
     func escalateCase(
-      request: EscalateCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: EscalateCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Case
 
     func closeCase(
-      request: CloseCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: CloseCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Case
 
     func searchCaseClassifications(
-      request: SearchCaseClassificationsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchCaseClassificationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SearchCaseClassificationsResponse
   }
 }

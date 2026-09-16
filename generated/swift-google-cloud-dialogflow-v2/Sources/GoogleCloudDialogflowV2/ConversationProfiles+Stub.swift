@@ -17,59 +17,59 @@
 #if ConversationProfiles
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ConversationProfilesStub: Sendable {
       func listConversationProfiles(
-        request: ListConversationProfilesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListConversationProfilesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListConversationProfilesResponse
 
       func getConversationProfile(
-        request: GetConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+        request: GetConversationProfileRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ConversationProfile
 
       func createConversationProfile(
-        request: CreateConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateConversationProfileRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ConversationProfile
 
       func updateConversationProfile(
-        request: UpdateConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateConversationProfileRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ConversationProfile
 
       func deleteConversationProfile(
-        request: DeleteConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteConversationProfileRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func setSuggestionFeatureConfig(
-        request: SetSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: SetSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func clearSuggestionFeatureConfig(
-        request: ClearSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: ClearSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

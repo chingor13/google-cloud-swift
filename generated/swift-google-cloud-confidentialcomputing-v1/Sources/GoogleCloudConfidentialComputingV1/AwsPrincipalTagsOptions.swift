@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Token options that only apply to the AWS Principal Tags token type.
-public struct AwsPrincipalTagsOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AwsPrincipalTagsOptions: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Principal tags to allow in the token.
   public var allowedPrincipalTags: AwsPrincipalTagsOptions.AllowedPrincipalTags? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AwsPrincipalTagsOptions`.
   public init() {}
@@ -61,7 +61,7 @@ public struct AwsPrincipalTagsOptions: Codable, Equatable, GoogleCloudWKT._AnyPa
       AwsPrincipalTagsOptions.AllowedPrincipalTags.self, forKey: .allowedPrincipalTags)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -75,14 +75,14 @@ public struct AwsPrincipalTagsOptions: Codable, Equatable, GoogleCloudWKT._AnyPa
 
   /// Allowed principal tags is used to define what principal tags will be
   /// placed in the token.
-  public struct AllowedPrincipalTags: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AllowedPrincipalTags: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Container image signatures allowed in the token.
     public var containerImageSignatures:
       AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AllowedPrincipalTags`.
     public init() {}
@@ -120,7 +120,7 @@ public struct AwsPrincipalTagsOptions: Codable, Equatable, GoogleCloudWKT._AnyPa
         forKey: .containerImageSignatures)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -135,7 +135,7 @@ public struct AwsPrincipalTagsOptions: Codable, Equatable, GoogleCloudWKT._AnyPa
 
     /// Allowed Container Image Signatures. Key IDs are required to allow
     /// this claim to fit within the narrow AWS IAM restrictions.
-    public struct ContainerImageSignatures: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ContainerImageSignatures: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. List of key ids to filter into the Principal tags. Only keys
@@ -143,7 +143,7 @@ public struct AwsPrincipalTagsOptions: Codable, Equatable, GoogleCloudWKT._AnyPa
       /// principal tags. Unrecognized key ids will be ignored.
       public var keyIds: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ContainerImageSignatures`.
       public init() {}
@@ -181,7 +181,7 @@ public struct AwsPrincipalTagsOptions: Codable, Equatable, GoogleCloudWKT._AnyPa
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -197,11 +197,11 @@ public struct AwsPrincipalTagsOptions: Codable, Equatable, GoogleCloudWKT._AnyPa
         return
           "type.googleapis.com/google.cloud.confidentialcomputing.v1.AwsPrincipalTagsOptions.AllowedPrincipalTags.ContainerImageSignatures"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -209,21 +209,21 @@ public struct AwsPrincipalTagsOptions: Codable, Equatable, GoogleCloudWKT._AnyPa
       return
         "type.googleapis.com/google.cloud.confidentialcomputing.v1.AwsPrincipalTagsOptions.AllowedPrincipalTags"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.confidentialcomputing.v1.AwsPrincipalTagsOptions"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,33 +16,33 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ConfidentialComputingStub: Sendable {
     func createChallenge(
-      request: CreateChallengeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateChallengeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfidentialComputingV1.Challenge
 
     func verifyAttestation(
-      request: VerifyAttestationRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyAttestationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfidentialComputingV1.VerifyAttestationResponse
 
     func verifyConfidentialSpace(
-      request: VerifyConfidentialSpaceRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyConfidentialSpaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfidentialComputingV1.VerifyConfidentialSpaceResponse
 
     func verifyConfidentialGke(
-      request: VerifyConfidentialGkeRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyConfidentialGkeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfidentialComputingV1.VerifyConfidentialGkeResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }

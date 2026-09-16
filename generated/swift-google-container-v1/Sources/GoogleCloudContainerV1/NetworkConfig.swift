@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// NetworkConfig reports the relative names of network & subnetwork.
-public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The relative name of the Google Compute Engine
@@ -95,7 +95,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Disable L4 load balancer VPC firewalls to enable firewall policies.
   public var disableL4LbFirewallReconciliation: Swift.Bool? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NetworkConfig`.
   public init() {}
@@ -212,7 +212,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       Swift.Bool.self, forKey: .disableL4LbFirewallReconciliation)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -246,13 +246,13 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Configuration of network bandwidth tiers
-  public struct ClusterNetworkPerformanceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ClusterNetworkPerformanceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Specifies the total network bandwidth tier for NodePools in the cluster.
     public var totalEgressBandwidthTier: NetworkConfig.ClusterNetworkPerformanceConfig.Tier? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ClusterNetworkPerformanceConfig`.
     public init() {}
@@ -289,7 +289,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         NetworkConfig.ClusterNetworkPerformanceConfig.Tier.self, forKey: .totalEgressBandwidthTier)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -403,21 +403,21 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NetworkConfig.ClusterNetworkPerformanceConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.NetworkConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

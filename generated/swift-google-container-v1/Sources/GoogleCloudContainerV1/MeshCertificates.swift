@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for issuance of mTLS keys and certificates to Kubernetes pods.
-public struct MeshCertificates: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MeshCertificates: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// enable_certificates controls issuance of workload mTLS certificates.
@@ -32,9 +32,9 @@ public struct MeshCertificates: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// must be non-empty).
   ///
   /// [google.container.v1.WorkloadIdentityConfig.workload_pool]: <doc:WorkloadIdentityConfig/workloadPool>
-  public var enableCertificates: GoogleCloudWKT.BoolValue? = nil
+  public var enableCertificates: GoogleWKT.BoolValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MeshCertificates`.
   public init() {}
@@ -68,10 +68,10 @@ public struct MeshCertificates: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.enableCertificates = try container.decodeIfPresent(
-      GoogleCloudWKT.BoolValue.self, forKey: .enableCertificates)
+      GoogleWKT.BoolValue.self, forKey: .enableCertificates)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -86,10 +86,10 @@ public struct MeshCertificates: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.MeshCertificates"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

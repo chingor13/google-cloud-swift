@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// TopologyManager defines the configuration options for the
 /// [`kubelet` Topology Manager
@@ -24,7 +24,7 @@ import Foundation
 /// Topology Manager in GKE, see
 /// [Customizing node system
 /// configuration](https://docs.cloud.google.com/kubernetes-engine/docs/how-to/node-system-config#kubelet-resource-managers).
-public struct TopologyManager: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TopologyManager: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Configures the strategy for resource alignment.
@@ -59,7 +59,7 @@ public struct TopologyManager: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// https://kubernetes.io/docs/tasks/administer-cluster/topology-manager/#topology-manager-scopes
   public var scope: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TopologyManager`.
   public init() {}
@@ -102,7 +102,7 @@ public struct TopologyManager: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -118,10 +118,10 @@ public struct TopologyManager: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.TopologyManager"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

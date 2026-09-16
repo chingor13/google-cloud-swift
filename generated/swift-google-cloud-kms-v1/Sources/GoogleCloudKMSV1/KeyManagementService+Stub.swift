@@ -16,178 +16,176 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol KeyManagementServiceStub: Sendable {
     func listKeyRings(
-      request: ListKeyRingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListKeyRingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListKeyRingsResponse
 
     func listCryptoKeys(
-      request: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListCryptoKeysResponse
 
     func listCryptoKeyVersions(
-      request: ListCryptoKeyVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCryptoKeyVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListCryptoKeyVersionsResponse
 
     func listImportJobs(
-      request: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListImportJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListImportJobsResponse
 
     func listRetiredResources(
-      request: ListRetiredResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRetiredResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListRetiredResourcesResponse
 
     func getKeyRing(
-      request: GetKeyRingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetKeyRingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.KeyRing
 
     func getCryptoKey(
-      request: GetCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCryptoKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKey
 
     func getCryptoKeyVersion(
-      request: GetCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     func getPublicKey(
-      request: GetPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.PublicKey
 
     func getImportJob(
-      request: GetImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ImportJob
 
     func getRetiredResource(
-      request: GetRetiredResourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRetiredResourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.RetiredResource
 
     func createKeyRing(
-      request: CreateKeyRingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateKeyRingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.KeyRing
 
     func createCryptoKey(
-      request: CreateCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCryptoKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKey
 
     func createCryptoKeyVersion(
-      request: CreateCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     func deleteCryptoKey(
-      request: DeleteCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCryptoKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCryptoKeyVersion(
-      request: DeleteCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func importCryptoKeyVersion(
-      request: ImportCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     func importTrustedKeyWrappedCryptoKeyVersion(
-      request: ImportTrustedKeyWrappedCryptoKeyVersionRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ImportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     func exportTrustedKeyWrappedCryptoKeyVersion(
-      request: ExportTrustedKeyWrappedCryptoKeyVersionRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ExportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse
 
     func createImportJob(
-      request: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ImportJob
 
     func updateCryptoKey(
-      request: UpdateCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCryptoKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKey
 
     func updateCryptoKeyVersion(
-      request: UpdateCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     func updateCryptoKeyPrimaryVersion(
-      request: UpdateCryptoKeyPrimaryVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCryptoKeyPrimaryVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKey
 
     func destroyCryptoKeyVersion(
-      request: DestroyCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DestroyCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     func restoreCryptoKeyVersion(
-      request: RestoreCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     func encrypt(
-      request: EncryptRequest, options: GoogleCloudGax.RequestOptions
+      request: EncryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.EncryptResponse
 
     func decrypt(
-      request: DecryptRequest, options: GoogleCloudGax.RequestOptions
+      request: DecryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.DecryptResponse
 
     func rawEncrypt(
-      request: RawEncryptRequest, options: GoogleCloudGax.RequestOptions
+      request: RawEncryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.RawEncryptResponse
 
     func rawDecrypt(
-      request: RawDecryptRequest, options: GoogleCloudGax.RequestOptions
+      request: RawDecryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.RawDecryptResponse
 
     func asymmetricSign(
-      request: AsymmetricSignRequest, options: GoogleCloudGax.RequestOptions
+      request: AsymmetricSignRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.AsymmetricSignResponse
 
     func asymmetricDecrypt(
-      request: AsymmetricDecryptRequest, options: GoogleCloudGax.RequestOptions
+      request: AsymmetricDecryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.AsymmetricDecryptResponse
 
     func macSign(
-      request: MacSignRequest, options: GoogleCloudGax.RequestOptions
+      request: MacSignRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.MacSignResponse
 
     func macVerify(
-      request: MacVerifyRequest, options: GoogleCloudGax.RequestOptions
+      request: MacVerifyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.MacVerifyResponse
 
     func decapsulate(
-      request: DecapsulateRequest, options: GoogleCloudGax.RequestOptions
+      request: DecapsulateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.DecapsulateResponse
 
     func generateRandomBytes(
-      request: GenerateRandomBytesRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateRandomBytesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.GenerateRandomBytesResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

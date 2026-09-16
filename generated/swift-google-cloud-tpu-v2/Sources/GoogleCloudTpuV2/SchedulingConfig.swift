@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Sets the scheduling options for this node.
-public struct SchedulingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SchedulingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Defines whether the node is preemptible.
@@ -30,7 +30,7 @@ public struct SchedulingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Defines whether the node is Spot VM.
   public var spot: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SchedulingConfig`.
   public init() {}
@@ -78,7 +78,7 @@ public struct SchedulingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,10 +95,10 @@ public struct SchedulingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.tpu.v2.SchedulingConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// API Overview
 ///
@@ -61,11 +61,11 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   Sendable
 {
   let inner: any Clients.ManagedIdentitiesServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `ManagedIdentitiesServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ManagedIdentitiesServiceStub =
       try Clients.ManagedIdentitiesServiceTransport(options)
     inner = Clients.ManagedIdentitiesServiceRetry(inner, options: options)
@@ -81,7 +81,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_CreateMicrosoftAdDomain")
   public func createMicrosoftAdDomain(
-    request: CreateMicrosoftAdDomainRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateMicrosoftAdDomainRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createMicrosoftAdDomain(request: request, options: options)
   }
@@ -90,21 +90,20 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_CreateMicrosoftAdDomain")
   public func createMicrosoftAdDomain(
-    withPolling: CreateMicrosoftAdDomainRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
+    withPolling: CreateMicrosoftAdDomainRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Domain>.State in
       return try op._extractStatus(Domain.self)
     }
     let rawOp = try await self.createMicrosoftAdDomain(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Domain>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -116,7 +115,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_ResetAdminPassword")
   public func resetAdminPassword(
-    request: ResetAdminPasswordRequest, options: GoogleCloudGax.RequestOptions
+    request: ResetAdminPasswordRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedIdentitiesV1.ResetAdminPasswordResponse {
     try await self.inner.resetAdminPassword(request: request, options: options)
   }
@@ -125,7 +124,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_ListDomains")
   public func listDomains(
-    request: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDomainsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedIdentitiesV1.ListDomainsResponse {
     try await self.inner.listDomains(request: request, options: options)
   }
@@ -134,7 +133,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_ListDomains")
   public func listDomains(
-    byItem: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDomainsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Domain, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudManagedIdentitiesV1.ListDomainsResponse in
@@ -142,14 +141,14 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
       request.pageToken = token
       return try await self.listDomains(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a domain.
   ///
   /// @Snippet(path: "ManagedIdentitiesService_GetDomain")
   public func getDomain(
-    request: GetDomainRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDomainRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedIdentitiesV1.Domain {
     try await self.inner.getDomain(request: request, options: options)
   }
@@ -158,7 +157,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_UpdateDomain")
   public func updateDomain(
-    request: UpdateDomainRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDomainRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateDomain(request: request, options: options)
   }
@@ -167,21 +166,20 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_UpdateDomain")
   public func updateDomain(
-    withPolling: UpdateDomainRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
+    withPolling: UpdateDomainRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Domain>.State in
       return try op._extractStatus(Domain.self)
     }
     let rawOp = try await self.updateDomain(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Domain>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -193,7 +191,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_DeleteDomain")
   public func deleteDomain(
-    request: DeleteDomainRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDomainRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteDomain(request: request, options: options)
   }
@@ -202,21 +200,21 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_DeleteDomain")
   public func deleteDomain(
-    withPolling: DeleteDomainRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteDomainRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteDomain(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -228,7 +226,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_AttachTrust")
   public func attachTrust(
-    request: AttachTrustRequest, options: GoogleCloudGax.RequestOptions
+    request: AttachTrustRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.attachTrust(request: request, options: options)
   }
@@ -237,21 +235,20 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_AttachTrust")
   public func attachTrust(
-    withPolling: AttachTrustRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
+    withPolling: AttachTrustRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Domain>.State in
       return try op._extractStatus(Domain.self)
     }
     let rawOp = try await self.attachTrust(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Domain>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -263,7 +260,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_ReconfigureTrust")
   public func reconfigureTrust(
-    request: ReconfigureTrustRequest, options: GoogleCloudGax.RequestOptions
+    request: ReconfigureTrustRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.reconfigureTrust(request: request, options: options)
   }
@@ -272,21 +269,20 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_ReconfigureTrust")
   public func reconfigureTrust(
-    withPolling: ReconfigureTrustRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
+    withPolling: ReconfigureTrustRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Domain>.State in
       return try op._extractStatus(Domain.self)
     }
     let rawOp = try await self.reconfigureTrust(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Domain>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -298,7 +294,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_DetachTrust")
   public func detachTrust(
-    request: DetachTrustRequest, options: GoogleCloudGax.RequestOptions
+    request: DetachTrustRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.detachTrust(request: request, options: options)
   }
@@ -307,21 +303,20 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_DetachTrust")
   public func detachTrust(
-    withPolling: DetachTrustRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
+    withPolling: DetachTrustRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Domain>.State in
       return try op._extractStatus(Domain.self)
     }
     let rawOp = try await self.detachTrust(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Domain>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -334,7 +329,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_ValidateTrust")
   public func validateTrust(
-    request: ValidateTrustRequest, options: GoogleCloudGax.RequestOptions
+    request: ValidateTrustRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.validateTrust(request: request, options: options)
   }
@@ -344,21 +339,20 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_ValidateTrust")
   public func validateTrust(
-    withPolling: ValidateTrustRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
+    withPolling: ValidateTrustRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Domain>.State in
       return try op._extractStatus(Domain.self)
     }
     let rawOp = try await self.validateTrust(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Domain>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -372,7 +366,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -383,7 +377,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -391,7 +385,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -400,7 +394,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -411,7 +405,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -422,7 +416,7 @@ public final class ManagedIdentitiesServiceClient: Clients.ManagedIdentitiesServ
   ///
   /// @Snippet(path: "ManagedIdentitiesService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -441,14 +435,14 @@ extension Clients {
 
     /// See `ManagedIdentitiesServiceClient.createMicrosoftAdDomain`.
     func createMicrosoftAdDomain(withPolling: CreateMicrosoftAdDomainRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Domain>
+      -> any GoogleGax.PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.createMicrosoftAdDomain`.
     func createMicrosoftAdDomain(
       parent: Swift.String,
       domainName: Swift.String,
       domain: Domain?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Domain>
+    ) async throws -> any GoogleGax.PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.resetAdminPassword`.
     func resetAdminPassword(request: ResetAdminPasswordRequest) async throws
@@ -485,46 +479,46 @@ extension Clients {
     func updateDomain(request: UpdateDomainRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedIdentitiesServiceClient.updateDomain`.
-    func updateDomain(withPolling: UpdateDomainRequest) async throws -> any GoogleCloudGax
+    func updateDomain(withPolling: UpdateDomainRequest) async throws -> any GoogleGax
       .PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.updateDomain`.
     func updateDomain(
       domain: Domain?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Domain>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.deleteDomain`.
     func deleteDomain(request: DeleteDomainRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedIdentitiesServiceClient.deleteDomain`.
-    func deleteDomain(withPolling: DeleteDomainRequest) async throws -> any GoogleCloudGax
+    func deleteDomain(withPolling: DeleteDomainRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `ManagedIdentitiesServiceClient.deleteDomain`.
     func deleteDomain(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ManagedIdentitiesServiceClient.attachTrust`.
     func attachTrust(request: AttachTrustRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedIdentitiesServiceClient.attachTrust`.
-    func attachTrust(withPolling: AttachTrustRequest) async throws -> any GoogleCloudGax
+    func attachTrust(withPolling: AttachTrustRequest) async throws -> any GoogleGax
       .PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.attachTrust`.
     func attachTrust(
       name: Swift.String,
       trust: Trust?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Domain>
+    ) async throws -> any GoogleGax.PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.reconfigureTrust`.
     func reconfigureTrust(request: ReconfigureTrustRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ManagedIdentitiesServiceClient.reconfigureTrust`.
-    func reconfigureTrust(withPolling: ReconfigureTrustRequest) async throws -> any GoogleCloudGax
+    func reconfigureTrust(withPolling: ReconfigureTrustRequest) async throws -> any GoogleGax
       .PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.reconfigureTrust`.
@@ -532,33 +526,33 @@ extension Clients {
       name: Swift.String,
       targetDomainName: Swift.String,
       targetDnsIpAddresses: [Swift.String],
-    ) async throws -> any GoogleCloudGax.PollableOperation<Domain>
+    ) async throws -> any GoogleGax.PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.detachTrust`.
     func detachTrust(request: DetachTrustRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedIdentitiesServiceClient.detachTrust`.
-    func detachTrust(withPolling: DetachTrustRequest) async throws -> any GoogleCloudGax
+    func detachTrust(withPolling: DetachTrustRequest) async throws -> any GoogleGax
       .PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.detachTrust`.
     func detachTrust(
       name: Swift.String,
       trust: Trust?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Domain>
+    ) async throws -> any GoogleGax.PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.validateTrust`.
     func validateTrust(request: ValidateTrustRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedIdentitiesServiceClient.validateTrust`.
-    func validateTrust(withPolling: ValidateTrustRequest) async throws -> any GoogleCloudGax
+    func validateTrust(withPolling: ValidateTrustRequest) async throws -> any GoogleGax
       .PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.validateTrust`.
     func validateTrust(
       name: Swift.String,
       trust: Trust?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Domain>
+    ) async throws -> any GoogleGax.PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.listOperations`.
     func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -593,112 +587,112 @@ extension Clients {
 
     /// See `ManagedIdentitiesServiceClient.createMicrosoftAdDomain`.
     func createMicrosoftAdDomain(
-      request: CreateMicrosoftAdDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMicrosoftAdDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedIdentitiesServiceClient.createMicrosoftAdDomain`.
     func createMicrosoftAdDomain(
-      withPolling: CreateMicrosoftAdDomainRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Domain>
+      withPolling: CreateMicrosoftAdDomainRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.resetAdminPassword`.
     func resetAdminPassword(
-      request: ResetAdminPasswordRequest, options: GoogleCloudGax.RequestOptions
+      request: ResetAdminPasswordRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedIdentitiesV1.ResetAdminPasswordResponse
 
     /// See `ManagedIdentitiesServiceClient.listDomains`.
     func listDomains(
-      request: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDomainsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedIdentitiesV1.ListDomainsResponse
 
     /// See `ManagedIdentitiesServiceClient.listDomains`.
     func listDomains(
-      byItem: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDomainsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Domain, Swift.Error>
 
     /// See `ManagedIdentitiesServiceClient.getDomain`.
     func getDomain(
-      request: GetDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedIdentitiesV1.Domain
 
     /// See `ManagedIdentitiesServiceClient.updateDomain`.
     func updateDomain(
-      request: UpdateDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedIdentitiesServiceClient.updateDomain`.
     func updateDomain(
-      withPolling: UpdateDomainRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Domain>
+      withPolling: UpdateDomainRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.deleteDomain`.
     func deleteDomain(
-      request: DeleteDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedIdentitiesServiceClient.deleteDomain`.
     func deleteDomain(
-      withPolling: DeleteDomainRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteDomainRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ManagedIdentitiesServiceClient.attachTrust`.
     func attachTrust(
-      request: AttachTrustRequest, options: GoogleCloudGax.RequestOptions
+      request: AttachTrustRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedIdentitiesServiceClient.attachTrust`.
     func attachTrust(
-      withPolling: AttachTrustRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Domain>
+      withPolling: AttachTrustRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.reconfigureTrust`.
     func reconfigureTrust(
-      request: ReconfigureTrustRequest, options: GoogleCloudGax.RequestOptions
+      request: ReconfigureTrustRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedIdentitiesServiceClient.reconfigureTrust`.
     func reconfigureTrust(
-      withPolling: ReconfigureTrustRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Domain>
+      withPolling: ReconfigureTrustRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.detachTrust`.
     func detachTrust(
-      request: DetachTrustRequest, options: GoogleCloudGax.RequestOptions
+      request: DetachTrustRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedIdentitiesServiceClient.detachTrust`.
     func detachTrust(
-      withPolling: DetachTrustRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Domain>
+      withPolling: DetachTrustRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.validateTrust`.
     func validateTrust(
-      request: ValidateTrustRequest, options: GoogleCloudGax.RequestOptions
+      request: ValidateTrustRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedIdentitiesServiceClient.validateTrust`.
     func validateTrust(
-      withPolling: ValidateTrustRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Domain>
+      withPolling: ValidateTrustRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Domain>
 
     /// See `ManagedIdentitiesServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `ManagedIdentitiesServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `ManagedIdentitiesServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ManagedIdentitiesServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -712,24 +706,24 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func createMicrosoftAdDomain(
-    request: CreateMicrosoftAdDomainRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateMicrosoftAdDomainRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createMicrosoftAdDomain(withPolling: CreateMicrosoftAdDomainRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Domain>
+    -> any GoogleGax.PollableOperation<Domain>
   {
     try await self.createMicrosoftAdDomain(withPolling: withPolling, options: .init())
   }
 
   public func createMicrosoftAdDomain(
-    withPolling: CreateMicrosoftAdDomainRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateMicrosoftAdDomainRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Domain>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -737,7 +731,7 @@ extension Clients.ManagedIdentitiesServiceProtocol {
     parent: Swift.String,
     domainName: Swift.String,
     domain: Domain?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
     let request = CreateMicrosoftAdDomainRequest().with {
       $0.parent = parent
       $0.domainName = domainName
@@ -753,9 +747,9 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func resetAdminPassword(
-    request: ResetAdminPasswordRequest, options: GoogleCloudGax.RequestOptions
+    request: ResetAdminPasswordRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedIdentitiesV1.ResetAdminPasswordResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func resetAdminPassword(
@@ -774,9 +768,9 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func listDomains(
-    request: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDomainsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedIdentitiesV1.ListDomainsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDomains(
@@ -786,13 +780,13 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func listDomains(
-    byItem: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDomainsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Domain, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudManagedIdentitiesV1.ListDomainsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDomains(
@@ -811,9 +805,9 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func getDomain(
-    request: GetDomainRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDomainRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedIdentitiesV1.Domain {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDomain(
@@ -831,31 +825,31 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func updateDomain(
-    request: UpdateDomainRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDomainRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateDomain(withPolling: UpdateDomainRequest) async throws -> any GoogleCloudGax
+  public func updateDomain(withPolling: UpdateDomainRequest) async throws -> any GoogleGax
     .PollableOperation<Domain>
   {
     try await self.updateDomain(withPolling: withPolling, options: .init())
   }
 
   public func updateDomain(
-    withPolling: UpdateDomainRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateDomainRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Domain>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateDomain(
     domain: Domain?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
     let request = UpdateDomainRequest().with {
       $0.domain = domain
       $0.updateMask = updateMask
@@ -869,30 +863,30 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func deleteDomain(
-    request: DeleteDomainRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDomainRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteDomain(withPolling: DeleteDomainRequest) async throws -> any GoogleCloudGax
+  public func deleteDomain(withPolling: DeleteDomainRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteDomain(withPolling: withPolling, options: .init())
   }
 
   public func deleteDomain(
-    withPolling: DeleteDomainRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteDomainRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteDomain(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteDomainRequest().with {
       $0.name = name
     }
@@ -904,31 +898,31 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func attachTrust(
-    request: AttachTrustRequest, options: GoogleCloudGax.RequestOptions
+    request: AttachTrustRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func attachTrust(withPolling: AttachTrustRequest) async throws -> any GoogleCloudGax
+  public func attachTrust(withPolling: AttachTrustRequest) async throws -> any GoogleGax
     .PollableOperation<Domain>
   {
     try await self.attachTrust(withPolling: withPolling, options: .init())
   }
 
   public func attachTrust(
-    withPolling: AttachTrustRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: AttachTrustRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Domain>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func attachTrust(
     name: Swift.String,
     trust: Trust?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
     let request = AttachTrustRequest().with {
       $0.name = name
       $0.trust = trust
@@ -943,24 +937,24 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func reconfigureTrust(
-    request: ReconfigureTrustRequest, options: GoogleCloudGax.RequestOptions
+    request: ReconfigureTrustRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func reconfigureTrust(withPolling: ReconfigureTrustRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Domain>
+  public func reconfigureTrust(withPolling: ReconfigureTrustRequest) async throws -> any GoogleGax
+    .PollableOperation<Domain>
   {
     try await self.reconfigureTrust(withPolling: withPolling, options: .init())
   }
 
   public func reconfigureTrust(
-    withPolling: ReconfigureTrustRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ReconfigureTrustRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Domain>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -968,7 +962,7 @@ extension Clients.ManagedIdentitiesServiceProtocol {
     name: Swift.String,
     targetDomainName: Swift.String,
     targetDnsIpAddresses: [Swift.String],
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
     let request = ReconfigureTrustRequest().with {
       $0.name = name
       $0.targetDomainName = targetDomainName
@@ -982,31 +976,31 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func detachTrust(
-    request: DetachTrustRequest, options: GoogleCloudGax.RequestOptions
+    request: DetachTrustRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func detachTrust(withPolling: DetachTrustRequest) async throws -> any GoogleCloudGax
+  public func detachTrust(withPolling: DetachTrustRequest) async throws -> any GoogleGax
     .PollableOperation<Domain>
   {
     try await self.detachTrust(withPolling: withPolling, options: .init())
   }
 
   public func detachTrust(
-    withPolling: DetachTrustRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DetachTrustRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Domain>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func detachTrust(
     name: Swift.String,
     trust: Trust?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
     let request = DetachTrustRequest().with {
       $0.name = name
       $0.trust = trust
@@ -1021,31 +1015,31 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func validateTrust(
-    request: ValidateTrustRequest, options: GoogleCloudGax.RequestOptions
+    request: ValidateTrustRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func validateTrust(withPolling: ValidateTrustRequest) async throws -> any GoogleCloudGax
+  public func validateTrust(withPolling: ValidateTrustRequest) async throws -> any GoogleGax
     .PollableOperation<Domain>
   {
     try await self.validateTrust(withPolling: withPolling, options: .init())
   }
 
   public func validateTrust(
-    withPolling: ValidateTrustRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Domain>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ValidateTrustRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Domain>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func validateTrust(
     name: Swift.String,
     trust: Trust?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Domain> {
+  ) async throws -> any GoogleGax.PollableOperation<Domain> {
     let request = ValidateTrustRequest().with {
       $0.name = name
       $0.trust = trust
@@ -1060,9 +1054,9 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1072,13 +1066,13 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1099,9 +1093,9 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1118,9 +1112,9 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1137,9 +1131,9 @@ extension Clients.ManagedIdentitiesServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

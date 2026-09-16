@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A representation of a session.
-public struct Session: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Session: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the session.
@@ -29,7 +29,7 @@ public struct Session: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var uuid: Swift.String = Swift.String()
 
   /// Output only. The time when the session was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Runtime information about session execution.
   public var runtimeInfo: RuntimeInfo? = nil
@@ -42,7 +42,7 @@ public struct Session: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var stateMessage: Swift.String = Swift.String()
 
   /// Output only. The time when the session entered the current state.
-  public var stateTime: GoogleCloudWKT.Timestamp? = nil
+  public var stateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The email address of the user who created the session.
   public var creator: Swift.String = Swift.String()
@@ -83,7 +83,7 @@ public struct Session: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The session configuration.
   public var sessionConfig: OneOf_SessionConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Session`.
   public init() {}
@@ -152,8 +152,7 @@ public struct Session: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .uuid) {
       self.uuid = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.runtimeInfo = try container.decodeIfPresent(RuntimeInfo.self, forKey: .runtimeInfo)
     if let value = try container.decodeIfPresent(Session.State.self, forKey: .state) {
       self.state = value
@@ -161,8 +160,7 @@ public struct Session: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .stateMessage) {
       self.stateMessage = value
     }
-    self.stateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .stateTime)
+    self.stateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .stateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .creator) {
       self.creator = value
     }
@@ -208,7 +206,7 @@ public struct Session: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.sessionConfig = sessionConfig
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -243,7 +241,7 @@ public struct Session: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Historical state information.
-  public struct SessionStateHistory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SessionStateHistory: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The state of the session at this point in the session
@@ -255,9 +253,9 @@ public struct Session: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var stateMessage: Swift.String = Swift.String()
 
     /// Output only. The time when the session entered the historical state.
-    public var stateStartTime: GoogleCloudWKT.Timestamp? = nil
+    public var stateStartTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SessionStateHistory`.
     public init() {}
@@ -301,10 +299,10 @@ public struct Session: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.stateMessage = value
       }
       self.stateStartTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .stateStartTime)
+        GoogleWKT.Timestamp.self, forKey: .stateStartTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -321,11 +319,11 @@ public struct Session: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataproc.v1.Session.SessionStateHistory"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -466,10 +464,10 @@ public struct Session: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.v1.Session"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

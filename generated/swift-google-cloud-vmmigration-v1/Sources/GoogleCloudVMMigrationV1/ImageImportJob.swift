@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ImageImportJob describes the progress and result of an image import.
-public struct ImageImportJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ImageImportJob: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource path of the ImageImportJob.
@@ -34,10 +34,10 @@ public struct ImageImportJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. The time the image import was created (as an API call, not
   /// when it was actually created in the target).
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time the image import was ended.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Provides details on the error that led to the image import
   /// state in case of an error.
@@ -55,7 +55,7 @@ public struct ImageImportJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// the image import.
   public var targetDetails: OneOf_TargetDetails? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ImageImportJob`.
   public init() {}
@@ -117,9 +117,8 @@ public struct ImageImportJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(ImageImportJob.State.self, forKey: .state) {
       self.state = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent([GoogleRpc.Status].self, forKey: .errors) {
       self.errors = value
     }
@@ -170,7 +169,7 @@ public struct ImageImportJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.targetDetails = targetDetails
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -356,10 +355,10 @@ public struct ImageImportJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmmigration.v1.ImageImportJob"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

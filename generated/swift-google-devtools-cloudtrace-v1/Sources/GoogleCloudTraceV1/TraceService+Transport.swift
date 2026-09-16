@@ -18,30 +18,28 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class TraceServiceTransport: TraceServiceStub {
-    let inner: GoogleCloudGax._HTTPClient
+    let inner: GoogleGax._HTTPClient
 
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      self.inner = try GoogleCloudGax._HTTPClient(
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
+      self.inner = try GoogleGax._HTTPClient(
         from: options,
         withDefaultEndpoint: "https://cloudtrace.googleapis.com",
       )
     }
 
     public func listTraces(
-      request: ListTracesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTracesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTraceV1.ListTracesResponse {
       let (path, query, configure) = try {
-        () throws -> (
-          Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-        ) in
+        () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void) in
         if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
           guard
-            let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+            let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
               request.projectId as Swift.String?,
               matching: [.singleWildcard],
               fieldName: "project_id")
@@ -52,7 +50,7 @@ extension Clients {
           var query = [
             URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
           ]
-          let encoder = GoogleCloudGax._QueryParameterEncoder()
+          let encoder = GoogleGax._QueryParameterEncoder()
           query.append(contentsOf: try encoder.encode(request.view, prefix: "view"))
           query.append(contentsOf: try encoder.encode(request.pageSize, prefix: "pageSize"))
           query.append(contentsOf: try encoder.encode(request.pageToken, prefix: "pageToken"))
@@ -64,9 +62,9 @@ extension Clients {
         }() {
           return (candidate.0, candidate.1, { $0.setMethod(.GET) })
         }
-        var paths: [GoogleCloudGax.PathMismatch] = []
+        var paths: [GoogleGax.PathMismatch] = []
         do {
-          var builder = GoogleCloudGax._PathMismatchBuilder()
+          var builder = GoogleGax._PathMismatchBuilder()
           builder.maybeAdd(
             request.projectId as Swift.String?,
             matching: [.singleWildcard],
@@ -75,27 +73,25 @@ extension Clients {
           )
           paths.append(builder.build())
         }
-        throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+        throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
       }()
       var req = try await self.inner.newRequest(
         percentEncodedPath: path, query: query, options: options)
       configure(&req)
-      req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+      req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
       return try await req.rpc(
         GoogleCloudTraceV1.ListTracesResponse.self, timeout: options.attemptTimeout
       ).get()
     }
 
     public func getTrace(
-      request: GetTraceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTraceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTraceV1.Trace {
       let (path, query, configure) = try {
-        () throws -> (
-          Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-        ) in
+        () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void) in
         if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
           guard
-            let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+            let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
               request.projectId as Swift.String?,
               matching: [.singleWildcard],
               fieldName: "project_id")
@@ -103,7 +99,7 @@ extension Clients {
             return nil
           }
           guard
-            let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+            let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
               request.traceId as Swift.String?,
               matching: [.singleWildcard],
               fieldName: "trace_id")
@@ -118,9 +114,9 @@ extension Clients {
         }() {
           return (candidate.0, candidate.1, { $0.setMethod(.GET) })
         }
-        var paths: [GoogleCloudGax.PathMismatch] = []
+        var paths: [GoogleGax.PathMismatch] = []
         do {
-          var builder = GoogleCloudGax._PathMismatchBuilder()
+          var builder = GoogleGax._PathMismatchBuilder()
           builder.maybeAdd(
             request.projectId as Swift.String?,
             matching: [.singleWildcard],
@@ -135,27 +131,25 @@ extension Clients {
           )
           paths.append(builder.build())
         }
-        throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+        throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
       }()
       var req = try await self.inner.newRequest(
         percentEncodedPath: path, query: query, options: options)
       configure(&req)
-      req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+      req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
       return try await req.rpc(
         GoogleCloudTraceV1.Trace.self, timeout: options.attemptTimeout
       ).get()
     }
 
     public func patchTraces(
-      request: PatchTracesRequest, options: GoogleCloudGax.RequestOptions
+      request: PatchTracesRequest, options: GoogleGax.RequestOptions
     ) async throws {
       let (path, query, configure) = try {
-        () throws -> (
-          Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-        ) in
+        () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void) in
         if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
           guard
-            let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+            let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
               request.projectId as Swift.String?,
               matching: [.singleWildcard],
               fieldName: "project_id")
@@ -170,9 +164,9 @@ extension Clients {
         }() {
           return (candidate.0, candidate.1, { $0.setMethod(.PATCH) })
         }
-        var paths: [GoogleCloudGax.PathMismatch] = []
+        var paths: [GoogleGax.PathMismatch] = []
         do {
-          var builder = GoogleCloudGax._PathMismatchBuilder()
+          var builder = GoogleGax._PathMismatchBuilder()
           builder.maybeAdd(
             request.projectId as Swift.String?,
             matching: [.singleWildcard],
@@ -181,17 +175,17 @@ extension Clients {
           )
           paths.append(builder.build())
         }
-        throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+        throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
       }()
       var req = try await self.inner.newRequest(
         percentEncodedPath: path, query: query, options: options)
       configure(&req)
-      req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+      req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
       if let body = request.traces {
         try req.setBody(json: body)
       }
       _ = try await req.rpc(
-        GoogleCloudWKT.Empty.self, timeout: options.attemptTimeout
+        GoogleWKT.Empty.self, timeout: options.attemptTimeout
       ).get()
     }
   }

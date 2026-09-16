@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudDataCatalogV1
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: DataCatalogClient, projectId: String, locationId: String, entryGroupId: String)
   async throws

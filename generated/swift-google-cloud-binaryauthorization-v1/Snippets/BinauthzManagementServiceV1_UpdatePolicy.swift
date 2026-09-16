@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudBinaryAuthorizationV1
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(client: BinauthzManagementServiceV1Client, projectId: String) async throws {
   let response = try await client.updatePolicy(

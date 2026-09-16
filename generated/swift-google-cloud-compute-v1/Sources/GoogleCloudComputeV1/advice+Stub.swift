@@ -16,13 +16,13 @@
 
 #if Advice
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol AdviceStub: Sendable {
       func calendarMode(
-        request: AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
+        request: AdviceClient.CalendarModeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse
     }
   }

@@ -16,14 +16,14 @@
 
 #if SiteSearchEngineService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Response message for
   /// [SiteSearchEngineService.FetchSitemaps][google.cloud.discoveryengine.v1.SiteSearchEngineService.FetchSitemaps]
   /// method.
   ///
   /// [google.cloud.discoveryengine.v1.SiteSearchEngineService.FetchSitemaps]: <doc:SiteSearchEngineServiceClient/fetchSitemaps(request:options:)>
-  public struct FetchSitemapsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FetchSitemapsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// List of [Sitemap][google.cloud.discoveryengine.v1.Sitemap]s fetched.
@@ -31,7 +31,7 @@
     /// [google.cloud.discoveryengine.v1.Sitemap]: <doc:Sitemap>
     public var sitemapsMetadata: [FetchSitemapsResponse.SitemapMetadata] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FetchSitemapsResponse`.
     public init() {}
@@ -71,7 +71,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -87,7 +87,7 @@
     /// metadata.
     ///
     /// [google.cloud.discoveryengine.v1.Sitemap]: <doc:Sitemap>
-    public struct SitemapMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SitemapMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The [Sitemap][google.cloud.discoveryengine.v1.Sitemap].
@@ -95,7 +95,7 @@
       /// [google.cloud.discoveryengine.v1.Sitemap]: <doc:Sitemap>
       public var sitemap: Sitemap? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SitemapMetadata`.
       public init() {}
@@ -131,7 +131,7 @@
         self.sitemap = try container.decodeIfPresent(Sitemap.self, forKey: .sitemap)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -147,22 +147,22 @@
         return
           "type.googleapis.com/google.cloud.discoveryengine.v1.FetchSitemapsResponse.SitemapMetadata"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.FetchSitemapsResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

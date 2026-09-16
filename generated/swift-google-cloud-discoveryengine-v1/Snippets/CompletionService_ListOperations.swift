@@ -19,9 +19,9 @@
   // snippet.show
   import Foundation
   import GoogleCloudDiscoveryEngineV1
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
+  import GoogleWKT
 
   func sample(client: CompletionServiceClient) async throws {
     let items = try client.listOperations(

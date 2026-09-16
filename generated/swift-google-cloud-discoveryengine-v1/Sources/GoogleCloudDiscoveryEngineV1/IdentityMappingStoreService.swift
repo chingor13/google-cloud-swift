@@ -19,10 +19,10 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing Identity Mapping Stores.
   ///
@@ -31,11 +31,11 @@
     Sendable
   {
     let inner: any Clients.IdentityMappingStoreServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `IdentityMappingStoreServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.IdentityMappingStoreServiceStub =
         try Clients.IdentityMappingStoreServiceTransport(options)
       inner = Clients.IdentityMappingStoreServiceRetry(inner, options: options)
@@ -51,7 +51,7 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_CreateIdentityMappingStore")
     public func createIdentityMappingStore(
-      request: CreateIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.IdentityMappingStore {
       try await self.inner.createIdentityMappingStore(request: request, options: options)
     }
@@ -60,7 +60,7 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_GetIdentityMappingStore")
     public func getIdentityMappingStore(
-      request: GetIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.IdentityMappingStore {
       try await self.inner.getIdentityMappingStore(request: request, options: options)
     }
@@ -69,7 +69,7 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_DeleteIdentityMappingStore")
     public func deleteIdentityMappingStore(
-      request: DeleteIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteIdentityMappingStore(request: request, options: options)
     }
@@ -78,21 +78,21 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_DeleteIdentityMappingStore")
     public func deleteIdentityMappingStore(
-      withPolling: DeleteIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteIdentityMappingStore(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -104,7 +104,7 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_ImportIdentityMappings")
     public func importIdentityMappings(
-      request: ImportIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportIdentityMappingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.importIdentityMappings(request: request, options: options)
     }
@@ -113,23 +113,22 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_ImportIdentityMappings")
     public func importIdentityMappings(
-      withPolling: ImportIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportIdentityMappingsResponse> {
+      withPolling: ImportIdentityMappingsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportIdentityMappingsResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ImportIdentityMappingsResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ImportIdentityMappingsResponse>.State in
         return try op._extractStatus(ImportIdentityMappingsResponse.self)
       }
       let rawOp = try await self.importIdentityMappings(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<ImportIdentityMappingsResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<ImportIdentityMappingsResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -142,7 +141,7 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_PurgeIdentityMappings")
     public func purgeIdentityMappings(
-      request: PurgeIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeIdentityMappingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.purgeIdentityMappings(request: request, options: options)
     }
@@ -152,21 +151,21 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_PurgeIdentityMappings")
     public func purgeIdentityMappings(
-      withPolling: PurgeIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: PurgeIdentityMappingsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.purgeIdentityMappings(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -178,7 +177,7 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_ListIdentityMappings")
     public func listIdentityMappings(
-      request: ListIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIdentityMappingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingsResponse {
       try await self.inner.listIdentityMappings(request: request, options: options)
     }
@@ -187,7 +186,7 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_ListIdentityMappings")
     public func listIdentityMappings(
-      byItem: ListIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListIdentityMappingsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<IdentityMappingEntry, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -196,14 +195,14 @@
         request.pageToken = token
         return try await self.listIdentityMappings(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Lists all Identity Mapping Stores.
     ///
     /// @Snippet(path: "IdentityMappingStoreService_ListIdentityMappingStores")
     public func listIdentityMappingStores(
-      request: ListIdentityMappingStoresRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIdentityMappingStoresRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingStoresResponse {
       try await self.inner.listIdentityMappingStores(request: request, options: options)
     }
@@ -212,7 +211,7 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_ListIdentityMappingStores")
     public func listIdentityMappingStores(
-      byItem: ListIdentityMappingStoresRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListIdentityMappingStoresRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<IdentityMappingStore, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -221,7 +220,7 @@
         request.pageToken = token
         return try await self.listIdentityMappingStores(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -230,7 +229,7 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -241,7 +240,7 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -249,7 +248,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -258,7 +257,7 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -269,7 +268,7 @@
     ///
     /// @Snippet(path: "IdentityMappingStoreService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -308,12 +307,12 @@
 
       /// See `IdentityMappingStoreServiceClient.deleteIdentityMappingStore`.
       func deleteIdentityMappingStore(withPolling: DeleteIdentityMappingStoreRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `IdentityMappingStoreServiceClient.deleteIdentityMappingStore`.
       func deleteIdentityMappingStore(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `IdentityMappingStoreServiceClient.importIdentityMappings`.
       func importIdentityMappings(request: ImportIdentityMappingsRequest) async throws
@@ -321,7 +320,7 @@
 
       /// See `IdentityMappingStoreServiceClient.importIdentityMappings`.
       func importIdentityMappings(withPolling: ImportIdentityMappingsRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<ImportIdentityMappingsResponse>
+        -> any GoogleGax.PollableOperation<ImportIdentityMappingsResponse>
 
       /// See `IdentityMappingStoreServiceClient.purgeIdentityMappings`.
       func purgeIdentityMappings(request: PurgeIdentityMappingsRequest) async throws
@@ -329,7 +328,7 @@
 
       /// See `IdentityMappingStoreServiceClient.purgeIdentityMappings`.
       func purgeIdentityMappings(withPolling: PurgeIdentityMappingsRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `IdentityMappingStoreServiceClient.listIdentityMappings`.
       func listIdentityMappings(request: ListIdentityMappingsRequest) async throws
@@ -379,77 +378,77 @@
 
       /// See `IdentityMappingStoreServiceClient.createIdentityMappingStore`.
       func createIdentityMappingStore(
-        request: CreateIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.IdentityMappingStore
 
       /// See `IdentityMappingStoreServiceClient.getIdentityMappingStore`.
       func getIdentityMappingStore(
-        request: GetIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: GetIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.IdentityMappingStore
 
       /// See `IdentityMappingStoreServiceClient.deleteIdentityMappingStore`.
       func deleteIdentityMappingStore(
-        request: DeleteIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `IdentityMappingStoreServiceClient.deleteIdentityMappingStore`.
       func deleteIdentityMappingStore(
-        withPolling: DeleteIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `IdentityMappingStoreServiceClient.importIdentityMappings`.
       func importIdentityMappings(
-        request: ImportIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportIdentityMappingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `IdentityMappingStoreServiceClient.importIdentityMappings`.
       func importIdentityMappings(
-        withPolling: ImportIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ImportIdentityMappingsResponse>
+        withPolling: ImportIdentityMappingsRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ImportIdentityMappingsResponse>
 
       /// See `IdentityMappingStoreServiceClient.purgeIdentityMappings`.
       func purgeIdentityMappings(
-        request: PurgeIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+        request: PurgeIdentityMappingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `IdentityMappingStoreServiceClient.purgeIdentityMappings`.
       func purgeIdentityMappings(
-        withPolling: PurgeIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: PurgeIdentityMappingsRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `IdentityMappingStoreServiceClient.listIdentityMappings`.
       func listIdentityMappings(
-        request: ListIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListIdentityMappingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingsResponse
 
       /// See `IdentityMappingStoreServiceClient.listIdentityMappings`.
       func listIdentityMappings(
-        byItem: ListIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListIdentityMappingsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<IdentityMappingEntry, Swift.Error>
 
       /// See `IdentityMappingStoreServiceClient.listIdentityMappingStores`.
       func listIdentityMappingStores(
-        request: ListIdentityMappingStoresRequest, options: GoogleCloudGax.RequestOptions
+        request: ListIdentityMappingStoresRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingStoresResponse
 
       /// See `IdentityMappingStoreServiceClient.listIdentityMappingStores`.
       func listIdentityMappingStores(
-        byItem: ListIdentityMappingStoresRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListIdentityMappingStoresRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<IdentityMappingStore, Swift.Error>
 
       /// See `IdentityMappingStoreServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `IdentityMappingStoreServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `IdentityMappingStoreServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -463,9 +462,9 @@
     }
 
     public func createIdentityMappingStore(
-      request: CreateIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.IdentityMappingStore {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createIdentityMappingStore(
@@ -488,9 +487,9 @@
     }
 
     public func getIdentityMappingStore(
-      request: GetIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.IdentityMappingStore {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIdentityMappingStore(
@@ -509,30 +508,30 @@
     }
 
     public func deleteIdentityMappingStore(
-      request: DeleteIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteIdentityMappingStore(withPolling: DeleteIdentityMappingStoreRequest)
-      async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      async throws -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.deleteIdentityMappingStore(withPolling: withPolling, options: .init())
     }
 
     public func deleteIdentityMappingStore(
-      withPolling: DeleteIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteIdentityMappingStore(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteIdentityMappingStoreRequest().with {
         $0.name = name
       }
@@ -546,26 +545,25 @@
     }
 
     public func importIdentityMappings(
-      request: ImportIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportIdentityMappingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func importIdentityMappings(withPolling: ImportIdentityMappingsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ImportIdentityMappingsResponse>
+      -> any GoogleGax.PollableOperation<ImportIdentityMappingsResponse>
     {
       try await self.importIdentityMappings(withPolling: withPolling, options: .init())
     }
 
     public func importIdentityMappings(
-      withPolling: ImportIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportIdentityMappingsResponse> {
+      withPolling: ImportIdentityMappingsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportIdentityMappingsResponse> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<ImportIdentityMappingsResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<ImportIdentityMappingsResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -576,24 +574,24 @@
     }
 
     public func purgeIdentityMappings(
-      request: PurgeIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeIdentityMappingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func purgeIdentityMappings(withPolling: PurgeIdentityMappingsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.purgeIdentityMappings(withPolling: withPolling, options: .init())
     }
 
     public func purgeIdentityMappings(
-      withPolling: PurgeIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: PurgeIdentityMappingsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -604,9 +602,9 @@
     }
 
     public func listIdentityMappings(
-      request: ListIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIdentityMappingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listIdentityMappings(
@@ -616,14 +614,14 @@
     }
 
     public func listIdentityMappings(
-      byItem: ListIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListIdentityMappingsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<IdentityMappingEntry, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listIdentityMappingStores(request: ListIdentityMappingStoresRequest) async throws
@@ -633,9 +631,9 @@
     }
 
     public func listIdentityMappingStores(
-      request: ListIdentityMappingStoresRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIdentityMappingStoresRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingStoresResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listIdentityMappingStores(
@@ -645,14 +643,14 @@
     }
 
     public func listIdentityMappingStores(
-      byItem: ListIdentityMappingStoresRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListIdentityMappingStoresRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<IdentityMappingStore, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingStoresResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listIdentityMappingStores(
@@ -671,9 +669,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -683,13 +681,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -710,9 +708,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -729,9 +727,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

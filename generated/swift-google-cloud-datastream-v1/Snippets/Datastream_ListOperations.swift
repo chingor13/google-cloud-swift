@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudDatastreamV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: DatastreamClient) async throws {
   let items = try client.listOperations(

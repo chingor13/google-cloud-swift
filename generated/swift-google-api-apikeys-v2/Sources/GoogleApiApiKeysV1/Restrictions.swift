@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes the restrictions on the key.
-public struct Restrictions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Restrictions: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A restriction for a specific service and optionally one or
@@ -32,7 +32,7 @@ public struct Restrictions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// restrictions per key.
   public var clientRestrictions: OneOf_ClientRestrictions? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Restrictions`.
   public init() {}
@@ -110,7 +110,7 @@ public struct Restrictions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.clientRestrictions = clientRestrictions
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -152,10 +152,10 @@ public struct Restrictions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.apikeys.v2.Restrictions"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

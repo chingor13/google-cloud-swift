@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Task represents a single run of a container to completion.
-public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Task: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The unique name of this Task.
@@ -50,33 +50,33 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. Represents time when the task was created by the system.
   /// It is not guaranteed to be set in happens-before order across separate
   /// operations.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Represents time when the task was scheduled to run by the
   /// system. It is not guaranteed to be set in happens-before order across
   /// separate operations.
-  public var scheduledTime: GoogleCloudWKT.Timestamp? = nil
+  public var scheduledTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Represents time when the task started to run.
   /// It is not guaranteed to be set in happens-before order across separate
   /// operations.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Represents time when the Task was completed. It is not
   /// guaranteed to be set in happens-before order across separate operations.
-  public var completionTime: GoogleCloudWKT.Timestamp? = nil
+  public var completionTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The last-modified time.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. For a deleted resource, the deletion time. It is only
   /// populated as a response to a Delete request.
-  public var deleteTime: GoogleCloudWKT.Timestamp? = nil
+  public var deleteTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. For a deleted resource, the time after which it will be
   /// permamently deleted. It is only populated as a response to a Delete
   /// request.
-  public var expireTime: GoogleCloudWKT.Timestamp? = nil
+  public var expireTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The name of the parent Job.
   public var job: Swift.String = Swift.String()
@@ -97,7 +97,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Max allowed time duration the Task may be active before the system will
   /// actively try to mark it failed and kill associated containers. This applies
   /// per attempt of a task, meaning each retry can run for the full timeout.
-  public var timeout: GoogleCloudWKT.Duration? = nil
+  public var timeout: GoogleWKT.Duration? = nil
 
   /// Email address of the IAM service account associated with the Task of a
   /// Job. The service account represents the identity of the
@@ -159,7 +159,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// resource. May be used to detect modification conflict during updates.
   public var etag: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Task`.
   public init() {}
@@ -274,20 +274,15 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.annotations = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.scheduledTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .scheduledTime)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
+      GoogleWKT.Timestamp.self, forKey: .scheduledTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
     self.completionTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .completionTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
-    self.deleteTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deleteTime)
-    self.expireTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .expireTime)
+      GoogleWKT.Timestamp.self, forKey: .completionTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
+    self.deleteTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deleteTime)
+    self.expireTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .expireTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .job) {
       self.job = value
     }
@@ -303,7 +298,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .maxRetries) {
       self.maxRetries = value
     }
-    self.timeout = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .timeout)
+    self.timeout = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeout)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .serviceAccount) {
       self.serviceAccount = value
     }
@@ -347,7 +342,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -395,10 +390,10 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.Task"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

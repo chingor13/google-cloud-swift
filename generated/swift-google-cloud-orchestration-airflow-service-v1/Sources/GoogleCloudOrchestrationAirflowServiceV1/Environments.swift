@@ -18,21 +18,21 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Managed Apache Airflow Environments.
 ///
 /// @Snippet(path: "EnvironmentsQuickstart")
 public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   let inner: any Clients.EnvironmentsStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `EnvironmentsClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.EnvironmentsStub = try Clients.EnvironmentsTransport(options)
     inner = Clients.EnvironmentsRetry(inner, options: options)
     if let logger = options.logger {
@@ -47,7 +47,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_CreateEnvironment")
   public func createEnvironment(
-    request: CreateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createEnvironment(request: request, options: options)
   }
@@ -56,21 +56,21 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_CreateEnvironment")
   public func createEnvironment(
-    withPolling: CreateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Environment> {
+    withPolling: CreateEnvironmentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Environment> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Environment>.State in
+        -> GoogleGax._PollableOperationImpl<Environment>.State in
       return try op._extractStatus(Environment.self)
     }
     let rawOp = try await self.createEnvironment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Environment>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Environment>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -82,7 +82,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_GetEnvironment")
   public func getEnvironment(
-    request: GetEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.Environment {
     try await self.inner.getEnvironment(request: request, options: options)
   }
@@ -91,7 +91,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_ListEnvironments")
   public func listEnvironments(
-    request: ListEnvironmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEnvironmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListEnvironmentsResponse {
     try await self.inner.listEnvironments(request: request, options: options)
   }
@@ -100,7 +100,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_ListEnvironments")
   public func listEnvironments(
-    byItem: ListEnvironmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEnvironmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Environment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -109,14 +109,14 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
       request.pageToken = token
       return try await self.listEnvironments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Update an environment.
   ///
   /// @Snippet(path: "Environments_UpdateEnvironment")
   public func updateEnvironment(
-    request: UpdateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateEnvironment(request: request, options: options)
   }
@@ -125,21 +125,21 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_UpdateEnvironment")
   public func updateEnvironment(
-    withPolling: UpdateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Environment> {
+    withPolling: UpdateEnvironmentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Environment> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Environment>.State in
+        -> GoogleGax._PollableOperationImpl<Environment>.State in
       return try op._extractStatus(Environment.self)
     }
     let rawOp = try await self.updateEnvironment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Environment>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Environment>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -151,7 +151,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_DeleteEnvironment")
   public func deleteEnvironment(
-    request: DeleteEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteEnvironment(request: request, options: options)
   }
@@ -160,21 +160,21 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_DeleteEnvironment")
   public func deleteEnvironment(
-    withPolling: DeleteEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteEnvironmentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteEnvironment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -186,7 +186,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_ExecuteAirflowCommand")
   public func executeAirflowCommand(
-    request: ExecuteAirflowCommandRequest, options: GoogleCloudGax.RequestOptions
+    request: ExecuteAirflowCommandRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ExecuteAirflowCommandResponse {
     try await self.inner.executeAirflowCommand(request: request, options: options)
   }
@@ -195,7 +195,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_StopAirflowCommand")
   public func stopAirflowCommand(
-    request: StopAirflowCommandRequest, options: GoogleCloudGax.RequestOptions
+    request: StopAirflowCommandRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.StopAirflowCommandResponse {
     try await self.inner.stopAirflowCommand(request: request, options: options)
   }
@@ -204,7 +204,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_PollAirflowCommand")
   public func pollAirflowCommand(
-    request: PollAirflowCommandRequest, options: GoogleCloudGax.RequestOptions
+    request: PollAirflowCommandRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.PollAirflowCommandResponse {
     try await self.inner.pollAirflowCommand(request: request, options: options)
   }
@@ -217,7 +217,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_ListWorkloads")
   public func listWorkloads(
-    request: ListWorkloadsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListWorkloadsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListWorkloadsResponse {
     try await self.inner.listWorkloads(request: request, options: options)
   }
@@ -230,7 +230,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_ListWorkloads")
   public func listWorkloads(
-    byItem: ListWorkloadsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListWorkloadsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ListWorkloadsResponse.ComposerWorkload, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -239,7 +239,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
       request.pageToken = token
       return try await self.listWorkloads(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Check if an upgrade operation on the environment will succeed.
@@ -248,7 +248,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_CheckUpgrade")
   public func checkUpgrade(
-    request: CheckUpgradeRequest, options: GoogleCloudGax.RequestOptions
+    request: CheckUpgradeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.checkUpgrade(request: request, options: options)
   }
@@ -259,22 +259,21 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_CheckUpgrade")
   public func checkUpgrade(
-    withPolling: CheckUpgradeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CheckUpgradeResponse> {
+    withPolling: CheckUpgradeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CheckUpgradeResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CheckUpgradeResponse>.State in
+        -> GoogleGax._PollableOperationImpl<CheckUpgradeResponse>.State in
       return try op._extractStatus(CheckUpgradeResponse.self)
     }
     let rawOp = try await self.checkUpgrade(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CheckUpgradeResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CheckUpgradeResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -289,7 +288,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_CreateUserWorkloadsSecret")
   public func createUserWorkloadsSecret(
-    request: CreateUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsSecret {
     try await self.inner.createUserWorkloadsSecret(request: request, options: options)
   }
@@ -302,7 +301,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_GetUserWorkloadsSecret")
   public func getUserWorkloadsSecret(
-    request: GetUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+    request: GetUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsSecret {
     try await self.inner.getUserWorkloadsSecret(request: request, options: options)
   }
@@ -314,7 +313,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_ListUserWorkloadsSecrets")
   public func listUserWorkloadsSecrets(
-    request: ListUserWorkloadsSecretsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUserWorkloadsSecretsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListUserWorkloadsSecretsResponse {
     try await self.inner.listUserWorkloadsSecrets(request: request, options: options)
   }
@@ -326,7 +325,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_ListUserWorkloadsSecrets")
   public func listUserWorkloadsSecrets(
-    byItem: ListUserWorkloadsSecretsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUserWorkloadsSecretsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<UserWorkloadsSecret, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -335,7 +334,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
       request.pageToken = token
       return try await self.listUserWorkloadsSecrets(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates a user workloads Secret.
@@ -345,7 +344,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_UpdateUserWorkloadsSecret")
   public func updateUserWorkloadsSecret(
-    request: UpdateUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsSecret {
     try await self.inner.updateUserWorkloadsSecret(request: request, options: options)
   }
@@ -357,7 +356,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_DeleteUserWorkloadsSecret")
   public func deleteUserWorkloadsSecret(
-    request: DeleteUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteUserWorkloadsSecret(request: request, options: options)
   }
@@ -369,7 +368,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_CreateUserWorkloadsConfigMap")
   public func createUserWorkloadsConfigMap(
-    request: CreateUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsConfigMap {
     try await self.inner.createUserWorkloadsConfigMap(request: request, options: options)
   }
@@ -381,7 +380,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_GetUserWorkloadsConfigMap")
   public func getUserWorkloadsConfigMap(
-    request: GetUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+    request: GetUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsConfigMap {
     try await self.inner.getUserWorkloadsConfigMap(request: request, options: options)
   }
@@ -393,7 +392,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_ListUserWorkloadsConfigMaps")
   public func listUserWorkloadsConfigMaps(
-    request: ListUserWorkloadsConfigMapsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUserWorkloadsConfigMapsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListUserWorkloadsConfigMapsResponse {
     try await self.inner.listUserWorkloadsConfigMaps(request: request, options: options)
   }
@@ -405,7 +404,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_ListUserWorkloadsConfigMaps")
   public func listUserWorkloadsConfigMaps(
-    byItem: ListUserWorkloadsConfigMapsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUserWorkloadsConfigMapsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<UserWorkloadsConfigMap, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -414,7 +413,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
       request.pageToken = token
       return try await self.listUserWorkloadsConfigMaps(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates a user workloads ConfigMap.
@@ -424,7 +423,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_UpdateUserWorkloadsConfigMap")
   public func updateUserWorkloadsConfigMap(
-    request: UpdateUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsConfigMap {
     try await self.inner.updateUserWorkloadsConfigMap(request: request, options: options)
   }
@@ -436,7 +435,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_DeleteUserWorkloadsConfigMap")
   public func deleteUserWorkloadsConfigMap(
-    request: DeleteUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteUserWorkloadsConfigMap(request: request, options: options)
   }
@@ -448,7 +447,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_SaveSnapshot")
   public func saveSnapshot(
-    request: SaveSnapshotRequest, options: GoogleCloudGax.RequestOptions
+    request: SaveSnapshotRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.saveSnapshot(request: request, options: options)
   }
@@ -460,22 +459,21 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_SaveSnapshot")
   public func saveSnapshot(
-    withPolling: SaveSnapshotRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SaveSnapshotResponse> {
+    withPolling: SaveSnapshotRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SaveSnapshotResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<SaveSnapshotResponse>.State in
+        -> GoogleGax._PollableOperationImpl<SaveSnapshotResponse>.State in
       return try op._extractStatus(SaveSnapshotResponse.self)
     }
     let rawOp = try await self.saveSnapshot(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<SaveSnapshotResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SaveSnapshotResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -490,7 +488,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_LoadSnapshot")
   public func loadSnapshot(
-    request: LoadSnapshotRequest, options: GoogleCloudGax.RequestOptions
+    request: LoadSnapshotRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.loadSnapshot(request: request, options: options)
   }
@@ -502,22 +500,21 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_LoadSnapshot")
   public func loadSnapshot(
-    withPolling: LoadSnapshotRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LoadSnapshotResponse> {
+    withPolling: LoadSnapshotRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LoadSnapshotResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<LoadSnapshotResponse>.State in
+        -> GoogleGax._PollableOperationImpl<LoadSnapshotResponse>.State in
       return try op._extractStatus(LoadSnapshotResponse.self)
     }
     let rawOp = try await self.loadSnapshot(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<LoadSnapshotResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LoadSnapshotResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -529,7 +526,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_DatabaseFailover")
   public func databaseFailover(
-    request: DatabaseFailoverRequest, options: GoogleCloudGax.RequestOptions
+    request: DatabaseFailoverRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.databaseFailover(request: request, options: options)
   }
@@ -538,22 +535,22 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_DatabaseFailover")
   public func databaseFailover(
-    withPolling: DatabaseFailoverRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DatabaseFailoverResponse> {
+    withPolling: DatabaseFailoverRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DatabaseFailoverResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DatabaseFailoverResponse>.State in
+        -> GoogleGax._PollableOperationImpl<DatabaseFailoverResponse>.State in
       return try op._extractStatus(DatabaseFailoverResponse.self)
     }
     let rawOp = try await self.databaseFailover(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DatabaseFailoverResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<DatabaseFailoverResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -565,7 +562,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_FetchDatabaseProperties")
   public func fetchDatabaseProperties(
-    request: FetchDatabasePropertiesRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchDatabasePropertiesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.FetchDatabasePropertiesResponse {
     try await self.inner.fetchDatabaseProperties(request: request, options: options)
   }
@@ -576,7 +573,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -587,7 +584,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -595,7 +592,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -604,7 +601,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -615,7 +612,7 @@ public final class EnvironmentsClient: Clients.EnvironmentsProtocol, Sendable {
   ///
   /// @Snippet(path: "Environments_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -633,14 +630,14 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.createEnvironment`.
-    func createEnvironment(withPolling: CreateEnvironmentRequest) async throws -> any GoogleCloudGax
+    func createEnvironment(withPolling: CreateEnvironmentRequest) async throws -> any GoogleGax
       .PollableOperation<Environment>
 
     /// See `EnvironmentsClient.createEnvironment`.
     func createEnvironment(
       parent: Swift.String,
       environment: Environment?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Environment>
+    ) async throws -> any GoogleGax.PollableOperation<Environment>
 
     /// See `EnvironmentsClient.getEnvironment`.
     func getEnvironment(request: GetEnvironmentRequest) async throws
@@ -670,28 +667,28 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.updateEnvironment`.
-    func updateEnvironment(withPolling: UpdateEnvironmentRequest) async throws -> any GoogleCloudGax
+    func updateEnvironment(withPolling: UpdateEnvironmentRequest) async throws -> any GoogleGax
       .PollableOperation<Environment>
 
     /// See `EnvironmentsClient.updateEnvironment`.
     func updateEnvironment(
       name: Swift.String,
       environment: Environment?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Environment>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Environment>
 
     /// See `EnvironmentsClient.deleteEnvironment`.
     func deleteEnvironment(request: DeleteEnvironmentRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.deleteEnvironment`.
-    func deleteEnvironment(withPolling: DeleteEnvironmentRequest) async throws -> any GoogleCloudGax
+    func deleteEnvironment(withPolling: DeleteEnvironmentRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `EnvironmentsClient.deleteEnvironment`.
     func deleteEnvironment(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `EnvironmentsClient.executeAirflowCommand`.
     func executeAirflowCommand(request: ExecuteAirflowCommandRequest) async throws
@@ -723,7 +720,7 @@ extension Clients {
     func checkUpgrade(request: CheckUpgradeRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.checkUpgrade`.
-    func checkUpgrade(withPolling: CheckUpgradeRequest) async throws -> any GoogleCloudGax
+    func checkUpgrade(withPolling: CheckUpgradeRequest) async throws -> any GoogleGax
       .PollableOperation<CheckUpgradeResponse>
 
     /// See `EnvironmentsClient.createUserWorkloadsSecret`.
@@ -830,14 +827,14 @@ extension Clients {
     func saveSnapshot(request: SaveSnapshotRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.saveSnapshot`.
-    func saveSnapshot(withPolling: SaveSnapshotRequest) async throws -> any GoogleCloudGax
+    func saveSnapshot(withPolling: SaveSnapshotRequest) async throws -> any GoogleGax
       .PollableOperation<SaveSnapshotResponse>
 
     /// See `EnvironmentsClient.loadSnapshot`.
     func loadSnapshot(request: LoadSnapshotRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.loadSnapshot`.
-    func loadSnapshot(withPolling: LoadSnapshotRequest) async throws -> any GoogleCloudGax
+    func loadSnapshot(withPolling: LoadSnapshotRequest) async throws -> any GoogleGax
       .PollableOperation<LoadSnapshotResponse>
 
     /// See `EnvironmentsClient.databaseFailover`.
@@ -845,7 +842,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.databaseFailover`.
-    func databaseFailover(withPolling: DatabaseFailoverRequest) async throws -> any GoogleCloudGax
+    func databaseFailover(withPolling: DatabaseFailoverRequest) async throws -> any GoogleGax
       .PollableOperation<DatabaseFailoverResponse>
 
     /// See `EnvironmentsClient.fetchDatabaseProperties`.
@@ -877,192 +874,192 @@ extension Clients {
 
     /// See `EnvironmentsClient.createEnvironment`.
     func createEnvironment(
-      request: CreateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.createEnvironment`.
     func createEnvironment(
-      withPolling: CreateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Environment>
+      withPolling: CreateEnvironmentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Environment>
 
     /// See `EnvironmentsClient.getEnvironment`.
     func getEnvironment(
-      request: GetEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.Environment
 
     /// See `EnvironmentsClient.listEnvironments`.
     func listEnvironments(
-      request: ListEnvironmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEnvironmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListEnvironmentsResponse
 
     /// See `EnvironmentsClient.listEnvironments`.
     func listEnvironments(
-      byItem: ListEnvironmentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEnvironmentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Environment, Swift.Error>
 
     /// See `EnvironmentsClient.updateEnvironment`.
     func updateEnvironment(
-      request: UpdateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.updateEnvironment`.
     func updateEnvironment(
-      withPolling: UpdateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Environment>
+      withPolling: UpdateEnvironmentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Environment>
 
     /// See `EnvironmentsClient.deleteEnvironment`.
     func deleteEnvironment(
-      request: DeleteEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.deleteEnvironment`.
     func deleteEnvironment(
-      withPolling: DeleteEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteEnvironmentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `EnvironmentsClient.executeAirflowCommand`.
     func executeAirflowCommand(
-      request: ExecuteAirflowCommandRequest, options: GoogleCloudGax.RequestOptions
+      request: ExecuteAirflowCommandRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ExecuteAirflowCommandResponse
 
     /// See `EnvironmentsClient.stopAirflowCommand`.
     func stopAirflowCommand(
-      request: StopAirflowCommandRequest, options: GoogleCloudGax.RequestOptions
+      request: StopAirflowCommandRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.StopAirflowCommandResponse
 
     /// See `EnvironmentsClient.pollAirflowCommand`.
     func pollAirflowCommand(
-      request: PollAirflowCommandRequest, options: GoogleCloudGax.RequestOptions
+      request: PollAirflowCommandRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.PollAirflowCommandResponse
 
     /// See `EnvironmentsClient.listWorkloads`.
     func listWorkloads(
-      request: ListWorkloadsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWorkloadsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListWorkloadsResponse
 
     /// See `EnvironmentsClient.listWorkloads`.
     func listWorkloads(
-      byItem: ListWorkloadsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListWorkloadsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ListWorkloadsResponse.ComposerWorkload, Swift.Error>
 
     /// See `EnvironmentsClient.checkUpgrade`.
     func checkUpgrade(
-      request: CheckUpgradeRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckUpgradeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.checkUpgrade`.
     func checkUpgrade(
-      withPolling: CheckUpgradeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CheckUpgradeResponse>
+      withPolling: CheckUpgradeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CheckUpgradeResponse>
 
     /// See `EnvironmentsClient.createUserWorkloadsSecret`.
     func createUserWorkloadsSecret(
-      request: CreateUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsSecret
 
     /// See `EnvironmentsClient.getUserWorkloadsSecret`.
     func getUserWorkloadsSecret(
-      request: GetUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: GetUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsSecret
 
     /// See `EnvironmentsClient.listUserWorkloadsSecrets`.
     func listUserWorkloadsSecrets(
-      request: ListUserWorkloadsSecretsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUserWorkloadsSecretsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListUserWorkloadsSecretsResponse
 
     /// See `EnvironmentsClient.listUserWorkloadsSecrets`.
     func listUserWorkloadsSecrets(
-      byItem: ListUserWorkloadsSecretsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListUserWorkloadsSecretsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<UserWorkloadsSecret, Swift.Error>
 
     /// See `EnvironmentsClient.updateUserWorkloadsSecret`.
     func updateUserWorkloadsSecret(
-      request: UpdateUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsSecret
 
     /// See `EnvironmentsClient.deleteUserWorkloadsSecret`.
     func deleteUserWorkloadsSecret(
-      request: DeleteUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `EnvironmentsClient.createUserWorkloadsConfigMap`.
     func createUserWorkloadsConfigMap(
-      request: CreateUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsConfigMap
 
     /// See `EnvironmentsClient.getUserWorkloadsConfigMap`.
     func getUserWorkloadsConfigMap(
-      request: GetUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+      request: GetUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsConfigMap
 
     /// See `EnvironmentsClient.listUserWorkloadsConfigMaps`.
     func listUserWorkloadsConfigMaps(
-      request: ListUserWorkloadsConfigMapsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUserWorkloadsConfigMapsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListUserWorkloadsConfigMapsResponse
 
     /// See `EnvironmentsClient.listUserWorkloadsConfigMaps`.
     func listUserWorkloadsConfigMaps(
-      byItem: ListUserWorkloadsConfigMapsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListUserWorkloadsConfigMapsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<UserWorkloadsConfigMap, Swift.Error>
 
     /// See `EnvironmentsClient.updateUserWorkloadsConfigMap`.
     func updateUserWorkloadsConfigMap(
-      request: UpdateUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsConfigMap
 
     /// See `EnvironmentsClient.deleteUserWorkloadsConfigMap`.
     func deleteUserWorkloadsConfigMap(
-      request: DeleteUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `EnvironmentsClient.saveSnapshot`.
     func saveSnapshot(
-      request: SaveSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: SaveSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.saveSnapshot`.
     func saveSnapshot(
-      withPolling: SaveSnapshotRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SaveSnapshotResponse>
+      withPolling: SaveSnapshotRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SaveSnapshotResponse>
 
     /// See `EnvironmentsClient.loadSnapshot`.
     func loadSnapshot(
-      request: LoadSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: LoadSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.loadSnapshot`.
     func loadSnapshot(
-      withPolling: LoadSnapshotRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<LoadSnapshotResponse>
+      withPolling: LoadSnapshotRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<LoadSnapshotResponse>
 
     /// See `EnvironmentsClient.databaseFailover`.
     func databaseFailover(
-      request: DatabaseFailoverRequest, options: GoogleCloudGax.RequestOptions
+      request: DatabaseFailoverRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EnvironmentsClient.databaseFailover`.
     func databaseFailover(
-      withPolling: DatabaseFailoverRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DatabaseFailoverResponse>
+      withPolling: DatabaseFailoverRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DatabaseFailoverResponse>
 
     /// See `EnvironmentsClient.fetchDatabaseProperties`.
     func fetchDatabaseProperties(
-      request: FetchDatabasePropertiesRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchDatabasePropertiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.FetchDatabasePropertiesResponse
 
     /// See `EnvironmentsClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `EnvironmentsClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `EnvironmentsClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1076,31 +1073,31 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func createEnvironment(
-    request: CreateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createEnvironment(withPolling: CreateEnvironmentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Environment>
+  public func createEnvironment(withPolling: CreateEnvironmentRequest) async throws -> any GoogleGax
+    .PollableOperation<Environment>
   {
     try await self.createEnvironment(withPolling: withPolling, options: .init())
   }
 
   public func createEnvironment(
-    withPolling: CreateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Environment> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Environment>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateEnvironmentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Environment> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Environment>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func createEnvironment(
     parent: Swift.String,
     environment: Environment?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Environment> {
+  ) async throws -> any GoogleGax.PollableOperation<Environment> {
     let request = CreateEnvironmentRequest().with {
       $0.parent = parent
       $0.environment = environment
@@ -1115,9 +1112,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func getEnvironment(
-    request: GetEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.Environment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getEnvironment(
@@ -1136,9 +1133,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func listEnvironments(
-    request: ListEnvironmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEnvironmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListEnvironmentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listEnvironments(
@@ -1148,14 +1145,14 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func listEnvironments(
-    byItem: ListEnvironmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEnvironmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Environment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudOrchestrationAirflowServiceV1.ListEnvironmentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listEnvironments(
@@ -1174,32 +1171,32 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func updateEnvironment(
-    request: UpdateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateEnvironment(withPolling: UpdateEnvironmentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Environment>
+  public func updateEnvironment(withPolling: UpdateEnvironmentRequest) async throws -> any GoogleGax
+    .PollableOperation<Environment>
   {
     try await self.updateEnvironment(withPolling: withPolling, options: .init())
   }
 
   public func updateEnvironment(
-    withPolling: UpdateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Environment> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Environment>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateEnvironmentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Environment> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Environment>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateEnvironment(
     name: Swift.String,
     environment: Environment?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Environment> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Environment> {
     let request = UpdateEnvironmentRequest().with {
       $0.name = name
       $0.environment = environment
@@ -1215,30 +1212,30 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func deleteEnvironment(
-    request: DeleteEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteEnvironment(withPolling: DeleteEnvironmentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteEnvironment(withPolling: DeleteEnvironmentRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteEnvironment(withPolling: withPolling, options: .init())
   }
 
   public func deleteEnvironment(
-    withPolling: DeleteEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteEnvironmentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteEnvironment(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteEnvironmentRequest().with {
       $0.name = name
     }
@@ -1252,9 +1249,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func executeAirflowCommand(
-    request: ExecuteAirflowCommandRequest, options: GoogleCloudGax.RequestOptions
+    request: ExecuteAirflowCommandRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ExecuteAirflowCommandResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func stopAirflowCommand(request: StopAirflowCommandRequest) async throws
@@ -1264,9 +1261,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func stopAirflowCommand(
-    request: StopAirflowCommandRequest, options: GoogleCloudGax.RequestOptions
+    request: StopAirflowCommandRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.StopAirflowCommandResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func pollAirflowCommand(request: PollAirflowCommandRequest) async throws
@@ -1276,9 +1273,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func pollAirflowCommand(
-    request: PollAirflowCommandRequest, options: GoogleCloudGax.RequestOptions
+    request: PollAirflowCommandRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.PollAirflowCommandResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listWorkloads(request: ListWorkloadsRequest) async throws
@@ -1288,9 +1285,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func listWorkloads(
-    request: ListWorkloadsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListWorkloadsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListWorkloadsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listWorkloads(
@@ -1300,14 +1297,14 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func listWorkloads(
-    byItem: ListWorkloadsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListWorkloadsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ListWorkloadsResponse.ComposerWorkload, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudOrchestrationAirflowServiceV1.ListWorkloadsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listWorkloads(
@@ -1325,25 +1322,24 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func checkUpgrade(
-    request: CheckUpgradeRequest, options: GoogleCloudGax.RequestOptions
+    request: CheckUpgradeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func checkUpgrade(withPolling: CheckUpgradeRequest) async throws -> any GoogleCloudGax
+  public func checkUpgrade(withPolling: CheckUpgradeRequest) async throws -> any GoogleGax
     .PollableOperation<CheckUpgradeResponse>
   {
     try await self.checkUpgrade(withPolling: withPolling, options: .init())
   }
 
   public func checkUpgrade(
-    withPolling: CheckUpgradeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CheckUpgradeResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CheckUpgradeResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CheckUpgradeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CheckUpgradeResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CheckUpgradeResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1354,9 +1350,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func createUserWorkloadsSecret(
-    request: CreateUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsSecret {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createUserWorkloadsSecret(
@@ -1377,9 +1373,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func getUserWorkloadsSecret(
-    request: GetUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+    request: GetUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsSecret {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getUserWorkloadsSecret(
@@ -1398,9 +1394,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func listUserWorkloadsSecrets(
-    request: ListUserWorkloadsSecretsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUserWorkloadsSecretsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListUserWorkloadsSecretsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listUserWorkloadsSecrets(
@@ -1410,14 +1406,14 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func listUserWorkloadsSecrets(
-    byItem: ListUserWorkloadsSecretsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUserWorkloadsSecretsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<UserWorkloadsSecret, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudOrchestrationAirflowServiceV1.ListUserWorkloadsSecretsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listUserWorkloadsSecrets(
@@ -1436,9 +1432,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func updateUserWorkloadsSecret(
-    request: UpdateUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsSecret {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateUserWorkloadsSecret(
@@ -1455,9 +1451,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func deleteUserWorkloadsSecret(
-    request: DeleteUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteUserWorkloadsSecret(
@@ -1476,9 +1472,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func createUserWorkloadsConfigMap(
-    request: CreateUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsConfigMap {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createUserWorkloadsConfigMap(
@@ -1499,9 +1495,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func getUserWorkloadsConfigMap(
-    request: GetUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+    request: GetUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsConfigMap {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getUserWorkloadsConfigMap(
@@ -1520,9 +1516,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func listUserWorkloadsConfigMaps(
-    request: ListUserWorkloadsConfigMapsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUserWorkloadsConfigMapsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListUserWorkloadsConfigMapsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listUserWorkloadsConfigMaps(
@@ -1532,14 +1528,14 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func listUserWorkloadsConfigMaps(
-    byItem: ListUserWorkloadsConfigMapsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUserWorkloadsConfigMapsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<UserWorkloadsConfigMap, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudOrchestrationAirflowServiceV1.ListUserWorkloadsConfigMapsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listUserWorkloadsConfigMaps(
@@ -1558,9 +1554,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func updateUserWorkloadsConfigMap(
-    request: UpdateUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsConfigMap {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateUserWorkloadsConfigMap(
@@ -1579,9 +1575,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func deleteUserWorkloadsConfigMap(
-    request: DeleteUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteUserWorkloadsConfigMap(
@@ -1599,25 +1595,24 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func saveSnapshot(
-    request: SaveSnapshotRequest, options: GoogleCloudGax.RequestOptions
+    request: SaveSnapshotRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func saveSnapshot(withPolling: SaveSnapshotRequest) async throws -> any GoogleCloudGax
+  public func saveSnapshot(withPolling: SaveSnapshotRequest) async throws -> any GoogleGax
     .PollableOperation<SaveSnapshotResponse>
   {
     try await self.saveSnapshot(withPolling: withPolling, options: .init())
   }
 
   public func saveSnapshot(
-    withPolling: SaveSnapshotRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SaveSnapshotResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<SaveSnapshotResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: SaveSnapshotRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SaveSnapshotResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SaveSnapshotResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1627,25 +1622,24 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func loadSnapshot(
-    request: LoadSnapshotRequest, options: GoogleCloudGax.RequestOptions
+    request: LoadSnapshotRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func loadSnapshot(withPolling: LoadSnapshotRequest) async throws -> any GoogleCloudGax
+  public func loadSnapshot(withPolling: LoadSnapshotRequest) async throws -> any GoogleGax
     .PollableOperation<LoadSnapshotResponse>
   {
     try await self.loadSnapshot(withPolling: withPolling, options: .init())
   }
 
   public func loadSnapshot(
-    withPolling: LoadSnapshotRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LoadSnapshotResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<LoadSnapshotResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: LoadSnapshotRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LoadSnapshotResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LoadSnapshotResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1656,25 +1650,25 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func databaseFailover(
-    request: DatabaseFailoverRequest, options: GoogleCloudGax.RequestOptions
+    request: DatabaseFailoverRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func databaseFailover(withPolling: DatabaseFailoverRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DatabaseFailoverResponse>
+  public func databaseFailover(withPolling: DatabaseFailoverRequest) async throws -> any GoogleGax
+    .PollableOperation<DatabaseFailoverResponse>
   {
     try await self.databaseFailover(withPolling: withPolling, options: .init())
   }
 
   public func databaseFailover(
-    withPolling: DatabaseFailoverRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DatabaseFailoverResponse> {
+    withPolling: DatabaseFailoverRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DatabaseFailoverResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DatabaseFailoverResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<DatabaseFailoverResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1685,9 +1679,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func fetchDatabaseProperties(
-    request: FetchDatabasePropertiesRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchDatabasePropertiesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.FetchDatabasePropertiesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1697,9 +1691,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1709,13 +1703,13 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1736,9 +1730,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1755,9 +1749,9 @@ extension Clients.EnvironmentsProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(

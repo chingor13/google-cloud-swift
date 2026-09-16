@@ -16,13 +16,13 @@
 
 #if FeatureOnlineStoreService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The request message for
   /// [FeatureOnlineStoreService.SearchNearestEntities][google.cloud.aiplatform.v1.FeatureOnlineStoreService.SearchNearestEntities].
   ///
   /// [google.cloud.aiplatform.v1.FeatureOnlineStoreService.SearchNearestEntities]: <doc:FeatureOnlineStoreServiceClient/searchNearestEntities(request:options:)>
-  public struct SearchNearestEntitiesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SearchNearestEntitiesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. FeatureView resource format
@@ -38,7 +38,7 @@
     /// entities will significantly increase the latency and cost of the query.
     public var returnFullEntity: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SearchNearestEntitiesRequest`.
     public init() {}
@@ -84,7 +84,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -101,11 +101,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SearchNearestEntitiesRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

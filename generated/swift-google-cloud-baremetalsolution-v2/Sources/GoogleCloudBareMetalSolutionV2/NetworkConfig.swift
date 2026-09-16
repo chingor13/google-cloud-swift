@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration parameters for a new network.
-public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The name of the network config.
@@ -58,7 +58,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The JumboFramesEnabled option for customer to set.
   public var jumboFramesEnabled: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NetworkConfig`.
   public init() {}
@@ -150,7 +150,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -173,7 +173,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// A GCP vlan attachment.
-  public struct IntakeVlanAttachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IntakeVlanAttachment: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Identifier of the VLAN attachment.
@@ -182,7 +182,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Attachment pairing key.
     public var pairingKey: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IntakeVlanAttachment`.
     public init() {}
@@ -225,7 +225,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -242,11 +242,11 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.baremetalsolution.v2.NetworkConfig.IntakeVlanAttachment"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -596,10 +596,10 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.baremetalsolution.v2.NetworkConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

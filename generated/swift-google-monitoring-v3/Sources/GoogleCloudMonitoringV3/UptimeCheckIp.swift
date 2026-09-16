@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Contains the region, location, and list of IP
 /// addresses where checkers in the location run from.
-public struct UptimeCheckIp: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UptimeCheckIp: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A broad region category in which the IP address is located.
@@ -37,7 +37,7 @@ public struct UptimeCheckIp: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// interpreting this field in either IPv4 or IPv6 format.
   public var ipAddress: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UptimeCheckIp`.
   public init() {}
@@ -85,7 +85,7 @@ public struct UptimeCheckIp: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,10 +102,10 @@ public struct UptimeCheckIp: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.UptimeCheckIp"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

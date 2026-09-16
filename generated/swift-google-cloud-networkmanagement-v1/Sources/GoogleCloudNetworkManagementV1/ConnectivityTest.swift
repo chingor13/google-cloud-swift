@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Connectivity Test for a network reachability analysis.
-public struct ConnectivityTest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ConnectivityTest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Unique name of the resource using the form:
@@ -63,10 +63,10 @@ public struct ConnectivityTest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var labels: [Swift.String: Swift.String] = [:]
 
   /// Output only. The time the test was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time the test's configuration was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The reachability details of this test from the latest run.
   /// The details are updated when creating a new test, updating an
@@ -92,7 +92,7 @@ public struct ConnectivityTest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Whether the analysis should skip firewall checking. Default value is false.
   public var bypassFirewallChecks: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ConnectivityTest`.
   public init() {}
@@ -174,10 +174,8 @@ public struct ConnectivityTest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.labels = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     self.reachabilityDetails = try container.decodeIfPresent(
       ReachabilityDetails.self, forKey: .reachabilityDetails)
     self.probingDetails = try container.decodeIfPresent(
@@ -192,7 +190,7 @@ public struct ConnectivityTest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -222,10 +220,10 @@ public struct ConnectivityTest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkmanagement.v1.ConnectivityTest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

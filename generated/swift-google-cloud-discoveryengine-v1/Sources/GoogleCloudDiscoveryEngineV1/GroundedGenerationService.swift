@@ -19,9 +19,9 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for grounded generation.
   ///
@@ -32,7 +32,7 @@
     let inner: any Clients.GroundedGenerationServiceStub
 
     /// Creates a new `GroundedGenerationServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.GroundedGenerationServiceStub =
         try Clients.GroundedGenerationServiceTransport(options)
       inner = Clients.GroundedGenerationServiceRetry(inner, options: options)
@@ -46,7 +46,7 @@
     ///
     /// @Snippet(path: "GroundedGenerationService_StreamGenerateGroundedContent")
     public func streamGenerateGroundedContent(
-      request: GenerateGroundedContentRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateGroundedContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.GenerateGroundedContentResponse {
       try await self.inner.streamGenerateGroundedContent(request: request, options: options)
     }
@@ -55,7 +55,7 @@
     ///
     /// @Snippet(path: "GroundedGenerationService_GenerateGroundedContent")
     public func generateGroundedContent(
-      request: GenerateGroundedContentRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateGroundedContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.GenerateGroundedContentResponse {
       try await self.inner.generateGroundedContent(request: request, options: options)
     }
@@ -64,7 +64,7 @@
     ///
     /// @Snippet(path: "GroundedGenerationService_CheckGrounding")
     public func checkGrounding(
-      request: CheckGroundingRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckGroundingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.CheckGroundingResponse {
       try await self.inner.checkGrounding(request: request, options: options)
     }
@@ -75,7 +75,7 @@
     ///
     /// @Snippet(path: "GroundedGenerationService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -86,7 +86,7 @@
     ///
     /// @Snippet(path: "GroundedGenerationService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -94,7 +94,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -103,7 +103,7 @@
     ///
     /// @Snippet(path: "GroundedGenerationService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -114,7 +114,7 @@
     ///
     /// @Snippet(path: "GroundedGenerationService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -164,32 +164,32 @@
 
       /// See `GroundedGenerationServiceClient.streamGenerateGroundedContent`.
       func streamGenerateGroundedContent(
-        request: GenerateGroundedContentRequest, options: GoogleCloudGax.RequestOptions
+        request: GenerateGroundedContentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.GenerateGroundedContentResponse
 
       /// See `GroundedGenerationServiceClient.generateGroundedContent`.
       func generateGroundedContent(
-        request: GenerateGroundedContentRequest, options: GoogleCloudGax.RequestOptions
+        request: GenerateGroundedContentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.GenerateGroundedContentResponse
 
       /// See `GroundedGenerationServiceClient.checkGrounding`.
       func checkGrounding(
-        request: CheckGroundingRequest, options: GoogleCloudGax.RequestOptions
+        request: CheckGroundingRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.CheckGroundingResponse
 
       /// See `GroundedGenerationServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `GroundedGenerationServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `GroundedGenerationServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -203,9 +203,9 @@
     }
 
     public func streamGenerateGroundedContent(
-      request: GenerateGroundedContentRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateGroundedContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.GenerateGroundedContentResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func generateGroundedContent(request: GenerateGroundedContentRequest) async throws
@@ -215,9 +215,9 @@
     }
 
     public func generateGroundedContent(
-      request: GenerateGroundedContentRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateGroundedContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.GenerateGroundedContentResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func checkGrounding(request: CheckGroundingRequest) async throws
@@ -227,9 +227,9 @@
     }
 
     public func checkGrounding(
-      request: CheckGroundingRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckGroundingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.CheckGroundingResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -239,9 +239,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -251,13 +251,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -278,9 +278,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -297,9 +297,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

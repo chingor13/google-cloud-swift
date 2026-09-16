@@ -16,11 +16,11 @@
 
 import Foundation
 import GoogleApi
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Cloud Run Instance represents a single group of containers running in a
 /// region.
-public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The fully qualified name of this Instance. In CreateInstanceRequest, this
@@ -51,17 +51,17 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var annotations: [Swift.String: Swift.String] = [:]
 
   /// Output only. The creation time.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The last-modified time.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The deletion time.
-  public var deleteTime: GoogleCloudWKT.Timestamp? = nil
+  public var deleteTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. For a deleted resource, the time after which it will be
   /// permamently deleted.
-  public var expireTime: GoogleCloudWKT.Timestamp? = nil
+  public var expireTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Email address of the authenticated creator.
   public var creator: Swift.String = Swift.String()
@@ -115,7 +115,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// If encryption_key_revocation_action is SHUTDOWN, the duration before
   /// shutting down all instances. The minimum increment is 1 hour.
-  public var encryptionKeyShutdownDuration: GoogleCloudWKT.Duration? = nil
+  public var encryptionKeyShutdownDuration: GoogleWKT.Duration? = nil
 
   /// Optional. The node selector for the instance.
   public var nodeSelector: NodeSelector? = nil
@@ -186,7 +186,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// resource. May be used to detect modification conflict during updates.
   public var etag: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Instance`.
   public init() {}
@@ -314,14 +314,10 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.annotations = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
-    self.deleteTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deleteTime)
-    self.expireTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .expireTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
+    self.deleteTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deleteTime)
+    self.expireTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .expireTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .creator) {
       self.creator = value
     }
@@ -358,7 +354,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.encryptionKeyRevocationAction = value
     }
     self.encryptionKeyShutdownDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .encryptionKeyShutdownDuration)
+      GoogleWKT.Duration.self, forKey: .encryptionKeyShutdownDuration)
     self.nodeSelector = try container.decodeIfPresent(NodeSelector.self, forKey: .nodeSelector)
     self.gpuZonalRedundancyDisabled = try container.decodeIfPresent(
       Swift.Bool.self, forKey: .gpuZonalRedundancyDisabled)
@@ -400,7 +396,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -453,10 +449,10 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.Instance"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,47 +16,46 @@
 
 #if RegionHealthSources
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionHealthSourcesStub: Sendable {
       func aggregatedList(
-        request: RegionHealthSourcesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionHealthSourcesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthSourceAggregatedList
 
       func delete(
-        request: RegionHealthSourcesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionHealthSourcesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RegionHealthSourcesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionHealthSourcesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthSource
 
       func getHealth(
-        request: RegionHealthSourcesClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionHealthSourcesClient.GetHealthRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthSourceHealth
 
       func insert(
-        request: RegionHealthSourcesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionHealthSourcesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RegionHealthSourcesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionHealthSourcesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HealthSourceList
 
       func patch(
-        request: RegionHealthSourcesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionHealthSourcesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
         request: RegionHealthSourcesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,29 +58,29 @@
       }
 
       public func aggregatedList(
-        request: NodeTemplatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTemplateAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           name: "aggregatedList",
           action: {
-            (r: NodeTemplatesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.NodeTemplateAggregatedList
+            (r: NodeTemplatesClient.AggregatedListRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.NodeTemplateAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func delete(
-        request: NodeTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: NodeTemplatesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: NodeTemplatesClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -88,14 +88,14 @@
       }
 
       public func `get`(
-        request: NodeTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTemplate {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: NodeTemplatesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: NodeTemplatesClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.NodeTemplate
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -103,29 +103,29 @@
       }
 
       public func getIamPolicy(
-        request: NodeTemplatesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "getIamPolicy",
           action: {
-            (r: NodeTemplatesClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Policy
+            (r: NodeTemplatesClient.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
           })
       }
 
       public func insert(
-        request: NodeTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: NodeTemplatesClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: NodeTemplatesClient.InsertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -133,14 +133,14 @@
       }
 
       public func list(
-        request: NodeTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTemplateList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: NodeTemplatesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: NodeTemplatesClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.NodeTemplateList
             in
             return try await self.inner.list(request: r, options: o)
@@ -148,30 +148,29 @@
       }
 
       public func setIamPolicy(
-        request: NodeTemplatesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "setIamPolicy",
           action: {
-            (r: NodeTemplatesClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Policy
+            (r: NodeTemplatesClient.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
           })
       }
 
       public func testIamPermissions(
-        request: NodeTemplatesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeTemplatesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "testIamPermissions",
           action: {
-            (r: NodeTemplatesClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: NodeTemplatesClient.TestIamPermissionsRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
@@ -179,14 +178,14 @@
       }
 
       public func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: RegionOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudVMwareEngineV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: VmwareEngineClient, projectId: String, locationId: String, networkPolicyId: String,

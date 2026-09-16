@@ -16,13 +16,13 @@
 
 #if TensorboardService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [TensorboardService.CreateTensorboardRun][google.cloud.aiplatform.v1.TensorboardService.CreateTensorboardRun].
   ///
   /// [google.cloud.aiplatform.v1.TensorboardService.CreateTensorboardRun]: <doc:TensorboardServiceClient/createTensorboardRun(request:options:)>
-  public struct CreateTensorboardRunRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CreateTensorboardRunRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The resource name of the TensorboardExperiment to create the
@@ -40,7 +40,7 @@
     /// are `/[a-z][0-9]-/`.
     public var tensorboardRunId: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CreateTensorboardRunRequest`.
     public init() {}
@@ -87,7 +87,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -104,11 +104,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.CreateTensorboardRunRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

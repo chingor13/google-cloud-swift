@@ -16,14 +16,14 @@
 
 #if Participants || Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Events allow for matching intents by event name instead of the natural
   /// language input. For instance, input `<event: { name: "welcome_event",
   /// parameters: { name: "Sam" } }>` can trigger a personalized welcome response.
   /// The parameter `name` may be used by the agent in the response:
   /// `"Hello #welcome_event.name! What can I do for you today?"`.
-  public struct EventInput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EventInput: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The unique identifier of the event.
@@ -43,7 +43,7 @@
     /// * MapValue value: If parameter's entity type is a composite entity then use
     /// map from composite entity property names to property values, otherwise,
     /// use parameter value.
-    public var parameters: GoogleCloudWKT.Struct? = nil
+    public var parameters: GoogleWKT.Struct? = nil
 
     /// Required. The language of this query. See [Language
     /// Support](https://cloud.google.com/dialogflow/docs/reference/language)
@@ -58,7 +58,7 @@
     /// [google.cloud.dialogflow.v2.WebhookResponse.followup_event_input]: <doc:WebhookResponse/followupEventInput>
     public var languageCode: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EventInput`.
     public init() {}
@@ -98,14 +98,13 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
         self.name = value
       }
-      self.parameters = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .parameters)
+      self.parameters = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .parameters)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .languageCode) {
         self.languageCode = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -122,11 +121,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.EventInput"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

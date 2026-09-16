@@ -16,13 +16,13 @@
 
 #if FeaturestoreService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [FeaturestoreService.BatchReadFeatureValues][google.cloud.aiplatform.v1.FeaturestoreService.BatchReadFeatureValues].
   ///
   /// [google.cloud.aiplatform.v1.FeaturestoreService.BatchReadFeatureValues]: <doc:FeaturestoreServiceClient/batchReadFeatureValues(request:options:)>
-  public struct BatchReadFeatureValuesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BatchReadFeatureValuesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The resource name of the Featurestore from which to query Feature
@@ -49,11 +49,11 @@
     /// Optional. Excludes Feature values with feature generation timestamp before
     /// this timestamp. If not set, retrieve oldest values kept in Feature Store.
     /// Timestamp, if present, must not have higher than millisecond precision.
-    public var startTime: GoogleCloudWKT.Timestamp? = nil
+    public var startTime: GoogleWKT.Timestamp? = nil
 
     public var readOption: OneOf_ReadOption? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BatchReadFeatureValuesRequest`.
     public init() {}
@@ -113,8 +113,7 @@
       {
         self.entityTypeSpecs = value
       }
-      self.startTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTime)
+      self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
 
       var readOption: OneOf_ReadOption? = nil
       let readOptionCheckAndSet = {
@@ -139,7 +138,7 @@
       self.readOption = readOption
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -165,7 +164,7 @@
     }
 
     /// Describe pass-through fields in read_instance source.
-    public struct PassThroughField: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PassThroughField: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The name of the field in the CSV header or the name of the
@@ -175,7 +174,7 @@
       /// [google.cloud.aiplatform.v1.Feature.name]: <doc:Feature/name>
       public var fieldName: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PassThroughField`.
       public init() {}
@@ -213,7 +212,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -229,17 +228,17 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.BatchReadFeatureValuesRequest.PassThroughField"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Selects Features of an EntityType to read values of and specifies read
     /// settings.
-    public struct EntityTypeSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct EntityTypeSpec: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. ID of the EntityType to select Features. The EntityType id is
@@ -257,7 +256,7 @@
       /// Per-Feature settings for the batch read.
       public var settings: [DestinationFeatureSetting] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `EntityTypeSpec`.
       public init() {}
@@ -306,7 +305,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -324,11 +323,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.BatchReadFeatureValuesRequest.EntityTypeSpec"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -365,11 +364,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.BatchReadFeatureValuesRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

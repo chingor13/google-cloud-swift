@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,29 +58,29 @@
       }
 
       public func aggregatedList(
-        request: SubnetworksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           name: "aggregatedList",
           action: {
-            (r: SubnetworksClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList
+            (r: SubnetworksClient.AggregatedListRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.SubnetworkAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func delete(
-        request: SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: SubnetworksClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SubnetworksClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -88,14 +88,14 @@
       }
 
       public func expandIpCidrRange(
-        request: SubnetworksClient.ExpandIpCidrRangeRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.ExpandIpCidrRangeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "expandIpCidrRange",
           action: {
-            (r: SubnetworksClient.ExpandIpCidrRangeRequest, o: GoogleCloudGax.RequestOptions)
+            (r: SubnetworksClient.ExpandIpCidrRangeRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.expandIpCidrRange(request: r, options: o)
@@ -103,14 +103,14 @@
       }
 
       public func `get`(
-        request: SubnetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Subnetwork {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: SubnetworksClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SubnetworksClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Subnetwork
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -118,29 +118,29 @@
       }
 
       public func getIamPolicy(
-        request: SubnetworksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "getIamPolicy",
           action: {
-            (r: SubnetworksClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Policy
+            (r: SubnetworksClient.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
           })
       }
 
       public func insert(
-        request: SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: SubnetworksClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SubnetworksClient.InsertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -148,14 +148,14 @@
       }
 
       public func list(
-        request: SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SubnetworkList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: SubnetworksClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SubnetworksClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.SubnetworkList
             in
             return try await self.inner.list(request: r, options: o)
@@ -163,14 +163,14 @@
       }
 
       public func listUsable(
-        request: SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.ListUsableRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           name: "listUsable",
           action: {
-            (r: SubnetworksClient.ListUsableRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SubnetworksClient.ListUsableRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList
             in
             return try await self.inner.listUsable(request: r, options: o)
@@ -178,14 +178,14 @@
       }
 
       public func patch(
-        request: SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (r: SubnetworksClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SubnetworksClient.PatchRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -193,15 +193,15 @@
       }
 
       public func setIamPolicy(
-        request: SubnetworksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "setIamPolicy",
           action: {
-            (r: SubnetworksClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Policy
+            (r: SubnetworksClient.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
           })
@@ -209,14 +209,14 @@
 
       public func setPrivateIpGoogleAccess(
         request: SubnetworksClient.SetPrivateIpGoogleAccessRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "setPrivateIpGoogleAccess",
           action: {
-            (r: SubnetworksClient.SetPrivateIpGoogleAccessRequest, o: GoogleCloudGax.RequestOptions)
+            (r: SubnetworksClient.SetPrivateIpGoogleAccessRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setPrivateIpGoogleAccess(request: r, options: o)
@@ -224,14 +224,14 @@
       }
 
       public func testIamPermissions(
-        request: SubnetworksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "testIamPermissions",
           action: {
-            (r: SubnetworksClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: SubnetworksClient.TestIamPermissionsRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
@@ -239,14 +239,14 @@
       }
 
       public func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: RegionOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

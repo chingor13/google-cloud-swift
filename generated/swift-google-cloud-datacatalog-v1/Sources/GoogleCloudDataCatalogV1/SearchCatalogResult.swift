@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Result in the response to a search request.
 ///
 /// Each result captures details of one entry that matches the search.
-public struct SearchCatalogResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SearchCatalogResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Type of the search result.
@@ -56,7 +56,7 @@ public struct SearchCatalogResult: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public var linkedResource: Swift.String = Swift.String()
 
   /// The last modification timestamp of the entry in the source system.
-  public var modifyTime: GoogleCloudWKT.Timestamp? = nil
+  public var modifyTime: GoogleWKT.Timestamp? = nil
 
   /// Fully qualified name (FQN) of the resource.
   ///
@@ -86,7 +86,7 @@ public struct SearchCatalogResult: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// `search_result_type` is `ENTRY`.
   public var system: OneOf_System? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SearchCatalogResult`.
   public init() {}
@@ -149,8 +149,7 @@ public struct SearchCatalogResult: Codable, Equatable, GoogleCloudWKT._AnyPackab
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .linkedResource) {
       self.linkedResource = value
     }
-    self.modifyTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .modifyTime)
+    self.modifyTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .modifyTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .fullyQualifiedName) {
       self.fullyQualifiedName = value
     }
@@ -184,7 +183,7 @@ public struct SearchCatalogResult: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.system = system
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -225,10 +224,10 @@ public struct SearchCatalogResult: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.v1.SearchCatalogResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

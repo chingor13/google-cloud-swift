@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for
 /// [BatchRecognize][google.cloud.speech.v2.Speech.BatchRecognize] that is
@@ -23,16 +23,16 @@ import Foundation
 ///
 /// [google.cloud.speech.v2.Speech.BatchRecognize]: <doc:SpeechClient/batchRecognize(request:options:)>
 /// [google.longrunning.Operation]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation
-public struct BatchRecognizeResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchRecognizeResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Map from filename to the final result for that file.
   public var results: [Swift.String: BatchRecognizeFileResult] = [:]
 
   /// When available, billed audio seconds for the corresponding request.
-  public var totalBilledDuration: GoogleCloudWKT.Duration? = nil
+  public var totalBilledDuration: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchRecognizeResponse`.
   public init() {}
@@ -73,10 +73,10 @@ public struct BatchRecognizeResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
       self.results = value
     }
     self.totalBilledDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .totalBilledDuration)
+      GoogleWKT.Duration.self, forKey: .totalBilledDuration)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -92,10 +92,10 @@ public struct BatchRecognizeResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.BatchRecognizeResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

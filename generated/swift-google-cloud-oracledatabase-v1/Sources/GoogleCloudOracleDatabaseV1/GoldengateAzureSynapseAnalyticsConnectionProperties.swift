@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The properties of GoldengateAzureSynapseAnalyticsConnection.
-public struct GoldengateAzureSynapseAnalyticsConnectionProperties: Codable, Equatable,
-  GoogleCloudWKT._AnyPackable,
+public struct GoldengateAzureSynapseAnalyticsConnectionProperties: Codable, Equatable, GoogleWKT
+    ._AnyPackable,
   Sendable
 {
   /// Optional. The technology type of AzureSynapseAnalyticsConnection.
@@ -38,7 +38,7 @@ public struct GoldengateAzureSynapseAnalyticsConnectionProperties: Codable, Equa
   /// the given technology.
   public var connectionPasswordOptions: OneOf_ConnectionPasswordOptions? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GoldengateAzureSynapseAnalyticsConnectionProperties`.
   public init() {}
@@ -110,7 +110,7 @@ public struct GoldengateAzureSynapseAnalyticsConnectionProperties: Codable, Equa
     self.connectionPasswordOptions = connectionPasswordOptions
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -150,10 +150,10 @@ public struct GoldengateAzureSynapseAnalyticsConnectionProperties: Codable, Equa
     return
       "type.googleapis.com/google.cloud.oracledatabase.v1.GoldengateAzureSynapseAnalyticsConnectionProperties"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

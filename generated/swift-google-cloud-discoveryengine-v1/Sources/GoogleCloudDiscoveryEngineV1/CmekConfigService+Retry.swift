@@ -19,28 +19,28 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class CmekConfigServiceRetry: CmekConfigServiceStub {
       let inner: any CmekConfigServiceStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any CmekConfigServiceStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any CmekConfigServiceStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -52,14 +52,14 @@
       }
 
       public func updateCmekConfig(
-        request: UpdateCmekConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateCmekConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: UpdateCmekConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateCmekConfigRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.updateCmekConfig(request: r, options: o)
@@ -67,14 +67,14 @@
       }
 
       public func getCmekConfig(
-        request: GetCmekConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: GetCmekConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.CmekConfig {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetCmekConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetCmekConfigRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.CmekConfig
             in
             return try await self.inner.getCmekConfig(request: r, options: o)
@@ -82,14 +82,14 @@
       }
 
       public func listCmekConfigs(
-        request: ListCmekConfigsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListCmekConfigsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListCmekConfigsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListCmekConfigsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListCmekConfigsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.ListCmekConfigsResponse
             in
             return try await self.inner.listCmekConfigs(request: r, options: o)
@@ -97,14 +97,14 @@
       }
 
       public func deleteCmekConfig(
-        request: DeleteCmekConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteCmekConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: DeleteCmekConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteCmekConfigRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteCmekConfig(request: r, options: o)
@@ -112,45 +112,45 @@
       }
 
       public func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.ListOperationsResponse
+            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.ListOperationsResponse
             in
             return try await self.inner.listOperations(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)
           })
       }
 
       public func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.cancelOperation(request: r, options: o)
           })
       }

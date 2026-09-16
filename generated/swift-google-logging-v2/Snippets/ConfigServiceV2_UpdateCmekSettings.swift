@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudLoggingV2
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ConfigServiceV2Client, projectId: String) async throws {
   let response = try await client.updateCmekSettings(
@@ -29,7 +29,7 @@ func sample(client: ConfigServiceV2Client, projectId: String) async throws {
         $0.cmekSettings = CmekSettings().with {
           $0.name = "projects/\(projectId)/cmekSettings"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

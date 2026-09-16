@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -40,9 +40,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,29 +59,28 @@ extension Clients {
     }
 
     public func createJob(
-      request: CreateJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Job {
       try await self._intercept(
         request: request,
         options: options,
         name: "createJob",
         action: {
-          (r: CreateJobRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudTalentV4.Job
+          (r: CreateJobRequest, o: GoogleGax.RequestOptions) async throws -> GoogleCloudTalentV4.Job
           in
           return try await self.inner.createJob(request: r, options: o)
         })
     }
 
     public func batchCreateJobs(
-      request: BatchCreateJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreateJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "batchCreateJobs",
         action: {
-          (r: BatchCreateJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BatchCreateJobsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.batchCreateJobs(request: r, options: o)
@@ -89,44 +88,42 @@ extension Clients {
     }
 
     public func getJob(
-      request: GetJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Job {
       try await self._intercept(
         request: request,
         options: options,
         name: "getJob",
         action: {
-          (r: GetJobRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudTalentV4.Job
+          (r: GetJobRequest, o: GoogleGax.RequestOptions) async throws -> GoogleCloudTalentV4.Job
           in
           return try await self.inner.getJob(request: r, options: o)
         })
     }
 
     public func updateJob(
-      request: UpdateJobRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Job {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateJob",
         action: {
-          (r: UpdateJobRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudTalentV4.Job
+          (r: UpdateJobRequest, o: GoogleGax.RequestOptions) async throws -> GoogleCloudTalentV4.Job
           in
           return try await self.inner.updateJob(request: r, options: o)
         })
     }
 
     public func batchUpdateJobs(
-      request: BatchUpdateJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchUpdateJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "batchUpdateJobs",
         action: {
-          (r: BatchUpdateJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BatchUpdateJobsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.batchUpdateJobs(request: r, options: o)
@@ -134,26 +131,26 @@ extension Clients {
     }
 
     public func deleteJob(
-      request: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteJob",
-        action: { (r: DeleteJobRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteJobRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteJob(request: r, options: o)
         })
     }
 
     public func batchDeleteJobs(
-      request: BatchDeleteJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchDeleteJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "batchDeleteJobs",
         action: {
-          (r: BatchDeleteJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BatchDeleteJobsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.batchDeleteJobs(request: r, options: o)
@@ -161,14 +158,14 @@ extension Clients {
     }
 
     public func listJobs(
-      request: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.ListJobsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listJobs",
         action: {
-          (r: ListJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListJobsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTalentV4.ListJobsResponse
           in
           return try await self.inner.listJobs(request: r, options: o)
@@ -176,14 +173,14 @@ extension Clients {
     }
 
     public func searchJobs(
-      request: SearchJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.SearchJobsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "searchJobs",
         action: {
-          (r: SearchJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchJobsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTalentV4.SearchJobsResponse
           in
           return try await self.inner.searchJobs(request: r, options: o)
@@ -191,14 +188,14 @@ extension Clients {
     }
 
     public func searchJobsForAlert(
-      request: SearchJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.SearchJobsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "searchJobsForAlert",
         action: {
-          (r: SearchJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchJobsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTalentV4.SearchJobsResponse
           in
           return try await self.inner.searchJobsForAlert(request: r, options: o)
@@ -206,14 +203,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

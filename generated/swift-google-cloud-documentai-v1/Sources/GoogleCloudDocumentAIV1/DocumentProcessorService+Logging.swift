@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -41,9 +41,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -60,14 +60,14 @@ extension Clients {
     }
 
     public func processDocument(
-      request: ProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: ProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ProcessResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "processDocument",
         action: {
-          (r: ProcessRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ProcessRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDocumentAIV1.ProcessResponse
           in
           return try await self.inner.processDocument(request: r, options: o)
@@ -75,14 +75,14 @@ extension Clients {
     }
 
     public func batchProcessDocuments(
-      request: BatchProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "batchProcessDocuments",
         action: {
-          (r: BatchProcessRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BatchProcessRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.batchProcessDocuments(request: r, options: o)
@@ -90,14 +90,14 @@ extension Clients {
     }
 
     public func fetchProcessorTypes(
-      request: FetchProcessorTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchProcessorTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.FetchProcessorTypesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "fetchProcessorTypes",
         action: {
-          (r: FetchProcessorTypesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FetchProcessorTypesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDocumentAIV1.FetchProcessorTypesResponse
           in
           return try await self.inner.fetchProcessorTypes(request: r, options: o)
@@ -105,14 +105,14 @@ extension Clients {
     }
 
     public func listProcessorTypes(
-      request: ListProcessorTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProcessorTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ListProcessorTypesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listProcessorTypes",
         action: {
-          (r: ListProcessorTypesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListProcessorTypesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDocumentAIV1.ListProcessorTypesResponse
           in
           return try await self.inner.listProcessorTypes(request: r, options: o)
@@ -120,14 +120,14 @@ extension Clients {
     }
 
     public func getProcessorType(
-      request: GetProcessorTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProcessorTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ProcessorType {
       try await self._intercept(
         request: request,
         options: options,
         name: "getProcessorType",
         action: {
-          (r: GetProcessorTypeRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetProcessorTypeRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDocumentAIV1.ProcessorType
           in
           return try await self.inner.getProcessorType(request: r, options: o)
@@ -135,14 +135,14 @@ extension Clients {
     }
 
     public func listProcessors(
-      request: ListProcessorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProcessorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ListProcessorsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listProcessors",
         action: {
-          (r: ListProcessorsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListProcessorsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDocumentAIV1.ListProcessorsResponse
           in
           return try await self.inner.listProcessors(request: r, options: o)
@@ -150,14 +150,14 @@ extension Clients {
     }
 
     public func getProcessor(
-      request: GetProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.Processor {
       try await self._intercept(
         request: request,
         options: options,
         name: "getProcessor",
         action: {
-          (r: GetProcessorRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetProcessorRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDocumentAIV1.Processor
           in
           return try await self.inner.getProcessor(request: r, options: o)
@@ -165,14 +165,14 @@ extension Clients {
     }
 
     public func trainProcessorVersion(
-      request: TrainProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: TrainProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "trainProcessorVersion",
         action: {
-          (r: TrainProcessorVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: TrainProcessorVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.trainProcessorVersion(request: r, options: o)
@@ -180,14 +180,14 @@ extension Clients {
     }
 
     public func getProcessorVersion(
-      request: GetProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ProcessorVersion {
       try await self._intercept(
         request: request,
         options: options,
         name: "getProcessorVersion",
         action: {
-          (r: GetProcessorVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetProcessorVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDocumentAIV1.ProcessorVersion
           in
           return try await self.inner.getProcessorVersion(request: r, options: o)
@@ -195,14 +195,14 @@ extension Clients {
     }
 
     public func listProcessorVersions(
-      request: ListProcessorVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProcessorVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ListProcessorVersionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listProcessorVersions",
         action: {
-          (r: ListProcessorVersionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListProcessorVersionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDocumentAIV1.ListProcessorVersionsResponse
           in
           return try await self.inner.listProcessorVersions(request: r, options: o)
@@ -210,14 +210,14 @@ extension Clients {
     }
 
     public func deleteProcessorVersion(
-      request: DeleteProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteProcessorVersion",
         action: {
-          (r: DeleteProcessorVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteProcessorVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteProcessorVersion(request: r, options: o)
@@ -225,14 +225,14 @@ extension Clients {
     }
 
     public func deployProcessorVersion(
-      request: DeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeployProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deployProcessorVersion",
         action: {
-          (r: DeployProcessorVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeployProcessorVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deployProcessorVersion(request: r, options: o)
@@ -240,14 +240,14 @@ extension Clients {
     }
 
     public func undeployProcessorVersion(
-      request: UndeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeployProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "undeployProcessorVersion",
         action: {
-          (r: UndeployProcessorVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UndeployProcessorVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.undeployProcessorVersion(request: r, options: o)
@@ -255,14 +255,14 @@ extension Clients {
     }
 
     public func createProcessor(
-      request: CreateProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.Processor {
       try await self._intercept(
         request: request,
         options: options,
         name: "createProcessor",
         action: {
-          (r: CreateProcessorRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateProcessorRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDocumentAIV1.Processor
           in
           return try await self.inner.createProcessor(request: r, options: o)
@@ -270,14 +270,14 @@ extension Clients {
     }
 
     public func deleteProcessor(
-      request: DeleteProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteProcessor",
         action: {
-          (r: DeleteProcessorRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteProcessorRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteProcessor(request: r, options: o)
@@ -285,14 +285,14 @@ extension Clients {
     }
 
     public func enableProcessor(
-      request: EnableProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: EnableProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "enableProcessor",
         action: {
-          (r: EnableProcessorRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: EnableProcessorRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.enableProcessor(request: r, options: o)
@@ -300,14 +300,14 @@ extension Clients {
     }
 
     public func disableProcessor(
-      request: DisableProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: DisableProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "disableProcessor",
         action: {
-          (r: DisableProcessorRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DisableProcessorRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.disableProcessor(request: r, options: o)
@@ -315,14 +315,14 @@ extension Clients {
     }
 
     public func setDefaultProcessorVersion(
-      request: SetDefaultProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: SetDefaultProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "setDefaultProcessorVersion",
         action: {
-          (r: SetDefaultProcessorVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SetDefaultProcessorVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.setDefaultProcessorVersion(request: r, options: o)
@@ -330,14 +330,14 @@ extension Clients {
     }
 
     public func reviewDocument(
-      request: ReviewDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: ReviewDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "reviewDocument",
         action: {
-          (r: ReviewDocumentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ReviewDocumentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.reviewDocument(request: r, options: o)
@@ -345,14 +345,14 @@ extension Clients {
     }
 
     public func evaluateProcessorVersion(
-      request: EvaluateProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: EvaluateProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "evaluateProcessorVersion",
         action: {
-          (r: EvaluateProcessorVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: EvaluateProcessorVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.evaluateProcessorVersion(request: r, options: o)
@@ -360,14 +360,14 @@ extension Clients {
     }
 
     public func getEvaluation(
-      request: GetEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.Evaluation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getEvaluation",
         action: {
-          (r: GetEvaluationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetEvaluationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDocumentAIV1.Evaluation
           in
           return try await self.inner.getEvaluation(request: r, options: o)
@@ -375,14 +375,14 @@ extension Clients {
     }
 
     public func listEvaluations(
-      request: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEvaluationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ListEvaluationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listEvaluations",
         action: {
-          (r: ListEvaluationsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListEvaluationsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDocumentAIV1.ListEvaluationsResponse
           in
           return try await self.inner.listEvaluations(request: r, options: o)
@@ -390,29 +390,29 @@ extension Clients {
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLocations",
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLocation",
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)
@@ -420,29 +420,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -450,15 +450,15 @@ extension Clients {
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "cancelOperation",
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

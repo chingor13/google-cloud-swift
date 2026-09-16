@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// References to the documents.
-public struct DocumentReference: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DocumentReference: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Name of the referenced document.
@@ -38,13 +38,13 @@ public struct DocumentReference: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public var documentIsFolder: Swift.Bool = Swift.Bool()
 
   /// Output only. The time when the document is last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the document is created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the document is deleted.
-  public var deleteTime: GoogleCloudWKT.Timestamp? = nil
+  public var deleteTime: GoogleWKT.Timestamp? = nil
 
   /// Document is a folder with retention policy.
   public var documentIsRetentionFolder: Swift.Bool = Swift.Bool()
@@ -52,7 +52,7 @@ public struct DocumentReference: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// Document is a folder with legal hold.
   public var documentIsLegalHoldFolder: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DocumentReference`.
   public init() {}
@@ -113,12 +113,9 @@ public struct DocumentReference: Codable, Equatable, GoogleCloudWKT._AnyPackable
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .documentIsFolder) {
       self.documentIsFolder = value
     }
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.deleteTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deleteTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.deleteTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deleteTime)
     if let value = try container.decodeIfPresent(
       Swift.Bool.self, forKey: .documentIsRetentionFolder)
     {
@@ -131,7 +128,7 @@ public struct DocumentReference: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -154,10 +151,10 @@ public struct DocumentReference: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contentwarehouse.v1.DocumentReference"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

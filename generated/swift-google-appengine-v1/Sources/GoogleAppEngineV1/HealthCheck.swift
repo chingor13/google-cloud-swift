@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Health checking configuration for VM instances. Unhealthy instances
 /// are killed and replaced with new instances. Only applicable for
 /// instances in App Engine flexible environment.
-public struct HealthCheck: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct HealthCheck: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Whether to explicitly disable health checks for this instance.
@@ -43,12 +43,12 @@ public struct HealthCheck: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var restartThreshold: Swift.UInt32 = Swift.UInt32()
 
   /// Interval between health checks.
-  public var checkInterval: GoogleCloudWKT.Duration? = nil
+  public var checkInterval: GoogleWKT.Duration? = nil
 
   /// Time before the health check is considered failed.
-  public var timeout: GoogleCloudWKT.Duration? = nil
+  public var timeout: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `HealthCheck`.
   public init() {}
@@ -109,11 +109,11 @@ public struct HealthCheck: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.restartThreshold = value
     }
     self.checkInterval = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .checkInterval)
-    self.timeout = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .timeout)
+      GoogleWKT.Duration.self, forKey: .checkInterval)
+    self.timeout = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeout)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -134,10 +134,10 @@ public struct HealthCheck: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.HealthCheck"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

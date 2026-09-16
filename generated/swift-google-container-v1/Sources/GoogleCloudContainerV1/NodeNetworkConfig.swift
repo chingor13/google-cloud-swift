@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Parameters for node pool-level network config.
-public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NodeNetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Input only. Whether to create a new range for pod IPs in this node pool.
@@ -122,7 +122,7 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// machine types, zone, etc.
   public var acceleratorNetworkProfile: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NodeNetworkConfig`.
   public init() {}
@@ -220,7 +220,7 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -245,13 +245,13 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
   }
 
   /// Configuration of all network bandwidth tiers
-  public struct NetworkPerformanceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NetworkPerformanceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Specifies the total network bandwidth tier for the NodePool.
     public var totalEgressBandwidthTier: NodeNetworkConfig.NetworkPerformanceConfig.Tier? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NetworkPerformanceConfig`.
     public init() {}
@@ -288,7 +288,7 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
         NodeNetworkConfig.NetworkPerformanceConfig.Tier.self, forKey: .totalEgressBandwidthTier)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -402,21 +402,21 @@ public struct NodeNetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NodeNetworkConfig.NetworkPerformanceConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.NodeNetworkConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

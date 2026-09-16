@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A saved query which can be shared with others or used later.
-public struct SavedQuery: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SavedQuery: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the saved query. The format must be:
@@ -33,13 +33,13 @@ public struct SavedQuery: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var description: Swift.String = Swift.String()
 
   /// Output only. The create time of this saved query.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The account's email address who has created this saved query.
   public var creator: Swift.String = Swift.String()
 
   /// Output only. The last update time of this saved query.
-  public var lastUpdateTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastUpdateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The account's email address who has updated this saved query
   /// most recently.
@@ -53,7 +53,7 @@ public struct SavedQuery: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The query content.
   public var content: SavedQuery.QueryContent? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SavedQuery`.
   public init() {}
@@ -106,13 +106,12 @@ public struct SavedQuery: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .creator) {
       self.creator = value
     }
     self.lastUpdateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastUpdateTime)
+      GoogleWKT.Timestamp.self, forKey: .lastUpdateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .lastUpdater) {
       self.lastUpdater = value
     }
@@ -123,7 +122,7 @@ public struct SavedQuery: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.content = try container.decodeIfPresent(SavedQuery.QueryContent.self, forKey: .content)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -143,12 +142,12 @@ public struct SavedQuery: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The query content.
-  public struct QueryContent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QueryContent: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var queryContent: OneOf_QueryContent? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QueryContent`.
     public init() {}
@@ -200,7 +199,7 @@ public struct SavedQuery: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.queryContent = queryContent
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -234,21 +233,21 @@ public struct SavedQuery: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.asset.v1.SavedQuery.QueryContent"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.SavedQuery"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

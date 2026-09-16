@@ -15,33 +15,33 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol UptimeCheckServiceStub: Sendable {
     func listUptimeCheckConfigs(
-      request: ListUptimeCheckConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUptimeCheckConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckConfigsResponse
 
     func getUptimeCheckConfig(
-      request: GetUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig
 
     func createUptimeCheckConfig(
-      request: CreateUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig
 
     func updateUptimeCheckConfig(
-      request: UpdateUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig
 
     func deleteUptimeCheckConfig(
-      request: DeleteUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listUptimeCheckIps(
-      request: ListUptimeCheckIpsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUptimeCheckIpsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckIpsResponse
   }
 }

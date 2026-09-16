@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudVideoAIV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectNumberId: String, locationId: String, corpusId: String, ) async throws {
   let client = try GoogleCloudVideoAIV1.WarehouseClient()

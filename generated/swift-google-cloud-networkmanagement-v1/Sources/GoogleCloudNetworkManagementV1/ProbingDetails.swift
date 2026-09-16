@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Results of active probing from the last run of the test.
-public struct ProbingDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ProbingDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The overall result of active probing.
   public var result: ProbingDetails.ProbingResult = ProbingDetails.ProbingResult()
 
   /// The time that reachability was assessed through active probing.
-  public var verifyTime: GoogleCloudWKT.Timestamp? = nil
+  public var verifyTime: GoogleWKT.Timestamp? = nil
 
   /// Details about an internal failure or the cancellation of active probing.
   public var error: GoogleRpc.Status? = nil
@@ -62,7 +62,7 @@ public struct ProbingDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Whether all relevant edge devices were probed.
   public var probedAllDevices: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ProbingDetails`.
   public init() {}
@@ -119,8 +119,7 @@ public struct ProbingDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.result = value
     }
-    self.verifyTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .verifyTime)
+    self.verifyTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .verifyTime)
     self.error = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .error)
     if let value = try container.decodeIfPresent(
       ProbingDetails.ProbingAbortCause.self, forKey: .abortCause)
@@ -148,7 +147,7 @@ public struct ProbingDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -173,13 +172,13 @@ public struct ProbingDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Representation of a network edge location as per
   /// https://cloud.google.com/vpc/docs/edge-locations.
-  public struct EdgeLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EdgeLocation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Name of the metropolitan area.
     public var metropolitanArea: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EdgeLocation`.
     public init() {}
@@ -217,7 +216,7 @@ public struct ProbingDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -232,16 +231,16 @@ public struct ProbingDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkmanagement.v1.ProbingDetails.EdgeLocation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Probing results for a single edge device.
-  public struct SingleEdgeResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SingleEdgeResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The overall result of active probing for this egress device.
@@ -269,7 +268,7 @@ public struct ProbingDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// pf01.aaa01, pr02.aaa01.
     public var destinationRouter: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SingleEdgeResponse`.
     public init() {}
@@ -333,7 +332,7 @@ public struct ProbingDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -355,11 +354,11 @@ public struct ProbingDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.networkmanagement.v1.ProbingDetails.SingleEdgeResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -595,10 +594,10 @@ public struct ProbingDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkmanagement.v1.ProbingDetails"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

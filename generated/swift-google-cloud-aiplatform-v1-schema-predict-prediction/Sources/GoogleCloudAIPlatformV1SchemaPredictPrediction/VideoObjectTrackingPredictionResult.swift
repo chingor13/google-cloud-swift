@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Prediction output format for Video Object Tracking.
-public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource ID of the AnnotationSpec that had been identified.
@@ -31,23 +31,23 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
   /// object instance has been detected. Expressed as a number of seconds as
   /// measured from the start of the video, with fractions up to a microsecond
   /// precision, and with "s" appended at the end.
-  public var timeSegmentStart: GoogleCloudWKT.Duration? = nil
+  public var timeSegmentStart: GoogleWKT.Duration? = nil
 
   /// The end, inclusive, of the video's time segment in which the
   /// object instance has been detected. Expressed as a number of seconds as
   /// measured from the start of the video, with fractions up to a microsecond
   /// precision, and with "s" appended at the end.
-  public var timeSegmentEnd: GoogleCloudWKT.Duration? = nil
+  public var timeSegmentEnd: GoogleWKT.Duration? = nil
 
   /// The Model's confidence in correction of this prediction, higher
   /// value means higher confidence.
-  public var confidence: GoogleCloudWKT.FloatValue? = nil
+  public var confidence: GoogleWKT.FloatValue? = nil
 
   /// All of the frames of the video in which a single object instance has been
   /// detected. The bounding boxes in the frames identify the same object.
   public var frames: [VideoObjectTrackingPredictionResult.Frame] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VideoObjectTrackingPredictionResult`.
   public init() {}
@@ -97,11 +97,10 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
       self.displayName = value
     }
     self.timeSegmentStart = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .timeSegmentStart)
+      GoogleWKT.Duration.self, forKey: .timeSegmentStart)
     self.timeSegmentEnd = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .timeSegmentEnd)
-    self.confidence = try container.decodeIfPresent(
-      GoogleCloudWKT.FloatValue.self, forKey: .confidence)
+      GoogleWKT.Duration.self, forKey: .timeSegmentEnd)
+    self.confidence = try container.decodeIfPresent(GoogleWKT.FloatValue.self, forKey: .confidence)
     if let value = try container.decodeIfPresent(
       [VideoObjectTrackingPredictionResult.Frame].self, forKey: .frames)
     {
@@ -109,7 +108,7 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -130,28 +129,28 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
   /// i.e. the rectangle over the video frame pinpointing the found
   /// AnnotationSpec. The coordinates are relative to the frame size, and the
   /// point 0,0 is in the top left of the frame.
-  public struct Frame: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Frame: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A time (frame) of a video in which the object has been detected.
     /// Expressed as a number of seconds as measured from the
     /// start of the video, with fractions up to a microsecond precision, and
     /// with "s" appended at the end.
-    public var timeOffset: GoogleCloudWKT.Duration? = nil
+    public var timeOffset: GoogleWKT.Duration? = nil
 
     /// The leftmost coordinate of the bounding box.
-    public var xMin: GoogleCloudWKT.FloatValue? = nil
+    public var xMin: GoogleWKT.FloatValue? = nil
 
     /// The rightmost coordinate of the bounding box.
-    public var xMax: GoogleCloudWKT.FloatValue? = nil
+    public var xMax: GoogleWKT.FloatValue? = nil
 
     /// The topmost coordinate of the bounding box.
-    public var yMin: GoogleCloudWKT.FloatValue? = nil
+    public var yMin: GoogleWKT.FloatValue? = nil
 
     /// The bottommost coordinate of the bounding box.
-    public var yMax: GoogleCloudWKT.FloatValue? = nil
+    public var yMax: GoogleWKT.FloatValue? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Frame`.
     public init() {}
@@ -192,15 +191,14 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.timeOffset = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .timeOffset)
-      self.xMin = try container.decodeIfPresent(GoogleCloudWKT.FloatValue.self, forKey: .xMin)
-      self.xMax = try container.decodeIfPresent(GoogleCloudWKT.FloatValue.self, forKey: .xMax)
-      self.yMin = try container.decodeIfPresent(GoogleCloudWKT.FloatValue.self, forKey: .yMin)
-      self.yMax = try container.decodeIfPresent(GoogleCloudWKT.FloatValue.self, forKey: .yMax)
+      self.timeOffset = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeOffset)
+      self.xMin = try container.decodeIfPresent(GoogleWKT.FloatValue.self, forKey: .xMin)
+      self.xMax = try container.decodeIfPresent(GoogleWKT.FloatValue.self, forKey: .xMax)
+      self.yMin = try container.decodeIfPresent(GoogleWKT.FloatValue.self, forKey: .yMin)
+      self.yMax = try container.decodeIfPresent(GoogleWKT.FloatValue.self, forKey: .yMax)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -220,11 +218,11 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
       return
         "type.googleapis.com/google.cloud.aiplatform.v1.schema.predict.prediction.VideoObjectTrackingPredictionResult.Frame"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -232,10 +230,10 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
     return
       "type.googleapis.com/google.cloud.aiplatform.v1.schema.predict.prediction.VideoObjectTrackingPredictionResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

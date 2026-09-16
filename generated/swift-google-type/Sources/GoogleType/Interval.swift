@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a time interval, encoded as a Timestamp start (inclusive) and a
 /// Timestamp end (exclusive).
@@ -23,22 +23,22 @@ import Foundation
 /// The start must be less than or equal to the end.
 /// When the start equals the end, the interval is empty (matches no time).
 /// When both start and end are unspecified, the interval matches any time.
-public struct Interval: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Interval: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Inclusive start of the interval.
   ///
   /// If specified, a Timestamp matching this interval will have to be the same
   /// or after the start.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Exclusive end of the interval.
   ///
   /// If specified, a Timestamp matching this interval will have to be before the
   /// end.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Interval`.
   public init() {}
@@ -73,12 +73,11 @@ public struct Interval: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -94,10 +93,10 @@ public struct Interval: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.type.Interval"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

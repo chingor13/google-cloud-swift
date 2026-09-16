@@ -20,9 +20,9 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing [Experiments][google.cloud.dialogflow.cx.v3.Experiment].
   ///
@@ -33,7 +33,7 @@
     let inner: any Clients.ExperimentsStub
 
     /// Creates a new `ExperimentsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.ExperimentsStub = try Clients.ExperimentsTransport(options)
       inner = Clients.ExperimentsRetry(inner, options: options)
       if let logger = options.logger {
@@ -49,7 +49,7 @@
     ///
     /// @Snippet(path: "Experiments_ListExperiments")
     public func listExperiments(
-      request: ListExperimentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExperimentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListExperimentsResponse {
       try await self.inner.listExperiments(request: request, options: options)
     }
@@ -61,7 +61,7 @@
     ///
     /// @Snippet(path: "Experiments_ListExperiments")
     public func listExperiments(
-      byItem: ListExperimentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListExperimentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Experiment, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListExperimentsResponse in
@@ -69,7 +69,7 @@
         request.pageToken = token
         return try await self.listExperiments(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves the specified
@@ -79,7 +79,7 @@
     ///
     /// @Snippet(path: "Experiments_GetExperiment")
     public func getExperiment(
-      request: GetExperimentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExperimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
       try await self.inner.getExperiment(request: request, options: options)
     }
@@ -92,7 +92,7 @@
     ///
     /// @Snippet(path: "Experiments_CreateExperiment")
     public func createExperiment(
-      request: CreateExperimentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExperimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
       try await self.inner.createExperiment(request: request, options: options)
     }
@@ -104,7 +104,7 @@
     ///
     /// @Snippet(path: "Experiments_UpdateExperiment")
     public func updateExperiment(
-      request: UpdateExperimentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExperimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
       try await self.inner.updateExperiment(request: request, options: options)
     }
@@ -116,7 +116,7 @@
     ///
     /// @Snippet(path: "Experiments_DeleteExperiment")
     public func deleteExperiment(
-      request: DeleteExperimentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExperimentRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteExperiment(request: request, options: options)
     }
@@ -129,7 +129,7 @@
     ///
     /// @Snippet(path: "Experiments_StartExperiment")
     public func startExperiment(
-      request: StartExperimentRequest, options: GoogleCloudGax.RequestOptions
+      request: StartExperimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
       try await self.inner.startExperiment(request: request, options: options)
     }
@@ -141,7 +141,7 @@
     ///
     /// @Snippet(path: "Experiments_StopExperiment")
     public func stopExperiment(
-      request: StopExperimentRequest, options: GoogleCloudGax.RequestOptions
+      request: StopExperimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
       try await self.inner.stopExperiment(request: request, options: options)
     }
@@ -167,7 +167,7 @@
     ///
     /// @Snippet(path: "Experiments_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -193,7 +193,7 @@
     ///
     /// @Snippet(path: "Experiments_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -201,14 +201,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "Experiments_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -219,7 +219,7 @@
     ///
     /// @Snippet(path: "Experiments_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -230,7 +230,7 @@
     ///
     /// @Snippet(path: "Experiments_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -238,7 +238,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -247,7 +247,7 @@
     ///
     /// @Snippet(path: "Experiments_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -258,7 +258,7 @@
     ///
     /// @Snippet(path: "Experiments_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -311,7 +311,7 @@
       /// See `ExperimentsClient.updateExperiment`.
       func updateExperiment(
         experiment: Experiment?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDialogflowCXV3.Experiment
 
       /// See `ExperimentsClient.deleteExperiment`.
@@ -378,72 +378,72 @@
 
       /// See `ExperimentsClient.listExperiments`.
       func listExperiments(
-        request: ListExperimentsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListExperimentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListExperimentsResponse
 
       /// See `ExperimentsClient.listExperiments`.
       func listExperiments(
-        byItem: ListExperimentsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListExperimentsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Experiment, Swift.Error>
 
       /// See `ExperimentsClient.getExperiment`.
       func getExperiment(
-        request: GetExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: GetExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Experiment
 
       /// See `ExperimentsClient.createExperiment`.
       func createExperiment(
-        request: CreateExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Experiment
 
       /// See `ExperimentsClient.updateExperiment`.
       func updateExperiment(
-        request: UpdateExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Experiment
 
       /// See `ExperimentsClient.deleteExperiment`.
       func deleteExperiment(
-        request: DeleteExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `ExperimentsClient.startExperiment`.
       func startExperiment(
-        request: StartExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: StartExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Experiment
 
       /// See `ExperimentsClient.stopExperiment`.
       func stopExperiment(
-        request: StopExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: StopExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Experiment
 
       /// See `ExperimentsClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `ExperimentsClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `ExperimentsClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `ExperimentsClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `ExperimentsClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `ExperimentsClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -457,9 +457,9 @@
     }
 
     public func listExperiments(
-      request: ListExperimentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExperimentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListExperimentsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listExperiments(
@@ -469,13 +469,13 @@
     }
 
     public func listExperiments(
-      byItem: ListExperimentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListExperimentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Experiment, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListExperimentsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listExperiments(
@@ -494,9 +494,9 @@
     }
 
     public func getExperiment(
-      request: GetExperimentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExperimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getExperiment(
@@ -515,9 +515,9 @@
     }
 
     public func createExperiment(
-      request: CreateExperimentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExperimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createExperiment(
@@ -538,14 +538,14 @@
     }
 
     public func updateExperiment(
-      request: UpdateExperimentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExperimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateExperiment(
       experiment: Experiment?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
       let request = UpdateExperimentRequest().with {
         $0.experiment = experiment
@@ -559,9 +559,9 @@
     }
 
     public func deleteExperiment(
-      request: DeleteExperimentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExperimentRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteExperiment(
@@ -580,9 +580,9 @@
     }
 
     public func startExperiment(
-      request: StartExperimentRequest, options: GoogleCloudGax.RequestOptions
+      request: StartExperimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func startExperiment(
@@ -601,9 +601,9 @@
     }
 
     public func stopExperiment(
-      request: StopExperimentRequest, options: GoogleCloudGax.RequestOptions
+      request: StopExperimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func stopExperiment(
@@ -622,9 +622,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -634,13 +634,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -650,9 +650,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -662,9 +662,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -674,13 +674,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -701,9 +701,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -720,9 +720,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

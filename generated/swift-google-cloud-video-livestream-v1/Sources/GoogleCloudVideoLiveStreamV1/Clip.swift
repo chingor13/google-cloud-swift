@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Clip is a sub-resource under channel. Each clip represents a clipping
 /// operation that generates a VOD playlist from its channel given a set of
 /// timestamp ranges.
-public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Clip: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the clip, in the following format:
@@ -34,13 +34,13 @@ public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The creation timestamp of the clip resource.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when the clip request starts to be processed.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The update timestamp of the clip resource.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// The labels associated with this resource. Each label is a key-value pair.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -73,7 +73,7 @@ public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// MANIFEST.
   public var outputType: Clip.OutputType = Clip.OutputType()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Clip`.
   public init() {}
@@ -129,12 +129,9 @@ public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -157,7 +154,7 @@ public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -181,16 +178,16 @@ public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// TimeSlice represents a tuple of Unix epoch timestamps that specifies a time
   /// range.
-  public struct TimeSlice: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TimeSlice: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The mark-in Unix epoch time in the original live stream manifest.
-    public var markinTime: GoogleCloudWKT.Timestamp? = nil
+    public var markinTime: GoogleWKT.Timestamp? = nil
 
     /// The mark-out Unix epoch time in the original live stream manifest.
-    public var markoutTime: GoogleCloudWKT.Timestamp? = nil
+    public var markoutTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TimeSlice`.
     public init() {}
@@ -225,13 +222,12 @@ public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.markinTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .markinTime)
+      self.markinTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .markinTime)
       self.markoutTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .markoutTime)
+        GoogleWKT.Timestamp.self, forKey: .markoutTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -247,22 +243,22 @@ public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.livestream.v1.Clip.TimeSlice"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Slice represents a slice of the requested clip.
-  public struct Slice: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Slice: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The allowlist forms of a slice.
     public var kind: OneOf_Kind? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Slice`.
     public init() {}
@@ -312,7 +308,7 @@ public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.kind = kind
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -339,16 +335,16 @@ public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.livestream.v1.Clip.Slice"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// ClipManifest identifies a source manifest for the generated clip manifest.
-  public struct ClipManifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ClipManifest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. A unique key that identifies a manifest config in the parent
@@ -364,7 +360,7 @@ public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// gs://my-bucket/clip-outputs/main.m3u8
     public var outputUri: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ClipManifest`.
     public init() {}
@@ -407,7 +403,7 @@ public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -423,11 +419,11 @@ public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.livestream.v1.Clip.ClipManifest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -661,10 +657,10 @@ public struct Clip: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.livestream.v1.Clip"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

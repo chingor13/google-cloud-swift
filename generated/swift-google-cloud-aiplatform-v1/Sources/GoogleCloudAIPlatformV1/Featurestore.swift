@@ -16,12 +16,12 @@
 
 #if FeaturestoreService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Vertex AI Feature Store provides a centralized repository for organizing,
   /// storing, and serving ML features. The Featurestore is a top-level container
   /// for your features and their values.
-  public struct Featurestore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Featurestore: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Name of the Featurestore. Format:
@@ -29,10 +29,10 @@
     public var name: Swift.String = Swift.String()
 
     /// Output only. Timestamp when this Featurestore was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when this Featurestore was last updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. Used to perform consistent read-modify-write updates. If not set,
     /// a blind "overwrite" update happens.
@@ -79,7 +79,7 @@
     /// Output only. Reserved for future use.
     public var satisfiesPzi: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Featurestore`.
     public init() {}
@@ -135,10 +135,8 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
         self.name = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
         self.etag = value
       }
@@ -166,7 +164,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -190,7 +188,7 @@
 
     /// OnlineServingConfig specifies the details for provisioning online serving
     /// resources.
-    public struct OnlineServingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct OnlineServingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The number of nodes for the online store. The number of nodes doesn't
@@ -204,7 +202,7 @@
       /// reset the other.
       public var scaling: Featurestore.OnlineServingConfig.Scaling? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `OnlineServingConfig`.
       public init() {}
@@ -246,7 +244,7 @@
           Featurestore.OnlineServingConfig.Scaling.self, forKey: .scaling)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -262,7 +260,7 @@
       /// Online serving scaling configuration. If min_node_count and
       /// max_node_count are set to the same value, the cluster will be configured
       /// with the fixed number of node (no auto-scaling).
-      public struct Scaling: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Scaling: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The minimum number of nodes to scale down to. Must be greater
@@ -282,8 +280,7 @@
         /// or set to 0, default to 50.
         public var cpuUtilizationTarget: Swift.Int32 = Swift.Int32()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Scaling`.
         public init() {}
@@ -333,7 +330,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -351,22 +348,22 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.Featurestore.OnlineServingConfig.Scaling"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Featurestore.OnlineServingConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -489,11 +486,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Featurestore"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

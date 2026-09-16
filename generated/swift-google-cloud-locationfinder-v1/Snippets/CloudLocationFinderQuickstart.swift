@@ -19,7 +19,7 @@
 import Foundation
 import GoogleCloudLocationFinderV1
 import GoogleCloudLocation
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudLocationFinderV1.CloudLocationFinderClient()

@@ -18,27 +18,25 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class LanguageServiceTransport: LanguageServiceStub {
-    let inner: GoogleCloudGax._HTTPClient
+    let inner: GoogleGax._HTTPClient
 
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-      self.inner = try GoogleCloudGax._HTTPClient(
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
+      self.inner = try GoogleGax._HTTPClient(
         from: options,
         withDefaultEndpoint: "https://language.googleapis.com",
       )
     }
 
     public func analyzeSentiment(
-      request: AnalyzeSentimentRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeSentimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.AnalyzeSentimentResponse {
       let (path, query, configure) = try {
-        () throws -> (
-          Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-        ) in
+        () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void) in
         if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
           let path = "/v2/documents:analyzeSentiment"
           let query = [
@@ -48,16 +46,16 @@ extension Clients {
         }() {
           return (candidate.0, candidate.1, { $0.setMethod(.POST) })
         }
-        var paths: [GoogleCloudGax.PathMismatch] = []
+        var paths: [GoogleGax.PathMismatch] = []
         do {
-          paths.append(GoogleCloudGax.PathMismatch())
+          paths.append(GoogleGax.PathMismatch())
         }
-        throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+        throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
       }()
       var req = try await self.inner.newRequest(
         percentEncodedPath: path, query: query, options: options)
       configure(&req)
-      req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+      req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
       try req.setBody(json: request)
       return try await req.rpc(
         GoogleCloudLanguageV2.AnalyzeSentimentResponse.self, timeout: options.attemptTimeout
@@ -65,12 +63,10 @@ extension Clients {
     }
 
     public func analyzeEntities(
-      request: AnalyzeEntitiesRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeEntitiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.AnalyzeEntitiesResponse {
       let (path, query, configure) = try {
-        () throws -> (
-          Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-        ) in
+        () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void) in
         if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
           let path = "/v2/documents:analyzeEntities"
           let query = [
@@ -80,16 +76,16 @@ extension Clients {
         }() {
           return (candidate.0, candidate.1, { $0.setMethod(.POST) })
         }
-        var paths: [GoogleCloudGax.PathMismatch] = []
+        var paths: [GoogleGax.PathMismatch] = []
         do {
-          paths.append(GoogleCloudGax.PathMismatch())
+          paths.append(GoogleGax.PathMismatch())
         }
-        throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+        throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
       }()
       var req = try await self.inner.newRequest(
         percentEncodedPath: path, query: query, options: options)
       configure(&req)
-      req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+      req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
       try req.setBody(json: request)
       return try await req.rpc(
         GoogleCloudLanguageV2.AnalyzeEntitiesResponse.self, timeout: options.attemptTimeout
@@ -97,12 +93,10 @@ extension Clients {
     }
 
     public func classifyText(
-      request: ClassifyTextRequest, options: GoogleCloudGax.RequestOptions
+      request: ClassifyTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.ClassifyTextResponse {
       let (path, query, configure) = try {
-        () throws -> (
-          Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-        ) in
+        () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void) in
         if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
           let path = "/v2/documents:classifyText"
           let query = [
@@ -112,16 +106,16 @@ extension Clients {
         }() {
           return (candidate.0, candidate.1, { $0.setMethod(.POST) })
         }
-        var paths: [GoogleCloudGax.PathMismatch] = []
+        var paths: [GoogleGax.PathMismatch] = []
         do {
-          paths.append(GoogleCloudGax.PathMismatch())
+          paths.append(GoogleGax.PathMismatch())
         }
-        throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+        throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
       }()
       var req = try await self.inner.newRequest(
         percentEncodedPath: path, query: query, options: options)
       configure(&req)
-      req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+      req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
       try req.setBody(json: request)
       return try await req.rpc(
         GoogleCloudLanguageV2.ClassifyTextResponse.self, timeout: options.attemptTimeout
@@ -129,12 +123,10 @@ extension Clients {
     }
 
     public func moderateText(
-      request: ModerateTextRequest, options: GoogleCloudGax.RequestOptions
+      request: ModerateTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.ModerateTextResponse {
       let (path, query, configure) = try {
-        () throws -> (
-          Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-        ) in
+        () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void) in
         if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
           let path = "/v2/documents:moderateText"
           let query = [
@@ -144,16 +136,16 @@ extension Clients {
         }() {
           return (candidate.0, candidate.1, { $0.setMethod(.POST) })
         }
-        var paths: [GoogleCloudGax.PathMismatch] = []
+        var paths: [GoogleGax.PathMismatch] = []
         do {
-          paths.append(GoogleCloudGax.PathMismatch())
+          paths.append(GoogleGax.PathMismatch())
         }
-        throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+        throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
       }()
       var req = try await self.inner.newRequest(
         percentEncodedPath: path, query: query, options: options)
       configure(&req)
-      req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+      req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
       try req.setBody(json: request)
       return try await req.rpc(
         GoogleCloudLanguageV2.ModerateTextResponse.self, timeout: options.attemptTimeout
@@ -161,12 +153,10 @@ extension Clients {
     }
 
     public func annotateText(
-      request: AnnotateTextRequest, options: GoogleCloudGax.RequestOptions
+      request: AnnotateTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.AnnotateTextResponse {
       let (path, query, configure) = try {
-        () throws -> (
-          Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-        ) in
+        () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void) in
         if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
           let path = "/v2/documents:annotateText"
           let query = [
@@ -176,16 +166,16 @@ extension Clients {
         }() {
           return (candidate.0, candidate.1, { $0.setMethod(.POST) })
         }
-        var paths: [GoogleCloudGax.PathMismatch] = []
+        var paths: [GoogleGax.PathMismatch] = []
         do {
-          paths.append(GoogleCloudGax.PathMismatch())
+          paths.append(GoogleGax.PathMismatch())
         }
-        throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+        throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
       }()
       var req = try await self.inner.newRequest(
         percentEncodedPath: path, query: query, options: options)
       configure(&req)
-      req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+      req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
       try req.setBody(json: request)
       return try await req.rpc(
         GoogleCloudLanguageV2.AnnotateTextResponse.self, timeout: options.attemptTimeout

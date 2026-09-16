@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response of `GenerateSourceUploadUrl` method.
-public struct GenerateUploadUrlResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GenerateUploadUrlResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The generated Google Cloud Storage signed URL that should be used for a
@@ -36,7 +36,7 @@ public struct GenerateUploadUrlResponse: Codable, Equatable, GoogleCloudWKT._Any
   /// upon uploading a new object or version of an object.
   public var storageSource: StorageSource? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GenerateUploadUrlResponse`.
   public init() {}
@@ -77,7 +77,7 @@ public struct GenerateUploadUrlResponse: Codable, Equatable, GoogleCloudWKT._Any
     self.storageSource = try container.decodeIfPresent(StorageSource.self, forKey: .storageSource)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -93,10 +93,10 @@ public struct GenerateUploadUrlResponse: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.functions.v2.GenerateUploadUrlResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,19 +15,19 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The type of machines to consider when calculating virtual machine migration
 /// insights and recommendations.
 /// Not all machine types are available in all zones and regions.
-public struct MachinePreferences: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MachinePreferences: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Compute Engine machine series to consider for insights and recommendations.
   /// If empty, no restriction is applied on the machine series.
   public var allowedMachineSeries: [MachineSeries] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MachinePreferences`.
   public init() {}
@@ -67,7 +67,7 @@ public struct MachinePreferences: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -82,10 +82,10 @@ public struct MachinePreferences: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.migrationcenter.v1.MachinePreferences"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

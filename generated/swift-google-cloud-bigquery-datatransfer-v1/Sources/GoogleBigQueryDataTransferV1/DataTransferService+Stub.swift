@@ -16,81 +16,81 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DataTransferServiceStub: Sendable {
     func getDataSource(
-      request: GetDataSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.DataSource
 
     func listDataSources(
-      request: ListDataSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.ListDataSourcesResponse
 
     func createTransferConfig(
-      request: CreateTransferConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTransferConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.TransferConfig
 
     func updateTransferConfig(
-      request: UpdateTransferConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTransferConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.TransferConfig
 
     func deleteTransferConfig(
-      request: DeleteTransferConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTransferConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getTransferConfig(
-      request: GetTransferConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTransferConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.TransferConfig
 
     func listTransferConfigs(
-      request: ListTransferConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTransferConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.ListTransferConfigsResponse
 
     func scheduleTransferRuns(
-      request: ScheduleTransferRunsRequest, options: GoogleCloudGax.RequestOptions
+      request: ScheduleTransferRunsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.ScheduleTransferRunsResponse
 
     func startManualTransferRuns(
-      request: StartManualTransferRunsRequest, options: GoogleCloudGax.RequestOptions
+      request: StartManualTransferRunsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.StartManualTransferRunsResponse
 
     func getTransferRun(
-      request: GetTransferRunRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTransferRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.TransferRun
 
     func deleteTransferRun(
-      request: DeleteTransferRunRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTransferRunRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listTransferRuns(
-      request: ListTransferRunsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTransferRunsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.ListTransferRunsResponse
 
     func listTransferLogs(
-      request: ListTransferLogsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTransferLogsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.ListTransferLogsResponse
 
     func checkValidCreds(
-      request: CheckValidCredsRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckValidCredsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.CheckValidCredsResponse
 
     func enrollDataSources(
-      request: EnrollDataSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: EnrollDataSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func unenrollDataSources(
-      request: UnenrollDataSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: UnenrollDataSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Representation of third party SIEM/SOAR fields within SCC.
-public struct ExternalSystem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExternalSystem: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Full resource name of the external system. The following list
@@ -48,7 +48,7 @@ public struct ExternalSystem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// The time when the case was last updated, as reported by the external
   /// system.
-  public var externalSystemUpdateTime: GoogleCloudWKT.Timestamp? = nil
+  public var externalSystemUpdateTime: GoogleWKT.Timestamp? = nil
 
   /// The link to the finding's corresponding case in the external system.
   public var caseUri: Swift.String = Swift.String()
@@ -57,19 +57,19 @@ public struct ExternalSystem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var casePriority: Swift.String = Swift.String()
 
   /// The SLA of the finding's corresponding case in the external system.
-  public var caseSla: GoogleCloudWKT.Timestamp? = nil
+  public var caseSla: GoogleWKT.Timestamp? = nil
 
   /// The time when the case was created, as reported by the external system.
-  public var caseCreateTime: GoogleCloudWKT.Timestamp? = nil
+  public var caseCreateTime: GoogleWKT.Timestamp? = nil
 
   /// The time when the case was closed, as reported by the external system.
-  public var caseCloseTime: GoogleCloudWKT.Timestamp? = nil
+  public var caseCloseTime: GoogleWKT.Timestamp? = nil
 
   /// Information about the ticket, if any, that is being used to track the
   /// resolution of the issue that is identified by this finding.
   public var ticketInfo: ExternalSystem.TicketInfo? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExternalSystem`.
   public init() {}
@@ -135,23 +135,23 @@ public struct ExternalSystem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.status = value
     }
     self.externalSystemUpdateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .externalSystemUpdateTime)
+      GoogleWKT.Timestamp.self, forKey: .externalSystemUpdateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .caseUri) {
       self.caseUri = value
     }
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .casePriority) {
       self.casePriority = value
     }
-    self.caseSla = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .caseSla)
+    self.caseSla = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .caseSla)
     self.caseCreateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .caseCreateTime)
+      GoogleWKT.Timestamp.self, forKey: .caseCreateTime)
     self.caseCloseTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .caseCloseTime)
+      GoogleWKT.Timestamp.self, forKey: .caseCloseTime)
     self.ticketInfo = try container.decodeIfPresent(
       ExternalSystem.TicketInfo.self, forKey: .ticketInfo)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -175,7 +175,7 @@ public struct ExternalSystem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Information about the ticket, if any, that is being used to track the
   /// resolution of the issue that is identified by this finding.
-  public struct TicketInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TicketInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The identifier of the ticket in the ticket system.
@@ -195,9 +195,9 @@ public struct ExternalSystem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     /// The time when the ticket was last updated, as reported by the ticket
     /// system.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TicketInfo`.
     public init() {}
@@ -255,11 +255,10 @@ public struct ExternalSystem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .status) {
         self.status = value
       }
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -279,21 +278,21 @@ public struct ExternalSystem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.ExternalSystem.TicketInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.ExternalSystem"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

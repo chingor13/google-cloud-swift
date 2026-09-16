@@ -16,7 +16,7 @@
 
 #if Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Contains a speech recognition result corresponding to a portion of the audio
   /// that is currently being processed or an indication that this is the end
@@ -55,7 +55,7 @@
   ///
   /// Concatenating the finalized transcripts with `is_final` set to true,
   /// the complete utterance becomes "to be or not to be that is the question".
-  public struct StreamingRecognitionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StreamingRecognitionResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Type of the result message.
@@ -101,12 +101,12 @@
     /// Time offset of the end of this Speech recognition result relative to the
     /// beginning of the audio. Only populated for `message_type` =
     /// `TRANSCRIPT`.
-    public var speechEndOffset: GoogleCloudWKT.Duration? = nil
+    public var speechEndOffset: GoogleWKT.Duration? = nil
 
     /// Detected language code for the transcript.
     public var languageCode: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StreamingRecognitionResult`.
     public init() {}
@@ -174,13 +174,13 @@
         self.speechWordInfo = value
       }
       self.speechEndOffset = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .speechEndOffset)
+        GoogleWKT.Duration.self, forKey: .speechEndOffset)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .languageCode) {
         self.languageCode = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -316,11 +316,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.StreamingRecognitionResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

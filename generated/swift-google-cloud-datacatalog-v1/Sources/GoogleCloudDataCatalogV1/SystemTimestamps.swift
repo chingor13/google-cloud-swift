@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Timestamps associated with this resource in a particular system.
-public struct SystemTimestamps: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SystemTimestamps: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Creation timestamp of the resource within the given system.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Timestamp of the last modification of the resource or its metadata within
   /// a given system.
@@ -31,14 +31,14 @@ public struct SystemTimestamps: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// timestamp.
   /// For example, BigQuery timestamps every metadata modification but not data
   /// or permission changes.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Expiration timestamp of the resource within the given system.
   ///
   /// Currently only applicable to BigQuery resources.
-  public var expireTime: GoogleCloudWKT.Timestamp? = nil
+  public var expireTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SystemTimestamps`.
   public init() {}
@@ -75,15 +75,12 @@ public struct SystemTimestamps: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
-    self.expireTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .expireTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
+    self.expireTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .expireTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -100,10 +97,10 @@ public struct SystemTimestamps: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.v1.SystemTimestamps"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

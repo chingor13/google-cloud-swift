@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func createReservation(
-      request: CreateReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Reservation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createReservation",
         action: {
-          (r: CreateReservationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateReservationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.Reservation
           in
           return try await self.inner.createReservation(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func listReservations(
-      request: ListReservationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReservationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ListReservationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listReservations",
         action: {
-          (r: ListReservationsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListReservationsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.ListReservationsResponse
           in
           return try await self.inner.listReservations(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func getReservation(
-      request: GetReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Reservation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getReservation",
         action: {
-          (r: GetReservationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetReservationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.Reservation
           in
           return try await self.inner.getReservation(request: r, options: o)
@@ -103,27 +103,26 @@ extension Clients {
     }
 
     public func deleteReservation(
-      request: DeleteReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReservationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteReservation",
-        action: {
-          (r: DeleteReservationRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteReservationRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteReservation(request: r, options: o)
         })
     }
 
     public func updateReservation(
-      request: UpdateReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Reservation {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateReservation",
         action: {
-          (r: UpdateReservationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateReservationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.Reservation
           in
           return try await self.inner.updateReservation(request: r, options: o)
@@ -131,14 +130,14 @@ extension Clients {
     }
 
     public func failoverReservation(
-      request: FailoverReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: FailoverReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Reservation {
       try await self._intercept(
         request: request,
         options: options,
         name: "failoverReservation",
         action: {
-          (r: FailoverReservationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FailoverReservationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.Reservation
           in
           return try await self.inner.failoverReservation(request: r, options: o)
@@ -146,14 +145,14 @@ extension Clients {
     }
 
     public func createCapacityCommitment(
-      request: CreateCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment {
       try await self._intercept(
         request: request,
         options: options,
         name: "createCapacityCommitment",
         action: {
-          (r: CreateCapacityCommitmentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateCapacityCommitmentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.CapacityCommitment
           in
           return try await self.inner.createCapacityCommitment(request: r, options: o)
@@ -161,14 +160,14 @@ extension Clients {
     }
 
     public func listCapacityCommitments(
-      request: ListCapacityCommitmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCapacityCommitmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ListCapacityCommitmentsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listCapacityCommitments",
         action: {
-          (r: ListCapacityCommitmentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCapacityCommitmentsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.ListCapacityCommitmentsResponse
           in
           return try await self.inner.listCapacityCommitments(request: r, options: o)
@@ -176,14 +175,14 @@ extension Clients {
     }
 
     public func getCapacityCommitment(
-      request: GetCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment {
       try await self._intercept(
         request: request,
         options: options,
         name: "getCapacityCommitment",
         action: {
-          (r: GetCapacityCommitmentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCapacityCommitmentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.CapacityCommitment
           in
           return try await self.inner.getCapacityCommitment(request: r, options: o)
@@ -191,28 +190,27 @@ extension Clients {
     }
 
     public func deleteCapacityCommitment(
-      request: DeleteCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteCapacityCommitment",
         action: {
-          (r: DeleteCapacityCommitmentRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> Void in
+          (r: DeleteCapacityCommitmentRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteCapacityCommitment(request: r, options: o)
         })
     }
 
     public func updateCapacityCommitment(
-      request: UpdateCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateCapacityCommitment",
         action: {
-          (r: UpdateCapacityCommitmentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateCapacityCommitmentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.CapacityCommitment
           in
           return try await self.inner.updateCapacityCommitment(request: r, options: o)
@@ -220,14 +218,14 @@ extension Clients {
     }
 
     public func splitCapacityCommitment(
-      request: SplitCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: SplitCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.SplitCapacityCommitmentResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "splitCapacityCommitment",
         action: {
-          (r: SplitCapacityCommitmentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SplitCapacityCommitmentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.SplitCapacityCommitmentResponse
           in
           return try await self.inner.splitCapacityCommitment(request: r, options: o)
@@ -235,14 +233,14 @@ extension Clients {
     }
 
     public func mergeCapacityCommitments(
-      request: MergeCapacityCommitmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: MergeCapacityCommitmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment {
       try await self._intercept(
         request: request,
         options: options,
         name: "mergeCapacityCommitments",
         action: {
-          (r: MergeCapacityCommitmentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: MergeCapacityCommitmentsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.CapacityCommitment
           in
           return try await self.inner.mergeCapacityCommitments(request: r, options: o)
@@ -250,14 +248,14 @@ extension Clients {
     }
 
     public func createAssignment(
-      request: CreateAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Assignment {
       try await self._intercept(
         request: request,
         options: options,
         name: "createAssignment",
         action: {
-          (r: CreateAssignmentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateAssignmentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.Assignment
           in
           return try await self.inner.createAssignment(request: r, options: o)
@@ -265,14 +263,14 @@ extension Clients {
     }
 
     public func listAssignments(
-      request: ListAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAssignmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ListAssignmentsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listAssignments",
         action: {
-          (r: ListAssignmentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListAssignmentsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.ListAssignmentsResponse
           in
           return try await self.inner.listAssignments(request: r, options: o)
@@ -280,27 +278,26 @@ extension Clients {
     }
 
     public func deleteAssignment(
-      request: DeleteAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteAssignment",
-        action: {
-          (r: DeleteAssignmentRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteAssignmentRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteAssignment(request: r, options: o)
         })
     }
 
     public func searchAssignments(
-      request: SearchAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchAssignmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.SearchAssignmentsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "searchAssignments",
         action: {
-          (r: SearchAssignmentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchAssignmentsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.SearchAssignmentsResponse
           in
           return try await self.inner.searchAssignments(request: r, options: o)
@@ -308,14 +305,14 @@ extension Clients {
     }
 
     public func searchAllAssignments(
-      request: SearchAllAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchAllAssignmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.SearchAllAssignmentsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "searchAllAssignments",
         action: {
-          (r: SearchAllAssignmentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchAllAssignmentsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.SearchAllAssignmentsResponse
           in
           return try await self.inner.searchAllAssignments(request: r, options: o)
@@ -323,14 +320,14 @@ extension Clients {
     }
 
     public func moveAssignment(
-      request: MoveAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: MoveAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Assignment {
       try await self._intercept(
         request: request,
         options: options,
         name: "moveAssignment",
         action: {
-          (r: MoveAssignmentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: MoveAssignmentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.Assignment
           in
           return try await self.inner.moveAssignment(request: r, options: o)
@@ -338,14 +335,14 @@ extension Clients {
     }
 
     public func updateAssignment(
-      request: UpdateAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Assignment {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateAssignment",
         action: {
-          (r: UpdateAssignmentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateAssignmentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.Assignment
           in
           return try await self.inner.updateAssignment(request: r, options: o)
@@ -353,14 +350,14 @@ extension Clients {
     }
 
     public func getBiReservation(
-      request: GetBiReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBiReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.BiReservation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getBiReservation",
         action: {
-          (r: GetBiReservationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetBiReservationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.BiReservation
           in
           return try await self.inner.getBiReservation(request: r, options: o)
@@ -368,14 +365,14 @@ extension Clients {
     }
 
     public func updateBiReservation(
-      request: UpdateBiReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBiReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.BiReservation {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateBiReservation",
         action: {
-          (r: UpdateBiReservationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateBiReservationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.BiReservation
           in
           return try await self.inner.updateBiReservation(request: r, options: o)
@@ -383,14 +380,14 @@ extension Clients {
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getIamPolicy",
         action: {
-          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.getIamPolicy(request: r, options: o)
@@ -398,14 +395,14 @@ extension Clients {
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "setIamPolicy",
         action: {
-          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.setIamPolicy(request: r, options: o)
@@ -413,14 +410,14 @@ extension Clients {
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "testIamPermissions",
         action: {
-          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.TestIamPermissionsResponse
           in
           return try await self.inner.testIamPermissions(request: r, options: o)
@@ -428,14 +425,14 @@ extension Clients {
     }
 
     public func createReservationGroup(
-      request: CreateReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReservationGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ReservationGroup {
       try await self._intercept(
         request: request,
         options: options,
         name: "createReservationGroup",
         action: {
-          (r: CreateReservationGroupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateReservationGroupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.ReservationGroup
           in
           return try await self.inner.createReservationGroup(request: r, options: o)
@@ -443,14 +440,14 @@ extension Clients {
     }
 
     public func getReservationGroup(
-      request: GetReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReservationGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ReservationGroup {
       try await self._intercept(
         request: request,
         options: options,
         name: "getReservationGroup",
         action: {
-          (r: GetReservationGroupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetReservationGroupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.ReservationGroup
           in
           return try await self.inner.getReservationGroup(request: r, options: o)
@@ -458,28 +455,27 @@ extension Clients {
     }
 
     public func deleteReservationGroup(
-      request: DeleteReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReservationGroupRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteReservationGroup",
         action: {
-          (r: DeleteReservationGroupRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void
-          in
+          (r: DeleteReservationGroupRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteReservationGroup(request: r, options: o)
         })
     }
 
     public func listReservationGroups(
-      request: ListReservationGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReservationGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ListReservationGroupsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listReservationGroups",
         action: {
-          (r: ListReservationGroupsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListReservationGroupsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.ListReservationGroupsResponse
           in
           return try await self.inner.listReservationGroups(request: r, options: o)
@@ -487,14 +483,14 @@ extension Clients {
     }
 
     public func updateReservationGroup(
-      request: UpdateReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateReservationGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ReservationGroup {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateReservationGroup",
         action: {
-          (r: UpdateReservationGroupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateReservationGroupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryReservationV1.ReservationGroup
           in
           return try await self.inner.updateReservationGroup(request: r, options: o)

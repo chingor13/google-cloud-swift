@@ -19,21 +19,21 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing User Licenses.
   ///
   /// @Snippet(path: "UserLicenseServiceQuickstart")
   public final class UserLicenseServiceClient: Clients.UserLicenseServiceProtocol, Sendable {
     let inner: any Clients.UserLicenseServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `UserLicenseServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.UserLicenseServiceStub = try Clients.UserLicenseServiceTransport(
         options)
       inner = Clients.UserLicenseServiceRetry(inner, options: options)
@@ -49,7 +49,7 @@
     ///
     /// @Snippet(path: "UserLicenseService_ListUserLicenses")
     public func listUserLicenses(
-      request: ListUserLicensesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUserLicensesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListUserLicensesResponse {
       try await self.inner.listUserLicenses(request: request, options: options)
     }
@@ -58,7 +58,7 @@
     ///
     /// @Snippet(path: "UserLicenseService_ListUserLicenses")
     public func listUserLicenses(
-      byItem: ListUserLicensesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListUserLicensesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<UserLicense, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListUserLicensesResponse
@@ -67,7 +67,7 @@
         request.pageToken = token
         return try await self.listUserLicenses(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Updates the User License.
@@ -75,7 +75,7 @@
     ///
     /// @Snippet(path: "UserLicenseService_BatchUpdateUserLicenses")
     public func batchUpdateUserLicenses(
-      request: BatchUpdateUserLicensesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchUpdateUserLicensesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.batchUpdateUserLicenses(request: request, options: options)
     }
@@ -85,23 +85,23 @@
     ///
     /// @Snippet(path: "UserLicenseService_BatchUpdateUserLicenses")
     public func batchUpdateUserLicenses(
-      withPolling: BatchUpdateUserLicensesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchUpdateUserLicensesResponse> {
+      withPolling: BatchUpdateUserLicensesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BatchUpdateUserLicensesResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<BatchUpdateUserLicensesResponse>.State in
+          -> GoogleGax._PollableOperationImpl<BatchUpdateUserLicensesResponse>.State in
         return try op._extractStatus(BatchUpdateUserLicensesResponse.self)
       }
       let rawOp = try await self.batchUpdateUserLicenses(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<BatchUpdateUserLicensesResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<BatchUpdateUserLicensesResponse>.State
+        in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -115,7 +115,7 @@
     ///
     /// @Snippet(path: "UserLicenseService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -126,7 +126,7 @@
     ///
     /// @Snippet(path: "UserLicenseService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -134,7 +134,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -143,7 +143,7 @@
     ///
     /// @Snippet(path: "UserLicenseService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -154,7 +154,7 @@
     ///
     /// @Snippet(path: "UserLicenseService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -187,7 +187,7 @@
 
       /// See `UserLicenseServiceClient.batchUpdateUserLicenses`.
       func batchUpdateUserLicenses(withPolling: BatchUpdateUserLicensesRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<BatchUpdateUserLicensesResponse>
+        -> any GoogleGax.PollableOperation<BatchUpdateUserLicensesResponse>
 
       /// See `UserLicenseServiceClient.listOperations`.
       func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -214,37 +214,37 @@
 
       /// See `UserLicenseServiceClient.listUserLicenses`.
       func listUserLicenses(
-        request: ListUserLicensesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListUserLicensesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListUserLicensesResponse
 
       /// See `UserLicenseServiceClient.listUserLicenses`.
       func listUserLicenses(
-        byItem: ListUserLicensesRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListUserLicensesRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<UserLicense, Swift.Error>
 
       /// See `UserLicenseServiceClient.batchUpdateUserLicenses`.
       func batchUpdateUserLicenses(
-        request: BatchUpdateUserLicensesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchUpdateUserLicensesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `UserLicenseServiceClient.batchUpdateUserLicenses`.
       func batchUpdateUserLicenses(
-        withPolling: BatchUpdateUserLicensesRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<BatchUpdateUserLicensesResponse>
+        withPolling: BatchUpdateUserLicensesRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<BatchUpdateUserLicensesResponse>
 
       /// See `UserLicenseServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `UserLicenseServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `UserLicenseServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -258,9 +258,9 @@
     }
 
     public func listUserLicenses(
-      request: ListUserLicensesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUserLicensesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListUserLicensesResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listUserLicenses(
@@ -270,14 +270,14 @@
     }
 
     public func listUserLicenses(
-      byItem: ListUserLicensesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListUserLicensesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<UserLicense, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListUserLicensesResponse
         in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listUserLicenses(
@@ -296,26 +296,26 @@
     }
 
     public func batchUpdateUserLicenses(
-      request: BatchUpdateUserLicensesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchUpdateUserLicensesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func batchUpdateUserLicenses(withPolling: BatchUpdateUserLicensesRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<BatchUpdateUserLicensesResponse>
+      -> any GoogleGax.PollableOperation<BatchUpdateUserLicensesResponse>
     {
       try await self.batchUpdateUserLicenses(withPolling: withPolling, options: .init())
     }
 
     public func batchUpdateUserLicenses(
-      withPolling: BatchUpdateUserLicensesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchUpdateUserLicensesResponse> {
+      withPolling: BatchUpdateUserLicensesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BatchUpdateUserLicensesResponse> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<BatchUpdateUserLicensesResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<BatchUpdateUserLicensesResponse>.State
+        in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -326,9 +326,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -338,13 +338,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -365,9 +365,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -384,9 +384,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

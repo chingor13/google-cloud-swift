@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a single edge connecting two nodes in the graph.
-public struct Edge: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Edge: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Properties associated with the edge.
   /// Refer to https://apptopology.googleapis.com/v1/GetSchema for a detailed
   /// list of edge properties.
-  public var properties: GoogleCloudWKT.Struct? = nil
+  public var properties: GoogleWKT.Struct? = nil
 
   /// The name of the source node for this edge. This is the `name` field in the
   /// Node.
@@ -43,7 +43,7 @@ public struct Edge: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The context of the edge.
   public var context: EntityContext? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Edge`.
   public init() {}
@@ -84,7 +84,7 @@ public struct Edge: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.properties = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .properties)
+    self.properties = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .properties)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .sourceNodeName) {
       self.sourceNodeName = value
     }
@@ -97,7 +97,7 @@ public struct Edge: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.context = try container.decodeIfPresent(EntityContext.self, forKey: .context)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -116,10 +116,10 @@ public struct Edge: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apptopology.v1.Edge"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

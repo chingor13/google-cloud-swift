@@ -15,29 +15,29 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DirectAccessServiceStub: Sendable {
     func createDeviceSession(
-      request: CreateDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDeviceSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession
 
     func listDeviceSessions(
-      request: ListDeviceSessionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeviceSessionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeviceStreamingV1.ListDeviceSessionsResponse
 
     func getDeviceSession(
-      request: GetDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeviceSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession
 
     func cancelDeviceSession(
-      request: CancelDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelDeviceSessionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updateDeviceSession(
-      request: UpdateDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDeviceSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession
   }
 }

@@ -15,45 +15,45 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol EnterpriseKnowledgeGraphServiceStub: Sendable {
     func createEntityReconciliationJob(
-      request: CreateEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.EntityReconciliationJob
 
     func getEntityReconciliationJob(
-      request: GetEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.EntityReconciliationJob
 
     func listEntityReconciliationJobs(
-      request: ListEntityReconciliationJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntityReconciliationJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.ListEntityReconciliationJobsResponse
 
     func cancelEntityReconciliationJob(
-      request: CancelEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func deleteEntityReconciliationJob(
-      request: DeleteEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func lookup(
-      request: LookupRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.LookupResponse
 
     func search(
-      request: SearchRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.SearchResponse
 
     func lookupPublicKg(
-      request: LookupPublicKgRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupPublicKgRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.LookupPublicKgResponse
 
     func searchPublicKg(
-      request: SearchPublicKgRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchPublicKgRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.SearchPublicKgResponse
   }
 }

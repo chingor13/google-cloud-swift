@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol PolicyTroubleshooterStub: Sendable {
     func troubleshootIamPolicy(
-      request: TroubleshootIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: TroubleshootIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPolicyTroubleshooterIAMV3.TroubleshootIamPolicyResponse
   }
 }

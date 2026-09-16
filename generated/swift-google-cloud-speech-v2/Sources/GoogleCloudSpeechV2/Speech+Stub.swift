@@ -16,123 +16,123 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol SpeechStub: Sendable {
     func createRecognizer(
-      request: CreateRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listRecognizers(
-      request: ListRecognizersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRecognizersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.ListRecognizersResponse
 
     func getRecognizer(
-      request: GetRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.Recognizer
 
     func updateRecognizer(
-      request: UpdateRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteRecognizer(
-      request: DeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func undeleteRecognizer(
-      request: UndeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func recognize(
-      request: RecognizeRequest, options: GoogleCloudGax.RequestOptions
+      request: RecognizeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.RecognizeResponse
 
     func batchRecognize(
-      request: BatchRecognizeRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchRecognizeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getConfig(
-      request: GetConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.Config
 
     func updateConfig(
-      request: UpdateConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.Config
 
     func createCustomClass(
-      request: CreateCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listCustomClasses(
-      request: ListCustomClassesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomClassesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.ListCustomClassesResponse
 
     func getCustomClass(
-      request: GetCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.CustomClass
 
     func updateCustomClass(
-      request: UpdateCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCustomClass(
-      request: DeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func undeleteCustomClass(
-      request: UndeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createPhraseSet(
-      request: CreatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listPhraseSets(
-      request: ListPhraseSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPhraseSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.ListPhraseSetsResponse
 
     func getPhraseSet(
-      request: GetPhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.PhraseSet
 
     func updatePhraseSet(
-      request: UpdatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deletePhraseSet(
-      request: DeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func undeletePhraseSet(
-      request: UndeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeletePhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

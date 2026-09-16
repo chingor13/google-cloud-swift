@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,29 +58,29 @@
       }
 
       public func delete(
-        request: ExternalVpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: ExternalVpnGatewaysClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: ExternalVpnGatewaysClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: ExternalVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ExternalVpnGateway {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: ExternalVpnGatewaysClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ExternalVpnGatewaysClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.ExternalVpnGateway
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -88,44 +88,44 @@
       }
 
       public func insert(
-        request: ExternalVpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: ExternalVpnGatewaysClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: ExternalVpnGatewaysClient.InsertRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ExternalVpnGatewayList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: ExternalVpnGatewaysClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.ExternalVpnGatewayList
+            (r: ExternalVpnGatewaysClient.ListRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.ExternalVpnGatewayList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func setLabels(
-        request: ExternalVpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "setLabels",
           action: {
-            (r: ExternalVpnGatewaysClient.SetLabelsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ExternalVpnGatewaysClient.SetLabelsRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setLabels(request: r, options: o)
@@ -134,31 +134,29 @@
 
       public func testIamPermissions(
         request: ExternalVpnGatewaysClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "testIamPermissions",
           action: {
-            (
-              r: ExternalVpnGatewaysClient.TestIamPermissionsRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+            (r: ExternalVpnGatewaysClient.TestIamPermissionsRequest, o: GoogleGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: GlobalOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GlobalOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

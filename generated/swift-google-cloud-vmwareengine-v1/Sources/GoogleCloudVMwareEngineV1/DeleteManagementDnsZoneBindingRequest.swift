@@ -15,14 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [VmwareEngine.DeleteManagementDnsZoneBinding][google.cloud.vmwareengine.v1.VmwareEngine.DeleteManagementDnsZoneBinding]
 ///
 /// [google.cloud.vmwareengine.v1.VmwareEngine.DeleteManagementDnsZoneBinding]: <doc:VmwareEngineClient/deleteManagementDnsZoneBinding(request:options:)>
-public struct DeleteManagementDnsZoneBindingRequest: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct DeleteManagementDnsZoneBindingRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the management DNS zone binding to delete.
@@ -48,7 +47,7 @@ public struct DeleteManagementDnsZoneBindingRequest: Codable, Equatable, GoogleC
   /// not supported (00000000-0000-0000-0000-000000000000).
   public var requestId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DeleteManagementDnsZoneBindingRequest`.
   public init() {}
@@ -91,7 +90,7 @@ public struct DeleteManagementDnsZoneBindingRequest: Codable, Equatable, GoogleC
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -107,10 +106,10 @@ public struct DeleteManagementDnsZoneBindingRequest: Codable, Equatable, GoogleC
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmwareengine.v1.DeleteManagementDnsZoneBindingRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

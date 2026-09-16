@@ -16,12 +16,12 @@
 
 #if Networks
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The status of update/delete for a consensus peering connection. Only set
   /// when connection_status.update_strategy isCONSENSUS or a network peering is proposing to update the
   /// strategy to CONSENSUS.
-  public struct NetworkPeeringConnectionStatusConsensusState: Codable, Equatable, GoogleCloudWKT
+  public struct NetworkPeeringConnectionStatusConsensusState: Codable, Equatable, GoogleWKT
       ._AnyPackable,
     Sendable
   {
@@ -31,7 +31,7 @@
     /// The status of the update request.
     public var updateStatus: NetworkPeeringConnectionStatusConsensusState.UpdateStatus? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NetworkPeeringConnectionStatusConsensusState`.
     public init() {}
@@ -72,7 +72,7 @@
         NetworkPeeringConnectionStatusConsensusState.UpdateStatus.self, forKey: .updateStatus)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -336,11 +336,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.NetworkPeeringConnectionStatusConsensusState"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

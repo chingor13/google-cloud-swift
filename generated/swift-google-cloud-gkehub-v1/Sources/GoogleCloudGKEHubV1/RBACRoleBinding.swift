@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// RBACRoleBinding represents a rbacrolebinding across the Fleet
-public struct RBACRoleBinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RBACRoleBinding: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name for the rbacrolebinding
@@ -33,13 +33,13 @@ public struct RBACRoleBinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var uid: Swift.String = Swift.String()
 
   /// Output only. When the rbacrolebinding was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. When the rbacrolebinding was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. When the rbacrolebinding was deleted.
-  public var deleteTime: GoogleCloudWKT.Timestamp? = nil
+  public var deleteTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. State of the rbacrolebinding resource.
   public var state: RBACRoleBindingLifecycleState? = nil
@@ -54,7 +54,7 @@ public struct RBACRoleBinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// is required). Updating one will unset the other automatically.
   public var principal: OneOf_Principal? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RBACRoleBinding`.
   public init() {}
@@ -111,12 +111,9 @@ public struct RBACRoleBinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .uid) {
       self.uid = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
-    self.deleteTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deleteTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
+    self.deleteTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deleteTime)
     self.state = try container.decodeIfPresent(RBACRoleBindingLifecycleState.self, forKey: .state)
     self.role = try container.decodeIfPresent(RBACRoleBinding.Role.self, forKey: .role)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
@@ -143,7 +140,7 @@ public struct RBACRoleBinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.principal = principal
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -172,7 +169,7 @@ public struct RBACRoleBinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Role is the type for Kubernetes roles
-  public struct Role: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Role: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// predefined_role is the Kubernetes default role to use
@@ -183,7 +180,7 @@ public struct RBACRoleBinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// use.
     public var customRole: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Role`.
     public init() {}
@@ -228,7 +225,7 @@ public struct RBACRoleBinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -364,11 +361,11 @@ public struct RBACRoleBinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.gkehub.v1.RBACRoleBinding.Role"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -385,10 +382,10 @@ public struct RBACRoleBinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.v1.RBACRoleBinding"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

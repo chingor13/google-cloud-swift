@@ -16,10 +16,10 @@
 
 #if TensorboardService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// TensorboardTimeSeries maps to times series produced in training runs
-  public struct TensorboardTimeSeries: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TensorboardTimeSeries: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Name of the TensorboardTimeSeries.
@@ -37,10 +37,10 @@
     public var valueType: TensorboardTimeSeries.ValueType = TensorboardTimeSeries.ValueType()
 
     /// Output only. Timestamp when this TensorboardTimeSeries was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when this TensorboardTimeSeries was last updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Used to perform a consistent read-modify-write updates. If not set, a blind
     /// "overwrite" update happens.
@@ -57,7 +57,7 @@
     /// TensorboardTimeSeries.
     public var metadata: TensorboardTimeSeries.Metadata? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TensorboardTimeSeries`.
     public init() {}
@@ -122,10 +122,8 @@
       {
         self.valueType = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
         self.etag = value
       }
@@ -139,7 +137,7 @@
         TensorboardTimeSeries.Metadata.self, forKey: .metadata)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -161,7 +159,7 @@
     }
 
     /// Describes metadata for a TensorboardTimeSeries.
-    public struct Metadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Metadata: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. Max step index of all data points within a
@@ -170,13 +168,13 @@
 
       /// Output only. Max wall clock timestamp of all data points within a
       /// TensorboardTimeSeries.
-      public var maxWallTime: GoogleCloudWKT.Timestamp? = nil
+      public var maxWallTime: GoogleWKT.Timestamp? = nil
 
       /// Output only. The largest blob sequence length (number of blobs) of all
       /// data points in this time series, if its ValueType is BLOB_SEQUENCE.
       public var maxBlobSequenceLength: Swift.Int64 = Swift.Int64()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Metadata`.
       public init() {}
@@ -217,7 +215,7 @@
           self.maxStep = value
         }
         self.maxWallTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .maxWallTime)
+          GoogleWKT.Timestamp.self, forKey: .maxWallTime)
         if let value = try container.decodeIfPresent(
           Swift.Int64.self, forKey: .maxBlobSequenceLength)
         {
@@ -225,7 +223,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -242,11 +240,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.TensorboardTimeSeries.Metadata"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -368,11 +366,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.TensorboardTimeSeries"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

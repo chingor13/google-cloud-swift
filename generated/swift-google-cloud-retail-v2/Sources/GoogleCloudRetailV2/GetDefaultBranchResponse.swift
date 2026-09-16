@@ -15,20 +15,20 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message of
 /// [CatalogService.GetDefaultBranch][google.cloud.retail.v2.CatalogService.GetDefaultBranch].
 ///
 /// [google.cloud.retail.v2.CatalogService.GetDefaultBranch]: <doc:CatalogServiceClient/getDefaultBranch(request:options:)>
-public struct GetDefaultBranchResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GetDefaultBranchResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Full resource name of the branch id currently set as default branch.
   public var branch: Swift.String = Swift.String()
 
   /// The time when this branch is set to default.
-  public var setTime: GoogleCloudWKT.Timestamp? = nil
+  public var setTime: GoogleWKT.Timestamp? = nil
 
   /// This corresponds to
   /// [SetDefaultBranchRequest.note][google.cloud.retail.v2.SetDefaultBranchRequest.note]
@@ -37,7 +37,7 @@ public struct GetDefaultBranchResponse: Codable, Equatable, GoogleCloudWKT._AnyP
   /// [google.cloud.retail.v2.SetDefaultBranchRequest.note]: <doc:SetDefaultBranchRequest/note>
   public var note: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GetDefaultBranchResponse`.
   public init() {}
@@ -77,13 +77,13 @@ public struct GetDefaultBranchResponse: Codable, Equatable, GoogleCloudWKT._AnyP
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .branch) {
       self.branch = value
     }
-    self.setTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .setTime)
+    self.setTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .setTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .note) {
       self.note = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -100,10 +100,10 @@ public struct GetDefaultBranchResponse: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.GetDefaultBranchResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

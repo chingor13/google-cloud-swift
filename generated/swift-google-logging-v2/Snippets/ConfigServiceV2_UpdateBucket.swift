@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudLoggingV2
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ConfigServiceV2Client, projectId: String, locationId: String, bucketId: String)
   async throws
@@ -31,7 +31,7 @@ func sample(client: ConfigServiceV2Client, projectId: String, locationId: String
         $0.bucket = LogBucket().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/buckets/\(bucketId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

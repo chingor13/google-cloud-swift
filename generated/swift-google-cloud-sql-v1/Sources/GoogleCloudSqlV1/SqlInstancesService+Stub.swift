@@ -16,183 +16,181 @@
 
 #if SqlInstancesService
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SqlInstancesServiceStub: Sendable {
       func addServerCa(
-        request: SqlInstancesAddServerCaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesAddServerCaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func addServerCertificate(
-        request: SqlInstancesAddServerCertificateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesAddServerCertificateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func addEntraIdCertificate(
-        request: SqlInstancesAddEntraIdCertificateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesAddEntraIdCertificateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func clone(
-        request: SqlInstancesCloneRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesCloneRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func delete(
-        request: SqlInstancesDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func demoteMaster(
-        request: SqlInstancesDemoteMasterRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesDemoteMasterRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func demote(
-        request: SqlInstancesDemoteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesDemoteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func export(
-        request: SqlInstancesExportRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesExportRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func failover(
-        request: SqlInstancesFailoverRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesFailoverRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func reencrypt(
-        request: SqlInstancesReencryptRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesReencryptRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func `get`(
-        request: SqlInstancesGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.DatabaseInstance
 
       func `import`(
-        request: SqlInstancesImportRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesImportRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func insert(
-        request: SqlInstancesInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func list(
-        request: SqlInstancesListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.InstancesListResponse
 
       func listServerCas(
-        request: SqlInstancesListServerCasRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesListServerCasRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.InstancesListServerCasResponse
 
       func listServerCertificates(
-        request: SqlInstancesListServerCertificatesRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesListServerCertificatesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.InstancesListServerCertificatesResponse
 
       func listEntraIdCertificates(
-        request: SqlInstancesListEntraIdCertificatesRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesListEntraIdCertificatesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.InstancesListEntraIdCertificatesResponse
 
       func patch(
-        request: SqlInstancesPatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func promoteReplica(
-        request: SqlInstancesPromoteReplicaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPromoteReplicaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func switchover(
-        request: SqlInstancesSwitchoverRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesSwitchoverRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func resetSslConfig(
-        request: SqlInstancesResetSslConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesResetSslConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func restart(
-        request: SqlInstancesRestartRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRestartRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func restoreBackup(
-        request: SqlInstancesRestoreBackupRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRestoreBackupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func rotateServerCa(
-        request: SqlInstancesRotateServerCaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRotateServerCaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func rotateServerCertificate(
-        request: SqlInstancesRotateServerCertificateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRotateServerCertificateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func rotateEntraIdCertificate(
-        request: SqlInstancesRotateEntraIdCertificateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRotateEntraIdCertificateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func startReplica(
-        request: SqlInstancesStartReplicaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesStartReplicaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func stopReplica(
-        request: SqlInstancesStopReplicaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesStopReplicaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func truncateLog(
-        request: SqlInstancesTruncateLogRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesTruncateLogRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func update(
-        request: SqlInstancesUpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesUpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func createEphemeral(
-        request: SqlInstancesCreateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesCreateEphemeralCertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SslCert
 
       func rescheduleMaintenance(
-        request: SqlInstancesRescheduleMaintenanceRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRescheduleMaintenanceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func verifyExternalSyncSettings(
-        request: SqlInstancesVerifyExternalSyncSettingsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesVerifyExternalSyncSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesVerifyExternalSyncSettingsResponse
 
       func startExternalSync(
-        request: SqlInstancesStartExternalSyncRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesStartExternalSyncRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func performDiskShrink(
-        request: SqlInstancesPerformDiskShrinkRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPerformDiskShrinkRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func getDiskShrinkConfig(
-        request: SqlInstancesGetDiskShrinkConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesGetDiskShrinkConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesGetDiskShrinkConfigResponse
 
       func resetReplicaSize(
-        request: SqlInstancesResetReplicaSizeRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesResetReplicaSizeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func getLatestRecoveryTime(
-        request: SqlInstancesGetLatestRecoveryTimeRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesGetLatestRecoveryTimeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesGetLatestRecoveryTimeResponse
 
       func executeSql(
-        request: SqlInstancesExecuteSqlRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesExecuteSqlRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesExecuteSqlResponse
 
       func acquireSsrsLease(
-        request: SqlInstancesAcquireSsrsLeaseRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesAcquireSsrsLeaseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesAcquireSsrsLeaseResponse
 
       func releaseSsrsLease(
-        request: SqlInstancesReleaseSsrsLeaseRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesReleaseSsrsLeaseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesReleaseSsrsLeaseResponse
 
       func preCheckMajorVersionUpgrade(
-        request: SqlInstancesPreCheckMajorVersionUpgradeRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPreCheckMajorVersionUpgradeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func pointInTimeRestore(
-        request: SqlInstancesPointInTimeRestoreRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPointInTimeRestoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
     }
   }

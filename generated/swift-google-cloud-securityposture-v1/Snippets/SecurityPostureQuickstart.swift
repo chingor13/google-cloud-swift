@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudSecuritypostureV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(organizationId: String, locationId: String, ) async throws {
   let client = try GoogleCloudSecuritypostureV1.SecurityPostureClient()

@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The output configuration setting.
-public struct OutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OutputConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The configuration of destination for holding output data.
   public var destination: OneOf_Destination? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OutputConfig`.
   public init() {}
@@ -83,7 +83,7 @@ public struct OutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.destination = destination
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -104,7 +104,7 @@ public struct OutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The Google Cloud Storage output destination configuration.
-  public struct GcsDestination: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GcsDestination: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The output uri prefix for saving output data to json files.
@@ -116,7 +116,7 @@ public struct OutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// gs://bucket/folder/item_  gs://bucket/folder/item_foo.json
     public var outputUriPrefix: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GcsDestination`.
     public init() {}
@@ -154,7 +154,7 @@ public struct OutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -169,16 +169,16 @@ public struct OutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.OutputConfig.GcsDestination"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The BigQuery output destination configuration.
-  public struct BigQueryDestination: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BigQueryDestination: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The ID of a BigQuery Dataset.
@@ -193,7 +193,7 @@ public struct OutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// * `view`: A virtual table defined by a SQL query.
     public var tableType: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BigQueryDestination`.
     public init() {}
@@ -241,7 +241,7 @@ public struct OutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -258,11 +258,11 @@ public struct OutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.OutputConfig.BigQueryDestination"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -277,10 +277,10 @@ public struct OutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.OutputConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudWorkloadIdentityV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: WorkloadIdentityClient) async throws {
   let poller = try await client.generateServiceAgents(

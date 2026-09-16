@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The description of a dynamic collection of monitored resources. Each group
 /// has a filter that is matched against monitored resources and their associated
@@ -43,7 +43,7 @@ import Foundation
 /// The monitored resources contained in a group can change at any moment,
 /// depending on what resources exist and what filters are associated with the
 /// group and its ancestors.
-public struct Group: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Group: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The name of this group. The format is:
@@ -73,7 +73,7 @@ public struct Group: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The system can perform additional analysis on groups that are clusters.
   public var isCluster: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Group`.
   public init() {}
@@ -131,7 +131,7 @@ public struct Group: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -150,10 +150,10 @@ public struct Group: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.Group"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

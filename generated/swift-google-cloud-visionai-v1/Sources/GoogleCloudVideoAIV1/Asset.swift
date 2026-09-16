@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An asset is a resource in corpus. It represents a media object inside corpus,
 /// contains metadata and another resource annotation. Different feature could be
 /// applied to the asset to generate annotations. User could specified annotation
 /// related to the target asset.
-public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Asset: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Resource name of the asset.
@@ -32,13 +32,13 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The duration for which all media assets, associated metadata, and search
   /// documents can exist. If not set, then it will using the default ttl in the
   /// parent corpus resource.
-  public var ttl: GoogleCloudWKT.Duration? = nil
+  public var ttl: GoogleWKT.Duration? = nil
 
   /// Output only. The original cloud storage source uri that is associated with
   /// this asset.
   public var assetGcsSource: AssetSource.AssetGcsSource? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Asset`.
   public init() {}
@@ -78,12 +78,12 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.ttl = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .ttl)
+    self.ttl = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .ttl)
     self.assetGcsSource = try container.decodeIfPresent(
       AssetSource.AssetGcsSource.self, forKey: .assetGcsSource)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -100,10 +100,10 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.Asset"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

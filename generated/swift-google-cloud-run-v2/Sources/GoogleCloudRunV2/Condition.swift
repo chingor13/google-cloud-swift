@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines a status condition for a resource.
-public struct Condition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Condition: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// type is used to communicate the status of the reconciliation process.
@@ -35,7 +35,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var message: Swift.String = Swift.String()
 
   /// Last time the condition transitioned from one status to another.
-  public var lastTransitionTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastTransitionTime: GoogleWKT.Timestamp? = nil
 
   /// How to interpret failures of this condition, one of Error, Warning, Info
   public var severity: Condition.Severity = Condition.Severity()
@@ -45,7 +45,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Successful conditions cannot have a reason.
   public var reasons: OneOf_Reasons? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Condition`.
   public init() {}
@@ -102,7 +102,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.message = value
     }
     self.lastTransitionTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastTransitionTime)
+      GoogleWKT.Timestamp.self, forKey: .lastTransitionTime)
     if let value = try container.decodeIfPresent(Condition.Severity.self, forKey: .severity) {
       self.severity = value
     }
@@ -133,7 +133,7 @@ public struct Condition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.reasons = reasons
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -924,10 +924,10 @@ public struct Condition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.Condition"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

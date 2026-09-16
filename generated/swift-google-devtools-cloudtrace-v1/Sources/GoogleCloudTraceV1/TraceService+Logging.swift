@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func listTraces(
-      request: ListTracesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTracesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTraceV1.ListTracesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listTraces",
         action: {
-          (r: ListTracesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListTracesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTraceV1.ListTracesResponse
           in
           return try await self.inner.listTraces(request: r, options: o)
@@ -72,28 +72,27 @@ extension Clients {
     }
 
     public func getTrace(
-      request: GetTraceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTraceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTraceV1.Trace {
       try await self._intercept(
         request: request,
         options: options,
         name: "getTrace",
         action: {
-          (r: GetTraceRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudTraceV1.Trace
+          (r: GetTraceRequest, o: GoogleGax.RequestOptions) async throws -> GoogleCloudTraceV1.Trace
           in
           return try await self.inner.getTrace(request: r, options: o)
         })
     }
 
     public func patchTraces(
-      request: PatchTracesRequest, options: GoogleCloudGax.RequestOptions
+      request: PatchTracesRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "patchTraces",
-        action: { (r: PatchTracesRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: PatchTracesRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.patchTraces(request: r, options: o)
         })
     }

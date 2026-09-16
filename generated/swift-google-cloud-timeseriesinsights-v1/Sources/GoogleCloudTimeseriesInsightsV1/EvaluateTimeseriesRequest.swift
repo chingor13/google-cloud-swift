@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request for evaluateTimeseries.
-public struct EvaluateTimeseriesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EvaluateTimeseriesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Client project name in the format of 'projects/{project}'.
@@ -48,12 +48,12 @@ public struct EvaluateTimeseriesRequest: Codable, Equatable, GoogleCloudWKT._Any
 
   /// The granularity of the time series (time distance between two consecutive
   /// points).
-  public var granularity: GoogleCloudWKT.Duration? = nil
+  public var granularity: GoogleWKT.Duration? = nil
 
   /// The forecast parameters.
   public var forecastParams: ForecastParams? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EvaluateTimeseriesRequest`.
   public init() {}
@@ -96,13 +96,12 @@ public struct EvaluateTimeseriesRequest: Codable, Equatable, GoogleCloudWKT._Any
       self.parent = value
     }
     self.timeseries = try container.decodeIfPresent(Timeseries.self, forKey: .timeseries)
-    self.granularity = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .granularity)
+    self.granularity = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .granularity)
     self.forecastParams = try container.decodeIfPresent(
       ForecastParams.self, forKey: .forecastParams)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -120,10 +119,10 @@ public struct EvaluateTimeseriesRequest: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.timeseriesinsights.v1.EvaluateTimeseriesRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

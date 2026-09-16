@@ -16,20 +16,20 @@
 
 #if Agents
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The request message for
   /// [Agents.DeleteAgent][google.cloud.dialogflow.v2.Agents.DeleteAgent].
   ///
   /// [google.cloud.dialogflow.v2.Agents.DeleteAgent]: <doc:AgentsClient/deleteAgent(request:options:)>
-  public struct DeleteAgentRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DeleteAgentRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The project that the agent to delete is associated with.
     /// Format: `projects/<Project ID>`.
     public var parent: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DeleteAgentRequest`.
     public init() {}
@@ -67,7 +67,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -82,11 +82,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.DeleteAgentRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

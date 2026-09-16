@@ -18,27 +18,27 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class GenerativeQuestionServiceRetry: GenerativeQuestionServiceStub {
     let inner: any GenerativeQuestionServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any GenerativeQuestionServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any GenerativeQuestionServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@ extension Clients {
     }
 
     public func updateGenerativeQuestionsFeatureConfig(
-      request: UpdateGenerativeQuestionsFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGenerativeQuestionsFeatureConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.GenerativeQuestionsFeatureConfig {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateGenerativeQuestionsFeatureConfigRequest, o: GoogleCloudGax.RequestOptions)
+          (r: UpdateGenerativeQuestionsFeatureConfigRequest, o: GoogleGax.RequestOptions)
             async throws -> GoogleCloudRetailV2.GenerativeQuestionsFeatureConfig
           in
           return try await self.inner.updateGenerativeQuestionsFeatureConfig(request: r, options: o)
@@ -65,29 +65,29 @@ extension Clients {
     }
 
     public func getGenerativeQuestionsFeatureConfig(
-      request: GetGenerativeQuestionsFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGenerativeQuestionsFeatureConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.GenerativeQuestionsFeatureConfig {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetGenerativeQuestionsFeatureConfigRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudRetailV2.GenerativeQuestionsFeatureConfig
+          (r: GetGenerativeQuestionsFeatureConfigRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudRetailV2.GenerativeQuestionsFeatureConfig
           in
           return try await self.inner.getGenerativeQuestionsFeatureConfig(request: r, options: o)
         })
     }
 
     public func listGenerativeQuestionConfigs(
-      request: ListGenerativeQuestionConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGenerativeQuestionConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ListGenerativeQuestionConfigsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListGenerativeQuestionConfigsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListGenerativeQuestionConfigsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.ListGenerativeQuestionConfigsResponse
           in
           return try await self.inner.listGenerativeQuestionConfigs(request: r, options: o)
@@ -95,14 +95,14 @@ extension Clients {
     }
 
     public func updateGenerativeQuestionConfig(
-      request: UpdateGenerativeQuestionConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGenerativeQuestionConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.GenerativeQuestionConfig {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateGenerativeQuestionConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateGenerativeQuestionConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.GenerativeQuestionConfig
           in
           return try await self.inner.updateGenerativeQuestionConfig(request: r, options: o)
@@ -110,44 +110,44 @@ extension Clients {
     }
 
     public func batchUpdateGenerativeQuestionConfigs(
-      request: BatchUpdateGenerativeQuestionConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchUpdateGenerativeQuestionConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.BatchUpdateGenerativeQuestionConfigsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: BatchUpdateGenerativeQuestionConfigsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudRetailV2.BatchUpdateGenerativeQuestionConfigsResponse
+          (r: BatchUpdateGenerativeQuestionConfigsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudRetailV2.BatchUpdateGenerativeQuestionConfigsResponse
           in
           return try await self.inner.batchUpdateGenerativeQuestionConfigs(request: r, options: o)
         })
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

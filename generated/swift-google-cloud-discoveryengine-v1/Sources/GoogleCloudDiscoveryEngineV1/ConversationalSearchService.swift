@@ -19,9 +19,9 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for conversational search.
   ///
@@ -32,7 +32,7 @@
     let inner: any Clients.ConversationalSearchServiceStub
 
     /// Creates a new `ConversationalSearchServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.ConversationalSearchServiceStub =
         try Clients.ConversationalSearchServiceTransport(options)
       inner = Clients.ConversationalSearchServiceRetry(inner, options: options)
@@ -46,7 +46,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_ConverseConversation")
     public func converseConversation(
-      request: ConverseConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: ConverseConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ConverseConversationResponse {
       try await self.inner.converseConversation(request: request, options: options)
     }
@@ -60,7 +60,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_CreateConversation")
     public func createConversation(
-      request: CreateConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation {
       try await self.inner.createConversation(request: request, options: options)
     }
@@ -74,7 +74,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_DeleteConversation")
     public func deleteConversation(
-      request: DeleteConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConversationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteConversation(request: request, options: options)
     }
@@ -90,7 +90,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_UpdateConversation")
     public func updateConversation(
-      request: UpdateConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation {
       try await self.inner.updateConversation(request: request, options: options)
     }
@@ -99,7 +99,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_GetConversation")
     public func getConversation(
-      request: GetConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation {
       try await self.inner.getConversation(request: request, options: options)
     }
@@ -111,7 +111,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_ListConversations")
     public func listConversations(
-      request: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListConversationsResponse {
       try await self.inner.listConversations(request: request, options: options)
     }
@@ -123,7 +123,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_ListConversations")
     public func listConversations(
-      byItem: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConversationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Conversation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListConversationsResponse
@@ -132,14 +132,14 @@
         request.pageToken = token
         return try await self.listConversations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Answer query method.
     ///
     /// @Snippet(path: "ConversationalSearchService_AnswerQuery")
     public func answerQuery(
-      request: AnswerQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: AnswerQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.AnswerQueryResponse {
       try await self.inner.answerQuery(request: request, options: options)
     }
@@ -157,7 +157,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_StreamAnswerQuery")
     public func streamAnswerQuery(
-      request: AnswerQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: AnswerQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.AnswerQueryResponse {
       try await self.inner.streamAnswerQuery(request: request, options: options)
     }
@@ -166,7 +166,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_GetAnswer")
     public func getAnswer(
-      request: GetAnswerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAnswerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Answer {
       try await self.inner.getAnswer(request: request, options: options)
     }
@@ -180,7 +180,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_CreateSession")
     public func createSession(
-      request: CreateSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Session {
       try await self.inner.createSession(request: request, options: options)
     }
@@ -194,7 +194,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_DeleteSession")
     public func deleteSession(
-      request: DeleteSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSessionRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteSession(request: request, options: options)
     }
@@ -209,7 +209,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_UpdateSession")
     public func updateSession(
-      request: UpdateSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Session {
       try await self.inner.updateSession(request: request, options: options)
     }
@@ -218,7 +218,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_GetSession")
     public func getSession(
-      request: GetSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Session {
       try await self.inner.getSession(request: request, options: options)
     }
@@ -230,7 +230,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_ListSessions")
     public func listSessions(
-      request: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSessionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListSessionsResponse {
       try await self.inner.listSessions(request: request, options: options)
     }
@@ -242,7 +242,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_ListSessions")
     public func listSessions(
-      byItem: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSessionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Session, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListSessionsResponse in
@@ -250,7 +250,7 @@
         request.pageToken = token
         return try await self.listSessions(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -259,7 +259,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -270,7 +270,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -278,7 +278,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -287,7 +287,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -298,7 +298,7 @@
     ///
     /// @Snippet(path: "ConversationalSearchService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -346,7 +346,7 @@
       /// See `ConversationalSearchServiceClient.updateConversation`.
       func updateConversation(
         conversation: Conversation?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation
 
       /// See `ConversationalSearchServiceClient.getConversation`.
@@ -413,7 +413,7 @@
       /// See `ConversationalSearchServiceClient.updateSession`.
       func updateSession(
         session: Session?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDiscoveryEngineV1.Session
 
       /// See `ConversationalSearchServiceClient.getSession`.
@@ -464,97 +464,97 @@
 
       /// See `ConversationalSearchServiceClient.converseConversation`.
       func converseConversation(
-        request: ConverseConversationRequest, options: GoogleCloudGax.RequestOptions
+        request: ConverseConversationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ConverseConversationResponse
 
       /// See `ConversationalSearchServiceClient.createConversation`.
       func createConversation(
-        request: CreateConversationRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateConversationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation
 
       /// See `ConversationalSearchServiceClient.deleteConversation`.
       func deleteConversation(
-        request: DeleteConversationRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteConversationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `ConversationalSearchServiceClient.updateConversation`.
       func updateConversation(
-        request: UpdateConversationRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateConversationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation
 
       /// See `ConversationalSearchServiceClient.getConversation`.
       func getConversation(
-        request: GetConversationRequest, options: GoogleCloudGax.RequestOptions
+        request: GetConversationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation
 
       /// See `ConversationalSearchServiceClient.listConversations`.
       func listConversations(
-        request: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListConversationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListConversationsResponse
 
       /// See `ConversationalSearchServiceClient.listConversations`.
       func listConversations(
-        byItem: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListConversationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Conversation, Swift.Error>
 
       /// See `ConversationalSearchServiceClient.answerQuery`.
       func answerQuery(
-        request: AnswerQueryRequest, options: GoogleCloudGax.RequestOptions
+        request: AnswerQueryRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.AnswerQueryResponse
 
       /// See `ConversationalSearchServiceClient.streamAnswerQuery`.
       func streamAnswerQuery(
-        request: AnswerQueryRequest, options: GoogleCloudGax.RequestOptions
+        request: AnswerQueryRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.AnswerQueryResponse
 
       /// See `ConversationalSearchServiceClient.getAnswer`.
       func getAnswer(
-        request: GetAnswerRequest, options: GoogleCloudGax.RequestOptions
+        request: GetAnswerRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Answer
 
       /// See `ConversationalSearchServiceClient.createSession`.
       func createSession(
-        request: CreateSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateSessionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Session
 
       /// See `ConversationalSearchServiceClient.deleteSession`.
       func deleteSession(
-        request: DeleteSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteSessionRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `ConversationalSearchServiceClient.updateSession`.
       func updateSession(
-        request: UpdateSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateSessionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Session
 
       /// See `ConversationalSearchServiceClient.getSession`.
       func getSession(
-        request: GetSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: GetSessionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Session
 
       /// See `ConversationalSearchServiceClient.listSessions`.
       func listSessions(
-        request: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListSessionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListSessionsResponse
 
       /// See `ConversationalSearchServiceClient.listSessions`.
       func listSessions(
-        byItem: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListSessionsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Session, Swift.Error>
 
       /// See `ConversationalSearchServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `ConversationalSearchServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `ConversationalSearchServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -568,9 +568,9 @@
     }
 
     public func converseConversation(
-      request: ConverseConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: ConverseConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ConverseConversationResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func converseConversation(
@@ -591,9 +591,9 @@
     }
 
     public func createConversation(
-      request: CreateConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createConversation(
@@ -612,9 +612,9 @@
     }
 
     public func deleteConversation(
-      request: DeleteConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConversationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteConversation(
@@ -633,14 +633,14 @@
     }
 
     public func updateConversation(
-      request: UpdateConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateConversation(
       conversation: Conversation?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation {
       let request = UpdateConversationRequest().with {
         $0.conversation = conversation
@@ -656,9 +656,9 @@
     }
 
     public func getConversation(
-      request: GetConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getConversation(
@@ -677,9 +677,9 @@
     }
 
     public func listConversations(
-      request: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListConversationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listConversations(
@@ -689,14 +689,14 @@
     }
 
     public func listConversations(
-      byItem: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConversationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Conversation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListConversationsResponse
         in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listConversations(
@@ -715,9 +715,9 @@
     }
 
     public func answerQuery(
-      request: AnswerQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: AnswerQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.AnswerQueryResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func streamAnswerQuery(request: AnswerQueryRequest) async throws
@@ -727,9 +727,9 @@
     }
 
     public func streamAnswerQuery(
-      request: AnswerQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: AnswerQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.AnswerQueryResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getAnswer(request: GetAnswerRequest) async throws
@@ -739,9 +739,9 @@
     }
 
     public func getAnswer(
-      request: GetAnswerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAnswerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Answer {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getAnswer(
@@ -760,9 +760,9 @@
     }
 
     public func createSession(
-      request: CreateSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Session {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createSession(
@@ -781,9 +781,9 @@
     }
 
     public func deleteSession(
-      request: DeleteSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSessionRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteSession(
@@ -802,14 +802,14 @@
     }
 
     public func updateSession(
-      request: UpdateSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Session {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateSession(
       session: Session?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDiscoveryEngineV1.Session {
       let request = UpdateSessionRequest().with {
         $0.session = session
@@ -825,9 +825,9 @@
     }
 
     public func getSession(
-      request: GetSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Session {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getSession(
@@ -846,9 +846,9 @@
     }
 
     public func listSessions(
-      request: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSessionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListSessionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listSessions(
@@ -858,13 +858,13 @@
     }
 
     public func listSessions(
-      byItem: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSessionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Session, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListSessionsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listSessions(
@@ -883,9 +883,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -895,13 +895,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -922,9 +922,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -941,9 +941,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

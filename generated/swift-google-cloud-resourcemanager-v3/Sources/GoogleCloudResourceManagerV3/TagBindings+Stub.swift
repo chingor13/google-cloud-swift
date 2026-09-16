@@ -15,31 +15,31 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol TagBindingsStub: Sendable {
     func listTagBindings(
-      request: ListTagBindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTagBindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudResourceManagerV3.ListTagBindingsResponse
 
     func createTagBinding(
-      request: CreateTagBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTagBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteTagBinding(
-      request: DeleteTagBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTagBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listEffectiveTags(
-      request: ListEffectiveTagsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEffectiveTagsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudResourceManagerV3.ListEffectiveTagsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

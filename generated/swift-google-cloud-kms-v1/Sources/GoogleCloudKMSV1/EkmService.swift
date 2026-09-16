@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Google Cloud Key Management EKM Service
 ///
@@ -37,7 +37,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   let inner: any Clients.EkmServiceStub
 
   /// Creates a new `EkmServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.EkmServiceStub = try Clients.EkmServiceTransport(options)
     inner = Clients.EkmServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -52,7 +52,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_ListEkmConnections")
   public func listEkmConnections(
-    request: ListEkmConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEkmConnectionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ListEkmConnectionsResponse {
     try await self.inner.listEkmConnections(request: request, options: options)
   }
@@ -63,7 +63,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_ListEkmConnections")
   public func listEkmConnections(
-    byItem: ListEkmConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEkmConnectionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<EkmConnection, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudKMSV1.ListEkmConnectionsResponse in
@@ -71,7 +71,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listEkmConnections(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns metadata for a given
@@ -81,7 +81,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_GetEkmConnection")
   public func getEkmConnection(
-    request: GetEkmConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEkmConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.EkmConnection {
     try await self.inner.getEkmConnection(request: request, options: options)
   }
@@ -93,7 +93,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_CreateEkmConnection")
   public func createEkmConnection(
-    request: CreateEkmConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEkmConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.EkmConnection {
     try await self.inner.createEkmConnection(request: request, options: options)
   }
@@ -104,7 +104,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_UpdateEkmConnection")
   public func updateEkmConnection(
-    request: UpdateEkmConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEkmConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.EkmConnection {
     try await self.inner.updateEkmConnection(request: request, options: options)
   }
@@ -116,7 +116,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_GetEkmConfig")
   public func getEkmConfig(
-    request: GetEkmConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEkmConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.EkmConfig {
     try await self.inner.getEkmConfig(request: request, options: options)
   }
@@ -128,7 +128,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_UpdateEkmConfig")
   public func updateEkmConfig(
-    request: UpdateEkmConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEkmConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.EkmConfig {
     try await self.inner.updateEkmConfig(request: request, options: options)
   }
@@ -143,7 +143,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_VerifyConnectivity")
   public func verifyConnectivity(
-    request: VerifyConnectivityRequest, options: GoogleCloudGax.RequestOptions
+    request: VerifyConnectivityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.VerifyConnectivityResponse {
     try await self.inner.verifyConnectivity(request: request, options: options)
   }
@@ -169,7 +169,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -195,7 +195,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -203,14 +203,14 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "EkmService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -223,7 +223,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -233,7 +233,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -248,7 +248,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -259,7 +259,7 @@ public final class EkmServiceClient: Clients.EkmServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EkmService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -313,7 +313,7 @@ extension Clients {
     /// See `EkmServiceClient.updateEkmConnection`.
     func updateEkmConnection(
       ekmConnection: EkmConnection?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudKMSV1.EkmConnection
 
     /// See `EkmServiceClient.getEkmConfig`.
@@ -330,7 +330,7 @@ extension Clients {
     /// See `EkmServiceClient.updateEkmConfig`.
     func updateEkmConfig(
       ekmConfig: EkmConfig?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudKMSV1.EkmConfig
 
     /// See `EkmServiceClient.verifyConnectivity`.
@@ -367,72 +367,72 @@ extension Clients {
 
     /// See `EkmServiceClient.listEkmConnections`.
     func listEkmConnections(
-      request: ListEkmConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEkmConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListEkmConnectionsResponse
 
     /// See `EkmServiceClient.listEkmConnections`.
     func listEkmConnections(
-      byItem: ListEkmConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEkmConnectionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<EkmConnection, Swift.Error>
 
     /// See `EkmServiceClient.getEkmConnection`.
     func getEkmConnection(
-      request: GetEkmConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEkmConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.EkmConnection
 
     /// See `EkmServiceClient.createEkmConnection`.
     func createEkmConnection(
-      request: CreateEkmConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEkmConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.EkmConnection
 
     /// See `EkmServiceClient.updateEkmConnection`.
     func updateEkmConnection(
-      request: UpdateEkmConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEkmConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.EkmConnection
 
     /// See `EkmServiceClient.getEkmConfig`.
     func getEkmConfig(
-      request: GetEkmConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEkmConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.EkmConfig
 
     /// See `EkmServiceClient.updateEkmConfig`.
     func updateEkmConfig(
-      request: UpdateEkmConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEkmConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.EkmConfig
 
     /// See `EkmServiceClient.verifyConnectivity`.
     func verifyConnectivity(
-      request: VerifyConnectivityRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyConnectivityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.VerifyConnectivityResponse
 
     /// See `EkmServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `EkmServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `EkmServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `EkmServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `EkmServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `EkmServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
   }
 }
@@ -446,9 +446,9 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func listEkmConnections(
-    request: ListEkmConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEkmConnectionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ListEkmConnectionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listEkmConnections(
@@ -458,13 +458,13 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func listEkmConnections(
-    byItem: ListEkmConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEkmConnectionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<EkmConnection, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudKMSV1.ListEkmConnectionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listEkmConnections(
@@ -483,9 +483,9 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func getEkmConnection(
-    request: GetEkmConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEkmConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.EkmConnection {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getEkmConnection(
@@ -504,9 +504,9 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func createEkmConnection(
-    request: CreateEkmConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEkmConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.EkmConnection {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createEkmConnection(
@@ -529,14 +529,14 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func updateEkmConnection(
-    request: UpdateEkmConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEkmConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.EkmConnection {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateEkmConnection(
     ekmConnection: EkmConnection?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudKMSV1.EkmConnection {
     let request = UpdateEkmConnectionRequest().with {
       $0.ekmConnection = ekmConnection
@@ -551,9 +551,9 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func getEkmConfig(
-    request: GetEkmConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEkmConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.EkmConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getEkmConfig(
@@ -572,14 +572,14 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func updateEkmConfig(
-    request: UpdateEkmConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEkmConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.EkmConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateEkmConfig(
     ekmConfig: EkmConfig?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudKMSV1.EkmConfig {
     let request = UpdateEkmConfigRequest().with {
       $0.ekmConfig = ekmConfig
@@ -595,9 +595,9 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func verifyConnectivity(
-    request: VerifyConnectivityRequest, options: GoogleCloudGax.RequestOptions
+    request: VerifyConnectivityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.VerifyConnectivityResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func verifyConnectivity(
@@ -616,9 +616,9 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -628,13 +628,13 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -644,9 +644,9 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -656,9 +656,9 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -668,9 +668,9 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -680,9 +680,9 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(request: GoogleLongRunning.GetOperationRequest) async throws
@@ -692,9 +692,9 @@ extension Clients.EkmServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

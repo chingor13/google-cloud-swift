@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ServiceProjectAttachment represents an attachment from a service project to a
 /// host project. Service projects contain the underlying cloud
 /// infrastructure resources, and expose these resources to the host project
 /// through a ServiceProjectAttachment. With the attachments, the host project
 /// can provide an aggregated view of resources across all service projects.
-public struct ServiceProjectAttachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ServiceProjectAttachment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of a ServiceProjectAttachment. Format:
@@ -35,7 +35,7 @@ public struct ServiceProjectAttachment: Codable, Equatable, GoogleCloudWKT._AnyP
   public var serviceProject: Swift.String = Swift.String()
 
   /// Output only. Create time.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. A globally unique identifier (in UUID4 format) for the
   /// `ServiceProjectAttachment`.
@@ -44,7 +44,7 @@ public struct ServiceProjectAttachment: Codable, Equatable, GoogleCloudWKT._AnyP
   /// Output only. ServiceProjectAttachment state.
   public var state: ServiceProjectAttachment.State = ServiceProjectAttachment.State()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ServiceProjectAttachment`.
   public init() {}
@@ -91,8 +91,7 @@ public struct ServiceProjectAttachment: Codable, Equatable, GoogleCloudWKT._AnyP
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .serviceProject) {
       self.serviceProject = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .uid) {
       self.uid = value
     }
@@ -103,7 +102,7 @@ public struct ServiceProjectAttachment: Codable, Equatable, GoogleCloudWKT._AnyP
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -236,10 +235,10 @@ public struct ServiceProjectAttachment: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apphub.v1.ServiceProjectAttachment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

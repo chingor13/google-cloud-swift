@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for exporting cluster resource usages.
-public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ResourceUsageExportConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Configuration to use BigQuery as usage export destination.
@@ -31,7 +31,7 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWKT._Any
   /// Configuration to enable resource consumption metering.
   public var consumptionMeteringConfig: ResourceUsageExportConfig.ConsumptionMeteringConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ResourceUsageExportConfig`.
   public init() {}
@@ -79,7 +79,7 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWKT._Any
       ResourceUsageExportConfig.ConsumptionMeteringConfig.self, forKey: .consumptionMeteringConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,13 +95,13 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWKT._Any
   }
 
   /// Parameters for using BigQuery as the destination of resource usage export.
-  public struct BigQueryDestination: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BigQueryDestination: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The ID of a BigQuery Dataset.
     public var datasetId: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BigQueryDestination`.
     public init() {}
@@ -139,7 +139,7 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -154,16 +154,16 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWKT._Any
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.ResourceUsageExportConfig.BigQueryDestination"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Parameters for controlling consumption metering.
-  public struct ConsumptionMeteringConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConsumptionMeteringConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Whether to enable consumption metering for this cluster. If enabled, a
@@ -171,7 +171,7 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWKT._Any
     /// records.
     public var enabled: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConsumptionMeteringConfig`.
     public init() {}
@@ -209,7 +209,7 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -225,21 +225,21 @@ public struct ResourceUsageExportConfig: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.container.v1.ResourceUsageExportConfig.ConsumptionMeteringConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.ResourceUsageExportConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

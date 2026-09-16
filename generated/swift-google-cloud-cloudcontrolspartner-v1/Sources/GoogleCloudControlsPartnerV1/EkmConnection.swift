@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Details about the EKM connection
-public struct EkmConnection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EkmConnection: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Resource name of the EKM connection in the format:
@@ -31,7 +31,7 @@ public struct EkmConnection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The connection error that occurred if any
   public var connectionError: EkmConnection.ConnectionError? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EkmConnection`.
   public init() {}
@@ -80,7 +80,7 @@ public struct EkmConnection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       EkmConnection.ConnectionError.self, forKey: .connectionError)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,7 +96,7 @@ public struct EkmConnection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Information around the error that occurred if the connection state is
   /// anything other than available or unspecified
-  public struct ConnectionError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConnectionError: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The error domain for the error
@@ -105,7 +105,7 @@ public struct EkmConnection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The error message for the error
     public var errorMessage: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConnectionError`.
     public init() {}
@@ -148,7 +148,7 @@ public struct EkmConnection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -165,11 +165,11 @@ public struct EkmConnection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.cloudcontrolspartner.v1.EkmConnection.ConnectionError"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -295,10 +295,10 @@ public struct EkmConnection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.cloudcontrolspartner.v1.EkmConnection"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

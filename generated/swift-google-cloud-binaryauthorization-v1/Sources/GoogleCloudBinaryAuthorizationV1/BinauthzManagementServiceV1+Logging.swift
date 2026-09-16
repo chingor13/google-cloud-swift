@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func getPolicy(
-      request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getPolicy",
         action: {
-          (r: GetPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBinaryAuthorizationV1.Policy
           in
           return try await self.inner.getPolicy(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func updatePolicy(
-      request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "updatePolicy",
         action: {
-          (r: UpdatePolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdatePolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBinaryAuthorizationV1.Policy
           in
           return try await self.inner.updatePolicy(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func createAttestor(
-      request: CreateAttestorRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAttestorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
       try await self._intercept(
         request: request,
         options: options,
         name: "createAttestor",
         action: {
-          (r: CreateAttestorRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateAttestorRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBinaryAuthorizationV1.Attestor
           in
           return try await self.inner.createAttestor(request: r, options: o)
@@ -103,14 +103,14 @@ extension Clients {
     }
 
     public func getAttestor(
-      request: GetAttestorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAttestorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
       try await self._intercept(
         request: request,
         options: options,
         name: "getAttestor",
         action: {
-          (r: GetAttestorRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetAttestorRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBinaryAuthorizationV1.Attestor
           in
           return try await self.inner.getAttestor(request: r, options: o)
@@ -118,14 +118,14 @@ extension Clients {
     }
 
     public func updateAttestor(
-      request: UpdateAttestorRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAttestorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateAttestor",
         action: {
-          (r: UpdateAttestorRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateAttestorRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBinaryAuthorizationV1.Attestor
           in
           return try await self.inner.updateAttestor(request: r, options: o)
@@ -133,14 +133,14 @@ extension Clients {
     }
 
     public func listAttestors(
-      request: ListAttestorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAttestorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBinaryAuthorizationV1.ListAttestorsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listAttestors",
         action: {
-          (r: ListAttestorsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListAttestorsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBinaryAuthorizationV1.ListAttestorsResponse
           in
           return try await self.inner.listAttestors(request: r, options: o)
@@ -148,27 +148,26 @@ extension Clients {
     }
 
     public func deleteAttestor(
-      request: DeleteAttestorRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAttestorRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteAttestor",
-        action: {
-          (r: DeleteAttestorRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteAttestorRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteAttestor(request: r, options: o)
         })
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "setIamPolicy",
         action: {
-          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.setIamPolicy(request: r, options: o)
@@ -176,14 +175,14 @@ extension Clients {
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getIamPolicy",
         action: {
-          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.getIamPolicy(request: r, options: o)
@@ -191,14 +190,14 @@ extension Clients {
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "testIamPermissions",
         action: {
-          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.TestIamPermissionsResponse
           in
           return try await self.inner.testIamPermissions(request: r, options: o)

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for executing a dashboard query.
-public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Result rows that are queried.
@@ -30,7 +30,7 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
 
   /// Optional. Last time the cache was refreshed. This would be used by the UI
   /// to show the last updated time.
-  public var lastBackendCacheRefreshedTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastBackendCacheRefreshedTime: GoogleWKT.Timestamp? = nil
 
   /// Time window against which query was executed.
   public var timeWindow: GoogleType.Interval? = nil
@@ -41,7 +41,7 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
   /// Optional. Language features found in the query.
   public var languageFeatures: [LanguageFeature] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExecuteDashboardQueryResponse`.
   public init() {}
@@ -94,7 +94,7 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
       self.dataSources = value
     }
     self.lastBackendCacheRefreshedTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastBackendCacheRefreshedTime)
+      GoogleWKT.Timestamp.self, forKey: .lastBackendCacheRefreshedTime)
     self.timeWindow = try container.decodeIfPresent(GoogleType.Interval.self, forKey: .timeWindow)
     if let value = try container.decodeIfPresent(
       [QueryRuntimeError].self, forKey: .queryRuntimeErrors)
@@ -107,7 +107,7 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -127,14 +127,14 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
 
   /// LINT.IfChange(stats_data)
   /// Value of the column based on data type.
-  public struct ColumnValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ColumnValue: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var metadata: ExecuteDashboardQueryResponse.ColumnValue.ValueMetadata? = nil
 
     public var value: OneOf_Value? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ColumnValue`.
     public init() {}
@@ -222,21 +222,20 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
         try valueCheckAndSet(.stringVal(stringVal))
       }
       if let timestampVal = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp?.self, forKey: .timestampVal)
+        GoogleWKT.Timestamp?.self, forKey: .timestampVal)
       {
         try valueCheckAndSet(.timestampVal(timestampVal))
       }
       if let dateVal = try container.decodeIfPresent(GoogleType.Date?.self, forKey: .dateVal) {
         try valueCheckAndSet(.dateVal(dateVal))
       }
-      if let protoVal = try container.decodeIfPresent(GoogleCloudWKT.`Any`?.self, forKey: .protoVal)
-      {
+      if let protoVal = try container.decodeIfPresent(GoogleWKT.`Any`?.self, forKey: .protoVal) {
         try valueCheckAndSet(.protoVal(protoVal))
       }
       self.value = value
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -273,7 +272,7 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
       }
     }
 
-    public struct ValueMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ValueMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// "Auto" generated In-app links.
@@ -283,9 +282,9 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
 
       /// Timestamp value to store the timestamp for the case of the date and
       /// time data type.
-      public var timestampVal: GoogleCloudWKT.Timestamp? = nil
+      public var timestampVal: GoogleWKT.Timestamp? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ValueMetadata`.
       public init() {}
@@ -329,10 +328,10 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
           self.fieldPaths = value
         }
         self.timestampVal = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .timestampVal)
+          GoogleWKT.Timestamp.self, forKey: .timestampVal)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -350,11 +349,11 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
         return
           "type.googleapis.com/google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue.ValueMetadata"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -374,32 +373,32 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
       /// String value. Enum values are returned as strings.
       case stringVal(Swift.String)
       /// Timestamp values. Does not handle `interval`.
-      indirect case timestampVal(GoogleCloudWKT.Timestamp?)
+      indirect case timestampVal(GoogleWKT.Timestamp?)
       /// Date values.
       indirect case dateVal(GoogleType.Date?)
       /// For any proto values that are not any of the above.
-      indirect case protoVal(GoogleCloudWKT.`Any`?)
+      indirect case protoVal(GoogleWKT.`Any`?)
     }
 
     public static var _anyTypeUrl: Swift.String {
       return
         "type.googleapis.com/google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnValue"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Singular vs list of values in a column.
-  public struct ColumnType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ColumnType: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var type: OneOf_Type? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ColumnType`.
     public init() {}
@@ -458,7 +457,7 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
       self.type = type
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -479,12 +478,12 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
     }
 
     /// Store list of values in a column.
-    public struct List: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct List: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       public var values: [ExecuteDashboardQueryResponse.ColumnValue] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `List`.
       public init() {}
@@ -524,7 +523,7 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -540,11 +539,11 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
         return
           "type.googleapis.com/google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType.List"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -559,15 +558,15 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
       return
         "type.googleapis.com/google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnType"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
-  public struct ColumnData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ColumnData: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Used to store column names.
@@ -579,7 +578,7 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
     /// To store column metadata.
     public var metadata: ColumnMetadata? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ColumnData`.
     public init() {}
@@ -627,7 +626,7 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
       self.metadata = try container.decodeIfPresent(ColumnMetadata.self, forKey: .metadata)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -645,21 +644,21 @@ public struct ExecuteDashboardQueryResponse: Codable, Equatable, GoogleCloudWKT.
       return
         "type.googleapis.com/google.cloud.chronicle.v1.ExecuteDashboardQueryResponse.ColumnData"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.chronicle.v1.ExecuteDashboardQueryResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

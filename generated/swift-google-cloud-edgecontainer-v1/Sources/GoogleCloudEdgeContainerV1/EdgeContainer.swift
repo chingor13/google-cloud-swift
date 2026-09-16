@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// EdgeContainer API provides management of Kubernetes Clusters on Google Edge
 /// Cloud deployments.
@@ -30,11 +30,11 @@ import GoogleCloudGax
 /// @Snippet(path: "EdgeContainerQuickstart")
 public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable {
   let inner: any Clients.EdgeContainerStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `EdgeContainerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.EdgeContainerStub = try Clients.EdgeContainerTransport(options)
     inner = Clients.EdgeContainerRetry(inner, options: options)
     if let logger = options.logger {
@@ -49,7 +49,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_ListClusters")
   public func listClusters(
-    request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListClustersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.ListClustersResponse {
     try await self.inner.listClusters(request: request, options: options)
   }
@@ -58,7 +58,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_ListClusters")
   public func listClusters(
-    byItem: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListClustersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Cluster, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudEdgeContainerV1.ListClustersResponse in
@@ -66,14 +66,14 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
       request.pageToken = token
       return try await self.listClusters(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Cluster.
   ///
   /// @Snippet(path: "EdgeContainer_GetCluster")
   public func getCluster(
-    request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.Cluster {
     try await self.inner.getCluster(request: request, options: options)
   }
@@ -82,7 +82,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_CreateCluster")
   public func createCluster(
-    request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createCluster(request: request, options: options)
   }
@@ -91,21 +91,20 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_CreateCluster")
   public func createCluster(
-    withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: CreateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.createCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -117,7 +116,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_UpdateCluster")
   public func updateCluster(
-    request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateCluster(request: request, options: options)
   }
@@ -126,21 +125,20 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_UpdateCluster")
   public func updateCluster(
-    withPolling: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: UpdateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.updateCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -152,7 +150,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_UpgradeCluster")
   public func upgradeCluster(
-    request: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpgradeClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.upgradeCluster(request: request, options: options)
   }
@@ -161,21 +159,20 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_UpgradeCluster")
   public func upgradeCluster(
-    withPolling: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: UpgradeClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.upgradeCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -187,7 +184,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_DeleteCluster")
   public func deleteCluster(
-    request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteCluster(request: request, options: options)
   }
@@ -196,21 +193,21 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_DeleteCluster")
   public func deleteCluster(
-    withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -222,7 +219,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_GenerateAccessToken")
   public func generateAccessToken(
-    request: GenerateAccessTokenRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateAccessTokenRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.GenerateAccessTokenResponse {
     try await self.inner.generateAccessToken(request: request, options: options)
   }
@@ -231,7 +228,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_GenerateOfflineCredential")
   public func generateOfflineCredential(
-    request: GenerateOfflineCredentialRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateOfflineCredentialRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.GenerateOfflineCredentialResponse {
     try await self.inner.generateOfflineCredential(request: request, options: options)
   }
@@ -240,7 +237,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_ListNodePools")
   public func listNodePools(
-    request: ListNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListNodePoolsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.ListNodePoolsResponse {
     try await self.inner.listNodePools(request: request, options: options)
   }
@@ -249,7 +246,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_ListNodePools")
   public func listNodePools(
-    byItem: ListNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListNodePoolsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<NodePool, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudEdgeContainerV1.ListNodePoolsResponse in
@@ -257,14 +254,14 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
       request.pageToken = token
       return try await self.listNodePools(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single NodePool.
   ///
   /// @Snippet(path: "EdgeContainer_GetNodePool")
   public func getNodePool(
-    request: GetNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: GetNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.NodePool {
     try await self.inner.getNodePool(request: request, options: options)
   }
@@ -273,7 +270,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_CreateNodePool")
   public func createNodePool(
-    request: CreateNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createNodePool(request: request, options: options)
   }
@@ -282,21 +279,21 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_CreateNodePool")
   public func createNodePool(
-    withPolling: CreateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<NodePool> {
+    withPolling: CreateNodePoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<NodePool> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<NodePool>.State
+      in
       return try op._extractStatus(NodePool.self)
     }
     let rawOp = try await self.createNodePool(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<NodePool>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -308,7 +305,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_UpdateNodePool")
   public func updateNodePool(
-    request: UpdateNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateNodePool(request: request, options: options)
   }
@@ -317,21 +314,21 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_UpdateNodePool")
   public func updateNodePool(
-    withPolling: UpdateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<NodePool> {
+    withPolling: UpdateNodePoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<NodePool> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<NodePool>.State
+      in
       return try op._extractStatus(NodePool.self)
     }
     let rawOp = try await self.updateNodePool(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<NodePool>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -343,7 +340,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_DeleteNodePool")
   public func deleteNodePool(
-    request: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteNodePool(request: request, options: options)
   }
@@ -352,21 +349,21 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_DeleteNodePool")
   public func deleteNodePool(
-    withPolling: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteNodePoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteNodePool(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -378,7 +375,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_ListMachines")
   public func listMachines(
-    request: ListMachinesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListMachinesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.ListMachinesResponse {
     try await self.inner.listMachines(request: request, options: options)
   }
@@ -387,7 +384,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_ListMachines")
   public func listMachines(
-    byItem: ListMachinesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListMachinesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Machine, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudEdgeContainerV1.ListMachinesResponse in
@@ -395,14 +392,14 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
       request.pageToken = token
       return try await self.listMachines(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Machine.
   ///
   /// @Snippet(path: "EdgeContainer_GetMachine")
   public func getMachine(
-    request: GetMachineRequest, options: GoogleCloudGax.RequestOptions
+    request: GetMachineRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.Machine {
     try await self.inner.getMachine(request: request, options: options)
   }
@@ -411,7 +408,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_ListVpnConnections")
   public func listVpnConnections(
-    request: ListVpnConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListVpnConnectionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.ListVpnConnectionsResponse {
     try await self.inner.listVpnConnections(request: request, options: options)
   }
@@ -420,7 +417,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_ListVpnConnections")
   public func listVpnConnections(
-    byItem: ListVpnConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListVpnConnectionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<VpnConnection, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudEdgeContainerV1.ListVpnConnectionsResponse in
@@ -428,14 +425,14 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
       request.pageToken = token
       return try await self.listVpnConnections(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single VPN connection.
   ///
   /// @Snippet(path: "EdgeContainer_GetVpnConnection")
   public func getVpnConnection(
-    request: GetVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetVpnConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.VpnConnection {
     try await self.inner.getVpnConnection(request: request, options: options)
   }
@@ -444,7 +441,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_CreateVpnConnection")
   public func createVpnConnection(
-    request: CreateVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateVpnConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createVpnConnection(request: request, options: options)
   }
@@ -453,21 +450,21 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_CreateVpnConnection")
   public func createVpnConnection(
-    withPolling: CreateVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<VpnConnection> {
+    withPolling: CreateVpnConnectionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<VpnConnection> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<VpnConnection>.State in
+        -> GoogleGax._PollableOperationImpl<VpnConnection>.State in
       return try op._extractStatus(VpnConnection.self)
     }
     let rawOp = try await self.createVpnConnection(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<VpnConnection>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<VpnConnection>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -479,7 +476,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_DeleteVpnConnection")
   public func deleteVpnConnection(
-    request: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteVpnConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteVpnConnection(request: request, options: options)
   }
@@ -488,21 +485,21 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_DeleteVpnConnection")
   public func deleteVpnConnection(
-    withPolling: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteVpnConnectionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteVpnConnection(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -514,7 +511,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_GetServerConfig")
   public func getServerConfig(
-    request: GetServerConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetServerConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.ServerConfig {
     try await self.inner.getServerConfig(request: request, options: options)
   }
@@ -523,7 +520,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -532,7 +529,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -540,14 +537,14 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "EdgeContainer_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -558,7 +555,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -569,7 +566,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -577,7 +574,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -586,7 +583,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -597,7 +594,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -608,7 +605,7 @@ public final class EdgeContainerClient: Clients.EdgeContainerProtocol, Sendable 
   ///
   /// @Snippet(path: "EdgeContainer_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -647,7 +644,7 @@ extension Clients {
     func createCluster(request: CreateClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.createCluster`.
-    func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleCloudGax
+    func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Cluster>
 
     /// See `EdgeContainerClient.createCluster`.
@@ -655,26 +652,26 @@ extension Clients {
       parent: Swift.String,
       cluster: Cluster?,
       clusterId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `EdgeContainerClient.updateCluster`.
     func updateCluster(request: UpdateClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.updateCluster`.
-    func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleCloudGax
+    func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Cluster>
 
     /// See `EdgeContainerClient.updateCluster`.
     func updateCluster(
       cluster: Cluster?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `EdgeContainerClient.upgradeCluster`.
     func upgradeCluster(request: UpgradeClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.upgradeCluster`.
-    func upgradeCluster(withPolling: UpgradeClusterRequest) async throws -> any GoogleCloudGax
+    func upgradeCluster(withPolling: UpgradeClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Cluster>
 
     /// See `EdgeContainerClient.upgradeCluster`.
@@ -682,19 +679,19 @@ extension Clients {
       name: Swift.String,
       targetVersion: Swift.String,
       schedule: UpgradeClusterRequest.Schedule,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `EdgeContainerClient.deleteCluster`.
     func deleteCluster(request: DeleteClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.deleteCluster`.
-    func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleCloudGax
+    func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `EdgeContainerClient.deleteCluster`.
     func deleteCluster(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `EdgeContainerClient.generateAccessToken`.
     func generateAccessToken(request: GenerateAccessTokenRequest) async throws
@@ -741,7 +738,7 @@ extension Clients {
     func createNodePool(request: CreateNodePoolRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.createNodePool`.
-    func createNodePool(withPolling: CreateNodePoolRequest) async throws -> any GoogleCloudGax
+    func createNodePool(withPolling: CreateNodePoolRequest) async throws -> any GoogleGax
       .PollableOperation<NodePool>
 
     /// See `EdgeContainerClient.createNodePool`.
@@ -749,32 +746,32 @@ extension Clients {
       parent: Swift.String,
       nodePool: NodePool?,
       nodePoolId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<NodePool>
+    ) async throws -> any GoogleGax.PollableOperation<NodePool>
 
     /// See `EdgeContainerClient.updateNodePool`.
     func updateNodePool(request: UpdateNodePoolRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.updateNodePool`.
-    func updateNodePool(withPolling: UpdateNodePoolRequest) async throws -> any GoogleCloudGax
+    func updateNodePool(withPolling: UpdateNodePoolRequest) async throws -> any GoogleGax
       .PollableOperation<NodePool>
 
     /// See `EdgeContainerClient.updateNodePool`.
     func updateNodePool(
       nodePool: NodePool?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<NodePool>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<NodePool>
 
     /// See `EdgeContainerClient.deleteNodePool`.
     func deleteNodePool(request: DeleteNodePoolRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.deleteNodePool`.
-    func deleteNodePool(withPolling: DeleteNodePoolRequest) async throws -> any GoogleCloudGax
+    func deleteNodePool(withPolling: DeleteNodePoolRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `EdgeContainerClient.deleteNodePool`.
     func deleteNodePool(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `EdgeContainerClient.listMachines`.
     func listMachines(request: ListMachinesRequest) async throws
@@ -826,28 +823,28 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.createVpnConnection`.
-    func createVpnConnection(withPolling: CreateVpnConnectionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<VpnConnection>
+    func createVpnConnection(withPolling: CreateVpnConnectionRequest) async throws -> any GoogleGax
+      .PollableOperation<VpnConnection>
 
     /// See `EdgeContainerClient.createVpnConnection`.
     func createVpnConnection(
       parent: Swift.String,
       vpnConnection: VpnConnection?,
       vpnConnectionId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<VpnConnection>
+    ) async throws -> any GoogleGax.PollableOperation<VpnConnection>
 
     /// See `EdgeContainerClient.deleteVpnConnection`.
     func deleteVpnConnection(request: DeleteVpnConnectionRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.deleteVpnConnection`.
-    func deleteVpnConnection(withPolling: DeleteVpnConnectionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    func deleteVpnConnection(withPolling: DeleteVpnConnectionRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
 
     /// See `EdgeContainerClient.deleteVpnConnection`.
     func deleteVpnConnection(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `EdgeContainerClient.getServerConfig`.
     func getServerConfig(request: GetServerConfigRequest) async throws
@@ -904,202 +901,202 @@ extension Clients {
 
     /// See `EdgeContainerClient.listClusters`.
     func listClusters(
-      request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.ListClustersResponse
 
     /// See `EdgeContainerClient.listClusters`.
     func listClusters(
-      byItem: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListClustersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Cluster, Swift.Error>
 
     /// See `EdgeContainerClient.getCluster`.
     func getCluster(
-      request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.Cluster
 
     /// See `EdgeContainerClient.createCluster`.
     func createCluster(
-      request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.createCluster`.
     func createCluster(
-      withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: CreateClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `EdgeContainerClient.updateCluster`.
     func updateCluster(
-      request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.updateCluster`.
     func updateCluster(
-      withPolling: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: UpdateClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `EdgeContainerClient.upgradeCluster`.
     func upgradeCluster(
-      request: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpgradeClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.upgradeCluster`.
     func upgradeCluster(
-      withPolling: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: UpgradeClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `EdgeContainerClient.deleteCluster`.
     func deleteCluster(
-      request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.deleteCluster`.
     func deleteCluster(
-      withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `EdgeContainerClient.generateAccessToken`.
     func generateAccessToken(
-      request: GenerateAccessTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAccessTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.GenerateAccessTokenResponse
 
     /// See `EdgeContainerClient.generateOfflineCredential`.
     func generateOfflineCredential(
-      request: GenerateOfflineCredentialRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateOfflineCredentialRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.GenerateOfflineCredentialResponse
 
     /// See `EdgeContainerClient.listNodePools`.
     func listNodePools(
-      request: ListNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNodePoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.ListNodePoolsResponse
 
     /// See `EdgeContainerClient.listNodePools`.
     func listNodePools(
-      byItem: ListNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListNodePoolsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<NodePool, Swift.Error>
 
     /// See `EdgeContainerClient.getNodePool`.
     func getNodePool(
-      request: GetNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.NodePool
 
     /// See `EdgeContainerClient.createNodePool`.
     func createNodePool(
-      request: CreateNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.createNodePool`.
     func createNodePool(
-      withPolling: CreateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<NodePool>
+      withPolling: CreateNodePoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<NodePool>
 
     /// See `EdgeContainerClient.updateNodePool`.
     func updateNodePool(
-      request: UpdateNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.updateNodePool`.
     func updateNodePool(
-      withPolling: UpdateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<NodePool>
+      withPolling: UpdateNodePoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<NodePool>
 
     /// See `EdgeContainerClient.deleteNodePool`.
     func deleteNodePool(
-      request: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.deleteNodePool`.
     func deleteNodePool(
-      withPolling: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteNodePoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `EdgeContainerClient.listMachines`.
     func listMachines(
-      request: ListMachinesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMachinesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.ListMachinesResponse
 
     /// See `EdgeContainerClient.listMachines`.
     func listMachines(
-      byItem: ListMachinesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListMachinesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Machine, Swift.Error>
 
     /// See `EdgeContainerClient.getMachine`.
     func getMachine(
-      request: GetMachineRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMachineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.Machine
 
     /// See `EdgeContainerClient.listVpnConnections`.
     func listVpnConnections(
-      request: ListVpnConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVpnConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.ListVpnConnectionsResponse
 
     /// See `EdgeContainerClient.listVpnConnections`.
     func listVpnConnections(
-      byItem: ListVpnConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListVpnConnectionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<VpnConnection, Swift.Error>
 
     /// See `EdgeContainerClient.getVpnConnection`.
     func getVpnConnection(
-      request: GetVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVpnConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.VpnConnection
 
     /// See `EdgeContainerClient.createVpnConnection`.
     func createVpnConnection(
-      request: CreateVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateVpnConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.createVpnConnection`.
     func createVpnConnection(
-      withPolling: CreateVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<VpnConnection>
+      withPolling: CreateVpnConnectionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<VpnConnection>
 
     /// See `EdgeContainerClient.deleteVpnConnection`.
     func deleteVpnConnection(
-      request: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteVpnConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EdgeContainerClient.deleteVpnConnection`.
     func deleteVpnConnection(
-      withPolling: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteVpnConnectionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `EdgeContainerClient.getServerConfig`.
     func getServerConfig(
-      request: GetServerConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServerConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.ServerConfig
 
     /// See `EdgeContainerClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `EdgeContainerClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `EdgeContainerClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `EdgeContainerClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `EdgeContainerClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `EdgeContainerClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `EdgeContainerClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1113,9 +1110,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func listClusters(
-    request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListClustersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.ListClustersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listClusters(
@@ -1125,13 +1122,13 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func listClusters(
-    byItem: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListClustersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Cluster, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudEdgeContainerV1.ListClustersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listClusters(
@@ -1150,9 +1147,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func getCluster(
-    request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.Cluster {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCluster(
@@ -1171,24 +1168,24 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func createCluster(
-    request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleCloudGax
+  public func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleGax
     .PollableOperation<Cluster>
   {
     try await self.createCluster(withPolling: withPolling, options: .init())
   }
 
   public func createCluster(
-    withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1196,7 +1193,7 @@ extension Clients.EdgeContainerProtocol {
     parent: Swift.String,
     cluster: Cluster?,
     clusterId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let request = CreateClusterRequest().with {
       $0.parent = parent
       $0.cluster = cluster
@@ -1212,31 +1209,31 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func updateCluster(
-    request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleCloudGax
+  public func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleGax
     .PollableOperation<Cluster>
   {
     try await self.updateCluster(withPolling: withPolling, options: .init())
   }
 
   public func updateCluster(
-    withPolling: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateCluster(
     cluster: Cluster?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let request = UpdateClusterRequest().with {
       $0.cluster = cluster
       $0.updateMask = updateMask
@@ -1251,24 +1248,24 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func upgradeCluster(
-    request: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpgradeClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func upgradeCluster(withPolling: UpgradeClusterRequest) async throws -> any GoogleCloudGax
+  public func upgradeCluster(withPolling: UpgradeClusterRequest) async throws -> any GoogleGax
     .PollableOperation<Cluster>
   {
     try await self.upgradeCluster(withPolling: withPolling, options: .init())
   }
 
   public func upgradeCluster(
-    withPolling: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpgradeClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1276,7 +1273,7 @@ extension Clients.EdgeContainerProtocol {
     name: Swift.String,
     targetVersion: Swift.String,
     schedule: UpgradeClusterRequest.Schedule,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let request = UpgradeClusterRequest().with {
       $0.name = name
       $0.targetVersion = targetVersion
@@ -1292,30 +1289,30 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func deleteCluster(
-    request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleCloudGax
+  public func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteCluster(withPolling: withPolling, options: .init())
   }
 
   public func deleteCluster(
-    withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteCluster(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteClusterRequest().with {
       $0.name = name
     }
@@ -1329,9 +1326,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func generateAccessToken(
-    request: GenerateAccessTokenRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateAccessTokenRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.GenerateAccessTokenResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func generateAccessToken(
@@ -1350,9 +1347,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func generateOfflineCredential(
-    request: GenerateOfflineCredentialRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateOfflineCredentialRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.GenerateOfflineCredentialResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func generateOfflineCredential(
@@ -1371,9 +1368,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func listNodePools(
-    request: ListNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListNodePoolsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.ListNodePoolsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listNodePools(
@@ -1383,13 +1380,13 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func listNodePools(
-    byItem: ListNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListNodePoolsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<NodePool, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudEdgeContainerV1.ListNodePoolsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listNodePools(
@@ -1408,9 +1405,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func getNodePool(
-    request: GetNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: GetNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.NodePool {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getNodePool(
@@ -1429,24 +1426,24 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func createNodePool(
-    request: CreateNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createNodePool(withPolling: CreateNodePoolRequest) async throws -> any GoogleCloudGax
+  public func createNodePool(withPolling: CreateNodePoolRequest) async throws -> any GoogleGax
     .PollableOperation<NodePool>
   {
     try await self.createNodePool(withPolling: withPolling, options: .init())
   }
 
   public func createNodePool(
-    withPolling: CreateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<NodePool> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateNodePoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<NodePool> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<NodePool>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1454,7 +1451,7 @@ extension Clients.EdgeContainerProtocol {
     parent: Swift.String,
     nodePool: NodePool?,
     nodePoolId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<NodePool> {
+  ) async throws -> any GoogleGax.PollableOperation<NodePool> {
     let request = CreateNodePoolRequest().with {
       $0.parent = parent
       $0.nodePool = nodePool
@@ -1470,31 +1467,31 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func updateNodePool(
-    request: UpdateNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateNodePool(withPolling: UpdateNodePoolRequest) async throws -> any GoogleCloudGax
+  public func updateNodePool(withPolling: UpdateNodePoolRequest) async throws -> any GoogleGax
     .PollableOperation<NodePool>
   {
     try await self.updateNodePool(withPolling: withPolling, options: .init())
   }
 
   public func updateNodePool(
-    withPolling: UpdateNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<NodePool> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<NodePool>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateNodePoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<NodePool> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<NodePool>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateNodePool(
     nodePool: NodePool?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<NodePool> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<NodePool> {
     let request = UpdateNodePoolRequest().with {
       $0.nodePool = nodePool
       $0.updateMask = updateMask
@@ -1509,30 +1506,30 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func deleteNodePool(
-    request: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteNodePool(withPolling: DeleteNodePoolRequest) async throws -> any GoogleCloudGax
+  public func deleteNodePool(withPolling: DeleteNodePoolRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteNodePool(withPolling: withPolling, options: .init())
   }
 
   public func deleteNodePool(
-    withPolling: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteNodePoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteNodePool(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteNodePoolRequest().with {
       $0.name = name
     }
@@ -1546,9 +1543,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func listMachines(
-    request: ListMachinesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListMachinesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.ListMachinesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listMachines(
@@ -1558,13 +1555,13 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func listMachines(
-    byItem: ListMachinesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListMachinesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Machine, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudEdgeContainerV1.ListMachinesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listMachines(
@@ -1583,9 +1580,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func getMachine(
-    request: GetMachineRequest, options: GoogleCloudGax.RequestOptions
+    request: GetMachineRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.Machine {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getMachine(
@@ -1604,9 +1601,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func listVpnConnections(
-    request: ListVpnConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListVpnConnectionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.ListVpnConnectionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listVpnConnections(
@@ -1616,13 +1613,13 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func listVpnConnections(
-    byItem: ListVpnConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListVpnConnectionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<VpnConnection, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudEdgeContainerV1.ListVpnConnectionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listVpnConnections(
@@ -1641,9 +1638,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func getVpnConnection(
-    request: GetVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetVpnConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.VpnConnection {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getVpnConnection(
@@ -1662,24 +1659,24 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func createVpnConnection(
-    request: CreateVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateVpnConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createVpnConnection(withPolling: CreateVpnConnectionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<VpnConnection>
+    -> any GoogleGax.PollableOperation<VpnConnection>
   {
     try await self.createVpnConnection(withPolling: withPolling, options: .init())
   }
 
   public func createVpnConnection(
-    withPolling: CreateVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<VpnConnection> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<VpnConnection>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateVpnConnectionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<VpnConnection> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<VpnConnection>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1687,7 +1684,7 @@ extension Clients.EdgeContainerProtocol {
     parent: Swift.String,
     vpnConnection: VpnConnection?,
     vpnConnectionId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<VpnConnection> {
+  ) async throws -> any GoogleGax.PollableOperation<VpnConnection> {
     let request = CreateVpnConnectionRequest().with {
       $0.parent = parent
       $0.vpnConnection = vpnConnection
@@ -1703,30 +1700,30 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func deleteVpnConnection(
-    request: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteVpnConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteVpnConnection(withPolling: DeleteVpnConnectionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteVpnConnection(withPolling: withPolling, options: .init())
   }
 
   public func deleteVpnConnection(
-    withPolling: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteVpnConnectionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteVpnConnection(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteVpnConnectionRequest().with {
       $0.name = name
     }
@@ -1740,9 +1737,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func getServerConfig(
-    request: GetServerConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetServerConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEdgeContainerV1.ServerConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getServerConfig(
@@ -1761,9 +1758,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -1773,13 +1770,13 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1789,9 +1786,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1801,9 +1798,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1813,13 +1810,13 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1840,9 +1837,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1859,9 +1856,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1878,9 +1875,9 @@ extension Clients.EdgeContainerProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

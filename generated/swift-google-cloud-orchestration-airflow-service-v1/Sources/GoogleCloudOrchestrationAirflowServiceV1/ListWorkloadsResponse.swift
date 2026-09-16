@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudGax
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleGax
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response to ListWorkloadsRequest.
-public struct ListWorkloadsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
-  GoogleCloudGax._PaginatedResponse,
+public struct ListWorkloadsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
+  GoogleGax._PaginatedResponse,
   Sendable
 {
   /// The list of environment workloads.
@@ -29,7 +29,7 @@ public struct ListWorkloadsResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// The page token used to query for the next page if one exists.
   public var nextPageToken: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListWorkloadsResponse`.
   public init() {}
@@ -74,7 +74,7 @@ public struct ListWorkloadsResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -88,7 +88,7 @@ public struct ListWorkloadsResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
   }
 
   /// Information about a single workload.
-  public struct ComposerWorkload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ComposerWorkload: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Name of a workload.
@@ -101,7 +101,7 @@ public struct ListWorkloadsResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
     /// Output only. Status of a workload.
     public var status: ListWorkloadsResponse.ComposerWorkloadStatus? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ComposerWorkload`.
     public init() {}
@@ -150,7 +150,7 @@ public struct ListWorkloadsResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
         ListWorkloadsResponse.ComposerWorkloadStatus.self, forKey: .status)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -168,16 +168,16 @@ public struct ListWorkloadsResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
       return
         "type.googleapis.com/google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkload"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Workload status.
-  public struct ComposerWorkloadStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ComposerWorkloadStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Workload state.
@@ -190,7 +190,7 @@ public struct ListWorkloadsResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
     /// Output only. Detailed message of the status.
     public var detailedStatusMessage: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ComposerWorkloadStatus`.
     public init() {}
@@ -242,7 +242,7 @@ public struct ListWorkloadsResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -260,11 +260,11 @@ public struct ListWorkloadsResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
       return
         "type.googleapis.com/google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse.ComposerWorkloadStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -551,11 +551,11 @@ public struct ListWorkloadsResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 
   public func _getPaginatedItems() -> [ListWorkloadsResponse.ComposerWorkload] {

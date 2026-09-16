@@ -15,25 +15,25 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ExecutionsStub: Sendable {
     func listExecutions(
-      request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExecutionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkflowsExecutionsV1.ListExecutionsResponse
 
     func createExecution(
-      request: CreateExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution
 
     func getExecution(
-      request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution
 
     func cancelExecution(
-      request: CancelExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution
   }
 }

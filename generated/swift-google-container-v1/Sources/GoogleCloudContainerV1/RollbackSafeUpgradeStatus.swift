@@ -15,24 +15,24 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// RollbackSafeUpgradeStatus contains the rollback-safe upgrade status of a
 /// cluster.
-public struct RollbackSafeUpgradeStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RollbackSafeUpgradeStatus: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The mode of the rollback-safe upgrade.
   public var mode: RollbackSafeUpgradeStatus.Mode = RollbackSafeUpgradeStatus.Mode()
 
   /// Output only. The rollback-safe mode expiration time.
-  public var controlPlaneUpgradeRollbackEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var controlPlaneUpgradeRollbackEndTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The GKE version that the cluster previously used before
   /// step-one upgrade.
   public var previousVersion: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RollbackSafeUpgradeStatus`.
   public init() {}
@@ -75,13 +75,13 @@ public struct RollbackSafeUpgradeStatus: Codable, Equatable, GoogleCloudWKT._Any
       self.mode = value
     }
     self.controlPlaneUpgradeRollbackEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .controlPlaneUpgradeRollbackEndTime)
+      GoogleWKT.Timestamp.self, forKey: .controlPlaneUpgradeRollbackEndTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .previousVersion) {
       self.previousVersion = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -199,10 +199,10 @@ public struct RollbackSafeUpgradeStatus: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.RollbackSafeUpgradeStatus"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

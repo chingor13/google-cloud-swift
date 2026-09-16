@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines a metric type and its schema. Once a metric descriptor is created,
 /// deleting or altering it stops data collection and makes the metric type's
 /// existing data unusable.
 ///
-public struct MetricDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MetricDescriptor: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the metric descriptor.
@@ -182,7 +182,7 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.api.MonitoredResourceDescriptor]: <doc:MonitoredResourceDescriptor>
   public var monitoredResourceTypes: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MetricDescriptor`.
   public init() {}
@@ -275,7 +275,7 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -298,7 +298,7 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Additional annotations that can be used to guide the usage of a metric.
-  public struct MetricDescriptorMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MetricDescriptorMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Deprecated. Must use the
@@ -313,18 +313,18 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// periodically, consecutive data points are stored at this time interval,
     /// excluding data loss due to errors. Metrics with a higher granularity have
     /// a smaller sampling period.
-    public var samplePeriod: GoogleCloudWKT.Duration? = nil
+    public var samplePeriod: GoogleWKT.Duration? = nil
 
     /// The delay of data points caused by ingestion. Data points older than this
     /// age are guaranteed to be ingested and available to be read, excluding
     /// data loss due to errors.
-    public var ingestDelay: GoogleCloudWKT.Duration? = nil
+    public var ingestDelay: GoogleWKT.Duration? = nil
 
     /// The scope of the timeseries data of the metric.
     public var timeSeriesResourceHierarchyLevel:
       [MetricDescriptor.MetricDescriptorMetadata.TimeSeriesResourceHierarchyLevel] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MetricDescriptorMetadata`.
     public init() {}
@@ -368,9 +368,9 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.launchStage = value
       }
       self.samplePeriod = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .samplePeriod)
+        GoogleWKT.Duration.self, forKey: .samplePeriod)
       self.ingestDelay = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .ingestDelay)
+        GoogleWKT.Duration.self, forKey: .ingestDelay)
       if let value = try container.decodeIfPresent(
         [MetricDescriptor.MetricDescriptorMetadata.TimeSeriesResourceHierarchyLevel].self,
         forKey: .timeSeriesResourceHierarchyLevel)
@@ -379,7 +379,7 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -511,11 +511,11 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.MetricDescriptor.MetricDescriptorMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -777,10 +777,10 @@ public struct MetricDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.MetricDescriptor"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

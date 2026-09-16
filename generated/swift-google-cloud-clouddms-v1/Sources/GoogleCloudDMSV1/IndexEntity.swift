@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Index is not used as an independent entity, it is retrieved as part of a
 /// Table entity.
-public struct IndexEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IndexEntity: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the index.
@@ -36,9 +36,9 @@ public struct IndexEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var unique: Swift.Bool = Swift.Bool()
 
   /// Custom engine specific features.
-  public var customFeatures: GoogleCloudWKT.Struct? = nil
+  public var customFeatures: GoogleWKT.Struct? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IndexEntity`.
   public init() {}
@@ -92,10 +92,10 @@ public struct IndexEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.unique = value
     }
     self.customFeatures = try container.decodeIfPresent(
-      GoogleCloudWKT.Struct.self, forKey: .customFeatures)
+      GoogleWKT.Struct.self, forKey: .customFeatures)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -114,10 +114,10 @@ public struct IndexEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.clouddms.v1.IndexEntity"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

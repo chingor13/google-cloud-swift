@@ -19,8 +19,8 @@
   // snippet.show
   import Foundation
   import GoogleCloudDiscoveryEngineV1
-  import GoogleCloudWKT
   import GoogleLongRunning
+  import GoogleWKT
 
   func sample() async throws {
     let client = try GoogleCloudDiscoveryEngineV1.SearchServiceClient()

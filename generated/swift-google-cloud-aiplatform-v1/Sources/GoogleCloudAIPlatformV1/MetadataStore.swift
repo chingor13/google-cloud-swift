@@ -16,21 +16,21 @@
 
 #if MetadataService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Instance of a metadata store. Contains a set of metadata that can be
   /// queried.
-  public struct MetadataStore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MetadataStore: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The resource name of the MetadataStore instance.
     public var name: Swift.String = Swift.String()
 
     /// Output only. Timestamp when this MetadataStore was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when this MetadataStore was last updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Customer-managed encryption key spec for a Metadata Store. If set, this
     /// Metadata Store and all sub-resources of this Metadata Store are secured
@@ -46,7 +46,7 @@
     /// Optional. Dataplex integration settings.
     public var dataplexConfig: MetadataStore.DataplexConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MetadataStore`.
     public init() {}
@@ -94,10 +94,8 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
         self.name = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       self.encryptionSpec = try container.decodeIfPresent(
         EncryptionSpec.self, forKey: .encryptionSpec)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
@@ -109,7 +107,7 @@
         MetadataStore.DataplexConfig.self, forKey: .dataplexConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -128,13 +126,13 @@
     }
 
     /// Represents state information for a MetadataStore.
-    public struct MetadataStoreState: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MetadataStoreState: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The disk utilization of the MetadataStore in bytes.
       public var diskUtilizationBytes: Swift.Int64 = Swift.Int64()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MetadataStoreState`.
       public init() {}
@@ -174,7 +172,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -189,23 +187,23 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.MetadataStore.MetadataStoreState"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Represents Dataplex integration settings.
-    public struct DataplexConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DataplexConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Whether or not Data Lineage synchronization is enabled for
       /// Vertex Pipelines.
       public var enabledPipelinesLineage: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DataplexConfig`.
       public init() {}
@@ -245,7 +243,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -260,22 +258,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.MetadataStore.DataplexConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.MetadataStore"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

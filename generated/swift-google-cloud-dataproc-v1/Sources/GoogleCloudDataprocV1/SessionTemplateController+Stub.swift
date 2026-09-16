@@ -15,59 +15,59 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol SessionTemplateControllerStub: Sendable {
     func createSessionTemplate(
-      request: CreateSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSessionTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.SessionTemplate
 
     func updateSessionTemplate(
-      request: UpdateSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSessionTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.SessionTemplate
 
     func getSessionTemplate(
-      request: GetSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSessionTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.SessionTemplate
 
     func listSessionTemplates(
-      request: ListSessionTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSessionTemplatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.ListSessionTemplatesResponse
 
     func deleteSessionTemplate(
-      request: DeleteSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSessionTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

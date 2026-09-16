@@ -16,14 +16,14 @@
 
 #if Projects
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a Project resource.
   ///
   /// A project is used to organize resources in a Google Cloud Platform
   /// environment. For more information, read about the
   /// Resource Hierarchy.
-  public struct Project: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Project: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. [Output Only] The Cloud Armor tier for this project. It can be one of the
@@ -87,7 +87,7 @@
     /// value HOST, are differentiated.
     public var xpnProjectStatus: Project.XpnProjectStatus? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Project`.
     public init() {}
@@ -177,7 +177,7 @@
         Project.XpnProjectStatus.self, forKey: .xpnProjectStatus)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -640,11 +640,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Project"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

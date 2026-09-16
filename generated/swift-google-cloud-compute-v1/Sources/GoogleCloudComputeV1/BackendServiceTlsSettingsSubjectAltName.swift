@@ -16,13 +16,12 @@
 
 #if BackendServices || RegionBackendServices
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A Subject Alternative Name that the load balancer matches against the SAN
   /// field in the TLS certificate provided by the backend, specified as either
   /// a DNS name or a URI, in accordance with RFC 5280 4.2.1.6
-  public struct BackendServiceTlsSettingsSubjectAltName: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
+  public struct BackendServiceTlsSettingsSubjectAltName: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The SAN specified as a DNS Name.
@@ -31,7 +30,7 @@
     /// The SAN specified as a URI.
     public var uniformResourceIdentifier: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BackendServiceTlsSettingsSubjectAltName`.
     public init() {}
@@ -71,7 +70,7 @@
         Swift.String.self, forKey: .uniformResourceIdentifier)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -88,11 +87,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.BackendServiceTlsSettingsSubjectAltName"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

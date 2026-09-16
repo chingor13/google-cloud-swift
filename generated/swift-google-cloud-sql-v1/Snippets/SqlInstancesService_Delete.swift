@@ -19,7 +19,7 @@
   // snippet.show
   import Foundation
   import GoogleCloudSqlV1
-  import GoogleCloudWKT
+  import GoogleWKT
 
   func sample(client: SqlInstancesServiceClient) async throws {
     let response = try await client.delete(

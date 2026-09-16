@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudSecurityCenterV2
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: SecurityCenterClient, organizationId: String, locationId: String) async throws {
   let response = try await client.createNotificationConfig(

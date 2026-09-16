@@ -16,108 +16,108 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol BusinessGlossaryServiceStub: Sendable {
     func createGlossary(
-      request: CreateGlossaryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGlossaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateGlossary(
-      request: UpdateGlossaryRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGlossaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteGlossary(
-      request: DeleteGlossaryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGlossaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getGlossary(
-      request: GetGlossaryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGlossaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Glossary
 
     func listGlossaries(
-      request: ListGlossariesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGlossariesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListGlossariesResponse
 
     func createGlossaryCategory(
-      request: CreateGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGlossaryCategoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.GlossaryCategory
 
     func updateGlossaryCategory(
-      request: UpdateGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGlossaryCategoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.GlossaryCategory
 
     func deleteGlossaryCategory(
-      request: DeleteGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGlossaryCategoryRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getGlossaryCategory(
-      request: GetGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGlossaryCategoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.GlossaryCategory
 
     func listGlossaryCategories(
-      request: ListGlossaryCategoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGlossaryCategoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListGlossaryCategoriesResponse
 
     func createGlossaryTerm(
-      request: CreateGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGlossaryTermRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.GlossaryTerm
 
     func updateGlossaryTerm(
-      request: UpdateGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGlossaryTermRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.GlossaryTerm
 
     func deleteGlossaryTerm(
-      request: DeleteGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGlossaryTermRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getGlossaryTerm(
-      request: GetGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGlossaryTermRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.GlossaryTerm
 
     func listGlossaryTerms(
-      request: ListGlossaryTermsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGlossaryTermsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListGlossaryTermsResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

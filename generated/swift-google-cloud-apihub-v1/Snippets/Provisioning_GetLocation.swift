@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudApiHubV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ProvisioningClient) async throws {
   let response = try await client.getLocation(

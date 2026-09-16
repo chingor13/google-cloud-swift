@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The inline source for the input config for ImportProducts method.
-public struct ProductInlineSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ProductInlineSource: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. A list of products to update/create. Each product must have a
@@ -28,7 +28,7 @@ public struct ProductInlineSource: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// [google.cloud.retail.v2.Product.id]: <doc:Product/id>
   public var products: [Product] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ProductInlineSource`.
   public init() {}
@@ -66,7 +66,7 @@ public struct ProductInlineSource: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -81,10 +81,10 @@ public struct ProductInlineSource: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.ProductInlineSource"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

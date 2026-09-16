@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// `WasmPlugin` is a resource representing a service executing
 /// a customer-provided Wasm module.
-public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct WasmPlugin: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Name of the `WasmPlugin` resource in the following format:
@@ -27,10 +27,10 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The timestamp when the resource was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when the resource was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. A human-readable description of the resource.
   public var description: Swift.String = Swift.String()
@@ -76,7 +76,7 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// that use this `WasmPlugin` resource.
   public var usedBy: [WasmPlugin.UsedBy] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `WasmPlugin`.
   public init() {}
@@ -128,10 +128,8 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
@@ -153,7 +151,7 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -175,14 +173,14 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Details of a `WasmPluginVersion` resource to be inlined in the
   /// `WasmPlugin` resource.
-  public struct VersionDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct VersionDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The timestamp when the resource was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. The timestamp when the resource was updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. A human-readable description of the resource.
     public var description: Swift.String = Swift.String()
@@ -228,7 +226,7 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public var pluginConfigSource: OneOf_PluginConfigSource? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `VersionDetails`.
     public init() {}
@@ -277,10 +275,8 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
         self.description = value
       }
@@ -322,7 +318,7 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.pluginConfigSource = pluginConfigSource
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -382,18 +378,18 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.WasmPlugin.VersionDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Specifies the logging options for the activity performed by this
   /// plugin. If logging is enabled, plugin logs are exported to
   /// Cloud Logging.
-  public struct LogConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LogConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Specifies whether to enable logging for activity by this
@@ -423,7 +419,7 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// `INFO` by default.
     public var minLogLevel: WasmPlugin.LogConfig.LogLevel = WasmPlugin.LogConfig.LogLevel()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LogConfig`.
     public init() {}
@@ -473,7 +469,7 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -624,16 +620,16 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.WasmPlugin.LogConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Defines a resource that uses the `WasmPlugin` resource.
-  public struct UsedBy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UsedBy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Full name of the resource
@@ -641,7 +637,7 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// `//networkservices.googleapis.com/projects/{project}/locations/{location}/lbRouteExtensions/{extension}`
     public var name: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UsedBy`.
     public init() {}
@@ -679,7 +675,7 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -694,21 +690,21 @@ public struct WasmPlugin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.WasmPlugin.UsedBy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkservices.v1.WasmPlugin"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

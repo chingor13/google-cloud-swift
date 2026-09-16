@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a set of metric values in the same metric.
 /// Each metric value in the set should have a unique combination of start time,
 /// end time, and label values.
-public struct MetricValueSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MetricValueSet: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The metric name defined in the service configuration.
@@ -29,7 +29,7 @@ public struct MetricValueSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The values in this metric.
   public var metricValues: [MetricValue] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MetricValueSet`.
   public init() {}
@@ -72,7 +72,7 @@ public struct MetricValueSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -88,10 +88,10 @@ public struct MetricValueSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.servicecontrol.v1.MetricValueSet"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

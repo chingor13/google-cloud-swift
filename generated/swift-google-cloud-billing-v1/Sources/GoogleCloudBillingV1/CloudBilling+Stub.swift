@@ -15,54 +15,54 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CloudBillingStub: Sendable {
     func getBillingAccount(
-      request: GetBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBillingAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.BillingAccount
 
     func listBillingAccounts(
-      request: ListBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBillingAccountsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ListBillingAccountsResponse
 
     func updateBillingAccount(
-      request: UpdateBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBillingAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.BillingAccount
 
     func createBillingAccount(
-      request: CreateBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBillingAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.BillingAccount
 
     func listProjectBillingInfo(
-      request: ListProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProjectBillingInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ListProjectBillingInfoResponse
 
     func getProjectBillingInfo(
-      request: GetProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProjectBillingInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ProjectBillingInfo
 
     func updateProjectBillingInfo(
-      request: UpdateProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProjectBillingInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ProjectBillingInfo
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func moveBillingAccount(
-      request: MoveBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: MoveBillingAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.BillingAccount
   }
 }

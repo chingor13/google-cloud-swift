@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The Reachability service in the Google Cloud Network Management API provides
 /// services that analyze the reachability within a single Google Virtual Private
@@ -37,11 +37,11 @@ import GoogleCloudGax
 /// @Snippet(path: "ReachabilityServiceQuickstart")
 public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtocol, Sendable {
   let inner: any Clients.ReachabilityServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `ReachabilityServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ReachabilityServiceStub = try Clients.ReachabilityServiceTransport(
       options)
     inner = Clients.ReachabilityServiceRetry(inner, options: options)
@@ -57,7 +57,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_ListConnectivityTests")
   public func listConnectivityTests(
-    request: ListConnectivityTestsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConnectivityTestsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkManagementV1.ListConnectivityTestsResponse {
     try await self.inner.listConnectivityTests(request: request, options: options)
   }
@@ -66,7 +66,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_ListConnectivityTests")
   public func listConnectivityTests(
-    byItem: ListConnectivityTestsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConnectivityTestsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ConnectivityTest, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -75,14 +75,14 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
       request.pageToken = token
       return try await self.listConnectivityTests(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the details of a specific Connectivity Test.
   ///
   /// @Snippet(path: "ReachabilityService_GetConnectivityTest")
   public func getConnectivityTest(
-    request: GetConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConnectivityTestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkManagementV1.ConnectivityTest {
     try await self.inner.getConnectivityTest(request: request, options: options)
   }
@@ -103,7 +103,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_CreateConnectivityTest")
   public func createConnectivityTest(
-    request: CreateConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateConnectivityTestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createConnectivityTest(request: request, options: options)
   }
@@ -124,21 +124,21 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_CreateConnectivityTest")
   public func createConnectivityTest(
-    withPolling: CreateConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectivityTest> {
+    withPolling: CreateConnectivityTestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ConnectivityTest> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ConnectivityTest>.State in
+        -> GoogleGax._PollableOperationImpl<ConnectivityTest>.State in
       return try op._extractStatus(ConnectivityTest.self)
     }
     let rawOp = try await self.createConnectivityTest(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ConnectivityTest>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConnectivityTest>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -163,7 +163,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_UpdateConnectivityTest")
   public func updateConnectivityTest(
-    request: UpdateConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConnectivityTestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateConnectivityTest(request: request, options: options)
   }
@@ -185,21 +185,21 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_UpdateConnectivityTest")
   public func updateConnectivityTest(
-    withPolling: UpdateConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectivityTest> {
+    withPolling: UpdateConnectivityTestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ConnectivityTest> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ConnectivityTest>.State in
+        -> GoogleGax._PollableOperationImpl<ConnectivityTest>.State in
       return try op._extractStatus(ConnectivityTest.self)
     }
     let rawOp = try await self.updateConnectivityTest(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ConnectivityTest>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConnectivityTest>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -222,7 +222,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_RerunConnectivityTest")
   public func rerunConnectivityTest(
-    request: RerunConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+    request: RerunConnectivityTestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.rerunConnectivityTest(request: request, options: options)
   }
@@ -242,21 +242,21 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_RerunConnectivityTest")
   public func rerunConnectivityTest(
-    withPolling: RerunConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectivityTest> {
+    withPolling: RerunConnectivityTestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ConnectivityTest> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ConnectivityTest>.State in
+        -> GoogleGax._PollableOperationImpl<ConnectivityTest>.State in
       return try op._extractStatus(ConnectivityTest.self)
     }
     let rawOp = try await self.rerunConnectivityTest(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ConnectivityTest>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConnectivityTest>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -268,7 +268,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_DeleteConnectivityTest")
   public func deleteConnectivityTest(
-    request: DeleteConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConnectivityTestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteConnectivityTest(request: request, options: options)
   }
@@ -277,21 +277,21 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_DeleteConnectivityTest")
   public func deleteConnectivityTest(
-    withPolling: DeleteConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteConnectivityTestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteConnectivityTest(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -310,7 +310,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -326,7 +326,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -334,14 +334,14 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "ReachabilityService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -354,7 +354,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -364,7 +364,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -379,7 +379,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -390,7 +390,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -401,7 +401,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -409,7 +409,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -418,7 +418,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -429,7 +429,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -440,7 +440,7 @@ public final class ReachabilityServiceClient: Clients.ReachabilityServiceProtoco
   ///
   /// @Snippet(path: "ReachabilityService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -482,14 +482,14 @@ extension Clients {
 
     /// See `ReachabilityServiceClient.createConnectivityTest`.
     func createConnectivityTest(withPolling: CreateConnectivityTestRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ConnectivityTest>
+      -> any GoogleGax.PollableOperation<ConnectivityTest>
 
     /// See `ReachabilityServiceClient.createConnectivityTest`.
     func createConnectivityTest(
       parent: Swift.String,
       testId: Swift.String,
       resource: ConnectivityTest?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConnectivityTest>
+    ) async throws -> any GoogleGax.PollableOperation<ConnectivityTest>
 
     /// See `ReachabilityServiceClient.updateConnectivityTest`.
     func updateConnectivityTest(request: UpdateConnectivityTestRequest) async throws
@@ -497,13 +497,13 @@ extension Clients {
 
     /// See `ReachabilityServiceClient.updateConnectivityTest`.
     func updateConnectivityTest(withPolling: UpdateConnectivityTestRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ConnectivityTest>
+      -> any GoogleGax.PollableOperation<ConnectivityTest>
 
     /// See `ReachabilityServiceClient.updateConnectivityTest`.
     func updateConnectivityTest(
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
       resource: ConnectivityTest?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConnectivityTest>
+    ) async throws -> any GoogleGax.PollableOperation<ConnectivityTest>
 
     /// See `ReachabilityServiceClient.rerunConnectivityTest`.
     func rerunConnectivityTest(request: RerunConnectivityTestRequest) async throws
@@ -511,7 +511,7 @@ extension Clients {
 
     /// See `ReachabilityServiceClient.rerunConnectivityTest`.
     func rerunConnectivityTest(withPolling: RerunConnectivityTestRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ConnectivityTest>
+      -> any GoogleGax.PollableOperation<ConnectivityTest>
 
     /// See `ReachabilityServiceClient.deleteConnectivityTest`.
     func deleteConnectivityTest(request: DeleteConnectivityTestRequest) async throws
@@ -519,12 +519,12 @@ extension Clients {
 
     /// See `ReachabilityServiceClient.deleteConnectivityTest`.
     func deleteConnectivityTest(withPolling: DeleteConnectivityTestRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ReachabilityServiceClient.deleteConnectivityTest`.
     func deleteConnectivityTest(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ReachabilityServiceClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -582,107 +582,107 @@ extension Clients {
 
     /// See `ReachabilityServiceClient.listConnectivityTests`.
     func listConnectivityTests(
-      request: ListConnectivityTestsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConnectivityTestsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkManagementV1.ListConnectivityTestsResponse
 
     /// See `ReachabilityServiceClient.listConnectivityTests`.
     func listConnectivityTests(
-      byItem: ListConnectivityTestsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConnectivityTestsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ConnectivityTest, Swift.Error>
 
     /// See `ReachabilityServiceClient.getConnectivityTest`.
     func getConnectivityTest(
-      request: GetConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectivityTestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkManagementV1.ConnectivityTest
 
     /// See `ReachabilityServiceClient.createConnectivityTest`.
     func createConnectivityTest(
-      request: CreateConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConnectivityTestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ReachabilityServiceClient.createConnectivityTest`.
     func createConnectivityTest(
-      withPolling: CreateConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConnectivityTest>
+      withPolling: CreateConnectivityTestRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ConnectivityTest>
 
     /// See `ReachabilityServiceClient.updateConnectivityTest`.
     func updateConnectivityTest(
-      request: UpdateConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConnectivityTestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ReachabilityServiceClient.updateConnectivityTest`.
     func updateConnectivityTest(
-      withPolling: UpdateConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConnectivityTest>
+      withPolling: UpdateConnectivityTestRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ConnectivityTest>
 
     /// See `ReachabilityServiceClient.rerunConnectivityTest`.
     func rerunConnectivityTest(
-      request: RerunConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+      request: RerunConnectivityTestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ReachabilityServiceClient.rerunConnectivityTest`.
     func rerunConnectivityTest(
-      withPolling: RerunConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConnectivityTest>
+      withPolling: RerunConnectivityTestRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ConnectivityTest>
 
     /// See `ReachabilityServiceClient.deleteConnectivityTest`.
     func deleteConnectivityTest(
-      request: DeleteConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConnectivityTestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ReachabilityServiceClient.deleteConnectivityTest`.
     func deleteConnectivityTest(
-      withPolling: DeleteConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteConnectivityTestRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ReachabilityServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `ReachabilityServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `ReachabilityServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `ReachabilityServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `ReachabilityServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `ReachabilityServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `ReachabilityServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `ReachabilityServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `ReachabilityServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ReachabilityServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -696,9 +696,9 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func listConnectivityTests(
-    request: ListConnectivityTestsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConnectivityTestsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkManagementV1.ListConnectivityTestsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listConnectivityTests(
@@ -708,14 +708,14 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func listConnectivityTests(
-    byItem: ListConnectivityTestsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConnectivityTestsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ConnectivityTest, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudNetworkManagementV1.ListConnectivityTestsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listConnectivityTests(
@@ -734,9 +734,9 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func getConnectivityTest(
-    request: GetConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConnectivityTestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkManagementV1.ConnectivityTest {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getConnectivityTest(
@@ -755,24 +755,24 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func createConnectivityTest(
-    request: CreateConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateConnectivityTestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createConnectivityTest(withPolling: CreateConnectivityTestRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ConnectivityTest>
+    -> any GoogleGax.PollableOperation<ConnectivityTest>
   {
     try await self.createConnectivityTest(withPolling: withPolling, options: .init())
   }
 
   public func createConnectivityTest(
-    withPolling: CreateConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectivityTest> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ConnectivityTest>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateConnectivityTestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ConnectivityTest> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConnectivityTest>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -780,7 +780,7 @@ extension Clients.ReachabilityServiceProtocol {
     parent: Swift.String,
     testId: Swift.String,
     resource: ConnectivityTest?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectivityTest> {
+  ) async throws -> any GoogleGax.PollableOperation<ConnectivityTest> {
     let request = CreateConnectivityTestRequest().with {
       $0.parent = parent
       $0.testId = testId
@@ -796,31 +796,31 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func updateConnectivityTest(
-    request: UpdateConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConnectivityTestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateConnectivityTest(withPolling: UpdateConnectivityTestRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ConnectivityTest>
+    -> any GoogleGax.PollableOperation<ConnectivityTest>
   {
     try await self.updateConnectivityTest(withPolling: withPolling, options: .init())
   }
 
   public func updateConnectivityTest(
-    withPolling: UpdateConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectivityTest> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ConnectivityTest>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateConnectivityTestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ConnectivityTest> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConnectivityTest>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateConnectivityTest(
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
     resource: ConnectivityTest?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectivityTest> {
+  ) async throws -> any GoogleGax.PollableOperation<ConnectivityTest> {
     let request = UpdateConnectivityTestRequest().with {
       $0.updateMask = updateMask
       $0.resource = resource
@@ -835,24 +835,24 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func rerunConnectivityTest(
-    request: RerunConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+    request: RerunConnectivityTestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func rerunConnectivityTest(withPolling: RerunConnectivityTestRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ConnectivityTest>
+    -> any GoogleGax.PollableOperation<ConnectivityTest>
   {
     try await self.rerunConnectivityTest(withPolling: withPolling, options: .init())
   }
 
   public func rerunConnectivityTest(
-    withPolling: RerunConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectivityTest> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ConnectivityTest>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: RerunConnectivityTestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ConnectivityTest> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConnectivityTest>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -863,30 +863,30 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func deleteConnectivityTest(
-    request: DeleteConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConnectivityTestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteConnectivityTest(withPolling: DeleteConnectivityTestRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteConnectivityTest(withPolling: withPolling, options: .init())
   }
 
   public func deleteConnectivityTest(
-    withPolling: DeleteConnectivityTestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteConnectivityTestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteConnectivityTest(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteConnectivityTestRequest().with {
       $0.name = name
     }
@@ -900,9 +900,9 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -912,13 +912,13 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -928,9 +928,9 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -940,9 +940,9 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -952,9 +952,9 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -964,9 +964,9 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -976,9 +976,9 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -988,13 +988,13 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1015,9 +1015,9 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1034,9 +1034,9 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1053,9 +1053,9 @@ extension Clients.ReachabilityServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

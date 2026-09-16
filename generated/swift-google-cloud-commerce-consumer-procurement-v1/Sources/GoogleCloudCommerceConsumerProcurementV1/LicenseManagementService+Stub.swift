@@ -15,34 +15,34 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol LicenseManagementServiceStub: Sendable {
     func getLicensePool(
-      request: GetLicensePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLicensePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.LicensePool
 
     func updateLicensePool(
-      request: UpdateLicensePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLicensePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.LicensePool
 
     func assign(
-      request: AssignRequest, options: GoogleCloudGax.RequestOptions
+      request: AssignRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.AssignResponse
 
     func unassign(
-      request: UnassignRequest, options: GoogleCloudGax.RequestOptions
+      request: UnassignRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.UnassignResponse
 
     func enumerateLicensedUsers(
-      request: EnumerateLicensedUsersRequest, options: GoogleCloudGax.RequestOptions
+      request: EnumerateLicensedUsersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.EnumerateLicensedUsersResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

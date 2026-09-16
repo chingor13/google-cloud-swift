@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Assessment for Fraud Prevention.
-public struct FraudPreventionAssessment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FraudPreventionAssessment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Probability of this transaction being fraudulent. Summarizes
@@ -41,7 +41,7 @@ public struct FraudPreventionAssessment: Codable, Equatable, GoogleCloudWKT._Any
   /// Output only. Assessment of this transaction for behavioral trust.
   public var behavioralTrustVerdict: FraudPreventionAssessment.BehavioralTrustVerdict? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FraudPreventionAssessment`.
   public init() {}
@@ -98,7 +98,7 @@ public struct FraudPreventionAssessment: Codable, Equatable, GoogleCloudWKT._Any
       FraudPreventionAssessment.BehavioralTrustVerdict.self, forKey: .behavioralTrustVerdict)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -115,14 +115,14 @@ public struct FraudPreventionAssessment: Codable, Equatable, GoogleCloudWKT._Any
   }
 
   /// Risk reasons applicable to the Fraud Prevention assessment.
-  public struct RiskReason: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RiskReason: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Risk reasons applicable to the Fraud Prevention assessment.
     public var reason: FraudPreventionAssessment.RiskReason.Reason = FraudPreventionAssessment
       .RiskReason.Reason()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RiskReason`.
     public init() {}
@@ -162,7 +162,7 @@ public struct FraudPreventionAssessment: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -312,24 +312,24 @@ public struct FraudPreventionAssessment: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.RiskReason"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Information about stolen instrument fraud, where the user is not the
   /// legitimate owner of the instrument being used for the purchase.
-  public struct StolenInstrumentVerdict: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StolenInstrumentVerdict: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Probability of this transaction being executed with a stolen
     /// instrument. Values are from 0.0 (lowest) to 1.0 (highest).
     public var risk: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StolenInstrumentVerdict`.
     public init() {}
@@ -367,7 +367,7 @@ public struct FraudPreventionAssessment: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -383,24 +383,24 @@ public struct FraudPreventionAssessment: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.StolenInstrumentVerdict"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Information about card testing fraud, where an adversary is testing
   /// fraudulently obtained cards or brute forcing their details.
-  public struct CardTestingVerdict: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CardTestingVerdict: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Probability of this transaction attempt being part of a card
     /// testing attack. Values are from 0.0 (lowest) to 1.0 (highest).
     public var risk: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CardTestingVerdict`.
     public init() {}
@@ -438,7 +438,7 @@ public struct FraudPreventionAssessment: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -454,16 +454,16 @@ public struct FraudPreventionAssessment: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.CardTestingVerdict"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Information about behavioral trust of the transaction.
-  public struct BehavioralTrustVerdict: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BehavioralTrustVerdict: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Probability of this transaction attempt being executed in a
@@ -471,7 +471,7 @@ public struct FraudPreventionAssessment: Codable, Equatable, GoogleCloudWKT._Any
     /// (highest).
     public var trust: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BehavioralTrustVerdict`.
     public init() {}
@@ -509,7 +509,7 @@ public struct FraudPreventionAssessment: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -525,21 +525,21 @@ public struct FraudPreventionAssessment: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment.BehavioralTrustVerdict"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.FraudPreventionAssessment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

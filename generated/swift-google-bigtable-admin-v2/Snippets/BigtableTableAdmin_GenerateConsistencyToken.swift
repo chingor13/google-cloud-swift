@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudBigtableAdminV2
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: BigtableTableAdminClient) async throws {
   let response = try await client.generateConsistencyToken(

@@ -16,7 +16,7 @@
 
 #if AnswerRecords
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Answer records are records to manage answer history and feedbacks for
   /// Dialogflow.
@@ -50,7 +50,7 @@
   ///
   /// [google.cloud.dialogflow.v2.AnswerRecord.name]: <doc:AnswerRecord/name>
   /// [google.cloud.dialogflow.v2.AnswerRecords.UpdateAnswerRecord]: <doc:AnswerRecordsClient/updateAnswerRecord(request:options:)>
-  public struct AnswerRecord: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AnswerRecord: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The unique identifier of this answer record.
@@ -68,7 +68,7 @@
     /// The record for this answer.
     public var record: OneOf_Record? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AnswerRecord`.
     public init() {}
@@ -129,7 +129,7 @@
       self.record = record
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -158,11 +158,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.AnswerRecord"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

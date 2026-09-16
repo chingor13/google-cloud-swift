@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class RolloutPlansRetry: RolloutPlansStub {
       let inner: any RolloutPlansStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any RolloutPlansStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any RolloutPlansStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@
       }
 
       public func delete(
-        request: RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: RolloutPlansClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RolloutPlansClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -65,14 +65,14 @@
       }
 
       public func `get`(
-        request: RolloutPlansClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RolloutPlan {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RolloutPlansClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RolloutPlansClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.RolloutPlan
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -80,14 +80,14 @@
       }
 
       public func insert(
-        request: RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: RolloutPlansClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RolloutPlansClient.InsertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -95,14 +95,14 @@
       }
 
       public func list(
-        request: RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RolloutPlansListResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RolloutPlansClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RolloutPlansClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.RolloutPlansListResponse
             in
             return try await self.inner.list(request: r, options: o)
@@ -110,14 +110,14 @@
       }
 
       public func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GlobalOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GlobalOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

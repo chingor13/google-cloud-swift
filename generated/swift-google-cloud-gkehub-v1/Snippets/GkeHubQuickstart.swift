@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudGKEHubV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudGKEHubV1.GkeHubClient()

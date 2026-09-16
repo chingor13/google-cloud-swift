@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [AgentService.ImportApp][google.cloud.ces.v1.AgentService.ImportApp].
 ///
 /// [google.cloud.ces.v1.AgentService.ImportApp]: <doc:AgentServiceClient/importApp(request:options:)>
-public struct ImportAppRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ImportAppRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The parent resource name with the location of the app to import.
@@ -55,7 +55,7 @@ public struct ImportAppRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The app to import.
   public var app: OneOf_App? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ImportAppRequest`.
   public init() {}
@@ -134,7 +134,7 @@ public struct ImportAppRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.app = app
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -162,7 +162,7 @@ public struct ImportAppRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Configuration options for the app import process.
   /// These options control how the import behaves, particularly when
   /// conflicts arise with existing app data.
-  public struct ImportOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ImportOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The strategy to use when resolving conflicts during import.
@@ -170,7 +170,7 @@ public struct ImportAppRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       ImportAppRequest.ImportOptions.ConflictResolutionStrategy = ImportAppRequest.ImportOptions
         .ConflictResolutionStrategy()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ImportOptions`.
     public init() {}
@@ -211,7 +211,7 @@ public struct ImportAppRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -346,11 +346,11 @@ public struct ImportAppRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.ImportAppRequest.ImportOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -368,10 +368,10 @@ public struct ImportAppRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.ImportAppRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

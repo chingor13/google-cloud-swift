@@ -16,13 +16,13 @@
 
 #if EntityTypes
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The request message for
   /// [EntityTypes.BatchUpdateEntityTypes][google.cloud.dialogflow.v2.EntityTypes.BatchUpdateEntityTypes].
   ///
   /// [google.cloud.dialogflow.v2.EntityTypes.BatchUpdateEntityTypes]: <doc:EntityTypesClient/batchUpdateEntityTypes(request:options:)>
-  public struct BatchUpdateEntityTypesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BatchUpdateEntityTypesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The name of the agent to update or create entity types in.
@@ -37,7 +37,7 @@
     public var languageCode: Swift.String = Swift.String()
 
     /// Optional. The mask to control which fields get updated.
-    public var updateMask: GoogleCloudWKT.FieldMask? = nil
+    public var updateMask: GoogleWKT.FieldMask? = nil
 
     /// The source of the entity type batch.
     ///
@@ -47,7 +47,7 @@
     /// *   If `name` is not specified, we create a new entity type.
     public var entityTypeBatch: OneOf_EntityTypeBatch? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BatchUpdateEntityTypesRequest`.
     public init() {}
@@ -94,8 +94,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .languageCode) {
         self.languageCode = value
       }
-      self.updateMask = try container.decodeIfPresent(
-        GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+      self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
 
       var entityTypeBatch: OneOf_EntityTypeBatch? = nil
       let entityTypeBatchCheckAndSet = {
@@ -120,7 +119,7 @@
       self.entityTypeBatch = entityTypeBatch
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -162,11 +161,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.BatchUpdateEntityTypesRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

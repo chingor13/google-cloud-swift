@@ -16,7 +16,7 @@
 
 #if Sessions || TestCases
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Configuration of the barge-in behavior. Barge-in instructs the API to return
   /// a detected utterance at a proper time while the client is playing back the
@@ -42,17 +42,17 @@
   ///
   /// No-speech event is a response with END_OF_UTTERANCE without any transcript
   /// following up.
-  public struct BargeInConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BargeInConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Duration that is not eligible for barge-in at the beginning of the input
     /// audio.
-    public var noBargeInDuration: GoogleCloudWKT.Duration? = nil
+    public var noBargeInDuration: GoogleWKT.Duration? = nil
 
     /// Total duration for the playback at the beginning of the input audio.
-    public var totalDuration: GoogleCloudWKT.Duration? = nil
+    public var totalDuration: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BargeInConfig`.
     public init() {}
@@ -88,12 +88,12 @@
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.noBargeInDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .noBargeInDuration)
+        GoogleWKT.Duration.self, forKey: .noBargeInDuration)
       self.totalDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .totalDuration)
+        GoogleWKT.Duration.self, forKey: .totalDuration)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -109,11 +109,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.BargeInConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

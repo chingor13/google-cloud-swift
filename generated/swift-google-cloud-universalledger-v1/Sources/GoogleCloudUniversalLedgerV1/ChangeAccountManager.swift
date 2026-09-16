@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Transfers the responsibility of managing a particular account to another
 /// manager. The sender must be the current account manager of the account and,
 /// to provide consent, the new manager must also sign this transaction.
-public struct ChangeAccountManager: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ChangeAccountManager: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Deprecated: Use
@@ -51,7 +51,7 @@ public struct ChangeAccountManager: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// to 60 characters.
   public var nextManagerId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ChangeAccountManager`.
   public init() {}
@@ -100,7 +100,7 @@ public struct ChangeAccountManager: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -118,10 +118,10 @@ public struct ChangeAccountManager: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.universalledger.v1.ChangeAccountManager"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

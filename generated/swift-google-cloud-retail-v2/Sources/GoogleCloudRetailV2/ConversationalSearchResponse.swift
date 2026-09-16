@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for
 /// [ConversationalSearchService.ConversationalSearch][google.cloud.retail.v2.ConversationalSearchService.ConversationalSearch]
 /// method.
 ///
 /// [google.cloud.retail.v2.ConversationalSearchService.ConversationalSearch]: <doc:ConversationalSearchServiceClient/conversationalSearch(request:options:)>
-public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ConversationalSearchResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The types Retail classifies the search query as.
@@ -70,7 +70,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
   /// Output only. The state of the response generation.
   public var state: ConversationalSearchResponse.State = ConversationalSearchResponse.State()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ConversationalSearchResponse`.
   public init() {}
@@ -144,7 +144,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -164,7 +164,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
   }
 
   /// The conversational followup question generated for Intent refinement.
-  public struct FollowupQuestion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FollowupQuestion: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The conversational followup question generated for Intent refinement.
@@ -174,7 +174,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
     public var suggestedAnswers: [ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer] =
       []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FollowupQuestion`.
     public init() {}
@@ -220,7 +220,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -236,14 +236,14 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
     /// Suggested answers to the follow-up question.
     /// If it's numerical attribute, only ProductAttributeInterval will be set.
     /// If it's textual attribute, only productAttributeValue will be set.
-    public struct SuggestedAnswer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SuggestedAnswer: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Product attribute value, including an attribute key and an
       /// attribute value. Other types can be added here in the future.
       public var productAttributeValue: ProductAttributeValue? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SuggestedAnswer`.
       public init() {}
@@ -280,7 +280,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
           ProductAttributeValue.self, forKey: .productAttributeValue)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -296,11 +296,11 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
         return
           "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion.SuggestedAnswer"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -308,24 +308,24 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
       return
         "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchResponse.FollowupQuestion"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The proposed refined search for intent-refinement/bundled shopping
   /// conversation. When using CONVERSATIONAL_FILTER_ONLY mode, the
   /// refined_query from search response will be populated here.
-  public struct RefinedSearch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RefinedSearch: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The query to be used for search.
     public var query: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RefinedSearch`.
     public init() {}
@@ -363,7 +363,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -378,17 +378,17 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchResponse.RefinedSearch"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// This field specifies all related information that is needed on client
   /// side for UI rendering of conversational filtering search.
-  public struct ConversationalFilteringResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConversationalFilteringResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The conversational filtering question.
@@ -402,7 +402,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
     public var additionalFilter:
       ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConversationalFilteringResult`.
     public init() {}
@@ -444,7 +444,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
         forKey: .additionalFilter)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -458,14 +458,14 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
     }
 
     /// Additional filter that client side need to apply.
-    public struct AdditionalFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AdditionalFilter: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Product attribute value, including an attribute key and an
       /// attribute value. Other types can be added here in the future.
       public var productAttributeValue: ProductAttributeValue? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AdditionalFilter`.
       public init() {}
@@ -502,7 +502,7 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
           ProductAttributeValue.self, forKey: .productAttributeValue)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -518,11 +518,11 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
         return
           "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult.AdditionalFilter"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -530,11 +530,11 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
       return
         "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchResponse.ConversationalFilteringResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -646,10 +646,10 @@ public struct ConversationalSearchResponse: Codable, Equatable, GoogleCloudWKT._
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.ConversationalSearchResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

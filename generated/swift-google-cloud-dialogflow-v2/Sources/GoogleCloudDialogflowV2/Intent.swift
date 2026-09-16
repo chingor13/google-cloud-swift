@@ -16,7 +16,7 @@
 
 #if AnswerRecords || Intents || Participants || Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// An intent categorizes an end-user's intention for one conversation turn. For
   /// each agent, you define many intents, where your combined intents can handle a
@@ -27,7 +27,7 @@
   ///
   /// For more information, see the [intent
   /// guide](https://cloud.google.com/dialogflow/docs/intents-overview).
-  public struct Intent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Intent: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The unique identifier of this intent.
@@ -145,7 +145,7 @@
     /// the output.
     public var followupIntentInfo: [Intent.FollowupIntentInfo] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Intent`.
     public init() {}
@@ -290,7 +290,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -322,7 +322,7 @@
     }
 
     /// Represents an example that the agent is trained on.
-    public struct TrainingPhrase: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct TrainingPhrase: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The unique identifier of this training phrase.
@@ -361,7 +361,7 @@
       /// intent or training, this counter is increased.
       public var timesAddedCount: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `TrainingPhrase`.
       public init() {}
@@ -418,7 +418,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -434,7 +434,7 @@
       }
 
       /// Represents a part of a training phrase.
-      public struct Part: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Part: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The text for this part.
@@ -455,8 +455,7 @@
         /// API, you must set this to true.
         public var userDefined: Swift.Bool = Swift.Bool()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Part`.
         public init() {}
@@ -509,7 +508,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -527,11 +526,11 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.TrainingPhrase.Part"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -650,16 +649,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.TrainingPhrase"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Represents intent parameters.
-    public struct Parameter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Parameter: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The unique identifier of this parameter.
@@ -700,7 +699,7 @@
       /// Optional. Indicates whether the parameter represents a list of values.
       public var isList: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Parameter`.
       public init() {}
@@ -775,7 +774,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -797,11 +796,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Parameter"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -810,7 +809,7 @@
     /// For more information, see
     /// [Rich response
     /// messages](https://cloud.google.com/dialogflow/docs/intents-rich-messages).
-    public struct Message: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Message: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The platform that this message is intended for.
@@ -819,7 +818,7 @@
       /// Required. The rich response message.
       public var message: OneOf_Message? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Message`.
       public init() {}
@@ -910,9 +909,7 @@
         if let card = try container.decodeIfPresent(Intent.Message.Card?.self, forKey: .card) {
           try messageCheckAndSet(.card(card))
         }
-        if let payload = try container.decodeIfPresent(
-          GoogleCloudWKT.Struct?.self, forKey: .payload)
-        {
+        if let payload = try container.decodeIfPresent(GoogleWKT.Struct?.self, forKey: .payload) {
           try messageCheckAndSet(.payload(payload))
         }
         if let simpleResponses = try container.decodeIfPresent(
@@ -963,7 +960,7 @@
         self.message = message
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1009,14 +1006,13 @@
       }
 
       /// The text response message.
-      public struct Text: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Text: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. The collection of the agent's responses.
         public var text: [Swift.String] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Text`.
         public init() {}
@@ -1054,7 +1050,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1069,16 +1065,16 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.Text"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// The image response message.
-      public struct Image: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Image: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. The public URI to an image file.
@@ -1088,8 +1084,7 @@
         /// e.g., screen readers.
         public var accessibilityText: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Image`.
         public init() {}
@@ -1134,7 +1129,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1150,16 +1145,16 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.Image"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// The quick replies response message.
-      public struct QuickReplies: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct QuickReplies: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. The title of the collection of quick replies.
@@ -1168,8 +1163,7 @@
         /// Optional. The collection of quick replies.
         public var quickReplies: [Swift.String] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `QuickReplies`.
         public init() {}
@@ -1212,7 +1206,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1228,16 +1222,16 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.QuickReplies"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// The card response message.
-      public struct Card: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Card: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. The title of the card.
@@ -1252,8 +1246,7 @@
         /// Optional. The collection of card buttons.
         public var buttons: [Intent.Message.Card.Button] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Card`.
         public init() {}
@@ -1308,7 +1301,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1324,7 +1317,7 @@
         }
 
         /// Contains information about a button.
-        public struct Button: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct Button: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Optional. The text to show on the button.
@@ -1334,8 +1327,7 @@
           /// open.
           public var postback: Swift.String = Swift.String()
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `Button`.
           public init() {}
@@ -1378,7 +1370,7 @@
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -1394,27 +1386,27 @@
           public static var _anyTypeUrl: Swift.String {
             return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.Card.Button"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.Card"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// The simple response message containing speech or text.
-      public struct SimpleResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct SimpleResponse: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// One of text_to_speech or ssml must be provided. The plain text of the
@@ -1429,8 +1421,7 @@
         /// Optional. The text to display.
         public var displayText: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `SimpleResponse`.
         public init() {}
@@ -1478,7 +1469,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1495,11 +1486,11 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.SimpleResponse"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -1507,14 +1498,13 @@
       /// This message in `QueryResult.fulfillment_messages` and
       /// `WebhookResponse.fulfillment_messages` should contain only one
       /// `SimpleResponse`.
-      public struct SimpleResponses: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct SimpleResponses: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The list of simple responses.
         public var simpleResponses: [Intent.Message.SimpleResponse] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `SimpleResponses`.
         public init() {}
@@ -1554,7 +1544,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1569,16 +1559,16 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.SimpleResponses"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// The basic card message. Useful for displaying information.
-      public struct BasicCard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct BasicCard: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. The title of the card.
@@ -1596,8 +1586,7 @@
         /// Optional. The collection of card buttons.
         public var buttons: [Intent.Message.BasicCard.Button] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `BasicCard`.
         public init() {}
@@ -1655,7 +1644,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1672,7 +1661,7 @@
         }
 
         /// The button object that appears at the bottom of a card.
-        public struct Button: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct Button: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Required. The title of the button.
@@ -1681,8 +1670,7 @@
           /// Required. Action to take when a user taps on the button.
           public var openUriAction: Intent.Message.BasicCard.Button.OpenUriAction? = nil
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `Button`.
           public init() {}
@@ -1724,7 +1712,7 @@
               Intent.Message.BasicCard.Button.OpenUriAction.self, forKey: .openUriAction)
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -1738,14 +1726,13 @@
           }
 
           /// Opens the given URI.
-          public struct OpenUriAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+          public struct OpenUriAction: Codable, Equatable, GoogleWKT._AnyPackable,
             Sendable
           {
             /// Required. The HTTP or HTTPS scheme URI.
             public var uri: Swift.String = Swift.String()
 
-            @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-              .init()
+            @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
             /// Initialize a new instance of `OpenUriAction`.
             public init() {}
@@ -1783,7 +1770,7 @@
               }
               for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
                 self._unknownFields.json[key.stringValue] = try container.decode(
-                  GoogleCloudWKT.Value.self, forKey: key)
+                  GoogleWKT.Value.self, forKey: key)
               }
             }
 
@@ -1799,46 +1786,45 @@
               return
                 "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.BasicCard.Button.OpenUriAction"
             }
-            public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-              self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+            public init(fromAny any: GoogleWKT.`Any`) throws {
+              self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
             }
-            public func _pack() throws -> GoogleCloudWKT.Struct {
-              return try GoogleCloudWKT._slowAnySerialize(message: self)
+            public func _pack() throws -> GoogleWKT.Struct {
+              return try GoogleWKT._slowAnySerialize(message: self)
             }
           }
 
           public static var _anyTypeUrl: Swift.String {
             return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.BasicCard.Button"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.BasicCard"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// The suggestion chip message that the user can tap to quickly post a reply
       /// to the conversation.
-      public struct Suggestion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Suggestion: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The text shown the in the suggestion chip.
         public var title: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Suggestion`.
         public init() {}
@@ -1876,7 +1862,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1891,23 +1877,22 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.Suggestion"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// The collection of suggestions.
-      public struct Suggestions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Suggestions: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The list of suggested replies.
         public var suggestions: [Intent.Message.Suggestion] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Suggestions`.
         public init() {}
@@ -1947,7 +1932,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1962,17 +1947,17 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.Suggestions"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// The suggestion chip message that allows the user to jump out to the app
       /// or website associated with this agent.
-      public struct LinkOutSuggestion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct LinkOutSuggestion: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The name of the app or site this chip is linking to.
@@ -1982,8 +1967,7 @@
         /// suggestion chip.
         public var uri: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `LinkOutSuggestion`.
         public init() {}
@@ -2027,7 +2011,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -2043,16 +2027,16 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.LinkOutSuggestion"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// The card for presenting a list of options to select from.
-      public struct ListSelect: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct ListSelect: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. The overall title of the list.
@@ -2064,8 +2048,7 @@
         /// Optional. Subtitle of the list.
         public var subtitle: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `ListSelect`.
         public init() {}
@@ -2115,7 +2098,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -2130,7 +2113,7 @@
         }
 
         /// An item in the list.
-        public struct Item: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct Item: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Required. Additional information about this option.
@@ -2145,8 +2128,7 @@
           /// Optional. The image to display.
           public var image: Intent.Message.Image? = nil
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `Item`.
           public init() {}
@@ -2196,7 +2178,7 @@
             self.image = try container.decodeIfPresent(Intent.Message.Image.self, forKey: .image)
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -2214,34 +2196,33 @@
           public static var _anyTypeUrl: Swift.String {
             return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.ListSelect.Item"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.ListSelect"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// The card for presenting a carousel of options to select from.
-      public struct CarouselSelect: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct CarouselSelect: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. Carousel items.
         public var items: [Intent.Message.CarouselSelect.Item] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `CarouselSelect`.
         public init() {}
@@ -2281,7 +2262,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -2294,7 +2275,7 @@
         }
 
         /// An item in the carousel.
-        public struct Item: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct Item: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Required. Additional info about the option item.
@@ -2309,8 +2290,7 @@
           /// Optional. The image to display.
           public var image: Intent.Message.Image? = nil
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `Item`.
           public init() {}
@@ -2360,7 +2340,7 @@
             self.image = try container.decodeIfPresent(Intent.Message.Image.self, forKey: .image)
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -2379,28 +2359,28 @@
             return
               "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.CarouselSelect.Item"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.CarouselSelect"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Additional info about the select item for when it is triggered in a
       /// dialog.
-      public struct SelectItemInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct SelectItemInfo: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. A unique key that will be sent back to the agent if this
@@ -2411,8 +2391,7 @@
         /// item in dialog.
         public var synonyms: [Swift.String] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `SelectItemInfo`.
         public init() {}
@@ -2455,7 +2434,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -2471,16 +2450,16 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.SelectItemInfo"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// The media content card for Actions on Google.
-      public struct MediaContent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct MediaContent: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. What type of media is the content (ie "audio").
@@ -2490,8 +2469,7 @@
         /// Required. List of media objects.
         public var mediaObjects: [Intent.Message.MediaContent.ResponseMediaObject] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `MediaContent`.
         public init() {}
@@ -2538,7 +2516,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -2552,7 +2530,7 @@
         }
 
         /// Response media object for media content card.
-        public struct ResponseMediaObject: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct ResponseMediaObject: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Required. Name of media card.
@@ -2567,8 +2545,7 @@
           /// Image to show with the media card.
           public var image: OneOf_Image? = nil
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `ResponseMediaObject`.
           public init() {}
@@ -2640,7 +2617,7 @@
             self.image = image
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -2675,11 +2652,11 @@
             return
               "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.MediaContent.ResponseMediaObject"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -2784,17 +2761,17 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.MediaContent"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Browse Carousel Card for Actions on Google.
       /// https://developers.google.com/actions/assistant/responses#browsing_carousel
-      public struct BrowseCarouselCard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct BrowseCarouselCard: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. List of items in the Browse Carousel Card. Minimum of two
@@ -2808,8 +2785,7 @@
         public var imageDisplayOptions: Intent.Message.BrowseCarouselCard.ImageDisplayOptions =
           Intent.Message.BrowseCarouselCard.ImageDisplayOptions()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `BrowseCarouselCard`.
         public init() {}
@@ -2856,7 +2832,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -2870,7 +2846,7 @@
         }
 
         /// Browsing carousel tile
-        public struct BrowseCarouselCardItem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct BrowseCarouselCardItem: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Required. Action to present to the user.
@@ -2891,8 +2867,7 @@
           /// Card. Maximum of one line of text.
           public var footer: Swift.String = Swift.String()
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `BrowseCarouselCardItem`.
           public init() {}
@@ -2948,7 +2923,7 @@
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -2965,7 +2940,7 @@
           }
 
           /// Actions on Google action to open a given url.
-          public struct OpenUrlAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+          public struct OpenUrlAction: Codable, Equatable, GoogleWKT._AnyPackable,
             Sendable
           {
             /// Required. URL
@@ -2977,8 +2952,7 @@
               Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint =
                 Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction.UrlTypeHint()
 
-            @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-              .init()
+            @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
             /// Initialize a new instance of `OpenUrlAction`.
             public init() {}
@@ -3024,7 +2998,7 @@
               }
               for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
                 self._unknownFields.json[key.stringValue] = try container.decode(
-                  GoogleCloudWKT.Value.self, forKey: key)
+                  GoogleWKT.Value.self, forKey: key)
               }
             }
 
@@ -3148,11 +3122,11 @@
               return
                 "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem.OpenUrlAction"
             }
-            public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-              self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+            public init(fromAny any: GoogleWKT.`Any`) throws {
+              self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
             }
-            public func _pack() throws -> GoogleCloudWKT.Struct {
-              return try GoogleCloudWKT._slowAnySerialize(message: self)
+            public func _pack() throws -> GoogleWKT.Struct {
+              return try GoogleWKT._slowAnySerialize(message: self)
             }
           }
 
@@ -3160,11 +3134,11 @@
             return
               "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard.BrowseCarouselCardItem"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -3301,16 +3275,16 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.BrowseCarouselCard"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Table card for Actions on Google.
-      public struct TableCard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct TableCard: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. Title of the card.
@@ -3331,8 +3305,7 @@
         /// Optional. List of buttons for the card.
         public var buttons: [Intent.Message.BasicCard.Button] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `TableCard`.
         public init() {}
@@ -3399,7 +3372,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -3419,11 +3392,11 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.TableCard"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -3431,7 +3404,7 @@
       /// [TableCard][google.cloud.dialogflow.v2.Intent.Message.TableCard].
       ///
       /// [google.cloud.dialogflow.v2.Intent.Message.TableCard]: <doc:Intent/Message/TableCard>
-      public struct ColumnProperties: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct ColumnProperties: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. Column heading.
@@ -3441,8 +3414,7 @@
         public var horizontalAlignment: Intent.Message.ColumnProperties.HorizontalAlignment = Intent
           .Message.ColumnProperties.HorizontalAlignment()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `ColumnProperties`.
         public init() {}
@@ -3487,7 +3459,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -3615,18 +3587,18 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.ColumnProperties"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Row of [TableCard][google.cloud.dialogflow.v2.Intent.Message.TableCard].
       ///
       /// [google.cloud.dialogflow.v2.Intent.Message.TableCard]: <doc:Intent/Message/TableCard>
-      public struct TableCardRow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct TableCardRow: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. List of cells that make up this row.
@@ -3635,8 +3607,7 @@
         /// Optional. Whether to add a visual divider after this row.
         public var dividerAfter: Swift.Bool = Swift.Bool()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `TableCardRow`.
         public init() {}
@@ -3681,7 +3652,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -3697,11 +3668,11 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.TableCardRow"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -3709,14 +3680,13 @@
       /// [TableCardRow][google.cloud.dialogflow.v2.Intent.Message.TableCardRow].
       ///
       /// [google.cloud.dialogflow.v2.Intent.Message.TableCardRow]: <doc:Intent/Message/TableCardRow>
-      public struct TableCardCell: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct TableCardCell: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. Text in this cell.
         public var text: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `TableCardCell`.
         public init() {}
@@ -3754,7 +3724,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -3769,11 +3739,11 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message.TableCardCell"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -3945,7 +3915,7 @@
         /// The card response.
         indirect case card(Intent.Message.Card?)
         /// A custom platform-specific response.
-        indirect case payload(GoogleCloudWKT.Struct?)
+        indirect case payload(GoogleWKT.Struct?)
         /// The voice and text-only responses for Actions on Google.
         indirect case simpleResponses(Intent.Message.SimpleResponses?)
         /// The basic card response for Actions on Google.
@@ -3969,16 +3939,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.Message"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Represents a single followup intent in the chain.
-    public struct FollowupIntentInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct FollowupIntentInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The unique identifier of the followup intent.
@@ -3989,7 +3959,7 @@
       /// Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
       public var parentFollowupIntentName: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `FollowupIntentInfo`.
       public init() {}
@@ -4035,7 +4005,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -4051,11 +4021,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Intent.FollowupIntentInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -4169,11 +4139,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Intent"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudHypercomputeClusterV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: HypercomputeClusterClient) async throws {
   let response = try await client.getLocation(

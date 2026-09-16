@@ -16,10 +16,10 @@
 
 #if ProjectService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Metadata and configurations for a Google Cloud project in the service.
-  public struct Project: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Project: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Full resource name of the project, for example
@@ -29,12 +29,12 @@
     public var name: Swift.String = Swift.String()
 
     /// Output only. The timestamp when this project is created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. The timestamp when this project is successfully provisioned.
     /// Empty value means this project is still provisioning and is not ready for
     /// use.
-    public var provisionCompletionTime: GoogleCloudWKT.Timestamp? = nil
+    public var provisionCompletionTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. A map of terms of services. The key is the `id` of
     /// [ServiceTerms][google.cloud.discoveryengine.v1.Project.ServiceTerms].
@@ -42,7 +42,7 @@
     /// [google.cloud.discoveryengine.v1.Project.ServiceTerms]: <doc:Project/ServiceTerms>
     public var serviceTermsMap: [Swift.String: Project.ServiceTerms] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Project`.
     public init() {}
@@ -84,10 +84,9 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
         self.name = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
       self.provisionCompletionTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .provisionCompletionTime)
+        GoogleWKT.Timestamp.self, forKey: .provisionCompletionTime)
       if let value = try container.decodeIfPresent(
         [Swift.String: Project.ServiceTerms].self, forKey: .serviceTermsMap)
       {
@@ -95,7 +94,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -111,7 +110,7 @@
     }
 
     /// Metadata about the terms of service.
-    public struct ServiceTerms: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ServiceTerms: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The unique identifier of this terms of service.
@@ -138,13 +137,13 @@
       public var state: Project.ServiceTerms.State = Project.ServiceTerms.State()
 
       /// The last time when the project agreed to the terms of service.
-      public var acceptTime: GoogleCloudWKT.Timestamp? = nil
+      public var acceptTime: GoogleWKT.Timestamp? = nil
 
       /// The last time when the project declined or revoked the agreement to terms
       /// of service.
-      public var declineTime: GoogleCloudWKT.Timestamp? = nil
+      public var declineTime: GoogleWKT.Timestamp? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ServiceTerms`.
       public init() {}
@@ -197,12 +196,12 @@
           self.state = value
         }
         self.acceptTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .acceptTime)
+          GoogleWKT.Timestamp.self, forKey: .acceptTime)
         self.declineTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .declineTime)
+          GoogleWKT.Timestamp.self, forKey: .declineTime)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -333,22 +332,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.discoveryengine.v1.Project.ServiceTerms"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.Project"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

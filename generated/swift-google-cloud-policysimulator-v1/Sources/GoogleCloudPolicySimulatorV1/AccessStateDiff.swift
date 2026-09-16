@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A summary and comparison of the principal's access under the current
 /// (baseline) policies and the proposed (simulated) policies for a single
 /// access tuple.
-public struct AccessStateDiff: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AccessStateDiff: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The results of evaluating the access tuple under the current (baseline)
@@ -42,7 +42,7 @@ public struct AccessStateDiff: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// between the current (baseline) policies and proposed (simulated) policies.
   public var accessChange: AccessStateDiff.AccessChangeType = AccessStateDiff.AccessChangeType()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AccessStateDiff`.
   public init() {}
@@ -88,7 +88,7 @@ public struct AccessStateDiff: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -259,10 +259,10 @@ public struct AccessStateDiff: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.policysimulator.v1.AccessStateDiff"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

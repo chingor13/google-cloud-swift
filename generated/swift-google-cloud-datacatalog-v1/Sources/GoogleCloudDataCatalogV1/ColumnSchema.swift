@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A column within a schema. Columns can be nested inside
 /// other columns.
-public struct ColumnSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ColumnSchema: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Name of the column.
@@ -74,7 +74,7 @@ public struct ColumnSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Information only applying for columns in Entries from a specific system.
   public var systemSpec: OneOf_SystemSpec? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ColumnSchema`.
   public init() {}
@@ -177,7 +177,7 @@ public struct ColumnSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.systemSpec = systemSpec
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -206,14 +206,14 @@ public struct ColumnSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Column info specific to Looker System.
-  public struct LookerColumnSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LookerColumnSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Looker specific column type of this column.
     public var type: ColumnSchema.LookerColumnSpec.LookerColumnType = ColumnSchema.LookerColumnSpec
       .LookerColumnType()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LookerColumnSpec`.
     public init() {}
@@ -253,7 +253,7 @@ public struct ColumnSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -394,16 +394,16 @@ public struct ColumnSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.datacatalog.v1.ColumnSchema.LookerColumnSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Represents the type of a field element.
-  public struct FieldElementType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FieldElementType: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The type of a field element. See
@@ -412,7 +412,7 @@ public struct ColumnSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.cloud.datacatalog.v1.ColumnSchema.type]: <doc:ColumnSchema/type>
     public var type: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FieldElementType`.
     public init() {}
@@ -450,7 +450,7 @@ public struct ColumnSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -465,11 +465,11 @@ public struct ColumnSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.datacatalog.v1.ColumnSchema.FieldElementType"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -601,10 +601,10 @@ public struct ColumnSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.v1.ColumnSchema"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

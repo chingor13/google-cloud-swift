@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a Data Fusion instance.
-public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The name of this instance is in the form of
@@ -56,10 +56,10 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var options: [Swift.String: Swift.String] = [:]
 
   /// Output only. The time the instance was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time the instance was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The current state of this Data Fusion instance.
   public var state: Instance.State = Instance.State()
@@ -121,7 +121,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. If the instance state is DISABLED, the reason for disabling the instance.
   public var disabledReason: [Instance.DisabledReason] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Instance`.
   public init() {}
@@ -239,10 +239,8 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.options = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Instance.State.self, forKey: .state) {
       self.state = value
     }
@@ -298,7 +296,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -721,10 +719,10 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datafusion.v1.Instance"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

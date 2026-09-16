@@ -16,49 +16,45 @@
 
 #if TargetTcpProxies
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol TargetTcpProxiesStub: Sendable {
       func aggregatedList(
-        request: TargetTcpProxiesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetTcpProxiesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetTcpProxyAggregatedList
 
       func delete(
-        request: TargetTcpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetTcpProxiesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: TargetTcpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetTcpProxiesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetTcpProxy
 
       func insert(
-        request: TargetTcpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetTcpProxiesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: TargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetTcpProxiesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetTcpProxyList
 
       func setBackendService(
-        request: TargetTcpProxiesClient.SetBackendServiceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetTcpProxiesClient.SetBackendServiceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setProxyHeader(
-        request: TargetTcpProxiesClient.SetProxyHeaderRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetTcpProxiesClient.SetProxyHeaderRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: TargetTcpProxiesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetTcpProxiesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

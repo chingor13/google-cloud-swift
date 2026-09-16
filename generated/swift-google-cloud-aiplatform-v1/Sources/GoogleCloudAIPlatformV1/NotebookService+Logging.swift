@@ -20,11 +20,11 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -43,9 +43,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -62,14 +62,14 @@
       }
 
       public func createNotebookRuntimeTemplate(
-        request: CreateNotebookRuntimeTemplateRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateNotebookRuntimeTemplateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "createNotebookRuntimeTemplate",
           action: {
-            (r: CreateNotebookRuntimeTemplateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateNotebookRuntimeTemplateRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.createNotebookRuntimeTemplate(request: r, options: o)
@@ -77,14 +77,14 @@
       }
 
       public func getNotebookRuntimeTemplate(
-        request: GetNotebookRuntimeTemplateRequest, options: GoogleCloudGax.RequestOptions
+        request: GetNotebookRuntimeTemplateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.NotebookRuntimeTemplate {
         try await self._intercept(
           request: request,
           options: options,
           name: "getNotebookRuntimeTemplate",
           action: {
-            (r: GetNotebookRuntimeTemplateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetNotebookRuntimeTemplateRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.NotebookRuntimeTemplate
             in
             return try await self.inner.getNotebookRuntimeTemplate(request: r, options: o)
@@ -92,14 +92,14 @@
       }
 
       public func listNotebookRuntimeTemplates(
-        request: ListNotebookRuntimeTemplatesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListNotebookRuntimeTemplatesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListNotebookRuntimeTemplatesResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listNotebookRuntimeTemplates",
           action: {
-            (r: ListNotebookRuntimeTemplatesRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListNotebookRuntimeTemplatesRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListNotebookRuntimeTemplatesResponse
             in
             return try await self.inner.listNotebookRuntimeTemplates(request: r, options: o)
@@ -107,14 +107,14 @@
       }
 
       public func deleteNotebookRuntimeTemplate(
-        request: DeleteNotebookRuntimeTemplateRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteNotebookRuntimeTemplateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteNotebookRuntimeTemplate",
           action: {
-            (r: DeleteNotebookRuntimeTemplateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteNotebookRuntimeTemplateRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteNotebookRuntimeTemplate(request: r, options: o)
@@ -122,14 +122,14 @@
       }
 
       public func updateNotebookRuntimeTemplate(
-        request: UpdateNotebookRuntimeTemplateRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateNotebookRuntimeTemplateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.NotebookRuntimeTemplate {
         try await self._intercept(
           request: request,
           options: options,
           name: "updateNotebookRuntimeTemplate",
           action: {
-            (r: UpdateNotebookRuntimeTemplateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateNotebookRuntimeTemplateRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.NotebookRuntimeTemplate
             in
             return try await self.inner.updateNotebookRuntimeTemplate(request: r, options: o)
@@ -137,14 +137,14 @@
       }
 
       public func assignNotebookRuntime(
-        request: AssignNotebookRuntimeRequest, options: GoogleCloudGax.RequestOptions
+        request: AssignNotebookRuntimeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "assignNotebookRuntime",
           action: {
-            (r: AssignNotebookRuntimeRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: AssignNotebookRuntimeRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.assignNotebookRuntime(request: r, options: o)
@@ -152,14 +152,14 @@
       }
 
       public func getNotebookRuntime(
-        request: GetNotebookRuntimeRequest, options: GoogleCloudGax.RequestOptions
+        request: GetNotebookRuntimeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.NotebookRuntime {
         try await self._intercept(
           request: request,
           options: options,
           name: "getNotebookRuntime",
           action: {
-            (r: GetNotebookRuntimeRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetNotebookRuntimeRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.NotebookRuntime
             in
             return try await self.inner.getNotebookRuntime(request: r, options: o)
@@ -167,14 +167,14 @@
       }
 
       public func listNotebookRuntimes(
-        request: ListNotebookRuntimesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListNotebookRuntimesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListNotebookRuntimesResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listNotebookRuntimes",
           action: {
-            (r: ListNotebookRuntimesRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListNotebookRuntimesRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListNotebookRuntimesResponse
             in
             return try await self.inner.listNotebookRuntimes(request: r, options: o)
@@ -182,14 +182,14 @@
       }
 
       public func deleteNotebookRuntime(
-        request: DeleteNotebookRuntimeRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteNotebookRuntimeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteNotebookRuntime",
           action: {
-            (r: DeleteNotebookRuntimeRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteNotebookRuntimeRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteNotebookRuntime(request: r, options: o)
@@ -197,14 +197,14 @@
       }
 
       public func upgradeNotebookRuntime(
-        request: UpgradeNotebookRuntimeRequest, options: GoogleCloudGax.RequestOptions
+        request: UpgradeNotebookRuntimeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "upgradeNotebookRuntime",
           action: {
-            (r: UpgradeNotebookRuntimeRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpgradeNotebookRuntimeRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.upgradeNotebookRuntime(request: r, options: o)
@@ -212,14 +212,14 @@
       }
 
       public func startNotebookRuntime(
-        request: StartNotebookRuntimeRequest, options: GoogleCloudGax.RequestOptions
+        request: StartNotebookRuntimeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "startNotebookRuntime",
           action: {
-            (r: StartNotebookRuntimeRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: StartNotebookRuntimeRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.startNotebookRuntime(request: r, options: o)
@@ -227,14 +227,14 @@
       }
 
       public func stopNotebookRuntime(
-        request: StopNotebookRuntimeRequest, options: GoogleCloudGax.RequestOptions
+        request: StopNotebookRuntimeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "stopNotebookRuntime",
           action: {
-            (r: StopNotebookRuntimeRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: StopNotebookRuntimeRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.stopNotebookRuntime(request: r, options: o)
@@ -242,14 +242,14 @@
       }
 
       public func createNotebookExecutionJob(
-        request: CreateNotebookExecutionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateNotebookExecutionJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "createNotebookExecutionJob",
           action: {
-            (r: CreateNotebookExecutionJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateNotebookExecutionJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.createNotebookExecutionJob(request: r, options: o)
@@ -257,14 +257,14 @@
       }
 
       public func getNotebookExecutionJob(
-        request: GetNotebookExecutionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetNotebookExecutionJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.NotebookExecutionJob {
         try await self._intercept(
           request: request,
           options: options,
           name: "getNotebookExecutionJob",
           action: {
-            (r: GetNotebookExecutionJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetNotebookExecutionJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.NotebookExecutionJob
             in
             return try await self.inner.getNotebookExecutionJob(request: r, options: o)
@@ -272,14 +272,14 @@
       }
 
       public func listNotebookExecutionJobs(
-        request: ListNotebookExecutionJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListNotebookExecutionJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListNotebookExecutionJobsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listNotebookExecutionJobs",
           action: {
-            (r: ListNotebookExecutionJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListNotebookExecutionJobsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListNotebookExecutionJobsResponse
             in
             return try await self.inner.listNotebookExecutionJobs(request: r, options: o)
@@ -287,14 +287,14 @@
       }
 
       public func deleteNotebookExecutionJob(
-        request: DeleteNotebookExecutionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteNotebookExecutionJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteNotebookExecutionJob",
           action: {
-            (r: DeleteNotebookExecutionJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteNotebookExecutionJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteNotebookExecutionJob(request: r, options: o)
@@ -302,44 +302,44 @@
       }
 
       public func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listLocations",
           action: {
-            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.ListLocationsResponse
+            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.ListLocationsResponse
             in
             return try await self.inner.listLocations(request: r, options: o)
           })
       }
 
       public func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location {
         try await self._intercept(
           request: request,
           options: options,
           name: "getLocation",
           action: {
-            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.Location
+            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.Location
             in
             return try await self.inner.getLocation(request: r, options: o)
           })
       }
 
       public func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "setIamPolicy",
           action: {
-            (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleIAMV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
@@ -347,14 +347,14 @@
       }
 
       public func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "getIamPolicy",
           action: {
-            (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleIAMV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
@@ -362,88 +362,88 @@
       }
 
       public func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "testIamPermissions",
           action: {
-            (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleIAMV1.TestIamPermissionsResponse
+            (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleIAMV1.TestIamPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
           })
       }
 
       public func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listOperations",
           action: {
-            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.ListOperationsResponse
+            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.ListOperationsResponse
             in
             return try await self.inner.listOperations(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)
           })
       }
 
       public func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteOperation",
           action: {
-            (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.deleteOperation(request: r, options: o)
           })
       }
 
       public func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "cancelOperation",
           action: {
-            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.cancelOperation(request: r, options: o)
           })
       }
 
       public func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "waitOperation",
           action: {
-            (r: GoogleLongRunning.WaitOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.WaitOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.waitOperation(request: r, options: o)
           })

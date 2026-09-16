@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service to determine the likelihood an event is legitimate.
 ///
@@ -30,7 +30,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   let inner: any Clients.RecaptchaEnterpriseServiceStub
 
   /// Creates a new `RecaptchaEnterpriseServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.RecaptchaEnterpriseServiceStub =
       try Clients.RecaptchaEnterpriseServiceTransport(options)
     inner = Clients.RecaptchaEnterpriseServiceRetry(inner, options: options)
@@ -44,7 +44,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_CreateAssessment")
   public func createAssessment(
-    request: CreateAssessmentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAssessmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Assessment {
     try await self.inner.createAssessment(request: request, options: options)
   }
@@ -54,7 +54,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_AnnotateAssessment")
   public func annotateAssessment(
-    request: AnnotateAssessmentRequest, options: GoogleCloudGax.RequestOptions
+    request: AnnotateAssessmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.AnnotateAssessmentResponse {
     try await self.inner.annotateAssessment(request: request, options: options)
   }
@@ -63,7 +63,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_CreateKey")
   public func createKey(
-    request: CreateKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key {
     try await self.inner.createKey(request: request, options: options)
   }
@@ -72,7 +72,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_ListKeys")
   public func listKeys(
-    request: ListKeysRequest, options: GoogleCloudGax.RequestOptions
+    request: ListKeysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListKeysResponse {
     try await self.inner.listKeys(request: request, options: options)
   }
@@ -81,7 +81,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_ListKeys")
   public func listKeys(
-    byItem: ListKeysRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListKeysRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Key, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListKeysResponse in
@@ -89,7 +89,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
       request.pageToken = token
       return try await self.listKeys(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the secret key related to the specified public key.
@@ -98,7 +98,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_RetrieveLegacySecretKey")
   public func retrieveLegacySecretKey(
-    request: RetrieveLegacySecretKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: RetrieveLegacySecretKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.RetrieveLegacySecretKeyResponse {
     try await self.inner.retrieveLegacySecretKey(request: request, options: options)
   }
@@ -107,7 +107,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_GetKey")
   public func getKey(
-    request: GetKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key {
     try await self.inner.getKey(request: request, options: options)
   }
@@ -116,7 +116,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_UpdateKey")
   public func updateKey(
-    request: UpdateKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key {
     try await self.inner.updateKey(request: request, options: options)
   }
@@ -125,7 +125,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_DeleteKey")
   public func deleteKey(
-    request: DeleteKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteKeyRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteKey(request: request, options: options)
   }
@@ -139,7 +139,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_MigrateKey")
   public func migrateKey(
-    request: MigrateKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: MigrateKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key {
     try await self.inner.migrateKey(request: request, options: options)
   }
@@ -151,7 +151,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_AddIpOverride")
   public func addIpOverride(
-    request: AddIpOverrideRequest, options: GoogleCloudGax.RequestOptions
+    request: AddIpOverrideRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.AddIpOverrideResponse {
     try await self.inner.addIpOverride(request: request, options: options)
   }
@@ -164,7 +164,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_RemoveIpOverride")
   public func removeIpOverride(
-    request: RemoveIpOverrideRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveIpOverrideRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.RemoveIpOverrideResponse {
     try await self.inner.removeIpOverride(request: request, options: options)
   }
@@ -173,7 +173,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_ListIpOverrides")
   public func listIpOverrides(
-    request: ListIpOverridesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListIpOverridesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListIpOverridesResponse {
     try await self.inner.listIpOverrides(request: request, options: options)
   }
@@ -182,7 +182,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_ListIpOverrides")
   public func listIpOverrides(
-    byItem: ListIpOverridesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListIpOverridesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<IpOverrideData, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListIpOverridesResponse
@@ -191,7 +191,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
       request.pageToken = token
       return try await self.listIpOverrides(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Get some aggregated metrics for a Key. This data can be used to build
@@ -199,7 +199,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_GetMetrics")
   public func getMetrics(
-    request: GetMetricsRequest, options: GoogleCloudGax.RequestOptions
+    request: GetMetricsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Metrics {
     try await self.inner.getMetrics(request: request, options: options)
   }
@@ -208,7 +208,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_GetPolicy")
   public func getPolicy(
-    request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Policy {
     try await self.inner.getPolicy(request: request, options: options)
   }
@@ -217,7 +217,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_UpdatePolicy")
   public func updatePolicy(
-    request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Policy {
     try await self.inner.updatePolicy(request: request, options: options)
   }
@@ -228,7 +228,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_CreateFirewallPolicy")
   public func createFirewallPolicy(
-    request: CreateFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateFirewallPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy {
     try await self.inner.createFirewallPolicy(request: request, options: options)
   }
@@ -237,7 +237,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_ListFirewallPolicies")
   public func listFirewallPolicies(
-    request: ListFirewallPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListFirewallPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListFirewallPoliciesResponse {
     try await self.inner.listFirewallPolicies(request: request, options: options)
   }
@@ -246,7 +246,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_ListFirewallPolicies")
   public func listFirewallPolicies(
-    byItem: ListFirewallPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListFirewallPoliciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<FirewallPolicy, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -255,14 +255,14 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
       request.pageToken = token
       return try await self.listFirewallPolicies(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the specified firewall policy.
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_GetFirewallPolicy")
   public func getFirewallPolicy(
-    request: GetFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetFirewallPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy {
     try await self.inner.getFirewallPolicy(request: request, options: options)
   }
@@ -271,7 +271,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_UpdateFirewallPolicy")
   public func updateFirewallPolicy(
-    request: UpdateFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateFirewallPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy {
     try await self.inner.updateFirewallPolicy(request: request, options: options)
   }
@@ -280,7 +280,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_DeleteFirewallPolicy")
   public func deleteFirewallPolicy(
-    request: DeleteFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteFirewallPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteFirewallPolicy(request: request, options: options)
   }
@@ -289,7 +289,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_ReorderFirewallPolicies")
   public func reorderFirewallPolicies(
-    request: ReorderFirewallPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ReorderFirewallPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ReorderFirewallPoliciesResponse {
     try await self.inner.reorderFirewallPolicies(request: request, options: options)
   }
@@ -298,7 +298,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_ListRelatedAccountGroups")
   public func listRelatedAccountGroups(
-    request: ListRelatedAccountGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRelatedAccountGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupsResponse {
     try await self.inner.listRelatedAccountGroups(request: request, options: options)
   }
@@ -307,7 +307,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_ListRelatedAccountGroups")
   public func listRelatedAccountGroups(
-    byItem: ListRelatedAccountGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRelatedAccountGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RelatedAccountGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -316,14 +316,14 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
       request.pageToken = token
       return try await self.listRelatedAccountGroups(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Get memberships in a group of related accounts.
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_ListRelatedAccountGroupMemberships")
   public func listRelatedAccountGroupMemberships(
-    request: ListRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupMembershipsResponse {
     try await self.inner.listRelatedAccountGroupMemberships(request: request, options: options)
   }
@@ -332,7 +332,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_ListRelatedAccountGroupMemberships")
   public func listRelatedAccountGroupMemberships(
-    byItem: ListRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RelatedAccountGroupMembership, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -341,14 +341,14 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
       request.pageToken = token
       return try await self.listRelatedAccountGroupMemberships(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Search group memberships related to a given account.
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_SearchRelatedAccountGroupMemberships")
   public func searchRelatedAccountGroupMemberships(
-    request: SearchRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.SearchRelatedAccountGroupMembershipsResponse {
     try await self.inner.searchRelatedAccountGroupMemberships(request: request, options: options)
   }
@@ -357,7 +357,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
   ///
   /// @Snippet(path: "RecaptchaEnterpriseService_SearchRelatedAccountGroupMemberships")
   public func searchRelatedAccountGroupMemberships(
-    byItem: SearchRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: SearchRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RelatedAccountGroupMembership, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -366,7 +366,7 @@ public final class RecaptchaEnterpriseServiceClient: Clients.RecaptchaEnterprise
       request.pageToken = token
       return try await self.searchRelatedAccountGroupMemberships(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 }
 
@@ -443,7 +443,7 @@ extension Clients {
     /// See `RecaptchaEnterpriseServiceClient.updateKey`.
     func updateKey(
       key: Key?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key
 
     /// See `RecaptchaEnterpriseServiceClient.deleteKey`.
@@ -516,7 +516,7 @@ extension Clients {
     /// See `RecaptchaEnterpriseServiceClient.updatePolicy`.
     func updatePolicy(
       policy: Policy?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Policy
 
     /// See `RecaptchaEnterpriseServiceClient.createFirewallPolicy`.
@@ -559,7 +559,7 @@ extension Clients {
     /// See `RecaptchaEnterpriseServiceClient.updateFirewallPolicy`.
     func updateFirewallPolicy(
       firewallPolicy: FirewallPolicy?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy
 
     /// See `RecaptchaEnterpriseServiceClient.deleteFirewallPolicy`.
@@ -625,152 +625,152 @@ extension Clients {
 
     /// See `RecaptchaEnterpriseServiceClient.createAssessment`.
     func createAssessment(
-      request: CreateAssessmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAssessmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Assessment
 
     /// See `RecaptchaEnterpriseServiceClient.annotateAssessment`.
     func annotateAssessment(
-      request: AnnotateAssessmentRequest, options: GoogleCloudGax.RequestOptions
+      request: AnnotateAssessmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.AnnotateAssessmentResponse
 
     /// See `RecaptchaEnterpriseServiceClient.createKey`.
     func createKey(
-      request: CreateKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key
 
     /// See `RecaptchaEnterpriseServiceClient.listKeys`.
     func listKeys(
-      request: ListKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListKeysResponse
 
     /// See `RecaptchaEnterpriseServiceClient.listKeys`.
     func listKeys(
-      byItem: ListKeysRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListKeysRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Key, Swift.Error>
 
     /// See `RecaptchaEnterpriseServiceClient.retrieveLegacySecretKey`.
     func retrieveLegacySecretKey(
-      request: RetrieveLegacySecretKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: RetrieveLegacySecretKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.RetrieveLegacySecretKeyResponse
 
     /// See `RecaptchaEnterpriseServiceClient.getKey`.
     func getKey(
-      request: GetKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key
 
     /// See `RecaptchaEnterpriseServiceClient.updateKey`.
     func updateKey(
-      request: UpdateKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key
 
     /// See `RecaptchaEnterpriseServiceClient.deleteKey`.
     func deleteKey(
-      request: DeleteKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteKeyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `RecaptchaEnterpriseServiceClient.migrateKey`.
     func migrateKey(
-      request: MigrateKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: MigrateKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key
 
     /// See `RecaptchaEnterpriseServiceClient.addIpOverride`.
     func addIpOverride(
-      request: AddIpOverrideRequest, options: GoogleCloudGax.RequestOptions
+      request: AddIpOverrideRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.AddIpOverrideResponse
 
     /// See `RecaptchaEnterpriseServiceClient.removeIpOverride`.
     func removeIpOverride(
-      request: RemoveIpOverrideRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveIpOverrideRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.RemoveIpOverrideResponse
 
     /// See `RecaptchaEnterpriseServiceClient.listIpOverrides`.
     func listIpOverrides(
-      request: ListIpOverridesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIpOverridesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListIpOverridesResponse
 
     /// See `RecaptchaEnterpriseServiceClient.listIpOverrides`.
     func listIpOverrides(
-      byItem: ListIpOverridesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListIpOverridesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<IpOverrideData, Swift.Error>
 
     /// See `RecaptchaEnterpriseServiceClient.getMetrics`.
     func getMetrics(
-      request: GetMetricsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetricsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Metrics
 
     /// See `RecaptchaEnterpriseServiceClient.getPolicy`.
     func getPolicy(
-      request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Policy
 
     /// See `RecaptchaEnterpriseServiceClient.updatePolicy`.
     func updatePolicy(
-      request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Policy
 
     /// See `RecaptchaEnterpriseServiceClient.createFirewallPolicy`.
     func createFirewallPolicy(
-      request: CreateFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFirewallPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy
 
     /// See `RecaptchaEnterpriseServiceClient.listFirewallPolicies`.
     func listFirewallPolicies(
-      request: ListFirewallPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFirewallPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListFirewallPoliciesResponse
 
     /// See `RecaptchaEnterpriseServiceClient.listFirewallPolicies`.
     func listFirewallPolicies(
-      byItem: ListFirewallPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListFirewallPoliciesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<FirewallPolicy, Swift.Error>
 
     /// See `RecaptchaEnterpriseServiceClient.getFirewallPolicy`.
     func getFirewallPolicy(
-      request: GetFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFirewallPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy
 
     /// See `RecaptchaEnterpriseServiceClient.updateFirewallPolicy`.
     func updateFirewallPolicy(
-      request: UpdateFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFirewallPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy
 
     /// See `RecaptchaEnterpriseServiceClient.deleteFirewallPolicy`.
     func deleteFirewallPolicy(
-      request: DeleteFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFirewallPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `RecaptchaEnterpriseServiceClient.reorderFirewallPolicies`.
     func reorderFirewallPolicies(
-      request: ReorderFirewallPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ReorderFirewallPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ReorderFirewallPoliciesResponse
 
     /// See `RecaptchaEnterpriseServiceClient.listRelatedAccountGroups`.
     func listRelatedAccountGroups(
-      request: ListRelatedAccountGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRelatedAccountGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupsResponse
 
     /// See `RecaptchaEnterpriseServiceClient.listRelatedAccountGroups`.
     func listRelatedAccountGroups(
-      byItem: ListRelatedAccountGroupsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListRelatedAccountGroupsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<RelatedAccountGroup, Swift.Error>
 
     /// See `RecaptchaEnterpriseServiceClient.listRelatedAccountGroupMemberships`.
     func listRelatedAccountGroupMemberships(
-      request: ListRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupMembershipsResponse
 
     /// See `RecaptchaEnterpriseServiceClient.listRelatedAccountGroupMemberships`.
     func listRelatedAccountGroupMemberships(
-      byItem: ListRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<RelatedAccountGroupMembership, Swift.Error>
 
     /// See `RecaptchaEnterpriseServiceClient.searchRelatedAccountGroupMemberships`.
     func searchRelatedAccountGroupMemberships(
-      request: SearchRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.SearchRelatedAccountGroupMembershipsResponse
 
     /// See `RecaptchaEnterpriseServiceClient.searchRelatedAccountGroupMemberships`.
     func searchRelatedAccountGroupMemberships(
-      byItem: SearchRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<RelatedAccountGroupMembership, Swift.Error>
   }
 }
@@ -784,9 +784,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func createAssessment(
-    request: CreateAssessmentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAssessmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Assessment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createAssessment(
@@ -807,9 +807,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func annotateAssessment(
-    request: AnnotateAssessmentRequest, options: GoogleCloudGax.RequestOptions
+    request: AnnotateAssessmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.AnnotateAssessmentResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func annotateAssessment(
@@ -830,9 +830,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func createKey(
-    request: CreateKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createKey(
@@ -853,9 +853,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func listKeys(
-    request: ListKeysRequest, options: GoogleCloudGax.RequestOptions
+    request: ListKeysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListKeysResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listKeys(
@@ -865,13 +865,13 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func listKeys(
-    byItem: ListKeysRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListKeysRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Key, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListKeysResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listKeys(
@@ -890,9 +890,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func retrieveLegacySecretKey(
-    request: RetrieveLegacySecretKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: RetrieveLegacySecretKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.RetrieveLegacySecretKeyResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func retrieveLegacySecretKey(
@@ -909,9 +909,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func getKey(
-    request: GetKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getKey(
@@ -930,14 +930,14 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func updateKey(
-    request: UpdateKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateKey(
     key: Key?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key {
     let request = UpdateKeyRequest().with {
       $0.key = key
@@ -951,9 +951,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func deleteKey(
-    request: DeleteKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteKeyRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteKey(
@@ -972,9 +972,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func migrateKey(
-    request: MigrateKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: MigrateKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func addIpOverride(request: AddIpOverrideRequest) async throws
@@ -984,9 +984,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func addIpOverride(
-    request: AddIpOverrideRequest, options: GoogleCloudGax.RequestOptions
+    request: AddIpOverrideRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.AddIpOverrideResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func addIpOverride(
@@ -1007,9 +1007,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func removeIpOverride(
-    request: RemoveIpOverrideRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveIpOverrideRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.RemoveIpOverrideResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func removeIpOverride(
@@ -1030,9 +1030,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func listIpOverrides(
-    request: ListIpOverridesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListIpOverridesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListIpOverridesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listIpOverrides(
@@ -1042,14 +1042,14 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func listIpOverrides(
-    byItem: ListIpOverridesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListIpOverridesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<IpOverrideData, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListIpOverridesResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listIpOverrides(
@@ -1068,9 +1068,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func getMetrics(
-    request: GetMetricsRequest, options: GoogleCloudGax.RequestOptions
+    request: GetMetricsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Metrics {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getMetrics(
@@ -1089,9 +1089,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func getPolicy(
-    request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPolicy(
@@ -1110,14 +1110,14 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func updatePolicy(
-    request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updatePolicy(
     policy: Policy?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Policy {
     let request = UpdatePolicyRequest().with {
       $0.policy = policy
@@ -1133,9 +1133,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func createFirewallPolicy(
-    request: CreateFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateFirewallPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createFirewallPolicy(
@@ -1156,9 +1156,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func listFirewallPolicies(
-    request: ListFirewallPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListFirewallPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListFirewallPoliciesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listFirewallPolicies(
@@ -1168,14 +1168,14 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func listFirewallPolicies(
-    byItem: ListFirewallPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListFirewallPoliciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<FirewallPolicy, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudRecaptchaEnterpriseV1.ListFirewallPoliciesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listFirewallPolicies(
@@ -1194,9 +1194,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func getFirewallPolicy(
-    request: GetFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetFirewallPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getFirewallPolicy(
@@ -1215,14 +1215,14 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func updateFirewallPolicy(
-    request: UpdateFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateFirewallPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateFirewallPolicy(
     firewallPolicy: FirewallPolicy?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy {
     let request = UpdateFirewallPolicyRequest().with {
       $0.firewallPolicy = firewallPolicy
@@ -1236,9 +1236,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func deleteFirewallPolicy(
-    request: DeleteFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteFirewallPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteFirewallPolicy(
@@ -1257,9 +1257,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func reorderFirewallPolicies(
-    request: ReorderFirewallPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ReorderFirewallPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ReorderFirewallPoliciesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func reorderFirewallPolicies(
@@ -1280,9 +1280,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func listRelatedAccountGroups(
-    request: ListRelatedAccountGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRelatedAccountGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listRelatedAccountGroups(
@@ -1292,14 +1292,14 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func listRelatedAccountGroups(
-    byItem: ListRelatedAccountGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRelatedAccountGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RelatedAccountGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listRelatedAccountGroups(
@@ -1318,9 +1318,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func listRelatedAccountGroupMemberships(
-    request: ListRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupMembershipsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listRelatedAccountGroupMemberships(
@@ -1330,14 +1330,14 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func listRelatedAccountGroupMemberships(
-    byItem: ListRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RelatedAccountGroupMembership, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupMembershipsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listRelatedAccountGroupMemberships(
@@ -1356,9 +1356,9 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func searchRelatedAccountGroupMemberships(
-    request: SearchRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRecaptchaEnterpriseV1.SearchRelatedAccountGroupMembershipsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func searchRelatedAccountGroupMemberships(
@@ -1368,14 +1368,14 @@ extension Clients.RecaptchaEnterpriseServiceProtocol {
   }
 
   public func searchRelatedAccountGroupMemberships(
-    byItem: SearchRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: SearchRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RelatedAccountGroupMembership, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudRecaptchaEnterpriseV1.SearchRelatedAccountGroupMembershipsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func searchRelatedAccountGroupMemberships(

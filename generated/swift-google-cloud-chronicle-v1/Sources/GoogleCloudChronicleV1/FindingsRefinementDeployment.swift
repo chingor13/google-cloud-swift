@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The FindingsRefinementDeployment resource represents the deployment state of
 /// a findings refinement.
-public struct FindingsRefinementDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FindingsRefinementDeployment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the findings refinement deployment.
@@ -38,13 +38,13 @@ public struct FindingsRefinementDeployment: Codable, Equatable, GoogleCloudWKT._
 
   /// Output only. The timestamp when the findings refinement deployment was last
   /// updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// The resources which the findings refinement is applied to. Corresponds to
   /// the type of the findings refinement.
   public var findingsRefinementApplication: OneOf_FindingsRefinementApplication? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FindingsRefinementDeployment`.
   public init() {}
@@ -95,8 +95,7 @@ public struct FindingsRefinementDeployment: Codable, Equatable, GoogleCloudWKT._
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .archived) {
       self.archived = value
     }
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
 
     var findingsRefinementApplication: OneOf_FindingsRefinementApplication? = nil
     let findingsRefinementApplicationCheckAndSet = {
@@ -117,7 +116,7 @@ public struct FindingsRefinementDeployment: Codable, Equatable, GoogleCloudWKT._
     self.findingsRefinementApplication = findingsRefinementApplication
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -149,10 +148,10 @@ public struct FindingsRefinementDeployment: Codable, Equatable, GoogleCloudWKT._
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.chronicle.v1.FindingsRefinementDeployment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

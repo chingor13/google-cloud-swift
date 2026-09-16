@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A resizable group of nodes in a particular cloud location, capable
 /// of serving all [Tables][google.bigtable.admin.v2.Table] in the parent
@@ -23,7 +23,7 @@ import Foundation
 ///
 /// [google.bigtable.admin.v2.Instance]: <doc:Instance>
 /// [google.bigtable.admin.v2.Table]: <doc:Table>
-public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The unique name of the cluster. Values are of the form
@@ -56,7 +56,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public var config: OneOf_Config? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Cluster`.
   public init() {}
@@ -144,7 +144,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.config = config
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -170,7 +170,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Autoscaling config for a cluster.
-  public struct ClusterAutoscalingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ClusterAutoscalingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Autoscaling limits for this cluster.
@@ -179,7 +179,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Required. Autoscaling targets for this cluster.
     public var autoscalingTargets: AutoscalingTargets? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ClusterAutoscalingConfig`.
     public init() {}
@@ -220,7 +220,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         AutoscalingTargets.self, forKey: .autoscalingTargets)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -236,22 +236,22 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.Cluster.ClusterAutoscalingConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for a cluster.
-  public struct ClusterConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ClusterConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Autoscaling configuration for this cluster.
     public var clusterAutoscalingConfig: Cluster.ClusterAutoscalingConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ClusterConfig`.
     public init() {}
@@ -288,7 +288,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         Cluster.ClusterAutoscalingConfig.self, forKey: .clusterAutoscalingConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -304,17 +304,17 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.Cluster.ClusterConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Cloud Key Management Service (Cloud KMS) settings for a CMEK-protected
   /// cluster.
-  public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EncryptionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Describes the Cloud KMS encryption key that will be used to protect the
@@ -328,7 +328,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}`
     public var kmsKeyName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EncryptionConfig`.
     public init() {}
@@ -366,7 +366,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -381,11 +381,11 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.Cluster.EncryptionConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -631,10 +631,10 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.Cluster"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

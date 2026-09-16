@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// RuleExecutionErrorService contains endpoints related to rule execution
 /// errors.
@@ -32,7 +32,7 @@ public final class RuleExecutionErrorServiceClient: Clients.RuleExecutionErrorSe
   let inner: any Clients.RuleExecutionErrorServiceStub
 
   /// Creates a new `RuleExecutionErrorServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.RuleExecutionErrorServiceStub =
       try Clients.RuleExecutionErrorServiceTransport(options)
     inner = Clients.RuleExecutionErrorServiceRetry(inner, options: options)
@@ -46,7 +46,7 @@ public final class RuleExecutionErrorServiceClient: Clients.RuleExecutionErrorSe
   ///
   /// @Snippet(path: "RuleExecutionErrorService_ListRuleExecutionErrors")
   public func listRuleExecutionErrors(
-    request: ListRuleExecutionErrorsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRuleExecutionErrorsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ListRuleExecutionErrorsResponse {
     try await self.inner.listRuleExecutionErrors(request: request, options: options)
   }
@@ -55,7 +55,7 @@ public final class RuleExecutionErrorServiceClient: Clients.RuleExecutionErrorSe
   ///
   /// @Snippet(path: "RuleExecutionErrorService_ListRuleExecutionErrors")
   public func listRuleExecutionErrors(
-    byItem: ListRuleExecutionErrorsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRuleExecutionErrorsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RuleExecutionError, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChronicleV1.ListRuleExecutionErrorsResponse
@@ -64,7 +64,7 @@ public final class RuleExecutionErrorServiceClient: Clients.RuleExecutionErrorSe
       request.pageToken = token
       return try await self.listRuleExecutionErrors(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -73,7 +73,7 @@ public final class RuleExecutionErrorServiceClient: Clients.RuleExecutionErrorSe
   ///
   /// @Snippet(path: "RuleExecutionErrorService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -84,7 +84,7 @@ public final class RuleExecutionErrorServiceClient: Clients.RuleExecutionErrorSe
   ///
   /// @Snippet(path: "RuleExecutionErrorService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -92,7 +92,7 @@ public final class RuleExecutionErrorServiceClient: Clients.RuleExecutionErrorSe
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -101,7 +101,7 @@ public final class RuleExecutionErrorServiceClient: Clients.RuleExecutionErrorSe
   ///
   /// @Snippet(path: "RuleExecutionErrorService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -112,7 +112,7 @@ public final class RuleExecutionErrorServiceClient: Clients.RuleExecutionErrorSe
   ///
   /// @Snippet(path: "RuleExecutionErrorService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -123,7 +123,7 @@ public final class RuleExecutionErrorServiceClient: Clients.RuleExecutionErrorSe
   ///
   /// @Snippet(path: "RuleExecutionErrorService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -183,32 +183,32 @@ extension Clients {
 
     /// See `RuleExecutionErrorServiceClient.listRuleExecutionErrors`.
     func listRuleExecutionErrors(
-      request: ListRuleExecutionErrorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRuleExecutionErrorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListRuleExecutionErrorsResponse
 
     /// See `RuleExecutionErrorServiceClient.listRuleExecutionErrors`.
     func listRuleExecutionErrors(
-      byItem: ListRuleExecutionErrorsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListRuleExecutionErrorsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<RuleExecutionError, Swift.Error>
 
     /// See `RuleExecutionErrorServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `RuleExecutionErrorServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `RuleExecutionErrorServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `RuleExecutionErrorServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -222,9 +222,9 @@ extension Clients.RuleExecutionErrorServiceProtocol {
   }
 
   public func listRuleExecutionErrors(
-    request: ListRuleExecutionErrorsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRuleExecutionErrorsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ListRuleExecutionErrorsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listRuleExecutionErrors(
@@ -234,14 +234,14 @@ extension Clients.RuleExecutionErrorServiceProtocol {
   }
 
   public func listRuleExecutionErrors(
-    byItem: ListRuleExecutionErrorsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRuleExecutionErrorsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RuleExecutionError, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChronicleV1.ListRuleExecutionErrorsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listRuleExecutionErrors(
@@ -260,9 +260,9 @@ extension Clients.RuleExecutionErrorServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -272,13 +272,13 @@ extension Clients.RuleExecutionErrorServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -299,9 +299,9 @@ extension Clients.RuleExecutionErrorServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -318,9 +318,9 @@ extension Clients.RuleExecutionErrorServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -337,9 +337,9 @@ extension Clients.RuleExecutionErrorServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

@@ -16,8 +16,8 @@
 
 #if Documents
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleRpc
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A knowledge document to be used by a
   /// [KnowledgeBase][google.cloud.dialogflow.v2.KnowledgeBase].
@@ -29,7 +29,7 @@
   /// only use `projects.knowledgeBases.documents`.
   ///
   /// [google.cloud.dialogflow.v2.KnowledgeBase]: <doc:KnowledgeBase>
-  public struct Document: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The document resource name.
@@ -83,7 +83,7 @@
     /// Required. The source of this document.
     public var source: OneOf_Source? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Document`.
     public init() {}
@@ -181,7 +181,7 @@
       self.source = source
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -210,18 +210,18 @@
     }
 
     /// The status of a reload attempt.
-    public struct ReloadStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ReloadStatus: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The time of a reload attempt.
       /// This reload may have been triggered automatically or manually and may
       /// not have succeeded.
-      public var time: GoogleCloudWKT.Timestamp? = nil
+      public var time: GoogleWKT.Timestamp? = nil
 
       /// The status of a reload attempt or the initial load.
       public var status: GoogleRpc.Status? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ReloadStatus`.
       public init() {}
@@ -256,11 +256,11 @@
 
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.time = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .time)
+        self.time = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .time)
         self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -276,11 +276,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Document.ReloadStatus"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -557,11 +557,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Document"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

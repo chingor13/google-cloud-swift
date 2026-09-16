@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A manual approval workflow where users who are designated as approvers
 /// need to call the `ApproveGrant`/`DenyGrant` APIs for a grant. The workflow
@@ -32,7 +32,7 @@ import Foundation
 /// A single user might be part of the `approvers` ACL for multiple steps in this
 /// workflow, but they can only approve once and that approval is only considered
 /// to satisfy the approval step at which it was granted.
-public struct ManualApprovals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ManualApprovals: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Do the approvers need to provide a justification for their
@@ -43,7 +43,7 @@ public struct ManualApprovals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// in the specified order sequentially. Only 1 step is supported.
   public var steps: [ManualApprovals.Step] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ManualApprovals`.
   public init() {}
@@ -89,7 +89,7 @@ public struct ManualApprovals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,7 +103,7 @@ public struct ManualApprovals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Step represents a logical step in a manual approval workflow.
-  public struct Step: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Step: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The potential set of approvers in this step. This list must
@@ -119,7 +119,7 @@ public struct ManualApprovals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// pending approval.
     public var approverEmailRecipients: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Step`.
     public init() {}
@@ -169,7 +169,7 @@ public struct ManualApprovals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -186,21 +186,21 @@ public struct ManualApprovals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.privilegedaccessmanager.v1.ManualApprovals.Step"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.privilegedaccessmanager.v1.ManualApprovals"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

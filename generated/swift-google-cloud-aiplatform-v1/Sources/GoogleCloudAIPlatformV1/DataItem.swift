@@ -16,21 +16,21 @@
 
 #if DatasetService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A piece of data in a Dataset. Could be an image, a video, a document or plain
   /// text.
-  public struct DataItem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DataItem: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The resource name of the DataItem.
     public var name: Swift.String = Swift.String()
 
     /// Output only. Timestamp when this DataItem was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when this DataItem was last updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. The labels with user-defined metadata to organize your DataItems.
     ///
@@ -51,7 +51,7 @@
     /// dataItemSchemaUri field.
     ///
     /// [google.cloud.aiplatform.v1.Dataset.metadata_schema_uri]: <doc:Dataset/metadataSchemaUri>
-    public var payload: GoogleCloudWKT.Value? = nil
+    public var payload: GoogleWKT.Value? = nil
 
     /// Optional. Used to perform consistent read-modify-write updates. If not set,
     /// a blind "overwrite" update happens.
@@ -63,7 +63,7 @@
     /// Output only. Reserved for future use.
     public var satisfiesPzi: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DataItem`.
     public init() {}
@@ -113,16 +113,14 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
         self.name = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(
         [Swift.String: Swift.String].self, forKey: .labels)
       {
         self.labels = value
       }
-      self.payload = try container.decodeIfPresent(GoogleCloudWKT.Value.self, forKey: .payload)
+      self.payload = try container.decodeIfPresent(GoogleWKT.Value.self, forKey: .payload)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
         self.etag = value
       }
@@ -134,7 +132,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -156,11 +154,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.DataItem"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

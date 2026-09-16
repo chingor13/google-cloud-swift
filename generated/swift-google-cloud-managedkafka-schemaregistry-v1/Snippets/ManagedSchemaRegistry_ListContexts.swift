@@ -20,8 +20,8 @@ import Foundation
 import GoogleCloudManagedKafkaSchemaRegistryV1
 import GoogleApi
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: ManagedSchemaRegistryClient) async throws {
   let response = try await client.listContexts(

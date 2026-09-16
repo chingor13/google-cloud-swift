@@ -16,10 +16,10 @@
 
 #if PublicAdvertisedPrefixes
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a CIDR range which can be used to assign addresses.
-  public struct PublicAdvertisedPrefixPublicDelegatedPrefix: Codable, Equatable, GoogleCloudWKT
+  public struct PublicAdvertisedPrefixPublicDelegatedPrefix: Codable, Equatable, GoogleWKT
       ._AnyPackable,
     Sendable
   {
@@ -42,7 +42,7 @@
     ///   ANNOUNCED: The public delegated prefix is active.
     public var status: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PublicAdvertisedPrefixPublicDelegatedPrefix`.
     public init() {}
@@ -90,7 +90,7 @@
       self.status = try container.decodeIfPresent(Swift.String.self, forKey: .status)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -110,11 +110,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.PublicAdvertisedPrefixPublicDelegatedPrefix"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

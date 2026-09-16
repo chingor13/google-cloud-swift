@@ -16,66 +16,65 @@
 
 #if Networks
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol NetworksStub: Sendable {
       func addPeering(
-        request: NetworksClient.AddPeeringRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.AddPeeringRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func cancelRequestRemovePeering(
-        request: NetworksClient.CancelRequestRemovePeeringRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.CancelRequestRemovePeeringRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: NetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: NetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Network
 
       func getEffectiveFirewalls(
-        request: NetworksClient.GetEffectiveFirewallsRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.GetEffectiveFirewallsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworksGetEffectiveFirewallsResponse
 
       func insert(
-        request: NetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: NetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkList
 
       func listPeeringRoutes(
-        request: NetworksClient.ListPeeringRoutesRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.ListPeeringRoutesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ExchangedPeeringRoutesList
 
       func patch(
-        request: NetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func removePeering(
-        request: NetworksClient.RemovePeeringRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.RemovePeeringRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func requestRemovePeering(
-        request: NetworksClient.RequestRemovePeeringRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.RequestRemovePeeringRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func switchToCustomMode(
-        request: NetworksClient.SwitchToCustomModeRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.SwitchToCustomModeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func updatePeering(
-        request: NetworksClient.UpdatePeeringRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworksClient.UpdatePeeringRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,29 +58,29 @@
       }
 
       public func aggregatedList(
-        request: MachineTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineTypeAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           name: "aggregatedList",
           action: {
-            (r: MachineTypesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.MachineTypeAggregatedList
+            (r: MachineTypesClient.AggregatedListRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.MachineTypeAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: MachineTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineType {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: MachineTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: MachineTypesClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.MachineType
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -88,14 +88,14 @@
       }
 
       public func list(
-        request: MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineTypeList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: MachineTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: MachineTypesClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.MachineTypeList
             in
             return try await self.inner.list(request: r, options: o)

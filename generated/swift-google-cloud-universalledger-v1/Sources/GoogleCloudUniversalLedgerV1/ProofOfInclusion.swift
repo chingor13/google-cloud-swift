@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Certificate of the inclusion of the effects of a transaction in the world
 /// state.
-public struct ProofOfInclusion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ProofOfInclusion: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Certificate of the inclusion of the transaction effects in a
@@ -56,7 +56,7 @@ public struct ProofOfInclusion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// the leaf was included in the round's Merkle tree.
   public var pathToRoundRoot: [ProofOfInclusion.MerkleTreeNode] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ProofOfInclusion`.
   public init() {}
@@ -104,7 +104,7 @@ public struct ProofOfInclusion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -119,7 +119,7 @@ public struct ProofOfInclusion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Represents a node in a Merkle tree path.
-  public struct MerkleTreeNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MerkleTreeNode: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The hexadecimal representation of the digest of the left
@@ -148,7 +148,7 @@ public struct ProofOfInclusion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// child of a node. Format: A 64-character hexadecimal string.
     public var rightChildDigestHex: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MerkleTreeNode`.
     public init() {}
@@ -202,7 +202,7 @@ public struct ProofOfInclusion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -220,21 +220,21 @@ public struct ProofOfInclusion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.universalledger.v1.ProofOfInclusion.MerkleTreeNode"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.universalledger.v1.ProofOfInclusion"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

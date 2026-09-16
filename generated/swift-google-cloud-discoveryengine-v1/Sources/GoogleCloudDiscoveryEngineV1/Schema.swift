@@ -16,10 +16,10 @@
 
 #if DataStoreService || SchemaService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Defines the structure and layout of a type of document data.
-  public struct Schema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Schema: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. The full resource name of the schema, in the format of
@@ -38,7 +38,7 @@
     /// [google.cloud.discoveryengine.v1.Schema.struct_schema]: <doc:Schema/OneOf_Schema/structSchema(_:)>
     public var schema: OneOf_Schema? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Schema`.
     public init() {}
@@ -90,7 +90,7 @@
         schema = $0
       }
       if let structSchema = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct?.self, forKey: .structSchema)
+        GoogleWKT.Struct?.self, forKey: .structSchema)
       {
         try schemaCheckAndSet(.structSchema(structSchema))
       }
@@ -100,7 +100,7 @@
       self.schema = schema
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -130,7 +130,7 @@
     /// [google.cloud.discoveryengine.v1.Schema.struct_schema]: <doc:Schema/OneOf_Schema/structSchema(_:)>
     public enum OneOf_Schema: Codable, Equatable, Sendable {
       /// The structured representation of the schema.
-      indirect case structSchema(GoogleCloudWKT.Struct?)
+      indirect case structSchema(GoogleWKT.Struct?)
       /// The JSON representation of the schema.
       case jsonSchema(Swift.String)
     }
@@ -138,11 +138,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.Schema"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

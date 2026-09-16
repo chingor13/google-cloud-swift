@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request for UpdateGenerativeQuestionsFeatureConfig method.
-public struct UpdateGenerativeQuestionsFeatureConfigRequest: Codable, Equatable, GoogleCloudWKT
+public struct UpdateGenerativeQuestionsFeatureConfigRequest: Codable, Equatable, GoogleWKT
     ._AnyPackable,
   Sendable
 {
@@ -30,9 +30,9 @@ public struct UpdateGenerativeQuestionsFeatureConfigRequest: Codable, Equatable,
   /// to update. If not set or empty, all supported fields are updated.
   ///
   /// [google.cloud.retail.v2.GenerativeQuestionsFeatureConfig]: <doc:GenerativeQuestionsFeatureConfig>
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateGenerativeQuestionsFeatureConfigRequest`.
   public init() {}
@@ -70,11 +70,10 @@ public struct UpdateGenerativeQuestionsFeatureConfigRequest: Codable, Equatable,
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.generativeQuestionsFeatureConfig = try container.decodeIfPresent(
       GenerativeQuestionsFeatureConfig.self, forKey: .generativeQuestionsFeatureConfig)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -92,10 +91,10 @@ public struct UpdateGenerativeQuestionsFeatureConfigRequest: Codable, Equatable,
     return
       "type.googleapis.com/google.cloud.retail.v2.UpdateGenerativeQuestionsFeatureConfigRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

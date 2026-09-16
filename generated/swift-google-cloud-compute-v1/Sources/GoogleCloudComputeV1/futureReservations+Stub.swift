@@ -16,42 +16,41 @@
 
 #if FutureReservations
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol FutureReservationsStub: Sendable {
       func aggregatedList(
-        request: FutureReservationsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FutureReservationsAggregatedListResponse
 
       func cancel(
-        request: FutureReservationsClient.CancelRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.CancelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: FutureReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: FutureReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FutureReservation
 
       func insert(
-        request: FutureReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: FutureReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FutureReservationsListResponse
 
       func update(
-        request: FutureReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

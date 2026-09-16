@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleIAMAdminV1
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(client: IAMClient) async throws {
   let response = try await client.testIamPermissions(

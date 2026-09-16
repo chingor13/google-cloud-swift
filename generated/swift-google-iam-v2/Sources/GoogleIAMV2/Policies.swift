@@ -18,21 +18,21 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// An interface for managing Identity and Access Management (IAM) policies.
 ///
 /// @Snippet(path: "PoliciesQuickstart")
 public final class PoliciesClient: Clients.PoliciesProtocol, Sendable {
   let inner: any Clients.PoliciesStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `PoliciesClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.PoliciesStub = try Clients.PoliciesTransport(options)
     inner = Clients.PoliciesRetry(inner, options: options)
     if let logger = options.logger {
@@ -51,7 +51,7 @@ public final class PoliciesClient: Clients.PoliciesProtocol, Sendable {
   ///
   /// @Snippet(path: "Policies_ListPolicies")
   public func listPolicies(
-    request: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV2.ListPoliciesResponse {
     try await self.inner.listPolicies(request: request, options: options)
   }
@@ -64,21 +64,21 @@ public final class PoliciesClient: Clients.PoliciesProtocol, Sendable {
   ///
   /// @Snippet(path: "Policies_ListPolicies")
   public func listPolicies(
-    byItem: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPoliciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Policy, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleIAMV2.ListPoliciesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listPolicies(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a policy.
   ///
   /// @Snippet(path: "Policies_GetPolicy")
   public func getPolicy(
-    request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV2.Policy {
     try await self.inner.getPolicy(request: request, options: options)
   }
@@ -87,7 +87,7 @@ public final class PoliciesClient: Clients.PoliciesProtocol, Sendable {
   ///
   /// @Snippet(path: "Policies_CreatePolicy")
   public func createPolicy(
-    request: CreatePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createPolicy(request: request, options: options)
   }
@@ -96,21 +96,20 @@ public final class PoliciesClient: Clients.PoliciesProtocol, Sendable {
   ///
   /// @Snippet(path: "Policies_CreatePolicy")
   public func createPolicy(
-    withPolling: CreatePolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Policy> {
+    withPolling: CreatePolicyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Policy> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Policy>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Policy>.State in
       return try op._extractStatus(Policy.self)
     }
     let rawOp = try await self.createPolicy(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Policy>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Policy>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -134,7 +133,7 @@ public final class PoliciesClient: Clients.PoliciesProtocol, Sendable {
   ///
   /// @Snippet(path: "Policies_UpdatePolicy")
   public func updatePolicy(
-    request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updatePolicy(request: request, options: options)
   }
@@ -155,21 +154,20 @@ public final class PoliciesClient: Clients.PoliciesProtocol, Sendable {
   ///
   /// @Snippet(path: "Policies_UpdatePolicy")
   public func updatePolicy(
-    withPolling: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Policy> {
+    withPolling: UpdatePolicyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Policy> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Policy>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Policy>.State in
       return try op._extractStatus(Policy.self)
     }
     let rawOp = try await self.updatePolicy(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Policy>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Policy>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -181,7 +179,7 @@ public final class PoliciesClient: Clients.PoliciesProtocol, Sendable {
   ///
   /// @Snippet(path: "Policies_DeletePolicy")
   public func deletePolicy(
-    request: DeletePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deletePolicy(request: request, options: options)
   }
@@ -190,21 +188,20 @@ public final class PoliciesClient: Clients.PoliciesProtocol, Sendable {
   ///
   /// @Snippet(path: "Policies_DeletePolicy")
   public func deletePolicy(
-    withPolling: DeletePolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Policy> {
+    withPolling: DeletePolicyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Policy> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Policy>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Policy>.State in
       return try op._extractStatus(Policy.self)
     }
     let rawOp = try await self.deletePolicy(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Policy>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Policy>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -218,7 +215,7 @@ public final class PoliciesClient: Clients.PoliciesProtocol, Sendable {
   ///
   /// @Snippet(path: "Policies_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -256,7 +253,7 @@ extension Clients {
     func createPolicy(request: CreatePolicyRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `PoliciesClient.createPolicy`.
-    func createPolicy(withPolling: CreatePolicyRequest) async throws -> any GoogleCloudGax
+    func createPolicy(withPolling: CreatePolicyRequest) async throws -> any GoogleGax
       .PollableOperation<Policy>
 
     /// See `PoliciesClient.createPolicy`.
@@ -264,71 +261,71 @@ extension Clients {
       parent: Swift.String,
       policy: Policy?,
       policyId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Policy>
+    ) async throws -> any GoogleGax.PollableOperation<Policy>
 
     /// See `PoliciesClient.updatePolicy`.
     func updatePolicy(request: UpdatePolicyRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `PoliciesClient.updatePolicy`.
-    func updatePolicy(withPolling: UpdatePolicyRequest) async throws -> any GoogleCloudGax
+    func updatePolicy(withPolling: UpdatePolicyRequest) async throws -> any GoogleGax
       .PollableOperation<Policy>
 
     /// See `PoliciesClient.deletePolicy`.
     func deletePolicy(request: DeletePolicyRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `PoliciesClient.deletePolicy`.
-    func deletePolicy(withPolling: DeletePolicyRequest) async throws -> any GoogleCloudGax
+    func deletePolicy(withPolling: DeletePolicyRequest) async throws -> any GoogleGax
       .PollableOperation<Policy>
 
     /// See `PoliciesClient.deletePolicy`.
     func deletePolicy(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Policy>
+    ) async throws -> any GoogleGax.PollableOperation<Policy>
 
     /// See `PoliciesClient.listPolicies`.
     func listPolicies(
-      request: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV2.ListPoliciesResponse
 
     /// See `PoliciesClient.listPolicies`.
     func listPolicies(
-      byItem: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPoliciesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Policy, Swift.Error>
 
     /// See `PoliciesClient.getPolicy`.
     func getPolicy(
-      request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV2.Policy
 
     /// See `PoliciesClient.createPolicy`.
     func createPolicy(
-      request: CreatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `PoliciesClient.createPolicy`.
     func createPolicy(
-      withPolling: CreatePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Policy>
+      withPolling: CreatePolicyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Policy>
 
     /// See `PoliciesClient.updatePolicy`.
     func updatePolicy(
-      request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `PoliciesClient.updatePolicy`.
     func updatePolicy(
-      withPolling: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Policy>
+      withPolling: UpdatePolicyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Policy>
 
     /// See `PoliciesClient.deletePolicy`.
     func deletePolicy(
-      request: DeletePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `PoliciesClient.deletePolicy`.
     func deletePolicy(
-      withPolling: DeletePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Policy>
+      withPolling: DeletePolicyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Policy>
   }
 }
 
@@ -341,9 +338,9 @@ extension Clients.PoliciesProtocol {
   }
 
   public func listPolicies(
-    request: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV2.ListPoliciesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPolicies(
@@ -353,12 +350,12 @@ extension Clients.PoliciesProtocol {
   }
 
   public func listPolicies(
-    byItem: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPoliciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Policy, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleIAMV2.ListPoliciesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPolicies(
@@ -375,9 +372,9 @@ extension Clients.PoliciesProtocol {
   }
 
   public func getPolicy(
-    request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV2.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPolicy(
@@ -395,24 +392,24 @@ extension Clients.PoliciesProtocol {
   }
 
   public func createPolicy(
-    request: CreatePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createPolicy(withPolling: CreatePolicyRequest) async throws -> any GoogleCloudGax
+  public func createPolicy(withPolling: CreatePolicyRequest) async throws -> any GoogleGax
     .PollableOperation<Policy>
   {
     try await self.createPolicy(withPolling: withPolling, options: .init())
   }
 
   public func createPolicy(
-    withPolling: CreatePolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Policy> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Policy>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreatePolicyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Policy> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Policy>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -420,7 +417,7 @@ extension Clients.PoliciesProtocol {
     parent: Swift.String,
     policy: Policy?,
     policyId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Policy> {
+  ) async throws -> any GoogleGax.PollableOperation<Policy> {
     let request = CreatePolicyRequest().with {
       $0.parent = parent
       $0.policy = policy
@@ -435,24 +432,24 @@ extension Clients.PoliciesProtocol {
   }
 
   public func updatePolicy(
-    request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updatePolicy(withPolling: UpdatePolicyRequest) async throws -> any GoogleCloudGax
+  public func updatePolicy(withPolling: UpdatePolicyRequest) async throws -> any GoogleGax
     .PollableOperation<Policy>
   {
     try await self.updatePolicy(withPolling: withPolling, options: .init())
   }
 
   public func updatePolicy(
-    withPolling: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Policy> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Policy>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdatePolicyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Policy> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Policy>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -462,30 +459,30 @@ extension Clients.PoliciesProtocol {
   }
 
   public func deletePolicy(
-    request: DeletePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deletePolicy(withPolling: DeletePolicyRequest) async throws -> any GoogleCloudGax
+  public func deletePolicy(withPolling: DeletePolicyRequest) async throws -> any GoogleGax
     .PollableOperation<Policy>
   {
     try await self.deletePolicy(withPolling: withPolling, options: .init())
   }
 
   public func deletePolicy(
-    withPolling: DeletePolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Policy> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Policy>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeletePolicyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Policy> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Policy>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deletePolicy(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Policy> {
+  ) async throws -> any GoogleGax.PollableOperation<Policy> {
     let request = DeletePolicyRequest().with {
       $0.name = name
     }
@@ -499,9 +496,9 @@ extension Clients.PoliciesProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

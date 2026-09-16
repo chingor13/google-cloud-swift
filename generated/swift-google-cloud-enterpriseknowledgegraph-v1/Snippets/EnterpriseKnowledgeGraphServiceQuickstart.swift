@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudEnterpriseKnowledgeGraphV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudEnterpriseKnowledgeGraphV1.EnterpriseKnowledgeGraphServiceClient()

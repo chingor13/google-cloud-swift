@@ -16,12 +16,12 @@
 
 #if Networks
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A network peering attached to a network resource. The message includes the
   /// peering name, peer network, peering state, and a flag indicating whether
   /// Google Compute Engine should automatically create routes for the peering.
-  public struct NetworkPeering: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NetworkPeering: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// This field will be deprecated soon. Use theexchange_subnet_routes field instead.
@@ -93,7 +93,7 @@
     /// peering connection configuration.
     public var updateStrategy: NetworkPeering.UpdateStrategy? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NetworkPeering`.
     public init() {}
@@ -179,7 +179,7 @@
         NetworkPeering.UpdateStrategy.self, forKey: .updateStrategy)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -529,11 +529,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.NetworkPeering"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

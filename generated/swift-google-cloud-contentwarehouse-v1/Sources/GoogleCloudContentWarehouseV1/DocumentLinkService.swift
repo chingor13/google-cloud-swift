@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// This service lets you manage document-links.
 /// Document-Links are treated as sub-resources under source documents.
@@ -30,7 +30,7 @@ public final class DocumentLinkServiceClient: Clients.DocumentLinkServiceProtoco
   let inner: any Clients.DocumentLinkServiceStub
 
   /// Creates a new `DocumentLinkServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DocumentLinkServiceStub = try Clients.DocumentLinkServiceTransport(
       options)
     inner = Clients.DocumentLinkServiceRetry(inner, options: options)
@@ -44,7 +44,7 @@ public final class DocumentLinkServiceClient: Clients.DocumentLinkServiceProtoco
   ///
   /// @Snippet(path: "DocumentLinkService_ListLinkedTargets")
   public func listLinkedTargets(
-    request: ListLinkedTargetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLinkedTargetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.ListLinkedTargetsResponse {
     try await self.inner.listLinkedTargets(request: request, options: options)
   }
@@ -53,7 +53,7 @@ public final class DocumentLinkServiceClient: Clients.DocumentLinkServiceProtoco
   ///
   /// @Snippet(path: "DocumentLinkService_ListLinkedSources")
   public func listLinkedSources(
-    request: ListLinkedSourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLinkedSourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.ListLinkedSourcesResponse {
     try await self.inner.listLinkedSources(request: request, options: options)
   }
@@ -62,7 +62,7 @@ public final class DocumentLinkServiceClient: Clients.DocumentLinkServiceProtoco
   ///
   /// @Snippet(path: "DocumentLinkService_ListLinkedSources")
   public func listLinkedSources(
-    byItem: ListLinkedSourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLinkedSourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DocumentLink, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudContentWarehouseV1.ListLinkedSourcesResponse
@@ -71,14 +71,14 @@ public final class DocumentLinkServiceClient: Clients.DocumentLinkServiceProtoco
       request.pageToken = token
       return try await self.listLinkedSources(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Create a link between a source document and a target document.
   ///
   /// @Snippet(path: "DocumentLinkService_CreateDocumentLink")
   public func createDocumentLink(
-    request: CreateDocumentLinkRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDocumentLinkRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.DocumentLink {
     try await self.inner.createDocumentLink(request: request, options: options)
   }
@@ -87,7 +87,7 @@ public final class DocumentLinkServiceClient: Clients.DocumentLinkServiceProtoco
   ///
   /// @Snippet(path: "DocumentLinkService_DeleteDocumentLink")
   public func deleteDocumentLink(
-    request: DeleteDocumentLinkRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDocumentLinkRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteDocumentLink(request: request, options: options)
   }
@@ -98,7 +98,7 @@ public final class DocumentLinkServiceClient: Clients.DocumentLinkServiceProtoco
   ///
   /// @Snippet(path: "DocumentLinkService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -154,27 +154,27 @@ extension Clients {
 
     /// See `DocumentLinkServiceClient.listLinkedTargets`.
     func listLinkedTargets(
-      request: ListLinkedTargetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLinkedTargetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.ListLinkedTargetsResponse
 
     /// See `DocumentLinkServiceClient.listLinkedSources`.
     func listLinkedSources(
-      request: ListLinkedSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLinkedSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.ListLinkedSourcesResponse
 
     /// See `DocumentLinkServiceClient.listLinkedSources`.
     func listLinkedSources(
-      byItem: ListLinkedSourcesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListLinkedSourcesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DocumentLink, Swift.Error>
 
     /// See `DocumentLinkServiceClient.createDocumentLink`.
     func createDocumentLink(
-      request: CreateDocumentLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDocumentLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.DocumentLink
 
     /// See `DocumentLinkServiceClient.deleteDocumentLink`.
     func deleteDocumentLink(
-      request: DeleteDocumentLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDocumentLinkRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -188,9 +188,9 @@ extension Clients.DocumentLinkServiceProtocol {
   }
 
   public func listLinkedTargets(
-    request: ListLinkedTargetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLinkedTargetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.ListLinkedTargetsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLinkedTargets(
@@ -209,9 +209,9 @@ extension Clients.DocumentLinkServiceProtocol {
   }
 
   public func listLinkedSources(
-    request: ListLinkedSourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLinkedSourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.ListLinkedSourcesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLinkedSources(
@@ -221,14 +221,14 @@ extension Clients.DocumentLinkServiceProtocol {
   }
 
   public func listLinkedSources(
-    byItem: ListLinkedSourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLinkedSourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DocumentLink, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudContentWarehouseV1.ListLinkedSourcesResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listLinkedSources(
@@ -247,9 +247,9 @@ extension Clients.DocumentLinkServiceProtocol {
   }
 
   public func createDocumentLink(
-    request: CreateDocumentLinkRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDocumentLinkRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.DocumentLink {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDocumentLink(
@@ -268,9 +268,9 @@ extension Clients.DocumentLinkServiceProtocol {
   }
 
   public func deleteDocumentLink(
-    request: DeleteDocumentLinkRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDocumentLinkRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteDocumentLink(
@@ -289,9 +289,9 @@ extension Clients.DocumentLinkServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

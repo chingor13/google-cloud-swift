@@ -16,74 +16,73 @@
 
 #if NodeGroups
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol NodeGroupsStub: Sendable {
       func addNodes(
-        request: NodeGroupsClient.AddNodesRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.AddNodesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func aggregatedList(
-        request: NodeGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeGroupAggregatedList
 
       func delete(
-        request: NodeGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func deleteNodes(
-        request: NodeGroupsClient.DeleteNodesRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.DeleteNodesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: NodeGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeGroup
 
       func getIamPolicy(
-        request: NodeGroupsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: NodeGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: NodeGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeGroupList
 
       func listNodes(
-        request: NodeGroupsClient.ListNodesRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.ListNodesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeGroupsListNodes
 
       func patch(
-        request: NodeGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func performMaintenance(
-        request: NodeGroupsClient.PerformMaintenanceRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.PerformMaintenanceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: NodeGroupsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setNodeTemplate(
-        request: NodeGroupsClient.SetNodeTemplateRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.SetNodeTemplateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func simulateMaintenanceEvent(
-        request: NodeGroupsClient.SimulateMaintenanceEventRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.SimulateMaintenanceEventRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: NodeGroupsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeGroupsClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

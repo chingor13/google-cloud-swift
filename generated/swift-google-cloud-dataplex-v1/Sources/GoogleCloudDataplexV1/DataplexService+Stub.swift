@@ -16,156 +16,156 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DataplexServiceStub: Sendable {
     func createLake(
-      request: CreateLakeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLakeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateLake(
-      request: UpdateLakeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLakeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteLake(
-      request: DeleteLakeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLakeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLakes(
-      request: ListLakesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLakesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListLakesResponse
 
     func getLake(
-      request: GetLakeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLakeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Lake
 
     func listLakeActions(
-      request: ListLakeActionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLakeActionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListActionsResponse
 
     func createZone(
-      request: CreateZoneRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateZoneRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateZone(
-      request: UpdateZoneRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateZoneRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteZone(
-      request: DeleteZoneRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteZoneRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listZones(
-      request: ListZonesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListZonesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListZonesResponse
 
     func getZone(
-      request: GetZoneRequest, options: GoogleCloudGax.RequestOptions
+      request: GetZoneRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Zone
 
     func listZoneActions(
-      request: ListZoneActionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListZoneActionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListActionsResponse
 
     func createAsset(
-      request: CreateAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateAsset(
-      request: UpdateAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteAsset(
-      request: DeleteAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listAssets(
-      request: ListAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListAssetsResponse
 
     func getAsset(
-      request: GetAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Asset
 
     func listAssetActions(
-      request: ListAssetActionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAssetActionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListActionsResponse
 
     func createTask(
-      request: CreateTaskRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTaskRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateTask(
-      request: UpdateTaskRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTaskRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteTask(
-      request: DeleteTaskRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTaskRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listTasks(
-      request: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTasksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListTasksResponse
 
     func getTask(
-      request: GetTaskRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTaskRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Task
 
     func listJobs(
-      request: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListJobsResponse
 
     func runTask(
-      request: RunTaskRequest, options: GoogleCloudGax.RequestOptions
+      request: RunTaskRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.RunTaskResponse
 
     func getJob(
-      request: GetJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Job
 
     func cancelJob(
-      request: CancelJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelJobRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

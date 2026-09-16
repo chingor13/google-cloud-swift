@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// DisruptionEvent is a notification sent to customers about the disruption
 /// event of a resource.
-public struct DisruptionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DisruptionEvent: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The type of the disruption event.
@@ -37,9 +37,9 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// After this timeout, pods are forcefully evicted.
   /// This field is only populated when event_type is
   /// POD_PDB_VIOLATION.
-  public var pdbViolationTimeout: GoogleCloudWKT.Duration? = nil
+  public var pdbViolationTimeout: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DisruptionEvent`.
   public init() {}
@@ -92,10 +92,10 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.pdbBlockedPod = value
     }
     self.pdbViolationTimeout = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .pdbViolationTimeout)
+      GoogleWKT.Duration.self, forKey: .pdbViolationTimeout)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -111,7 +111,7 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The namespace/name of the pod whose eviction is blocked by PDB.
-  public struct PdbBlockedPod: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PdbBlockedPod: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The namespace of the pod.
@@ -120,7 +120,7 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The name of the pod.
     public var name: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PdbBlockedPod`.
     public init() {}
@@ -163,7 +163,7 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -179,11 +179,11 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.DisruptionEvent.PdbBlockedPod"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -297,10 +297,10 @@ public struct DisruptionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.DisruptionEvent"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

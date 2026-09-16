@@ -16,10 +16,10 @@
 
 #if GenAiTuningService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The results from an evaluation run performed by the EvaluationService.
-  public struct EvaluateDatasetResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EvaluateDatasetResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Aggregation statistics derived from results of
@@ -29,7 +29,7 @@
     /// Output only. Output info for EvaluationService.
     public var outputInfo: OutputInfo? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EvaluateDatasetResponse`.
     public init() {}
@@ -69,7 +69,7 @@
       self.outputInfo = try container.decodeIfPresent(OutputInfo.self, forKey: .outputInfo)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -85,11 +85,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.EvaluateDatasetResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

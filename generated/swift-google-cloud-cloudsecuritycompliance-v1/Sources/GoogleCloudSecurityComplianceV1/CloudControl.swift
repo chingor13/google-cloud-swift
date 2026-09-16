@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A cloud control is a set of rules and associated metadata that you can
 /// use to define your organization's security or compliance intent.
-public struct CloudControl: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CloudControl: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Identifier. The name of the cloud control, in either of the
@@ -77,13 +77,13 @@ public struct CloudControl: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The time that the cloud control was last updated.
   /// `create_time` is used because a new cloud control is created
   /// whenever an existing cloud control is updated.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The target resource types that are supported by the cloud
   /// control.
   public var supportedTargetResourceTypes: [TargetResourceType] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CloudControl`.
   public init() {}
@@ -188,8 +188,7 @@ public struct CloudControl: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent([CloudControlCategory].self, forKey: .categories) {
       self.categories = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(
       [TargetResourceType].self, forKey: .supportedTargetResourceTypes)
     {
@@ -197,7 +196,7 @@ public struct CloudControl: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -331,10 +330,10 @@ public struct CloudControl: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.cloudsecuritycompliance.v1.CloudControl"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

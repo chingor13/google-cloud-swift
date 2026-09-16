@@ -16,91 +16,91 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol SecurityPostureStub: Sendable {
     func listPostures(
-      request: ListPosturesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPosturesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecuritypostureV1.ListPosturesResponse
 
     func listPostureRevisions(
-      request: ListPostureRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPostureRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecuritypostureV1.ListPostureRevisionsResponse
 
     func getPosture(
-      request: GetPostureRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPostureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecuritypostureV1.Posture
 
     func createPosture(
-      request: CreatePostureRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePostureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updatePosture(
-      request: UpdatePostureRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePostureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deletePosture(
-      request: DeletePostureRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePostureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func extractPosture(
-      request: ExtractPostureRequest, options: GoogleCloudGax.RequestOptions
+      request: ExtractPostureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listPostureDeployments(
-      request: ListPostureDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPostureDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecuritypostureV1.ListPostureDeploymentsResponse
 
     func getPostureDeployment(
-      request: GetPostureDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPostureDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecuritypostureV1.PostureDeployment
 
     func createPostureDeployment(
-      request: CreatePostureDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePostureDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updatePostureDeployment(
-      request: UpdatePostureDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePostureDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deletePostureDeployment(
-      request: DeletePostureDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePostureDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listPostureTemplates(
-      request: ListPostureTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPostureTemplatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecuritypostureV1.ListPostureTemplatesResponse
 
     func getPostureTemplate(
-      request: GetPostureTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPostureTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecuritypostureV1.PostureTemplate
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

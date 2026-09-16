@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudShellV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CloudShellServiceClient, userId: String, environmentId: String) async throws {
   let response = try await client.getEnvironment(

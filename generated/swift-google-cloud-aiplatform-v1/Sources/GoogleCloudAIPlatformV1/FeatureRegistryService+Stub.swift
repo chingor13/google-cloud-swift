@@ -17,96 +17,96 @@
 #if FeatureRegistryService
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol FeatureRegistryServiceStub: Sendable {
       func createFeatureGroup(
-        request: CreateFeatureGroupRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateFeatureGroupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func getFeatureGroup(
-        request: GetFeatureGroupRequest, options: GoogleCloudGax.RequestOptions
+        request: GetFeatureGroupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.FeatureGroup
 
       func listFeatureGroups(
-        request: ListFeatureGroupsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListFeatureGroupsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListFeatureGroupsResponse
 
       func updateFeatureGroup(
-        request: UpdateFeatureGroupRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateFeatureGroupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteFeatureGroup(
-        request: DeleteFeatureGroupRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteFeatureGroupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func createFeature(
-        request: CreateFeatureRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateFeatureRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func batchCreateFeatures(
-        request: BatchCreateFeaturesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchCreateFeaturesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func getFeature(
-        request: GetFeatureRequest, options: GoogleCloudGax.RequestOptions
+        request: GetFeatureRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Feature
 
       func listFeatures(
-        request: ListFeaturesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListFeaturesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListFeaturesResponse
 
       func updateFeature(
-        request: UpdateFeatureRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateFeatureRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteFeature(
-        request: DeleteFeatureRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteFeatureRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }

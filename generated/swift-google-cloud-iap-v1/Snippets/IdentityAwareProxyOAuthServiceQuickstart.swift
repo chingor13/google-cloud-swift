@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudIAPV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample() async throws {
   let client = try GoogleCloudIAPV1.IdentityAwareProxyOAuthServiceClient()

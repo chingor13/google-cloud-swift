@@ -15,8 +15,8 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleIAMV1
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A [Secret][google.cloud.secretmanager.v1.Secret] is a logical secret whose
 /// value and versions can be accessed.
@@ -27,7 +27,7 @@ import GoogleIAMV1
 ///
 /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
 /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-public struct Secret: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Secret: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the
@@ -49,7 +49,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [Secret][google.cloud.secretmanager.v1.Secret] was created.
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The labels assigned to this Secret.
   ///
@@ -114,7 +114,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// For secret with TTL>0, version destruction doesn't happen immediately
   /// on calling destroy instead the version goes to a disabled state and
   /// destruction happens after the TTL expires.
-  public var versionDestroyTtl: GoogleCloudWKT.Duration? = nil
+  public var versionDestroyTtl: GoogleWKT.Duration? = nil
 
   /// Optional. The customer-managed encryption configuration of the regionalized
   /// secrets. If no configuration is provided, Google-managed default encryption
@@ -169,7 +169,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var expiration: OneOf_Expiration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Secret`.
   public init() {}
@@ -236,8 +236,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.name = value
     }
     self.replication = try container.decodeIfPresent(Replication.self, forKey: .replication)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -260,7 +259,7 @@ public struct Secret: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.annotations = value
     }
     self.versionDestroyTtl = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .versionDestroyTtl)
+      GoogleWKT.Duration.self, forKey: .versionDestroyTtl)
     self.customerManagedEncryption = try container.decodeIfPresent(
       CustomerManagedEncryption.self, forKey: .customerManagedEncryption)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .tags) {
@@ -283,17 +282,17 @@ public struct Secret: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       expiration = $0
     }
     if let expireTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp?.self, forKey: .expireTime)
+      GoogleWKT.Timestamp?.self, forKey: .expireTime)
     {
       try expirationCheckAndSet(.expireTime(expireTime))
     }
-    if let ttl = try container.decodeIfPresent(GoogleCloudWKT.Duration?.self, forKey: .ttl) {
+    if let ttl = try container.decodeIfPresent(GoogleWKT.Duration?.self, forKey: .ttl) {
       try expirationCheckAndSet(.ttl(ttl))
     }
     self.expiration = expiration
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -477,21 +476,21 @@ public struct Secret: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// This is always provided on output, regardless of what was sent on input.
     ///
     /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-    indirect case expireTime(GoogleCloudWKT.Timestamp?)
+    indirect case expireTime(GoogleWKT.Timestamp?)
     /// Input only. The TTL for the
     /// [Secret][google.cloud.secretmanager.v1.Secret].
     ///
     /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
-    indirect case ttl(GoogleCloudWKT.Duration?)
+    indirect case ttl(GoogleWKT.Duration?)
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.secretmanager.v1.Secret"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

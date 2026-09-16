@@ -15,95 +15,95 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CloudBuildStub: Sendable {
     func createBuild(
-      request: CreateBuildRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBuildRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getBuild(
-      request: GetBuildRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBuildRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV1.Build
 
     func listBuilds(
-      request: ListBuildsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBuildsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV1.ListBuildsResponse
 
     func cancelBuild(
-      request: CancelBuildRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelBuildRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV1.Build
 
     func retryBuild(
-      request: RetryBuildRequest, options: GoogleCloudGax.RequestOptions
+      request: RetryBuildRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func approveBuild(
-      request: ApproveBuildRequest, options: GoogleCloudGax.RequestOptions
+      request: ApproveBuildRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createBuildTrigger(
-      request: CreateBuildTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBuildTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV1.BuildTrigger
 
     func getBuildTrigger(
-      request: GetBuildTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBuildTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV1.BuildTrigger
 
     func listBuildTriggers(
-      request: ListBuildTriggersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBuildTriggersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV1.ListBuildTriggersResponse
 
     func deleteBuildTrigger(
-      request: DeleteBuildTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBuildTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updateBuildTrigger(
-      request: UpdateBuildTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBuildTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV1.BuildTrigger
 
     func runBuildTrigger(
-      request: RunBuildTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: RunBuildTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func receiveTriggerWebhook(
-      request: ReceiveTriggerWebhookRequest, options: GoogleCloudGax.RequestOptions
+      request: ReceiveTriggerWebhookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV1.ReceiveTriggerWebhookResponse
 
     func createWorkerPool(
-      request: CreateWorkerPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateWorkerPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getWorkerPool(
-      request: GetWorkerPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetWorkerPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV1.WorkerPool
 
     func deleteWorkerPool(
-      request: DeleteWorkerPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteWorkerPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateWorkerPool(
-      request: UpdateWorkerPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateWorkerPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listWorkerPools(
-      request: ListWorkerPoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWorkerPoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV1.ListWorkerPoolsResponse
 
     func getDefaultServiceAccount(
-      request: GetDefaultServiceAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDefaultServiceAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV1.DefaultServiceAccount
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

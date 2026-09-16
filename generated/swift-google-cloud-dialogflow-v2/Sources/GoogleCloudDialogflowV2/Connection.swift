@@ -16,10 +16,10 @@
 
 #if SipTrunks
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a connection for SIP Trunk.
-  public struct Connection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Connection: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The unique identifier of the SIP Trunk connection.
@@ -29,13 +29,13 @@
     public var state: Connection.State = Connection.State()
 
     /// Output only. When the connection status changed.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. The error details for the connection. Only populated when
     /// authentication errors occur.
     public var errorDetails: Connection.ErrorDetails? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Connection`.
     public init() {}
@@ -80,13 +80,12 @@
       if let value = try container.decodeIfPresent(Connection.State.self, forKey: .state) {
         self.state = value
       }
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       self.errorDetails = try container.decodeIfPresent(
         Connection.ErrorDetails.self, forKey: .errorDetails)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -102,7 +101,7 @@
     }
 
     /// The error details of Sip Trunk connection authentication.
-    public struct ErrorDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ErrorDetails: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The status of the certificate authentication.
@@ -111,7 +110,7 @@
       /// The error message provided from SIP trunking auth service
       public var errorMessage: Swift.String? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ErrorDetails`.
       public init() {}
@@ -151,7 +150,7 @@
         self.errorMessage = try container.decodeIfPresent(Swift.String.self, forKey: .errorMessage)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -167,11 +166,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Connection.ErrorDetails"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -447,11 +446,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Connection"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for `ExecuteOntapPatch` API.
-public struct ExecuteOntapPatchRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExecuteOntapPatchRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The raw `JSON` body of the request.
@@ -32,7 +32,7 @@ public struct ExecuteOntapPatchRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   ///   }
   /// }
   /// ```
-  public var body: GoogleCloudWKT.Struct? = nil
+  public var body: GoogleWKT.Struct? = nil
 
   /// Required. The resource path of the ONTAP resource.
   /// Format:
@@ -41,7 +41,7 @@ public struct ExecuteOntapPatchRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   /// `projects/123456789/locations/us-central1/storagePools/my-storage-pool/ontap/api/storage/volumes`.
   public var ontapPath: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExecuteOntapPatchRequest`.
   public init() {}
@@ -76,13 +76,13 @@ public struct ExecuteOntapPatchRequest: Codable, Equatable, GoogleCloudWKT._AnyP
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.body = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .body)
+    self.body = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .body)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .ontapPath) {
       self.ontapPath = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,10 +98,10 @@ public struct ExecuteOntapPatchRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.netapp.v1.ExecuteOntapPatchRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

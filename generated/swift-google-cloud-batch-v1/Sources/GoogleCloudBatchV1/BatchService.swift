@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Google Batch Service.
 /// The service manages user submitted batch jobs and allocates Google Compute
@@ -31,11 +31,11 @@ import GoogleCloudGax
 /// @Snippet(path: "BatchServiceQuickstart")
 public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   let inner: any Clients.BatchServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `BatchServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.BatchServiceStub = try Clients.BatchServiceTransport(options)
     inner = Clients.BatchServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -50,7 +50,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_CreateJob")
   public func createJob(
-    request: CreateJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBatchV1.Job {
     try await self.inner.createJob(request: request, options: options)
   }
@@ -59,7 +59,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_GetJob")
   public func getJob(
-    request: GetJobRequest, options: GoogleCloudGax.RequestOptions
+    request: GetJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBatchV1.Job {
     try await self.inner.getJob(request: request, options: options)
   }
@@ -68,7 +68,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_DeleteJob")
   public func deleteJob(
-    request: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteJob(request: request, options: options)
   }
@@ -77,21 +77,21 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_DeleteJob")
   public func deleteJob(
-    withPolling: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteJob(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -103,7 +103,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_CancelJob")
   public func cancelJob(
-    request: CancelJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.cancelJob(request: request, options: options)
   }
@@ -112,22 +112,21 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_CancelJob")
   public func cancelJob(
-    withPolling: CancelJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CancelJobResponse> {
+    withPolling: CancelJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CancelJobResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CancelJobResponse>.State in
+        -> GoogleGax._PollableOperationImpl<CancelJobResponse>.State in
       return try op._extractStatus(CancelJobResponse.self)
     }
     let rawOp = try await self.cancelJob(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CancelJobResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CancelJobResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -139,7 +138,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_ListJobs")
   public func listJobs(
-    request: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListJobsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBatchV1.ListJobsResponse {
     try await self.inner.listJobs(request: request, options: options)
   }
@@ -148,21 +147,21 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_ListJobs")
   public func listJobs(
-    byItem: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListJobsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Job, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudBatchV1.ListJobsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listJobs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Return a single Task.
   ///
   /// @Snippet(path: "BatchService_GetTask")
   public func getTask(
-    request: GetTaskRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTaskRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBatchV1.Task {
     try await self.inner.getTask(request: request, options: options)
   }
@@ -171,7 +170,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_ListTasks")
   public func listTasks(
-    request: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTasksRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBatchV1.ListTasksResponse {
     try await self.inner.listTasks(request: request, options: options)
   }
@@ -180,14 +179,14 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_ListTasks")
   public func listTasks(
-    byItem: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTasksRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Task, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudBatchV1.ListTasksResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listTasks(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists information about the supported locations for this service.
@@ -211,7 +210,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -237,7 +236,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -245,14 +244,14 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "BatchService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -263,7 +262,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -274,7 +273,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -282,7 +281,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -291,7 +290,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -302,7 +301,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -313,7 +312,7 @@ public final class BatchServiceClient: Clients.BatchServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "BatchService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -348,25 +347,27 @@ extension Clients {
     func deleteJob(request: DeleteJobRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `BatchServiceClient.deleteJob`.
-    func deleteJob(withPolling: DeleteJobRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Swift.Void>
+    func deleteJob(withPolling: DeleteJobRequest) async throws -> any GoogleGax.PollableOperation<
+      Swift.Void
+    >
 
     /// See `BatchServiceClient.deleteJob`.
     func deleteJob(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `BatchServiceClient.cancelJob`.
     func cancelJob(request: CancelJobRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `BatchServiceClient.cancelJob`.
-    func cancelJob(withPolling: CancelJobRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<CancelJobResponse>
+    func cancelJob(withPolling: CancelJobRequest) async throws -> any GoogleGax.PollableOperation<
+      CancelJobResponse
+    >
 
     /// See `BatchServiceClient.cancelJob`.
     func cancelJob(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CancelJobResponse>
+    ) async throws -> any GoogleGax.PollableOperation<CancelJobResponse>
 
     /// See `BatchServiceClient.listJobs`.
     func listJobs(request: ListJobsRequest) async throws -> GoogleCloudBatchV1.ListJobsResponse
@@ -448,92 +449,92 @@ extension Clients {
 
     /// See `BatchServiceClient.createJob`.
     func createJob(
-      request: CreateJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBatchV1.Job
 
     /// See `BatchServiceClient.getJob`.
     func getJob(
-      request: GetJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBatchV1.Job
 
     /// See `BatchServiceClient.deleteJob`.
     func deleteJob(
-      request: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BatchServiceClient.deleteJob`.
     func deleteJob(
-      withPolling: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `BatchServiceClient.cancelJob`.
     func cancelJob(
-      request: CancelJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BatchServiceClient.cancelJob`.
     func cancelJob(
-      withPolling: CancelJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CancelJobResponse>
+      withPolling: CancelJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CancelJobResponse>
 
     /// See `BatchServiceClient.listJobs`.
     func listJobs(
-      request: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBatchV1.ListJobsResponse
 
     /// See `BatchServiceClient.listJobs`.
     func listJobs(
-      byItem: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Job, Swift.Error>
 
     /// See `BatchServiceClient.getTask`.
     func getTask(
-      request: GetTaskRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTaskRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBatchV1.Task
 
     /// See `BatchServiceClient.listTasks`.
     func listTasks(
-      request: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTasksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBatchV1.ListTasksResponse
 
     /// See `BatchServiceClient.listTasks`.
     func listTasks(
-      byItem: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTasksRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Task, Swift.Error>
 
     /// See `BatchServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `BatchServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `BatchServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `BatchServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `BatchServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `BatchServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BatchServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -545,9 +546,9 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func createJob(
-    request: CreateJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBatchV1.Job {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createJob(
@@ -568,9 +569,9 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func getJob(
-    request: GetJobRequest, options: GoogleCloudGax.RequestOptions
+    request: GetJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBatchV1.Job {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getJob(
@@ -587,30 +588,30 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func deleteJob(
-    request: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteJob(withPolling: DeleteJobRequest) async throws -> any GoogleCloudGax
+  public func deleteJob(withPolling: DeleteJobRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteJob(withPolling: withPolling, options: .init())
   }
 
   public func deleteJob(
-    withPolling: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteJob(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteJobRequest().with {
       $0.name = name
     }
@@ -622,31 +623,30 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func cancelJob(
-    request: CancelJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func cancelJob(withPolling: CancelJobRequest) async throws -> any GoogleCloudGax
+  public func cancelJob(withPolling: CancelJobRequest) async throws -> any GoogleGax
     .PollableOperation<CancelJobResponse>
   {
     try await self.cancelJob(withPolling: withPolling, options: .init())
   }
 
   public func cancelJob(
-    withPolling: CancelJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CancelJobResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CancelJobResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CancelJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CancelJobResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CancelJobResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func cancelJob(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CancelJobResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<CancelJobResponse> {
     let request = CancelJobRequest().with {
       $0.name = name
     }
@@ -659,9 +659,9 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func listJobs(
-    request: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListJobsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBatchV1.ListJobsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listJobs(
@@ -671,12 +671,12 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func listJobs(
-    byItem: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListJobsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Job, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudBatchV1.ListJobsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listJobs(
@@ -693,9 +693,9 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func getTask(
-    request: GetTaskRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTaskRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBatchV1.Task {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getTask(
@@ -714,9 +714,9 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func listTasks(
-    request: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTasksRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBatchV1.ListTasksResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTasks(
@@ -726,12 +726,12 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func listTasks(
-    byItem: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTasksRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Task, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudBatchV1.ListTasksResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listTasks(
@@ -750,9 +750,9 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -762,13 +762,13 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -778,9 +778,9 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -790,9 +790,9 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -802,13 +802,13 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -829,9 +829,9 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -848,9 +848,9 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -867,9 +867,9 @@ extension Clients.BatchServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

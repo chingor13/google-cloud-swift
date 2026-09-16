@@ -18,28 +18,28 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class CloudShellServiceRetry: CloudShellServiceStub {
     let inner: any CloudShellServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any CloudShellServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any CloudShellServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -51,14 +51,14 @@ extension Clients {
     }
 
     public func getEnvironment(
-      request: GetEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudShellV1.Environment {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetEnvironmentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetEnvironmentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudShellV1.Environment
           in
           return try await self.inner.getEnvironment(request: r, options: o)
@@ -66,14 +66,14 @@ extension Clients {
     }
 
     public func startEnvironment(
-      request: StartEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: StartEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: StartEnvironmentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: StartEnvironmentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.startEnvironment(request: r, options: o)
@@ -81,14 +81,14 @@ extension Clients {
     }
 
     public func authorizeEnvironment(
-      request: AuthorizeEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: AuthorizeEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: AuthorizeEnvironmentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AuthorizeEnvironmentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.authorizeEnvironment(request: r, options: o)
@@ -96,14 +96,14 @@ extension Clients {
     }
 
     public func addPublicKey(
-      request: AddPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: AddPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: AddPublicKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AddPublicKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.addPublicKey(request: r, options: o)
@@ -111,14 +111,14 @@ extension Clients {
     }
 
     public func removePublicKey(
-      request: RemovePublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: RemovePublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: RemovePublicKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RemovePublicKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.removePublicKey(request: r, options: o)
@@ -126,14 +126,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

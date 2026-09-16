@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for updating a Data Fusion instance.
 /// Data Fusion allows updating the labels, options, and stack driver settings.
 /// This is also used for CDF version upgrade.
-public struct UpdateInstanceRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateInstanceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The instance resource that replaces the resource on the server. Currently,
@@ -34,9 +34,9 @@ public struct UpdateInstanceRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// A field will be overwritten if it is in the mask.
   /// If the user does not provide a mask, all the supported fields (labels,
   /// options, and version currently) will be overwritten.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateInstanceRequest`.
   public init() {}
@@ -72,11 +72,10 @@ public struct UpdateInstanceRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.instance = try container.decodeIfPresent(Instance.self, forKey: .instance)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -92,10 +91,10 @@ public struct UpdateInstanceRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datafusion.v1.UpdateInstanceRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

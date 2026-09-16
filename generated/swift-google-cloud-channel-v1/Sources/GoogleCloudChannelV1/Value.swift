@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Data type and value of a parameter.
-public struct Value: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Value: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The kind of value.
   public var kind: OneOf_Kind? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Value`.
   public init() {}
@@ -85,9 +85,7 @@ public struct Value: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let doubleValue = try container.decodeIfPresent(Swift.Double.self, forKey: .doubleValue) {
       try kindCheckAndSet(.doubleValue(doubleValue))
     }
-    if let protoValue = try container.decodeIfPresent(
-      GoogleCloudWKT.`Any`?.self, forKey: .protoValue)
-    {
+    if let protoValue = try container.decodeIfPresent(GoogleWKT.`Any`?.self, forKey: .protoValue) {
       try kindCheckAndSet(.protoValue(protoValue))
     }
     if let boolValue = try container.decodeIfPresent(Swift.Bool.self, forKey: .boolValue) {
@@ -96,7 +94,7 @@ public struct Value: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.kind = kind
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -131,7 +129,7 @@ public struct Value: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Represents a double value.
     case doubleValue(Swift.Double)
     /// Represents an 'Any' proto value.
-    indirect case protoValue(GoogleCloudWKT.`Any`?)
+    indirect case protoValue(GoogleWKT.`Any`?)
     /// Represents a boolean value.
     case boolValue(Swift.Bool)
   }
@@ -139,10 +137,10 @@ public struct Value: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.channel.v1.Value"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

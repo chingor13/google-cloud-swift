@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes a link connected to an analytics enabled bucket.
-public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Link: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the link. The name can have up to 100 characters.
@@ -41,7 +41,7 @@ public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var description: Swift.String = Swift.String()
 
   /// Output only. The creation timestamp of the link.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The resource lifecycle state.
   public var lifecycleState: LifecycleState = LifecycleState()
@@ -52,7 +52,7 @@ public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// LogViews in the bucket.
   public var bigqueryDataset: BigQueryDataset? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Link`.
   public init() {}
@@ -99,8 +99,7 @@ public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(LifecycleState.self, forKey: .lifecycleState) {
       self.lifecycleState = value
     }
@@ -108,7 +107,7 @@ public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       BigQueryDataset.self, forKey: .bigqueryDataset)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -127,10 +126,10 @@ public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.logging.v2.Link"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

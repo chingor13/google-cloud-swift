@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for ReceiveEvents.
-public struct ReceiveEventsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ReceiveEventsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   public var request: OneOf_Request? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ReceiveEventsRequest`.
   public init() {}
@@ -82,7 +82,7 @@ public struct ReceiveEventsRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     self.request = request
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -104,7 +104,7 @@ public struct ReceiveEventsRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   /// SetupRequest is the first message sent to the service to setup the RPC
   /// connection.
-  public struct SetupRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SetupRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The cluster name.
@@ -127,7 +127,7 @@ public struct ReceiveEventsRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// The client must either receive an `Event` update or a heart beat message
     /// before this duration expires; otherwise, the client will automatically
     /// cancel the current connection and retry.
-    public var heartbeatInterval: GoogleCloudWKT.Duration? = nil
+    public var heartbeatInterval: GoogleWKT.Duration? = nil
 
     /// The grace period after which a `writes_done_request` is issued, that a
     /// `WritesDone` is expected from the client.
@@ -135,9 +135,9 @@ public struct ReceiveEventsRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// The server is free to cancel the RPC should this expire.
     ///
     /// A system default will be chosen if unset.
-    public var writesDoneGracePeriod: GoogleCloudWKT.Duration? = nil
+    public var writesDoneGracePeriod: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SetupRequest`.
     public init() {}
@@ -192,12 +192,12 @@ public struct ReceiveEventsRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
       self.controlledMode = try container.decodeIfPresent(
         ControlledMode.self, forKey: .controlledMode)
       self.heartbeatInterval = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .heartbeatInterval)
+        GoogleWKT.Duration.self, forKey: .heartbeatInterval)
       self.writesDoneGracePeriod = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .writesDoneGracePeriod)
+        GoogleWKT.Duration.self, forKey: .writesDoneGracePeriod)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -217,11 +217,11 @@ public struct ReceiveEventsRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.ReceiveEventsRequest.SetupRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -235,10 +235,10 @@ public struct ReceiveEventsRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.ReceiveEventsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

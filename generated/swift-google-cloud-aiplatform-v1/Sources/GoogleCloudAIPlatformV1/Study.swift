@@ -16,10 +16,10 @@
 
 #if VizierService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A message representing a Study.
-  public struct Study: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Study: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The name of a study. The study's globally unique identifier.
@@ -36,13 +36,13 @@
     public var state: Study.State = Study.State()
 
     /// Output only. Time at which the study was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. A human readable reason why the Study is inactive.
     /// This should be empty if a study is ACTIVE or COMPLETED.
     public var inactiveReason: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Study`.
     public init() {}
@@ -95,14 +95,13 @@
       if let value = try container.decodeIfPresent(Study.State.self, forKey: .state) {
         self.state = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .inactiveReason) {
         self.inactiveReason = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -235,11 +234,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Study"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

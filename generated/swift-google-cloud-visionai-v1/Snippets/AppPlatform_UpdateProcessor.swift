@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudVideoAIV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: AppPlatformClient, projectId: String, locationId: String, processorId: String)
   async throws
@@ -32,7 +32,7 @@ func sample(client: AppPlatformClient, projectId: String, locationId: String, pr
         $0.processor = Processor().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/processors/\(processorId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

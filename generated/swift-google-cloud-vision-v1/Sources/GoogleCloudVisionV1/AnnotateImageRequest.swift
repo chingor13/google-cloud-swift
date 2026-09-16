@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request for performing Google Cloud Vision API tasks over a user-provided
 /// image, with user-requested features, and with context information.
-public struct AnnotateImageRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AnnotateImageRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The image to be processed.
@@ -31,7 +31,7 @@ public struct AnnotateImageRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// Additional context that may accompany the image.
   public var imageContext: ImageContext? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AnnotateImageRequest`.
   public init() {}
@@ -75,7 +75,7 @@ public struct AnnotateImageRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     self.imageContext = try container.decodeIfPresent(ImageContext.self, forKey: .imageContext)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -92,10 +92,10 @@ public struct AnnotateImageRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vision.v1.AnnotateImageRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

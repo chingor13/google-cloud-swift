@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// This resource represents the configuration of a transfer job that runs
 /// periodically.
-public struct TransferJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TransferJob: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A unique name (within the transfer project) assigned when the job is
@@ -113,19 +113,19 @@ public struct TransferJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var status: TransferJob.Status = TransferJob.Status()
 
   /// Output only. The time that the transfer job was created.
-  public var creationTime: GoogleCloudWKT.Timestamp? = nil
+  public var creationTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time that the transfer job was last modified.
-  public var lastModificationTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastModificationTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time that the transfer job was deleted.
-  public var deletionTime: GoogleCloudWKT.Timestamp? = nil
+  public var deletionTime: GoogleWKT.Timestamp? = nil
 
   /// The name of the most recently started TransferOperation of this JobConfig.
   /// Present if a TransferOperation has been created for this JobConfig.
   public var latestOperationName: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TransferJob`.
   public init() {}
@@ -210,17 +210,17 @@ public struct TransferJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.status = value
     }
     self.creationTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .creationTime)
+      GoogleWKT.Timestamp.self, forKey: .creationTime)
     self.lastModificationTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastModificationTime)
+      GoogleWKT.Timestamp.self, forKey: .lastModificationTime)
     self.deletionTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deletionTime)
+      GoogleWKT.Timestamp.self, forKey: .deletionTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .latestOperationName) {
       self.latestOperationName = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -364,10 +364,10 @@ public struct TransferJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.TransferJob"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

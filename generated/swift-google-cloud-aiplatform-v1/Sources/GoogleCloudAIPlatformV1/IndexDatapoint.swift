@@ -16,10 +16,10 @@
 
 #if IndexService || MatchService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A datapoint of Index.
-  public struct IndexDatapoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IndexDatapoint: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Unique identifier of the datapoint.
@@ -48,9 +48,9 @@
     public var crowdingTag: IndexDatapoint.CrowdingTag? = nil
 
     /// Optional. The key-value map of additional metadata for the datapoint.
-    public var embeddingMetadata: GoogleCloudWKT.Struct? = nil
+    public var embeddingMetadata: GoogleWKT.Struct? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IndexDatapoint`.
     public init() {}
@@ -116,10 +116,10 @@
       self.crowdingTag = try container.decodeIfPresent(
         IndexDatapoint.CrowdingTag.self, forKey: .crowdingTag)
       self.embeddingMetadata = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .embeddingMetadata)
+        GoogleWKT.Struct.self, forKey: .embeddingMetadata)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -139,7 +139,7 @@
 
     /// Feature embedding vector for sparse index. An array of numbers whose values
     /// are located in the specified dimensions.
-    public struct SparseEmbedding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SparseEmbedding: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The list of embedding values of the sparse vector.
@@ -149,7 +149,7 @@
       /// vector.
       public var dimensions: [Swift.Int64] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SparseEmbedding`.
       public init() {}
@@ -192,7 +192,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -208,17 +208,17 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.IndexDatapoint.SparseEmbedding"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Restriction of a datapoint which describe its attributes(tokens) from each
     /// of several attribute categories(namespaces).
-    public struct Restriction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Restriction: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The namespace of this restriction. e.g.: color.
@@ -230,7 +230,7 @@
       /// The attributes to deny in this namespace. e.g.: 'blue'
       public var denyList: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Restriction`.
       public init() {}
@@ -278,7 +278,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -295,17 +295,17 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.IndexDatapoint.Restriction"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// This field allows restricts to be based on numeric comparisons rather
     /// than categorical tokens.
-    public struct NumericRestriction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct NumericRestriction: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The namespace of this restriction. e.g.: cost.
@@ -320,7 +320,7 @@
       /// namespace name. This is verified at runtime.
       public var value: OneOf_Value? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `NumericRestriction`.
       public init() {}
@@ -393,7 +393,7 @@
         self.value = value
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -568,18 +568,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.IndexDatapoint.NumericRestriction"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Crowding tag is a constraint on a neighbor list produced by nearest
     /// neighbor search requiring that no more than some value k' of the k
     /// neighbors returned have the same value of crowding_attribute.
-    public struct CrowdingTag: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct CrowdingTag: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The attribute value used for crowding.  The maximum number of neighbors
@@ -589,7 +589,7 @@
       /// the total number of neighbors to return for a given query.
       public var crowdingAttribute: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `CrowdingTag`.
       public init() {}
@@ -628,7 +628,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -643,22 +643,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.IndexDatapoint.CrowdingTag"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.IndexDatapoint"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

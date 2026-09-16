@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The execution result of a specific tool from the client or the agent.
-public struct ToolResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ToolResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The matching ID of the [tool call][google.cloud.ces.v1.ToolCall]
@@ -34,13 +34,13 @@ public struct ToolResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Use "output" key to specify tool response and "error" key to specify
   /// error details (if any). If "output" and "error" keys are not specified,
   /// then whole "response" is treated as tool execution result.
-  public var response: GoogleCloudWKT.Struct? = nil
+  public var response: GoogleWKT.Struct? = nil
 
   /// The identifier of the tool that got executed. It could be either a
   /// persisted tool or a tool from a toolset.
   public var toolIdentifier: OneOf_ToolIdentifier? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ToolResponse`.
   public init() {}
@@ -87,7 +87,7 @@ public struct ToolResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
       self.displayName = value
     }
-    self.response = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .response)
+    self.response = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .response)
 
     var toolIdentifier: OneOf_ToolIdentifier? = nil
     let toolIdentifierCheckAndSet = {
@@ -108,7 +108,7 @@ public struct ToolResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.toolIdentifier = toolIdentifier
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -144,10 +144,10 @@ public struct ToolResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.ToolResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

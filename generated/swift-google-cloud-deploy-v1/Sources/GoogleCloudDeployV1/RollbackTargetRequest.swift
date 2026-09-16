@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request object for `RollbackTarget`.
-public struct RollbackTargetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RollbackTargetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The `DeliveryPipeline` for which the rollback `Rollout` must be
@@ -52,7 +52,7 @@ public struct RollbackTargetRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// `projects/{project}/locations/{location}/deployPolicies/{deploy_policy}`.
   public var overrideDeployPolicy: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RollbackTargetRequest`.
   public init() {}
@@ -125,7 +125,7 @@ public struct RollbackTargetRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -147,10 +147,10 @@ public struct RollbackTargetRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.deploy.v1.RollbackTargetRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

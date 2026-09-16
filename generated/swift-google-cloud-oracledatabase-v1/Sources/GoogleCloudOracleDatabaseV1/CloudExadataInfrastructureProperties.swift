@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Various properties of Exadata Infrastructure.
-public struct CloudExadataInfrastructureProperties: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CloudExadataInfrastructureProperties: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. OCID of created infra.
@@ -98,10 +98,10 @@ public struct CloudExadataInfrastructureProperties: Codable, Equatable, GoogleCl
   public var nextMaintenanceRunId: Swift.String = Swift.String()
 
   /// Output only. The time when the next maintenance run will occur.
-  public var nextMaintenanceRunTime: GoogleCloudWKT.Timestamp? = nil
+  public var nextMaintenanceRunTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the next security maintenance run will occur.
-  public var nextSecurityMaintenanceRunTime: GoogleCloudWKT.Timestamp? = nil
+  public var nextSecurityMaintenanceRunTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The list of customer contacts.
   public var customerContacts: [CustomerContact] = []
@@ -126,7 +126,7 @@ public struct CloudExadataInfrastructureProperties: Codable, Equatable, GoogleCl
   /// Output only. The Exascale configuration for the Exadata Infrastructure.
   public var exascaleConfig: ExascaleConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CloudExadataInfrastructureProperties`.
   public init() {}
@@ -291,9 +291,9 @@ public struct CloudExadataInfrastructureProperties: Codable, Equatable, GoogleCl
       self.nextMaintenanceRunId = value
     }
     self.nextMaintenanceRunTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .nextMaintenanceRunTime)
+      GoogleWKT.Timestamp.self, forKey: .nextMaintenanceRunTime)
     self.nextSecurityMaintenanceRunTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .nextSecurityMaintenanceRunTime)
+      GoogleWKT.Timestamp.self, forKey: .nextSecurityMaintenanceRunTime)
     if let value = try container.decodeIfPresent([CustomerContact].self, forKey: .customerContacts)
     {
       self.customerContacts = value
@@ -320,7 +320,7 @@ public struct CloudExadataInfrastructureProperties: Codable, Equatable, GoogleCl
       ExascaleConfig.self, forKey: .exascaleConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -506,10 +506,10 @@ public struct CloudExadataInfrastructureProperties: Codable, Equatable, GoogleCl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.oracledatabase.v1.CloudExadataInfrastructureProperties"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

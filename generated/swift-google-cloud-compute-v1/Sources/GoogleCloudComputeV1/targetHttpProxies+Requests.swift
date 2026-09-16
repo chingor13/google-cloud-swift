@@ -16,13 +16,13 @@
 
 #if TargetHttpProxies
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   extension TargetHttpProxiesClient {
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.targetHttpProxies.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.targetHttpProxies.aggregatedList]: <doc:TargetHttpProxiesClient/aggregatedList(request:options:)>
-    public struct AggregatedListRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AggregatedListRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -134,7 +134,7 @@
       /// aggregated list request is invoked for subnetworks list-usable api.
       public var serviceProjectNumber: Swift.Int64? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AggregatedListRequest`.
       public init() {}
@@ -196,7 +196,7 @@
           Swift.Int64.self, forKey: .serviceProjectNumber)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -218,18 +218,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.targetHttpProxies.aggregatedListRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.targetHttpProxies.delete] method.
     ///
     /// [google.cloud.compute.v1.targetHttpProxies.delete]: <doc:TargetHttpProxiesClient/delete(request:options:)>
-    public struct DeleteRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DeleteRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Project ID for this request.
@@ -253,7 +253,7 @@
       /// Name of the TargetHttpProxy resource to delete.
       public var targetHttpProxy: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DeleteRequest`.
       public init() {}
@@ -299,7 +299,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -316,18 +316,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.targetHttpProxies.deleteRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [get()][google.cloud.compute.v1.targetHttpProxies.get] method.
     ///
     /// [google.cloud.compute.v1.targetHttpProxies.get]: <doc:TargetHttpProxiesClient/`get`(request:options:)>
-    public struct GetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Project ID for this request.
@@ -336,7 +336,7 @@
       /// Name of the TargetHttpProxy resource to return.
       public var targetHttpProxy: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetRequest`.
       public init() {}
@@ -379,7 +379,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -395,18 +395,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.targetHttpProxies.getRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [insert()][google.cloud.compute.v1.targetHttpProxies.insert] method.
     ///
     /// [google.cloud.compute.v1.targetHttpProxies.insert]: <doc:TargetHttpProxiesClient/insert(request:options:)>
-    public struct InsertRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct InsertRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Project ID for this request.
@@ -432,7 +432,7 @@
       /// [google.cloud.compute.v1.targetHttpProxies.insert]: <doc:TargetHttpProxiesClient/insert(request:options:)>
       public var body: TargetHttpProxy? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `InsertRequest`.
       public init() {}
@@ -476,7 +476,7 @@
         self.body = try container.decodeIfPresent(TargetHttpProxy.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -493,18 +493,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.targetHttpProxies.insertRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [list()][google.cloud.compute.v1.targetHttpProxies.list] method.
     ///
     /// [google.cloud.compute.v1.targetHttpProxies.list]: <doc:TargetHttpProxiesClient/list(request:options:)>
-    public struct ListRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ListRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -603,7 +603,7 @@
       /// with an error code.
       public var returnPartialSuccess: Swift.Bool? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListRequest`.
       public init() {}
@@ -657,7 +657,7 @@
           Swift.Bool.self, forKey: .returnPartialSuccess)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -677,18 +677,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.targetHttpProxies.listRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [patch()][google.cloud.compute.v1.targetHttpProxies.patch] method.
     ///
     /// [google.cloud.compute.v1.targetHttpProxies.patch]: <doc:TargetHttpProxiesClient/patch(request:options:)>
-    public struct PatchRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PatchRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Project ID for this request.
@@ -717,7 +717,7 @@
       /// [google.cloud.compute.v1.targetHttpProxies.patch]: <doc:TargetHttpProxiesClient/patch(request:options:)>
       public var body: TargetHttpProxy? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PatchRequest`.
       public init() {}
@@ -766,7 +766,7 @@
         self.body = try container.decodeIfPresent(TargetHttpProxy.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -784,18 +784,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.targetHttpProxies.patchRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setUrlMap()][google.cloud.compute.v1.targetHttpProxies.setUrlMap] method.
     ///
     /// [google.cloud.compute.v1.targetHttpProxies.setUrlMap]: <doc:TargetHttpProxiesClient/setUrlMap(request:options:)>
-    public struct SetUrlMapRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetUrlMapRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Project ID for this request.
@@ -824,7 +824,7 @@
       /// [google.cloud.compute.v1.targetHttpProxies.setUrlMap]: <doc:TargetHttpProxiesClient/setUrlMap(request:options:)>
       public var body: UrlMapReference? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetUrlMapRequest`.
       public init() {}
@@ -873,7 +873,7 @@
         self.body = try container.decodeIfPresent(UrlMapReference.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -891,11 +891,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.targetHttpProxies.setUrlMapRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
   }

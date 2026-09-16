@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Details information about an error encountered during job execution or
 /// the results of an unsuccessful activation of the JobTrigger.
-public struct Error: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Error: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Detailed error codes and messages.
@@ -28,12 +28,12 @@ public struct Error: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// The times the error occurred. List includes the oldest timestamp and the
   /// last 9 timestamps.
-  public var timestamps: [GoogleCloudWKT.Timestamp] = []
+  public var timestamps: [GoogleWKT.Timestamp] = []
 
   /// Additional information about the error.
   public var extraInfo: Error.ErrorExtraInfo = Error.ErrorExtraInfo()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Error`.
   public init() {}
@@ -71,9 +71,7 @@ public struct Error: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.details = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .details)
-    if let value = try container.decodeIfPresent(
-      [GoogleCloudWKT.Timestamp].self, forKey: .timestamps)
-    {
+    if let value = try container.decodeIfPresent([GoogleWKT.Timestamp].self, forKey: .timestamps) {
       self.timestamps = value
     }
     if let value = try container.decodeIfPresent(Error.ErrorExtraInfo.self, forKey: .extraInfo) {
@@ -81,7 +79,7 @@ public struct Error: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -205,10 +203,10 @@ public struct Error: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.Error"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

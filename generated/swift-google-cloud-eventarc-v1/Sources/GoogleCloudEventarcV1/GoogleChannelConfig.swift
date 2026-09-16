@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A GoogleChannelConfig is a resource that stores the custom settings
 /// respected by Eventarc first-party triggers in the matching region.
 /// Once configured, first-party event data will be protected
 /// using the specified custom managed encryption key instead of Google-managed
 /// encryption keys.
-public struct GoogleChannelConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GoogleChannelConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the config. Must be in the format of,
@@ -32,7 +32,7 @@ public struct GoogleChannelConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public var name: Swift.String = Swift.String()
 
   /// Output only. The last-modified time.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Resource name of a KMS crypto key (managed by the user) used to
   /// encrypt/decrypt their event data.
@@ -44,7 +44,7 @@ public struct GoogleChannelConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Optional. Resource labels.
   public var labels: [Swift.String: Swift.String] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GoogleChannelConfig`.
   public init() {}
@@ -86,8 +86,7 @@ public struct GoogleChannelConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .cryptoKeyName) {
       self.cryptoKeyName = value
     }
@@ -97,7 +96,7 @@ public struct GoogleChannelConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -115,10 +114,10 @@ public struct GoogleChannelConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.eventarc.v1.GoogleChannelConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

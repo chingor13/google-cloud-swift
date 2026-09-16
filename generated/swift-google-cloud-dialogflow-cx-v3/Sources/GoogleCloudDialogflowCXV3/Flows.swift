@@ -20,10 +20,10 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing [Flows][google.cloud.dialogflow.cx.v3.Flow].
   ///
@@ -32,11 +32,11 @@
   /// @Snippet(path: "FlowsQuickstart")
   public final class FlowsClient: Clients.FlowsProtocol, Sendable {
     let inner: any Clients.FlowsStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `FlowsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.FlowsStub = try Clients.FlowsTransport(options)
       inner = Clients.FlowsRetry(inner, options: options)
       if let logger = options.logger {
@@ -55,7 +55,7 @@
     ///
     /// @Snippet(path: "Flows_CreateFlow")
     public func createFlow(
-      request: CreateFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Flow {
       try await self.inner.createFlow(request: request, options: options)
     }
@@ -64,7 +64,7 @@
     ///
     /// @Snippet(path: "Flows_DeleteFlow")
     public func deleteFlow(
-      request: DeleteFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFlowRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteFlow(request: request, options: options)
     }
@@ -73,7 +73,7 @@
     ///
     /// @Snippet(path: "Flows_ListFlows")
     public func listFlows(
-      request: ListFlowsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFlowsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListFlowsResponse {
       try await self.inner.listFlows(request: request, options: options)
     }
@@ -82,7 +82,7 @@
     ///
     /// @Snippet(path: "Flows_ListFlows")
     public func listFlows(
-      byItem: ListFlowsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListFlowsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Flow, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListFlowsResponse in
@@ -90,14 +90,14 @@
         request.pageToken = token
         return try await self.listFlows(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves the specified flow.
     ///
     /// @Snippet(path: "Flows_GetFlow")
     public func getFlow(
-      request: GetFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Flow {
       try await self.inner.getFlow(request: request, options: options)
     }
@@ -110,7 +110,7 @@
     ///
     /// @Snippet(path: "Flows_UpdateFlow")
     public func updateFlow(
-      request: UpdateFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Flow {
       try await self.inner.updateFlow(request: request, options: options)
     }
@@ -133,7 +133,7 @@
     ///
     /// @Snippet(path: "Flows_TrainFlow")
     public func trainFlow(
-      request: TrainFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: TrainFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.trainFlow(request: request, options: options)
     }
@@ -156,21 +156,21 @@
     ///
     /// @Snippet(path: "Flows_TrainFlow")
     public func trainFlow(
-      withPolling: TrainFlowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: TrainFlowRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.trainFlow(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -184,7 +184,7 @@
     ///
     /// @Snippet(path: "Flows_ValidateFlow")
     public func validateFlow(
-      request: ValidateFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: ValidateFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.FlowValidationResult {
       try await self.inner.validateFlow(request: request, options: options)
     }
@@ -194,7 +194,7 @@
     ///
     /// @Snippet(path: "Flows_GetFlowValidationResult")
     public func getFlowValidationResult(
-      request: GetFlowValidationResultRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFlowValidationResultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.FlowValidationResult {
       try await self.inner.getFlowValidationResult(request: request, options: options)
     }
@@ -218,7 +218,7 @@
     ///
     /// @Snippet(path: "Flows_ImportFlow")
     public func importFlow(
-      request: ImportFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.importFlow(request: request, options: options)
     }
@@ -242,22 +242,21 @@
     ///
     /// @Snippet(path: "Flows_ImportFlow")
     public func importFlow(
-      withPolling: ImportFlowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportFlowResponse> {
+      withPolling: ImportFlowRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportFlowResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ImportFlowResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ImportFlowResponse>.State in
         return try op._extractStatus(ImportFlowResponse.self)
       }
       let rawOp = try await self.importFlow(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportFlowResponse>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportFlowResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -283,7 +282,7 @@
     ///
     /// @Snippet(path: "Flows_ExportFlow")
     public func exportFlow(
-      request: ExportFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.exportFlow(request: request, options: options)
     }
@@ -306,22 +305,21 @@
     ///
     /// @Snippet(path: "Flows_ExportFlow")
     public func exportFlow(
-      withPolling: ExportFlowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportFlowResponse> {
+      withPolling: ExportFlowRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportFlowResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ExportFlowResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ExportFlowResponse>.State in
         return try op._extractStatus(ExportFlowResponse.self)
       }
       let rawOp = try await self.exportFlow(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportFlowResponse>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ExportFlowResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -350,7 +348,7 @@
     ///
     /// @Snippet(path: "Flows_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -376,7 +374,7 @@
     ///
     /// @Snippet(path: "Flows_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -384,14 +382,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "Flows_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -402,7 +400,7 @@
     ///
     /// @Snippet(path: "Flows_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -413,7 +411,7 @@
     ///
     /// @Snippet(path: "Flows_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -421,7 +419,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -430,7 +428,7 @@
     ///
     /// @Snippet(path: "Flows_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -441,7 +439,7 @@
     ///
     /// @Snippet(path: "Flows_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -499,20 +497,21 @@
       /// See `FlowsClient.updateFlow`.
       func updateFlow(
         flow: Flow?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDialogflowCXV3.Flow
 
       /// See `FlowsClient.trainFlow`.
       func trainFlow(request: TrainFlowRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `FlowsClient.trainFlow`.
-      func trainFlow(withPolling: TrainFlowRequest) async throws -> any GoogleCloudGax
-        .PollableOperation<Swift.Void>
+      func trainFlow(withPolling: TrainFlowRequest) async throws -> any GoogleGax.PollableOperation<
+        Swift.Void
+      >
 
       /// See `FlowsClient.trainFlow`.
       func trainFlow(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `FlowsClient.validateFlow`.
       func validateFlow(request: ValidateFlowRequest) async throws
@@ -531,14 +530,14 @@
       func importFlow(request: ImportFlowRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `FlowsClient.importFlow`.
-      func importFlow(withPolling: ImportFlowRequest) async throws -> any GoogleCloudGax
+      func importFlow(withPolling: ImportFlowRequest) async throws -> any GoogleGax
         .PollableOperation<ImportFlowResponse>
 
       /// See `FlowsClient.exportFlow`.
       func exportFlow(request: ExportFlowRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `FlowsClient.exportFlow`.
-      func exportFlow(withPolling: ExportFlowRequest) async throws -> any GoogleCloudGax
+      func exportFlow(withPolling: ExportFlowRequest) async throws -> any GoogleGax
         .PollableOperation<ExportFlowResponse>
 
       /// See `FlowsClient.listLocations`.
@@ -579,102 +578,102 @@
 
       /// See `FlowsClient.createFlow`.
       func createFlow(
-        request: CreateFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Flow
 
       /// See `FlowsClient.deleteFlow`.
       func deleteFlow(
-        request: DeleteFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteFlowRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `FlowsClient.listFlows`.
       func listFlows(
-        request: ListFlowsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListFlowsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListFlowsResponse
 
       /// See `FlowsClient.listFlows`.
       func listFlows(
-        byItem: ListFlowsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListFlowsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Flow, Swift.Error>
 
       /// See `FlowsClient.getFlow`.
       func getFlow(
-        request: GetFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: GetFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Flow
 
       /// See `FlowsClient.updateFlow`.
       func updateFlow(
-        request: UpdateFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Flow
 
       /// See `FlowsClient.trainFlow`.
       func trainFlow(
-        request: TrainFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: TrainFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `FlowsClient.trainFlow`.
       func trainFlow(
-        withPolling: TrainFlowRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: TrainFlowRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `FlowsClient.validateFlow`.
       func validateFlow(
-        request: ValidateFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: ValidateFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.FlowValidationResult
 
       /// See `FlowsClient.getFlowValidationResult`.
       func getFlowValidationResult(
-        request: GetFlowValidationResultRequest, options: GoogleCloudGax.RequestOptions
+        request: GetFlowValidationResultRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.FlowValidationResult
 
       /// See `FlowsClient.importFlow`.
       func importFlow(
-        request: ImportFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `FlowsClient.importFlow`.
       func importFlow(
-        withPolling: ImportFlowRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ImportFlowResponse>
+        withPolling: ImportFlowRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ImportFlowResponse>
 
       /// See `FlowsClient.exportFlow`.
       func exportFlow(
-        request: ExportFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `FlowsClient.exportFlow`.
       func exportFlow(
-        withPolling: ExportFlowRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ExportFlowResponse>
+        withPolling: ExportFlowRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ExportFlowResponse>
 
       /// See `FlowsClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `FlowsClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `FlowsClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `FlowsClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `FlowsClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `FlowsClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -688,9 +687,9 @@
     }
 
     public func createFlow(
-      request: CreateFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Flow {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createFlow(
@@ -709,9 +708,9 @@
     }
 
     public func deleteFlow(
-      request: DeleteFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFlowRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteFlow(
@@ -730,9 +729,9 @@
     }
 
     public func listFlows(
-      request: ListFlowsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFlowsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListFlowsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listFlows(
@@ -742,13 +741,13 @@
     }
 
     public func listFlows(
-      byItem: ListFlowsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListFlowsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Flow, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListFlowsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listFlows(
@@ -765,9 +764,9 @@
     }
 
     public func getFlow(
-      request: GetFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Flow {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getFlow(
@@ -786,14 +785,14 @@
     }
 
     public func updateFlow(
-      request: UpdateFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Flow {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateFlow(
       flow: Flow?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDialogflowCXV3.Flow {
       let request = UpdateFlowRequest().with {
         $0.flow = flow
@@ -807,30 +806,30 @@
     }
 
     public func trainFlow(
-      request: TrainFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: TrainFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func trainFlow(withPolling: TrainFlowRequest) async throws -> any GoogleCloudGax
+    public func trainFlow(withPolling: TrainFlowRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
     {
       try await self.trainFlow(withPolling: withPolling, options: .init())
     }
 
     public func trainFlow(
-      withPolling: TrainFlowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: TrainFlowRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func trainFlow(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = TrainFlowRequest().with {
         $0.name = name
       }
@@ -844,9 +843,9 @@
     }
 
     public func validateFlow(
-      request: ValidateFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: ValidateFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.FlowValidationResult {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getFlowValidationResult(request: GetFlowValidationResultRequest) async throws
@@ -856,9 +855,9 @@
     }
 
     public func getFlowValidationResult(
-      request: GetFlowValidationResultRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFlowValidationResultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.FlowValidationResult {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getFlowValidationResult(
@@ -875,25 +874,24 @@
     }
 
     public func importFlow(
-      request: ImportFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func importFlow(withPolling: ImportFlowRequest) async throws -> any GoogleCloudGax
+    public func importFlow(withPolling: ImportFlowRequest) async throws -> any GoogleGax
       .PollableOperation<ImportFlowResponse>
     {
       try await self.importFlow(withPolling: withPolling, options: .init())
     }
 
     public func importFlow(
-      withPolling: ImportFlowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportFlowResponse> {
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportFlowResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: ImportFlowRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportFlowResponse> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportFlowResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -902,25 +900,24 @@
     }
 
     public func exportFlow(
-      request: ExportFlowRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportFlowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func exportFlow(withPolling: ExportFlowRequest) async throws -> any GoogleCloudGax
+    public func exportFlow(withPolling: ExportFlowRequest) async throws -> any GoogleGax
       .PollableOperation<ExportFlowResponse>
     {
       try await self.exportFlow(withPolling: withPolling, options: .init())
     }
 
     public func exportFlow(
-      withPolling: ExportFlowRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportFlowResponse> {
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportFlowResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: ExportFlowRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportFlowResponse> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ExportFlowResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -931,9 +928,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -943,13 +940,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -959,9 +956,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -971,9 +968,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -983,13 +980,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -1010,9 +1007,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -1029,9 +1026,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

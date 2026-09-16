@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An API Configuration is a combination of settings for both the Managed
 /// Service and Gateways serving this API Config.
-public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ApiConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Resource name of the API Config.
@@ -27,10 +27,10 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. Created time.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Updated time.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Resource labels to represent user-provided metadata.
   /// Refer to cloud documentation on labels for more details.
@@ -78,7 +78,7 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// fields.
   public var managedServiceConfigs: [ApiConfig.File] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ApiConfig`.
   public init() {}
@@ -134,10 +134,8 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -172,7 +170,7 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -195,7 +193,7 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// A lightweight description of a file.
-  public struct File: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct File: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The file path (full or relative path). This is typically the path of the
@@ -205,7 +203,7 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The bytes that constitute the file.
     public var contents: Foundation.Data = Foundation.Data()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `File`.
     public init() {}
@@ -248,7 +246,7 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -264,22 +262,22 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.apigateway.v1.ApiConfig.File"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// An OpenAPI Specification Document describing an API.
-  public struct OpenApiDocument: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct OpenApiDocument: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The OpenAPI Specification document file.
     public var document: ApiConfig.File? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `OpenApiDocument`.
     public init() {}
@@ -315,7 +313,7 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.document = try container.decodeIfPresent(ApiConfig.File.self, forKey: .document)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -330,16 +328,16 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.apigateway.v1.ApiConfig.OpenApiDocument"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A gRPC service definition.
-  public struct GrpcServiceDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GrpcServiceDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Input only. File descriptor set, generated by protoc.
@@ -357,7 +355,7 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// file_descriptor_set.
     public var source: [ApiConfig.File] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GrpcServiceDefinition`.
     public init() {}
@@ -399,7 +397,7 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -415,11 +413,11 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.apigateway.v1.ApiConfig.GrpcServiceDefinition"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -560,10 +558,10 @@ public struct ApiConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apigateway.v1.ApiConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

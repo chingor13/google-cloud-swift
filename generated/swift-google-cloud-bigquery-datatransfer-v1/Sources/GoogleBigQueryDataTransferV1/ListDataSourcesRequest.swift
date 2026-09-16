@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request to list supported data sources and their data transfer settings.
-public struct ListDataSourcesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ListDataSourcesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The BigQuery project id for which data sources should be
@@ -36,7 +36,7 @@ public struct ListDataSourcesRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// Page size. The default page size is the maximum value of 1000 results.
   public var pageSize: Swift.Int32 = Swift.Int32()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListDataSourcesRequest`.
   public init() {}
@@ -84,7 +84,7 @@ public struct ListDataSourcesRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,10 +101,10 @@ public struct ListDataSourcesRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,21 +15,21 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for
 /// [SecurityCenterManagement.SimulateSecurityHealthAnalyticsCustomModule][google.cloud.securitycentermanagement.v1.SecurityCenterManagement.SimulateSecurityHealthAnalyticsCustomModule].
 ///
 /// [google.cloud.securitycentermanagement.v1.SecurityCenterManagement.SimulateSecurityHealthAnalyticsCustomModule]: <doc:SecurityCenterManagementClient/simulateSecurityHealthAnalyticsCustomModule(request:options:)>
-public struct SimulateSecurityHealthAnalyticsCustomModuleResponse: Codable, Equatable,
-  GoogleCloudWKT._AnyPackable,
+public struct SimulateSecurityHealthAnalyticsCustomModuleResponse: Codable, Equatable, GoogleWKT
+    ._AnyPackable,
   Sendable
 {
   /// Result for test case in the corresponding request.
   public var result: SimulateSecurityHealthAnalyticsCustomModuleResponse.SimulatedResult? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SimulateSecurityHealthAnalyticsCustomModuleResponse`.
   public init() {}
@@ -66,7 +66,7 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleResponse: Codable, Equa
       SimulateSecurityHealthAnalyticsCustomModuleResponse.SimulatedResult.self, forKey: .result)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -79,13 +79,13 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleResponse: Codable, Equa
   }
 
   /// Possible test result.
-  public struct SimulatedResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SimulatedResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The result of the simulation.
     public var result: OneOf_Result? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SimulatedResult`.
     public init() {}
@@ -137,7 +137,7 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleResponse: Codable, Equa
         try resultCheckAndSet(.finding(finding))
       }
       if let noViolation = try container.decodeIfPresent(
-        GoogleCloudWKT.Empty?.self, forKey: .noViolation)
+        GoogleWKT.Empty?.self, forKey: .noViolation)
       {
         try resultCheckAndSet(.noViolation(noViolation))
       }
@@ -147,7 +147,7 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleResponse: Codable, Equa
       self.result = result
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -175,7 +175,7 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleResponse: Codable, Equa
       /// detected.
       indirect case finding(SimulatedFinding?)
       /// Indicates that the test case does not trigger any violation.
-      indirect case noViolation(GoogleCloudWKT.Empty?)
+      indirect case noViolation(GoogleWKT.Empty?)
       /// Error encountered during the test.
       indirect case error(GoogleRpc.Status?)
     }
@@ -184,11 +184,11 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleResponse: Codable, Equa
       return
         "type.googleapis.com/google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse.SimulatedResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -196,10 +196,10 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleResponse: Codable, Equa
     return
       "type.googleapis.com/google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

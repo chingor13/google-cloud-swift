@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class InstanceGroupManagersRetry: InstanceGroupManagersStub {
       let inner: any InstanceGroupManagersStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any InstanceGroupManagersStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any InstanceGroupManagersStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -51,17 +51,15 @@
 
       public func abandonInstances(
         request: InstanceGroupManagersClient.AbandonInstancesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (
-              r: InstanceGroupManagersClient.AbandonInstancesRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: InstanceGroupManagersClient.AbandonInstancesRequest, o: GoogleGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.abandonInstances(request: r, options: o)
           })
@@ -69,14 +67,14 @@
 
       public func aggregatedList(
         request: InstanceGroupManagersClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: InstanceGroupManagersClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: InstanceGroupManagersClient.AggregatedListRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.InstanceGroupManagerAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
@@ -85,7 +83,7 @@
 
       public func applyUpdatesToInstances(
         request: InstanceGroupManagersClient.ApplyUpdatesToInstancesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
@@ -94,7 +92,7 @@
           action: {
             (
               r: InstanceGroupManagersClient.ApplyUpdatesToInstancesRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.applyUpdatesToInstances(request: r, options: o)
@@ -103,32 +101,30 @@
 
       public func createInstances(
         request: InstanceGroupManagersClient.CreateInstancesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (
-              r: InstanceGroupManagersClient.CreateInstancesRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: InstanceGroupManagersClient.CreateInstancesRequest, o: GoogleGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.createInstances(request: r, options: o)
           })
       }
 
       public func delete(
-        request: InstanceGroupManagersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupManagersClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: InstanceGroupManagersClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: InstanceGroupManagersClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
@@ -136,17 +132,15 @@
 
       public func deleteInstances(
         request: InstanceGroupManagersClient.DeleteInstancesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (
-              r: InstanceGroupManagersClient.DeleteInstancesRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: InstanceGroupManagersClient.DeleteInstancesRequest, o: GoogleGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.deleteInstances(request: r, options: o)
           })
@@ -154,7 +148,7 @@
 
       public func deletePerInstanceConfigs(
         request: InstanceGroupManagersClient.DeletePerInstanceConfigsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
@@ -163,7 +157,7 @@
           action: {
             (
               r: InstanceGroupManagersClient.DeletePerInstanceConfigsRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.deletePerInstanceConfigs(request: r, options: o)
@@ -171,60 +165,59 @@
       }
 
       public func `get`(
-        request: InstanceGroupManagersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupManagersClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupManager {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: InstanceGroupManagersClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.InstanceGroupManager
+            (r: InstanceGroupManagersClient.GetRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.InstanceGroupManager
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func insert(
-        request: InstanceGroupManagersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupManagersClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: InstanceGroupManagersClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: InstanceGroupManagersClient.InsertRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: InstanceGroupManagersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupManagersClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: InstanceGroupManagersClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.InstanceGroupManagerList
+            (r: InstanceGroupManagersClient.ListRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.InstanceGroupManagerList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func listErrors(
-        request: InstanceGroupManagersClient.ListErrorsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupManagersClient.ListErrorsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupManagersListErrorsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: InstanceGroupManagersClient.ListErrorsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: InstanceGroupManagersClient.ListErrorsRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.InstanceGroupManagersListErrorsResponse
             in
             return try await self.inner.listErrors(request: r, options: o)
@@ -233,7 +226,7 @@
 
       public func listManagedInstances(
         request: InstanceGroupManagersClient.ListManagedInstancesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupManagersListManagedInstancesResponse {
         try await self._intercept(
           request: request,
@@ -242,7 +235,7 @@
           action: {
             (
               r: InstanceGroupManagersClient.ListManagedInstancesRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.InstanceGroupManagersListManagedInstancesResponse
             in
             return try await self.inner.listManagedInstances(request: r, options: o)
@@ -251,7 +244,7 @@
 
       public func listPerInstanceConfigs(
         request: InstanceGroupManagersClient.ListPerInstanceConfigsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupManagersListPerInstanceConfigsResp {
         try await self._intercept(
           request: request,
@@ -260,7 +253,7 @@
           action: {
             (
               r: InstanceGroupManagersClient.ListPerInstanceConfigsRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.InstanceGroupManagersListPerInstanceConfigsResp
             in
             return try await self.inner.listPerInstanceConfigs(request: r, options: o)
@@ -268,15 +261,15 @@
       }
 
       public func patch(
-        request: InstanceGroupManagersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupManagersClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: InstanceGroupManagersClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: InstanceGroupManagersClient.PatchRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })
@@ -284,7 +277,7 @@
 
       public func patchPerInstanceConfigs(
         request: InstanceGroupManagersClient.PatchPerInstanceConfigsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
@@ -293,7 +286,7 @@
           action: {
             (
               r: InstanceGroupManagersClient.PatchPerInstanceConfigsRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patchPerInstanceConfigs(request: r, options: o)
@@ -302,32 +295,30 @@
 
       public func recreateInstances(
         request: InstanceGroupManagersClient.RecreateInstancesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (
-              r: InstanceGroupManagersClient.RecreateInstancesRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: InstanceGroupManagersClient.RecreateInstancesRequest, o: GoogleGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.recreateInstances(request: r, options: o)
           })
       }
 
       public func resize(
-        request: InstanceGroupManagersClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupManagersClient.ResizeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: InstanceGroupManagersClient.ResizeRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: InstanceGroupManagersClient.ResizeRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.resize(request: r, options: o)
           })
@@ -335,17 +326,15 @@
 
       public func resumeInstances(
         request: InstanceGroupManagersClient.ResumeInstancesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (
-              r: InstanceGroupManagersClient.ResumeInstancesRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: InstanceGroupManagersClient.ResumeInstancesRequest, o: GoogleGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.resumeInstances(request: r, options: o)
           })
@@ -353,17 +342,15 @@
 
       public func setInstanceTemplate(
         request: InstanceGroupManagersClient.SetInstanceTemplateRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (
-              r: InstanceGroupManagersClient.SetInstanceTemplateRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: InstanceGroupManagersClient.SetInstanceTemplateRequest, o: GoogleGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setInstanceTemplate(request: r, options: o)
           })
@@ -371,14 +358,14 @@
 
       public func setTargetPools(
         request: InstanceGroupManagersClient.SetTargetPoolsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: InstanceGroupManagersClient.SetTargetPoolsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: InstanceGroupManagersClient.SetTargetPoolsRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setTargetPools(request: r, options: o)
@@ -387,14 +374,14 @@
 
       public func startInstances(
         request: InstanceGroupManagersClient.StartInstancesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: InstanceGroupManagersClient.StartInstancesRequest, o: GoogleCloudGax.RequestOptions)
+            (r: InstanceGroupManagersClient.StartInstancesRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.startInstances(request: r, options: o)
@@ -402,15 +389,14 @@
       }
 
       public func stopInstances(
-        request: InstanceGroupManagersClient.StopInstancesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupManagersClient.StopInstancesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: InstanceGroupManagersClient.StopInstancesRequest, o: GoogleCloudGax.RequestOptions)
+            (r: InstanceGroupManagersClient.StopInstancesRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.stopInstances(request: r, options: o)
@@ -419,17 +405,15 @@
 
       public func suspendInstances(
         request: InstanceGroupManagersClient.SuspendInstancesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (
-              r: InstanceGroupManagersClient.SuspendInstancesRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: InstanceGroupManagersClient.SuspendInstancesRequest, o: GoogleGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.suspendInstances(request: r, options: o)
           })
@@ -437,7 +421,7 @@
 
       public func updatePerInstanceConfigs(
         request: InstanceGroupManagersClient.UpdatePerInstanceConfigsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
@@ -446,7 +430,7 @@
           action: {
             (
               r: InstanceGroupManagersClient.UpdatePerInstanceConfigsRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.updatePerInstanceConfigs(request: r, options: o)
@@ -454,14 +438,14 @@
       }
 
       public func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ZoneOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ZoneOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

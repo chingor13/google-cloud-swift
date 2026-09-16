@@ -16,10 +16,10 @@
 
 #if Routers
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Network Layer Reachability Information (NLRI) for a route.
-  public struct BgpRouteNetworkLayerReachabilityInformation: Codable, Equatable, GoogleCloudWKT
+  public struct BgpRouteNetworkLayerReachabilityInformation: Codable, Equatable, GoogleWKT
       ._AnyPackable,
     Sendable
   {
@@ -30,7 +30,7 @@
     /// Human readable CIDR notation for a prefix. E.g. 10.42.0.0/16.
     public var `prefix`: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BgpRouteNetworkLayerReachabilityInformation`.
     public init() {}
@@ -69,7 +69,7 @@
       self.`prefix` = try container.decodeIfPresent(Swift.String.self, forKey: .`prefix`)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -86,11 +86,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.BgpRouteNetworkLayerReachabilityInformation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

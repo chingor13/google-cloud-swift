@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func listLinkedTargets(
-      request: ListLinkedTargetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLinkedTargetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.ListLinkedTargetsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLinkedTargets",
         action: {
-          (r: ListLinkedTargetsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListLinkedTargetsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.ListLinkedTargetsResponse
           in
           return try await self.inner.listLinkedTargets(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func listLinkedSources(
-      request: ListLinkedSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLinkedSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.ListLinkedSourcesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLinkedSources",
         action: {
-          (r: ListLinkedSourcesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListLinkedSourcesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.ListLinkedSourcesResponse
           in
           return try await self.inner.listLinkedSources(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func createDocumentLink(
-      request: CreateDocumentLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDocumentLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.DocumentLink {
       try await self._intercept(
         request: request,
         options: options,
         name: "createDocumentLink",
         action: {
-          (r: CreateDocumentLinkRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateDocumentLinkRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.DocumentLink
           in
           return try await self.inner.createDocumentLink(request: r, options: o)
@@ -103,27 +103,27 @@ extension Clients {
     }
 
     public func deleteDocumentLink(
-      request: DeleteDocumentLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDocumentLinkRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteDocumentLink",
         action: {
-          (r: DeleteDocumentLinkRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          (r: DeleteDocumentLinkRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteDocumentLink(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol QuotaAdjusterSettingsManagerStub: Sendable {
     func updateQuotaAdjusterSettings(
-      request: UpdateQuotaAdjusterSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateQuotaAdjusterSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings
 
     func getQuotaAdjusterSettings(
-      request: GetQuotaAdjusterSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQuotaAdjusterSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings
   }
 }

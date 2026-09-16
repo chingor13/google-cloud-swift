@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// GatewayControl is the control plane API for Connect Gateway.
 ///
@@ -28,7 +28,7 @@ public final class GatewayControlClient: Clients.GatewayControlProtocol, Sendabl
   let inner: any Clients.GatewayControlStub
 
   /// Creates a new `GatewayControlClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.GatewayControlStub = try Clients.GatewayControlTransport(options)
     inner = Clients.GatewayControlRetry(inner, options: options)
     if let logger = options.logger {
@@ -42,7 +42,7 @@ public final class GatewayControlClient: Clients.GatewayControlProtocol, Sendabl
   ///
   /// @Snippet(path: "GatewayControl_GenerateCredentials")
   public func generateCredentials(
-    request: GenerateCredentialsRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateCredentialsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEConnectGatewayV1.GenerateCredentialsResponse {
     try await self.inner.generateCredentials(request: request, options: options)
   }
@@ -61,7 +61,7 @@ extension Clients {
 
     /// See `GatewayControlClient.generateCredentials`.
     func generateCredentials(
-      request: GenerateCredentialsRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateCredentialsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEConnectGatewayV1.GenerateCredentialsResponse
   }
 }
@@ -75,8 +75,8 @@ extension Clients.GatewayControlProtocol {
   }
 
   public func generateCredentials(
-    request: GenerateCredentialsRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateCredentialsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEConnectGatewayV1.GenerateCredentialsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

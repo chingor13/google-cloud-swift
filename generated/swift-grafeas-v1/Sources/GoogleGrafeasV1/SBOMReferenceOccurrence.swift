@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The occurrence representing an SBOM reference as applied to a specific
 /// resource. The occurrence follows the DSSE specification. See
 /// https://github.com/secure-systems-lab/dsse/blob/master/envelope.md for more
 /// details.
-public struct SBOMReferenceOccurrence: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SBOMReferenceOccurrence: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The actual payload that contains the SBOM reference data.
@@ -35,7 +35,7 @@ public struct SBOMReferenceOccurrence: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// The signatures over the payload.
   public var signatures: [EnvelopeSignature] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SBOMReferenceOccurrence`.
   public init() {}
@@ -81,7 +81,7 @@ public struct SBOMReferenceOccurrence: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,10 +98,10 @@ public struct SBOMReferenceOccurrence: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.SBOMReferenceOccurrence"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,10 +16,10 @@
 
 #if SqlBackupRunsService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A BackupRun resource.
-  public struct BackupRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BackupRun: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// This is always `sql#backupRun`.
@@ -31,7 +31,7 @@
     /// The time the run was enqueued in UTC timezone in
     /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var enqueuedTime: GoogleCloudWKT.Timestamp? = nil
+    public var enqueuedTime: GoogleWKT.Timestamp? = nil
 
     /// The identifier for this backup run. Unique only for a specific Cloud SQL
     /// instance.
@@ -40,12 +40,12 @@
     /// The time the backup operation actually started in UTC timezone in
     /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var startTime: GoogleCloudWKT.Timestamp? = nil
+    public var startTime: GoogleWKT.Timestamp? = nil
 
     /// The time the backup operation completed in UTC timezone in
     /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var endTime: GoogleCloudWKT.Timestamp? = nil
+    public var endTime: GoogleWKT.Timestamp? = nil
 
     /// Information about why the backup operation failed. This is only present if
     /// the run has the FAILED status.
@@ -62,7 +62,7 @@
     /// The start time of the backup window during which this the backup was
     /// attempted in [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for
     /// example `2012-11-15T16:19:00.094Z`.
-    public var windowStartTime: GoogleCloudWKT.Timestamp? = nil
+    public var windowStartTime: GoogleWKT.Timestamp? = nil
 
     /// Name of the database instance.
     public var instance: Swift.String = Swift.String()
@@ -93,7 +93,7 @@
     /// Output only. The maximum chargeable bytes for the backup.
     public var maxChargeableBytes: Swift.Int64? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BackupRun`.
     public init() {}
@@ -170,13 +170,12 @@
         self.status = value
       }
       self.enqueuedTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .enqueuedTime)
+        GoogleWKT.Timestamp.self, forKey: .enqueuedTime)
       if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .id) {
         self.id = value
       }
-      self.startTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-      self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+      self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+      self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
       self.error = try container.decodeIfPresent(OperationError.self, forKey: .error)
       if let value = try container.decodeIfPresent(SqlBackupRunType.self, forKey: .type) {
         self.type = value
@@ -185,7 +184,7 @@
         self.description = value
       }
       self.windowStartTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .windowStartTime)
+        GoogleWKT.Timestamp.self, forKey: .windowStartTime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .instance) {
         self.instance = value
       }
@@ -214,7 +213,7 @@
         Swift.Int64.self, forKey: .maxChargeableBytes)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -248,11 +247,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.BackupRun"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

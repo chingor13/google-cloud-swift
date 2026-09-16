@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// This resource represents the BigQuery export configuration for a Chronicle
 /// instance which includes Google Cloud Platform resources like Cloud Storage
 /// buckets, BigQuery datasets etc and the export settings for each data source.
-public struct BigQueryExport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BigQueryExport: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the BigQueryExport.
@@ -50,7 +50,7 @@ public struct BigQueryExport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. The export settings for the UDM Events data source.
   public var udmEventsSettings: DataSourceExportSettings? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BigQueryExport`.
   public init() {}
@@ -120,7 +120,7 @@ public struct BigQueryExport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       DataSourceExportSettings.self, forKey: .udmEventsSettings)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -143,10 +143,10 @@ public struct BigQueryExport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.chronicle.v1.BigQueryExport"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

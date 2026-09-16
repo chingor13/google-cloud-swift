@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Protobuf message describing the device message, used from several RPCs.
-public struct DeviceSession: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DeviceSession: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Name of the DeviceSession, e.g.
@@ -37,13 +37,13 @@ public struct DeviceSession: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. The interval of time that this device must be interacted with
   /// before it transitions from ACTIVE to TIMEOUT_INACTIVITY.
-  public var inactivityTimeout: GoogleCloudWKT.Duration? = nil
+  public var inactivityTimeout: GoogleWKT.Duration? = nil
 
   /// Output only. The time that the Session was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp that the session first became ACTIVE.
-  public var activeStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var activeStartTime: GoogleWKT.Timestamp? = nil
 
   /// Required. The requested device
   public var androidDevice: AndroidDevice? = nil
@@ -51,7 +51,7 @@ public struct DeviceSession: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The amount of time that a device will be initially allocated for.
   public var expiration: OneOf_Expiration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DeviceSession`.
   public init() {}
@@ -117,11 +117,10 @@ public struct DeviceSession: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.stateHistories = value
     }
     self.inactivityTimeout = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .inactivityTimeout)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+      GoogleWKT.Duration.self, forKey: .inactivityTimeout)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.activeStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .activeStartTime)
+      GoogleWKT.Timestamp.self, forKey: .activeStartTime)
     self.androidDevice = try container.decodeIfPresent(AndroidDevice.self, forKey: .androidDevice)
 
     var expiration: OneOf_Expiration? = nil
@@ -134,18 +133,18 @@ public struct DeviceSession: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       expiration = $0
     }
-    if let ttl = try container.decodeIfPresent(GoogleCloudWKT.Duration?.self, forKey: .ttl) {
+    if let ttl = try container.decodeIfPresent(GoogleWKT.Duration?.self, forKey: .ttl) {
       try expirationCheckAndSet(.ttl(ttl))
     }
     if let expireTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp?.self, forKey: .expireTime)
+      GoogleWKT.Timestamp?.self, forKey: .expireTime)
     {
       try expirationCheckAndSet(.expireTime(expireTime))
     }
     self.expiration = expiration
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -175,7 +174,7 @@ public struct DeviceSession: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// A message encapsulating a series of Session states and the time that the
   /// DeviceSession first entered those states.
-  public struct SessionStateEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SessionStateEvent: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The session_state tracked by this event
@@ -183,12 +182,12 @@ public struct DeviceSession: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     /// Output only. The time that the session_state first encountered that
     /// state.
-    public var eventTime: GoogleCloudWKT.Timestamp? = nil
+    public var eventTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. A human-readable message to explain the state.
     public var stateMessage: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SessionStateEvent`.
     public init() {}
@@ -230,14 +229,13 @@ public struct DeviceSession: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       {
         self.sessionState = value
       }
-      self.eventTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .eventTime)
+      self.eventTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .eventTime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .stateMessage) {
         self.stateMessage = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -254,11 +252,11 @@ public struct DeviceSession: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.devicestreaming.v1.DeviceSession.SessionStateEvent"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -416,20 +414,20 @@ public struct DeviceSession: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The amount of time that a device will be initially allocated
     /// for. This can eventually be extended with the UpdateDeviceSession RPC.
     /// Default: 15 minutes.
-    indirect case ttl(GoogleCloudWKT.Duration?)
+    indirect case ttl(GoogleWKT.Duration?)
     /// Optional. If the device is still in use at this time, any connections
     /// will be ended and the SessionState will transition from ACTIVE to
     /// FINISHED.
-    indirect case expireTime(GoogleCloudWKT.Timestamp?)
+    indirect case expireTime(GoogleWKT.Timestamp?)
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.devicestreaming.v1.DeviceSession"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

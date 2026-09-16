@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudControlsPartnerV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(organizationId: String, locationId: String, customerId: String, ) async throws {
   let client = try GoogleCloudControlsPartnerV1.CloudControlsPartnerCoreClient()

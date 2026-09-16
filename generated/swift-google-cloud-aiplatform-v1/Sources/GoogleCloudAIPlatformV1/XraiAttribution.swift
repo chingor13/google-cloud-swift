@@ -16,7 +16,7 @@
 
 #if DatasetService || DeploymentResourcePoolService || EndpointService || JobService || ModelService || PipelineService || PredictionService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// An explanation method that redistributes Integrated Gradients
   /// attributions to segmented regions, taking advantage of the model's fully
@@ -24,7 +24,7 @@
   /// https://arxiv.org/abs/1906.02825
   ///
   /// Supported only by image Models.
-  public struct XraiAttribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct XraiAttribution: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The number of steps for approximating the path integral.
@@ -50,7 +50,7 @@
     /// https://arxiv.org/abs/2004.03383
     public var blurBaselineConfig: BlurBaselineConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `XraiAttribution`.
     public init() {}
@@ -96,7 +96,7 @@
         BlurBaselineConfig.self, forKey: .blurBaselineConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -113,11 +113,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.XraiAttribution"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

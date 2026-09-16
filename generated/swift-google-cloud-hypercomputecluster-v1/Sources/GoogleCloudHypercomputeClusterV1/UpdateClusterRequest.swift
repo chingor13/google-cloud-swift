@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [UpdateCluster][google.cloud.hypercomputecluster.v1.HypercomputeCluster.UpdateCluster].
 ///
 /// [google.cloud.hypercomputecluster.v1.HypercomputeCluster.UpdateCluster]: <doc:HypercomputeClusterClient/updateCluster(request:options:)>
-public struct UpdateClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateClusterRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Cluster to update.
@@ -30,14 +30,14 @@ public struct UpdateClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// Optional. Mask specifying which fields in the cluster to update. All paths
   /// must be specified explicitly - wildcards are not supported. At least one
   /// path must be provided.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Optional. A unique identifier for this request. A random UUID is
   /// recommended. This request is idempotent if and only if `request_id` is
   /// provided.
   public var requestId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateClusterRequest`.
   public init() {}
@@ -75,14 +75,13 @@ public struct UpdateClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.cluster = try container.decodeIfPresent(Cluster.self, forKey: .cluster)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .requestId) {
       self.requestId = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -99,10 +98,10 @@ public struct UpdateClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.hypercomputecluster.v1.UpdateClusterRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,9 +15,9 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
-public struct ComplianceNote: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ComplianceNote: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The title that identifies this compliance check.
@@ -43,7 +43,7 @@ public struct ComplianceNote: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Potential impact of the suggested remediation
   public var potentialImpact: OneOf_PotentialImpact? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ComplianceNote`.
   public init() {}
@@ -142,7 +142,7 @@ public struct ComplianceNote: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.potentialImpact = potentialImpact
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -174,14 +174,14 @@ public struct ComplianceNote: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// A compliance check that is a CIS benchmark.
-  public struct CisBenchmark: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CisBenchmark: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var profileLevel: Swift.Int32 = Swift.Int32()
 
     public var severity: Severity = Severity()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CisBenchmark`.
     public init() {}
@@ -224,7 +224,7 @@ public struct ComplianceNote: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -240,11 +240,11 @@ public struct ComplianceNote: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.ComplianceNote.CisBenchmark"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -260,10 +260,10 @@ public struct ComplianceNote: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.ComplianceNote"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

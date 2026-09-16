@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Add-on configuration that is shared across all add-on host applications.
-public struct CommonAddOnManifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CommonAddOnManifest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The display name of the add-on.
@@ -56,9 +56,9 @@ public struct CommonAddOnManifest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// prefixes specified in this whitelist. If the prefix omits the scheme, HTTPS
   /// is assumed.  Notice that HTTP links are automatically rewritten to HTTPS
   /// links.
-  public var openLinkUrlPrefixes: GoogleCloudWKT.ListValue? = nil
+  public var openLinkUrlPrefixes: GoogleWKT.ListValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CommonAddOnManifest`.
   public init() {}
@@ -126,10 +126,10 @@ public struct CommonAddOnManifest: Codable, Equatable, GoogleCloudWKT._AnyPackab
       self.universalActions = value
     }
     self.openLinkUrlPrefixes = try container.decodeIfPresent(
-      GoogleCloudWKT.ListValue.self, forKey: .openLinkUrlPrefixes)
+      GoogleWKT.ListValue.self, forKey: .openLinkUrlPrefixes)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -151,10 +151,10 @@ public struct CommonAddOnManifest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.apps.script.type.CommonAddOnManifest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

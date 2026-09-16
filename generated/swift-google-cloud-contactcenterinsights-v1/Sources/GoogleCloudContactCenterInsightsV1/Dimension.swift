@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A dimension determines the grouping key for the query. In SQL terms, these
 /// would be part of both the "SELECT" and "GROUP BY" clauses.
-public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Dimension: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The key of the dimension.
@@ -28,7 +28,7 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output-only metadata about the dimension.
   public var dimensionMetadata: OneOf_DimensionMetadata? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Dimension`.
   public init() {}
@@ -109,7 +109,7 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.dimensionMetadata = dimensionMetadata
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -135,7 +135,7 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Metadata about the issue dimension.
-  public struct IssueDimensionMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IssueDimensionMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The issue ID.
@@ -147,7 +147,7 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The parent issue model ID.
     public var issueModelId: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IssueDimensionMetadata`.
     public init() {}
@@ -195,7 +195,7 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -213,16 +213,16 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.Dimension.IssueDimensionMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Metadata about the agent dimension.
-  public struct AgentDimensionMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AgentDimensionMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. A user-specified string representing the agent.
@@ -234,7 +234,7 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. A user-specified string representing the agent's team.
     public var agentTeam: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AgentDimensionMetadata`.
     public init() {}
@@ -282,7 +282,7 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -300,16 +300,16 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.Dimension.AgentDimensionMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Metadata about the QA question dimension.
-  public struct QaQuestionDimensionMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QaQuestionDimensionMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The QA scorecard ID.
@@ -321,7 +321,7 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The full body of the question.
     public var questionBody: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QaQuestionDimensionMetadata`.
     public init() {}
@@ -369,7 +369,7 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -387,18 +387,18 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.Dimension.QaQuestionDimensionMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Metadata about the QA question-answer dimension.
   /// This is useful for showing the answer distribution for questions for a
   /// given scorecard.
-  public struct QaQuestionAnswerDimensionMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QaQuestionAnswerDimensionMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The QA scorecard ID.
@@ -413,7 +413,7 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The full body of the question.
     public var answerValue: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QaQuestionAnswerDimensionMetadata`.
     public init() {}
@@ -466,7 +466,7 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -485,11 +485,11 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.Dimension.QaQuestionAnswerDimensionMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -648,10 +648,10 @@ public struct Dimension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.Dimension"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A `Service` is a discrete, autonomous, and network-accessible unit, designed
 /// to solve an individual concern
 /// ([Wikipedia](https://en.wikipedia.org/wiki/Service-orientation)). In
 /// Cloud Monitoring, a `Service` acts as the root resource under which
 /// operational aspects of the service are accessible.
-public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Service: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Resource name for this Service. The format is:
@@ -53,7 +53,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// REQUIRED. Service-identifying atoms specifying the underlying service.
   public var identifier: OneOf_Identifier? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Service`.
   public init() {}
@@ -183,7 +183,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.identifier = identifier
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -227,10 +227,10 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Use a custom service to designate a service that you want to monitor
   /// when none of the other service types (like App Engine, Cloud Run, or
   /// a GKE type) matches your intended service.
-  public struct Custom: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Custom: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Custom`.
     public init() {}
@@ -261,7 +261,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -275,16 +275,16 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.Service.Custom"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// App Engine service. Learn more at https://cloud.google.com/appengine.
-  public struct AppEngine: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AppEngine: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The ID of the App Engine module underlying this service. Corresponds to
@@ -292,7 +292,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// resource](https://cloud.google.com/monitoring/api/resources#tag_gae_app).
     public var moduleId: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AppEngine`.
     public init() {}
@@ -330,7 +330,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -345,16 +345,16 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.Service.AppEngine"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Cloud Endpoints service. Learn more at https://cloud.google.com/endpoints.
-  public struct CloudEndpoints: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CloudEndpoints: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the Cloud Endpoints service underlying this service.
@@ -362,7 +362,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// resource](https://cloud.google.com/monitoring/api/resources#tag_api).
     public var service: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CloudEndpoints`.
     public init() {}
@@ -400,7 +400,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -415,18 +415,18 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.Service.CloudEndpoints"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Istio service scoped to a single Kubernetes cluster. Learn more at
   /// https://istio.io. Clusters running OSS Istio will have their services
   /// ingested as this type.
-  public struct ClusterIstio: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ClusterIstio: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The location of the Kubernetes cluster in which this Istio service is
@@ -447,7 +447,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// `destination_service_name` metric label in Istio metrics.
     public var serviceName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ClusterIstio`.
     public init() {}
@@ -500,7 +500,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -518,17 +518,17 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.Service.ClusterIstio"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Istio service scoped to an Istio mesh. Anthos clusters running ASM < 1.6.8
   /// will have their services ingested as this type.
-  public struct MeshIstio: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MeshIstio: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Identifier for the mesh in which this Istio service is defined.
@@ -543,7 +543,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// `destination_service_name` metric label in Istio metrics.
     public var serviceName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MeshIstio`.
     public init() {}
@@ -591,7 +591,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -608,17 +608,17 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.Service.MeshIstio"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Canonical service scoped to an Istio mesh. Anthos clusters running ASM >=
   /// 1.6.8 will have their services ingested as this type.
-  public struct IstioCanonicalService: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IstioCanonicalService: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Identifier for the Istio mesh in which this canonical service is defined.
@@ -638,7 +638,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// metrics](https://cloud.google.com/monitoring/api/metrics_istio).
     public var canonicalService: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IstioCanonicalService`.
     public init() {}
@@ -688,7 +688,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -705,16 +705,16 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.Service.IstioCanonicalService"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Cloud Run service. Learn more at https://cloud.google.com/run.
-  public struct CloudRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CloudRun: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the Cloud Run service. Corresponds to the `service_name`
@@ -727,7 +727,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// resource](https://cloud.google.com/monitoring/api/resources#tag_cloud_run_revision).
     public var location: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CloudRun`.
     public init() {}
@@ -770,7 +770,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -786,18 +786,18 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.Service.CloudRun"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// GKE Namespace. The field names correspond to the resource metadata labels
   /// on monitored resources that fall under a namespace (for example,
   /// `k8s_container` or `k8s_pod`).
-  public struct GkeNamespace: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GkeNamespace: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The project this resource lives in. For legacy services
@@ -814,7 +814,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The name of this namespace.
     public var namespaceName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GkeNamespace`.
     public init() {}
@@ -867,7 +867,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -885,18 +885,18 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.Service.GkeNamespace"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A GKE Workload (Deployment, StatefulSet, etc). The field names correspond
   /// to the metadata labels on monitored resources that fall under a workload
   /// (for example, `k8s_container` or `k8s_pod`).
-  public struct GkeWorkload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GkeWorkload: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The project this resource lives in. For legacy services
@@ -919,7 +919,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The name of this workload.
     public var topLevelControllerName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GkeWorkload`.
     public init() {}
@@ -986,7 +986,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1006,11 +1006,11 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.Service.GkeWorkload"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1020,7 +1020,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The field names correspond to the resource labels on [`k8s_service`
   /// monitored
   /// resources](https://cloud.google.com/monitoring/api/resources#tag_k8s_service).
-  public struct GkeService: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GkeService: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The project this resource lives in. For legacy services
@@ -1040,7 +1040,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The name of this service.
     public var serviceName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GkeService`.
     public init() {}
@@ -1098,7 +1098,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1117,18 +1117,18 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.Service.GkeService"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A well-known service type, defined by its service type and service labels.
   /// Documentation and examples
   /// [here](https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring/api/api-structures#basic-svc-w-basic-sli).
-  public struct BasicService: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BasicService: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The type of service that this basic service defines, e.g.
@@ -1143,7 +1143,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [here](https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring/api/api-structures#basic-svc-w-basic-sli).
     public var serviceLabels: [Swift.String: Swift.String] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BasicService`.
     public init() {}
@@ -1188,7 +1188,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1204,23 +1204,23 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.Service.BasicService"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for how to query telemetry on a Service.
-  public struct Telemetry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Telemetry: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The full name of the resource that defines this service. Formatted as
     /// described in https://cloud.google.com/apis/design/resource_names.
     public var resourceName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Telemetry`.
     public init() {}
@@ -1258,7 +1258,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1273,11 +1273,11 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.Service.Telemetry"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1310,10 +1310,10 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.Service"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

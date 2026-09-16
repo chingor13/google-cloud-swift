@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// HCX activation key. A default key is created during
 /// private cloud provisioning, but this behavior is subject to change
@@ -28,7 +28,7 @@ import Foundation
 ///
 /// [google.cloud.vmwareengine.v1.VmwareEngine.CreateHcxActivationKey]: <doc:VmwareEngineClient/createHcxActivationKey(request:options:)>
 /// [google.cloud.vmwareengine.v1.VmwareEngine.ListHcxActivationKeys]: <doc:VmwareEngineClient/listHcxActivationKeys(request:options:)>
-public struct HcxActivationKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct HcxActivationKey: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of this HcxActivationKey.
@@ -39,7 +39,7 @@ public struct HcxActivationKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. Creation time of HCX activation key.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. State of HCX activation key.
   public var state: HcxActivationKey.State = HcxActivationKey.State()
@@ -50,7 +50,7 @@ public struct HcxActivationKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. System-generated unique identifier for the resource.
   public var uid: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `HcxActivationKey`.
   public init() {}
@@ -94,8 +94,7 @@ public struct HcxActivationKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(HcxActivationKey.State.self, forKey: .state) {
       self.state = value
     }
@@ -107,7 +106,7 @@ public struct HcxActivationKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -238,10 +237,10 @@ public struct HcxActivationKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmwareengine.v1.HcxActivationKey"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

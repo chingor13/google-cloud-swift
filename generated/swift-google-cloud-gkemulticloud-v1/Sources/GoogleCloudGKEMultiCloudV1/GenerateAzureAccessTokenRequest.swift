@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for `AzureClusters.GenerateAzureAccessToken` method.
 @available(*, deprecated)
-public struct GenerateAzureAccessTokenRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GenerateAzureAccessTokenRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the
@@ -35,7 +35,7 @@ public struct GenerateAzureAccessTokenRequest: Codable, Equatable, GoogleCloudWK
   /// [google.cloud.gkemulticloud.v1.AzureCluster]: <doc:AzureCluster>
   public var azureCluster: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GenerateAzureAccessTokenRequest`.
   public init() {}
@@ -73,7 +73,7 @@ public struct GenerateAzureAccessTokenRequest: Codable, Equatable, GoogleCloudWK
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -88,10 +88,10 @@ public struct GenerateAzureAccessTokenRequest: Codable, Equatable, GoogleCloudWK
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkemulticloud.v1.GenerateAzureAccessTokenRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

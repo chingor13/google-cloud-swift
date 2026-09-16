@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// IAM Policy Troubleshooter service.
 ///
@@ -30,7 +30,7 @@ public final class PolicyTroubleshooterClient: Clients.PolicyTroubleshooterProto
   let inner: any Clients.PolicyTroubleshooterStub
 
   /// Creates a new `PolicyTroubleshooterClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.PolicyTroubleshooterStub = try Clients.PolicyTroubleshooterTransport(
       options)
     inner = Clients.PolicyTroubleshooterRetry(inner, options: options)
@@ -46,7 +46,7 @@ public final class PolicyTroubleshooterClient: Clients.PolicyTroubleshooterProto
   ///
   /// @Snippet(path: "PolicyTroubleshooter_TroubleshootIamPolicy")
   public func troubleshootIamPolicy(
-    request: TroubleshootIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: TroubleshootIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudPolicyTroubleshooterIAMV3.TroubleshootIamPolicyResponse {
     try await self.inner.troubleshootIamPolicy(request: request, options: options)
   }
@@ -65,7 +65,7 @@ extension Clients {
 
     /// See `PolicyTroubleshooterClient.troubleshootIamPolicy`.
     func troubleshootIamPolicy(
-      request: TroubleshootIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: TroubleshootIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPolicyTroubleshooterIAMV3.TroubleshootIamPolicyResponse
   }
 }
@@ -79,8 +79,8 @@ extension Clients.PolicyTroubleshooterProtocol {
   }
 
   public func troubleshootIamPolicy(
-    request: TroubleshootIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: TroubleshootIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudPolicyTroubleshooterIAMV3.TroubleshootIamPolicyResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

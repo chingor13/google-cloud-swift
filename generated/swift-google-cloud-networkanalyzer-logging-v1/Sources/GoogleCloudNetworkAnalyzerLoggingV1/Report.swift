@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Log entry that describes a report from Network Analyzer.
-public struct Report: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Report: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The unique identifier of the report.
@@ -34,7 +34,7 @@ public struct Report: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var status: Report.ReportStatus = Report.ReportStatus()
 
   /// The timestamp when the report was first discovered by Network Analyzer.
-  public var firstReportTime: GoogleCloudWKT.Timestamp? = nil
+  public var firstReportTime: GoogleWKT.Timestamp? = nil
 
   /// Cause code of the report.
   public var causeCode: ReportCauseCode = ReportCauseCode()
@@ -57,7 +57,7 @@ public struct Report: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public var content: OneOf_Content? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Report`.
   public init() {}
@@ -123,7 +123,7 @@ public struct Report: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.status = value
     }
     self.firstReportTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .firstReportTime)
+      GoogleWKT.Timestamp.self, forKey: .firstReportTime)
     if let value = try container.decodeIfPresent(ReportCauseCode.self, forKey: .causeCode) {
       self.causeCode = value
     }
@@ -159,7 +159,7 @@ public struct Report: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.content = content
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -644,10 +644,10 @@ public struct Report: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkanalyzer.logging.v1.Report"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,43 +16,43 @@
 
 #if EngineService
   import Foundation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol EngineServiceStub: Sendable {
       func createEngine(
-        request: CreateEngineRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateEngineRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteEngine(
-        request: DeleteEngineRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteEngineRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func updateEngine(
-        request: UpdateEngineRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateEngineRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Engine
 
       func getEngine(
-        request: GetEngineRequest, options: GoogleCloudGax.RequestOptions
+        request: GetEngineRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Engine
 
       func listEngines(
-        request: ListEnginesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListEnginesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListEnginesResponse
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

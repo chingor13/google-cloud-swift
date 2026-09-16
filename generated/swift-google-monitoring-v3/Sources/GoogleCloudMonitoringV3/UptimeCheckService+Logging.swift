@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func listUptimeCheckConfigs(
-      request: ListUptimeCheckConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUptimeCheckConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckConfigsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listUptimeCheckConfigs",
         action: {
-          (r: ListUptimeCheckConfigsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListUptimeCheckConfigsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ListUptimeCheckConfigsResponse
           in
           return try await self.inner.listUptimeCheckConfigs(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func getUptimeCheckConfig(
-      request: GetUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "getUptimeCheckConfig",
         action: {
-          (r: GetUptimeCheckConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetUptimeCheckConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.UptimeCheckConfig
           in
           return try await self.inner.getUptimeCheckConfig(request: r, options: o)
@@ -87,14 +87,14 @@ extension Clients {
     }
 
     public func createUptimeCheckConfig(
-      request: CreateUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "createUptimeCheckConfig",
         action: {
-          (r: CreateUptimeCheckConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateUptimeCheckConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.UptimeCheckConfig
           in
           return try await self.inner.createUptimeCheckConfig(request: r, options: o)
@@ -102,14 +102,14 @@ extension Clients {
     }
 
     public func updateUptimeCheckConfig(
-      request: UpdateUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateUptimeCheckConfig",
         action: {
-          (r: UpdateUptimeCheckConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateUptimeCheckConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.UptimeCheckConfig
           in
           return try await self.inner.updateUptimeCheckConfig(request: r, options: o)
@@ -117,28 +117,27 @@ extension Clients {
     }
 
     public func deleteUptimeCheckConfig(
-      request: DeleteUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteUptimeCheckConfig",
         action: {
-          (r: DeleteUptimeCheckConfigRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void
-          in
+          (r: DeleteUptimeCheckConfigRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteUptimeCheckConfig(request: r, options: o)
         })
     }
 
     public func listUptimeCheckIps(
-      request: ListUptimeCheckIpsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUptimeCheckIpsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckIpsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listUptimeCheckIps",
         action: {
-          (r: ListUptimeCheckIpsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListUptimeCheckIpsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ListUptimeCheckIpsResponse
           in
           return try await self.inner.listUptimeCheckIps(request: r, options: o)

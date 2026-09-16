@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metadata used to register VOD configs.
-public struct VodConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VodConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the VOD config, in the form of
@@ -40,7 +40,7 @@ public struct VodConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Options for fetching source manifests and segments.
   public var sourceFetchOptions: FetchOptions? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VodConfig`.
   public init() {}
@@ -100,7 +100,7 @@ public struct VodConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       FetchOptions.self, forKey: .sourceFetchOptions)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -232,10 +232,10 @@ public struct VodConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.stitcher.v1.VodConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

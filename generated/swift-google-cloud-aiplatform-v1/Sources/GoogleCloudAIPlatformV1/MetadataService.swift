@@ -20,22 +20,22 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for reading and writing metadata entries.
   ///
   /// @Snippet(path: "MetadataServiceQuickstart")
   public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Sendable {
     let inner: any Clients.MetadataServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `MetadataServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.MetadataServiceStub = try Clients.MetadataServiceTransport(options)
       inner = Clients.MetadataServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -50,7 +50,7 @@
     ///
     /// @Snippet(path: "MetadataService_CreateMetadataStore")
     public func createMetadataStore(
-      request: CreateMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMetadataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createMetadataStore(request: request, options: options)
     }
@@ -59,21 +59,21 @@
     ///
     /// @Snippet(path: "MetadataService_CreateMetadataStore")
     public func createMetadataStore(
-      withPolling: CreateMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<MetadataStore> {
+      withPolling: CreateMetadataStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<MetadataStore> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<MetadataStore>.State in
+          -> GoogleGax._PollableOperationImpl<MetadataStore>.State in
         return try op._extractStatus(MetadataStore.self)
       }
       let rawOp = try await self.createMetadataStore(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<MetadataStore>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<MetadataStore>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -85,7 +85,7 @@
     ///
     /// @Snippet(path: "MetadataService_GetMetadataStore")
     public func getMetadataStore(
-      request: GetMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetadataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.MetadataStore {
       try await self.inner.getMetadataStore(request: request, options: options)
     }
@@ -94,7 +94,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListMetadataStores")
     public func listMetadataStores(
-      request: ListMetadataStoresRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMetadataStoresRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListMetadataStoresResponse {
       try await self.inner.listMetadataStores(request: request, options: options)
     }
@@ -103,7 +103,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListMetadataStores")
     public func listMetadataStores(
-      byItem: ListMetadataStoresRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListMetadataStoresRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<MetadataStore, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListMetadataStoresResponse in
@@ -111,7 +111,7 @@
         request.pageToken = token
         return try await self.listMetadataStores(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes a single MetadataStore and all its child resources (Artifacts,
@@ -119,7 +119,7 @@
     ///
     /// @Snippet(path: "MetadataService_DeleteMetadataStore")
     public func deleteMetadataStore(
-      request: DeleteMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMetadataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteMetadataStore(request: request, options: options)
     }
@@ -129,21 +129,21 @@
     ///
     /// @Snippet(path: "MetadataService_DeleteMetadataStore")
     public func deleteMetadataStore(
-      withPolling: DeleteMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteMetadataStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteMetadataStore(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -155,7 +155,7 @@
     ///
     /// @Snippet(path: "MetadataService_CreateArtifact")
     public func createArtifact(
-      request: CreateArtifactRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateArtifactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Artifact {
       try await self.inner.createArtifact(request: request, options: options)
     }
@@ -164,7 +164,7 @@
     ///
     /// @Snippet(path: "MetadataService_GetArtifact")
     public func getArtifact(
-      request: GetArtifactRequest, options: GoogleCloudGax.RequestOptions
+      request: GetArtifactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Artifact {
       try await self.inner.getArtifact(request: request, options: options)
     }
@@ -173,7 +173,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListArtifacts")
     public func listArtifacts(
-      request: ListArtifactsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListArtifactsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListArtifactsResponse {
       try await self.inner.listArtifacts(request: request, options: options)
     }
@@ -182,7 +182,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListArtifacts")
     public func listArtifacts(
-      byItem: ListArtifactsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListArtifactsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Artifact, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListArtifactsResponse in
@@ -190,14 +190,14 @@
         request.pageToken = token
         return try await self.listArtifacts(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Updates a stored Artifact.
     ///
     /// @Snippet(path: "MetadataService_UpdateArtifact")
     public func updateArtifact(
-      request: UpdateArtifactRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateArtifactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Artifact {
       try await self.inner.updateArtifact(request: request, options: options)
     }
@@ -206,7 +206,7 @@
     ///
     /// @Snippet(path: "MetadataService_DeleteArtifact")
     public func deleteArtifact(
-      request: DeleteArtifactRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteArtifactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteArtifact(request: request, options: options)
     }
@@ -215,21 +215,21 @@
     ///
     /// @Snippet(path: "MetadataService_DeleteArtifact")
     public func deleteArtifact(
-      withPolling: DeleteArtifactRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteArtifactRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteArtifact(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -241,7 +241,7 @@
     ///
     /// @Snippet(path: "MetadataService_PurgeArtifacts")
     public func purgeArtifacts(
-      request: PurgeArtifactsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeArtifactsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.purgeArtifacts(request: request, options: options)
     }
@@ -250,22 +250,22 @@
     ///
     /// @Snippet(path: "MetadataService_PurgeArtifacts")
     public func purgeArtifacts(
-      withPolling: PurgeArtifactsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PurgeArtifactsResponse> {
+      withPolling: PurgeArtifactsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PurgeArtifactsResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<PurgeArtifactsResponse>.State in
+          -> GoogleGax._PollableOperationImpl<PurgeArtifactsResponse>.State in
         return try op._extractStatus(PurgeArtifactsResponse.self)
       }
       let rawOp = try await self.purgeArtifacts(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<PurgeArtifactsResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<PurgeArtifactsResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -277,7 +277,7 @@
     ///
     /// @Snippet(path: "MetadataService_CreateContext")
     public func createContext(
-      request: CreateContextRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateContextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Context {
       try await self.inner.createContext(request: request, options: options)
     }
@@ -286,7 +286,7 @@
     ///
     /// @Snippet(path: "MetadataService_GetContext")
     public func getContext(
-      request: GetContextRequest, options: GoogleCloudGax.RequestOptions
+      request: GetContextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Context {
       try await self.inner.getContext(request: request, options: options)
     }
@@ -295,7 +295,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListContexts")
     public func listContexts(
-      request: ListContextsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListContextsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListContextsResponse {
       try await self.inner.listContexts(request: request, options: options)
     }
@@ -304,7 +304,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListContexts")
     public func listContexts(
-      byItem: ListContextsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListContextsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Context, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListContextsResponse in
@@ -312,14 +312,14 @@
         request.pageToken = token
         return try await self.listContexts(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Updates a stored Context.
     ///
     /// @Snippet(path: "MetadataService_UpdateContext")
     public func updateContext(
-      request: UpdateContextRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateContextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Context {
       try await self.inner.updateContext(request: request, options: options)
     }
@@ -328,7 +328,7 @@
     ///
     /// @Snippet(path: "MetadataService_DeleteContext")
     public func deleteContext(
-      request: DeleteContextRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteContextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteContext(request: request, options: options)
     }
@@ -337,21 +337,21 @@
     ///
     /// @Snippet(path: "MetadataService_DeleteContext")
     public func deleteContext(
-      withPolling: DeleteContextRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteContextRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteContext(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -363,7 +363,7 @@
     ///
     /// @Snippet(path: "MetadataService_PurgeContexts")
     public func purgeContexts(
-      request: PurgeContextsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeContextsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.purgeContexts(request: request, options: options)
     }
@@ -372,22 +372,22 @@
     ///
     /// @Snippet(path: "MetadataService_PurgeContexts")
     public func purgeContexts(
-      withPolling: PurgeContextsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PurgeContextsResponse> {
+      withPolling: PurgeContextsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PurgeContextsResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<PurgeContextsResponse>.State in
+          -> GoogleGax._PollableOperationImpl<PurgeContextsResponse>.State in
         return try op._extractStatus(PurgeContextsResponse.self)
       }
       let rawOp = try await self.purgeContexts(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<PurgeContextsResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<PurgeContextsResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -401,7 +401,7 @@
     ///
     /// @Snippet(path: "MetadataService_AddContextArtifactsAndExecutions")
     public func addContextArtifactsAndExecutions(
-      request: AddContextArtifactsAndExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      request: AddContextArtifactsAndExecutionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.AddContextArtifactsAndExecutionsResponse {
       try await self.inner.addContextArtifactsAndExecutions(request: request, options: options)
     }
@@ -414,7 +414,7 @@
     ///
     /// @Snippet(path: "MetadataService_AddContextChildren")
     public func addContextChildren(
-      request: AddContextChildrenRequest, options: GoogleCloudGax.RequestOptions
+      request: AddContextChildrenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.AddContextChildrenResponse {
       try await self.inner.addContextChildren(request: request, options: options)
     }
@@ -425,7 +425,7 @@
     ///
     /// @Snippet(path: "MetadataService_RemoveContextChildren")
     public func removeContextChildren(
-      request: RemoveContextChildrenRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveContextChildrenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.RemoveContextChildrenResponse {
       try await self.inner.removeContextChildren(request: request, options: options)
     }
@@ -435,7 +435,7 @@
     ///
     /// @Snippet(path: "MetadataService_QueryContextLineageSubgraph")
     public func queryContextLineageSubgraph(
-      request: QueryContextLineageSubgraphRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryContextLineageSubgraphRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.LineageSubgraph {
       try await self.inner.queryContextLineageSubgraph(request: request, options: options)
     }
@@ -444,7 +444,7 @@
     ///
     /// @Snippet(path: "MetadataService_CreateExecution")
     public func createExecution(
-      request: CreateExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Execution {
       try await self.inner.createExecution(request: request, options: options)
     }
@@ -453,7 +453,7 @@
     ///
     /// @Snippet(path: "MetadataService_GetExecution")
     public func getExecution(
-      request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Execution {
       try await self.inner.getExecution(request: request, options: options)
     }
@@ -462,7 +462,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListExecutions")
     public func listExecutions(
-      request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExecutionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListExecutionsResponse {
       try await self.inner.listExecutions(request: request, options: options)
     }
@@ -471,7 +471,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListExecutions")
     public func listExecutions(
-      byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListExecutionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Execution, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListExecutionsResponse in
@@ -479,14 +479,14 @@
         request.pageToken = token
         return try await self.listExecutions(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Updates a stored Execution.
     ///
     /// @Snippet(path: "MetadataService_UpdateExecution")
     public func updateExecution(
-      request: UpdateExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Execution {
       try await self.inner.updateExecution(request: request, options: options)
     }
@@ -495,7 +495,7 @@
     ///
     /// @Snippet(path: "MetadataService_DeleteExecution")
     public func deleteExecution(
-      request: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteExecution(request: request, options: options)
     }
@@ -504,21 +504,21 @@
     ///
     /// @Snippet(path: "MetadataService_DeleteExecution")
     public func deleteExecution(
-      withPolling: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteExecutionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteExecution(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -530,7 +530,7 @@
     ///
     /// @Snippet(path: "MetadataService_PurgeExecutions")
     public func purgeExecutions(
-      request: PurgeExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeExecutionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.purgeExecutions(request: request, options: options)
     }
@@ -539,22 +539,22 @@
     ///
     /// @Snippet(path: "MetadataService_PurgeExecutions")
     public func purgeExecutions(
-      withPolling: PurgeExecutionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PurgeExecutionsResponse> {
+      withPolling: PurgeExecutionsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PurgeExecutionsResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<PurgeExecutionsResponse>.State in
+          -> GoogleGax._PollableOperationImpl<PurgeExecutionsResponse>.State in
         return try op._extractStatus(PurgeExecutionsResponse.self)
       }
       let rawOp = try await self.purgeExecutions(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<PurgeExecutionsResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<PurgeExecutionsResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -569,7 +569,7 @@
     ///
     /// @Snippet(path: "MetadataService_AddExecutionEvents")
     public func addExecutionEvents(
-      request: AddExecutionEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: AddExecutionEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.AddExecutionEventsResponse {
       try await self.inner.addExecutionEvents(request: request, options: options)
     }
@@ -580,7 +580,7 @@
     ///
     /// @Snippet(path: "MetadataService_QueryExecutionInputsAndOutputs")
     public func queryExecutionInputsAndOutputs(
-      request: QueryExecutionInputsAndOutputsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryExecutionInputsAndOutputsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.LineageSubgraph {
       try await self.inner.queryExecutionInputsAndOutputs(request: request, options: options)
     }
@@ -589,7 +589,7 @@
     ///
     /// @Snippet(path: "MetadataService_CreateMetadataSchema")
     public func createMetadataSchema(
-      request: CreateMetadataSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMetadataSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.MetadataSchema {
       try await self.inner.createMetadataSchema(request: request, options: options)
     }
@@ -598,7 +598,7 @@
     ///
     /// @Snippet(path: "MetadataService_GetMetadataSchema")
     public func getMetadataSchema(
-      request: GetMetadataSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetadataSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.MetadataSchema {
       try await self.inner.getMetadataSchema(request: request, options: options)
     }
@@ -607,7 +607,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListMetadataSchemas")
     public func listMetadataSchemas(
-      request: ListMetadataSchemasRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMetadataSchemasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListMetadataSchemasResponse {
       try await self.inner.listMetadataSchemas(request: request, options: options)
     }
@@ -616,7 +616,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListMetadataSchemas")
     public func listMetadataSchemas(
-      byItem: ListMetadataSchemasRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListMetadataSchemasRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<MetadataSchema, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListMetadataSchemasResponse in
@@ -624,7 +624,7 @@
         request.pageToken = token
         return try await self.listMetadataSchemas(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves lineage of an Artifact represented through Artifacts and
@@ -632,7 +632,7 @@
     ///
     /// @Snippet(path: "MetadataService_QueryArtifactLineageSubgraph")
     public func queryArtifactLineageSubgraph(
-      request: QueryArtifactLineageSubgraphRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryArtifactLineageSubgraphRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.LineageSubgraph {
       try await self.inner.queryArtifactLineageSubgraph(request: request, options: options)
     }
@@ -641,7 +641,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -650,7 +650,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -658,14 +658,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "MetadataService_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -678,7 +678,7 @@
     ///
     /// @Snippet(path: "MetadataService_SetIamPolicy")
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -688,7 +688,7 @@
     ///
     /// @Snippet(path: "MetadataService_GetIamPolicy")
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -703,7 +703,7 @@
     ///
     /// @Snippet(path: "MetadataService_TestIamPermissions")
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -714,7 +714,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -725,7 +725,7 @@
     ///
     /// @Snippet(path: "MetadataService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -733,7 +733,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -742,7 +742,7 @@
     ///
     /// @Snippet(path: "MetadataService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -753,7 +753,7 @@
     ///
     /// @Snippet(path: "MetadataService_DeleteOperation")
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteOperation(request: request, options: options)
     }
@@ -764,7 +764,7 @@
     ///
     /// @Snippet(path: "MetadataService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -775,7 +775,7 @@
     ///
     /// @Snippet(path: "MetadataService_WaitOperation")
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.waitOperation(request: request, options: options)
     }
@@ -794,14 +794,14 @@
 
       /// See `MetadataServiceClient.createMetadataStore`.
       func createMetadataStore(withPolling: CreateMetadataStoreRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<MetadataStore>
+        -> any GoogleGax.PollableOperation<MetadataStore>
 
       /// See `MetadataServiceClient.createMetadataStore`.
       func createMetadataStore(
         parent: Swift.String,
         metadataStore: MetadataStore?,
         metadataStoreId: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<MetadataStore>
+      ) async throws -> any GoogleGax.PollableOperation<MetadataStore>
 
       /// See `MetadataServiceClient.getMetadataStore`.
       func getMetadataStore(request: GetMetadataStoreRequest) async throws
@@ -832,12 +832,12 @@
 
       /// See `MetadataServiceClient.deleteMetadataStore`.
       func deleteMetadataStore(withPolling: DeleteMetadataStoreRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `MetadataServiceClient.deleteMetadataStore`.
       func deleteMetadataStore(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `MetadataServiceClient.createArtifact`.
       func createArtifact(request: CreateArtifactRequest) async throws
@@ -879,7 +879,7 @@
       /// See `MetadataServiceClient.updateArtifact`.
       func updateArtifact(
         artifact: Artifact?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudAIPlatformV1.Artifact
 
       /// See `MetadataServiceClient.deleteArtifact`.
@@ -887,26 +887,26 @@
         -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.deleteArtifact`.
-      func deleteArtifact(withPolling: DeleteArtifactRequest) async throws -> any GoogleCloudGax
+      func deleteArtifact(withPolling: DeleteArtifactRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `MetadataServiceClient.deleteArtifact`.
       func deleteArtifact(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `MetadataServiceClient.purgeArtifacts`.
       func purgeArtifacts(request: PurgeArtifactsRequest) async throws
         -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.purgeArtifacts`.
-      func purgeArtifacts(withPolling: PurgeArtifactsRequest) async throws -> any GoogleCloudGax
+      func purgeArtifacts(withPolling: PurgeArtifactsRequest) async throws -> any GoogleGax
         .PollableOperation<PurgeArtifactsResponse>
 
       /// See `MetadataServiceClient.purgeArtifacts`.
       func purgeArtifacts(
         parent: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<PurgeArtifactsResponse>
+      ) async throws -> any GoogleGax.PollableOperation<PurgeArtifactsResponse>
 
       /// See `MetadataServiceClient.createContext`.
       func createContext(request: CreateContextRequest) async throws
@@ -948,32 +948,32 @@
       /// See `MetadataServiceClient.updateContext`.
       func updateContext(
         context: Context?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudAIPlatformV1.Context
 
       /// See `MetadataServiceClient.deleteContext`.
       func deleteContext(request: DeleteContextRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.deleteContext`.
-      func deleteContext(withPolling: DeleteContextRequest) async throws -> any GoogleCloudGax
+      func deleteContext(withPolling: DeleteContextRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `MetadataServiceClient.deleteContext`.
       func deleteContext(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `MetadataServiceClient.purgeContexts`.
       func purgeContexts(request: PurgeContextsRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.purgeContexts`.
-      func purgeContexts(withPolling: PurgeContextsRequest) async throws -> any GoogleCloudGax
+      func purgeContexts(withPolling: PurgeContextsRequest) async throws -> any GoogleGax
         .PollableOperation<PurgeContextsResponse>
 
       /// See `MetadataServiceClient.purgeContexts`.
       func purgeContexts(
         parent: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<PurgeContextsResponse>
+      ) async throws -> any GoogleGax.PollableOperation<PurgeContextsResponse>
 
       /// See `MetadataServiceClient.addContextArtifactsAndExecutions`.
       func addContextArtifactsAndExecutions(request: AddContextArtifactsAndExecutionsRequest)
@@ -1056,7 +1056,7 @@
       /// See `MetadataServiceClient.updateExecution`.
       func updateExecution(
         execution: Execution?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudAIPlatformV1.Execution
 
       /// See `MetadataServiceClient.deleteExecution`.
@@ -1064,26 +1064,26 @@
         -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.deleteExecution`.
-      func deleteExecution(withPolling: DeleteExecutionRequest) async throws -> any GoogleCloudGax
+      func deleteExecution(withPolling: DeleteExecutionRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `MetadataServiceClient.deleteExecution`.
       func deleteExecution(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `MetadataServiceClient.purgeExecutions`.
       func purgeExecutions(request: PurgeExecutionsRequest) async throws
         -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.purgeExecutions`.
-      func purgeExecutions(withPolling: PurgeExecutionsRequest) async throws -> any GoogleCloudGax
+      func purgeExecutions(withPolling: PurgeExecutionsRequest) async throws -> any GoogleGax
         .PollableOperation<PurgeExecutionsResponse>
 
       /// See `MetadataServiceClient.purgeExecutions`.
       func purgeExecutions(
         parent: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<PurgeExecutionsResponse>
+      ) async throws -> any GoogleGax.PollableOperation<PurgeExecutionsResponse>
 
       /// See `MetadataServiceClient.addExecutionEvents`.
       func addExecutionEvents(request: AddExecutionEventsRequest) async throws
@@ -1207,282 +1207,282 @@
 
       /// See `MetadataServiceClient.createMetadataStore`.
       func createMetadataStore(
-        request: CreateMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateMetadataStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.createMetadataStore`.
       func createMetadataStore(
-        withPolling: CreateMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<MetadataStore>
+        withPolling: CreateMetadataStoreRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<MetadataStore>
 
       /// See `MetadataServiceClient.getMetadataStore`.
       func getMetadataStore(
-        request: GetMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: GetMetadataStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.MetadataStore
 
       /// See `MetadataServiceClient.listMetadataStores`.
       func listMetadataStores(
-        request: ListMetadataStoresRequest, options: GoogleCloudGax.RequestOptions
+        request: ListMetadataStoresRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListMetadataStoresResponse
 
       /// See `MetadataServiceClient.listMetadataStores`.
       func listMetadataStores(
-        byItem: ListMetadataStoresRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListMetadataStoresRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<MetadataStore, Swift.Error>
 
       /// See `MetadataServiceClient.deleteMetadataStore`.
       func deleteMetadataStore(
-        request: DeleteMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteMetadataStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.deleteMetadataStore`.
       func deleteMetadataStore(
-        withPolling: DeleteMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteMetadataStoreRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `MetadataServiceClient.createArtifact`.
       func createArtifact(
-        request: CreateArtifactRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateArtifactRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Artifact
 
       /// See `MetadataServiceClient.getArtifact`.
       func getArtifact(
-        request: GetArtifactRequest, options: GoogleCloudGax.RequestOptions
+        request: GetArtifactRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Artifact
 
       /// See `MetadataServiceClient.listArtifacts`.
       func listArtifacts(
-        request: ListArtifactsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListArtifactsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListArtifactsResponse
 
       /// See `MetadataServiceClient.listArtifacts`.
       func listArtifacts(
-        byItem: ListArtifactsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListArtifactsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Artifact, Swift.Error>
 
       /// See `MetadataServiceClient.updateArtifact`.
       func updateArtifact(
-        request: UpdateArtifactRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateArtifactRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Artifact
 
       /// See `MetadataServiceClient.deleteArtifact`.
       func deleteArtifact(
-        request: DeleteArtifactRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteArtifactRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.deleteArtifact`.
       func deleteArtifact(
-        withPolling: DeleteArtifactRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteArtifactRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `MetadataServiceClient.purgeArtifacts`.
       func purgeArtifacts(
-        request: PurgeArtifactsRequest, options: GoogleCloudGax.RequestOptions
+        request: PurgeArtifactsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.purgeArtifacts`.
       func purgeArtifacts(
-        withPolling: PurgeArtifactsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<PurgeArtifactsResponse>
+        withPolling: PurgeArtifactsRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<PurgeArtifactsResponse>
 
       /// See `MetadataServiceClient.createContext`.
       func createContext(
-        request: CreateContextRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateContextRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Context
 
       /// See `MetadataServiceClient.getContext`.
       func getContext(
-        request: GetContextRequest, options: GoogleCloudGax.RequestOptions
+        request: GetContextRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Context
 
       /// See `MetadataServiceClient.listContexts`.
       func listContexts(
-        request: ListContextsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListContextsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListContextsResponse
 
       /// See `MetadataServiceClient.listContexts`.
       func listContexts(
-        byItem: ListContextsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListContextsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Context, Swift.Error>
 
       /// See `MetadataServiceClient.updateContext`.
       func updateContext(
-        request: UpdateContextRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateContextRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Context
 
       /// See `MetadataServiceClient.deleteContext`.
       func deleteContext(
-        request: DeleteContextRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteContextRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.deleteContext`.
       func deleteContext(
-        withPolling: DeleteContextRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteContextRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `MetadataServiceClient.purgeContexts`.
       func purgeContexts(
-        request: PurgeContextsRequest, options: GoogleCloudGax.RequestOptions
+        request: PurgeContextsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.purgeContexts`.
       func purgeContexts(
-        withPolling: PurgeContextsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<PurgeContextsResponse>
+        withPolling: PurgeContextsRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<PurgeContextsResponse>
 
       /// See `MetadataServiceClient.addContextArtifactsAndExecutions`.
       func addContextArtifactsAndExecutions(
-        request: AddContextArtifactsAndExecutionsRequest, options: GoogleCloudGax.RequestOptions
+        request: AddContextArtifactsAndExecutionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.AddContextArtifactsAndExecutionsResponse
 
       /// See `MetadataServiceClient.addContextChildren`.
       func addContextChildren(
-        request: AddContextChildrenRequest, options: GoogleCloudGax.RequestOptions
+        request: AddContextChildrenRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.AddContextChildrenResponse
 
       /// See `MetadataServiceClient.removeContextChildren`.
       func removeContextChildren(
-        request: RemoveContextChildrenRequest, options: GoogleCloudGax.RequestOptions
+        request: RemoveContextChildrenRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.RemoveContextChildrenResponse
 
       /// See `MetadataServiceClient.queryContextLineageSubgraph`.
       func queryContextLineageSubgraph(
-        request: QueryContextLineageSubgraphRequest, options: GoogleCloudGax.RequestOptions
+        request: QueryContextLineageSubgraphRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.LineageSubgraph
 
       /// See `MetadataServiceClient.createExecution`.
       func createExecution(
-        request: CreateExecutionRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateExecutionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Execution
 
       /// See `MetadataServiceClient.getExecution`.
       func getExecution(
-        request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
+        request: GetExecutionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Execution
 
       /// See `MetadataServiceClient.listExecutions`.
       func listExecutions(
-        request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListExecutionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListExecutionsResponse
 
       /// See `MetadataServiceClient.listExecutions`.
       func listExecutions(
-        byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListExecutionsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Execution, Swift.Error>
 
       /// See `MetadataServiceClient.updateExecution`.
       func updateExecution(
-        request: UpdateExecutionRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateExecutionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Execution
 
       /// See `MetadataServiceClient.deleteExecution`.
       func deleteExecution(
-        request: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteExecutionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.deleteExecution`.
       func deleteExecution(
-        withPolling: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteExecutionRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `MetadataServiceClient.purgeExecutions`.
       func purgeExecutions(
-        request: PurgeExecutionsRequest, options: GoogleCloudGax.RequestOptions
+        request: PurgeExecutionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `MetadataServiceClient.purgeExecutions`.
       func purgeExecutions(
-        withPolling: PurgeExecutionsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<PurgeExecutionsResponse>
+        withPolling: PurgeExecutionsRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<PurgeExecutionsResponse>
 
       /// See `MetadataServiceClient.addExecutionEvents`.
       func addExecutionEvents(
-        request: AddExecutionEventsRequest, options: GoogleCloudGax.RequestOptions
+        request: AddExecutionEventsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.AddExecutionEventsResponse
 
       /// See `MetadataServiceClient.queryExecutionInputsAndOutputs`.
       func queryExecutionInputsAndOutputs(
-        request: QueryExecutionInputsAndOutputsRequest, options: GoogleCloudGax.RequestOptions
+        request: QueryExecutionInputsAndOutputsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.LineageSubgraph
 
       /// See `MetadataServiceClient.createMetadataSchema`.
       func createMetadataSchema(
-        request: CreateMetadataSchemaRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateMetadataSchemaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.MetadataSchema
 
       /// See `MetadataServiceClient.getMetadataSchema`.
       func getMetadataSchema(
-        request: GetMetadataSchemaRequest, options: GoogleCloudGax.RequestOptions
+        request: GetMetadataSchemaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.MetadataSchema
 
       /// See `MetadataServiceClient.listMetadataSchemas`.
       func listMetadataSchemas(
-        request: ListMetadataSchemasRequest, options: GoogleCloudGax.RequestOptions
+        request: ListMetadataSchemasRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListMetadataSchemasResponse
 
       /// See `MetadataServiceClient.listMetadataSchemas`.
       func listMetadataSchemas(
-        byItem: ListMetadataSchemasRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListMetadataSchemasRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<MetadataSchema, Swift.Error>
 
       /// See `MetadataServiceClient.queryArtifactLineageSubgraph`.
       func queryArtifactLineageSubgraph(
-        request: QueryArtifactLineageSubgraphRequest, options: GoogleCloudGax.RequestOptions
+        request: QueryArtifactLineageSubgraphRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.LineageSubgraph
 
       /// See `MetadataServiceClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `MetadataServiceClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `MetadataServiceClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `MetadataServiceClient.setIamPolicy`.
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `MetadataServiceClient.getIamPolicy`.
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `MetadataServiceClient.testIamPermissions`.
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       /// See `MetadataServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `MetadataServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `MetadataServiceClient.deleteOperation`.
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `MetadataServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `MetadataServiceClient.waitOperation`.
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }
@@ -1496,24 +1496,24 @@
     }
 
     public func createMetadataStore(
-      request: CreateMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMetadataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createMetadataStore(withPolling: CreateMetadataStoreRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<MetadataStore>
+      -> any GoogleGax.PollableOperation<MetadataStore>
     {
       try await self.createMetadataStore(withPolling: withPolling, options: .init())
     }
 
     public func createMetadataStore(
-      withPolling: CreateMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<MetadataStore> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<MetadataStore>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateMetadataStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<MetadataStore> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<MetadataStore>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1521,7 +1521,7 @@
       parent: Swift.String,
       metadataStore: MetadataStore?,
       metadataStoreId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<MetadataStore> {
+    ) async throws -> any GoogleGax.PollableOperation<MetadataStore> {
       let request = CreateMetadataStoreRequest().with {
         $0.parent = parent
         $0.metadataStore = metadataStore
@@ -1537,9 +1537,9 @@
     }
 
     public func getMetadataStore(
-      request: GetMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetadataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.MetadataStore {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getMetadataStore(
@@ -1558,9 +1558,9 @@
     }
 
     public func listMetadataStores(
-      request: ListMetadataStoresRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMetadataStoresRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListMetadataStoresResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listMetadataStores(
@@ -1570,13 +1570,13 @@
     }
 
     public func listMetadataStores(
-      byItem: ListMetadataStoresRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListMetadataStoresRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<MetadataStore, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListMetadataStoresResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listMetadataStores(
@@ -1595,30 +1595,30 @@
     }
 
     public func deleteMetadataStore(
-      request: DeleteMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMetadataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteMetadataStore(withPolling: DeleteMetadataStoreRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.deleteMetadataStore(withPolling: withPolling, options: .init())
     }
 
     public func deleteMetadataStore(
-      withPolling: DeleteMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteMetadataStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteMetadataStore(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteMetadataStoreRequest().with {
         $0.name = name
       }
@@ -1632,9 +1632,9 @@
     }
 
     public func createArtifact(
-      request: CreateArtifactRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateArtifactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Artifact {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createArtifact(
@@ -1657,9 +1657,9 @@
     }
 
     public func getArtifact(
-      request: GetArtifactRequest, options: GoogleCloudGax.RequestOptions
+      request: GetArtifactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Artifact {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getArtifact(
@@ -1678,9 +1678,9 @@
     }
 
     public func listArtifacts(
-      request: ListArtifactsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListArtifactsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListArtifactsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listArtifacts(
@@ -1690,13 +1690,13 @@
     }
 
     public func listArtifacts(
-      byItem: ListArtifactsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListArtifactsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Artifact, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListArtifactsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listArtifacts(
@@ -1715,14 +1715,14 @@
     }
 
     public func updateArtifact(
-      request: UpdateArtifactRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateArtifactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Artifact {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateArtifact(
       artifact: Artifact?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudAIPlatformV1.Artifact {
       let request = UpdateArtifactRequest().with {
         $0.artifact = artifact
@@ -1738,30 +1738,30 @@
     }
 
     public func deleteArtifact(
-      request: DeleteArtifactRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteArtifactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func deleteArtifact(withPolling: DeleteArtifactRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    public func deleteArtifact(withPolling: DeleteArtifactRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
     {
       try await self.deleteArtifact(withPolling: withPolling, options: .init())
     }
 
     public func deleteArtifact(
-      withPolling: DeleteArtifactRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteArtifactRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteArtifact(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteArtifactRequest().with {
         $0.name = name
       }
@@ -1775,31 +1775,31 @@
     }
 
     public func purgeArtifacts(
-      request: PurgeArtifactsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeArtifactsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func purgeArtifacts(withPolling: PurgeArtifactsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<PurgeArtifactsResponse>
+    public func purgeArtifacts(withPolling: PurgeArtifactsRequest) async throws -> any GoogleGax
+      .PollableOperation<PurgeArtifactsResponse>
     {
       try await self.purgeArtifacts(withPolling: withPolling, options: .init())
     }
 
     public func purgeArtifacts(
-      withPolling: PurgeArtifactsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PurgeArtifactsResponse> {
+      withPolling: PurgeArtifactsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PurgeArtifactsResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<PurgeArtifactsResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<PurgeArtifactsResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func purgeArtifacts(
       parent: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PurgeArtifactsResponse> {
+    ) async throws -> any GoogleGax.PollableOperation<PurgeArtifactsResponse> {
       let request = PurgeArtifactsRequest().with {
         $0.parent = parent
       }
@@ -1813,9 +1813,9 @@
     }
 
     public func createContext(
-      request: CreateContextRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateContextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Context {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createContext(
@@ -1838,9 +1838,9 @@
     }
 
     public func getContext(
-      request: GetContextRequest, options: GoogleCloudGax.RequestOptions
+      request: GetContextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Context {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getContext(
@@ -1859,9 +1859,9 @@
     }
 
     public func listContexts(
-      request: ListContextsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListContextsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListContextsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listContexts(
@@ -1871,13 +1871,13 @@
     }
 
     public func listContexts(
-      byItem: ListContextsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListContextsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Context, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListContextsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listContexts(
@@ -1896,14 +1896,14 @@
     }
 
     public func updateContext(
-      request: UpdateContextRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateContextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Context {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateContext(
       context: Context?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudAIPlatformV1.Context {
       let request = UpdateContextRequest().with {
         $0.context = context
@@ -1919,30 +1919,30 @@
     }
 
     public func deleteContext(
-      request: DeleteContextRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteContextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func deleteContext(withPolling: DeleteContextRequest) async throws -> any GoogleCloudGax
+    public func deleteContext(withPolling: DeleteContextRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
     {
       try await self.deleteContext(withPolling: withPolling, options: .init())
     }
 
     public func deleteContext(
-      withPolling: DeleteContextRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteContextRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteContext(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteContextRequest().with {
         $0.name = name
       }
@@ -1956,31 +1956,31 @@
     }
 
     public func purgeContexts(
-      request: PurgeContextsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeContextsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func purgeContexts(withPolling: PurgeContextsRequest) async throws -> any GoogleCloudGax
+    public func purgeContexts(withPolling: PurgeContextsRequest) async throws -> any GoogleGax
       .PollableOperation<PurgeContextsResponse>
     {
       try await self.purgeContexts(withPolling: withPolling, options: .init())
     }
 
     public func purgeContexts(
-      withPolling: PurgeContextsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PurgeContextsResponse> {
+      withPolling: PurgeContextsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PurgeContextsResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<PurgeContextsResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<PurgeContextsResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func purgeContexts(
       parent: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PurgeContextsResponse> {
+    ) async throws -> any GoogleGax.PollableOperation<PurgeContextsResponse> {
       let request = PurgeContextsRequest().with {
         $0.parent = parent
       }
@@ -1994,9 +1994,9 @@
     }
 
     public func addContextArtifactsAndExecutions(
-      request: AddContextArtifactsAndExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      request: AddContextArtifactsAndExecutionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.AddContextArtifactsAndExecutionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func addContextArtifactsAndExecutions(
@@ -2019,9 +2019,9 @@
     }
 
     public func addContextChildren(
-      request: AddContextChildrenRequest, options: GoogleCloudGax.RequestOptions
+      request: AddContextChildrenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.AddContextChildrenResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func addContextChildren(
@@ -2042,9 +2042,9 @@
     }
 
     public func removeContextChildren(
-      request: RemoveContextChildrenRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveContextChildrenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.RemoveContextChildrenResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func removeContextChildren(
@@ -2065,9 +2065,9 @@
     }
 
     public func queryContextLineageSubgraph(
-      request: QueryContextLineageSubgraphRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryContextLineageSubgraphRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.LineageSubgraph {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func queryContextLineageSubgraph(
@@ -2086,9 +2086,9 @@
     }
 
     public func createExecution(
-      request: CreateExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Execution {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createExecution(
@@ -2111,9 +2111,9 @@
     }
 
     public func getExecution(
-      request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Execution {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getExecution(
@@ -2132,9 +2132,9 @@
     }
 
     public func listExecutions(
-      request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExecutionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListExecutionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listExecutions(
@@ -2144,13 +2144,13 @@
     }
 
     public func listExecutions(
-      byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListExecutionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Execution, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListExecutionsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listExecutions(
@@ -2169,14 +2169,14 @@
     }
 
     public func updateExecution(
-      request: UpdateExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Execution {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateExecution(
       execution: Execution?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudAIPlatformV1.Execution {
       let request = UpdateExecutionRequest().with {
         $0.execution = execution
@@ -2192,30 +2192,30 @@
     }
 
     public func deleteExecution(
-      request: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func deleteExecution(withPolling: DeleteExecutionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    public func deleteExecution(withPolling: DeleteExecutionRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
     {
       try await self.deleteExecution(withPolling: withPolling, options: .init())
     }
 
     public func deleteExecution(
-      withPolling: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteExecutionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteExecution(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteExecutionRequest().with {
         $0.name = name
       }
@@ -2229,31 +2229,31 @@
     }
 
     public func purgeExecutions(
-      request: PurgeExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeExecutionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func purgeExecutions(withPolling: PurgeExecutionsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<PurgeExecutionsResponse>
+    public func purgeExecutions(withPolling: PurgeExecutionsRequest) async throws -> any GoogleGax
+      .PollableOperation<PurgeExecutionsResponse>
     {
       try await self.purgeExecutions(withPolling: withPolling, options: .init())
     }
 
     public func purgeExecutions(
-      withPolling: PurgeExecutionsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PurgeExecutionsResponse> {
+      withPolling: PurgeExecutionsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PurgeExecutionsResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<PurgeExecutionsResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<PurgeExecutionsResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func purgeExecutions(
       parent: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PurgeExecutionsResponse> {
+    ) async throws -> any GoogleGax.PollableOperation<PurgeExecutionsResponse> {
       let request = PurgeExecutionsRequest().with {
         $0.parent = parent
       }
@@ -2267,9 +2267,9 @@
     }
 
     public func addExecutionEvents(
-      request: AddExecutionEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: AddExecutionEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.AddExecutionEventsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func addExecutionEvents(
@@ -2290,9 +2290,9 @@
     }
 
     public func queryExecutionInputsAndOutputs(
-      request: QueryExecutionInputsAndOutputsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryExecutionInputsAndOutputsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.LineageSubgraph {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func queryExecutionInputsAndOutputs(
@@ -2311,9 +2311,9 @@
     }
 
     public func createMetadataSchema(
-      request: CreateMetadataSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMetadataSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.MetadataSchema {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createMetadataSchema(
@@ -2336,9 +2336,9 @@
     }
 
     public func getMetadataSchema(
-      request: GetMetadataSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetadataSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.MetadataSchema {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getMetadataSchema(
@@ -2357,9 +2357,9 @@
     }
 
     public func listMetadataSchemas(
-      request: ListMetadataSchemasRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMetadataSchemasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListMetadataSchemasResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listMetadataSchemas(
@@ -2369,13 +2369,13 @@
     }
 
     public func listMetadataSchemas(
-      byItem: ListMetadataSchemasRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListMetadataSchemasRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<MetadataSchema, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListMetadataSchemasResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listMetadataSchemas(
@@ -2394,9 +2394,9 @@
     }
 
     public func queryArtifactLineageSubgraph(
-      request: QueryArtifactLineageSubgraphRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryArtifactLineageSubgraphRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.LineageSubgraph {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func queryArtifactLineageSubgraph(
@@ -2415,9 +2415,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -2427,13 +2427,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -2443,9 +2443,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -2455,9 +2455,9 @@
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -2467,9 +2467,9 @@
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -2479,9 +2479,9 @@
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -2491,9 +2491,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -2503,13 +2503,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -2530,9 +2530,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -2549,9 +2549,9 @@
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteOperation(
@@ -2568,9 +2568,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(
@@ -2589,9 +2589,9 @@
     }
 
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

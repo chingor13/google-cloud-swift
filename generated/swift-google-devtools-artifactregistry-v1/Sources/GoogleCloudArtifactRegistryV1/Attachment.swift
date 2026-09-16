@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An Attachment refers to additional metadata that can be attached to
 /// artifacts in Artifact Registry. An attachment consists of one or more files.
-public struct Attachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Attachment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the attachment. E.g.
@@ -47,10 +47,10 @@ public struct Attachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var annotations: [Swift.String: Swift.String] = [:]
 
   /// Output only. The time when the attachment was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the attachment was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Required. The files that belong to this attachment.
   /// If the file ID part contains slashes, they are escaped. E.g.
@@ -62,7 +62,7 @@ public struct Attachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `projects/p1/locations/us-central1/repositories/repo1/packages/p1/versions/v1`.
   public var ociVersionName: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Attachment`.
   public init() {}
@@ -128,10 +128,8 @@ public struct Attachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.annotations = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .files) {
       self.files = value
     }
@@ -140,7 +138,7 @@ public struct Attachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -163,10 +161,10 @@ public struct Attachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.Attachment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

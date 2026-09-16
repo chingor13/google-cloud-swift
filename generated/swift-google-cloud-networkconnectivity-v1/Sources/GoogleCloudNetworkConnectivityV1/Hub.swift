@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Network Connectivity Center hub is a global management resource to which
 /// you attach spokes. A single hub can contain spokes from multiple regions.
@@ -23,7 +23,7 @@ import Foundation
 /// the resources associated with those spokes must all be in the same VPC
 /// network. Spokes that do not use site-to-site data transfer can be associated
 /// with any VPC network in your project.
-public struct Hub: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Hub: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Immutable. The name of the hub. Hub names must be unique. They use the
@@ -32,10 +32,10 @@ public struct Hub: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The time the hub was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time the hub was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional labels in key-value pair format. For more information about
   /// labels, see [Requirements for
@@ -92,7 +92,7 @@ public struct Hub: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// hub. The default value is false.
   public var exportPsc: Swift.Bool? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Hub`.
   public init() {}
@@ -152,10 +152,8 @@ public struct Hub: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -185,7 +183,7 @@ public struct Hub: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.exportPsc = try container.decodeIfPresent(Swift.Bool.self, forKey: .exportPsc)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -212,10 +210,10 @@ public struct Hub: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkconnectivity.v1.Hub"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

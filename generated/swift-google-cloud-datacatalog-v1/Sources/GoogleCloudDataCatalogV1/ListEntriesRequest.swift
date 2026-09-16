@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [ListEntries][google.cloud.datacatalog.v1.DataCatalog.ListEntries].
 ///
 /// [google.cloud.datacatalog.v1.DataCatalog.ListEntries]: <doc:DataCatalogClient/listEntries(request:options:)>
-public struct ListEntriesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ListEntriesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the entry group that contains the entries to list.
@@ -42,9 +42,9 @@ public struct ListEntriesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   ///
   /// For example, to return a list of entries with only the `name` field,
   /// set `read_mask` to only one path with the `name` value.
-  public var readMask: GoogleCloudWKT.FieldMask? = nil
+  public var readMask: GoogleWKT.FieldMask? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListEntriesRequest`.
   public init() {}
@@ -92,10 +92,10 @@ public struct ListEntriesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .pageToken) {
       self.pageToken = value
     }
-    self.readMask = try container.decodeIfPresent(GoogleCloudWKT.FieldMask.self, forKey: .readMask)
+    self.readMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .readMask)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -113,10 +113,10 @@ public struct ListEntriesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.v1.ListEntriesRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

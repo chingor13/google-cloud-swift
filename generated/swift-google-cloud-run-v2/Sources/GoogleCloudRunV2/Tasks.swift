@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Cloud Run Task Control Plane API.
 ///
@@ -29,7 +29,7 @@ public final class TasksClient: Clients.TasksProtocol, Sendable {
   let inner: any Clients.TasksStub
 
   /// Creates a new `TasksClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.TasksStub = try Clients.TasksTransport(options)
     inner = Clients.TasksRetry(inner, options: options)
     if let logger = options.logger {
@@ -42,7 +42,7 @@ public final class TasksClient: Clients.TasksProtocol, Sendable {
   ///
   /// @Snippet(path: "Tasks_GetTask")
   public func getTask(
-    request: GetTaskRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTaskRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRunV2.Task {
     try await self.inner.getTask(request: request, options: options)
   }
@@ -51,7 +51,7 @@ public final class TasksClient: Clients.TasksProtocol, Sendable {
   ///
   /// @Snippet(path: "Tasks_ListTasks")
   public func listTasks(
-    request: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTasksRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRunV2.ListTasksResponse {
     try await self.inner.listTasks(request: request, options: options)
   }
@@ -60,14 +60,14 @@ public final class TasksClient: Clients.TasksProtocol, Sendable {
   ///
   /// @Snippet(path: "Tasks_ListTasks")
   public func listTasks(
-    byItem: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTasksRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Task, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudRunV2.ListTasksResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listTasks(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -76,7 +76,7 @@ public final class TasksClient: Clients.TasksProtocol, Sendable {
   ///
   /// @Snippet(path: "Tasks_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -87,7 +87,7 @@ public final class TasksClient: Clients.TasksProtocol, Sendable {
   ///
   /// @Snippet(path: "Tasks_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -95,7 +95,7 @@ public final class TasksClient: Clients.TasksProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -104,7 +104,7 @@ public final class TasksClient: Clients.TasksProtocol, Sendable {
   ///
   /// @Snippet(path: "Tasks_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -115,7 +115,7 @@ public final class TasksClient: Clients.TasksProtocol, Sendable {
   ///
   /// @Snippet(path: "Tasks_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -126,7 +126,7 @@ public final class TasksClient: Clients.TasksProtocol, Sendable {
   ///
   /// @Snippet(path: "Tasks_WaitOperation")
   public func waitOperation(
-    request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.waitOperation(request: request, options: options)
   }
@@ -189,37 +189,37 @@ extension Clients {
 
     /// See `TasksClient.getTask`.
     func getTask(
-      request: GetTaskRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTaskRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRunV2.Task
 
     /// See `TasksClient.listTasks`.
     func listTasks(
-      request: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTasksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRunV2.ListTasksResponse
 
     /// See `TasksClient.listTasks`.
     func listTasks(
-      byItem: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTasksRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Task, Swift.Error>
 
     /// See `TasksClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `TasksClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `TasksClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `TasksClient.waitOperation`.
     func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }
@@ -231,9 +231,9 @@ extension Clients.TasksProtocol {
   }
 
   public func getTask(
-    request: GetTaskRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTaskRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRunV2.Task {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getTask(
@@ -252,9 +252,9 @@ extension Clients.TasksProtocol {
   }
 
   public func listTasks(
-    request: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTasksRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRunV2.ListTasksResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTasks(
@@ -264,12 +264,12 @@ extension Clients.TasksProtocol {
   }
 
   public func listTasks(
-    byItem: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTasksRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Task, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudRunV2.ListTasksResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listTasks(
@@ -288,9 +288,9 @@ extension Clients.TasksProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -300,13 +300,13 @@ extension Clients.TasksProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -327,9 +327,9 @@ extension Clients.TasksProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -346,9 +346,9 @@ extension Clients.TasksProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -367,8 +367,8 @@ extension Clients.TasksProtocol {
   }
 
   public func waitOperation(
-    request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

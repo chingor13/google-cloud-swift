@@ -15,33 +15,33 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol GkeInferenceQuickstartStub: Sendable {
     func fetchModels(
-      request: FetchModelsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchModelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchModelsResponse
 
     func fetchModelServers(
-      request: FetchModelServersRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchModelServersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchModelServersResponse
 
     func fetchModelServerVersions(
-      request: FetchModelServerVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchModelServerVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchModelServerVersionsResponse
 
     func fetchProfiles(
-      request: FetchProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchProfilesResponse
 
     func generateOptimizedManifest(
-      request: GenerateOptimizedManifestRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateOptimizedManifestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.GenerateOptimizedManifestResponse
 
     func fetchBenchmarkingData(
-      request: FetchBenchmarkingDataRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchBenchmarkingDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchBenchmarkingDataResponse
   }
 }

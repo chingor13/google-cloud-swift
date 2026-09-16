@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudManagedIdentitiesV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudManagedIdentitiesV1.ManagedIdentitiesServiceClient()

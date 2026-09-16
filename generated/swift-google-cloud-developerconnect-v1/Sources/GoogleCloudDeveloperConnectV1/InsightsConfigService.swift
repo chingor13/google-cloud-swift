@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Creates and manages InsightsConfigs.
 ///
@@ -37,11 +37,11 @@ import GoogleCloudGax
 /// @Snippet(path: "InsightsConfigServiceQuickstart")
 public final class InsightsConfigServiceClient: Clients.InsightsConfigServiceProtocol, Sendable {
   let inner: any Clients.InsightsConfigServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `InsightsConfigServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.InsightsConfigServiceStub = try Clients.InsightsConfigServiceTransport(
       options)
     inner = Clients.InsightsConfigServiceRetry(inner, options: options)
@@ -57,7 +57,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_ListInsightsConfigs")
   public func listInsightsConfigs(
-    request: ListInsightsConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInsightsConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeveloperConnectV1.ListInsightsConfigsResponse {
     try await self.inner.listInsightsConfigs(request: request, options: options)
   }
@@ -66,7 +66,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_ListInsightsConfigs")
   public func listInsightsConfigs(
-    byItem: ListInsightsConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListInsightsConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<InsightsConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -75,14 +75,14 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
       request.pageToken = token
       return try await self.listInsightsConfigs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a new InsightsConfig in a given project and location.
   ///
   /// @Snippet(path: "InsightsConfigService_CreateInsightsConfig")
   public func createInsightsConfig(
-    request: CreateInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateInsightsConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createInsightsConfig(request: request, options: options)
   }
@@ -91,21 +91,21 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_CreateInsightsConfig")
   public func createInsightsConfig(
-    withPolling: CreateInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<InsightsConfig> {
+    withPolling: CreateInsightsConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<InsightsConfig> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<InsightsConfig>.State in
+        -> GoogleGax._PollableOperationImpl<InsightsConfig>.State in
       return try op._extractStatus(InsightsConfig.self)
     }
     let rawOp = try await self.createInsightsConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<InsightsConfig>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<InsightsConfig>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -117,7 +117,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_GetInsightsConfig")
   public func getInsightsConfig(
-    request: GetInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInsightsConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeveloperConnectV1.InsightsConfig {
     try await self.inner.getInsightsConfig(request: request, options: options)
   }
@@ -126,7 +126,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_UpdateInsightsConfig")
   public func updateInsightsConfig(
-    request: UpdateInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateInsightsConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateInsightsConfig(request: request, options: options)
   }
@@ -135,21 +135,21 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_UpdateInsightsConfig")
   public func updateInsightsConfig(
-    withPolling: UpdateInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<InsightsConfig> {
+    withPolling: UpdateInsightsConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<InsightsConfig> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<InsightsConfig>.State in
+        -> GoogleGax._PollableOperationImpl<InsightsConfig>.State in
       return try op._extractStatus(InsightsConfig.self)
     }
     let rawOp = try await self.updateInsightsConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<InsightsConfig>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<InsightsConfig>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -161,7 +161,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_DeleteInsightsConfig")
   public func deleteInsightsConfig(
-    request: DeleteInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteInsightsConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteInsightsConfig(request: request, options: options)
   }
@@ -170,21 +170,21 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_DeleteInsightsConfig")
   public func deleteInsightsConfig(
-    withPolling: DeleteInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteInsightsConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteInsightsConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -196,7 +196,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_GetDeploymentEvent")
   public func getDeploymentEvent(
-    request: GetDeploymentEventRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeploymentEventRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeveloperConnectV1.DeploymentEvent {
     try await self.inner.getDeploymentEvent(request: request, options: options)
   }
@@ -205,7 +205,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_ListDeploymentEvents")
   public func listDeploymentEvents(
-    request: ListDeploymentEventsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeploymentEventsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeveloperConnectV1.ListDeploymentEventsResponse {
     try await self.inner.listDeploymentEvents(request: request, options: options)
   }
@@ -214,7 +214,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_ListDeploymentEvents")
   public func listDeploymentEvents(
-    byItem: ListDeploymentEventsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeploymentEventsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DeploymentEvent, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -223,7 +223,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
       request.pageToken = token
       return try await self.listDeploymentEvents(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists information about the supported locations for this service.
@@ -237,7 +237,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -253,7 +253,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -261,14 +261,14 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "InsightsConfigService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -279,7 +279,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -290,7 +290,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -298,7 +298,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -307,7 +307,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -318,7 +318,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -329,7 +329,7 @@ public final class InsightsConfigServiceClient: Clients.InsightsConfigServicePro
   ///
   /// @Snippet(path: "InsightsConfigService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -362,14 +362,14 @@ extension Clients {
 
     /// See `InsightsConfigServiceClient.createInsightsConfig`.
     func createInsightsConfig(withPolling: CreateInsightsConfigRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<InsightsConfig>
+      -> any GoogleGax.PollableOperation<InsightsConfig>
 
     /// See `InsightsConfigServiceClient.createInsightsConfig`.
     func createInsightsConfig(
       parent: Swift.String,
       insightsConfig: InsightsConfig?,
       insightsConfigId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<InsightsConfig>
+    ) async throws -> any GoogleGax.PollableOperation<InsightsConfig>
 
     /// See `InsightsConfigServiceClient.getInsightsConfig`.
     func getInsightsConfig(request: GetInsightsConfigRequest) async throws
@@ -386,7 +386,7 @@ extension Clients {
 
     /// See `InsightsConfigServiceClient.updateInsightsConfig`.
     func updateInsightsConfig(withPolling: UpdateInsightsConfigRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<InsightsConfig>
+      -> any GoogleGax.PollableOperation<InsightsConfig>
 
     /// See `InsightsConfigServiceClient.deleteInsightsConfig`.
     func deleteInsightsConfig(request: DeleteInsightsConfigRequest) async throws
@@ -394,12 +394,12 @@ extension Clients {
 
     /// See `InsightsConfigServiceClient.deleteInsightsConfig`.
     func deleteInsightsConfig(withPolling: DeleteInsightsConfigRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `InsightsConfigServiceClient.deleteInsightsConfig`.
     func deleteInsightsConfig(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `InsightsConfigServiceClient.getDeploymentEvent`.
     func getDeploymentEvent(request: GetDeploymentEventRequest) async throws
@@ -470,97 +470,97 @@ extension Clients {
 
     /// See `InsightsConfigServiceClient.listInsightsConfigs`.
     func listInsightsConfigs(
-      request: ListInsightsConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInsightsConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeveloperConnectV1.ListInsightsConfigsResponse
 
     /// See `InsightsConfigServiceClient.listInsightsConfigs`.
     func listInsightsConfigs(
-      byItem: ListInsightsConfigsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListInsightsConfigsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<InsightsConfig, Swift.Error>
 
     /// See `InsightsConfigServiceClient.createInsightsConfig`.
     func createInsightsConfig(
-      request: CreateInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInsightsConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `InsightsConfigServiceClient.createInsightsConfig`.
     func createInsightsConfig(
-      withPolling: CreateInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<InsightsConfig>
+      withPolling: CreateInsightsConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<InsightsConfig>
 
     /// See `InsightsConfigServiceClient.getInsightsConfig`.
     func getInsightsConfig(
-      request: GetInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInsightsConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeveloperConnectV1.InsightsConfig
 
     /// See `InsightsConfigServiceClient.updateInsightsConfig`.
     func updateInsightsConfig(
-      request: UpdateInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateInsightsConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `InsightsConfigServiceClient.updateInsightsConfig`.
     func updateInsightsConfig(
-      withPolling: UpdateInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<InsightsConfig>
+      withPolling: UpdateInsightsConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<InsightsConfig>
 
     /// See `InsightsConfigServiceClient.deleteInsightsConfig`.
     func deleteInsightsConfig(
-      request: DeleteInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInsightsConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `InsightsConfigServiceClient.deleteInsightsConfig`.
     func deleteInsightsConfig(
-      withPolling: DeleteInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteInsightsConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `InsightsConfigServiceClient.getDeploymentEvent`.
     func getDeploymentEvent(
-      request: GetDeploymentEventRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeploymentEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeveloperConnectV1.DeploymentEvent
 
     /// See `InsightsConfigServiceClient.listDeploymentEvents`.
     func listDeploymentEvents(
-      request: ListDeploymentEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeploymentEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeveloperConnectV1.ListDeploymentEventsResponse
 
     /// See `InsightsConfigServiceClient.listDeploymentEvents`.
     func listDeploymentEvents(
-      byItem: ListDeploymentEventsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDeploymentEventsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DeploymentEvent, Swift.Error>
 
     /// See `InsightsConfigServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `InsightsConfigServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `InsightsConfigServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `InsightsConfigServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `InsightsConfigServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `InsightsConfigServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `InsightsConfigServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -574,9 +574,9 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func listInsightsConfigs(
-    request: ListInsightsConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInsightsConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeveloperConnectV1.ListInsightsConfigsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listInsightsConfigs(
@@ -586,14 +586,14 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func listInsightsConfigs(
-    byItem: ListInsightsConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListInsightsConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<InsightsConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudDeveloperConnectV1.ListInsightsConfigsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listInsightsConfigs(
@@ -612,24 +612,24 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func createInsightsConfig(
-    request: CreateInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateInsightsConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createInsightsConfig(withPolling: CreateInsightsConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<InsightsConfig>
+    -> any GoogleGax.PollableOperation<InsightsConfig>
   {
     try await self.createInsightsConfig(withPolling: withPolling, options: .init())
   }
 
   public func createInsightsConfig(
-    withPolling: CreateInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<InsightsConfig> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<InsightsConfig>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateInsightsConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<InsightsConfig> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<InsightsConfig>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -637,7 +637,7 @@ extension Clients.InsightsConfigServiceProtocol {
     parent: Swift.String,
     insightsConfig: InsightsConfig?,
     insightsConfigId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<InsightsConfig> {
+  ) async throws -> any GoogleGax.PollableOperation<InsightsConfig> {
     let request = CreateInsightsConfigRequest().with {
       $0.parent = parent
       $0.insightsConfig = insightsConfig
@@ -653,9 +653,9 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func getInsightsConfig(
-    request: GetInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInsightsConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeveloperConnectV1.InsightsConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getInsightsConfig(
@@ -674,24 +674,24 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func updateInsightsConfig(
-    request: UpdateInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateInsightsConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateInsightsConfig(withPolling: UpdateInsightsConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<InsightsConfig>
+    -> any GoogleGax.PollableOperation<InsightsConfig>
   {
     try await self.updateInsightsConfig(withPolling: withPolling, options: .init())
   }
 
   public func updateInsightsConfig(
-    withPolling: UpdateInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<InsightsConfig> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<InsightsConfig>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateInsightsConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<InsightsConfig> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<InsightsConfig>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -702,30 +702,30 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func deleteInsightsConfig(
-    request: DeleteInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteInsightsConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteInsightsConfig(withPolling: DeleteInsightsConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteInsightsConfig(withPolling: withPolling, options: .init())
   }
 
   public func deleteInsightsConfig(
-    withPolling: DeleteInsightsConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteInsightsConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteInsightsConfig(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteInsightsConfigRequest().with {
       $0.name = name
     }
@@ -739,9 +739,9 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func getDeploymentEvent(
-    request: GetDeploymentEventRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeploymentEventRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeveloperConnectV1.DeploymentEvent {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDeploymentEvent(
@@ -760,9 +760,9 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func listDeploymentEvents(
-    request: ListDeploymentEventsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeploymentEventsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeveloperConnectV1.ListDeploymentEventsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDeploymentEvents(
@@ -772,14 +772,14 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func listDeploymentEvents(
-    byItem: ListDeploymentEventsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeploymentEventsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DeploymentEvent, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudDeveloperConnectV1.ListDeploymentEventsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDeploymentEvents(
@@ -798,9 +798,9 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -810,13 +810,13 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -826,9 +826,9 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -838,9 +838,9 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -850,13 +850,13 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -877,9 +877,9 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -896,9 +896,9 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -915,9 +915,9 @@ extension Clients.InsightsConfigServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

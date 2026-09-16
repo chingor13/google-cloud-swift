@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class SqlInstancesServiceRetry: SqlInstancesServiceStub {
       let inner: any SqlInstancesServiceStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any SqlInstancesServiceStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any SqlInstancesServiceStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@
       }
 
       public func addServerCa(
-        request: SqlInstancesAddServerCaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesAddServerCaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesAddServerCaRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesAddServerCaRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.addServerCa(request: r, options: o)
@@ -65,44 +65,44 @@
       }
 
       public func addServerCertificate(
-        request: SqlInstancesAddServerCertificateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesAddServerCertificateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesAddServerCertificateRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudSqlV1.Operation
+            (r: SqlInstancesAddServerCertificateRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.addServerCertificate(request: r, options: o)
           })
       }
 
       public func addEntraIdCertificate(
-        request: SqlInstancesAddEntraIdCertificateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesAddEntraIdCertificateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesAddEntraIdCertificateRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudSqlV1.Operation
+            (r: SqlInstancesAddEntraIdCertificateRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.addEntraIdCertificate(request: r, options: o)
           })
       }
 
       public func clone(
-        request: SqlInstancesCloneRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesCloneRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesCloneRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesCloneRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.clone(request: r, options: o)
@@ -110,14 +110,14 @@
       }
 
       public func delete(
-        request: SqlInstancesDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesDeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesDeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -125,14 +125,14 @@
       }
 
       public func demoteMaster(
-        request: SqlInstancesDemoteMasterRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesDemoteMasterRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesDemoteMasterRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesDemoteMasterRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.demoteMaster(request: r, options: o)
@@ -140,14 +140,14 @@
       }
 
       public func demote(
-        request: SqlInstancesDemoteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesDemoteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesDemoteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesDemoteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.demote(request: r, options: o)
@@ -155,14 +155,14 @@
       }
 
       public func export(
-        request: SqlInstancesExportRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesExportRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesExportRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesExportRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.export(request: r, options: o)
@@ -170,14 +170,14 @@
       }
 
       public func failover(
-        request: SqlInstancesFailoverRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesFailoverRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesFailoverRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesFailoverRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.failover(request: r, options: o)
@@ -185,14 +185,14 @@
       }
 
       public func reencrypt(
-        request: SqlInstancesReencryptRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesReencryptRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesReencryptRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesReencryptRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.reencrypt(request: r, options: o)
@@ -200,14 +200,14 @@
       }
 
       public func `get`(
-        request: SqlInstancesGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.DatabaseInstance {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlInstancesGetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesGetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.DatabaseInstance
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -215,14 +215,14 @@
       }
 
       public func `import`(
-        request: SqlInstancesImportRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesImportRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesImportRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesImportRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.`import`(request: r, options: o)
@@ -230,14 +230,14 @@
       }
 
       public func insert(
-        request: SqlInstancesInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesInsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesInsertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -245,14 +245,14 @@
       }
 
       public func list(
-        request: SqlInstancesListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.InstancesListResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlInstancesListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.InstancesListResponse
             in
             return try await self.inner.list(request: r, options: o)
@@ -260,14 +260,14 @@
       }
 
       public func listServerCas(
-        request: SqlInstancesListServerCasRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesListServerCasRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.InstancesListServerCasResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlInstancesListServerCasRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesListServerCasRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.InstancesListServerCasResponse
             in
             return try await self.inner.listServerCas(request: r, options: o)
@@ -275,29 +275,29 @@
       }
 
       public func listServerCertificates(
-        request: SqlInstancesListServerCertificatesRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesListServerCertificatesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.InstancesListServerCertificatesResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlInstancesListServerCertificatesRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudSqlV1.InstancesListServerCertificatesResponse
+            (r: SqlInstancesListServerCertificatesRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudSqlV1.InstancesListServerCertificatesResponse
             in
             return try await self.inner.listServerCertificates(request: r, options: o)
           })
       }
 
       public func listEntraIdCertificates(
-        request: SqlInstancesListEntraIdCertificatesRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesListEntraIdCertificatesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.InstancesListEntraIdCertificatesResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlInstancesListEntraIdCertificatesRequest, o: GoogleCloudGax.RequestOptions)
+            (r: SqlInstancesListEntraIdCertificatesRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudSqlV1.InstancesListEntraIdCertificatesResponse
             in
             return try await self.inner.listEntraIdCertificates(request: r, options: o)
@@ -305,14 +305,14 @@
       }
 
       public func patch(
-        request: SqlInstancesPatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesPatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesPatchRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -320,14 +320,14 @@
       }
 
       public func promoteReplica(
-        request: SqlInstancesPromoteReplicaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPromoteReplicaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesPromoteReplicaRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesPromoteReplicaRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.promoteReplica(request: r, options: o)
@@ -335,14 +335,14 @@
       }
 
       public func switchover(
-        request: SqlInstancesSwitchoverRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesSwitchoverRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesSwitchoverRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesSwitchoverRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.switchover(request: r, options: o)
@@ -350,14 +350,14 @@
       }
 
       public func resetSslConfig(
-        request: SqlInstancesResetSslConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesResetSslConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesResetSslConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesResetSslConfigRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.resetSslConfig(request: r, options: o)
@@ -365,14 +365,14 @@
       }
 
       public func restart(
-        request: SqlInstancesRestartRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRestartRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesRestartRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesRestartRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.restart(request: r, options: o)
@@ -380,14 +380,14 @@
       }
 
       public func restoreBackup(
-        request: SqlInstancesRestoreBackupRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRestoreBackupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesRestoreBackupRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesRestoreBackupRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.restoreBackup(request: r, options: o)
@@ -395,14 +395,14 @@
       }
 
       public func rotateServerCa(
-        request: SqlInstancesRotateServerCaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRotateServerCaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesRotateServerCaRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesRotateServerCaRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.rotateServerCa(request: r, options: o)
@@ -410,14 +410,14 @@
       }
 
       public func rotateServerCertificate(
-        request: SqlInstancesRotateServerCertificateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRotateServerCertificateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesRotateServerCertificateRequest, o: GoogleCloudGax.RequestOptions)
+            (r: SqlInstancesRotateServerCertificateRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.rotateServerCertificate(request: r, options: o)
@@ -425,14 +425,14 @@
       }
 
       public func rotateEntraIdCertificate(
-        request: SqlInstancesRotateEntraIdCertificateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRotateEntraIdCertificateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesRotateEntraIdCertificateRequest, o: GoogleCloudGax.RequestOptions)
+            (r: SqlInstancesRotateEntraIdCertificateRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.rotateEntraIdCertificate(request: r, options: o)
@@ -440,14 +440,14 @@
       }
 
       public func startReplica(
-        request: SqlInstancesStartReplicaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesStartReplicaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesStartReplicaRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesStartReplicaRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.startReplica(request: r, options: o)
@@ -455,14 +455,14 @@
       }
 
       public func stopReplica(
-        request: SqlInstancesStopReplicaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesStopReplicaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesStopReplicaRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesStopReplicaRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.stopReplica(request: r, options: o)
@@ -470,14 +470,14 @@
       }
 
       public func truncateLog(
-        request: SqlInstancesTruncateLogRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesTruncateLogRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesTruncateLogRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesTruncateLogRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.truncateLog(request: r, options: o)
@@ -485,14 +485,14 @@
       }
 
       public func update(
-        request: SqlInstancesUpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesUpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlInstancesUpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesUpdateRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
@@ -500,45 +500,44 @@
       }
 
       public func createEphemeral(
-        request: SqlInstancesCreateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesCreateEphemeralCertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SslCert {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesCreateEphemeralCertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudSqlV1.SslCert
+            (r: SqlInstancesCreateEphemeralCertRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudSqlV1.SslCert
             in
             return try await self.inner.createEphemeral(request: r, options: o)
           })
       }
 
       public func rescheduleMaintenance(
-        request: SqlInstancesRescheduleMaintenanceRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRescheduleMaintenanceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesRescheduleMaintenanceRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudSqlV1.Operation
+            (r: SqlInstancesRescheduleMaintenanceRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.rescheduleMaintenance(request: r, options: o)
           })
       }
 
       public func verifyExternalSyncSettings(
-        request: SqlInstancesVerifyExternalSyncSettingsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesVerifyExternalSyncSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesVerifyExternalSyncSettingsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesVerifyExternalSyncSettingsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: SqlInstancesVerifyExternalSyncSettingsRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudSqlV1.SqlInstancesVerifyExternalSyncSettingsResponse
             in
             return try await self.inner.verifyExternalSyncSettings(request: r, options: o)
@@ -546,14 +545,14 @@
       }
 
       public func startExternalSync(
-        request: SqlInstancesStartExternalSyncRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesStartExternalSyncRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesStartExternalSyncRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesStartExternalSyncRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.startExternalSync(request: r, options: o)
@@ -561,14 +560,14 @@
       }
 
       public func performDiskShrink(
-        request: SqlInstancesPerformDiskShrinkRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPerformDiskShrinkRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesPerformDiskShrinkRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesPerformDiskShrinkRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.performDiskShrink(request: r, options: o)
@@ -576,29 +575,29 @@
       }
 
       public func getDiskShrinkConfig(
-        request: SqlInstancesGetDiskShrinkConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesGetDiskShrinkConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesGetDiskShrinkConfigResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlInstancesGetDiskShrinkConfigRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudSqlV1.SqlInstancesGetDiskShrinkConfigResponse
+            (r: SqlInstancesGetDiskShrinkConfigRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudSqlV1.SqlInstancesGetDiskShrinkConfigResponse
             in
             return try await self.inner.getDiskShrinkConfig(request: r, options: o)
           })
       }
 
       public func resetReplicaSize(
-        request: SqlInstancesResetReplicaSizeRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesResetReplicaSizeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesResetReplicaSizeRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesResetReplicaSizeRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.resetReplicaSize(request: r, options: o)
@@ -606,29 +605,29 @@
       }
 
       public func getLatestRecoveryTime(
-        request: SqlInstancesGetLatestRecoveryTimeRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesGetLatestRecoveryTimeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesGetLatestRecoveryTimeResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlInstancesGetLatestRecoveryTimeRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudSqlV1.SqlInstancesGetLatestRecoveryTimeResponse
+            (r: SqlInstancesGetLatestRecoveryTimeRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudSqlV1.SqlInstancesGetLatestRecoveryTimeResponse
             in
             return try await self.inner.getLatestRecoveryTime(request: r, options: o)
           })
       }
 
       public func executeSql(
-        request: SqlInstancesExecuteSqlRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesExecuteSqlRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesExecuteSqlResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesExecuteSqlRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesExecuteSqlRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.SqlInstancesExecuteSqlResponse
             in
             return try await self.inner.executeSql(request: r, options: o)
@@ -636,14 +635,14 @@
       }
 
       public func acquireSsrsLease(
-        request: SqlInstancesAcquireSsrsLeaseRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesAcquireSsrsLeaseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesAcquireSsrsLeaseResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesAcquireSsrsLeaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesAcquireSsrsLeaseRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.SqlInstancesAcquireSsrsLeaseResponse
             in
             return try await self.inner.acquireSsrsLease(request: r, options: o)
@@ -651,14 +650,14 @@
       }
 
       public func releaseSsrsLease(
-        request: SqlInstancesReleaseSsrsLeaseRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesReleaseSsrsLeaseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesReleaseSsrsLeaseResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesReleaseSsrsLeaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlInstancesReleaseSsrsLeaseRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.SqlInstancesReleaseSsrsLeaseResponse
             in
             return try await self.inner.releaseSsrsLease(request: r, options: o)
@@ -666,15 +665,14 @@
       }
 
       public func preCheckMajorVersionUpgrade(
-        request: SqlInstancesPreCheckMajorVersionUpgradeRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPreCheckMajorVersionUpgradeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesPreCheckMajorVersionUpgradeRequest, o: GoogleCloudGax.RequestOptions)
+            (r: SqlInstancesPreCheckMajorVersionUpgradeRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.preCheckMajorVersionUpgrade(request: r, options: o)
@@ -682,15 +680,15 @@
       }
 
       public func pointInTimeRestore(
-        request: SqlInstancesPointInTimeRestoreRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPointInTimeRestoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlInstancesPointInTimeRestoreRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudSqlV1.Operation
+            (r: SqlInstancesPointInTimeRestoreRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.pointInTimeRestore(request: r, options: o)
           })

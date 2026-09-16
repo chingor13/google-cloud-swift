@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Precise location of the finding within a document, record, image, or metadata
 /// container.
-public struct ContentLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ContentLocation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Name of the container where the finding is located.
@@ -38,7 +38,7 @@ public struct ContentLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// this field contains the last file modification timestamp. For a BigQuery
   /// table, this field contains the last_modified_time property. For Datastore,
   /// this field isn't populated.
-  public var containerTimestamp: GoogleCloudWKT.Timestamp? = nil
+  public var containerTimestamp: GoogleWKT.Timestamp? = nil
 
   /// Finding container version, if available
   /// ("generation" for Cloud Storage).
@@ -47,7 +47,7 @@ public struct ContentLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Type of the container within the file with location of the finding.
   public var location: OneOf_Location? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ContentLocation`.
   public init() {}
@@ -100,7 +100,7 @@ public struct ContentLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.containerName = value
     }
     self.containerTimestamp = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .containerTimestamp)
+      GoogleWKT.Timestamp.self, forKey: .containerTimestamp)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .containerVersion) {
       self.containerVersion = value
     }
@@ -148,7 +148,7 @@ public struct ContentLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.location = location
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -198,10 +198,10 @@ public struct ContentLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.ContentLocation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

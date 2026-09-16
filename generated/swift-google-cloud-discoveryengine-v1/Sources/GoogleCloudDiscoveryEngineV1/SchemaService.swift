@@ -19,10 +19,10 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing [Schema][google.cloud.discoveryengine.v1.Schema]s.
   ///
@@ -31,11 +31,11 @@
   /// @Snippet(path: "SchemaServiceQuickstart")
   public final class SchemaServiceClient: Clients.SchemaServiceProtocol, Sendable {
     let inner: any Clients.SchemaServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `SchemaServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SchemaServiceStub = try Clients.SchemaServiceTransport(options)
       inner = Clients.SchemaServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -52,7 +52,7 @@
     ///
     /// @Snippet(path: "SchemaService_GetSchema")
     public func getSchema(
-      request: GetSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Schema {
       try await self.inner.getSchema(request: request, options: options)
     }
@@ -63,7 +63,7 @@
     ///
     /// @Snippet(path: "SchemaService_ListSchemas")
     public func listSchemas(
-      request: ListSchemasRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSchemasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListSchemasResponse {
       try await self.inner.listSchemas(request: request, options: options)
     }
@@ -74,7 +74,7 @@
     ///
     /// @Snippet(path: "SchemaService_ListSchemas")
     public func listSchemas(
-      byItem: ListSchemasRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSchemasRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Schema, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListSchemasResponse in
@@ -82,7 +82,7 @@
         request.pageToken = token
         return try await self.listSchemas(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Creates a [Schema][google.cloud.discoveryengine.v1.Schema].
@@ -91,7 +91,7 @@
     ///
     /// @Snippet(path: "SchemaService_CreateSchema")
     public func createSchema(
-      request: CreateSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createSchema(request: request, options: options)
     }
@@ -102,21 +102,21 @@
     ///
     /// @Snippet(path: "SchemaService_CreateSchema")
     public func createSchema(
-      withPolling: CreateSchemaRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Schema> {
+      withPolling: CreateSchemaRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Schema> {
       let extractStatus = {
-        (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Schema>.State in
+        (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Schema>.State
+        in
         return try op._extractStatus(Schema.self)
       }
       let rawOp = try await self.createSchema(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Schema>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Schema>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -130,7 +130,7 @@
     ///
     /// @Snippet(path: "SchemaService_UpdateSchema")
     public func updateSchema(
-      request: UpdateSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.updateSchema(request: request, options: options)
     }
@@ -141,21 +141,21 @@
     ///
     /// @Snippet(path: "SchemaService_UpdateSchema")
     public func updateSchema(
-      withPolling: UpdateSchemaRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Schema> {
+      withPolling: UpdateSchemaRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Schema> {
       let extractStatus = {
-        (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Schema>.State in
+        (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Schema>.State
+        in
         return try op._extractStatus(Schema.self)
       }
       let rawOp = try await self.updateSchema(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Schema>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Schema>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -169,7 +169,7 @@
     ///
     /// @Snippet(path: "SchemaService_DeleteSchema")
     public func deleteSchema(
-      request: DeleteSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteSchema(request: request, options: options)
     }
@@ -180,21 +180,21 @@
     ///
     /// @Snippet(path: "SchemaService_DeleteSchema")
     public func deleteSchema(
-      withPolling: DeleteSchemaRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteSchemaRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteSchema(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -208,7 +208,7 @@
     ///
     /// @Snippet(path: "SchemaService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -219,7 +219,7 @@
     ///
     /// @Snippet(path: "SchemaService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -227,7 +227,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -236,7 +236,7 @@
     ///
     /// @Snippet(path: "SchemaService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -247,7 +247,7 @@
     ///
     /// @Snippet(path: "SchemaService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -286,7 +286,7 @@
       func createSchema(request: CreateSchemaRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `SchemaServiceClient.createSchema`.
-      func createSchema(withPolling: CreateSchemaRequest) async throws -> any GoogleCloudGax
+      func createSchema(withPolling: CreateSchemaRequest) async throws -> any GoogleGax
         .PollableOperation<Schema>
 
       /// See `SchemaServiceClient.createSchema`.
@@ -294,26 +294,26 @@
         parent: Swift.String,
         schema: Schema?,
         schemaId: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Schema>
+      ) async throws -> any GoogleGax.PollableOperation<Schema>
 
       /// See `SchemaServiceClient.updateSchema`.
       func updateSchema(request: UpdateSchemaRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `SchemaServiceClient.updateSchema`.
-      func updateSchema(withPolling: UpdateSchemaRequest) async throws -> any GoogleCloudGax
+      func updateSchema(withPolling: UpdateSchemaRequest) async throws -> any GoogleGax
         .PollableOperation<Schema>
 
       /// See `SchemaServiceClient.deleteSchema`.
       func deleteSchema(request: DeleteSchemaRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `SchemaServiceClient.deleteSchema`.
-      func deleteSchema(withPolling: DeleteSchemaRequest) async throws -> any GoogleCloudGax
+      func deleteSchema(withPolling: DeleteSchemaRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `SchemaServiceClient.deleteSchema`.
       func deleteSchema(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `SchemaServiceClient.listOperations`.
       func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -340,62 +340,62 @@
 
       /// See `SchemaServiceClient.getSchema`.
       func getSchema(
-        request: GetSchemaRequest, options: GoogleCloudGax.RequestOptions
+        request: GetSchemaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Schema
 
       /// See `SchemaServiceClient.listSchemas`.
       func listSchemas(
-        request: ListSchemasRequest, options: GoogleCloudGax.RequestOptions
+        request: ListSchemasRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListSchemasResponse
 
       /// See `SchemaServiceClient.listSchemas`.
       func listSchemas(
-        byItem: ListSchemasRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListSchemasRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Schema, Swift.Error>
 
       /// See `SchemaServiceClient.createSchema`.
       func createSchema(
-        request: CreateSchemaRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateSchemaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `SchemaServiceClient.createSchema`.
       func createSchema(
-        withPolling: CreateSchemaRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Schema>
+        withPolling: CreateSchemaRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Schema>
 
       /// See `SchemaServiceClient.updateSchema`.
       func updateSchema(
-        request: UpdateSchemaRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateSchemaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `SchemaServiceClient.updateSchema`.
       func updateSchema(
-        withPolling: UpdateSchemaRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Schema>
+        withPolling: UpdateSchemaRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Schema>
 
       /// See `SchemaServiceClient.deleteSchema`.
       func deleteSchema(
-        request: DeleteSchemaRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteSchemaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `SchemaServiceClient.deleteSchema`.
       func deleteSchema(
-        withPolling: DeleteSchemaRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteSchemaRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `SchemaServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `SchemaServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `SchemaServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -409,9 +409,9 @@
     }
 
     public func getSchema(
-      request: GetSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Schema {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getSchema(
@@ -430,9 +430,9 @@
     }
 
     public func listSchemas(
-      request: ListSchemasRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSchemasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListSchemasResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listSchemas(
@@ -442,13 +442,13 @@
     }
 
     public func listSchemas(
-      byItem: ListSchemasRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSchemasRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Schema, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListSchemasResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listSchemas(
@@ -467,24 +467,24 @@
     }
 
     public func createSchema(
-      request: CreateSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func createSchema(withPolling: CreateSchemaRequest) async throws -> any GoogleCloudGax
+    public func createSchema(withPolling: CreateSchemaRequest) async throws -> any GoogleGax
       .PollableOperation<Schema>
     {
       try await self.createSchema(withPolling: withPolling, options: .init())
     }
 
     public func createSchema(
-      withPolling: CreateSchemaRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Schema> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Schema>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateSchemaRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Schema> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Schema>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -492,7 +492,7 @@
       parent: Swift.String,
       schema: Schema?,
       schemaId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Schema> {
+    ) async throws -> any GoogleGax.PollableOperation<Schema> {
       let request = CreateSchemaRequest().with {
         $0.parent = parent
         $0.schema = schema
@@ -508,24 +508,24 @@
     }
 
     public func updateSchema(
-      request: UpdateSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func updateSchema(withPolling: UpdateSchemaRequest) async throws -> any GoogleCloudGax
+    public func updateSchema(withPolling: UpdateSchemaRequest) async throws -> any GoogleGax
       .PollableOperation<Schema>
     {
       try await self.updateSchema(withPolling: withPolling, options: .init())
     }
 
     public func updateSchema(
-      withPolling: UpdateSchemaRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Schema> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Schema>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: UpdateSchemaRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Schema> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Schema>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -536,30 +536,30 @@
     }
 
     public func deleteSchema(
-      request: DeleteSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func deleteSchema(withPolling: DeleteSchemaRequest) async throws -> any GoogleCloudGax
+    public func deleteSchema(withPolling: DeleteSchemaRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
     {
       try await self.deleteSchema(withPolling: withPolling, options: .init())
     }
 
     public func deleteSchema(
-      withPolling: DeleteSchemaRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteSchemaRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteSchema(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteSchemaRequest().with {
         $0.name = name
       }
@@ -573,9 +573,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -585,13 +585,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -612,9 +612,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -631,9 +631,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

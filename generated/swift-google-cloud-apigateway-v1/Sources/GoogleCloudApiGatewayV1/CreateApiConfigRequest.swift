@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for ApiGatewayService.CreateApiConfig
-public struct CreateApiConfigRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateApiConfigRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Parent resource of the API Config, of the form:
@@ -32,7 +32,7 @@ public struct CreateApiConfigRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// Required. API resource.
   public var apiConfig: ApiConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateApiConfigRequest`.
   public init() {}
@@ -78,7 +78,7 @@ public struct CreateApiConfigRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
     self.apiConfig = try container.decodeIfPresent(ApiConfig.self, forKey: .apiConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,10 +95,10 @@ public struct CreateApiConfigRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apigateway.v1.CreateApiConfigRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

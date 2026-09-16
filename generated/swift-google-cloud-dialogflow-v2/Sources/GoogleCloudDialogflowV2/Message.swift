@@ -16,10 +16,10 @@
 
 #if Conversations || Participants
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a message posted into a conversation.
-  public struct Message: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Message: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The unique identifier of the message.
@@ -42,11 +42,11 @@
     public var participantRole: Participant.Role = Participant.Role()
 
     /// Output only. The time when the message was created in Contact Center AI.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. The time when the message was sent. For voice messages, this is
     /// the time when an utterance started.
-    public var sendTime: GoogleCloudWKT.Timestamp? = nil
+    public var sendTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. The annotation for the message.
     public var messageAnnotation: MessageAnnotation? = nil
@@ -54,7 +54,7 @@
     /// Output only. The sentiment analysis result for the message.
     public var sentimentAnalysis: SentimentAnalysisResult? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Message`.
     public init() {}
@@ -119,17 +119,15 @@
       {
         self.participantRole = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.sendTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .sendTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.sendTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .sendTime)
       self.messageAnnotation = try container.decodeIfPresent(
         MessageAnnotation.self, forKey: .messageAnnotation)
       self.sentimentAnalysis = try container.decodeIfPresent(
         SentimentAnalysisResult.self, forKey: .sentimentAnalysis)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -152,11 +150,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Message"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

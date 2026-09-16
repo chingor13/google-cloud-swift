@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudTalentV4
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: JobServiceClient) async throws {
   let response = try await client.searchJobsForAlert(

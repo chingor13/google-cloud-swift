@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A [CertificateConfig][google.cloud.security.privateca.v1.CertificateConfig]
 /// describes an X.509 certificate or CSR that is to be created, as an
 /// alternative to using ASN.1.
 ///
 /// [google.cloud.security.privateca.v1.CertificateConfig]: <doc:CertificateConfig>
-public struct CertificateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CertificateConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Specifies some of the values in a certificate that are related to
@@ -52,7 +52,7 @@ public struct CertificateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// (1) described in RFC 5280 section 4.2.1.2.
   public var subjectKeyId: CertificateConfig.KeyId? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CertificateConfig`.
   public init() {}
@@ -99,7 +99,7 @@ public struct CertificateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       CertificateConfig.KeyId.self, forKey: .subjectKeyId)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -116,7 +116,7 @@ public struct CertificateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
 
   /// These values are used to create the distinguished name and subject
   /// alternative name fields in an X.509 certificate.
-  public struct SubjectConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SubjectConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Contains distinguished name fields such as the common name,
@@ -126,7 +126,7 @@ public struct CertificateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// Optional. The subject alternative name fields.
     public var subjectAltName: SubjectAltNames? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SubjectConfig`.
     public init() {}
@@ -166,7 +166,7 @@ public struct CertificateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
         SubjectAltNames.self, forKey: .subjectAltName)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -183,24 +183,24 @@ public struct CertificateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       return
         "type.googleapis.com/google.cloud.security.privateca.v1.CertificateConfig.SubjectConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A KeyId identifies a specific public key, usually by hashing the public
   /// key.
-  public struct KeyId: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct KeyId: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The value of this KeyId encoded in lowercase hexadecimal. This
     /// is most likely the 160 bit SHA-1 hash of the public key.
     public var keyId: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `KeyId`.
     public init() {}
@@ -238,7 +238,7 @@ public struct CertificateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -253,21 +253,21 @@ public struct CertificateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.security.privateca.v1.CertificateConfig.KeyId"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.CertificateConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

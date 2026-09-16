@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// A service handles client event report.
 ///
@@ -29,7 +29,7 @@ public final class EventServiceClient: Clients.EventServiceProtocol, Sendable {
   let inner: any Clients.EventServiceStub
 
   /// Creates a new `EventServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.EventServiceStub = try Clients.EventServiceTransport(options)
     inner = Clients.EventServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -48,7 +48,7 @@ public final class EventServiceClient: Clients.EventServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EventService_CreateClientEvent")
   public func createClientEvent(
-    request: CreateClientEventRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateClientEventRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTalentV4.ClientEvent {
     try await self.inner.createClientEvent(request: request, options: options)
   }
@@ -59,7 +59,7 @@ public final class EventServiceClient: Clients.EventServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "EventService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -84,7 +84,7 @@ extension Clients {
 
     /// See `EventServiceClient.createClientEvent`.
     func createClientEvent(
-      request: CreateClientEventRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClientEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.ClientEvent
   }
 }
@@ -98,9 +98,9 @@ extension Clients.EventServiceProtocol {
   }
 
   public func createClientEvent(
-    request: CreateClientEventRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateClientEventRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTalentV4.ClientEvent {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createClientEvent(
@@ -121,9 +121,9 @@ extension Clients.EventServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

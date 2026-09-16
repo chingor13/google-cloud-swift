@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// SecurityProfileGroup is a resource that defines an action for specific threat
 /// signatures or severity levels.
@@ -33,11 +33,11 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   Sendable
 {
   let inner: any Clients.SecurityProfileGroupServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `SecurityProfileGroupServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.SecurityProfileGroupServiceStub =
       try Clients.SecurityProfileGroupServiceTransport(options)
     inner = Clients.SecurityProfileGroupServiceRetry(inner, options: options)
@@ -53,7 +53,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_ListSecurityProfileGroups")
   public func listSecurityProfileGroups(
-    request: ListSecurityProfileGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSecurityProfileGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.ListSecurityProfileGroupsResponse {
     try await self.inner.listSecurityProfileGroups(request: request, options: options)
   }
@@ -62,7 +62,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_ListSecurityProfileGroups")
   public func listSecurityProfileGroups(
-    byItem: ListSecurityProfileGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSecurityProfileGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SecurityProfileGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -71,14 +71,14 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
       request.pageToken = token
       return try await self.listSecurityProfileGroups(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single SecurityProfileGroup.
   ///
   /// @Snippet(path: "SecurityProfileGroupService_GetSecurityProfileGroup")
   public func getSecurityProfileGroup(
-    request: GetSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.SecurityProfileGroup {
     try await self.inner.getSecurityProfileGroup(request: request, options: options)
   }
@@ -87,7 +87,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_CreateSecurityProfileGroup")
   public func createSecurityProfileGroup(
-    request: CreateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createSecurityProfileGroup(request: request, options: options)
   }
@@ -96,22 +96,21 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_CreateSecurityProfileGroup")
   public func createSecurityProfileGroup(
-    withPolling: CreateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup> {
+    withPolling: CreateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SecurityProfileGroup> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<SecurityProfileGroup>.State in
+        -> GoogleGax._PollableOperationImpl<SecurityProfileGroup>.State in
       return try op._extractStatus(SecurityProfileGroup.self)
     }
     let rawOp = try await self.createSecurityProfileGroup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<SecurityProfileGroup>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SecurityProfileGroup>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -123,7 +122,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_UpdateSecurityProfileGroup")
   public func updateSecurityProfileGroup(
-    request: UpdateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateSecurityProfileGroup(request: request, options: options)
   }
@@ -132,22 +131,21 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_UpdateSecurityProfileGroup")
   public func updateSecurityProfileGroup(
-    withPolling: UpdateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup> {
+    withPolling: UpdateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SecurityProfileGroup> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<SecurityProfileGroup>.State in
+        -> GoogleGax._PollableOperationImpl<SecurityProfileGroup>.State in
       return try op._extractStatus(SecurityProfileGroup.self)
     }
     let rawOp = try await self.updateSecurityProfileGroup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<SecurityProfileGroup>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SecurityProfileGroup>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -159,7 +157,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_DeleteSecurityProfileGroup")
   public func deleteSecurityProfileGroup(
-    request: DeleteSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteSecurityProfileGroup(request: request, options: options)
   }
@@ -168,21 +166,21 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_DeleteSecurityProfileGroup")
   public func deleteSecurityProfileGroup(
-    withPolling: DeleteSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteSecurityProfileGroup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -194,7 +192,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_ListSecurityProfiles")
   public func listSecurityProfiles(
-    request: ListSecurityProfilesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSecurityProfilesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.ListSecurityProfilesResponse {
     try await self.inner.listSecurityProfiles(request: request, options: options)
   }
@@ -203,7 +201,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_ListSecurityProfiles")
   public func listSecurityProfiles(
-    byItem: ListSecurityProfilesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSecurityProfilesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SecurityProfile, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -212,14 +210,14 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
       request.pageToken = token
       return try await self.listSecurityProfiles(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single SecurityProfile.
   ///
   /// @Snippet(path: "SecurityProfileGroupService_GetSecurityProfile")
   public func getSecurityProfile(
-    request: GetSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSecurityProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.SecurityProfile {
     try await self.inner.getSecurityProfile(request: request, options: options)
   }
@@ -228,7 +226,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_CreateSecurityProfile")
   public func createSecurityProfile(
-    request: CreateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSecurityProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createSecurityProfile(request: request, options: options)
   }
@@ -237,21 +235,21 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_CreateSecurityProfile")
   public func createSecurityProfile(
-    withPolling: CreateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfile> {
+    withPolling: CreateSecurityProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SecurityProfile> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<SecurityProfile>.State in
+        -> GoogleGax._PollableOperationImpl<SecurityProfile>.State in
       return try op._extractStatus(SecurityProfile.self)
     }
     let rawOp = try await self.createSecurityProfile(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<SecurityProfile>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SecurityProfile>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -263,7 +261,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_UpdateSecurityProfile")
   public func updateSecurityProfile(
-    request: UpdateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSecurityProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateSecurityProfile(request: request, options: options)
   }
@@ -272,21 +270,21 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_UpdateSecurityProfile")
   public func updateSecurityProfile(
-    withPolling: UpdateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfile> {
+    withPolling: UpdateSecurityProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SecurityProfile> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<SecurityProfile>.State in
+        -> GoogleGax._PollableOperationImpl<SecurityProfile>.State in
       return try op._extractStatus(SecurityProfile.self)
     }
     let rawOp = try await self.updateSecurityProfile(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<SecurityProfile>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SecurityProfile>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -298,7 +296,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_DeleteSecurityProfile")
   public func deleteSecurityProfile(
-    request: DeleteSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSecurityProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteSecurityProfile(request: request, options: options)
   }
@@ -307,21 +305,21 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_DeleteSecurityProfile")
   public func deleteSecurityProfile(
-    withPolling: DeleteSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteSecurityProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteSecurityProfile(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -350,7 +348,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -376,7 +374,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -384,14 +382,14 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "SecurityProfileGroupService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -404,7 +402,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -414,7 +412,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -429,7 +427,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -440,7 +438,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -451,7 +449,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -459,7 +457,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -468,7 +466,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -479,7 +477,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -490,7 +488,7 @@ public final class SecurityProfileGroupServiceClient: Clients.SecurityProfileGro
   ///
   /// @Snippet(path: "SecurityProfileGroupService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -532,14 +530,14 @@ extension Clients {
 
     /// See `SecurityProfileGroupServiceClient.createSecurityProfileGroup`.
     func createSecurityProfileGroup(withPolling: CreateSecurityProfileGroupRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup>
+      -> any GoogleGax.PollableOperation<SecurityProfileGroup>
 
     /// See `SecurityProfileGroupServiceClient.createSecurityProfileGroup`.
     func createSecurityProfileGroup(
       parent: Swift.String,
       securityProfileGroup: SecurityProfileGroup?,
       securityProfileGroupId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup>
+    ) async throws -> any GoogleGax.PollableOperation<SecurityProfileGroup>
 
     /// See `SecurityProfileGroupServiceClient.updateSecurityProfileGroup`.
     func updateSecurityProfileGroup(request: UpdateSecurityProfileGroupRequest) async throws
@@ -547,13 +545,13 @@ extension Clients {
 
     /// See `SecurityProfileGroupServiceClient.updateSecurityProfileGroup`.
     func updateSecurityProfileGroup(withPolling: UpdateSecurityProfileGroupRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup>
+      -> any GoogleGax.PollableOperation<SecurityProfileGroup>
 
     /// See `SecurityProfileGroupServiceClient.updateSecurityProfileGroup`.
     func updateSecurityProfileGroup(
       securityProfileGroup: SecurityProfileGroup?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<SecurityProfileGroup>
 
     /// See `SecurityProfileGroupServiceClient.deleteSecurityProfileGroup`.
     func deleteSecurityProfileGroup(request: DeleteSecurityProfileGroupRequest) async throws
@@ -561,12 +559,12 @@ extension Clients {
 
     /// See `SecurityProfileGroupServiceClient.deleteSecurityProfileGroup`.
     func deleteSecurityProfileGroup(withPolling: DeleteSecurityProfileGroupRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecurityProfileGroupServiceClient.deleteSecurityProfileGroup`.
     func deleteSecurityProfileGroup(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecurityProfileGroupServiceClient.listSecurityProfiles`.
     func listSecurityProfiles(request: ListSecurityProfilesRequest) async throws
@@ -597,14 +595,14 @@ extension Clients {
 
     /// See `SecurityProfileGroupServiceClient.createSecurityProfile`.
     func createSecurityProfile(withPolling: CreateSecurityProfileRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<SecurityProfile>
+      -> any GoogleGax.PollableOperation<SecurityProfile>
 
     /// See `SecurityProfileGroupServiceClient.createSecurityProfile`.
     func createSecurityProfile(
       parent: Swift.String,
       securityProfile: SecurityProfile?,
       securityProfileId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfile>
+    ) async throws -> any GoogleGax.PollableOperation<SecurityProfile>
 
     /// See `SecurityProfileGroupServiceClient.updateSecurityProfile`.
     func updateSecurityProfile(request: UpdateSecurityProfileRequest) async throws
@@ -612,13 +610,13 @@ extension Clients {
 
     /// See `SecurityProfileGroupServiceClient.updateSecurityProfile`.
     func updateSecurityProfile(withPolling: UpdateSecurityProfileRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<SecurityProfile>
+      -> any GoogleGax.PollableOperation<SecurityProfile>
 
     /// See `SecurityProfileGroupServiceClient.updateSecurityProfile`.
     func updateSecurityProfile(
       securityProfile: SecurityProfile?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfile>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<SecurityProfile>
 
     /// See `SecurityProfileGroupServiceClient.deleteSecurityProfile`.
     func deleteSecurityProfile(request: DeleteSecurityProfileRequest) async throws
@@ -626,12 +624,12 @@ extension Clients {
 
     /// See `SecurityProfileGroupServiceClient.deleteSecurityProfile`.
     func deleteSecurityProfile(withPolling: DeleteSecurityProfileRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecurityProfileGroupServiceClient.deleteSecurityProfile`.
     func deleteSecurityProfile(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecurityProfileGroupServiceClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -689,142 +687,142 @@ extension Clients {
 
     /// See `SecurityProfileGroupServiceClient.listSecurityProfileGroups`.
     func listSecurityProfileGroups(
-      request: ListSecurityProfileGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSecurityProfileGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListSecurityProfileGroupsResponse
 
     /// See `SecurityProfileGroupServiceClient.listSecurityProfileGroups`.
     func listSecurityProfileGroups(
-      byItem: ListSecurityProfileGroupsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSecurityProfileGroupsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SecurityProfileGroup, Swift.Error>
 
     /// See `SecurityProfileGroupServiceClient.getSecurityProfileGroup`.
     func getSecurityProfileGroup(
-      request: GetSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.SecurityProfileGroup
 
     /// See `SecurityProfileGroupServiceClient.createSecurityProfileGroup`.
     func createSecurityProfileGroup(
-      request: CreateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecurityProfileGroupServiceClient.createSecurityProfileGroup`.
     func createSecurityProfileGroup(
-      withPolling: CreateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup>
+      withPolling: CreateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SecurityProfileGroup>
 
     /// See `SecurityProfileGroupServiceClient.updateSecurityProfileGroup`.
     func updateSecurityProfileGroup(
-      request: UpdateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecurityProfileGroupServiceClient.updateSecurityProfileGroup`.
     func updateSecurityProfileGroup(
-      withPolling: UpdateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup>
+      withPolling: UpdateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SecurityProfileGroup>
 
     /// See `SecurityProfileGroupServiceClient.deleteSecurityProfileGroup`.
     func deleteSecurityProfileGroup(
-      request: DeleteSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecurityProfileGroupServiceClient.deleteSecurityProfileGroup`.
     func deleteSecurityProfileGroup(
-      withPolling: DeleteSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecurityProfileGroupServiceClient.listSecurityProfiles`.
     func listSecurityProfiles(
-      request: ListSecurityProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSecurityProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListSecurityProfilesResponse
 
     /// See `SecurityProfileGroupServiceClient.listSecurityProfiles`.
     func listSecurityProfiles(
-      byItem: ListSecurityProfilesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSecurityProfilesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SecurityProfile, Swift.Error>
 
     /// See `SecurityProfileGroupServiceClient.getSecurityProfile`.
     func getSecurityProfile(
-      request: GetSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSecurityProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.SecurityProfile
 
     /// See `SecurityProfileGroupServiceClient.createSecurityProfile`.
     func createSecurityProfile(
-      request: CreateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSecurityProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecurityProfileGroupServiceClient.createSecurityProfile`.
     func createSecurityProfile(
-      withPolling: CreateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfile>
+      withPolling: CreateSecurityProfileRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SecurityProfile>
 
     /// See `SecurityProfileGroupServiceClient.updateSecurityProfile`.
     func updateSecurityProfile(
-      request: UpdateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSecurityProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecurityProfileGroupServiceClient.updateSecurityProfile`.
     func updateSecurityProfile(
-      withPolling: UpdateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfile>
+      withPolling: UpdateSecurityProfileRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SecurityProfile>
 
     /// See `SecurityProfileGroupServiceClient.deleteSecurityProfile`.
     func deleteSecurityProfile(
-      request: DeleteSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSecurityProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecurityProfileGroupServiceClient.deleteSecurityProfile`.
     func deleteSecurityProfile(
-      withPolling: DeleteSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteSecurityProfileRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecurityProfileGroupServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `SecurityProfileGroupServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `SecurityProfileGroupServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `SecurityProfileGroupServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SecurityProfileGroupServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SecurityProfileGroupServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `SecurityProfileGroupServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `SecurityProfileGroupServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `SecurityProfileGroupServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `SecurityProfileGroupServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -838,9 +836,9 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func listSecurityProfileGroups(
-    request: ListSecurityProfileGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSecurityProfileGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.ListSecurityProfileGroupsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSecurityProfileGroups(
@@ -850,14 +848,14 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func listSecurityProfileGroups(
-    byItem: ListSecurityProfileGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSecurityProfileGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SecurityProfileGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudNetworkSecurityV1.ListSecurityProfileGroupsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSecurityProfileGroups(
@@ -876,9 +874,9 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func getSecurityProfileGroup(
-    request: GetSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.SecurityProfileGroup {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSecurityProfileGroup(
@@ -897,25 +895,24 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func createSecurityProfileGroup(
-    request: CreateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createSecurityProfileGroup(withPolling: CreateSecurityProfileGroupRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup>
+    async throws -> any GoogleGax.PollableOperation<SecurityProfileGroup>
   {
     try await self.createSecurityProfileGroup(withPolling: withPolling, options: .init())
   }
 
   public func createSecurityProfileGroup(
-    withPolling: CreateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<SecurityProfileGroup>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SecurityProfileGroup> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SecurityProfileGroup>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -923,7 +920,7 @@ extension Clients.SecurityProfileGroupServiceProtocol {
     parent: Swift.String,
     securityProfileGroup: SecurityProfileGroup?,
     securityProfileGroupId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup> {
+  ) async throws -> any GoogleGax.PollableOperation<SecurityProfileGroup> {
     let request = CreateSecurityProfileGroupRequest().with {
       $0.parent = parent
       $0.securityProfileGroup = securityProfileGroup
@@ -939,32 +936,31 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func updateSecurityProfileGroup(
-    request: UpdateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateSecurityProfileGroup(withPolling: UpdateSecurityProfileGroupRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup>
+    async throws -> any GoogleGax.PollableOperation<SecurityProfileGroup>
   {
     try await self.updateSecurityProfileGroup(withPolling: withPolling, options: .init())
   }
 
   public func updateSecurityProfileGroup(
-    withPolling: UpdateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<SecurityProfileGroup>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SecurityProfileGroup> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SecurityProfileGroup>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateSecurityProfileGroup(
     securityProfileGroup: SecurityProfileGroup?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfileGroup> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<SecurityProfileGroup> {
     let request = UpdateSecurityProfileGroupRequest().with {
       $0.securityProfileGroup = securityProfileGroup
       $0.updateMask = updateMask
@@ -979,30 +975,30 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func deleteSecurityProfileGroup(
-    request: DeleteSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteSecurityProfileGroup(withPolling: DeleteSecurityProfileGroupRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    async throws -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteSecurityProfileGroup(withPolling: withPolling, options: .init())
   }
 
   public func deleteSecurityProfileGroup(
-    withPolling: DeleteSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteSecurityProfileGroup(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteSecurityProfileGroupRequest().with {
       $0.name = name
     }
@@ -1016,9 +1012,9 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func listSecurityProfiles(
-    request: ListSecurityProfilesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSecurityProfilesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.ListSecurityProfilesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSecurityProfiles(
@@ -1028,14 +1024,14 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func listSecurityProfiles(
-    byItem: ListSecurityProfilesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSecurityProfilesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SecurityProfile, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudNetworkSecurityV1.ListSecurityProfilesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSecurityProfiles(
@@ -1054,9 +1050,9 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func getSecurityProfile(
-    request: GetSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSecurityProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.SecurityProfile {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSecurityProfile(
@@ -1075,24 +1071,24 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func createSecurityProfile(
-    request: CreateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSecurityProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createSecurityProfile(withPolling: CreateSecurityProfileRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<SecurityProfile>
+    -> any GoogleGax.PollableOperation<SecurityProfile>
   {
     try await self.createSecurityProfile(withPolling: withPolling, options: .init())
   }
 
   public func createSecurityProfile(
-    withPolling: CreateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfile> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<SecurityProfile>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateSecurityProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SecurityProfile> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SecurityProfile>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1100,7 +1096,7 @@ extension Clients.SecurityProfileGroupServiceProtocol {
     parent: Swift.String,
     securityProfile: SecurityProfile?,
     securityProfileId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfile> {
+  ) async throws -> any GoogleGax.PollableOperation<SecurityProfile> {
     let request = CreateSecurityProfileRequest().with {
       $0.parent = parent
       $0.securityProfile = securityProfile
@@ -1116,31 +1112,31 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func updateSecurityProfile(
-    request: UpdateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSecurityProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateSecurityProfile(withPolling: UpdateSecurityProfileRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<SecurityProfile>
+    -> any GoogleGax.PollableOperation<SecurityProfile>
   {
     try await self.updateSecurityProfile(withPolling: withPolling, options: .init())
   }
 
   public func updateSecurityProfile(
-    withPolling: UpdateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfile> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<SecurityProfile>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateSecurityProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SecurityProfile> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SecurityProfile>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateSecurityProfile(
     securityProfile: SecurityProfile?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<SecurityProfile> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<SecurityProfile> {
     let request = UpdateSecurityProfileRequest().with {
       $0.securityProfile = securityProfile
       $0.updateMask = updateMask
@@ -1155,30 +1151,30 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func deleteSecurityProfile(
-    request: DeleteSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSecurityProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteSecurityProfile(withPolling: DeleteSecurityProfileRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteSecurityProfile(withPolling: withPolling, options: .init())
   }
 
   public func deleteSecurityProfile(
-    withPolling: DeleteSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteSecurityProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteSecurityProfile(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteSecurityProfileRequest().with {
       $0.name = name
     }
@@ -1192,9 +1188,9 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -1204,13 +1200,13 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1220,9 +1216,9 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -1232,9 +1228,9 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -1244,9 +1240,9 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -1256,9 +1252,9 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1268,9 +1264,9 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1280,13 +1276,13 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1307,9 +1303,9 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1326,9 +1322,9 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1345,9 +1341,9 @@ extension Clients.SecurityProfileGroupServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

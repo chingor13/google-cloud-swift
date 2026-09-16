@@ -16,9 +16,9 @@
 
 #if Projects
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct ProjectsListXpnHostsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ProjectsListXpnHostsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional organization ID managed by Cloud Resource Manager, for which to
@@ -26,7 +26,7 @@
     /// inferred from the project.
     public var organization: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ProjectsListXpnHostsRequest`.
     public init() {}
@@ -62,7 +62,7 @@
       self.organization = try container.decodeIfPresent(Swift.String.self, forKey: .organization)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -77,11 +77,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.ProjectsListXpnHostsRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

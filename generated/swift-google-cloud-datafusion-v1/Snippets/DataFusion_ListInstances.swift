@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudDataFusionV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: DataFusionClient, parent: String) async throws {
   let items = try client.listInstances(

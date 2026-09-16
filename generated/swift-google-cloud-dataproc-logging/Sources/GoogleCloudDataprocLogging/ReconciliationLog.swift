@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Reconciliation log for session ttl event.
-public struct ReconciliationLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ReconciliationLog: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The reconciliation algorithm inputs.
@@ -27,7 +27,7 @@ public struct ReconciliationLog: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// The algorithm outputs for the recommended reconciliation operation.
   public var outputs: ReconciliationLog.Outputs? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ReconciliationLog`.
   public init() {}
@@ -66,7 +66,7 @@ public struct ReconciliationLog: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.outputs = try container.decodeIfPresent(ReconciliationLog.Outputs.self, forKey: .outputs)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -81,22 +81,22 @@ public struct ReconciliationLog: Codable, Equatable, GoogleCloudWKT._AnyPackable
 
   /// The input values for the Reconciler recommendation algorithm.
   /// We could add more details in future if required.
-  public struct Inputs: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Inputs: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Idle duration
-    public var idleDuration: GoogleCloudWKT.Duration? = nil
+    public var idleDuration: GoogleWKT.Duration? = nil
 
     /// Configured idle TTL
-    public var idleTtl: GoogleCloudWKT.Duration? = nil
+    public var idleTtl: GoogleWKT.Duration? = nil
 
     /// Total session lifetime
-    public var sessionLifetime: GoogleCloudWKT.Duration? = nil
+    public var sessionLifetime: GoogleWKT.Duration? = nil
 
     /// Configured ttl
-    public var ttl: GoogleCloudWKT.Duration? = nil
+    public var ttl: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Inputs`.
     public init() {}
@@ -136,14 +136,14 @@ public struct ReconciliationLog: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.idleDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .idleDuration)
-      self.idleTtl = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .idleTtl)
+        GoogleWKT.Duration.self, forKey: .idleDuration)
+      self.idleTtl = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .idleTtl)
       self.sessionLifetime = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .sessionLifetime)
-      self.ttl = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .ttl)
+        GoogleWKT.Duration.self, forKey: .sessionLifetime)
+      self.ttl = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .ttl)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -161,16 +161,16 @@ public struct ReconciliationLog: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataproc.logging.ReconciliationLog.Inputs"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Reconciler recommendations.
-  public struct Outputs: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Outputs: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The high-level reconciliation decision.
@@ -179,7 +179,7 @@ public struct ReconciliationLog: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// Human readable context messages which explain the reconciler decision.
     public var decisionDetails: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Outputs`.
     public init() {}
@@ -224,7 +224,7 @@ public struct ReconciliationLog: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -240,21 +240,21 @@ public struct ReconciliationLog: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataproc.logging.ReconciliationLog.Outputs"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.logging.ReconciliationLog"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration of an Action for the tool to use.
 /// Note: This can be either an Action or an Operation. See
 /// https://cloud.google.com/integration-connectors/docs/entities-operation-action
 /// for details.
-public struct Action: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Action: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Entity fields to use as inputs for the operation.
@@ -35,7 +35,7 @@ public struct Action: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Specification for an action to configure for the tool to use.
   public var actionSpec: OneOf_ActionSpec? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Action`.
   public init() {}
@@ -104,7 +104,7 @@ public struct Action: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.actionSpec = actionSpec
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -127,7 +127,7 @@ public struct Action: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Entity CRUD operation specification.
-  public struct EntityOperation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EntityOperation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. ID of the entity.
@@ -137,7 +137,7 @@ public struct Action: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var operation: Action.EntityOperation.OperationType = Action.EntityOperation
       .OperationType()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EntityOperation`.
     public init() {}
@@ -182,7 +182,7 @@ public struct Action: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -325,11 +325,11 @@ public struct Action: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.Action.EntityOperation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -344,10 +344,10 @@ public struct Action: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.Action"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

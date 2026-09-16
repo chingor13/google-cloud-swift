@@ -18,28 +18,28 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class ManagedIdentitiesServiceRetry: ManagedIdentitiesServiceStub {
     let inner: any ManagedIdentitiesServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any ManagedIdentitiesServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any ManagedIdentitiesServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -51,14 +51,14 @@ extension Clients {
     }
 
     public func createMicrosoftAdDomain(
-      request: CreateMicrosoftAdDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMicrosoftAdDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateMicrosoftAdDomainRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateMicrosoftAdDomainRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createMicrosoftAdDomain(request: r, options: o)
@@ -66,14 +66,14 @@ extension Clients {
     }
 
     public func resetAdminPassword(
-      request: ResetAdminPasswordRequest, options: GoogleCloudGax.RequestOptions
+      request: ResetAdminPasswordRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedIdentitiesV1.ResetAdminPasswordResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: ResetAdminPasswordRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ResetAdminPasswordRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudManagedIdentitiesV1.ResetAdminPasswordResponse
           in
           return try await self.inner.resetAdminPassword(request: r, options: o)
@@ -81,14 +81,14 @@ extension Clients {
     }
 
     public func listDomains(
-      request: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDomainsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedIdentitiesV1.ListDomainsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListDomainsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDomainsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudManagedIdentitiesV1.ListDomainsResponse
           in
           return try await self.inner.listDomains(request: r, options: o)
@@ -96,14 +96,14 @@ extension Clients {
     }
 
     public func getDomain(
-      request: GetDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedIdentitiesV1.Domain {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetDomainRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetDomainRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudManagedIdentitiesV1.Domain
           in
           return try await self.inner.getDomain(request: r, options: o)
@@ -111,14 +111,14 @@ extension Clients {
     }
 
     public func updateDomain(
-      request: UpdateDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateDomainRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateDomainRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updateDomain(request: r, options: o)
@@ -126,14 +126,14 @@ extension Clients {
     }
 
     public func deleteDomain(
-      request: DeleteDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteDomainRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteDomainRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteDomain(request: r, options: o)
@@ -141,14 +141,14 @@ extension Clients {
     }
 
     public func attachTrust(
-      request: AttachTrustRequest, options: GoogleCloudGax.RequestOptions
+      request: AttachTrustRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: AttachTrustRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AttachTrustRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.attachTrust(request: r, options: o)
@@ -156,14 +156,14 @@ extension Clients {
     }
 
     public func reconfigureTrust(
-      request: ReconfigureTrustRequest, options: GoogleCloudGax.RequestOptions
+      request: ReconfigureTrustRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: ReconfigureTrustRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ReconfigureTrustRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.reconfigureTrust(request: r, options: o)
@@ -171,14 +171,14 @@ extension Clients {
     }
 
     public func detachTrust(
-      request: DetachTrustRequest, options: GoogleCloudGax.RequestOptions
+      request: DetachTrustRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DetachTrustRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DetachTrustRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.detachTrust(request: r, options: o)
@@ -186,14 +186,14 @@ extension Clients {
     }
 
     public func validateTrust(
-      request: ValidateTrustRequest, options: GoogleCloudGax.RequestOptions
+      request: ValidateTrustRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: ValidateTrustRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ValidateTrustRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.validateTrust(request: r, options: o)
@@ -201,29 +201,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -231,29 +231,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

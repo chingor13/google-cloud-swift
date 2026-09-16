@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Allows users to manage their organization resources.
 ///
@@ -30,7 +30,7 @@ public final class OrganizationsClient: Clients.OrganizationsProtocol, Sendable 
   let inner: any Clients.OrganizationsStub
 
   /// Creates a new `OrganizationsClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.OrganizationsStub = try Clients.OrganizationsTransport(options)
     inner = Clients.OrganizationsRetry(inner, options: options)
     if let logger = options.logger {
@@ -43,7 +43,7 @@ public final class OrganizationsClient: Clients.OrganizationsProtocol, Sendable 
   ///
   /// @Snippet(path: "Organizations_GetOrganization")
   public func getOrganization(
-    request: GetOrganizationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetOrganizationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudResourceManagerV3.Organization {
     try await self.inner.getOrganization(request: request, options: options)
   }
@@ -58,7 +58,7 @@ public final class OrganizationsClient: Clients.OrganizationsProtocol, Sendable 
   ///
   /// @Snippet(path: "Organizations_SearchOrganizations")
   public func searchOrganizations(
-    request: SearchOrganizationsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchOrganizationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudResourceManagerV3.SearchOrganizationsResponse {
     try await self.inner.searchOrganizations(request: request, options: options)
   }
@@ -73,7 +73,7 @@ public final class OrganizationsClient: Clients.OrganizationsProtocol, Sendable 
   ///
   /// @Snippet(path: "Organizations_SearchOrganizations")
   public func searchOrganizations(
-    byItem: SearchOrganizationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: SearchOrganizationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Organization, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudResourceManagerV3.SearchOrganizationsResponse
@@ -82,7 +82,7 @@ public final class OrganizationsClient: Clients.OrganizationsProtocol, Sendable 
       request.pageToken = token
       return try await self.searchOrganizations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the access control policy for an organization resource. The policy may
@@ -94,7 +94,7 @@ public final class OrganizationsClient: Clients.OrganizationsProtocol, Sendable 
   ///
   /// @Snippet(path: "Organizations_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -108,7 +108,7 @@ public final class OrganizationsClient: Clients.OrganizationsProtocol, Sendable 
   ///
   /// @Snippet(path: "Organizations_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -121,7 +121,7 @@ public final class OrganizationsClient: Clients.OrganizationsProtocol, Sendable 
   ///
   /// @Snippet(path: "Organizations_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -132,7 +132,7 @@ public final class OrganizationsClient: Clients.OrganizationsProtocol, Sendable 
   ///
   /// @Snippet(path: "Organizations_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -196,32 +196,32 @@ extension Clients {
 
     /// See `OrganizationsClient.getOrganization`.
     func getOrganization(
-      request: GetOrganizationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOrganizationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudResourceManagerV3.Organization
 
     /// See `OrganizationsClient.searchOrganizations`.
     func searchOrganizations(
-      request: SearchOrganizationsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchOrganizationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudResourceManagerV3.SearchOrganizationsResponse
 
     /// See `OrganizationsClient.searchOrganizations`.
     func searchOrganizations(
-      byItem: SearchOrganizationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchOrganizationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Organization, Swift.Error>
 
     /// See `OrganizationsClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `OrganizationsClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `OrganizationsClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
   }
 }
@@ -235,9 +235,9 @@ extension Clients.OrganizationsProtocol {
   }
 
   public func getOrganization(
-    request: GetOrganizationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetOrganizationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudResourceManagerV3.Organization {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOrganization(
@@ -256,9 +256,9 @@ extension Clients.OrganizationsProtocol {
   }
 
   public func searchOrganizations(
-    request: SearchOrganizationsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchOrganizationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudResourceManagerV3.SearchOrganizationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func searchOrganizations(
@@ -268,14 +268,14 @@ extension Clients.OrganizationsProtocol {
   }
 
   public func searchOrganizations(
-    byItem: SearchOrganizationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: SearchOrganizationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Organization, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudResourceManagerV3.SearchOrganizationsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func searchOrganizations(
@@ -294,9 +294,9 @@ extension Clients.OrganizationsProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(
@@ -315,9 +315,9 @@ extension Clients.OrganizationsProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(
@@ -336,9 +336,9 @@ extension Clients.OrganizationsProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(
@@ -359,9 +359,9 @@ extension Clients.OrganizationsProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

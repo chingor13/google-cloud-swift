@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudResourceManagerV3
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: OrganizationsClient) async throws {
   let response = try await client.testIamPermissions(

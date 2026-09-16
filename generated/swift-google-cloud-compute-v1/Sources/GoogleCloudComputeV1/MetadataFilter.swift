@@ -16,7 +16,7 @@
 
 #if ForwardingRules || GlobalForwardingRules || RegionUrlMaps || UrlMaps
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Opaque filter criteria used by load balancers to restrict routing
   /// configuration to a limited set of load balancing proxies. Proxies and
@@ -34,7 +34,7 @@
   /// An example for using metadataFilters would be: if
   /// load balancing involves
   /// Envoys, they receive routing configuration when values inmetadataFilters match values supplied in  of their XDS requests to loadbalancers.
-  public struct MetadataFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MetadataFilter: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The list of label value pairs that must match labels in the provided
@@ -55,7 +55,7 @@
     ///    matching labels in the provided metadata.
     public var filterMatchCriteria: MetadataFilter.FilterMatchCriteria? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MetadataFilter`.
     public init() {}
@@ -99,7 +99,7 @@
         MetadataFilter.FilterMatchCriteria.self, forKey: .filterMatchCriteria)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -222,11 +222,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.MetadataFilter"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

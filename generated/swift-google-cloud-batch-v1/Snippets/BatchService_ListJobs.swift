@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudBatchV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: BatchServiceClient, parent: String) async throws {
   let items = try client.listJobs(

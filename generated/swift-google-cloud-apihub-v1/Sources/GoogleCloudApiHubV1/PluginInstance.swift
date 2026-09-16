@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a plugin instance resource in the API Hub.
 /// A PluginInstance is a specific instance of a hub plugin with its own
 /// configuration, state, and execution details.
-public struct PluginInstance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PluginInstance: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The unique name of the plugin instance resource.
@@ -56,11 +56,11 @@ public struct PluginInstance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var actions: [PluginInstanceAction] = []
 
   /// Output only. Timestamp indicating when the plugin instance was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Timestamp indicating when the plugin instance was last
   /// updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The source project id of the plugin instance. This will be the id
   /// of runtime project in case of gcp based plugins and org id in case of non
@@ -68,7 +68,7 @@ public struct PluginInstance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// on-ramp plugins.
   public var sourceProjectId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PluginInstance`.
   public init() {}
@@ -140,16 +140,14 @@ public struct PluginInstance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent([PluginInstanceAction].self, forKey: .actions) {
       self.actions = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .sourceProjectId) {
       self.sourceProjectId = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -324,10 +322,10 @@ public struct PluginInstance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apihub.v1.PluginInstance"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

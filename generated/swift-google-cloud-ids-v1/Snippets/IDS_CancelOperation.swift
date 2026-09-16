@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudIDSV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: IDSClient) async throws {
   try await client.cancelOperation(

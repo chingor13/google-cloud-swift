@@ -19,26 +19,26 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class CloudLocationFinderRetry: CloudLocationFinderStub {
     let inner: any CloudLocationFinderStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any CloudLocationFinderStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any CloudLocationFinderStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@ extension Clients {
     }
 
     public func listCloudLocations(
-      request: ListCloudLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCloudLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocationFinderV1.ListCloudLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListCloudLocationsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCloudLocationsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocationFinderV1.ListCloudLocationsResponse
           in
           return try await self.inner.listCloudLocations(request: r, options: o)
@@ -65,14 +65,14 @@ extension Clients {
     }
 
     public func getCloudLocation(
-      request: GetCloudLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCloudLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocationFinderV1.CloudLocation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetCloudLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCloudLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocationFinderV1.CloudLocation
           in
           return try await self.inner.getCloudLocation(request: r, options: o)
@@ -80,14 +80,14 @@ extension Clients {
     }
 
     public func searchCloudLocations(
-      request: SearchCloudLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchCloudLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocationFinderV1.SearchCloudLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: SearchCloudLocationsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchCloudLocationsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocationFinderV1.SearchCloudLocationsResponse
           in
           return try await self.inner.searchCloudLocations(request: r, options: o)
@@ -95,29 +95,29 @@ extension Clients {
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)

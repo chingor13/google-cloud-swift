@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// This service lets you manage document schema.
 ///
@@ -29,7 +29,7 @@ public final class DocumentSchemaServiceClient: Clients.DocumentSchemaServicePro
   let inner: any Clients.DocumentSchemaServiceStub
 
   /// Creates a new `DocumentSchemaServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DocumentSchemaServiceStub = try Clients.DocumentSchemaServiceTransport(
       options)
     inner = Clients.DocumentSchemaServiceRetry(inner, options: options)
@@ -43,7 +43,7 @@ public final class DocumentSchemaServiceClient: Clients.DocumentSchemaServicePro
   ///
   /// @Snippet(path: "DocumentSchemaService_CreateDocumentSchema")
   public func createDocumentSchema(
-    request: CreateDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDocumentSchemaRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema {
     try await self.inner.createDocumentSchema(request: request, options: options)
   }
@@ -60,7 +60,7 @@ public final class DocumentSchemaServiceClient: Clients.DocumentSchemaServicePro
   ///
   /// @Snippet(path: "DocumentSchemaService_UpdateDocumentSchema")
   public func updateDocumentSchema(
-    request: UpdateDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDocumentSchemaRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema {
     try await self.inner.updateDocumentSchema(request: request, options: options)
   }
@@ -70,7 +70,7 @@ public final class DocumentSchemaServiceClient: Clients.DocumentSchemaServicePro
   ///
   /// @Snippet(path: "DocumentSchemaService_GetDocumentSchema")
   public func getDocumentSchema(
-    request: GetDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDocumentSchemaRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema {
     try await self.inner.getDocumentSchema(request: request, options: options)
   }
@@ -81,7 +81,7 @@ public final class DocumentSchemaServiceClient: Clients.DocumentSchemaServicePro
   ///
   /// @Snippet(path: "DocumentSchemaService_DeleteDocumentSchema")
   public func deleteDocumentSchema(
-    request: DeleteDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDocumentSchemaRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteDocumentSchema(request: request, options: options)
   }
@@ -90,7 +90,7 @@ public final class DocumentSchemaServiceClient: Clients.DocumentSchemaServicePro
   ///
   /// @Snippet(path: "DocumentSchemaService_ListDocumentSchemas")
   public func listDocumentSchemas(
-    request: ListDocumentSchemasRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDocumentSchemasRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.ListDocumentSchemasResponse {
     try await self.inner.listDocumentSchemas(request: request, options: options)
   }
@@ -99,7 +99,7 @@ public final class DocumentSchemaServiceClient: Clients.DocumentSchemaServicePro
   ///
   /// @Snippet(path: "DocumentSchemaService_ListDocumentSchemas")
   public func listDocumentSchemas(
-    byItem: ListDocumentSchemasRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDocumentSchemasRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DocumentSchema, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -108,7 +108,7 @@ public final class DocumentSchemaServiceClient: Clients.DocumentSchemaServicePro
       request.pageToken = token
       return try await self.listDocumentSchemas(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -117,7 +117,7 @@ public final class DocumentSchemaServiceClient: Clients.DocumentSchemaServicePro
   ///
   /// @Snippet(path: "DocumentSchemaService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -183,32 +183,32 @@ extension Clients {
 
     /// See `DocumentSchemaServiceClient.createDocumentSchema`.
     func createDocumentSchema(
-      request: CreateDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDocumentSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema
 
     /// See `DocumentSchemaServiceClient.updateDocumentSchema`.
     func updateDocumentSchema(
-      request: UpdateDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDocumentSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema
 
     /// See `DocumentSchemaServiceClient.getDocumentSchema`.
     func getDocumentSchema(
-      request: GetDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDocumentSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema
 
     /// See `DocumentSchemaServiceClient.deleteDocumentSchema`.
     func deleteDocumentSchema(
-      request: DeleteDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDocumentSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `DocumentSchemaServiceClient.listDocumentSchemas`.
     func listDocumentSchemas(
-      request: ListDocumentSchemasRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDocumentSchemasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.ListDocumentSchemasResponse
 
     /// See `DocumentSchemaServiceClient.listDocumentSchemas`.
     func listDocumentSchemas(
-      byItem: ListDocumentSchemasRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDocumentSchemasRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DocumentSchema, Swift.Error>
   }
 }
@@ -222,9 +222,9 @@ extension Clients.DocumentSchemaServiceProtocol {
   }
 
   public func createDocumentSchema(
-    request: CreateDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDocumentSchemaRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDocumentSchema(
@@ -245,9 +245,9 @@ extension Clients.DocumentSchemaServiceProtocol {
   }
 
   public func updateDocumentSchema(
-    request: UpdateDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDocumentSchemaRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateDocumentSchema(
@@ -268,9 +268,9 @@ extension Clients.DocumentSchemaServiceProtocol {
   }
 
   public func getDocumentSchema(
-    request: GetDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDocumentSchemaRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDocumentSchema(
@@ -287,9 +287,9 @@ extension Clients.DocumentSchemaServiceProtocol {
   }
 
   public func deleteDocumentSchema(
-    request: DeleteDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDocumentSchemaRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteDocumentSchema(
@@ -308,9 +308,9 @@ extension Clients.DocumentSchemaServiceProtocol {
   }
 
   public func listDocumentSchemas(
-    request: ListDocumentSchemasRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDocumentSchemasRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.ListDocumentSchemasResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDocumentSchemas(
@@ -320,14 +320,14 @@ extension Clients.DocumentSchemaServiceProtocol {
   }
 
   public func listDocumentSchemas(
-    byItem: ListDocumentSchemasRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDocumentSchemasRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DocumentSchema, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudContentWarehouseV1.ListDocumentSchemasResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDocumentSchemas(
@@ -346,9 +346,9 @@ extension Clients.DocumentSchemaServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

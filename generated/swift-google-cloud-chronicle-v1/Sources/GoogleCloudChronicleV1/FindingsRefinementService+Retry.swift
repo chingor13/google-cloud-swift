@@ -18,27 +18,27 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class FindingsRefinementServiceRetry: FindingsRefinementServiceStub {
     let inner: any FindingsRefinementServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any FindingsRefinementServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any FindingsRefinementServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@ extension Clients {
     }
 
     public func getFindingsRefinement(
-      request: GetFindingsRefinementRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFindingsRefinementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.FindingsRefinement {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetFindingsRefinementRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetFindingsRefinementRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.FindingsRefinement
           in
           return try await self.inner.getFindingsRefinement(request: r, options: o)
@@ -65,14 +65,14 @@ extension Clients {
     }
 
     public func listFindingsRefinements(
-      request: ListFindingsRefinementsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFindingsRefinementsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListFindingsRefinementsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListFindingsRefinementsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListFindingsRefinementsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.ListFindingsRefinementsResponse
           in
           return try await self.inner.listFindingsRefinements(request: r, options: o)
@@ -80,14 +80,14 @@ extension Clients {
     }
 
     public func createFindingsRefinement(
-      request: CreateFindingsRefinementRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFindingsRefinementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.FindingsRefinement {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateFindingsRefinementRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateFindingsRefinementRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.FindingsRefinement
           in
           return try await self.inner.createFindingsRefinement(request: r, options: o)
@@ -95,14 +95,14 @@ extension Clients {
     }
 
     public func updateFindingsRefinement(
-      request: UpdateFindingsRefinementRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFindingsRefinementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.FindingsRefinement {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateFindingsRefinementRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateFindingsRefinementRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.FindingsRefinement
           in
           return try await self.inner.updateFindingsRefinement(request: r, options: o)
@@ -110,14 +110,14 @@ extension Clients {
     }
 
     public func getFindingsRefinementDeployment(
-      request: GetFindingsRefinementDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFindingsRefinementDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.FindingsRefinementDeployment {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetFindingsRefinementDeploymentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetFindingsRefinementDeploymentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.FindingsRefinementDeployment
           in
           return try await self.inner.getFindingsRefinementDeployment(request: r, options: o)
@@ -125,59 +125,59 @@ extension Clients {
     }
 
     public func updateFindingsRefinementDeployment(
-      request: UpdateFindingsRefinementDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFindingsRefinementDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.FindingsRefinementDeployment {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateFindingsRefinementDeploymentRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudChronicleV1.FindingsRefinementDeployment
+          (r: UpdateFindingsRefinementDeploymentRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudChronicleV1.FindingsRefinementDeployment
           in
           return try await self.inner.updateFindingsRefinementDeployment(request: r, options: o)
         })
     }
 
     public func listAllFindingsRefinementDeployments(
-      request: ListAllFindingsRefinementDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAllFindingsRefinementDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListAllFindingsRefinementDeploymentsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListAllFindingsRefinementDeploymentsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudChronicleV1.ListAllFindingsRefinementDeploymentsResponse
+          (r: ListAllFindingsRefinementDeploymentsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudChronicleV1.ListAllFindingsRefinementDeploymentsResponse
           in
           return try await self.inner.listAllFindingsRefinementDeployments(request: r, options: o)
         })
     }
 
     public func computeFindingsRefinementActivity(
-      request: ComputeFindingsRefinementActivityRequest, options: GoogleCloudGax.RequestOptions
+      request: ComputeFindingsRefinementActivityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ComputeFindingsRefinementActivityResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: ComputeFindingsRefinementActivityRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudChronicleV1.ComputeFindingsRefinementActivityResponse
+          (r: ComputeFindingsRefinementActivityRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudChronicleV1.ComputeFindingsRefinementActivityResponse
           in
           return try await self.inner.computeFindingsRefinementActivity(request: r, options: o)
         })
     }
 
     public func computeAllFindingsRefinementActivities(
-      request: ComputeAllFindingsRefinementActivitiesRequest, options: GoogleCloudGax.RequestOptions
+      request: ComputeAllFindingsRefinementActivitiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ComputeAllFindingsRefinementActivitiesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: ComputeAllFindingsRefinementActivitiesRequest, o: GoogleCloudGax.RequestOptions)
+          (r: ComputeAllFindingsRefinementActivitiesRequest, o: GoogleGax.RequestOptions)
             async throws -> GoogleCloudChronicleV1.ComputeAllFindingsRefinementActivitiesResponse
           in
           return try await self.inner.computeAllFindingsRefinementActivities(request: r, options: o)
@@ -185,29 +185,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -215,29 +215,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

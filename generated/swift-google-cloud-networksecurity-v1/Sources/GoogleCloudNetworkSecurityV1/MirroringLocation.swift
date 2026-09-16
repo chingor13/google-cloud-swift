@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Details about mirroring in a specific cloud location.
-public struct MirroringLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MirroringLocation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The cloud location, e.g. "us-central1-a" or "asia-south1".
@@ -27,7 +27,7 @@ public struct MirroringLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// Output only. The current state of the association in this location.
   public var state: MirroringLocation.State = MirroringLocation.State()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MirroringLocation`.
   public init() {}
@@ -70,7 +70,7 @@ public struct MirroringLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -194,10 +194,10 @@ public struct MirroringLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networksecurity.v1.MirroringLocation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,13 +16,13 @@
 
 #if RegionUrlMaps || UrlMaps
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A policy that specifies how requests intended for the route's backends
   /// are shadowed to a separate mirrored backend service. The load balancer
   /// doesn't wait for responses from the shadow service. Before sending traffic
   /// to the shadow service, the host or authority header is suffixed with-shadow.
-  public struct RequestMirrorPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RequestMirrorPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The full or partial URL to the BackendService resource being
@@ -39,7 +39,7 @@
     /// The percentage of requests to be mirrored to `backend_service`.
     public var mirrorPercent: Swift.Double? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RequestMirrorPolicy`.
     public init() {}
@@ -79,7 +79,7 @@
       self.mirrorPercent = try container.decodeIfPresent(Swift.Double.self, forKey: .mirrorPercent)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -95,11 +95,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.RequestMirrorPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

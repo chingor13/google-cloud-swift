@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudGKEMultiCloudV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: AttachedClustersClient, projectId: String, locationId: String) async throws {
   let poller = try await client.createAttachedCluster(

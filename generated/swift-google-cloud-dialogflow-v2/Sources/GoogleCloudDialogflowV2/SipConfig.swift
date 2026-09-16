@@ -16,10 +16,10 @@
 
 #if ConversationProfiles || Conversations
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Defines the SIP configuration.
-  public struct SipConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SipConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Asks Dialogflow Telephony to create the conversation provided in the SIP
@@ -32,7 +32,7 @@
     /// Max duration for audio recording.
     /// Overrides the default value of 15 min.
     /// Max value is 8 hours.
-    public var maxAudioRecordingDuration: GoogleCloudWKT.Duration? = nil
+    public var maxAudioRecordingDuration: GoogleWKT.Duration? = nil
 
     /// Allows interactions with a Dialogflow virtual agent even if the call is
     /// connected for SIPREC purposes.
@@ -49,7 +49,7 @@
     /// media direction.
     public var ignoreReinviteMediaDirection: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SipConfig`.
     public init() {}
@@ -105,7 +105,7 @@
         self.inactiveStart = value
       }
       self.maxAudioRecordingDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .maxAudioRecordingDuration)
+        GoogleWKT.Duration.self, forKey: .maxAudioRecordingDuration)
       if let value = try container.decodeIfPresent(
         Swift.Bool.self, forKey: .allowVirtualAgentInteraction)
       {
@@ -128,7 +128,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -150,11 +150,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.SipConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

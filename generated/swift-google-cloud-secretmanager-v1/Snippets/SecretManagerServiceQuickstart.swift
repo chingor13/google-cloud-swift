@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudSecretManagerV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(projectId: String, ) async throws {
   let client = try GoogleCloudSecretManagerV1.SecretManagerServiceClient()

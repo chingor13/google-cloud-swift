@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudKMSV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: KeyManagementServiceClient, projectId: String, locationId: String, keyRingId: String,
@@ -35,7 +35,7 @@ func sample(
           $0.name =
             "projects/\(projectId)/locations/\(locationId)/keyRings/\(keyRingId)/cryptoKeys/\(cryptoKeyId)/cryptoKeyVersions/\(cryptoKeyVersionId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

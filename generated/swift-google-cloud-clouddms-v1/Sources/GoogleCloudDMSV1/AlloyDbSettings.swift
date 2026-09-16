@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Settings for creating an AlloyDB cluster.
-public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AlloyDbSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Input only. Initial user to setup during cluster creation.
@@ -45,7 +45,7 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// protect the user data.
   public var encryptionConfig: AlloyDbSettings.EncryptionConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AlloyDbSettings`.
   public init() {}
@@ -101,7 +101,7 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       AlloyDbSettings.EncryptionConfig.self, forKey: .encryptionConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -119,7 +119,7 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// The username/password for a database user. Used for specifying initial
   /// users at cluster creation time.
-  public struct UserPassword: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UserPassword: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The database username.
@@ -131,7 +131,7 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. Indicates if the initial_user.password field has been set.
     public var passwordSet: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UserPassword`.
     public init() {}
@@ -179,7 +179,7 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -196,16 +196,16 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.clouddms.v1.AlloyDbSettings.UserPassword"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Settings for the cluster's primary instance
-  public struct PrimaryInstanceSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PrimaryInstanceSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The ID of the AlloyDB primary instance. The ID must satisfy the
@@ -229,7 +229,7 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// This is the connection endpoint for an end-user application.
     public var privateIp: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PrimaryInstanceSettings`.
     public init() {}
@@ -290,7 +290,7 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -307,13 +307,13 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// MachineConfig describes the configuration of a machine.
-    public struct MachineConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MachineConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The number of CPU's in the VM instance.
       public var cpuCount: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MachineConfig`.
       public init() {}
@@ -351,7 +351,7 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -367,28 +367,28 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.MachineConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// EncryptionConfig describes the encryption config of a cluster that is
   /// encrypted with a CMEK (customer-managed encryption key).
-  public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EncryptionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The fully-qualified resource name of the KMS key.
@@ -396,7 +396,7 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// projects/[PROJECT]/locations/[REGION]/keyRings/[RING]/cryptoKeys/[KEY_NAME]
     public var kmsKeyName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EncryptionConfig`.
     public init() {}
@@ -434,7 +434,7 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -449,21 +449,21 @@ public struct AlloyDbSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.clouddms.v1.AlloyDbSettings.EncryptionConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.clouddms.v1.AlloyDbSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

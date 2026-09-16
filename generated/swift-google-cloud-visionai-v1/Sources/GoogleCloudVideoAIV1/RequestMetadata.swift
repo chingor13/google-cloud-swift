@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// RequestMetadata is the metadata message for the request.
-public struct RequestMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RequestMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Stream name.
@@ -40,9 +40,9 @@ public struct RequestMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// by the server after the client leaves. If the lease term is not set, the
   /// server will release the session immediately and the client cannot reconnect
   /// to the same session later.
-  public var leaseTerm: GoogleCloudWKT.Duration? = nil
+  public var leaseTerm: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RequestMetadata`.
   public init() {}
@@ -100,10 +100,10 @@ public struct RequestMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .owner) {
       self.owner = value
     }
-    self.leaseTerm = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .leaseTerm)
+    self.leaseTerm = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .leaseTerm)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -123,10 +123,10 @@ public struct RequestMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.RequestMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

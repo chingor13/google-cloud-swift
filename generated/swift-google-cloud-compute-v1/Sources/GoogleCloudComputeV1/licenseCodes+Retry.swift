@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class LicenseCodesRetry: LicenseCodesStub {
       let inner: any LicenseCodesStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any LicenseCodesStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any LicenseCodesStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@
       }
 
       public func `get`(
-        request: LicenseCodesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.LicenseCode {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: LicenseCodesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: LicenseCodesClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.LicenseCode
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -65,45 +65,44 @@
       }
 
       public func getIamPolicy(
-        request: LicenseCodesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: LicenseCodesClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Policy
+            (r: LicenseCodesClient.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
           })
       }
 
       public func setIamPolicy(
-        request: LicenseCodesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: LicenseCodesClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Policy
+            (r: LicenseCodesClient.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
           })
       }
 
       public func testIamPermissions(
-        request: LicenseCodesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: LicenseCodesClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: LicenseCodesClient.TestIamPermissionsRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)

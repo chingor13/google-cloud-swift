@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The `MulticloudDataTransferConfig` resource. It lists the services that you
 /// configure for Data Transfer Essentials billing and metering.
-public struct MulticloudDataTransferConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MulticloudDataTransferConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The name of the `MulticloudDataTransferConfig` resource.
@@ -29,11 +29,11 @@ public struct MulticloudDataTransferConfig: Codable, Equatable, GoogleCloudWKT._
 
   /// Output only. Time when the `MulticloudDataTransferConfig` resource was
   /// created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time when the `MulticloudDataTransferConfig` resource was
   /// updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. User-defined labels.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -86,7 +86,7 @@ public struct MulticloudDataTransferConfig: Codable, Equatable, GoogleCloudWKT._
   /// different and unique ID.
   public var uid: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MulticloudDataTransferConfig`.
   public init() {}
@@ -140,10 +140,8 @@ public struct MulticloudDataTransferConfig: Codable, Equatable, GoogleCloudWKT._
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -171,7 +169,7 @@ public struct MulticloudDataTransferConfig: Codable, Equatable, GoogleCloudWKT._
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -195,10 +193,10 @@ public struct MulticloudDataTransferConfig: Codable, Equatable, GoogleCloudWKT._
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkconnectivity.v1.MulticloudDataTransferConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Status of a deployment resource.
-public struct ResourceStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ResourceStatus: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Name of the resource.
@@ -45,7 +45,7 @@ public struct ResourceStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. Detailed status of NFDeploy.
   public var nfDeployStatus: NFDeployStatus? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ResourceStatus`.
   public init() {}
@@ -117,7 +117,7 @@ public struct ResourceStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       NFDeployStatus.self, forKey: .nfDeployStatus)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -139,10 +139,10 @@ public struct ResourceStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.telcoautomation.v1.ResourceStatus"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,9 +19,9 @@
   // snippet.show
   import Foundation
   import GoogleCloudDiscoveryEngineV1
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
+  import GoogleWKT
 
   func sample(client: ProjectServiceClient) async throws {
     try await client.cancelOperation(

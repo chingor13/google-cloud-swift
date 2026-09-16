@@ -20,9 +20,9 @@
   import Foundation
   import GoogleCloudDialogflowCXV3
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
+  import GoogleWKT
 
   func sample(
     client: EnvironmentsClient, projectId: String, locationId: String, agentId: String,
@@ -35,7 +35,7 @@
             $0.name =
               "projects/\(projectId)/locations/\(locationId)/agents/\(agentId)/environments/\(environmentId)"
           }
-          $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+          $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
         }
     )
     let response = try await poller.wait()

@@ -16,120 +16,120 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CrossNetworkAutomationServiceStub: Sendable {
     func listServiceConnectionMaps(
-      request: ListServiceConnectionMapsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServiceConnectionMapsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.ListServiceConnectionMapsResponse
 
     func getServiceConnectionMap(
-      request: GetServiceConnectionMapRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceConnectionMapRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.ServiceConnectionMap
 
     func createServiceConnectionMap(
-      request: CreateServiceConnectionMapRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServiceConnectionMapRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateServiceConnectionMap(
-      request: UpdateServiceConnectionMapRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServiceConnectionMapRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteServiceConnectionMap(
-      request: DeleteServiceConnectionMapRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceConnectionMapRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listServiceConnectionPolicies(
-      request: ListServiceConnectionPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServiceConnectionPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.ListServiceConnectionPoliciesResponse
 
     func getServiceConnectionPolicy(
-      request: GetServiceConnectionPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceConnectionPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.ServiceConnectionPolicy
 
     func createServiceConnectionPolicy(
-      request: CreateServiceConnectionPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServiceConnectionPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateServiceConnectionPolicy(
-      request: UpdateServiceConnectionPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServiceConnectionPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteServiceConnectionPolicy(
-      request: DeleteServiceConnectionPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceConnectionPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listServiceClasses(
-      request: ListServiceClassesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServiceClassesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.ListServiceClassesResponse
 
     func getServiceClass(
-      request: GetServiceClassRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.ServiceClass
 
     func updateServiceClass(
-      request: UpdateServiceClassRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServiceClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteServiceClass(
-      request: DeleteServiceClassRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getServiceConnectionToken(
-      request: GetServiceConnectionTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceConnectionTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.ServiceConnectionToken
 
     func listServiceConnectionTokens(
-      request: ListServiceConnectionTokensRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServiceConnectionTokensRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.ListServiceConnectionTokensResponse
 
     func createServiceConnectionToken(
-      request: CreateServiceConnectionTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServiceConnectionTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteServiceConnectionToken(
-      request: DeleteServiceConnectionTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceConnectionTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

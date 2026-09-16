@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// AuthorizationPolicy is a resource that specifies how a server
 /// should authorize incoming connections. This resource in itself does
 /// not change the configuration unless it's attached to a target https
 /// proxy or endpoint config selector resource.
-public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AuthorizationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Name of the AuthorizationPolicy resource. It matches pattern
@@ -32,10 +32,10 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public var description: Swift.String = Swift.String()
 
   /// Output only. The timestamp when the resource was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when the resource was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Set of label tags associated with the AuthorizationPolicy
   /// resource.
@@ -52,7 +52,7 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// request.
   public var rules: [AuthorizationPolicy.Rule] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AuthorizationPolicy`.
   public init() {}
@@ -103,10 +103,8 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -119,7 +117,7 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -138,7 +136,7 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
   }
 
   /// Specification of rules.
-  public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. List of attributes for the traffic source. All of the sources
@@ -154,7 +152,7 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// checks for the destination.
     public var destinations: [AuthorizationPolicy.Rule.Destination] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Rule`.
     public init() {}
@@ -201,7 +199,7 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -215,7 +213,7 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
 
     /// Specification of traffic source attributes.
-    public struct Source: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Source: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. List of peer identities to match for authorization. At least
@@ -233,7 +231,7 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
       /// proxies should be considered untrusted.
       public var ipBlocks: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Source`.
       public init() {}
@@ -276,7 +274,7 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -292,16 +290,16 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Source"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Specification of traffic destination attributes.
-    public struct Destination: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Destination: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. List of host names to match. Matched against the ":authority"
@@ -325,7 +323,7 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
       /// requests arrive through a trusted client or proxy.
       public var httpHeaderMatch: AuthorizationPolicy.Rule.Destination.HttpHeaderMatch? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Destination`.
       public init() {}
@@ -377,7 +375,7 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
           AuthorizationPolicy.Rule.Destination.HttpHeaderMatch.self, forKey: .httpHeaderMatch)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -393,7 +391,7 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
 
       /// Specification of HTTP header match attributes.
-      public struct HttpHeaderMatch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct HttpHeaderMatch: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The name of the HTTP header to match. For matching
@@ -404,8 +402,7 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
 
         public var type: OneOf_Type? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `HttpHeaderMatch`.
         public init() {}
@@ -461,7 +458,7 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
           self.type = type
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -495,11 +492,11 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
           return
             "type.googleapis.com/google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination.HttpHeaderMatch"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -507,22 +504,22 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
         return
           "type.googleapis.com/google.cloud.networksecurity.v1.AuthorizationPolicy.Rule.Destination"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networksecurity.v1.AuthorizationPolicy.Rule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -636,10 +633,10 @@ public struct AuthorizationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networksecurity.v1.AuthorizationPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

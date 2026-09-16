@@ -16,7 +16,7 @@
 
 #if Participants
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The top-level message sent by the client to the
   /// [Participants.StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent]
@@ -68,7 +68,7 @@
   /// [google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.query_params]: <doc:StreamingAnalyzeContentRequest/queryParams>
   /// [google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.reply_audio_config]: <doc:StreamingAnalyzeContentRequest/replyAudioConfig>
   /// [google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.text_config]: <doc:StreamingAnalyzeContentRequest/OneOf_Config/textConfig(_:)>
-  public struct StreamingAnalyzeContentRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StreamingAnalyzeContentRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The name of the participant this text comes from.
@@ -95,7 +95,7 @@
     ///
     /// Note: this field should only be used if you are connecting to a Dialogflow
     /// CX agent.
-    public var cxParameters: GoogleCloudWKT.Struct? = nil
+    public var cxParameters: GoogleWKT.Struct? = nil
 
     /// Optional. Enable full bidirectional streaming. You can keep streaming the
     /// audio until timeout, and there's no need to half close the stream to get
@@ -144,7 +144,7 @@
     /// The input.
     public var input: OneOf_Input? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StreamingAnalyzeContentRequest`.
     public init() {}
@@ -213,7 +213,7 @@
       self.assistQueryParams = try container.decodeIfPresent(
         AssistQueryParameters.self, forKey: .assistQueryParams)
       self.cxParameters = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .cxParameters)
+        GoogleWKT.Struct.self, forKey: .cxParameters)
       if let value = try container.decodeIfPresent(
         Swift.Bool.self, forKey: .enableExtendedStreaming)
       {
@@ -278,7 +278,7 @@
       self.input = input
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -348,11 +348,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

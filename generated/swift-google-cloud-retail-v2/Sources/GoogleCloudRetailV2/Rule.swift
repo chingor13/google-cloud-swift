@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A rule is a condition-action pair
 ///
@@ -26,7 +26,7 @@ import Foundation
 ///
 /// [google.cloud.retail.v2.Control]: <doc:Control>
 /// [google.cloud.retail.v2.SolutionType.SOLUTION_TYPE_SEARCH]: <doc:SolutionType/search>
-public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The condition that triggers the rule.
@@ -36,7 +36,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// An action must be provided.
   public var action: OneOf_Action? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Rule`.
   public init() {}
@@ -158,7 +158,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.action = action
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -198,7 +198,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// A boost action to apply to results matching condition specified above.
-  public struct BoostAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BoostAction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Strength of the condition boost, which must be in [-1, 1]. Negative
@@ -238,7 +238,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.cloud.retail.v2.SearchRequest.filter]: <doc:SearchRequest/filter>
     public var productsFilter: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BoostAction`.
     public init() {}
@@ -281,7 +281,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -297,11 +297,11 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.BoostAction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -323,7 +323,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// the filter.
   ///
   /// [google.cloud.retail.v2.Condition.query_terms]: <doc:Condition/queryTerms>
-  public struct FilterAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FilterAction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A filter to apply on the matching condition results. Supported features:
@@ -344,7 +344,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.cloud.retail.v2.SearchRequest.filter]: <doc:SearchRequest/filter>
     public var filter: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FilterAction`.
     public init() {}
@@ -382,7 +382,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -397,11 +397,11 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.FilterAction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -414,13 +414,13 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// * Action Result: Redirects shopper to provided uri.
   ///
   /// [google.cloud.retail.v2.Condition.query_terms]: <doc:Condition/queryTerms>
-  public struct RedirectAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RedirectAction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// URL must have length equal or less than 2000 characters.
     public var redirectUri: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RedirectAction`.
     public init() {}
@@ -458,7 +458,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -473,11 +473,11 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.RedirectAction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -486,7 +486,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   ///  * "sneakers" will use a synonym of "shoes".
   ///  * "shoes" will use a synonym of "sneakers".
-  public struct TwowaySynonymsAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TwowaySynonymsAction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Defines a set of synonyms.
@@ -494,7 +494,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Must specify at least 2 synonyms.
     public var synonyms: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TwowaySynonymsAction`.
     public init() {}
@@ -532,7 +532,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -547,11 +547,11 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.TwowaySynonymsAction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -560,7 +560,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `query_terms` will not be treated as synonyms of each other.
   /// Example: "sneakers" will use a synonym of "shoes".
   /// "shoes" will not use a synonym of "sneakers".
-  public struct OnewaySynonymsAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct OnewaySynonymsAction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Terms from the search query.
@@ -577,7 +577,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Will be [deprecated = true] post migration;
     public var onewayTerms: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `OnewaySynonymsAction`.
     public init() {}
@@ -625,7 +625,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -642,18 +642,18 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.OnewaySynonymsAction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Prevents `query_term` from being associated with specified terms during
   /// search.
   /// Example: Don't associate "gShoe" and "cheap".
-  public struct DoNotAssociateAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DoNotAssociateAction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Terms from the search query.
@@ -668,7 +668,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Will be [deprecated = true] post migration;
     public var terms: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DoNotAssociateAction`.
     public init() {}
@@ -718,7 +718,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -735,18 +735,18 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.DoNotAssociateAction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Replaces a term in the query. Multiple replacement candidates can be
   /// specified. All `query_terms` will be replaced with the replacement term.
   /// Example: Replace "gShoe" with "google shoe".
-  public struct ReplacementAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ReplacementAction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Terms from the search query.
@@ -760,7 +760,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Will be [deprecated = true] post migration;
     public var term: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ReplacementAction`.
     public init() {}
@@ -808,7 +808,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -825,23 +825,23 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.ReplacementAction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Prevents a term in the query from being used in search.
   /// Example: Don't search for "shoddy".
-  public struct IgnoreAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IgnoreAction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Terms to ignore in the search query.
     public var ignoreTerms: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IgnoreAction`.
     public init() {}
@@ -879,7 +879,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -894,11 +894,11 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.IgnoreAction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -934,14 +934,14 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.retail.v2.Condition.query_terms]: <doc:Condition/queryTerms>
   /// [google.cloud.retail.v2.Rule.ForceReturnFacetAction.FacetPositionAdjustment.attribute_name]: <doc:Rule/ForceReturnFacetAction/FacetPositionAdjustment/attributeName>
   /// [google.cloud.retail.v2.Rule.ForceReturnFacetAction.FacetPositionAdjustment.position]: <doc:Rule/ForceReturnFacetAction/FacetPositionAdjustment/position>
-  public struct ForceReturnFacetAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ForceReturnFacetAction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Each instance corresponds to a force return attribute for the given
     /// condition. There can't be more 15 instances here.
     public var facetPositionAdjustments: [Rule.ForceReturnFacetAction.FacetPositionAdjustment] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ForceReturnFacetAction`.
     public init() {}
@@ -982,7 +982,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -996,7 +996,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     /// Each facet position adjustment consists of a single attribute name (i.e.
     /// facet key) along with a specified position.
-    public struct FacetPositionAdjustment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct FacetPositionAdjustment: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The attribute name to force return as a facet. Each attribute name
@@ -1008,7 +1008,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// strictly positive be at most 100.
       public var position: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `FacetPositionAdjustment`.
       public init() {}
@@ -1051,7 +1051,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1068,22 +1068,22 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.retail.v2.Rule.ForceReturnFacetAction.FacetPositionAdjustment"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.ForceReturnFacetAction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1108,7 +1108,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// [google.cloud.retail.v2.Condition.page_categories]: <doc:Condition/pageCategories>
   /// [google.cloud.retail.v2.Condition.query_terms]: <doc:Condition/queryTerms>
-  public struct RemoveFacetAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RemoveFacetAction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The attribute names (i.e. facet keys) to remove from the dynamic facets
@@ -1117,7 +1117,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// contain at most 80 characters.
     public var attributeNames: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RemoveFacetAction`.
     public init() {}
@@ -1155,7 +1155,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1170,11 +1170,11 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.RemoveFacetAction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1207,7 +1207,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// [google.cloud.retail.v2.Condition.page_categories]: <doc:Condition/pageCategories>
   /// [google.cloud.retail.v2.Condition.query_terms]: <doc:Condition/queryTerms>
-  public struct PinAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PinAction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. A map of positions to product_ids.
@@ -1224,7 +1224,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// size](https://cloud.google.com/retail/docs/reference/rest/v2/projects.locations.catalogs.placements/search#request-body).
     public var pinMap: [Swift.Int64: Swift.String] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PinAction`.
     public init() {}
@@ -1275,7 +1275,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1295,11 +1295,11 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Rule.PinAction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1334,10 +1334,10 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.Rule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

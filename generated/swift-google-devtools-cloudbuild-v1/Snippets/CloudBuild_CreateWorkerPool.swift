@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudBuildV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CloudBuildClient, parent: String) async throws {
   let poller = try await client.createWorkerPool(

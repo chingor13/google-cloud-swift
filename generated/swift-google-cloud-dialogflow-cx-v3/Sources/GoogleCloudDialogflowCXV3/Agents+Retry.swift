@@ -20,28 +20,28 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class AgentsRetry: AgentsStub {
       let inner: any AgentsStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any AgentsStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any AgentsStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -53,14 +53,14 @@
       }
 
       public func listAgents(
-        request: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListAgentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListAgentsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListAgentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListAgentsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.ListAgentsResponse
             in
             return try await self.inner.listAgents(request: r, options: o)
@@ -68,14 +68,14 @@
       }
 
       public func getAgent(
-        request: GetAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: GetAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Agent {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetAgentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetAgentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Agent
             in
             return try await self.inner.getAgent(request: r, options: o)
@@ -83,14 +83,14 @@
       }
 
       public func createAgent(
-        request: CreateAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Agent {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: CreateAgentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateAgentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Agent
             in
             return try await self.inner.createAgent(request: r, options: o)
@@ -98,14 +98,14 @@
       }
 
       public func updateAgent(
-        request: UpdateAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Agent {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: UpdateAgentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateAgentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Agent
             in
             return try await self.inner.updateAgent(request: r, options: o)
@@ -113,27 +113,26 @@
       }
 
       public func deleteAgent(
-        request: DeleteAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteAgentRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
-          action: {
-            (r: DeleteAgentRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          action: { (r: DeleteAgentRequest, o: GoogleGax.RequestOptions) async throws -> Void in
             return try await self.inner.deleteAgent(request: r, options: o)
           })
       }
 
       public func exportAgent(
-        request: ExportAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ExportAgentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ExportAgentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.exportAgent(request: r, options: o)
@@ -141,14 +140,14 @@
       }
 
       public func restoreAgent(
-        request: RestoreAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: RestoreAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: RestoreAgentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RestoreAgentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.restoreAgent(request: r, options: o)
@@ -156,14 +155,14 @@
       }
 
       public func validateAgent(
-        request: ValidateAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: ValidateAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.AgentValidationResult {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ValidateAgentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ValidateAgentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.AgentValidationResult
             in
             return try await self.inner.validateAgent(request: r, options: o)
@@ -171,14 +170,14 @@
       }
 
       public func getAgentValidationResult(
-        request: GetAgentValidationResultRequest, options: GoogleCloudGax.RequestOptions
+        request: GetAgentValidationResultRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.AgentValidationResult {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetAgentValidationResultRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetAgentValidationResultRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.AgentValidationResult
             in
             return try await self.inner.getAgentValidationResult(request: r, options: o)
@@ -186,14 +185,14 @@
       }
 
       public func getGenerativeSettings(
-        request: GetGenerativeSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: GetGenerativeSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.GenerativeSettings {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetGenerativeSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetGenerativeSettingsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.GenerativeSettings
             in
             return try await self.inner.getGenerativeSettings(request: r, options: o)
@@ -201,14 +200,14 @@
       }
 
       public func updateGenerativeSettings(
-        request: UpdateGenerativeSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateGenerativeSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.GenerativeSettings {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: UpdateGenerativeSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateGenerativeSettingsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.GenerativeSettings
             in
             return try await self.inner.updateGenerativeSettings(request: r, options: o)
@@ -216,75 +215,75 @@
       }
 
       public func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.ListLocationsResponse
+            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.ListLocationsResponse
             in
             return try await self.inner.listLocations(request: r, options: o)
           })
       }
 
       public func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.Location
+            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.Location
             in
             return try await self.inner.getLocation(request: r, options: o)
           })
       }
 
       public func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.ListOperationsResponse
+            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.ListOperationsResponse
             in
             return try await self.inner.listOperations(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)
           })
       }
 
       public func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.cancelOperation(request: r, options: o)
           })
       }

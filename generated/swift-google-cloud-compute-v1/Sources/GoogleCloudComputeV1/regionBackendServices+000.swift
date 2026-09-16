@@ -19,19 +19,19 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `regionBackendServices` resource.
   ///
   /// @Snippet(path: "regionBackendServicesQuickstart")
   public final class RegionBackendServicesClient: Clients.RegionBackendServicesProtocol, Sendable {
     let inner: any Clients.RegionBackendServicesStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `RegionBackendServicesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.RegionBackendServicesStub = try Clients.RegionBackendServicesTransport(
         options)
       inner = Clients.RegionBackendServicesRetry(inner, options: options)
@@ -47,7 +47,7 @@
     ///
     /// @Snippet(path: "regionBackendServices_delete")
     public func delete(
-      request: RegionBackendServicesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.delete(request: request, options: options)
     }
@@ -56,18 +56,18 @@
     ///
     /// @Snippet(path: "regionBackendServices_delete")
     public func delete(
-      withPolling: RegionBackendServicesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RegionBackendServicesClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -75,8 +75,7 @@
       let rawOp = try await self.delete(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -85,7 +84,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -97,7 +96,7 @@
     ///
     /// @Snippet(path: "regionBackendServices_get")
     public func `get`(
-      request: RegionBackendServicesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.BackendService {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -107,7 +106,7 @@
     ///
     /// @Snippet(path: "regionBackendServices_getHealth")
     public func getHealth(
-      request: RegionBackendServicesClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.GetHealthRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.BackendServiceGroupHealth {
       try await self.inner.getHealth(request: request, options: options)
     }
@@ -117,8 +116,7 @@
     ///
     /// @Snippet(path: "regionBackendServices_getIamPolicy")
     public func getIamPolicy(
-      request: RegionBackendServicesClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -129,7 +127,7 @@
     ///
     /// @Snippet(path: "regionBackendServices_insert")
     public func insert(
-      request: RegionBackendServicesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
     }
@@ -140,18 +138,18 @@
     ///
     /// @Snippet(path: "regionBackendServices_insert")
     public func insert(
-      withPolling: RegionBackendServicesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RegionBackendServicesClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -159,8 +157,7 @@
       let rawOp = try await self.insert(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -169,7 +166,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -182,7 +179,7 @@
     ///
     /// @Snippet(path: "regionBackendServices_list")
     public func list(
-      request: RegionBackendServicesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.BackendServiceList {
       try await self.inner.list(request: request, options: options)
     }
@@ -192,7 +189,7 @@
     ///
     /// @Snippet(path: "regionBackendServices_list")
     public func list(
-      byItem: RegionBackendServicesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionBackendServicesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BackendService, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.BackendServiceList in
@@ -200,7 +197,7 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves a list of all usable backend services for Application Load
@@ -210,7 +207,7 @@
     ///
     /// @Snippet(path: "regionBackendServices_listUsable")
     public func listUsable(
-      request: RegionBackendServicesClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.ListUsableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.BackendServiceListUsable {
       try await self.inner.listUsable(request: request, options: options)
     }
@@ -222,7 +219,7 @@
     ///
     /// @Snippet(path: "regionBackendServices_listUsable")
     public func listUsable(
-      byItem: RegionBackendServicesClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionBackendServicesClient.ListUsableRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BackendService, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.BackendServiceListUsable in
@@ -230,7 +227,7 @@
         request.pageToken = token
         return try await self.listUsable(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Updates the specified regional BackendService resource with the data
@@ -241,7 +238,7 @@
     ///
     /// @Snippet(path: "regionBackendServices_patch")
     public func patch(
-      request: RegionBackendServicesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.patch(request: request, options: options)
     }
@@ -254,18 +251,18 @@
     ///
     /// @Snippet(path: "regionBackendServices_patch")
     public func patch(
-      withPolling: RegionBackendServicesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RegionBackendServicesClient.PatchRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -273,8 +270,7 @@
       let rawOp = try await self.patch(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -283,7 +279,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -296,8 +292,7 @@
     ///
     /// @Snippet(path: "regionBackendServices_setIamPolicy")
     public func setIamPolicy(
-      request: RegionBackendServicesClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -309,7 +304,7 @@
     /// @Snippet(path: "regionBackendServices_setSecurityPolicy")
     public func setSecurityPolicy(
       request: RegionBackendServicesClient.SetSecurityPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.setSecurityPolicy(request: request, options: options)
     }
@@ -321,18 +316,18 @@
     /// @Snippet(path: "regionBackendServices_setSecurityPolicy")
     public func setSecurityPolicy(
       withPolling: RegionBackendServicesClient.SetSecurityPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -340,8 +335,7 @@
       let rawOp = try await self.setSecurityPolicy(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -350,7 +344,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -363,7 +357,7 @@
     /// @Snippet(path: "regionBackendServices_testIamPermissions")
     public func testIamPermissions(
       request: RegionBackendServicesClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -375,7 +369,7 @@
     ///
     /// @Snippet(path: "regionBackendServices_update")
     public func update(
-      request: RegionBackendServicesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.UpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.update(request: request, options: options)
     }
@@ -387,18 +381,18 @@
     ///
     /// @Snippet(path: "regionBackendServices_update")
     public func update(
-      withPolling: RegionBackendServicesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RegionBackendServicesClient.UpdateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -406,8 +400,7 @@
       let rawOp = try await self.update(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -416,7 +409,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -428,7 +421,7 @@
     ///
     /// @Snippet(path: "regionBackendServices_getOperation")
     func getOperation(
-      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -551,79 +544,74 @@
 
       /// See `RegionBackendServicesClient.delete`.
       func delete(
-        request: RegionBackendServicesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionBackendServicesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionBackendServicesClient.`get``.
       func `get`(
-        request: RegionBackendServicesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionBackendServicesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendService
 
       /// See `RegionBackendServicesClient.getHealth`.
       func getHealth(
-        request: RegionBackendServicesClient.GetHealthRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendServicesClient.GetHealthRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendServiceGroupHealth
 
       /// See `RegionBackendServicesClient.getIamPolicy`.
       func getIamPolicy(
-        request: RegionBackendServicesClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendServicesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       /// See `RegionBackendServicesClient.insert`.
       func insert(
-        request: RegionBackendServicesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionBackendServicesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionBackendServicesClient.list`.
       func list(
-        request: RegionBackendServicesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionBackendServicesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendServiceList
 
       /// See `RegionBackendServicesClient.list`.
       func list(
-        byItem: RegionBackendServicesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: RegionBackendServicesClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<BackendService, Swift.Error>
 
       /// See `RegionBackendServicesClient.listUsable`.
       func listUsable(
-        request: RegionBackendServicesClient.ListUsableRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendServicesClient.ListUsableRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendServiceListUsable
 
       /// See `RegionBackendServicesClient.listUsable`.
       func listUsable(
-        byItem: RegionBackendServicesClient.ListUsableRequest,
-        options: GoogleCloudGax.RequestOptions
+        byItem: RegionBackendServicesClient.ListUsableRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<BackendService, Swift.Error>
 
       /// See `RegionBackendServicesClient.patch`.
       func patch(
-        request: RegionBackendServicesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionBackendServicesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionBackendServicesClient.setIamPolicy`.
       func setIamPolicy(
-        request: RegionBackendServicesClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendServicesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       /// See `RegionBackendServicesClient.setSecurityPolicy`.
       func setSecurityPolicy(
         request: RegionBackendServicesClient.SetSecurityPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionBackendServicesClient.testIamPermissions`.
       func testIamPermissions(
         request: RegionBackendServicesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       /// See `RegionBackendServicesClient.update`.
       func update(
-        request: RegionBackendServicesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionBackendServicesClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
@@ -637,26 +625,25 @@
     }
 
     public func delete(
-      request: RegionBackendServicesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func delete(
       withPolling: RegionBackendServicesClient.DeleteRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
     }
 
     public func delete(
-      withPolling: RegionBackendServicesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RegionBackendServicesClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -664,7 +651,7 @@
       project: Swift.String,
       region: Swift.String,
       backendService: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RegionBackendServicesClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
@@ -680,9 +667,9 @@
     }
 
     public func `get`(
-      request: RegionBackendServicesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.BackendService {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -705,9 +692,9 @@
     }
 
     public func getHealth(
-      request: RegionBackendServicesClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.GetHealthRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.BackendServiceGroupHealth {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getHealth(
@@ -732,10 +719,9 @@
     }
 
     public func getIamPolicy(
-      request: RegionBackendServicesClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(
@@ -758,26 +744,25 @@
     }
 
     public func insert(
-      request: RegionBackendServicesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func insert(
       withPolling: RegionBackendServicesClient.InsertRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
     }
 
     public func insert(
-      withPolling: RegionBackendServicesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RegionBackendServicesClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -785,7 +770,7 @@
       project: Swift.String,
       region: Swift.String,
       body: BackendService?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RegionBackendServicesClient.InsertRequest().with {
         $0.project = project
         $0.region = region
@@ -801,9 +786,9 @@
     }
 
     public func list(
-      request: RegionBackendServicesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.BackendServiceList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -813,13 +798,13 @@
     }
 
     public func list(
-      byItem: RegionBackendServicesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionBackendServicesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BackendService, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.BackendServiceList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(
@@ -840,9 +825,9 @@
     }
 
     public func listUsable(
-      request: RegionBackendServicesClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.ListUsableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.BackendServiceListUsable {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listUsable(
@@ -852,13 +837,13 @@
     }
 
     public func listUsable(
-      byItem: RegionBackendServicesClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionBackendServicesClient.ListUsableRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BackendService, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.BackendServiceListUsable in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listUsable(
@@ -879,26 +864,25 @@
     }
 
     public func patch(
-      request: RegionBackendServicesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func patch(
       withPolling: RegionBackendServicesClient.PatchRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
     }
 
     public func patch(
-      withPolling: RegionBackendServicesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RegionBackendServicesClient.PatchRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -907,7 +891,7 @@
       region: Swift.String,
       backendService: Swift.String,
       body: BackendService?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RegionBackendServicesClient.PatchRequest().with {
         $0.project = project
         $0.region = region
@@ -924,10 +908,9 @@
     }
 
     public func setIamPolicy(
-      request: RegionBackendServicesClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(
@@ -953,27 +936,26 @@
 
     public func setSecurityPolicy(
       request: RegionBackendServicesClient.SetSecurityPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setSecurityPolicy(
       withPolling: RegionBackendServicesClient.SetSecurityPolicyRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setSecurityPolicy(withPolling: withPolling, options: .init())
     }
 
     public func setSecurityPolicy(
       withPolling: RegionBackendServicesClient.SetSecurityPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -982,7 +964,7 @@
       region: Swift.String,
       backendService: Swift.String,
       body: SecurityPolicyReference?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RegionBackendServicesClient.SetSecurityPolicyRequest().with {
         $0.project = project
         $0.region = region
@@ -1000,9 +982,9 @@
 
     public func testIamPermissions(
       request: RegionBackendServicesClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(
@@ -1027,26 +1009,25 @@
     }
 
     public func update(
-      request: RegionBackendServicesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionBackendServicesClient.UpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func update(
       withPolling: RegionBackendServicesClient.UpdateRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.update(withPolling: withPolling, options: .init())
     }
 
     public func update(
-      withPolling: RegionBackendServicesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RegionBackendServicesClient.UpdateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1055,7 +1036,7 @@
       region: Swift.String,
       backendService: Swift.String,
       body: BackendService?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RegionBackendServicesClient.UpdateRequest().with {
         $0.project = project
         $0.region = region
@@ -1072,9 +1053,9 @@
     }
 
     public func getOperation(
-      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

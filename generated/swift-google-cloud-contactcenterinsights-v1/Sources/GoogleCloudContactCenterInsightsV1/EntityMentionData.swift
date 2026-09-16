@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The data for an entity mention annotation.
 /// This represents a mention of an `Entity` in the conversation.
-public struct EntityMentionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EntityMentionData: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The key of this entity in conversation entities.
@@ -32,7 +32,7 @@ public struct EntityMentionData: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// Sentiment expressed for this mention of the entity.
   public var sentiment: SentimentData? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EntityMentionData`.
   public init() {}
@@ -79,7 +79,7 @@ public struct EntityMentionData: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.sentiment = try container.decodeIfPresent(SentimentData.self, forKey: .sentiment)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -201,10 +201,10 @@ public struct EntityMentionData: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.EntityMentionData"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

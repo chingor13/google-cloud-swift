@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Subset of the source instance configuration that is available when reading
 /// the cluster resource.
-public struct MigrationSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MigrationSource: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The host and port of the on-premises instance in host:port
@@ -33,7 +33,7 @@ public struct MigrationSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. Type of migration source.
   public var sourceType: MigrationSource.MigrationSourceType = MigrationSource.MigrationSourceType()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MigrationSource`.
   public init() {}
@@ -83,7 +83,7 @@ public struct MigrationSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -198,10 +198,10 @@ public struct MigrationSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.MigrationSource"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

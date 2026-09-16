@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// UpdateNodePoolRequests update a node pool's image and/or version.
-public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateNodePoolRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Deprecated. The Google Developers Console [project ID or project
@@ -191,7 +191,7 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
 
   /// The maximum duration for the nodes to exist.
   /// If unspecified, the nodes can exist indefinitely.
-  public var maxRunDuration: GoogleCloudWKT.Duration? = nil
+  public var maxRunDuration: GoogleWKT.Duration? = nil
 
   /// Flex Start flag for enabling Flex Start VM.
   public var flexStart: Swift.Bool? = nil
@@ -207,7 +207,7 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// Consolidation delay defines duration after which the Cluster Autoscaler can
   /// scale down underutilized nodes. If not set, nodes are scaled down by
   /// default behavior, i.e. according to the chosen autoscaling profile.
-  public var consolidationDelay: GoogleCloudWKT.Duration? = nil
+  public var consolidationDelay: GoogleWKT.Duration? = nil
 
   /// The taint configuration for the node pool.
   public var taintConfig: TaintConfig? = nil
@@ -216,7 +216,7 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// maintenance exclusion options.
   public var maintenancePolicy: NodePool.NodePoolMaintenancePolicy? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateNodePoolRequest`.
   public init() {}
@@ -408,19 +408,19 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
       self.storagePools = value
     }
     self.maxRunDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .maxRunDuration)
+      GoogleWKT.Duration.self, forKey: .maxRunDuration)
     self.flexStart = try container.decodeIfPresent(Swift.Bool.self, forKey: .flexStart)
     self.bootDisk = try container.decodeIfPresent(BootDisk.self, forKey: .bootDisk)
     self.nodeDrainConfig = try container.decodeIfPresent(
       NodePool.NodeDrainConfig.self, forKey: .nodeDrainConfig)
     self.consolidationDelay = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .consolidationDelay)
+      GoogleWKT.Duration.self, forKey: .consolidationDelay)
     self.taintConfig = try container.decodeIfPresent(TaintConfig.self, forKey: .taintConfig)
     self.maintenancePolicy = try container.decodeIfPresent(
       NodePool.NodePoolMaintenancePolicy.self, forKey: .maintenancePolicy)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -475,10 +475,10 @@ public struct UpdateNodePoolRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.UpdateNodePoolRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

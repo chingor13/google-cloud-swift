@@ -16,10 +16,10 @@
 
 #if ConversationProfiles || Conversations
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Defines the Automated Agent to connect to a conversation.
-  public struct AutomatedAgentConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AutomatedAgentConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. ID of the Dialogflow agent environment to use.
@@ -45,9 +45,9 @@
     /// By default, a Dialogflow CX session remains active and its data is stored
     /// for 30 minutes after the last request is sent for the session.
     /// This value should be no longer than 1 day.
-    public var sessionTtl: GoogleCloudWKT.Duration? = nil
+    public var sessionTtl: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AutomatedAgentConfig`.
     public init() {}
@@ -85,11 +85,10 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .agent) {
         self.agent = value
       }
-      self.sessionTtl = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .sessionTtl)
+      self.sessionTtl = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .sessionTtl)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -105,11 +104,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.AutomatedAgentConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

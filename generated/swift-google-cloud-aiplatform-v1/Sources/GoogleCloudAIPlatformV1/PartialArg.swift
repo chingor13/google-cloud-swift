@@ -16,10 +16,10 @@
 
 #if DataFoundryService || EvaluationService || GenAiCacheService || GenAiTuningService || LlmUtilityService || PredictionService || SessionService || VertexRagService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Partial argument value of the function call.
-  public struct PartialArg: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PartialArg: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. A JSON Path (RFC 9535) to the argument being streamed.
@@ -34,7 +34,7 @@
     /// The delta of field value being streamed.
     public var delta: OneOf_Delta? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PartialArg`.
     public init() {}
@@ -94,8 +94,7 @@
         }
         delta = $0
       }
-      if let nullValue = try container.decodeIfPresent(
-        GoogleCloudWKT.NullValue.self, forKey: .nullValue)
+      if let nullValue = try container.decodeIfPresent(GoogleWKT.NullValue.self, forKey: .nullValue)
       {
         try deltaCheckAndSet(.nullValue(nullValue))
       }
@@ -111,7 +110,7 @@
       self.delta = delta
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -140,7 +139,7 @@
     /// The delta of field value being streamed.
     public enum OneOf_Delta: Codable, Equatable, Sendable {
       /// Optional. Represents a null value.
-      case nullValue(GoogleCloudWKT.NullValue)
+      case nullValue(GoogleWKT.NullValue)
       /// Optional. Represents a double value.
       case numberValue(Swift.Double)
       /// Optional. Represents a string value.
@@ -152,11 +151,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.PartialArg"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

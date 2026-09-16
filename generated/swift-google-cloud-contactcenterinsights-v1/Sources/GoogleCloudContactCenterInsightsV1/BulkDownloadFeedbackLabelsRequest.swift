@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request for the BulkDownloadFeedbackLabel endpoint.
-public struct BulkDownloadFeedbackLabelsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BulkDownloadFeedbackLabelsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The parent resource for new feedback labels.
@@ -63,7 +63,7 @@ public struct BulkDownloadFeedbackLabelsRequest: Codable, Equatable, GoogleCloud
   /// will be written to.
   public var destination: OneOf_Destination? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BulkDownloadFeedbackLabelsRequest`.
   public init() {}
@@ -149,7 +149,7 @@ public struct BulkDownloadFeedbackLabelsRequest: Codable, Equatable, GoogleCloud
     self.destination = destination
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -174,7 +174,7 @@ public struct BulkDownloadFeedbackLabelsRequest: Codable, Equatable, GoogleCloud
   }
 
   /// Google Cloud Storage Object details to write the feedback labels to.
-  public struct GcsDestination: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GcsDestination: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. File format in which the labels will be exported.
@@ -201,7 +201,7 @@ public struct BulkDownloadFeedbackLabelsRequest: Codable, Equatable, GoogleCloud
     /// Optional. The number of records per file. Applicable for either format.
     public var recordsPerFileCount: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GcsDestination`.
     public init() {}
@@ -262,7 +262,7 @@ public struct BulkDownloadFeedbackLabelsRequest: Codable, Equatable, GoogleCloud
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -391,11 +391,11 @@ public struct BulkDownloadFeedbackLabelsRequest: Codable, Equatable, GoogleCloud
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest.GcsDestination"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -516,10 +516,10 @@ public struct BulkDownloadFeedbackLabelsRequest: Codable, Equatable, GoogleCloud
     return
       "type.googleapis.com/google.cloud.contactcenterinsights.v1.BulkDownloadFeedbackLabelsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

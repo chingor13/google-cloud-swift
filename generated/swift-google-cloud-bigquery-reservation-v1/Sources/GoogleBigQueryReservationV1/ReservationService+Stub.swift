@@ -15,130 +15,130 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ReservationServiceStub: Sendable {
     func createReservation(
-      request: CreateReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Reservation
 
     func listReservations(
-      request: ListReservationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReservationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ListReservationsResponse
 
     func getReservation(
-      request: GetReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Reservation
 
     func deleteReservation(
-      request: DeleteReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReservationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updateReservation(
-      request: UpdateReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Reservation
 
     func failoverReservation(
-      request: FailoverReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: FailoverReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Reservation
 
     func createCapacityCommitment(
-      request: CreateCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment
 
     func listCapacityCommitments(
-      request: ListCapacityCommitmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCapacityCommitmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ListCapacityCommitmentsResponse
 
     func getCapacityCommitment(
-      request: GetCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment
 
     func deleteCapacityCommitment(
-      request: DeleteCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updateCapacityCommitment(
-      request: UpdateCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment
 
     func splitCapacityCommitment(
-      request: SplitCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: SplitCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.SplitCapacityCommitmentResponse
 
     func mergeCapacityCommitments(
-      request: MergeCapacityCommitmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: MergeCapacityCommitmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment
 
     func createAssignment(
-      request: CreateAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Assignment
 
     func listAssignments(
-      request: ListAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAssignmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ListAssignmentsResponse
 
     func deleteAssignment(
-      request: DeleteAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func searchAssignments(
-      request: SearchAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchAssignmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.SearchAssignmentsResponse
 
     func searchAllAssignments(
-      request: SearchAllAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchAllAssignmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.SearchAllAssignmentsResponse
 
     func moveAssignment(
-      request: MoveAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: MoveAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Assignment
 
     func updateAssignment(
-      request: UpdateAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Assignment
 
     func getBiReservation(
-      request: GetBiReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBiReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.BiReservation
 
     func updateBiReservation(
-      request: UpdateBiReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBiReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.BiReservation
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func createReservationGroup(
-      request: CreateReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReservationGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ReservationGroup
 
     func getReservationGroup(
-      request: GetReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReservationGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ReservationGroup
 
     func deleteReservationGroup(
-      request: DeleteReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReservationGroupRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listReservationGroups(
-      request: ListReservationGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReservationGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ListReservationGroupsResponse
 
     func updateReservationGroup(
-      request: UpdateReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateReservationGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ReservationGroup
   }
 }

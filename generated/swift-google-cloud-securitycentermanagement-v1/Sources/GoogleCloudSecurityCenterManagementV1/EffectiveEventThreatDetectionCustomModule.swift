@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The representation of an
 /// [EventThreatDetectionCustomModule][google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule]
@@ -26,8 +26,7 @@ import Foundation
 /// effective module's configuration will reflect the ancestor's configuration.
 ///
 /// [google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule]: <doc:EventThreatDetectionCustomModule>
-public struct EffectiveEventThreatDetectionCustomModule: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct EffectiveEventThreatDetectionCustomModule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the Event Threat Detection custom module,
@@ -39,7 +38,7 @@ public struct EffectiveEventThreatDetectionCustomModule: Codable, Equatable, Goo
   public var name: Swift.String = Swift.String()
 
   /// Output only. Configuration for the effective module.
-  public var config: GoogleCloudWKT.Struct? = nil
+  public var config: GoogleWKT.Struct? = nil
 
   /// Output only. The effective state of enablement for the module at the given
   /// level of the hierarchy.
@@ -55,7 +54,7 @@ public struct EffectiveEventThreatDetectionCustomModule: Codable, Equatable, Goo
   /// Output only. A description of the module.
   public var description: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EffectiveEventThreatDetectionCustomModule`.
   public init() {}
@@ -101,7 +100,7 @@ public struct EffectiveEventThreatDetectionCustomModule: Codable, Equatable, Goo
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.config = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .config)
+    self.config = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .config)
     if let value = try container.decodeIfPresent(
       EffectiveEventThreatDetectionCustomModule.EnablementState.self, forKey: .enablementState)
     {
@@ -118,7 +117,7 @@ public struct EffectiveEventThreatDetectionCustomModule: Codable, Equatable, Goo
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -244,10 +243,10 @@ public struct EffectiveEventThreatDetectionCustomModule: Codable, Equatable, Goo
     return
       "type.googleapis.com/google.cloud.securitycentermanagement.v1.EffectiveEventThreatDetectionCustomModule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

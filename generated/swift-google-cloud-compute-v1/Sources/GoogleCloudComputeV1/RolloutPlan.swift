@@ -16,7 +16,7 @@
 
 #if RolloutPlans
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// RolloutPlan resource.
   ///
@@ -24,7 +24,7 @@
   /// into smaller increments, referred to as "waves". Each wave targets a specific
   /// portion of the overall affected area and defines criteria that must be met
   /// before progressing to the subsequent wave.
-  public struct RolloutPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RolloutPlan: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. [Output Only] Creation timestamp inRFC3339
@@ -65,7 +65,7 @@
     /// Required. The waves included in this rollout plan.
     public var waves: [RolloutPlanWave] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RolloutPlan`.
     public init() {}
@@ -130,7 +130,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -260,11 +260,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.RolloutPlan"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

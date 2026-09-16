@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Encoding of a text stream. For example, closed captions or subtitles.
-public struct TextStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TextStream: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The codec for this text stream. The default is `webvtt`.
@@ -51,7 +51,7 @@ public struct TextStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// will be added to the HLS/DASH manifest. Not supported in MP4 files.
   public var displayName: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TextStream`.
   public init() {}
@@ -104,7 +104,7 @@ public struct TextStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -126,7 +126,7 @@ public struct TextStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// [google.cloud.video.transcoder.v1.EditAtom.inputs]: <doc:EditAtom/inputs>
   /// [google.cloud.video.transcoder.v1.JobConfig.edit_list]: <doc:JobConfig/editList>
-  public struct TextMapping: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TextMapping: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The
@@ -147,7 +147,7 @@ public struct TextStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Required. The zero-based index of the track in the input file.
     public var inputTrack: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TextMapping`.
     public init() {}
@@ -195,7 +195,7 @@ public struct TextStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -212,21 +212,21 @@ public struct TextStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.TextStream.TextMapping"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.transcoder.v1.TextStream"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The Workload Manager provides various tools to deploy, validate and observe
 /// your workloads running on Google Cloud.
@@ -30,11 +30,11 @@ import GoogleCloudGax
 /// @Snippet(path: "WorkloadManagerQuickstart")
 public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Sendable {
   let inner: any Clients.WorkloadManagerStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `WorkloadManagerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.WorkloadManagerStub = try Clients.WorkloadManagerTransport(options)
     inner = Clients.WorkloadManagerRetry(inner, options: options)
     if let logger = options.logger {
@@ -49,7 +49,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_ListEvaluations")
   public func listEvaluations(
-    request: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEvaluationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.ListEvaluationsResponse {
     try await self.inner.listEvaluations(request: request, options: options)
   }
@@ -58,7 +58,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_ListEvaluations")
   public func listEvaluations(
-    byItem: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEvaluationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Evaluation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudWorkloadManagerV1.ListEvaluationsResponse in
@@ -66,14 +66,14 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
       request.pageToken = token
       return try await self.listEvaluations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Evaluation.
   ///
   /// @Snippet(path: "WorkloadManager_GetEvaluation")
   public func getEvaluation(
-    request: GetEvaluationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEvaluationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.Evaluation {
     try await self.inner.getEvaluation(request: request, options: options)
   }
@@ -82,7 +82,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_CreateEvaluation")
   public func createEvaluation(
-    request: CreateEvaluationRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEvaluationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createEvaluation(request: request, options: options)
   }
@@ -91,21 +91,21 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_CreateEvaluation")
   public func createEvaluation(
-    withPolling: CreateEvaluationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Evaluation> {
+    withPolling: CreateEvaluationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Evaluation> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Evaluation>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Evaluation>.State
+      in
       return try op._extractStatus(Evaluation.self)
     }
     let rawOp = try await self.createEvaluation(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Evaluation>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Evaluation>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -117,7 +117,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_UpdateEvaluation")
   public func updateEvaluation(
-    request: UpdateEvaluationRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEvaluationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateEvaluation(request: request, options: options)
   }
@@ -126,21 +126,21 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_UpdateEvaluation")
   public func updateEvaluation(
-    withPolling: UpdateEvaluationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Evaluation> {
+    withPolling: UpdateEvaluationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Evaluation> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Evaluation>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Evaluation>.State
+      in
       return try op._extractStatus(Evaluation.self)
     }
     let rawOp = try await self.updateEvaluation(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Evaluation>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Evaluation>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -152,7 +152,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_DeleteEvaluation")
   public func deleteEvaluation(
-    request: DeleteEvaluationRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteEvaluationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteEvaluation(request: request, options: options)
   }
@@ -161,21 +161,21 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_DeleteEvaluation")
   public func deleteEvaluation(
-    withPolling: DeleteEvaluationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteEvaluationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteEvaluation(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -187,7 +187,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_ListExecutions")
   public func listExecutions(
-    request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListExecutionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.ListExecutionsResponse {
     try await self.inner.listExecutions(request: request, options: options)
   }
@@ -196,7 +196,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_ListExecutions")
   public func listExecutions(
-    byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListExecutionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Execution, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudWorkloadManagerV1.ListExecutionsResponse in
@@ -204,14 +204,14 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
       request.pageToken = token
       return try await self.listExecutions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Execution.
   ///
   /// @Snippet(path: "WorkloadManager_GetExecution")
   public func getExecution(
-    request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetExecutionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.Execution {
     try await self.inner.getExecution(request: request, options: options)
   }
@@ -220,7 +220,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_RunEvaluation")
   public func runEvaluation(
-    request: RunEvaluationRequest, options: GoogleCloudGax.RequestOptions
+    request: RunEvaluationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.runEvaluation(request: request, options: options)
   }
@@ -229,21 +229,21 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_RunEvaluation")
   public func runEvaluation(
-    withPolling: RunEvaluationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Execution> {
+    withPolling: RunEvaluationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Execution> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Execution>.State
+      in
       return try op._extractStatus(Execution.self)
     }
     let rawOp = try await self.runEvaluation(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Execution>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -255,7 +255,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_DeleteExecution")
   public func deleteExecution(
-    request: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteExecutionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteExecution(request: request, options: options)
   }
@@ -264,21 +264,21 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_DeleteExecution")
   public func deleteExecution(
-    withPolling: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteExecutionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteExecution(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -290,7 +290,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_ListExecutionResults")
   public func listExecutionResults(
-    request: ListExecutionResultsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListExecutionResultsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.ListExecutionResultsResponse {
     try await self.inner.listExecutionResults(request: request, options: options)
   }
@@ -299,7 +299,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_ListExecutionResults")
   public func listExecutionResults(
-    byItem: ListExecutionResultsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListExecutionResultsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ExecutionResult, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -308,14 +308,14 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
       request.pageToken = token
       return try await self.listExecutionResults(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists rules in a given project.
   ///
   /// @Snippet(path: "WorkloadManager_ListRules")
   public func listRules(
-    request: ListRulesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRulesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.ListRulesResponse {
     try await self.inner.listRules(request: request, options: options)
   }
@@ -324,7 +324,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_ListScannedResources")
   public func listScannedResources(
-    request: ListScannedResourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListScannedResourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.ListScannedResourcesResponse {
     try await self.inner.listScannedResources(request: request, options: options)
   }
@@ -333,7 +333,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_ListScannedResources")
   public func listScannedResources(
-    byItem: ListScannedResourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListScannedResourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ScannedResource, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -342,7 +342,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
       request.pageToken = token
       return try await self.listScannedResources(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists information about the supported locations for this service.
@@ -356,7 +356,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -372,7 +372,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -380,14 +380,14 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "WorkloadManager_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -398,7 +398,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -409,7 +409,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -417,7 +417,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -426,7 +426,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -437,7 +437,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -448,7 +448,7 @@ public final class WorkloadManagerClient: Clients.WorkloadManagerProtocol, Senda
   ///
   /// @Snippet(path: "WorkloadManager_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -489,7 +489,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `WorkloadManagerClient.createEvaluation`.
-    func createEvaluation(withPolling: CreateEvaluationRequest) async throws -> any GoogleCloudGax
+    func createEvaluation(withPolling: CreateEvaluationRequest) async throws -> any GoogleGax
       .PollableOperation<Evaluation>
 
     /// See `WorkloadManagerClient.createEvaluation`.
@@ -497,34 +497,34 @@ extension Clients {
       parent: Swift.String,
       evaluation: Evaluation?,
       evaluationId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Evaluation>
+    ) async throws -> any GoogleGax.PollableOperation<Evaluation>
 
     /// See `WorkloadManagerClient.updateEvaluation`.
     func updateEvaluation(request: UpdateEvaluationRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `WorkloadManagerClient.updateEvaluation`.
-    func updateEvaluation(withPolling: UpdateEvaluationRequest) async throws -> any GoogleCloudGax
+    func updateEvaluation(withPolling: UpdateEvaluationRequest) async throws -> any GoogleGax
       .PollableOperation<Evaluation>
 
     /// See `WorkloadManagerClient.updateEvaluation`.
     func updateEvaluation(
       evaluation: Evaluation?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Evaluation>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Evaluation>
 
     /// See `WorkloadManagerClient.deleteEvaluation`.
     func deleteEvaluation(request: DeleteEvaluationRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `WorkloadManagerClient.deleteEvaluation`.
-    func deleteEvaluation(withPolling: DeleteEvaluationRequest) async throws -> any GoogleCloudGax
+    func deleteEvaluation(withPolling: DeleteEvaluationRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `WorkloadManagerClient.deleteEvaluation`.
     func deleteEvaluation(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `WorkloadManagerClient.listExecutions`.
     func listExecutions(request: ListExecutionsRequest) async throws
@@ -553,7 +553,7 @@ extension Clients {
     func runEvaluation(request: RunEvaluationRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `WorkloadManagerClient.runEvaluation`.
-    func runEvaluation(withPolling: RunEvaluationRequest) async throws -> any GoogleCloudGax
+    func runEvaluation(withPolling: RunEvaluationRequest) async throws -> any GoogleGax
       .PollableOperation<Execution>
 
     /// See `WorkloadManagerClient.runEvaluation`.
@@ -561,20 +561,20 @@ extension Clients {
       name: Swift.String,
       execution: Execution?,
       executionId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Execution>
+    ) async throws -> any GoogleGax.PollableOperation<Execution>
 
     /// See `WorkloadManagerClient.deleteExecution`.
     func deleteExecution(request: DeleteExecutionRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `WorkloadManagerClient.deleteExecution`.
-    func deleteExecution(withPolling: DeleteExecutionRequest) async throws -> any GoogleCloudGax
+    func deleteExecution(withPolling: DeleteExecutionRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `WorkloadManagerClient.deleteExecution`.
     func deleteExecution(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `WorkloadManagerClient.listExecutionResults`.
     func listExecutionResults(request: ListExecutionResultsRequest) async throws
@@ -659,142 +659,142 @@ extension Clients {
 
     /// See `WorkloadManagerClient.listEvaluations`.
     func listEvaluations(
-      request: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEvaluationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkloadManagerV1.ListEvaluationsResponse
 
     /// See `WorkloadManagerClient.listEvaluations`.
     func listEvaluations(
-      byItem: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEvaluationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Evaluation, Swift.Error>
 
     /// See `WorkloadManagerClient.getEvaluation`.
     func getEvaluation(
-      request: GetEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkloadManagerV1.Evaluation
 
     /// See `WorkloadManagerClient.createEvaluation`.
     func createEvaluation(
-      request: CreateEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `WorkloadManagerClient.createEvaluation`.
     func createEvaluation(
-      withPolling: CreateEvaluationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Evaluation>
+      withPolling: CreateEvaluationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Evaluation>
 
     /// See `WorkloadManagerClient.updateEvaluation`.
     func updateEvaluation(
-      request: UpdateEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `WorkloadManagerClient.updateEvaluation`.
     func updateEvaluation(
-      withPolling: UpdateEvaluationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Evaluation>
+      withPolling: UpdateEvaluationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Evaluation>
 
     /// See `WorkloadManagerClient.deleteEvaluation`.
     func deleteEvaluation(
-      request: DeleteEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `WorkloadManagerClient.deleteEvaluation`.
     func deleteEvaluation(
-      withPolling: DeleteEvaluationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteEvaluationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `WorkloadManagerClient.listExecutions`.
     func listExecutions(
-      request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExecutionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkloadManagerV1.ListExecutionsResponse
 
     /// See `WorkloadManagerClient.listExecutions`.
     func listExecutions(
-      byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListExecutionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Execution, Swift.Error>
 
     /// See `WorkloadManagerClient.getExecution`.
     func getExecution(
-      request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkloadManagerV1.Execution
 
     /// See `WorkloadManagerClient.runEvaluation`.
     func runEvaluation(
-      request: RunEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: RunEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `WorkloadManagerClient.runEvaluation`.
     func runEvaluation(
-      withPolling: RunEvaluationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Execution>
+      withPolling: RunEvaluationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Execution>
 
     /// See `WorkloadManagerClient.deleteExecution`.
     func deleteExecution(
-      request: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `WorkloadManagerClient.deleteExecution`.
     func deleteExecution(
-      withPolling: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteExecutionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `WorkloadManagerClient.listExecutionResults`.
     func listExecutionResults(
-      request: ListExecutionResultsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExecutionResultsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkloadManagerV1.ListExecutionResultsResponse
 
     /// See `WorkloadManagerClient.listExecutionResults`.
     func listExecutionResults(
-      byItem: ListExecutionResultsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListExecutionResultsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ExecutionResult, Swift.Error>
 
     /// See `WorkloadManagerClient.listRules`.
     func listRules(
-      request: ListRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkloadManagerV1.ListRulesResponse
 
     /// See `WorkloadManagerClient.listScannedResources`.
     func listScannedResources(
-      request: ListScannedResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListScannedResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkloadManagerV1.ListScannedResourcesResponse
 
     /// See `WorkloadManagerClient.listScannedResources`.
     func listScannedResources(
-      byItem: ListScannedResourcesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListScannedResourcesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ScannedResource, Swift.Error>
 
     /// See `WorkloadManagerClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `WorkloadManagerClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `WorkloadManagerClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `WorkloadManagerClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `WorkloadManagerClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `WorkloadManagerClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `WorkloadManagerClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -808,9 +808,9 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func listEvaluations(
-    request: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEvaluationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.ListEvaluationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listEvaluations(
@@ -820,13 +820,13 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func listEvaluations(
-    byItem: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEvaluationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Evaluation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudWorkloadManagerV1.ListEvaluationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listEvaluations(
@@ -845,9 +845,9 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func getEvaluation(
-    request: GetEvaluationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEvaluationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.Evaluation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getEvaluation(
@@ -866,24 +866,24 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func createEvaluation(
-    request: CreateEvaluationRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEvaluationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createEvaluation(withPolling: CreateEvaluationRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Evaluation>
+  public func createEvaluation(withPolling: CreateEvaluationRequest) async throws -> any GoogleGax
+    .PollableOperation<Evaluation>
   {
     try await self.createEvaluation(withPolling: withPolling, options: .init())
   }
 
   public func createEvaluation(
-    withPolling: CreateEvaluationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Evaluation> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Evaluation>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateEvaluationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Evaluation> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Evaluation>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -891,7 +891,7 @@ extension Clients.WorkloadManagerProtocol {
     parent: Swift.String,
     evaluation: Evaluation?,
     evaluationId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Evaluation> {
+  ) async throws -> any GoogleGax.PollableOperation<Evaluation> {
     let request = CreateEvaluationRequest().with {
       $0.parent = parent
       $0.evaluation = evaluation
@@ -907,31 +907,31 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func updateEvaluation(
-    request: UpdateEvaluationRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEvaluationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateEvaluation(withPolling: UpdateEvaluationRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Evaluation>
+  public func updateEvaluation(withPolling: UpdateEvaluationRequest) async throws -> any GoogleGax
+    .PollableOperation<Evaluation>
   {
     try await self.updateEvaluation(withPolling: withPolling, options: .init())
   }
 
   public func updateEvaluation(
-    withPolling: UpdateEvaluationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Evaluation> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Evaluation>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateEvaluationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Evaluation> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Evaluation>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateEvaluation(
     evaluation: Evaluation?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Evaluation> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Evaluation> {
     let request = UpdateEvaluationRequest().with {
       $0.evaluation = evaluation
       $0.updateMask = updateMask
@@ -946,30 +946,30 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func deleteEvaluation(
-    request: DeleteEvaluationRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteEvaluationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteEvaluation(withPolling: DeleteEvaluationRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteEvaluation(withPolling: DeleteEvaluationRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteEvaluation(withPolling: withPolling, options: .init())
   }
 
   public func deleteEvaluation(
-    withPolling: DeleteEvaluationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteEvaluationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteEvaluation(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteEvaluationRequest().with {
       $0.name = name
     }
@@ -983,9 +983,9 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func listExecutions(
-    request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListExecutionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.ListExecutionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listExecutions(
@@ -995,13 +995,13 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func listExecutions(
-    byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListExecutionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Execution, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudWorkloadManagerV1.ListExecutionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listExecutions(
@@ -1020,9 +1020,9 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func getExecution(
-    request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetExecutionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.Execution {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getExecution(
@@ -1041,24 +1041,24 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func runEvaluation(
-    request: RunEvaluationRequest, options: GoogleCloudGax.RequestOptions
+    request: RunEvaluationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func runEvaluation(withPolling: RunEvaluationRequest) async throws -> any GoogleCloudGax
+  public func runEvaluation(withPolling: RunEvaluationRequest) async throws -> any GoogleGax
     .PollableOperation<Execution>
   {
     try await self.runEvaluation(withPolling: withPolling, options: .init())
   }
 
   public func runEvaluation(
-    withPolling: RunEvaluationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Execution> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Execution>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: RunEvaluationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Execution> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Execution>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1066,7 +1066,7 @@ extension Clients.WorkloadManagerProtocol {
     name: Swift.String,
     execution: Execution?,
     executionId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Execution> {
+  ) async throws -> any GoogleGax.PollableOperation<Execution> {
     let request = RunEvaluationRequest().with {
       $0.name = name
       $0.execution = execution
@@ -1082,30 +1082,30 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func deleteExecution(
-    request: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteExecutionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteExecution(withPolling: DeleteExecutionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteExecution(withPolling: DeleteExecutionRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteExecution(withPolling: withPolling, options: .init())
   }
 
   public func deleteExecution(
-    withPolling: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteExecutionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteExecution(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteExecutionRequest().with {
       $0.name = name
     }
@@ -1119,9 +1119,9 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func listExecutionResults(
-    request: ListExecutionResultsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListExecutionResultsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.ListExecutionResultsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listExecutionResults(
@@ -1131,14 +1131,14 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func listExecutionResults(
-    byItem: ListExecutionResultsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListExecutionResultsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ExecutionResult, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudWorkloadManagerV1.ListExecutionResultsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listExecutionResults(
@@ -1157,9 +1157,9 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func listRules(
-    request: ListRulesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRulesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.ListRulesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listRules(
@@ -1178,9 +1178,9 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func listScannedResources(
-    request: ListScannedResourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListScannedResourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkloadManagerV1.ListScannedResourcesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listScannedResources(
@@ -1190,14 +1190,14 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func listScannedResources(
-    byItem: ListScannedResourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListScannedResourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ScannedResource, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudWorkloadManagerV1.ListScannedResourcesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listScannedResources(
@@ -1216,9 +1216,9 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -1228,13 +1228,13 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1244,9 +1244,9 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1256,9 +1256,9 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1268,13 +1268,13 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1295,9 +1295,9 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1314,9 +1314,9 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1333,9 +1333,9 @@ extension Clients.WorkloadManagerProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

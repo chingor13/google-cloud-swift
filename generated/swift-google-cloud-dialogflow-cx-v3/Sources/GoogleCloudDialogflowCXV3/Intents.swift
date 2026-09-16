@@ -20,10 +20,10 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing [Intents][google.cloud.dialogflow.cx.v3.Intent].
   ///
@@ -32,11 +32,11 @@
   /// @Snippet(path: "IntentsQuickstart")
   public final class IntentsClient: Clients.IntentsProtocol, Sendable {
     let inner: any Clients.IntentsStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `IntentsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.IntentsStub = try Clients.IntentsTransport(options)
       inner = Clients.IntentsRetry(inner, options: options)
       if let logger = options.logger {
@@ -51,7 +51,7 @@
     ///
     /// @Snippet(path: "Intents_ListIntents")
     public func listIntents(
-      request: ListIntentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIntentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListIntentsResponse {
       try await self.inner.listIntents(request: request, options: options)
     }
@@ -60,7 +60,7 @@
     ///
     /// @Snippet(path: "Intents_ListIntents")
     public func listIntents(
-      byItem: ListIntentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListIntentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Intent, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListIntentsResponse in
@@ -68,14 +68,14 @@
         request.pageToken = token
         return try await self.listIntents(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves the specified intent.
     ///
     /// @Snippet(path: "Intents_GetIntent")
     public func getIntent(
-      request: GetIntentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIntentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Intent {
       try await self.inner.getIntent(request: request, options: options)
     }
@@ -88,7 +88,7 @@
     ///
     /// @Snippet(path: "Intents_CreateIntent")
     public func createIntent(
-      request: CreateIntentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIntentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Intent {
       try await self.inner.createIntent(request: request, options: options)
     }
@@ -101,7 +101,7 @@
     ///
     /// @Snippet(path: "Intents_UpdateIntent")
     public func updateIntent(
-      request: UpdateIntentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIntentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Intent {
       try await self.inner.updateIntent(request: request, options: options)
     }
@@ -114,7 +114,7 @@
     ///
     /// @Snippet(path: "Intents_DeleteIntent")
     public func deleteIntent(
-      request: DeleteIntentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIntentRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteIntent(request: request, options: options)
     }
@@ -135,7 +135,7 @@
     ///
     /// @Snippet(path: "Intents_ImportIntents")
     public func importIntents(
-      request: ImportIntentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportIntentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.importIntents(request: request, options: options)
     }
@@ -156,22 +156,22 @@
     ///
     /// @Snippet(path: "Intents_ImportIntents")
     public func importIntents(
-      withPolling: ImportIntentsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportIntentsResponse> {
+      withPolling: ImportIntentsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportIntentsResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ImportIntentsResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ImportIntentsResponse>.State in
         return try op._extractStatus(ImportIntentsResponse.self)
       }
       let rawOp = try await self.importIntents(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportIntentsResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<ImportIntentsResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -195,7 +195,7 @@
     ///
     /// @Snippet(path: "Intents_ExportIntents")
     public func exportIntents(
-      request: ExportIntentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportIntentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.exportIntents(request: request, options: options)
     }
@@ -216,22 +216,22 @@
     ///
     /// @Snippet(path: "Intents_ExportIntents")
     public func exportIntents(
-      withPolling: ExportIntentsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportIntentsResponse> {
+      withPolling: ExportIntentsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportIntentsResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ExportIntentsResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ExportIntentsResponse>.State in
         return try op._extractStatus(ExportIntentsResponse.self)
       }
       let rawOp = try await self.exportIntents(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportIntentsResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<ExportIntentsResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -260,7 +260,7 @@
     ///
     /// @Snippet(path: "Intents_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -286,7 +286,7 @@
     ///
     /// @Snippet(path: "Intents_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -294,14 +294,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "Intents_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -312,7 +312,7 @@
     ///
     /// @Snippet(path: "Intents_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -323,7 +323,7 @@
     ///
     /// @Snippet(path: "Intents_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -331,7 +331,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -340,7 +340,7 @@
     ///
     /// @Snippet(path: "Intents_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -351,7 +351,7 @@
     ///
     /// @Snippet(path: "Intents_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -403,7 +403,7 @@
       /// See `IntentsClient.updateIntent`.
       func updateIntent(
         intent: Intent?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDialogflowCXV3.Intent
 
       /// See `IntentsClient.deleteIntent`.
@@ -418,14 +418,14 @@
       func importIntents(request: ImportIntentsRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `IntentsClient.importIntents`.
-      func importIntents(withPolling: ImportIntentsRequest) async throws -> any GoogleCloudGax
+      func importIntents(withPolling: ImportIntentsRequest) async throws -> any GoogleGax
         .PollableOperation<ImportIntentsResponse>
 
       /// See `IntentsClient.exportIntents`.
       func exportIntents(request: ExportIntentsRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `IntentsClient.exportIntents`.
-      func exportIntents(withPolling: ExportIntentsRequest) async throws -> any GoogleCloudGax
+      func exportIntents(withPolling: ExportIntentsRequest) async throws -> any GoogleGax
         .PollableOperation<ExportIntentsResponse>
 
       /// See `IntentsClient.listLocations`.
@@ -466,82 +466,82 @@
 
       /// See `IntentsClient.listIntents`.
       func listIntents(
-        request: ListIntentsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListIntentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListIntentsResponse
 
       /// See `IntentsClient.listIntents`.
       func listIntents(
-        byItem: ListIntentsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListIntentsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Intent, Swift.Error>
 
       /// See `IntentsClient.getIntent`.
       func getIntent(
-        request: GetIntentRequest, options: GoogleCloudGax.RequestOptions
+        request: GetIntentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Intent
 
       /// See `IntentsClient.createIntent`.
       func createIntent(
-        request: CreateIntentRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateIntentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Intent
 
       /// See `IntentsClient.updateIntent`.
       func updateIntent(
-        request: UpdateIntentRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateIntentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Intent
 
       /// See `IntentsClient.deleteIntent`.
       func deleteIntent(
-        request: DeleteIntentRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteIntentRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `IntentsClient.importIntents`.
       func importIntents(
-        request: ImportIntentsRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportIntentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `IntentsClient.importIntents`.
       func importIntents(
-        withPolling: ImportIntentsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ImportIntentsResponse>
+        withPolling: ImportIntentsRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ImportIntentsResponse>
 
       /// See `IntentsClient.exportIntents`.
       func exportIntents(
-        request: ExportIntentsRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportIntentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `IntentsClient.exportIntents`.
       func exportIntents(
-        withPolling: ExportIntentsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ExportIntentsResponse>
+        withPolling: ExportIntentsRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ExportIntentsResponse>
 
       /// See `IntentsClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `IntentsClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `IntentsClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `IntentsClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `IntentsClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `IntentsClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -555,9 +555,9 @@
     }
 
     public func listIntents(
-      request: ListIntentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIntentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListIntentsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listIntents(
@@ -567,13 +567,13 @@
     }
 
     public func listIntents(
-      byItem: ListIntentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListIntentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Intent, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListIntentsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listIntents(
@@ -592,9 +592,9 @@
     }
 
     public func getIntent(
-      request: GetIntentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIntentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Intent {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIntent(
@@ -613,9 +613,9 @@
     }
 
     public func createIntent(
-      request: CreateIntentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIntentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Intent {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createIntent(
@@ -636,14 +636,14 @@
     }
 
     public func updateIntent(
-      request: UpdateIntentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIntentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Intent {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateIntent(
       intent: Intent?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDialogflowCXV3.Intent {
       let request = UpdateIntentRequest().with {
         $0.intent = intent
@@ -657,9 +657,9 @@
     }
 
     public func deleteIntent(
-      request: DeleteIntentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIntentRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteIntent(
@@ -678,25 +678,25 @@
     }
 
     public func importIntents(
-      request: ImportIntentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportIntentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func importIntents(withPolling: ImportIntentsRequest) async throws -> any GoogleCloudGax
+    public func importIntents(withPolling: ImportIntentsRequest) async throws -> any GoogleGax
       .PollableOperation<ImportIntentsResponse>
     {
       try await self.importIntents(withPolling: withPolling, options: .init())
     }
 
     public func importIntents(
-      withPolling: ImportIntentsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportIntentsResponse> {
+      withPolling: ImportIntentsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportIntentsResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportIntentsResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<ImportIntentsResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -707,25 +707,25 @@
     }
 
     public func exportIntents(
-      request: ExportIntentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportIntentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func exportIntents(withPolling: ExportIntentsRequest) async throws -> any GoogleCloudGax
+    public func exportIntents(withPolling: ExportIntentsRequest) async throws -> any GoogleGax
       .PollableOperation<ExportIntentsResponse>
     {
       try await self.exportIntents(withPolling: withPolling, options: .init())
     }
 
     public func exportIntents(
-      withPolling: ExportIntentsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportIntentsResponse> {
+      withPolling: ExportIntentsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportIntentsResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportIntentsResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<ExportIntentsResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -736,9 +736,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -748,13 +748,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -764,9 +764,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -776,9 +776,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -788,13 +788,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -815,9 +815,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -834,9 +834,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

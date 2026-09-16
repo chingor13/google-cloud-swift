@@ -16,42 +16,42 @@
 
 #if ControlService
   import Foundation
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ControlServiceStub: Sendable {
       func createControl(
-        request: CreateControlRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateControlRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Control
 
       func deleteControl(
-        request: DeleteControlRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteControlRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func updateControl(
-        request: UpdateControlRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateControlRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Control
 
       func getControl(
-        request: GetControlRequest, options: GoogleCloudGax.RequestOptions
+        request: GetControlRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Control
 
       func listControls(
-        request: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListControlsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListControlsResponse
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

@@ -15,35 +15,35 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol PoliciesStub: Sendable {
     func listPolicies(
-      request: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV2.ListPoliciesResponse
 
     func getPolicy(
-      request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV2.Policy
 
     func createPolicy(
-      request: CreatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updatePolicy(
-      request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deletePolicy(
-      request: DeletePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

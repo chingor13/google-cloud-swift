@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// How to handle transformation errors during de-identification. A
 /// transformation error occurs when the requested transformation is incompatible
@@ -25,13 +25,13 @@ import Foundation
 /// Information about any incompatible transformations, and how they were
 /// handled, is returned in the response as part of the
 /// `TransformationOverviews`.
-public struct TransformationErrorHandling: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TransformationErrorHandling: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// How transformation errors should be handled.
   public var mode: OneOf_Mode? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TransformationErrorHandling`.
   public init() {}
@@ -90,7 +90,7 @@ public struct TransformationErrorHandling: Codable, Equatable, GoogleCloudWKT._A
     self.mode = mode
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -111,10 +111,10 @@ public struct TransformationErrorHandling: Codable, Equatable, GoogleCloudWKT._A
   }
 
   /// Throw an error and fail the request when a transformation error occurs.
-  public struct ThrowError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ThrowError: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ThrowError`.
     public init() {}
@@ -145,7 +145,7 @@ public struct TransformationErrorHandling: Codable, Equatable, GoogleCloudWKT._A
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -159,11 +159,11 @@ public struct TransformationErrorHandling: Codable, Equatable, GoogleCloudWKT._A
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.TransformationErrorHandling.ThrowError"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -171,10 +171,10 @@ public struct TransformationErrorHandling: Codable, Equatable, GoogleCloudWKT._A
   /// cause an error. For example, if a `DateShift` transformation were applied
   /// an an IP address, this mode would leave the IP address unchanged in the
   /// response.
-  public struct LeaveUntransformed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LeaveUntransformed: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LeaveUntransformed`.
     public init() {}
@@ -205,7 +205,7 @@ public struct TransformationErrorHandling: Codable, Equatable, GoogleCloudWKT._A
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -220,11 +220,11 @@ public struct TransformationErrorHandling: Codable, Equatable, GoogleCloudWKT._A
       return
         "type.googleapis.com/google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -239,10 +239,10 @@ public struct TransformationErrorHandling: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.TransformationErrorHandling"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

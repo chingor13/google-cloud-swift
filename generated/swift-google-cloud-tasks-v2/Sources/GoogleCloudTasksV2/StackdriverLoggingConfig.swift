@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration options for writing logs to
 /// [Stackdriver Logging](https://cloud.google.com/logging/docs/).
-public struct StackdriverLoggingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StackdriverLoggingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Specifies the fraction of operations to write to
@@ -28,7 +28,7 @@ public struct StackdriverLoggingConfig: Codable, Equatable, GoogleCloudWKT._AnyP
   /// 0.0 is the default and means that no operations are logged.
   public var samplingRatio: Swift.Double = Swift.Double()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StackdriverLoggingConfig`.
   public init() {}
@@ -66,7 +66,7 @@ public struct StackdriverLoggingConfig: Codable, Equatable, GoogleCloudWKT._AnyP
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -81,10 +81,10 @@ public struct StackdriverLoggingConfig: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.tasks.v2.StackdriverLoggingConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

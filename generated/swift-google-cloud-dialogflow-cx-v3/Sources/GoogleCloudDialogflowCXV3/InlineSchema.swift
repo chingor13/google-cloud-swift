@@ -16,19 +16,19 @@
 
 #if Flows || Playbooks || Sessions || TestCases
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A type schema object that's specified inline.
-  public struct InlineSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InlineSchema: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Data type of the schema.
     public var type: DataType = DataType()
 
     /// Schema of the elements if this is an ARRAY type.
-    public var items: GoogleCloudWKT.Recursive<TypeSchema>? = nil
+    public var items: GoogleWKT.Recursive<TypeSchema>? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InlineSchema`.
     public init() {}
@@ -67,10 +67,10 @@
         self.type = value
       }
       self.items = try container.decodeIfPresent(
-        GoogleCloudWKT.Recursive<TypeSchema>.self, forKey: .items)
+        GoogleWKT.Recursive<TypeSchema>.self, forKey: .items)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -86,11 +86,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.InlineSchema"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

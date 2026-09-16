@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Options of a Hive table.
-public struct HiveTableOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct HiveTableOptions: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Stores user supplied Hive table parameters.
@@ -30,7 +30,7 @@ public struct HiveTableOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Stores physical storage information of the data.
   public var storageDescriptor: HiveTableOptions.StorageDescriptor? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `HiveTableOptions`.
   public init() {}
@@ -79,7 +79,7 @@ public struct HiveTableOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       HiveTableOptions.StorageDescriptor.self, forKey: .storageDescriptor)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -94,13 +94,13 @@ public struct HiveTableOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Serializer and deserializer information.
-  public struct SerDeInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SerDeInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The fully qualified Java class name of the serialization library.
     public var serializationLib: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SerDeInfo`.
     public init() {}
@@ -138,7 +138,7 @@ public struct HiveTableOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -153,16 +153,16 @@ public struct HiveTableOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.biglake.v1.HiveTableOptions.SerDeInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Stores physical storage information of the data.
-  public struct StorageDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StorageDescriptor: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Cloud Storage folder URI where the table data is stored, starting with
@@ -178,7 +178,7 @@ public struct HiveTableOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Serializer and deserializer information.
     public var serdeInfo: HiveTableOptions.SerDeInfo? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StorageDescriptor`.
     public init() {}
@@ -230,7 +230,7 @@ public struct HiveTableOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         HiveTableOptions.SerDeInfo.self, forKey: .serdeInfo)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -249,21 +249,21 @@ public struct HiveTableOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.bigquery.biglake.v1.HiveTableOptions.StorageDescriptor"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.biglake.v1.HiveTableOptions"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

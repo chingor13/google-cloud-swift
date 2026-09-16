@@ -16,11 +16,11 @@
 
 #if MachineImages
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// DEPRECATED: Please use compute#savedDisk instead.
   /// An instance-attached disk resource.
-  public struct SavedAttachedDisk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SavedAttachedDisk: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Specifies whether the disk will be auto-deleted when the instance is
@@ -84,7 +84,7 @@
     /// Specifies the type of the attached disk, either SCRATCH orPERSISTENT.
     public var type: SavedAttachedDisk.Type_? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SavedAttachedDisk`.
     public init() {}
@@ -173,7 +173,7 @@
       self.type = try container.decodeIfPresent(SavedAttachedDisk.Type_.self, forKey: .type)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -599,11 +599,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.SavedAttachedDisk"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

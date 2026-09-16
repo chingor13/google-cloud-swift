@@ -16,14 +16,14 @@
 
 #if ModelService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Details of
   /// [ModelService.ExportModel][google.cloud.aiplatform.v1.ModelService.ExportModel]
   /// operation.
   ///
   /// [google.cloud.aiplatform.v1.ModelService.ExportModel]: <doc:ModelServiceClient/exportModel(request:options:)>
-  public struct ExportModelOperationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExportModelOperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The common part of the operation metadata.
@@ -33,7 +33,7 @@
     /// export.
     public var outputInfo: ExportModelOperationMetadata.OutputInfo? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExportModelOperationMetadata`.
     public init() {}
@@ -74,7 +74,7 @@
         ExportModelOperationMetadata.OutputInfo.self, forKey: .outputInfo)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -91,7 +91,7 @@
     /// [ExportModelRequest.OutputConfig][google.cloud.aiplatform.v1.ExportModelRequest.OutputConfig].
     ///
     /// [google.cloud.aiplatform.v1.ExportModelRequest.OutputConfig]: <doc:ExportModelRequest/OutputConfig>
-    public struct OutputInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct OutputInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. If the Model artifact is being exported to Google Cloud
@@ -103,7 +103,7 @@
       /// Registry or Artifact Registry this is the full path of the image created.
       public var imageOutputUri: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `OutputInfo`.
       public init() {}
@@ -147,7 +147,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -164,22 +164,22 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ExportModelOperationMetadata.OutputInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ExportModelOperationMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

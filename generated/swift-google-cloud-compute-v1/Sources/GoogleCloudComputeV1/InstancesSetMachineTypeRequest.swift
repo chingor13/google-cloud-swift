@@ -16,16 +16,16 @@
 
 #if Instances
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct InstancesSetMachineTypeRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InstancesSetMachineTypeRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Full or partial URL of the machine type resource. See Machine Types for a full list of
     /// machine types. For example:zones/us-central1-f/machineTypes/n1-standard-1
     public var machineType: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InstancesSetMachineTypeRequest`.
     public init() {}
@@ -61,7 +61,7 @@
       self.machineType = try container.decodeIfPresent(Swift.String.self, forKey: .machineType)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -76,11 +76,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.InstancesSetMachineTypeRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

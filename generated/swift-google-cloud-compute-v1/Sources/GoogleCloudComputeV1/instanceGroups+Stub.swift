@@ -16,54 +16,53 @@
 
 #if InstanceGroups
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol InstanceGroupsStub: Sendable {
       func addInstances(
-        request: InstanceGroupsClient.AddInstancesRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.AddInstancesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func aggregatedList(
-        request: InstanceGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupAggregatedList
 
       func delete(
-        request: InstanceGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: InstanceGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroup
 
       func insert(
-        request: InstanceGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: InstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupList
 
       func listInstances(
-        request: InstanceGroupsClient.ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.ListInstancesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupsListInstances
 
       func removeInstances(
-        request: InstanceGroupsClient.RemoveInstancesRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.RemoveInstancesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setNamedPorts(
-        request: InstanceGroupsClient.SetNamedPortsRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.SetNamedPortsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: InstanceGroupsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

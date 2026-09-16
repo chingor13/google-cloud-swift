@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [UpdateRun][google.cloud.datacatalog.lineage.v1.Lineage.UpdateRun].
 ///
 /// [google.cloud.datacatalog.lineage.v1.Lineage.UpdateRun]: <doc:LineageClient/updateRun(request:options:)>
-public struct UpdateRunRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateRunRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The lineage run to update.
@@ -34,12 +34,12 @@ public struct UpdateRunRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Optional. The list of fields to update. Currently not used. The whole
   /// message is updated.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Optional. If set to true and the run is not found, the request creates it.
   public var allowMissing: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateRunRequest`.
   public init() {}
@@ -77,14 +77,13 @@ public struct UpdateRunRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.run = try container.decodeIfPresent(Run.self, forKey: .run)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .allowMissing) {
       self.allowMissing = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,10 +100,10 @@ public struct UpdateRunRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.lineage.v1.UpdateRunRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

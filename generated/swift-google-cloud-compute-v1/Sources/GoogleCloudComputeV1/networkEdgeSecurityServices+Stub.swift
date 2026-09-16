@@ -16,38 +16,34 @@
 
 #if NetworkEdgeSecurityServices
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol NetworkEdgeSecurityServicesStub: Sendable {
       func aggregatedList(
         request: NetworkEdgeSecurityServicesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList
 
       func delete(
-        request: NetworkEdgeSecurityServicesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworkEdgeSecurityServicesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: NetworkEdgeSecurityServicesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworkEdgeSecurityServicesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityService
 
       func insert(
-        request: NetworkEdgeSecurityServicesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworkEdgeSecurityServicesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func patch(
-        request: NetworkEdgeSecurityServicesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworkEdgeSecurityServicesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

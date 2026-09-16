@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudSpeechV2
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: SpeechClient, parent: String) async throws {
   let items = try client.listCustomClasses(

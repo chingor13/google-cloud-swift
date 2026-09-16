@@ -20,11 +20,11 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// A service for creating and managing Customer SpecialistPools.
   /// When customers start Data Labeling jobs, they can reuse/create Specialist
@@ -36,11 +36,11 @@
   /// @Snippet(path: "SpecialistPoolServiceQuickstart")
   public final class SpecialistPoolServiceClient: Clients.SpecialistPoolServiceProtocol, Sendable {
     let inner: any Clients.SpecialistPoolServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `SpecialistPoolServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SpecialistPoolServiceStub = try Clients.SpecialistPoolServiceTransport(
         options)
       inner = Clients.SpecialistPoolServiceRetry(inner, options: options)
@@ -56,7 +56,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_CreateSpecialistPool")
     public func createSpecialistPool(
-      request: CreateSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSpecialistPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createSpecialistPool(request: request, options: options)
     }
@@ -65,21 +65,21 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_CreateSpecialistPool")
     public func createSpecialistPool(
-      withPolling: CreateSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SpecialistPool> {
+      withPolling: CreateSpecialistPoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SpecialistPool> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<SpecialistPool>.State in
+          -> GoogleGax._PollableOperationImpl<SpecialistPool>.State in
         return try op._extractStatus(SpecialistPool.self)
       }
       let rawOp = try await self.createSpecialistPool(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<SpecialistPool>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<SpecialistPool>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -91,7 +91,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_GetSpecialistPool")
     public func getSpecialistPool(
-      request: GetSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSpecialistPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.SpecialistPool {
       try await self.inner.getSpecialistPool(request: request, options: options)
     }
@@ -100,7 +100,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_ListSpecialistPools")
     public func listSpecialistPools(
-      request: ListSpecialistPoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSpecialistPoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListSpecialistPoolsResponse {
       try await self.inner.listSpecialistPools(request: request, options: options)
     }
@@ -109,7 +109,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_ListSpecialistPools")
     public func listSpecialistPools(
-      byItem: ListSpecialistPoolsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSpecialistPoolsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SpecialistPool, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListSpecialistPoolsResponse in
@@ -117,14 +117,14 @@
         request.pageToken = token
         return try await self.listSpecialistPools(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes a SpecialistPool as well as all Specialists in the pool.
     ///
     /// @Snippet(path: "SpecialistPoolService_DeleteSpecialistPool")
     public func deleteSpecialistPool(
-      request: DeleteSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSpecialistPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteSpecialistPool(request: request, options: options)
     }
@@ -133,21 +133,21 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_DeleteSpecialistPool")
     public func deleteSpecialistPool(
-      withPolling: DeleteSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteSpecialistPoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteSpecialistPool(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -159,7 +159,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_UpdateSpecialistPool")
     public func updateSpecialistPool(
-      request: UpdateSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSpecialistPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.updateSpecialistPool(request: request, options: options)
     }
@@ -168,21 +168,21 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_UpdateSpecialistPool")
     public func updateSpecialistPool(
-      withPolling: UpdateSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SpecialistPool> {
+      withPolling: UpdateSpecialistPoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SpecialistPool> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<SpecialistPool>.State in
+          -> GoogleGax._PollableOperationImpl<SpecialistPool>.State in
         return try op._extractStatus(SpecialistPool.self)
       }
       let rawOp = try await self.updateSpecialistPool(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<SpecialistPool>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<SpecialistPool>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -194,7 +194,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -203,7 +203,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -211,14 +211,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "SpecialistPoolService_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -231,7 +231,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_SetIamPolicy")
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -241,7 +241,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_GetIamPolicy")
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -256,7 +256,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_TestIamPermissions")
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -267,7 +267,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -278,7 +278,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -286,7 +286,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -295,7 +295,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -306,7 +306,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_DeleteOperation")
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteOperation(request: request, options: options)
     }
@@ -317,7 +317,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -328,7 +328,7 @@
     ///
     /// @Snippet(path: "SpecialistPoolService_WaitOperation")
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.waitOperation(request: request, options: options)
     }
@@ -347,13 +347,13 @@
 
       /// See `SpecialistPoolServiceClient.createSpecialistPool`.
       func createSpecialistPool(withPolling: CreateSpecialistPoolRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<SpecialistPool>
+        -> any GoogleGax.PollableOperation<SpecialistPool>
 
       /// See `SpecialistPoolServiceClient.createSpecialistPool`.
       func createSpecialistPool(
         parent: Swift.String,
         specialistPool: SpecialistPool?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<SpecialistPool>
+      ) async throws -> any GoogleGax.PollableOperation<SpecialistPool>
 
       /// See `SpecialistPoolServiceClient.getSpecialistPool`.
       func getSpecialistPool(request: GetSpecialistPoolRequest) async throws
@@ -384,12 +384,12 @@
 
       /// See `SpecialistPoolServiceClient.deleteSpecialistPool`.
       func deleteSpecialistPool(withPolling: DeleteSpecialistPoolRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `SpecialistPoolServiceClient.deleteSpecialistPool`.
       func deleteSpecialistPool(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `SpecialistPoolServiceClient.updateSpecialistPool`.
       func updateSpecialistPool(request: UpdateSpecialistPoolRequest) async throws
@@ -397,13 +397,13 @@
 
       /// See `SpecialistPoolServiceClient.updateSpecialistPool`.
       func updateSpecialistPool(withPolling: UpdateSpecialistPoolRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<SpecialistPool>
+        -> any GoogleGax.PollableOperation<SpecialistPool>
 
       /// See `SpecialistPoolServiceClient.updateSpecialistPool`.
       func updateSpecialistPool(
         specialistPool: SpecialistPool?,
-        updateMask: GoogleCloudWKT.FieldMask?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<SpecialistPool>
+        updateMask: GoogleWKT.FieldMask?,
+      ) async throws -> any GoogleGax.PollableOperation<SpecialistPool>
 
       /// See `SpecialistPoolServiceClient.listLocations`.
       func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -465,102 +465,102 @@
 
       /// See `SpecialistPoolServiceClient.createSpecialistPool`.
       func createSpecialistPool(
-        request: CreateSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateSpecialistPoolRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `SpecialistPoolServiceClient.createSpecialistPool`.
       func createSpecialistPool(
-        withPolling: CreateSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<SpecialistPool>
+        withPolling: CreateSpecialistPoolRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<SpecialistPool>
 
       /// See `SpecialistPoolServiceClient.getSpecialistPool`.
       func getSpecialistPool(
-        request: GetSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
+        request: GetSpecialistPoolRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.SpecialistPool
 
       /// See `SpecialistPoolServiceClient.listSpecialistPools`.
       func listSpecialistPools(
-        request: ListSpecialistPoolsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListSpecialistPoolsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListSpecialistPoolsResponse
 
       /// See `SpecialistPoolServiceClient.listSpecialistPools`.
       func listSpecialistPools(
-        byItem: ListSpecialistPoolsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListSpecialistPoolsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<SpecialistPool, Swift.Error>
 
       /// See `SpecialistPoolServiceClient.deleteSpecialistPool`.
       func deleteSpecialistPool(
-        request: DeleteSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteSpecialistPoolRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `SpecialistPoolServiceClient.deleteSpecialistPool`.
       func deleteSpecialistPool(
-        withPolling: DeleteSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteSpecialistPoolRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `SpecialistPoolServiceClient.updateSpecialistPool`.
       func updateSpecialistPool(
-        request: UpdateSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateSpecialistPoolRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `SpecialistPoolServiceClient.updateSpecialistPool`.
       func updateSpecialistPool(
-        withPolling: UpdateSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<SpecialistPool>
+        withPolling: UpdateSpecialistPoolRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<SpecialistPool>
 
       /// See `SpecialistPoolServiceClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `SpecialistPoolServiceClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `SpecialistPoolServiceClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `SpecialistPoolServiceClient.setIamPolicy`.
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `SpecialistPoolServiceClient.getIamPolicy`.
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `SpecialistPoolServiceClient.testIamPermissions`.
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       /// See `SpecialistPoolServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `SpecialistPoolServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `SpecialistPoolServiceClient.deleteOperation`.
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `SpecialistPoolServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `SpecialistPoolServiceClient.waitOperation`.
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }
@@ -574,31 +574,31 @@
     }
 
     public func createSpecialistPool(
-      request: CreateSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSpecialistPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createSpecialistPool(withPolling: CreateSpecialistPoolRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<SpecialistPool>
+      -> any GoogleGax.PollableOperation<SpecialistPool>
     {
       try await self.createSpecialistPool(withPolling: withPolling, options: .init())
     }
 
     public func createSpecialistPool(
-      withPolling: CreateSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SpecialistPool> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<SpecialistPool>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateSpecialistPoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SpecialistPool> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<SpecialistPool>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func createSpecialistPool(
       parent: Swift.String,
       specialistPool: SpecialistPool?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<SpecialistPool> {
+    ) async throws -> any GoogleGax.PollableOperation<SpecialistPool> {
       let request = CreateSpecialistPoolRequest().with {
         $0.parent = parent
         $0.specialistPool = specialistPool
@@ -613,9 +613,9 @@
     }
 
     public func getSpecialistPool(
-      request: GetSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSpecialistPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.SpecialistPool {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getSpecialistPool(
@@ -634,9 +634,9 @@
     }
 
     public func listSpecialistPools(
-      request: ListSpecialistPoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSpecialistPoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListSpecialistPoolsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listSpecialistPools(
@@ -646,13 +646,13 @@
     }
 
     public func listSpecialistPools(
-      byItem: ListSpecialistPoolsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSpecialistPoolsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SpecialistPool, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListSpecialistPoolsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listSpecialistPools(
@@ -671,30 +671,30 @@
     }
 
     public func deleteSpecialistPool(
-      request: DeleteSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSpecialistPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteSpecialistPool(withPolling: DeleteSpecialistPoolRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.deleteSpecialistPool(withPolling: withPolling, options: .init())
     }
 
     public func deleteSpecialistPool(
-      withPolling: DeleteSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteSpecialistPoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteSpecialistPool(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteSpecialistPoolRequest().with {
         $0.name = name
       }
@@ -708,31 +708,31 @@
     }
 
     public func updateSpecialistPool(
-      request: UpdateSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSpecialistPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateSpecialistPool(withPolling: UpdateSpecialistPoolRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<SpecialistPool>
+      -> any GoogleGax.PollableOperation<SpecialistPool>
     {
       try await self.updateSpecialistPool(withPolling: withPolling, options: .init())
     }
 
     public func updateSpecialistPool(
-      withPolling: UpdateSpecialistPoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SpecialistPool> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<SpecialistPool>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: UpdateSpecialistPoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SpecialistPool> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<SpecialistPool>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func updateSpecialistPool(
       specialistPool: SpecialistPool?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<SpecialistPool> {
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<SpecialistPool> {
       let request = UpdateSpecialistPoolRequest().with {
         $0.specialistPool = specialistPool
         $0.updateMask = updateMask
@@ -747,9 +747,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -759,13 +759,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -775,9 +775,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -787,9 +787,9 @@
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -799,9 +799,9 @@
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -811,9 +811,9 @@
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -823,9 +823,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -835,13 +835,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -862,9 +862,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -881,9 +881,9 @@
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteOperation(
@@ -900,9 +900,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(
@@ -921,9 +921,9 @@
     }
 
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

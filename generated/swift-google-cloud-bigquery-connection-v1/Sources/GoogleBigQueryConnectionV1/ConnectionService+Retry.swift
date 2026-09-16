@@ -18,27 +18,27 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class ConnectionServiceRetry: ConnectionServiceStub {
     let inner: any ConnectionServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any ConnectionServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any ConnectionServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@ extension Clients {
     }
 
     public func createConnection(
-      request: CreateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryConnectionV1.Connection {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateConnectionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateConnectionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryConnectionV1.Connection
           in
           return try await self.inner.createConnection(request: r, options: o)
@@ -65,14 +65,14 @@ extension Clients {
     }
 
     public func getConnection(
-      request: GetConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryConnectionV1.Connection {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetConnectionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetConnectionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryConnectionV1.Connection
           in
           return try await self.inner.getConnection(request: r, options: o)
@@ -80,14 +80,14 @@ extension Clients {
     }
 
     public func listConnections(
-      request: ListConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryConnectionV1.ListConnectionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListConnectionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListConnectionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryConnectionV1.ListConnectionsResponse
           in
           return try await self.inner.listConnections(request: r, options: o)
@@ -95,14 +95,14 @@ extension Clients {
     }
 
     public func updateConnection(
-      request: UpdateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryConnectionV1.Connection {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateConnectionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateConnectionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryConnectionV1.Connection
           in
           return try await self.inner.updateConnection(request: r, options: o)
@@ -110,27 +110,26 @@ extension Clients {
     }
 
     public func deleteConnection(
-      request: DeleteConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: {
-          (r: DeleteConnectionRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteConnectionRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteConnection(request: r, options: o)
         })
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.getIamPolicy(request: r, options: o)
@@ -138,14 +137,14 @@ extension Clients {
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.setIamPolicy(request: r, options: o)
@@ -153,14 +152,14 @@ extension Clients {
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.TestIamPermissionsResponse
           in
           return try await self.inner.testIamPermissions(request: r, options: o)

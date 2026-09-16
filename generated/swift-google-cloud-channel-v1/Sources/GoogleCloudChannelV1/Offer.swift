@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents an offer made to resellers for purchase.
 /// An offer is associated with a [Sku][google.cloud.channel.v1.Sku], has a plan
 /// for payment, a price, and defines the constraints for buying.
 ///
 /// [google.cloud.channel.v1.Sku]: <doc:Sku>
-public struct Offer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Offer: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Resource Name of the Offer.
@@ -45,10 +45,10 @@ public struct Offer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var priceByResources: [PriceByResource] = []
 
   /// Start of the Offer validity time.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. End of the Offer validity time.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Parameters required to use current Offer to purchase.
   public var parameterDefinitions: [ParameterDefinition] = []
@@ -56,7 +56,7 @@ public struct Offer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The deal code of the offer to get a special promotion or discount.
   public var dealCode: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Offer`.
   public init() {}
@@ -118,9 +118,8 @@ public struct Offer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.priceByResources = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(
       [ParameterDefinition].self, forKey: .parameterDefinitions)
     {
@@ -131,7 +130,7 @@ public struct Offer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -155,10 +154,10 @@ public struct Offer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.channel.v1.Offer"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

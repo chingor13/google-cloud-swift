@@ -16,15 +16,15 @@
 
 #if VertexRagDataService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Response message for
   /// [VertexRagDataService.ListRagFiles][google.cloud.aiplatform.v1.VertexRagDataService.ListRagFiles].
   ///
   /// [google.cloud.aiplatform.v1.VertexRagDataService.ListRagFiles]: <doc:VertexRagDataServiceClient/listRagFiles(request:options:)>
-  public struct ListRagFilesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
-    GoogleCloudGax._PaginatedResponse,
+  public struct ListRagFilesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
+    GoogleGax._PaginatedResponse,
     Sendable
   {
     /// List of RagFiles in the requested page.
@@ -38,7 +38,7 @@
     /// [google.cloud.aiplatform.v1.ListRagFilesRequest.page_token]: <doc:ListRagFilesRequest/pageToken>
     public var nextPageToken: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ListRagFilesResponse`.
     public init() {}
@@ -81,7 +81,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -97,11 +97,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ListRagFilesResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
 
     public func _getPaginatedItems() -> [RagFile] {

@@ -19,28 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class RegionNotificationEndpointsRetry: RegionNotificationEndpointsStub {
       let inner: any RegionNotificationEndpointsStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(
-        _ inner: any RegionNotificationEndpointsStub, options: GoogleCloudGax.ClientOptions
-      ) {
+      public init(_ inner: any RegionNotificationEndpointsStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -53,7 +51,7 @@
 
       public func aggregatedList(
         request: RegionNotificationEndpointsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList {
         try await self._intercept(
           request: request,
@@ -62,7 +60,7 @@
           action: {
             (
               r: RegionNotificationEndpointsClient.AggregatedListRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
@@ -70,15 +68,14 @@
       }
 
       public func delete(
-        request: RegionNotificationEndpointsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionNotificationEndpointsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: RegionNotificationEndpointsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionNotificationEndpointsClient.DeleteRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -86,15 +83,14 @@
       }
 
       public func `get`(
-        request: RegionNotificationEndpointsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionNotificationEndpointsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NotificationEndpoint {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RegionNotificationEndpointsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionNotificationEndpointsClient.GetRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.NotificationEndpoint
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -102,15 +98,14 @@
       }
 
       public func insert(
-        request: RegionNotificationEndpointsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionNotificationEndpointsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: RegionNotificationEndpointsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionNotificationEndpointsClient.InsertRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -118,15 +113,14 @@
       }
 
       public func list(
-        request: RegionNotificationEndpointsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionNotificationEndpointsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NotificationEndpointList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RegionNotificationEndpointsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionNotificationEndpointsClient.ListRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.NotificationEndpointList
             in
             return try await self.inner.list(request: r, options: o)
@@ -135,7 +129,7 @@
 
       public func testIamPermissions(
         request: RegionNotificationEndpointsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
@@ -144,7 +138,7 @@
           action: {
             (
               r: RegionNotificationEndpointsClient.TestIamPermissionsRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
@@ -152,14 +146,14 @@
       }
 
       public func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RegionOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

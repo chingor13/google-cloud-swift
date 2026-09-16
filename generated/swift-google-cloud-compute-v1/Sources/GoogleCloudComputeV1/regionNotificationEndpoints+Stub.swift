@@ -16,43 +16,39 @@
 
 #if RegionNotificationEndpoints
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionNotificationEndpointsStub: Sendable {
       func aggregatedList(
         request: RegionNotificationEndpointsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NotificationEndpointAggregatedList
 
       func delete(
-        request: RegionNotificationEndpointsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionNotificationEndpointsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RegionNotificationEndpointsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionNotificationEndpointsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NotificationEndpoint
 
       func insert(
-        request: RegionNotificationEndpointsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionNotificationEndpointsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RegionNotificationEndpointsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionNotificationEndpointsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NotificationEndpointList
 
       func testIamPermissions(
         request: RegionNotificationEndpointsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

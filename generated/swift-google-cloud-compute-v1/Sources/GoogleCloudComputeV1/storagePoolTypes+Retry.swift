@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class StoragePoolTypesRetry: StoragePoolTypesStub {
       let inner: any StoragePoolTypesStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any StoragePoolTypesStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any StoragePoolTypesStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,15 +50,14 @@
       }
 
       public func aggregatedList(
-        request: StoragePoolTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: StoragePoolTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: StoragePoolTypesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: StoragePoolTypesClient.AggregatedListRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
@@ -66,14 +65,14 @@
       }
 
       public func `get`(
-        request: StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolTypesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolType {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: StoragePoolTypesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: StoragePoolTypesClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.StoragePoolType
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -81,14 +80,14 @@
       }
 
       public func list(
-        request: StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolTypeList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: StoragePoolTypesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: StoragePoolTypesClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.StoragePoolTypeList
             in
             return try await self.inner.list(request: r, options: o)

@@ -19,7 +19,7 @@
 import Foundation
 import GoogleCloudMaintenanceApiV1
 import GoogleCloudLocation
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: MaintenanceClient) async throws {
   let response = try await client.getLocation(

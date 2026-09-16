@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudChronicleV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: FindingsRefinementServiceClient) async throws {
   try await client.cancelOperation(

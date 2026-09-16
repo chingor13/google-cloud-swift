@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudGKEHubV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: GkeHubClient, projectId: String, locationId: String, membershipId: String)
   async throws
@@ -31,7 +31,7 @@ func sample(client: GkeHubClient, projectId: String, locationId: String, members
         $0.resource = Membership().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/memberships/\(membershipId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

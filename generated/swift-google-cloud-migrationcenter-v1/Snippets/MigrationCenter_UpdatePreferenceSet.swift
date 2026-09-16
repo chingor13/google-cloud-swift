@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudMigrationCenterV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: MigrationCenterClient, projectId: String, locationId: String, preferenceSetId: String
@@ -33,7 +33,7 @@ func sample(
           $0.name =
             "projects/\(projectId)/locations/\(locationId)/preferenceSets/\(preferenceSetId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for the
 /// [Recognize][google.cloud.speech.v2.Speech.Recognize] method.
 ///
 /// [google.cloud.speech.v2.Speech.Recognize]: <doc:SpeechClient/recognize(request:options:)>
-public struct RecognizeResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RecognizeResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Sequential list of transcription results corresponding to sequential
@@ -31,7 +31,7 @@ public struct RecognizeResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// Metadata about the recognition.
   public var metadata: RecognitionResponseMetadata? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RecognizeResponse`.
   public init() {}
@@ -73,7 +73,7 @@ public struct RecognizeResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable
       RecognitionResponseMetadata.self, forKey: .metadata)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -89,10 +89,10 @@ public struct RecognizeResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.RecognizeResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

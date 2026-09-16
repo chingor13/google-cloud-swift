@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Performance range for a model deployment.
-public struct PerformanceRange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PerformanceRange: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The range of throughput in output tokens per second. This is
@@ -35,7 +35,7 @@ public struct PerformanceRange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// output tokens, measured as request_latency / total_output_tokens.
   public var ntpotRange: MillisecondRange? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PerformanceRange`.
   public init() {}
@@ -78,7 +78,7 @@ public struct PerformanceRange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.ntpotRange = try container.decodeIfPresent(MillisecondRange.self, forKey: .ntpotRange)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,10 +95,10 @@ public struct PerformanceRange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkerecommender.v1.PerformanceRange"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

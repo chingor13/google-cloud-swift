@@ -16,45 +16,45 @@
 
 #if Autoscalers
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol AutoscalersStub: Sendable {
       func aggregatedList(
-        request: AutoscalersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AutoscalerAggregatedList
 
       func delete(
-        request: AutoscalersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: AutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Autoscaler
 
       func insert(
-        request: AutoscalersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AutoscalerList
 
       func patch(
-        request: AutoscalersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: AutoscalersClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: AutoscalersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

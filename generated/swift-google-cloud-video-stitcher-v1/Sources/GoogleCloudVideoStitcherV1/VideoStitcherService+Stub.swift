@@ -15,147 +15,147 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol VideoStitcherServiceStub: Sendable {
     func createCdnKey(
-      request: CreateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCdnKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listCdnKeys(
-      request: ListCdnKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCdnKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListCdnKeysResponse
 
     func getCdnKey(
-      request: GetCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCdnKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.CdnKey
 
     func deleteCdnKey(
-      request: DeleteCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCdnKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateCdnKey(
-      request: UpdateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCdnKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createVodSession(
-      request: CreateVodSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateVodSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.VodSession
 
     func getVodSession(
-      request: GetVodSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVodSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.VodSession
 
     func listVodStitchDetails(
-      request: ListVodStitchDetailsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVodStitchDetailsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListVodStitchDetailsResponse
 
     func getVodStitchDetail(
-      request: GetVodStitchDetailRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVodStitchDetailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.VodStitchDetail
 
     func listVodAdTagDetails(
-      request: ListVodAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVodAdTagDetailsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListVodAdTagDetailsResponse
 
     func getVodAdTagDetail(
-      request: GetVodAdTagDetailRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVodAdTagDetailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.VodAdTagDetail
 
     func listLiveAdTagDetails(
-      request: ListLiveAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLiveAdTagDetailsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListLiveAdTagDetailsResponse
 
     func getLiveAdTagDetail(
-      request: GetLiveAdTagDetailRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLiveAdTagDetailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.LiveAdTagDetail
 
     func createSlate(
-      request: CreateSlateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSlateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listSlates(
-      request: ListSlatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSlatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListSlatesResponse
 
     func getSlate(
-      request: GetSlateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSlateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.Slate
 
     func updateSlate(
-      request: UpdateSlateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSlateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteSlate(
-      request: DeleteSlateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSlateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createLiveSession(
-      request: CreateLiveSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLiveSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.LiveSession
 
     func getLiveSession(
-      request: GetLiveSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLiveSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.LiveSession
 
     func createLiveConfig(
-      request: CreateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLiveConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLiveConfigs(
-      request: ListLiveConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLiveConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListLiveConfigsResponse
 
     func getLiveConfig(
-      request: GetLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLiveConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.LiveConfig
 
     func deleteLiveConfig(
-      request: DeleteLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLiveConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateLiveConfig(
-      request: UpdateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLiveConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createVodConfig(
-      request: CreateVodConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateVodConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listVodConfigs(
-      request: ListVodConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVodConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListVodConfigsResponse
 
     func getVodConfig(
-      request: GetVodConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVodConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.VodConfig
 
     func deleteVodConfig(
-      request: DeleteVodConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteVodConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateVodConfig(
-      request: UpdateVodConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateVodConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

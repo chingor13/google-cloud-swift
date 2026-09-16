@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudOSConfigV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: OsConfigZonalServiceClient) async throws {
   try await client.cancelOperation(

@@ -18,11 +18,11 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for creating, configuring, and deleting Cloud Bigtable tables.
 ///
@@ -33,11 +33,11 @@ import GoogleCloudGax
 /// @Snippet(path: "BigtableTableAdminQuickstart")
 public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol, Sendable {
   let inner: any Clients.BigtableTableAdminStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `BigtableTableAdminClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.BigtableTableAdminStub = try Clients.BigtableTableAdminTransport(options)
     inner = Clients.BigtableTableAdminRetry(inner, options: options)
     if let logger = options.logger {
@@ -54,7 +54,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_CreateTable")
   public func createTable(
-    request: CreateTableRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Table {
     try await self.inner.createTable(request: request, options: options)
   }
@@ -70,7 +70,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_CreateTableFromSnapshot")
   public func createTableFromSnapshot(
-    request: CreateTableFromSnapshotRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTableFromSnapshotRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createTableFromSnapshot(request: request, options: options)
   }
@@ -86,21 +86,20 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_CreateTableFromSnapshot")
   public func createTableFromSnapshot(
-    withPolling: CreateTableFromSnapshotRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Table> {
+    withPolling: CreateTableFromSnapshotRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Table> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Table>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Table>.State in
       return try op._extractStatus(Table.self)
     }
     let rawOp = try await self.createTableFromSnapshot(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Table>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Table>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -112,7 +111,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_ListTables")
   public func listTables(
-    request: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTablesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListTablesResponse {
     try await self.inner.listTables(request: request, options: options)
   }
@@ -121,7 +120,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_ListTables")
   public func listTables(
-    byItem: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTablesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Table, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListTablesResponse in
@@ -129,14 +128,14 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
       request.pageToken = token
       return try await self.listTables(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets metadata information about the specified table.
   ///
   /// @Snippet(path: "BigtableTableAdmin_GetTable")
   public func getTable(
-    request: GetTableRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Table {
     try await self.inner.getTable(request: request, options: options)
   }
@@ -145,7 +144,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_UpdateTable")
   public func updateTable(
-    request: UpdateTableRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateTable(request: request, options: options)
   }
@@ -154,21 +153,20 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_UpdateTable")
   public func updateTable(
-    withPolling: UpdateTableRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Table> {
+    withPolling: UpdateTableRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Table> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Table>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Table>.State in
       return try op._extractStatus(Table.self)
     }
     let rawOp = try await self.updateTable(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Table>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Table>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -180,7 +178,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_DeleteTable")
   public func deleteTable(
-    request: DeleteTableRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteTableRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteTable(request: request, options: options)
   }
@@ -189,7 +187,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_UndeleteTable")
   public func undeleteTable(
-    request: UndeleteTableRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeleteTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.undeleteTable(request: request, options: options)
   }
@@ -198,21 +196,20 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_UndeleteTable")
   public func undeleteTable(
-    withPolling: UndeleteTableRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Table> {
+    withPolling: UndeleteTableRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Table> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Table>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Table>.State in
       return try op._extractStatus(Table.self)
     }
     let rawOp = try await self.undeleteTable(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Table>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Table>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -224,7 +221,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_CreateAuthorizedView")
   public func createAuthorizedView(
-    request: CreateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAuthorizedViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createAuthorizedView(request: request, options: options)
   }
@@ -233,21 +230,21 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_CreateAuthorizedView")
   public func createAuthorizedView(
-    withPolling: CreateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthorizedView> {
+    withPolling: CreateAuthorizedViewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AuthorizedView> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AuthorizedView>.State in
+        -> GoogleGax._PollableOperationImpl<AuthorizedView>.State in
       return try op._extractStatus(AuthorizedView.self)
     }
     let rawOp = try await self.createAuthorizedView(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AuthorizedView>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AuthorizedView>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -259,7 +256,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_ListAuthorizedViews")
   public func listAuthorizedViews(
-    request: ListAuthorizedViewsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAuthorizedViewsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListAuthorizedViewsResponse {
     try await self.inner.listAuthorizedViews(request: request, options: options)
   }
@@ -268,7 +265,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_ListAuthorizedViews")
   public func listAuthorizedViews(
-    byItem: ListAuthorizedViewsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAuthorizedViewsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AuthorizedView, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListAuthorizedViewsResponse
@@ -277,14 +274,14 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
       request.pageToken = token
       return try await self.listAuthorizedViews(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information from a specified AuthorizedView.
   ///
   /// @Snippet(path: "BigtableTableAdmin_GetAuthorizedView")
   public func getAuthorizedView(
-    request: GetAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAuthorizedViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.AuthorizedView {
     try await self.inner.getAuthorizedView(request: request, options: options)
   }
@@ -293,7 +290,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_UpdateAuthorizedView")
   public func updateAuthorizedView(
-    request: UpdateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAuthorizedViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateAuthorizedView(request: request, options: options)
   }
@@ -302,21 +299,21 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_UpdateAuthorizedView")
   public func updateAuthorizedView(
-    withPolling: UpdateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthorizedView> {
+    withPolling: UpdateAuthorizedViewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AuthorizedView> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AuthorizedView>.State in
+        -> GoogleGax._PollableOperationImpl<AuthorizedView>.State in
       return try op._extractStatus(AuthorizedView.self)
     }
     let rawOp = try await self.updateAuthorizedView(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AuthorizedView>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AuthorizedView>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -328,7 +325,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_DeleteAuthorizedView")
   public func deleteAuthorizedView(
-    request: DeleteAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAuthorizedViewRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteAuthorizedView(request: request, options: options)
   }
@@ -340,7 +337,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_ModifyColumnFamilies")
   public func modifyColumnFamilies(
-    request: ModifyColumnFamiliesRequest, options: GoogleCloudGax.RequestOptions
+    request: ModifyColumnFamiliesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Table {
     try await self.inner.modifyColumnFamilies(request: request, options: options)
   }
@@ -351,7 +348,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_DropRowRange")
   public func dropRowRange(
-    request: DropRowRangeRequest, options: GoogleCloudGax.RequestOptions
+    request: DropRowRangeRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.dropRowRange(request: request, options: options)
   }
@@ -363,7 +360,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_GenerateConsistencyToken")
   public func generateConsistencyToken(
-    request: GenerateConsistencyTokenRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateConsistencyTokenRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.GenerateConsistencyTokenResponse {
     try await self.inner.generateConsistencyToken(request: request, options: options)
   }
@@ -374,7 +371,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_CheckConsistency")
   public func checkConsistency(
-    request: CheckConsistencyRequest, options: GoogleCloudGax.RequestOptions
+    request: CheckConsistencyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.CheckConsistencyResponse {
     try await self.inner.checkConsistency(request: request, options: options)
   }
@@ -390,7 +387,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_SnapshotTable")
   public func snapshotTable(
-    request: SnapshotTableRequest, options: GoogleCloudGax.RequestOptions
+    request: SnapshotTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.snapshotTable(request: request, options: options)
   }
@@ -406,21 +403,21 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_SnapshotTable")
   public func snapshotTable(
-    withPolling: SnapshotTableRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot> {
+    withPolling: SnapshotTableRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Snapshot> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Snapshot>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Snapshot>.State
+      in
       return try op._extractStatus(Snapshot.self)
     }
     let rawOp = try await self.snapshotTable(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Snapshot>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Snapshot>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -438,7 +435,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_GetSnapshot")
   public func getSnapshot(
-    request: GetSnapshotRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSnapshotRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Snapshot {
     try await self.inner.getSnapshot(request: request, options: options)
   }
@@ -453,7 +450,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_ListSnapshots")
   public func listSnapshots(
-    request: ListSnapshotsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSnapshotsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListSnapshotsResponse {
     try await self.inner.listSnapshots(request: request, options: options)
   }
@@ -468,7 +465,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_ListSnapshots")
   public func listSnapshots(
-    byItem: ListSnapshotsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSnapshotsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Snapshot, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListSnapshotsResponse in
@@ -476,7 +473,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
       request.pageToken = token
       return try await self.listSnapshots(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Permanently deletes the specified snapshot.
@@ -489,7 +486,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_DeleteSnapshot")
   public func deleteSnapshot(
-    request: DeleteSnapshotRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSnapshotRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteSnapshot(request: request, options: options)
   }
@@ -511,7 +508,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_CreateBackup")
   public func createBackup(
-    request: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createBackup(request: request, options: options)
   }
@@ -533,21 +530,20 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_CreateBackup")
   public func createBackup(
-    withPolling: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
+    withPolling: CreateBackupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Backup> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Backup>.State in
       return try op._extractStatus(Backup.self)
     }
     let rawOp = try await self.createBackup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Backup>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -559,7 +555,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_GetBackup")
   public func getBackup(
-    request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Backup {
     try await self.inner.getBackup(request: request, options: options)
   }
@@ -568,7 +564,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_UpdateBackup")
   public func updateBackup(
-    request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Backup {
     try await self.inner.updateBackup(request: request, options: options)
   }
@@ -577,7 +573,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_DeleteBackup")
   public func deleteBackup(
-    request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteBackupRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteBackup(request: request, options: options)
   }
@@ -587,7 +583,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_ListBackups")
   public func listBackups(
-    request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBackupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListBackupsResponse {
     try await self.inner.listBackups(request: request, options: options)
   }
@@ -597,7 +593,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_ListBackups")
   public func listBackups(
-    byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBackupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Backup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListBackupsResponse in
@@ -605,7 +601,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
       request.pageToken = token
       return try await self.listBackups(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Create a new table by restoring from a completed backup.  The
@@ -624,7 +620,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_RestoreTable")
   public func restoreTable(
-    request: RestoreTableRequest, options: GoogleCloudGax.RequestOptions
+    request: RestoreTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.restoreTable(request: request, options: options)
   }
@@ -645,21 +641,20 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_RestoreTable")
   public func restoreTable(
-    withPolling: RestoreTableRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Table> {
+    withPolling: RestoreTableRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Table> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Table>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Table>.State in
       return try op._extractStatus(Table.self)
     }
     let rawOp = try await self.restoreTable(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Table>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Table>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -672,7 +667,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_CopyBackup")
   public func copyBackup(
-    request: CopyBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: CopyBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.copyBackup(request: request, options: options)
   }
@@ -682,21 +677,20 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_CopyBackup")
   public func copyBackup(
-    withPolling: CopyBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
+    withPolling: CopyBackupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Backup> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Backup>.State in
       return try op._extractStatus(Backup.self)
     }
     let rawOp = try await self.copyBackup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Backup>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -710,7 +704,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -720,7 +714,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -730,7 +724,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -739,7 +733,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_CreateSchemaBundle")
   public func createSchemaBundle(
-    request: CreateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSchemaBundleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createSchemaBundle(request: request, options: options)
   }
@@ -748,21 +742,21 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_CreateSchemaBundle")
   public func createSchemaBundle(
-    withPolling: CreateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SchemaBundle> {
+    withPolling: CreateSchemaBundleRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SchemaBundle> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<SchemaBundle>.State in
+        -> GoogleGax._PollableOperationImpl<SchemaBundle>.State in
       return try op._extractStatus(SchemaBundle.self)
     }
     let rawOp = try await self.createSchemaBundle(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<SchemaBundle>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SchemaBundle>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -774,7 +768,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_UpdateSchemaBundle")
   public func updateSchemaBundle(
-    request: UpdateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSchemaBundleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateSchemaBundle(request: request, options: options)
   }
@@ -783,21 +777,21 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_UpdateSchemaBundle")
   public func updateSchemaBundle(
-    withPolling: UpdateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SchemaBundle> {
+    withPolling: UpdateSchemaBundleRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SchemaBundle> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<SchemaBundle>.State in
+        -> GoogleGax._PollableOperationImpl<SchemaBundle>.State in
       return try op._extractStatus(SchemaBundle.self)
     }
     let rawOp = try await self.updateSchemaBundle(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<SchemaBundle>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SchemaBundle>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -809,7 +803,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_GetSchemaBundle")
   public func getSchemaBundle(
-    request: GetSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSchemaBundleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.SchemaBundle {
     try await self.inner.getSchemaBundle(request: request, options: options)
   }
@@ -818,7 +812,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_ListSchemaBundles")
   public func listSchemaBundles(
-    request: ListSchemaBundlesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSchemaBundlesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListSchemaBundlesResponse {
     try await self.inner.listSchemaBundles(request: request, options: options)
   }
@@ -827,7 +821,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_ListSchemaBundles")
   public func listSchemaBundles(
-    byItem: ListSchemaBundlesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSchemaBundlesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SchemaBundle, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListSchemaBundlesResponse in
@@ -835,14 +829,14 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
       request.pageToken = token
       return try await self.listSchemaBundles(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes a schema bundle in the specified table.
   ///
   /// @Snippet(path: "BigtableTableAdmin_DeleteSchemaBundle")
   public func deleteSchemaBundle(
-    request: DeleteSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSchemaBundleRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteSchemaBundle(request: request, options: options)
   }
@@ -853,7 +847,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -864,7 +858,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -872,7 +866,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -881,7 +875,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -892,7 +886,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -903,7 +897,7 @@ public final class BigtableTableAdminClient: Clients.BigtableTableAdminProtocol,
   ///
   /// @Snippet(path: "BigtableTableAdmin_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -932,14 +926,14 @@ extension Clients {
 
     /// See `BigtableTableAdminClient.createTableFromSnapshot`.
     func createTableFromSnapshot(withPolling: CreateTableFromSnapshotRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Table>
+      -> any GoogleGax.PollableOperation<Table>
 
     /// See `BigtableTableAdminClient.createTableFromSnapshot`.
     func createTableFromSnapshot(
       parent: Swift.String,
       tableId: Swift.String,
       sourceSnapshot: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Table>
+    ) async throws -> any GoogleGax.PollableOperation<Table>
 
     /// See `BigtableTableAdminClient.listTables`.
     func listTables(request: ListTablesRequest) async throws
@@ -967,14 +961,14 @@ extension Clients {
     func updateTable(request: UpdateTableRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.updateTable`.
-    func updateTable(withPolling: UpdateTableRequest) async throws -> any GoogleCloudGax
+    func updateTable(withPolling: UpdateTableRequest) async throws -> any GoogleGax
       .PollableOperation<Table>
 
     /// See `BigtableTableAdminClient.updateTable`.
     func updateTable(
       table: Table?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Table>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Table>
 
     /// See `BigtableTableAdminClient.deleteTable`.
     func deleteTable(request: DeleteTableRequest) async throws
@@ -988,13 +982,13 @@ extension Clients {
     func undeleteTable(request: UndeleteTableRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.undeleteTable`.
-    func undeleteTable(withPolling: UndeleteTableRequest) async throws -> any GoogleCloudGax
+    func undeleteTable(withPolling: UndeleteTableRequest) async throws -> any GoogleGax
       .PollableOperation<Table>
 
     /// See `BigtableTableAdminClient.undeleteTable`.
     func undeleteTable(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Table>
+    ) async throws -> any GoogleGax.PollableOperation<Table>
 
     /// See `BigtableTableAdminClient.createAuthorizedView`.
     func createAuthorizedView(request: CreateAuthorizedViewRequest) async throws
@@ -1002,14 +996,14 @@ extension Clients {
 
     /// See `BigtableTableAdminClient.createAuthorizedView`.
     func createAuthorizedView(withPolling: CreateAuthorizedViewRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<AuthorizedView>
+      -> any GoogleGax.PollableOperation<AuthorizedView>
 
     /// See `BigtableTableAdminClient.createAuthorizedView`.
     func createAuthorizedView(
       parent: Swift.String,
       authorizedView: AuthorizedView?,
       authorizedViewId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AuthorizedView>
+    ) async throws -> any GoogleGax.PollableOperation<AuthorizedView>
 
     /// See `BigtableTableAdminClient.listAuthorizedViews`.
     func listAuthorizedViews(request: ListAuthorizedViewsRequest) async throws
@@ -1040,13 +1034,13 @@ extension Clients {
 
     /// See `BigtableTableAdminClient.updateAuthorizedView`.
     func updateAuthorizedView(withPolling: UpdateAuthorizedViewRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<AuthorizedView>
+      -> any GoogleGax.PollableOperation<AuthorizedView>
 
     /// See `BigtableTableAdminClient.updateAuthorizedView`.
     func updateAuthorizedView(
       authorizedView: AuthorizedView?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AuthorizedView>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<AuthorizedView>
 
     /// See `BigtableTableAdminClient.deleteAuthorizedView`.
     func deleteAuthorizedView(request: DeleteAuthorizedViewRequest) async throws
@@ -1092,7 +1086,7 @@ extension Clients {
     func snapshotTable(request: SnapshotTableRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.snapshotTable`.
-    func snapshotTable(withPolling: SnapshotTableRequest) async throws -> any GoogleCloudGax
+    func snapshotTable(withPolling: SnapshotTableRequest) async throws -> any GoogleGax
       .PollableOperation<Snapshot>
 
     /// See `BigtableTableAdminClient.snapshotTable`.
@@ -1101,7 +1095,7 @@ extension Clients {
       cluster: Swift.String,
       snapshotId: Swift.String,
       description: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot>
+    ) async throws -> any GoogleGax.PollableOperation<Snapshot>
 
     /// See `BigtableTableAdminClient.getSnapshot`.
     func getSnapshot(request: GetSnapshotRequest) async throws
@@ -1138,7 +1132,7 @@ extension Clients {
     func createBackup(request: CreateBackupRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.createBackup`.
-    func createBackup(withPolling: CreateBackupRequest) async throws -> any GoogleCloudGax
+    func createBackup(withPolling: CreateBackupRequest) async throws -> any GoogleGax
       .PollableOperation<Backup>
 
     /// See `BigtableTableAdminClient.createBackup`.
@@ -1146,7 +1140,7 @@ extension Clients {
       parent: Swift.String,
       backupId: Swift.String,
       backup: Backup?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
+    ) async throws -> any GoogleGax.PollableOperation<Backup>
 
     /// See `BigtableTableAdminClient.getBackup`.
     func getBackup(request: GetBackupRequest) async throws -> GoogleCloudBigtableAdminV2.Backup
@@ -1163,7 +1157,7 @@ extension Clients {
     /// See `BigtableTableAdminClient.updateBackup`.
     func updateBackup(
       backup: Backup?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudBigtableAdminV2.Backup
 
     /// See `BigtableTableAdminClient.deleteBackup`.
@@ -1192,23 +1186,24 @@ extension Clients {
     func restoreTable(request: RestoreTableRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.restoreTable`.
-    func restoreTable(withPolling: RestoreTableRequest) async throws -> any GoogleCloudGax
+    func restoreTable(withPolling: RestoreTableRequest) async throws -> any GoogleGax
       .PollableOperation<Table>
 
     /// See `BigtableTableAdminClient.copyBackup`.
     func copyBackup(request: CopyBackupRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.copyBackup`.
-    func copyBackup(withPolling: CopyBackupRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Backup>
+    func copyBackup(withPolling: CopyBackupRequest) async throws -> any GoogleGax.PollableOperation<
+      Backup
+    >
 
     /// See `BigtableTableAdminClient.copyBackup`.
     func copyBackup(
       parent: Swift.String,
       backupId: Swift.String,
       sourceBackup: Swift.String,
-      expireTime: GoogleCloudWKT.Timestamp?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
+      expireTime: GoogleWKT.Timestamp?,
+    ) async throws -> any GoogleGax.PollableOperation<Backup>
 
     /// See `BigtableTableAdminClient.getIamPolicy`.
     func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws -> GoogleIAMV1.Policy
@@ -1242,29 +1237,29 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.createSchemaBundle`.
-    func createSchemaBundle(withPolling: CreateSchemaBundleRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<SchemaBundle>
+    func createSchemaBundle(withPolling: CreateSchemaBundleRequest) async throws -> any GoogleGax
+      .PollableOperation<SchemaBundle>
 
     /// See `BigtableTableAdminClient.createSchemaBundle`.
     func createSchemaBundle(
       parent: Swift.String,
       schemaBundleId: Swift.String,
       schemaBundle: SchemaBundle?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<SchemaBundle>
+    ) async throws -> any GoogleGax.PollableOperation<SchemaBundle>
 
     /// See `BigtableTableAdminClient.updateSchemaBundle`.
     func updateSchemaBundle(request: UpdateSchemaBundleRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.updateSchemaBundle`.
-    func updateSchemaBundle(withPolling: UpdateSchemaBundleRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<SchemaBundle>
+    func updateSchemaBundle(withPolling: UpdateSchemaBundleRequest) async throws -> any GoogleGax
+      .PollableOperation<SchemaBundle>
 
     /// See `BigtableTableAdminClient.updateSchemaBundle`.
     func updateSchemaBundle(
       schemaBundle: SchemaBundle?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<SchemaBundle>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<SchemaBundle>
 
     /// See `BigtableTableAdminClient.getSchemaBundle`.
     func getSchemaBundle(request: GetSchemaBundleRequest) async throws
@@ -1330,277 +1325,277 @@ extension Clients {
 
     /// See `BigtableTableAdminClient.createTable`.
     func createTable(
-      request: CreateTableRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Table
 
     /// See `BigtableTableAdminClient.createTableFromSnapshot`.
     func createTableFromSnapshot(
-      request: CreateTableFromSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTableFromSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.createTableFromSnapshot`.
     func createTableFromSnapshot(
-      withPolling: CreateTableFromSnapshotRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Table>
+      withPolling: CreateTableFromSnapshotRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Table>
 
     /// See `BigtableTableAdminClient.listTables`.
     func listTables(
-      request: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTablesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListTablesResponse
 
     /// See `BigtableTableAdminClient.listTables`.
     func listTables(
-      byItem: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTablesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Table, Swift.Error>
 
     /// See `BigtableTableAdminClient.getTable`.
     func getTable(
-      request: GetTableRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Table
 
     /// See `BigtableTableAdminClient.updateTable`.
     func updateTable(
-      request: UpdateTableRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.updateTable`.
     func updateTable(
-      withPolling: UpdateTableRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Table>
+      withPolling: UpdateTableRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Table>
 
     /// See `BigtableTableAdminClient.deleteTable`.
     func deleteTable(
-      request: DeleteTableRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTableRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigtableTableAdminClient.undeleteTable`.
     func undeleteTable(
-      request: UndeleteTableRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.undeleteTable`.
     func undeleteTable(
-      withPolling: UndeleteTableRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Table>
+      withPolling: UndeleteTableRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Table>
 
     /// See `BigtableTableAdminClient.createAuthorizedView`.
     func createAuthorizedView(
-      request: CreateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAuthorizedViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.createAuthorizedView`.
     func createAuthorizedView(
-      withPolling: CreateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AuthorizedView>
+      withPolling: CreateAuthorizedViewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AuthorizedView>
 
     /// See `BigtableTableAdminClient.listAuthorizedViews`.
     func listAuthorizedViews(
-      request: ListAuthorizedViewsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAuthorizedViewsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListAuthorizedViewsResponse
 
     /// See `BigtableTableAdminClient.listAuthorizedViews`.
     func listAuthorizedViews(
-      byItem: ListAuthorizedViewsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAuthorizedViewsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AuthorizedView, Swift.Error>
 
     /// See `BigtableTableAdminClient.getAuthorizedView`.
     func getAuthorizedView(
-      request: GetAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAuthorizedViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.AuthorizedView
 
     /// See `BigtableTableAdminClient.updateAuthorizedView`.
     func updateAuthorizedView(
-      request: UpdateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAuthorizedViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.updateAuthorizedView`.
     func updateAuthorizedView(
-      withPolling: UpdateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AuthorizedView>
+      withPolling: UpdateAuthorizedViewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AuthorizedView>
 
     /// See `BigtableTableAdminClient.deleteAuthorizedView`.
     func deleteAuthorizedView(
-      request: DeleteAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAuthorizedViewRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigtableTableAdminClient.modifyColumnFamilies`.
     func modifyColumnFamilies(
-      request: ModifyColumnFamiliesRequest, options: GoogleCloudGax.RequestOptions
+      request: ModifyColumnFamiliesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Table
 
     /// See `BigtableTableAdminClient.dropRowRange`.
     func dropRowRange(
-      request: DropRowRangeRequest, options: GoogleCloudGax.RequestOptions
+      request: DropRowRangeRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigtableTableAdminClient.generateConsistencyToken`.
     func generateConsistencyToken(
-      request: GenerateConsistencyTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateConsistencyTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.GenerateConsistencyTokenResponse
 
     /// See `BigtableTableAdminClient.checkConsistency`.
     func checkConsistency(
-      request: CheckConsistencyRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckConsistencyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.CheckConsistencyResponse
 
     /// See `BigtableTableAdminClient.snapshotTable`.
     func snapshotTable(
-      request: SnapshotTableRequest, options: GoogleCloudGax.RequestOptions
+      request: SnapshotTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.snapshotTable`.
     func snapshotTable(
-      withPolling: SnapshotTableRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot>
+      withPolling: SnapshotTableRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Snapshot>
 
     /// See `BigtableTableAdminClient.getSnapshot`.
     func getSnapshot(
-      request: GetSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Snapshot
 
     /// See `BigtableTableAdminClient.listSnapshots`.
     func listSnapshots(
-      request: ListSnapshotsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSnapshotsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListSnapshotsResponse
 
     /// See `BigtableTableAdminClient.listSnapshots`.
     func listSnapshots(
-      byItem: ListSnapshotsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSnapshotsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Snapshot, Swift.Error>
 
     /// See `BigtableTableAdminClient.deleteSnapshot`.
     func deleteSnapshot(
-      request: DeleteSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigtableTableAdminClient.createBackup`.
     func createBackup(
-      request: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.createBackup`.
     func createBackup(
-      withPolling: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
+      withPolling: CreateBackupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Backup>
 
     /// See `BigtableTableAdminClient.getBackup`.
     func getBackup(
-      request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Backup
 
     /// See `BigtableTableAdminClient.updateBackup`.
     func updateBackup(
-      request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Backup
 
     /// See `BigtableTableAdminClient.deleteBackup`.
     func deleteBackup(
-      request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBackupRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigtableTableAdminClient.listBackups`.
     func listBackups(
-      request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBackupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListBackupsResponse
 
     /// See `BigtableTableAdminClient.listBackups`.
     func listBackups(
-      byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListBackupsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Backup, Swift.Error>
 
     /// See `BigtableTableAdminClient.restoreTable`.
     func restoreTable(
-      request: RestoreTableRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.restoreTable`.
     func restoreTable(
-      withPolling: RestoreTableRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Table>
+      withPolling: RestoreTableRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Table>
 
     /// See `BigtableTableAdminClient.copyBackup`.
     func copyBackup(
-      request: CopyBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: CopyBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.copyBackup`.
     func copyBackup(
-      withPolling: CopyBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
+      withPolling: CopyBackupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Backup>
 
     /// See `BigtableTableAdminClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `BigtableTableAdminClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `BigtableTableAdminClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `BigtableTableAdminClient.createSchemaBundle`.
     func createSchemaBundle(
-      request: CreateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSchemaBundleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.createSchemaBundle`.
     func createSchemaBundle(
-      withPolling: CreateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SchemaBundle>
+      withPolling: CreateSchemaBundleRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SchemaBundle>
 
     /// See `BigtableTableAdminClient.updateSchemaBundle`.
     func updateSchemaBundle(
-      request: UpdateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSchemaBundleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableTableAdminClient.updateSchemaBundle`.
     func updateSchemaBundle(
-      withPolling: UpdateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SchemaBundle>
+      withPolling: UpdateSchemaBundleRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SchemaBundle>
 
     /// See `BigtableTableAdminClient.getSchemaBundle`.
     func getSchemaBundle(
-      request: GetSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSchemaBundleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.SchemaBundle
 
     /// See `BigtableTableAdminClient.listSchemaBundles`.
     func listSchemaBundles(
-      request: ListSchemaBundlesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSchemaBundlesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListSchemaBundlesResponse
 
     /// See `BigtableTableAdminClient.listSchemaBundles`.
     func listSchemaBundles(
-      byItem: ListSchemaBundlesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSchemaBundlesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SchemaBundle, Swift.Error>
 
     /// See `BigtableTableAdminClient.deleteSchemaBundle`.
     func deleteSchemaBundle(
-      request: DeleteSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSchemaBundleRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigtableTableAdminClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `BigtableTableAdminClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `BigtableTableAdminClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigtableTableAdminClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1614,9 +1609,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func createTable(
-    request: CreateTableRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Table {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createTable(
@@ -1639,24 +1634,24 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func createTableFromSnapshot(
-    request: CreateTableFromSnapshotRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTableFromSnapshotRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createTableFromSnapshot(withPolling: CreateTableFromSnapshotRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Table>
+    -> any GoogleGax.PollableOperation<Table>
   {
     try await self.createTableFromSnapshot(withPolling: withPolling, options: .init())
   }
 
   public func createTableFromSnapshot(
-    withPolling: CreateTableFromSnapshotRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Table> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Table>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateTableFromSnapshotRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Table> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Table>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1664,7 +1659,7 @@ extension Clients.BigtableTableAdminProtocol {
     parent: Swift.String,
     tableId: Swift.String,
     sourceSnapshot: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Table> {
+  ) async throws -> any GoogleGax.PollableOperation<Table> {
     let request = CreateTableFromSnapshotRequest().with {
       $0.parent = parent
       $0.tableId = tableId
@@ -1680,9 +1675,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func listTables(
-    request: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTablesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListTablesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTables(
@@ -1692,13 +1687,13 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func listTables(
-    byItem: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTablesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Table, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListTablesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listTables(
@@ -1715,9 +1710,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func getTable(
-    request: GetTableRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Table {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getTable(
@@ -1734,31 +1729,31 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func updateTable(
-    request: UpdateTableRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateTable(withPolling: UpdateTableRequest) async throws -> any GoogleCloudGax
+  public func updateTable(withPolling: UpdateTableRequest) async throws -> any GoogleGax
     .PollableOperation<Table>
   {
     try await self.updateTable(withPolling: withPolling, options: .init())
   }
 
   public func updateTable(
-    withPolling: UpdateTableRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Table> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Table>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateTableRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Table> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Table>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateTable(
     table: Table?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Table> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Table> {
     let request = UpdateTableRequest().with {
       $0.table = table
       $0.updateMask = updateMask
@@ -1771,9 +1766,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func deleteTable(
-    request: DeleteTableRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteTableRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteTable(
@@ -1792,30 +1787,30 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func undeleteTable(
-    request: UndeleteTableRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeleteTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func undeleteTable(withPolling: UndeleteTableRequest) async throws -> any GoogleCloudGax
+  public func undeleteTable(withPolling: UndeleteTableRequest) async throws -> any GoogleGax
     .PollableOperation<Table>
   {
     try await self.undeleteTable(withPolling: withPolling, options: .init())
   }
 
   public func undeleteTable(
-    withPolling: UndeleteTableRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Table> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Table>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UndeleteTableRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Table> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Table>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func undeleteTable(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Table> {
+  ) async throws -> any GoogleGax.PollableOperation<Table> {
     let request = UndeleteTableRequest().with {
       $0.name = name
     }
@@ -1829,24 +1824,24 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func createAuthorizedView(
-    request: CreateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAuthorizedViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createAuthorizedView(withPolling: CreateAuthorizedViewRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AuthorizedView>
+    -> any GoogleGax.PollableOperation<AuthorizedView>
   {
     try await self.createAuthorizedView(withPolling: withPolling, options: .init())
   }
 
   public func createAuthorizedView(
-    withPolling: CreateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthorizedView> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AuthorizedView>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateAuthorizedViewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AuthorizedView> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AuthorizedView>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1854,7 +1849,7 @@ extension Clients.BigtableTableAdminProtocol {
     parent: Swift.String,
     authorizedView: AuthorizedView?,
     authorizedViewId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthorizedView> {
+  ) async throws -> any GoogleGax.PollableOperation<AuthorizedView> {
     let request = CreateAuthorizedViewRequest().with {
       $0.parent = parent
       $0.authorizedView = authorizedView
@@ -1870,9 +1865,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func listAuthorizedViews(
-    request: ListAuthorizedViewsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAuthorizedViewsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListAuthorizedViewsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAuthorizedViews(
@@ -1882,14 +1877,14 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func listAuthorizedViews(
-    byItem: ListAuthorizedViewsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAuthorizedViewsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AuthorizedView, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListAuthorizedViewsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAuthorizedViews(
@@ -1908,9 +1903,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func getAuthorizedView(
-    request: GetAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAuthorizedViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.AuthorizedView {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAuthorizedView(
@@ -1929,31 +1924,31 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func updateAuthorizedView(
-    request: UpdateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAuthorizedViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAuthorizedView(withPolling: UpdateAuthorizedViewRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AuthorizedView>
+    -> any GoogleGax.PollableOperation<AuthorizedView>
   {
     try await self.updateAuthorizedView(withPolling: withPolling, options: .init())
   }
 
   public func updateAuthorizedView(
-    withPolling: UpdateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthorizedView> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AuthorizedView>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateAuthorizedViewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AuthorizedView> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AuthorizedView>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateAuthorizedView(
     authorizedView: AuthorizedView?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthorizedView> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<AuthorizedView> {
     let request = UpdateAuthorizedViewRequest().with {
       $0.authorizedView = authorizedView
       $0.updateMask = updateMask
@@ -1966,9 +1961,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func deleteAuthorizedView(
-    request: DeleteAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAuthorizedViewRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAuthorizedView(
@@ -1987,9 +1982,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func modifyColumnFamilies(
-    request: ModifyColumnFamiliesRequest, options: GoogleCloudGax.RequestOptions
+    request: ModifyColumnFamiliesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Table {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func modifyColumnFamilies(
@@ -2008,9 +2003,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func dropRowRange(
-    request: DropRowRangeRequest, options: GoogleCloudGax.RequestOptions
+    request: DropRowRangeRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func generateConsistencyToken(request: GenerateConsistencyTokenRequest) async throws
@@ -2020,9 +2015,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func generateConsistencyToken(
-    request: GenerateConsistencyTokenRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateConsistencyTokenRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.GenerateConsistencyTokenResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func generateConsistencyToken(
@@ -2041,9 +2036,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func checkConsistency(
-    request: CheckConsistencyRequest, options: GoogleCloudGax.RequestOptions
+    request: CheckConsistencyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.CheckConsistencyResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func checkConsistency(
@@ -2064,24 +2059,24 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func snapshotTable(
-    request: SnapshotTableRequest, options: GoogleCloudGax.RequestOptions
+    request: SnapshotTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func snapshotTable(withPolling: SnapshotTableRequest) async throws -> any GoogleCloudGax
+  public func snapshotTable(withPolling: SnapshotTableRequest) async throws -> any GoogleGax
     .PollableOperation<Snapshot>
   {
     try await self.snapshotTable(withPolling: withPolling, options: .init())
   }
 
   public func snapshotTable(
-    withPolling: SnapshotTableRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Snapshot>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: SnapshotTableRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Snapshot> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Snapshot>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2090,7 +2085,7 @@ extension Clients.BigtableTableAdminProtocol {
     cluster: Swift.String,
     snapshotId: Swift.String,
     description: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Snapshot> {
+  ) async throws -> any GoogleGax.PollableOperation<Snapshot> {
     let request = SnapshotTableRequest().with {
       $0.name = name
       $0.cluster = cluster
@@ -2107,9 +2102,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func getSnapshot(
-    request: GetSnapshotRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSnapshotRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Snapshot {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSnapshot(
@@ -2128,9 +2123,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func listSnapshots(
-    request: ListSnapshotsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSnapshotsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListSnapshotsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSnapshots(
@@ -2140,13 +2135,13 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func listSnapshots(
-    byItem: ListSnapshotsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSnapshotsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Snapshot, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListSnapshotsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSnapshots(
@@ -2163,9 +2158,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func deleteSnapshot(
-    request: DeleteSnapshotRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSnapshotRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteSnapshot(
@@ -2183,24 +2178,24 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func createBackup(
-    request: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createBackup(withPolling: CreateBackupRequest) async throws -> any GoogleCloudGax
+  public func createBackup(withPolling: CreateBackupRequest) async throws -> any GoogleGax
     .PollableOperation<Backup>
   {
     try await self.createBackup(withPolling: withPolling, options: .init())
   }
 
   public func createBackup(
-    withPolling: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateBackupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Backup> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Backup>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2208,7 +2203,7 @@ extension Clients.BigtableTableAdminProtocol {
     parent: Swift.String,
     backupId: Swift.String,
     backup: Backup?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
+  ) async throws -> any GoogleGax.PollableOperation<Backup> {
     let request = CreateBackupRequest().with {
       $0.parent = parent
       $0.backupId = backupId
@@ -2223,9 +2218,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func getBackup(
-    request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Backup {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getBackup(
@@ -2244,14 +2239,14 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func updateBackup(
-    request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Backup {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateBackup(
     backup: Backup?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudBigtableAdminV2.Backup {
     let request = UpdateBackupRequest().with {
       $0.backup = backup
@@ -2265,9 +2260,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func deleteBackup(
-    request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteBackupRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteBackup(
@@ -2286,9 +2281,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func listBackups(
-    request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBackupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListBackupsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listBackups(
@@ -2298,13 +2293,13 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func listBackups(
-    byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBackupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Backup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListBackupsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listBackups(
@@ -2322,24 +2317,24 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func restoreTable(
-    request: RestoreTableRequest, options: GoogleCloudGax.RequestOptions
+    request: RestoreTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func restoreTable(withPolling: RestoreTableRequest) async throws -> any GoogleCloudGax
+  public func restoreTable(withPolling: RestoreTableRequest) async throws -> any GoogleGax
     .PollableOperation<Table>
   {
     try await self.restoreTable(withPolling: withPolling, options: .init())
   }
 
   public func restoreTable(
-    withPolling: RestoreTableRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Table> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Table>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: RestoreTableRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Table> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Table>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2348,24 +2343,24 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func copyBackup(
-    request: CopyBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: CopyBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func copyBackup(withPolling: CopyBackupRequest) async throws -> any GoogleCloudGax
+  public func copyBackup(withPolling: CopyBackupRequest) async throws -> any GoogleGax
     .PollableOperation<Backup>
   {
     try await self.copyBackup(withPolling: withPolling, options: .init())
   }
 
   public func copyBackup(
-    withPolling: CopyBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CopyBackupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Backup> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Backup>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2373,8 +2368,8 @@ extension Clients.BigtableTableAdminProtocol {
     parent: Swift.String,
     backupId: Swift.String,
     sourceBackup: Swift.String,
-    expireTime: GoogleCloudWKT.Timestamp?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
+    expireTime: GoogleWKT.Timestamp?,
+  ) async throws -> any GoogleGax.PollableOperation<Backup> {
     let request = CopyBackupRequest().with {
       $0.parent = parent
       $0.backupId = backupId
@@ -2391,9 +2386,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(
@@ -2412,9 +2407,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(
@@ -2435,9 +2430,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(
@@ -2458,24 +2453,24 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func createSchemaBundle(
-    request: CreateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSchemaBundleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createSchemaBundle(withPolling: CreateSchemaBundleRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<SchemaBundle>
+    -> any GoogleGax.PollableOperation<SchemaBundle>
   {
     try await self.createSchemaBundle(withPolling: withPolling, options: .init())
   }
 
   public func createSchemaBundle(
-    withPolling: CreateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SchemaBundle> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<SchemaBundle>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateSchemaBundleRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SchemaBundle> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SchemaBundle>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2483,7 +2478,7 @@ extension Clients.BigtableTableAdminProtocol {
     parent: Swift.String,
     schemaBundleId: Swift.String,
     schemaBundle: SchemaBundle?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<SchemaBundle> {
+  ) async throws -> any GoogleGax.PollableOperation<SchemaBundle> {
     let request = CreateSchemaBundleRequest().with {
       $0.parent = parent
       $0.schemaBundleId = schemaBundleId
@@ -2499,31 +2494,31 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func updateSchemaBundle(
-    request: UpdateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSchemaBundleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateSchemaBundle(withPolling: UpdateSchemaBundleRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<SchemaBundle>
+    -> any GoogleGax.PollableOperation<SchemaBundle>
   {
     try await self.updateSchemaBundle(withPolling: withPolling, options: .init())
   }
 
   public func updateSchemaBundle(
-    withPolling: UpdateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SchemaBundle> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<SchemaBundle>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateSchemaBundleRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SchemaBundle> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SchemaBundle>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateSchemaBundle(
     schemaBundle: SchemaBundle?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<SchemaBundle> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<SchemaBundle> {
     let request = UpdateSchemaBundleRequest().with {
       $0.schemaBundle = schemaBundle
       $0.updateMask = updateMask
@@ -2538,9 +2533,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func getSchemaBundle(
-    request: GetSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSchemaBundleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.SchemaBundle {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSchemaBundle(
@@ -2559,9 +2554,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func listSchemaBundles(
-    request: ListSchemaBundlesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSchemaBundlesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListSchemaBundlesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSchemaBundles(
@@ -2571,13 +2566,13 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func listSchemaBundles(
-    byItem: ListSchemaBundlesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSchemaBundlesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SchemaBundle, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListSchemaBundlesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSchemaBundles(
@@ -2594,9 +2589,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func deleteSchemaBundle(
-    request: DeleteSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSchemaBundleRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteSchemaBundle(
@@ -2615,9 +2610,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -2627,13 +2622,13 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -2654,9 +2649,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -2673,9 +2668,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -2692,9 +2687,9 @@ extension Clients.BigtableTableAdminProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

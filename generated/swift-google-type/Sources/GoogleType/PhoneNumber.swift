@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An object representing a phone number, suitable as an API wire format.
 ///
@@ -43,7 +43,7 @@ import Foundation
 ///
 ///  Reference(s):
 ///   - https://github.com/google/libphonenumber
-public struct PhoneNumber: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PhoneNumber: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The phone number's extension. The extension is not standardized in ITU
@@ -62,7 +62,7 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// numbers for which none of the fields they coded against are set.
   public var kind: OneOf_Kind? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PhoneNumber`.
   public init() {}
@@ -124,7 +124,7 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.kind = kind
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -155,7 +155,7 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// dialable, which means the same short code can exist in different regions,
   /// with different usage and pricing, even if those regions share the same
   /// country calling code (For example: US and CA).
-  public struct ShortCode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ShortCode: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The BCP-47 region code of the location where calls to this
@@ -169,7 +169,7 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// calling code. For example "611".
     public var number: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ShortCode`.
     public init() {}
@@ -212,7 +212,7 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -228,11 +228,11 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.type.PhoneNumber.ShortCode"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -271,10 +271,10 @@ public struct PhoneNumber: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.type.PhoneNumber"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

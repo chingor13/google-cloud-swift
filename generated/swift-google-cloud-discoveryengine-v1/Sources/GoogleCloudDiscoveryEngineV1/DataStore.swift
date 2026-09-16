@@ -16,10 +16,10 @@
 
 #if DataStoreService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// DataStore captures global settings and configs at the DataStore level.
-  public struct DataStore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DataStore: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. Identifier. The full resource name of the data store.
@@ -67,7 +67,7 @@
     /// [DataStore][google.cloud.discoveryengine.v1.DataStore] was created at.
     ///
     /// [google.cloud.discoveryengine.v1.DataStore]: <doc:DataStore>
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. Configuration for advanced site search.
     public var advancedSiteSearchConfig: AdvancedSiteSearchConfig? = nil
@@ -165,7 +165,7 @@
     /// [google.cloud.discoveryengine.v1.IdentityMappingStore]: <doc:IdentityMappingStore>
     public var identityMappingStore: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DataStore`.
     public init() {}
@@ -254,8 +254,7 @@
       {
         self.contentConfig = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
       self.advancedSiteSearchConfig = try container.decodeIfPresent(
         AdvancedSiteSearchConfig.self, forKey: .advancedSiteSearchConfig)
       self.naturalLanguageQueryUnderstandingConfig = try container.decodeIfPresent(
@@ -283,7 +282,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -317,7 +316,7 @@
     }
 
     /// Estimation of data size per data store.
-    public struct BillingEstimation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BillingEstimation: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Data size for structured data in terms of bytes.
@@ -330,15 +329,15 @@
       public var websiteDataSize: Swift.Int64 = Swift.Int64()
 
       /// Last updated timestamp for structured data.
-      public var structuredDataUpdateTime: GoogleCloudWKT.Timestamp? = nil
+      public var structuredDataUpdateTime: GoogleWKT.Timestamp? = nil
 
       /// Last updated timestamp for unstructured data.
-      public var unstructuredDataUpdateTime: GoogleCloudWKT.Timestamp? = nil
+      public var unstructuredDataUpdateTime: GoogleWKT.Timestamp? = nil
 
       /// Last updated timestamp for websites.
-      public var websiteDataUpdateTime: GoogleCloudWKT.Timestamp? = nil
+      public var websiteDataUpdateTime: GoogleWKT.Timestamp? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BillingEstimation`.
       public init() {}
@@ -395,14 +394,14 @@
           self.websiteDataSize = value
         }
         self.structuredDataUpdateTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .structuredDataUpdateTime)
+          GoogleWKT.Timestamp.self, forKey: .structuredDataUpdateTime)
         self.unstructuredDataUpdateTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .unstructuredDataUpdateTime)
+          GoogleWKT.Timestamp.self, forKey: .unstructuredDataUpdateTime)
         self.websiteDataUpdateTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .websiteDataUpdateTime)
+          GoogleWKT.Timestamp.self, forKey: .websiteDataUpdateTime)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -424,11 +423,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.discoveryengine.v1.DataStore.BillingEstimation"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -564,11 +563,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.DataStore"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

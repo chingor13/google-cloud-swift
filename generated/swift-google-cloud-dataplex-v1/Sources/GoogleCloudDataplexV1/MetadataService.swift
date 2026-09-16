@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Metadata service manages metadata resources such as tables, filesets and
 /// partitions.
@@ -32,7 +32,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   let inner: any Clients.MetadataServiceStub
 
   /// Creates a new `MetadataServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.MetadataServiceStub = try Clients.MetadataServiceTransport(options)
     inner = Clients.MetadataServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -45,7 +45,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_CreateEntity")
   public func createEntity(
-    request: CreateEntityRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEntityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.Entity {
     try await self.inner.createEntity(request: request, options: options)
   }
@@ -54,7 +54,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_UpdateEntity")
   public func updateEntity(
-    request: UpdateEntityRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEntityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.Entity {
     try await self.inner.updateEntity(request: request, options: options)
   }
@@ -63,7 +63,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_DeleteEntity")
   public func deleteEntity(
-    request: DeleteEntityRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteEntityRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteEntity(request: request, options: options)
   }
@@ -72,7 +72,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_GetEntity")
   public func getEntity(
-    request: GetEntityRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEntityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.Entity {
     try await self.inner.getEntity(request: request, options: options)
   }
@@ -81,7 +81,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_ListEntities")
   public func listEntities(
-    request: ListEntitiesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEntitiesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListEntitiesResponse {
     try await self.inner.listEntities(request: request, options: options)
   }
@@ -90,7 +90,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_ListEntities")
   public func listEntities(
-    byItem: ListEntitiesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEntitiesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Entity, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListEntitiesResponse in
@@ -98,14 +98,14 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
       request.pageToken = token
       return try await self.listEntities(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Create a metadata partition.
   ///
   /// @Snippet(path: "MetadataService_CreatePartition")
   public func createPartition(
-    request: CreatePartitionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePartitionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.Partition {
     try await self.inner.createPartition(request: request, options: options)
   }
@@ -114,7 +114,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_DeletePartition")
   public func deletePartition(
-    request: DeletePartitionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePartitionRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deletePartition(request: request, options: options)
   }
@@ -123,7 +123,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_GetPartition")
   public func getPartition(
-    request: GetPartitionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPartitionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.Partition {
     try await self.inner.getPartition(request: request, options: options)
   }
@@ -132,7 +132,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_ListPartitions")
   public func listPartitions(
-    request: ListPartitionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPartitionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListPartitionsResponse {
     try await self.inner.listPartitions(request: request, options: options)
   }
@@ -141,7 +141,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_ListPartitions")
   public func listPartitions(
-    byItem: ListPartitionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPartitionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Partition, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListPartitionsResponse in
@@ -149,7 +149,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
       request.pageToken = token
       return try await self.listPartitions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists information about the supported locations for this service.
@@ -173,7 +173,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -199,7 +199,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -207,14 +207,14 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "MetadataService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -227,7 +227,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -237,7 +237,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -252,7 +252,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -263,7 +263,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -274,7 +274,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -282,7 +282,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -291,7 +291,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -302,7 +302,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -313,7 +313,7 @@ public final class MetadataServiceClient: Clients.MetadataServiceProtocol, Senda
   ///
   /// @Snippet(path: "MetadataService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -464,107 +464,107 @@ extension Clients {
 
     /// See `MetadataServiceClient.createEntity`.
     func createEntity(
-      request: CreateEntityRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Entity
 
     /// See `MetadataServiceClient.updateEntity`.
     func updateEntity(
-      request: UpdateEntityRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEntityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Entity
 
     /// See `MetadataServiceClient.deleteEntity`.
     func deleteEntity(
-      request: DeleteEntityRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntityRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `MetadataServiceClient.getEntity`.
     func getEntity(
-      request: GetEntityRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Entity
 
     /// See `MetadataServiceClient.listEntities`.
     func listEntities(
-      request: ListEntitiesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntitiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListEntitiesResponse
 
     /// See `MetadataServiceClient.listEntities`.
     func listEntities(
-      byItem: ListEntitiesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEntitiesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Entity, Swift.Error>
 
     /// See `MetadataServiceClient.createPartition`.
     func createPartition(
-      request: CreatePartitionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePartitionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Partition
 
     /// See `MetadataServiceClient.deletePartition`.
     func deletePartition(
-      request: DeletePartitionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePartitionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `MetadataServiceClient.getPartition`.
     func getPartition(
-      request: GetPartitionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPartitionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Partition
 
     /// See `MetadataServiceClient.listPartitions`.
     func listPartitions(
-      request: ListPartitionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPartitionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListPartitionsResponse
 
     /// See `MetadataServiceClient.listPartitions`.
     func listPartitions(
-      byItem: ListPartitionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPartitionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Partition, Swift.Error>
 
     /// See `MetadataServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `MetadataServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `MetadataServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `MetadataServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `MetadataServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `MetadataServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `MetadataServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `MetadataServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `MetadataServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `MetadataServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -578,9 +578,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func createEntity(
-    request: CreateEntityRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEntityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.Entity {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createEntity(
@@ -601,9 +601,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func updateEntity(
-    request: UpdateEntityRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEntityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.Entity {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteEntity(request: DeleteEntityRequest) async throws {
@@ -611,9 +611,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func deleteEntity(
-    request: DeleteEntityRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteEntityRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteEntity(
@@ -630,9 +630,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func getEntity(
-    request: GetEntityRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEntityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.Entity {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getEntity(
@@ -651,9 +651,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func listEntities(
-    request: ListEntitiesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEntitiesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListEntitiesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listEntities(
@@ -663,13 +663,13 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func listEntities(
-    byItem: ListEntitiesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEntitiesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Entity, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListEntitiesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listEntities(
@@ -688,9 +688,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func createPartition(
-    request: CreatePartitionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePartitionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.Partition {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createPartition(
@@ -709,9 +709,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func deletePartition(
-    request: DeletePartitionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePartitionRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deletePartition(
@@ -730,9 +730,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func getPartition(
-    request: GetPartitionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPartitionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.Partition {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPartition(
@@ -751,9 +751,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func listPartitions(
-    request: ListPartitionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPartitionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListPartitionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPartitions(
@@ -763,13 +763,13 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func listPartitions(
-    byItem: ListPartitionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPartitionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Partition, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListPartitionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPartitions(
@@ -788,9 +788,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -800,13 +800,13 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -816,9 +816,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -828,9 +828,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -840,9 +840,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -852,9 +852,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -864,9 +864,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -876,13 +876,13 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -903,9 +903,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -922,9 +922,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -941,9 +941,9 @@ extension Clients.MetadataServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

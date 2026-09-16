@@ -16,10 +16,10 @@
 
 #if Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents one match result of [MatchIntent][].
-  public struct Match: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Match: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The [Intent][google.cloud.dialogflow.cx.v3.Intent] that matched the query.
@@ -53,7 +53,7 @@
     /// * MapValue value: If parameter's entity type is a composite entity then use
     /// map from composite entity property names to property values, otherwise,
     /// use parameter value.
-    public var parameters: GoogleCloudWKT.Struct? = nil
+    public var parameters: GoogleWKT.Struct? = nil
 
     /// Final text input which was matched during MatchIntent. This value can be
     /// different from original input sent in request because of spelling
@@ -73,7 +73,7 @@
     /// change in implementation.
     public var confidence: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Match`.
     public init() {}
@@ -120,8 +120,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .event) {
         self.event = value
       }
-      self.parameters = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .parameters)
+      self.parameters = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .parameters)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .resolvedInput) {
         self.resolvedInput = value
       }
@@ -133,7 +132,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -303,11 +302,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Match"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [google.bigtable.admin.v2.BigtableTableAdmin.ModifyColumnFamilies][google.bigtable.admin.v2.BigtableTableAdmin.ModifyColumnFamilies]
 ///
 /// [google.bigtable.admin.v2.BigtableTableAdmin.ModifyColumnFamilies]: <doc:BigtableTableAdminClient/modifyColumnFamilies(request:options:)>
-public struct ModifyColumnFamiliesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ModifyColumnFamiliesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The unique name of the table whose families should be modified.
@@ -38,7 +38,7 @@ public struct ModifyColumnFamiliesRequest: Codable, Equatable, GoogleCloudWKT._A
   /// Optional. If true, ignore safety checks when modifying the column families.
   public var ignoreWarnings: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ModifyColumnFamiliesRequest`.
   public init() {}
@@ -88,7 +88,7 @@ public struct ModifyColumnFamiliesRequest: Codable, Equatable, GoogleCloudWKT._A
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,7 +103,7 @@ public struct ModifyColumnFamiliesRequest: Codable, Equatable, GoogleCloudWKT._A
   }
 
   /// A create, update, or delete of a particular column family.
-  public struct Modification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Modification: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The ID of the column family to be modified.
@@ -112,12 +112,12 @@ public struct ModifyColumnFamiliesRequest: Codable, Equatable, GoogleCloudWKT._A
     /// Optional. A mask specifying which fields (e.g. `gc_rule`) in the `update`
     /// mod should be updated, ignored for other modification types. If unset or
     /// empty, we treat it as updating `gc_rule` to be backward compatible.
-    public var updateMask: GoogleCloudWKT.FieldMask? = nil
+    public var updateMask: GoogleWKT.FieldMask? = nil
 
     /// Column family modifications.
     public var mod: OneOf_Mod? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Modification`.
     public init() {}
@@ -161,8 +161,7 @@ public struct ModifyColumnFamiliesRequest: Codable, Equatable, GoogleCloudWKT._A
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .id) {
         self.id = value
       }
-      self.updateMask = try container.decodeIfPresent(
-        GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+      self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
 
       var mod: OneOf_Mod? = nil
       let modCheckAndSet = {
@@ -186,7 +185,7 @@ public struct ModifyColumnFamiliesRequest: Codable, Equatable, GoogleCloudWKT._A
       self.mod = mod
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -226,21 +225,21 @@ public struct ModifyColumnFamiliesRequest: Codable, Equatable, GoogleCloudWKT._A
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.ModifyColumnFamiliesRequest.Modification"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.ModifyColumnFamiliesRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

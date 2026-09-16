@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Fields related to Google Cloud Armor findings.
-public struct CloudArmor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CloudArmor: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Information about the [Google Cloud Armor security
@@ -46,9 +46,9 @@ public struct CloudArmor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Duration of attack from the start until the current moment (updated every 5
   /// minutes).
-  public var duration: GoogleCloudWKT.Duration? = nil
+  public var duration: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CloudArmor`.
   public init() {}
@@ -100,10 +100,10 @@ public struct CloudArmor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .threatVector) {
       self.threatVector = value
     }
-    self.duration = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .duration)
+    self.duration = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .duration)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -123,10 +123,10 @@ public struct CloudArmor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.CloudArmor"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

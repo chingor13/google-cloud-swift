@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@
       }
 
       public func calendarMode(
-        request: AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
+        request: AdviceClient.CalendarModeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "calendarMode",
           action: {
-            (r: AdviceClient.CalendarModeRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: AdviceClient.CalendarModeRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.CalendarModeAdviceResponse
             in
             return try await self.inner.calendarMode(request: r, options: o)

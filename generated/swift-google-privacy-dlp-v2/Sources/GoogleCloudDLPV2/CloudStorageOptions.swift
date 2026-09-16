@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Options defining a file or a set of files within a Cloud Storage
 /// bucket.
-public struct CloudStorageOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CloudStorageOptions: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The set of one or more files to scan.
@@ -61,7 +61,7 @@ public struct CloudStorageOptions: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// inclusively. Both 0 and 100 means no limit. Defaults to 0.
   public var filesLimitPercent: Swift.Int32 = Swift.Int32()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CloudStorageOptions`.
   public init() {}
@@ -126,7 +126,7 @@ public struct CloudStorageOptions: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -144,7 +144,7 @@ public struct CloudStorageOptions: Codable, Equatable, GoogleCloudWKT._AnyPackab
   }
 
   /// Set of files to scan.
-  public struct FileSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FileSet: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The Cloud Storage url of the file(s) to scan, in the format
@@ -163,7 +163,7 @@ public struct CloudStorageOptions: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// `regex_file_set` must be set.
     public var regexFileSet: CloudStorageRegexFileSet? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FileSet`.
     public init() {}
@@ -205,7 +205,7 @@ public struct CloudStorageOptions: Codable, Equatable, GoogleCloudWKT._AnyPackab
         CloudStorageRegexFileSet.self, forKey: .regexFileSet)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -221,11 +221,11 @@ public struct CloudStorageOptions: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.CloudStorageOptions.FileSet"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -340,10 +340,10 @@ public struct CloudStorageOptions: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.CloudStorageOptions"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

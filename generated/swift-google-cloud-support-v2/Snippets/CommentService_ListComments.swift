@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudSupportV2
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: CommentServiceClient, organizationId: String, caseId: String) async throws {
   let items = try client.listComments(

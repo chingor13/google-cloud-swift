@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A snapshot of a table at a particular time. A snapshot can be used as a
 /// checkpoint for data restoration or a data source for a new table.
@@ -24,7 +24,7 @@ import Foundation
 /// feature is not currently available to most Cloud Bigtable customers. This
 /// feature might be changed in backward-incompatible ways and is not recommended
 /// for production use. It is not subject to any SLA or deprecation policy.
-public struct Snapshot: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Snapshot: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The unique name of the snapshot.
@@ -42,12 +42,12 @@ public struct Snapshot: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var dataSizeBytes: Swift.Int64 = Swift.Int64()
 
   /// Output only. The time when the snapshot is created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The time when the snapshot will be deleted. The maximum amount of time a
   /// snapshot can stay active is 365 days. If 'ttl' is not specified,
   /// the default maximum of 365 days will be used.
-  public var deleteTime: GoogleCloudWKT.Timestamp? = nil
+  public var deleteTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The current state of the snapshot.
   public var state: Snapshot.State = Snapshot.State()
@@ -55,7 +55,7 @@ public struct Snapshot: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Description of the snapshot.
   public var description: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Snapshot`.
   public init() {}
@@ -107,10 +107,8 @@ public struct Snapshot: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .dataSizeBytes) {
       self.dataSizeBytes = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.deleteTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deleteTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.deleteTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deleteTime)
     if let value = try container.decodeIfPresent(Snapshot.State.self, forKey: .state) {
       self.state = value
     }
@@ -119,7 +117,7 @@ public struct Snapshot: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -247,10 +245,10 @@ public struct Snapshot: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.Snapshot"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

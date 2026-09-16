@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A workstation cluster resource in the Cloud Workstations API.
 ///
 /// Defines a group of workstations in a particular region and the
 /// VPC network they're attached to.
-public struct WorkstationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct WorkstationCluster: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Full name of this workstation cluster.
@@ -49,13 +49,13 @@ public struct WorkstationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public var labels: [Swift.String: Swift.String] = [:]
 
   /// Output only. Time when this workstation cluster was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time when this workstation cluster was most recently updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time when this workstation cluster was soft-deleted.
-  public var deleteTime: GoogleCloudWKT.Timestamp? = nil
+  public var deleteTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Checksum computed by the server. May be sent on update and delete
   /// requests to make sure that the client has an up-to-date value before
@@ -123,7 +123,7 @@ public struct WorkstationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// `STATE_RUNNING`, and then issuing a redirect to the workstation's host URL.
   public var workstationLaunchUrl: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `WorkstationCluster`.
   public init() {}
@@ -217,12 +217,9 @@ public struct WorkstationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     {
       self.labels = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
-    self.deleteTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deleteTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
+    self.deleteTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deleteTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
       self.etag = value
     }
@@ -260,7 +257,7 @@ public struct WorkstationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -293,7 +290,7 @@ public struct WorkstationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   }
 
   /// Configuration options for private workstation clusters.
-  public struct PrivateClusterConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PrivateClusterConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. Whether Workstations endpoint is private.
@@ -318,7 +315,7 @@ public struct WorkstationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// cluster's project and the VPC host project (if different) are allowed.
     public var allowedProjects: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PrivateClusterConfig`.
     public init() {}
@@ -373,7 +370,7 @@ public struct WorkstationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -392,22 +389,22 @@ public struct WorkstationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       return
         "type.googleapis.com/google.cloud.workstations.v1.WorkstationCluster.PrivateClusterConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration options for a custom domain.
-  public struct DomainConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DomainConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. Domain used by Workstations for HTTP ingress.
     public var domain: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DomainConfig`.
     public init() {}
@@ -445,7 +442,7 @@ public struct WorkstationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -460,23 +457,23 @@ public struct WorkstationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.workstations.v1.WorkstationCluster.DomainConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration options for Cluster HTTP Gateway.
-  public struct GatewayConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GatewayConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Whether HTTP/2 is enabled for this workstation cluster.
     /// Defaults to false.
     public var http2Enabled: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GatewayConfig`.
     public init() {}
@@ -514,7 +511,7 @@ public struct WorkstationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -529,21 +526,21 @@ public struct WorkstationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.workstations.v1.WorkstationCluster.GatewayConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.workstations.v1.WorkstationCluster"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

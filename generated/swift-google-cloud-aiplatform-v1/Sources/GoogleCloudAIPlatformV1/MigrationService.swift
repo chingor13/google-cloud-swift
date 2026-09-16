@@ -20,11 +20,11 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// A service that migrates resources from automl.googleapis.com,
   /// datalabeling.googleapis.com and ml.googleapis.com to Vertex AI.
@@ -32,11 +32,11 @@
   /// @Snippet(path: "MigrationServiceQuickstart")
   public final class MigrationServiceClient: Clients.MigrationServiceProtocol, Sendable {
     let inner: any Clients.MigrationServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `MigrationServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.MigrationServiceStub = try Clients.MigrationServiceTransport(options)
       inner = Clients.MigrationServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -53,7 +53,7 @@
     ///
     /// @Snippet(path: "MigrationService_SearchMigratableResources")
     public func searchMigratableResources(
-      request: SearchMigratableResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchMigratableResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.SearchMigratableResourcesResponse {
       try await self.inner.searchMigratableResources(request: request, options: options)
     }
@@ -64,7 +64,7 @@
     ///
     /// @Snippet(path: "MigrationService_SearchMigratableResources")
     public func searchMigratableResources(
-      byItem: SearchMigratableResourcesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchMigratableResourcesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<MigratableResource, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -73,7 +73,7 @@
         request.pageToken = token
         return try await self.searchMigratableResources(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Batch migrates resources from ml.googleapis.com, automl.googleapis.com,
@@ -81,7 +81,7 @@
     ///
     /// @Snippet(path: "MigrationService_BatchMigrateResources")
     public func batchMigrateResources(
-      request: BatchMigrateResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchMigrateResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.batchMigrateResources(request: request, options: options)
     }
@@ -91,23 +91,22 @@
     ///
     /// @Snippet(path: "MigrationService_BatchMigrateResources")
     public func batchMigrateResources(
-      withPolling: BatchMigrateResourcesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchMigrateResourcesResponse> {
+      withPolling: BatchMigrateResourcesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BatchMigrateResourcesResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<BatchMigrateResourcesResponse>.State in
+          -> GoogleGax._PollableOperationImpl<BatchMigrateResourcesResponse>.State in
         return try op._extractStatus(BatchMigrateResourcesResponse.self)
       }
       let rawOp = try await self.batchMigrateResources(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<BatchMigrateResourcesResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<BatchMigrateResourcesResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -119,7 +118,7 @@
     ///
     /// @Snippet(path: "MigrationService_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -128,7 +127,7 @@
     ///
     /// @Snippet(path: "MigrationService_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -136,14 +135,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "MigrationService_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -156,7 +155,7 @@
     ///
     /// @Snippet(path: "MigrationService_SetIamPolicy")
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -166,7 +165,7 @@
     ///
     /// @Snippet(path: "MigrationService_GetIamPolicy")
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -181,7 +180,7 @@
     ///
     /// @Snippet(path: "MigrationService_TestIamPermissions")
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -192,7 +191,7 @@
     ///
     /// @Snippet(path: "MigrationService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -203,7 +202,7 @@
     ///
     /// @Snippet(path: "MigrationService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -211,7 +210,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -220,7 +219,7 @@
     ///
     /// @Snippet(path: "MigrationService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -231,7 +230,7 @@
     ///
     /// @Snippet(path: "MigrationService_DeleteOperation")
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteOperation(request: request, options: options)
     }
@@ -242,7 +241,7 @@
     ///
     /// @Snippet(path: "MigrationService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -253,7 +252,7 @@
     ///
     /// @Snippet(path: "MigrationService_WaitOperation")
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.waitOperation(request: request, options: options)
     }
@@ -286,13 +285,13 @@
 
       /// See `MigrationServiceClient.batchMigrateResources`.
       func batchMigrateResources(withPolling: BatchMigrateResourcesRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<BatchMigrateResourcesResponse>
+        -> any GoogleGax.PollableOperation<BatchMigrateResourcesResponse>
 
       /// See `MigrationServiceClient.batchMigrateResources`.
       func batchMigrateResources(
         parent: Swift.String,
         migrateResourceRequests: [MigrateResourceRequest],
-      ) async throws -> any GoogleCloudGax.PollableOperation<BatchMigrateResourcesResponse>
+      ) async throws -> any GoogleGax.PollableOperation<BatchMigrateResourcesResponse>
 
       /// See `MigrationServiceClient.listLocations`.
       func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -354,77 +353,77 @@
 
       /// See `MigrationServiceClient.searchMigratableResources`.
       func searchMigratableResources(
-        request: SearchMigratableResourcesRequest, options: GoogleCloudGax.RequestOptions
+        request: SearchMigratableResourcesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.SearchMigratableResourcesResponse
 
       /// See `MigrationServiceClient.searchMigratableResources`.
       func searchMigratableResources(
-        byItem: SearchMigratableResourcesRequest, options: GoogleCloudGax.RequestOptions
+        byItem: SearchMigratableResourcesRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<MigratableResource, Swift.Error>
 
       /// See `MigrationServiceClient.batchMigrateResources`.
       func batchMigrateResources(
-        request: BatchMigrateResourcesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchMigrateResourcesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `MigrationServiceClient.batchMigrateResources`.
       func batchMigrateResources(
-        withPolling: BatchMigrateResourcesRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<BatchMigrateResourcesResponse>
+        withPolling: BatchMigrateResourcesRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<BatchMigrateResourcesResponse>
 
       /// See `MigrationServiceClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `MigrationServiceClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `MigrationServiceClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `MigrationServiceClient.setIamPolicy`.
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `MigrationServiceClient.getIamPolicy`.
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `MigrationServiceClient.testIamPermissions`.
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       /// See `MigrationServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `MigrationServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `MigrationServiceClient.deleteOperation`.
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `MigrationServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `MigrationServiceClient.waitOperation`.
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }
@@ -438,9 +437,9 @@
     }
 
     public func searchMigratableResources(
-      request: SearchMigratableResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchMigratableResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.SearchMigratableResourcesResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func searchMigratableResources(
@@ -450,14 +449,14 @@
     }
 
     public func searchMigratableResources(
-      byItem: SearchMigratableResourcesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchMigratableResourcesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<MigratableResource, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudAIPlatformV1.SearchMigratableResourcesResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func searchMigratableResources(
@@ -476,33 +475,32 @@
     }
 
     public func batchMigrateResources(
-      request: BatchMigrateResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchMigrateResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func batchMigrateResources(withPolling: BatchMigrateResourcesRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<BatchMigrateResourcesResponse>
+      -> any GoogleGax.PollableOperation<BatchMigrateResourcesResponse>
     {
       try await self.batchMigrateResources(withPolling: withPolling, options: .init())
     }
 
     public func batchMigrateResources(
-      withPolling: BatchMigrateResourcesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchMigrateResourcesResponse> {
+      withPolling: BatchMigrateResourcesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BatchMigrateResourcesResponse> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<BatchMigrateResourcesResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<BatchMigrateResourcesResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func batchMigrateResources(
       parent: Swift.String,
       migrateResourceRequests: [MigrateResourceRequest],
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchMigrateResourcesResponse> {
+    ) async throws -> any GoogleGax.PollableOperation<BatchMigrateResourcesResponse> {
       let request = BatchMigrateResourcesRequest().with {
         $0.parent = parent
         $0.migrateResourceRequests = migrateResourceRequests
@@ -517,9 +515,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -529,13 +527,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -545,9 +543,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -557,9 +555,9 @@
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -569,9 +567,9 @@
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -581,9 +579,9 @@
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -593,9 +591,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -605,13 +603,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -632,9 +630,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -651,9 +649,9 @@
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteOperation(
@@ -670,9 +668,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(
@@ -691,9 +689,9 @@
     }
 
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Log entry for BDRBackupPlanAssociationJobLog for resources using BackupPlan
 /// based protection.
-public struct BDRBackupPlanAssociationJobLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BDRBackupPlanAssociationJobLog: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The job_id field displays the identifier of the job being reported.
@@ -68,10 +68,10 @@ public struct BDRBackupPlanAssociationJobLog: Codable, Equatable, GoogleCloudWKT
   public var newBackupPlanRevisionName: Swift.String? = nil
 
   /// Start time of the job.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// End time of the job.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// The error code. Only populated in error scenarios.
   public var errorCode: Swift.Int32? = nil
@@ -83,7 +83,7 @@ public struct BDRBackupPlanAssociationJobLog: Codable, Equatable, GoogleCloudWKT
   /// The user readable error message. Only populated in error scenarios.
   public var errorMessage: Swift.String? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BDRBackupPlanAssociationJobLog`.
   public init() {}
@@ -178,15 +178,14 @@ public struct BDRBackupPlanAssociationJobLog: Codable, Equatable, GoogleCloudWKT
       Swift.String.self, forKey: .newBackupPlanRevisionId)
     self.newBackupPlanRevisionName = try container.decodeIfPresent(
       Swift.String.self, forKey: .newBackupPlanRevisionName)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     self.errorCode = try container.decodeIfPresent(Swift.Int32.self, forKey: .errorCode)
     self.errorType = try container.decodeIfPresent(Swift.String.self, forKey: .errorType)
     self.errorMessage = try container.decodeIfPresent(Swift.String.self, forKey: .errorMessage)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -223,10 +222,10 @@ public struct BDRBackupPlanAssociationJobLog: Codable, Equatable, GoogleCloudWKT
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.logging.v1.BDRBackupPlanAssociationJobLog"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

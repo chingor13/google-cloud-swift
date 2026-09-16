@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The result of the connectivity test performed between the Goldengate
 /// deployment and the associated database / service.
-public struct TestGoldengateConnectionAssignmentResponse: Codable, Equatable, GoogleCloudWKT
+public struct TestGoldengateConnectionAssignmentResponse: Codable, Equatable, GoogleWKT
     ._AnyPackable,
   Sendable
 {
@@ -33,7 +33,7 @@ public struct TestGoldengateConnectionAssignmentResponse: Codable, Equatable, Go
   /// List of test connection assignment error objects.
   public var errors: [TestConnectionAssignmentError] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TestGoldengateConnectionAssignmentResponse`.
   public init() {}
@@ -83,7 +83,7 @@ public struct TestGoldengateConnectionAssignmentResponse: Codable, Equatable, Go
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -213,10 +213,10 @@ public struct TestGoldengateConnectionAssignmentResponse: Codable, Equatable, Go
     return
       "type.googleapis.com/google.cloud.oracledatabase.v1.TestGoldengateConnectionAssignmentResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

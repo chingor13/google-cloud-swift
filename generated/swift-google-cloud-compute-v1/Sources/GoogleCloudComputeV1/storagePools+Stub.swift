@@ -16,54 +16,53 @@
 
 #if StoragePools
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol StoragePoolsStub: Sendable {
       func aggregatedList(
-        request: StoragePoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolAggregatedList
 
       func delete(
-        request: StoragePoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: StoragePoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePool
 
       func getIamPolicy(
-        request: StoragePoolsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: StoragePoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: StoragePoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolList
 
       func listDisks(
-        request: StoragePoolsClient.ListDisksRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.ListDisksRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolListDisks
 
       func setIamPolicy(
-        request: StoragePoolsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: StoragePoolsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: StoragePoolsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolsClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

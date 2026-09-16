@@ -16,87 +16,87 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol PrivilegedAccessManagerStub: Sendable {
     func checkOnboardingStatus(
-      request: CheckOnboardingStatusRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckOnboardingStatusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPrivilegedAccessManagerV1.CheckOnboardingStatusResponse
 
     func listEntitlements(
-      request: ListEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntitlementsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPrivilegedAccessManagerV1.ListEntitlementsResponse
 
     func searchEntitlements(
-      request: SearchEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchEntitlementsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPrivilegedAccessManagerV1.SearchEntitlementsResponse
 
     func getEntitlement(
-      request: GetEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPrivilegedAccessManagerV1.Entitlement
 
     func createEntitlement(
-      request: CreateEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteEntitlement(
-      request: DeleteEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateEntitlement(
-      request: UpdateEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listGrants(
-      request: ListGrantsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGrantsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPrivilegedAccessManagerV1.ListGrantsResponse
 
     func searchGrants(
-      request: SearchGrantsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchGrantsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPrivilegedAccessManagerV1.SearchGrantsResponse
 
     func getGrant(
-      request: GetGrantRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGrantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPrivilegedAccessManagerV1.Grant
 
     func createGrant(
-      request: CreateGrantRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGrantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPrivilegedAccessManagerV1.Grant
 
     func approveGrant(
-      request: ApproveGrantRequest, options: GoogleCloudGax.RequestOptions
+      request: ApproveGrantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPrivilegedAccessManagerV1.Grant
 
     func denyGrant(
-      request: DenyGrantRequest, options: GoogleCloudGax.RequestOptions
+      request: DenyGrantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPrivilegedAccessManagerV1.Grant
 
     func revokeGrant(
-      request: RevokeGrantRequest, options: GoogleCloudGax.RequestOptions
+      request: RevokeGrantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

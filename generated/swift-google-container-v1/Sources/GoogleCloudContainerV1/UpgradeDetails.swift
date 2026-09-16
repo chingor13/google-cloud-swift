@@ -15,21 +15,21 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// UpgradeDetails contains detailed information of each individual upgrade
 /// operation.
-public struct UpgradeDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpgradeDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The state of the upgrade.
   public var state: UpgradeDetails.State = UpgradeDetails.State()
 
   /// The start timestamp of the upgrade.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// The end timestamp of the upgrade.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// The version before the upgrade.
   public var initialVersion: Swift.String = Swift.String()
@@ -46,7 +46,7 @@ public struct UpgradeDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The emulated version after the upgrade.
   public var targetEmulatedVersion: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpgradeDetails`.
   public init() {}
@@ -96,9 +96,8 @@ public struct UpgradeDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(UpgradeDetails.State.self, forKey: .state) {
       self.state = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .initialVersion) {
       self.initialVersion = value
     }
@@ -119,7 +118,7 @@ public struct UpgradeDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -365,10 +364,10 @@ public struct UpgradeDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.UpgradeDetails"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

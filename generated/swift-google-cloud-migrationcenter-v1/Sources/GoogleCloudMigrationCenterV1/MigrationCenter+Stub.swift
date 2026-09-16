@@ -16,227 +16,227 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol MigrationCenterStub: Sendable {
     func listAssets(
-      request: ListAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListAssetsResponse
 
     func getAsset(
-      request: GetAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.Asset
 
     func updateAsset(
-      request: UpdateAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.Asset
 
     func batchUpdateAssets(
-      request: BatchUpdateAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchUpdateAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.BatchUpdateAssetsResponse
 
     func deleteAsset(
-      request: DeleteAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAssetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func batchDeleteAssets(
-      request: BatchDeleteAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchDeleteAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func reportAssetFrames(
-      request: ReportAssetFramesRequest, options: GoogleCloudGax.RequestOptions
+      request: ReportAssetFramesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ReportAssetFramesResponse
 
     func aggregateAssetsValues(
-      request: AggregateAssetsValuesRequest, options: GoogleCloudGax.RequestOptions
+      request: AggregateAssetsValuesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.AggregateAssetsValuesResponse
 
     func createImportJob(
-      request: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listImportJobs(
-      request: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListImportJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListImportJobsResponse
 
     func getImportJob(
-      request: GetImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ImportJob
 
     func deleteImportJob(
-      request: DeleteImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateImportJob(
-      request: UpdateImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func validateImportJob(
-      request: ValidateImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: ValidateImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func runImportJob(
-      request: RunImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: RunImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getImportDataFile(
-      request: GetImportDataFileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetImportDataFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ImportDataFile
 
     func listImportDataFiles(
-      request: ListImportDataFilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListImportDataFilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListImportDataFilesResponse
 
     func createImportDataFile(
-      request: CreateImportDataFileRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateImportDataFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteImportDataFile(
-      request: DeleteImportDataFileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteImportDataFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listGroups(
-      request: ListGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListGroupsResponse
 
     func getGroup(
-      request: GetGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.Group
 
     func createGroup(
-      request: CreateGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateGroup(
-      request: UpdateGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteGroup(
-      request: DeleteGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func addAssetsToGroup(
-      request: AddAssetsToGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: AddAssetsToGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func removeAssetsFromGroup(
-      request: RemoveAssetsFromGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveAssetsFromGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listErrorFrames(
-      request: ListErrorFramesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListErrorFramesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListErrorFramesResponse
 
     func getErrorFrame(
-      request: GetErrorFrameRequest, options: GoogleCloudGax.RequestOptions
+      request: GetErrorFrameRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ErrorFrame
 
     func listSources(
-      request: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListSourcesResponse
 
     func getSource(
-      request: GetSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.Source
 
     func createSource(
-      request: CreateSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateSource(
-      request: UpdateSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteSource(
-      request: DeleteSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listPreferenceSets(
-      request: ListPreferenceSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPreferenceSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListPreferenceSetsResponse
 
     func getPreferenceSet(
-      request: GetPreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPreferenceSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.PreferenceSet
 
     func createPreferenceSet(
-      request: CreatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePreferenceSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updatePreferenceSet(
-      request: UpdatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePreferenceSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deletePreferenceSet(
-      request: DeletePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePreferenceSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getSettings(
-      request: GetSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.Settings
 
     func updateSettings(
-      request: UpdateSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createReportConfig(
-      request: CreateReportConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReportConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getReportConfig(
-      request: GetReportConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReportConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ReportConfig
 
     func listReportConfigs(
-      request: ListReportConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReportConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListReportConfigsResponse
 
     func deleteReportConfig(
-      request: DeleteReportConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReportConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createReport(
-      request: CreateReportRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getReport(
-      request: GetReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.Report
 
     func listReports(
-      request: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReportsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListReportsResponse
 
     func deleteReport(
-      request: DeleteReportRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

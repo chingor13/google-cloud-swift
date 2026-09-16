@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a spec associated with an API version in the API
 /// Hub. Note that specs of various types can be uploaded, however
 /// parsing of details is supported for OpenAPI spec currently.
-public struct Spec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Spec: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The name of the spec.
@@ -55,10 +55,10 @@ public struct Spec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var sourceUri: Swift.String = Swift.String()
 
   /// Output only. The time at which the spec was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time at which the spec was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The lint response for the spec.
   public var lintResponse: LintResponse? = nil
@@ -81,7 +81,7 @@ public struct Spec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The list of sources and metadata from the sources of the spec.
   public var sourceMetadata: [SourceMetadata] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Spec`.
   public init() {}
@@ -150,10 +150,8 @@ public struct Spec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .sourceUri) {
       self.sourceUri = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     self.lintResponse = try container.decodeIfPresent(LintResponse.self, forKey: .lintResponse)
     if let value = try container.decodeIfPresent(
       [Swift.String: AttributeValues].self, forKey: .attributes)
@@ -169,7 +167,7 @@ public struct Spec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -309,10 +307,10 @@ public struct Spec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apihub.v1.Spec"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,134 +15,134 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol IAMStub: Sendable {
     func listServiceAccounts(
-      request: ListServiceAccountsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServiceAccountsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.ListServiceAccountsResponse
 
     func getServiceAccount(
-      request: GetServiceAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.ServiceAccount
 
     func createServiceAccount(
-      request: CreateServiceAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServiceAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.ServiceAccount
 
     func updateServiceAccount(
-      request: ServiceAccount, options: GoogleCloudGax.RequestOptions
+      request: ServiceAccount, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.ServiceAccount
 
     func patchServiceAccount(
-      request: PatchServiceAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: PatchServiceAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.ServiceAccount
 
     func deleteServiceAccount(
-      request: DeleteServiceAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceAccountRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func undeleteServiceAccount(
-      request: UndeleteServiceAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteServiceAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.UndeleteServiceAccountResponse
 
     func enableServiceAccount(
-      request: EnableServiceAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: EnableServiceAccountRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func disableServiceAccount(
-      request: DisableServiceAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: DisableServiceAccountRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listServiceAccountKeys(
-      request: ListServiceAccountKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServiceAccountKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.ListServiceAccountKeysResponse
 
     func getServiceAccountKey(
-      request: GetServiceAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceAccountKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.ServiceAccountKey
 
     func createServiceAccountKey(
-      request: CreateServiceAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServiceAccountKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.ServiceAccountKey
 
     func uploadServiceAccountKey(
-      request: UploadServiceAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UploadServiceAccountKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.ServiceAccountKey
 
     func deleteServiceAccountKey(
-      request: DeleteServiceAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceAccountKeyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func disableServiceAccountKey(
-      request: DisableServiceAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DisableServiceAccountKeyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func enableServiceAccountKey(
-      request: EnableServiceAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: EnableServiceAccountKeyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func signBlob(
-      request: SignBlobRequest, options: GoogleCloudGax.RequestOptions
+      request: SignBlobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.SignBlobResponse
 
     func signJwt(
-      request: SignJwtRequest, options: GoogleCloudGax.RequestOptions
+      request: SignJwtRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.SignJwtResponse
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func queryGrantableRoles(
-      request: QueryGrantableRolesRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryGrantableRolesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.QueryGrantableRolesResponse
 
     func listRoles(
-      request: ListRolesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRolesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.ListRolesResponse
 
     func getRole(
-      request: GetRoleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRoleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.Role
 
     func createRole(
-      request: CreateRoleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRoleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.Role
 
     func updateRole(
-      request: UpdateRoleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRoleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.Role
 
     func deleteRole(
-      request: DeleteRoleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRoleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.Role
 
     func undeleteRole(
-      request: UndeleteRoleRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteRoleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.Role
 
     func queryTestablePermissions(
-      request: QueryTestablePermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryTestablePermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.QueryTestablePermissionsResponse
 
     func queryAuditableServices(
-      request: QueryAuditableServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryAuditableServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.QueryAuditableServicesResponse
 
     func lintPolicy(
-      request: LintPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: LintPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMAdminV1.LintPolicyResponse
   }
 }

@@ -16,88 +16,88 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol SecurityProfileGroupServiceStub: Sendable {
     func listSecurityProfileGroups(
-      request: ListSecurityProfileGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSecurityProfileGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListSecurityProfileGroupsResponse
 
     func getSecurityProfileGroup(
-      request: GetSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.SecurityProfileGroup
 
     func createSecurityProfileGroup(
-      request: CreateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateSecurityProfileGroup(
-      request: UpdateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteSecurityProfileGroup(
-      request: DeleteSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listSecurityProfiles(
-      request: ListSecurityProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSecurityProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListSecurityProfilesResponse
 
     func getSecurityProfile(
-      request: GetSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSecurityProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.SecurityProfile
 
     func createSecurityProfile(
-      request: CreateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSecurityProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateSecurityProfile(
-      request: UpdateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSecurityProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteSecurityProfile(
-      request: DeleteSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSecurityProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

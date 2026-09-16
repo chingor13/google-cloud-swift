@@ -16,156 +16,156 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AppHubStub: Sendable {
     func lookupServiceProjectAttachment(
-      request: LookupServiceProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupServiceProjectAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.LookupServiceProjectAttachmentResponse
 
     func listServiceProjectAttachments(
-      request: ListServiceProjectAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServiceProjectAttachmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.ListServiceProjectAttachmentsResponse
 
     func createServiceProjectAttachment(
-      request: CreateServiceProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServiceProjectAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getServiceProjectAttachment(
-      request: GetServiceProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceProjectAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.ServiceProjectAttachment
 
     func deleteServiceProjectAttachment(
-      request: DeleteServiceProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceProjectAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func detachServiceProjectAttachment(
-      request: DetachServiceProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DetachServiceProjectAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.DetachServiceProjectAttachmentResponse
 
     func listDiscoveredServices(
-      request: ListDiscoveredServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDiscoveredServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.ListDiscoveredServicesResponse
 
     func getDiscoveredService(
-      request: GetDiscoveredServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDiscoveredServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.DiscoveredService
 
     func lookupDiscoveredService(
-      request: LookupDiscoveredServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupDiscoveredServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.LookupDiscoveredServiceResponse
 
     func listServices(
-      request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.ListServicesResponse
 
     func createService(
-      request: CreateServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getService(
-      request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.Service
 
     func updateService(
-      request: UpdateServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteService(
-      request: DeleteServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listDiscoveredWorkloads(
-      request: ListDiscoveredWorkloadsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDiscoveredWorkloadsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.ListDiscoveredWorkloadsResponse
 
     func getDiscoveredWorkload(
-      request: GetDiscoveredWorkloadRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDiscoveredWorkloadRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.DiscoveredWorkload
 
     func lookupDiscoveredWorkload(
-      request: LookupDiscoveredWorkloadRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupDiscoveredWorkloadRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.LookupDiscoveredWorkloadResponse
 
     func listWorkloads(
-      request: ListWorkloadsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWorkloadsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.ListWorkloadsResponse
 
     func createWorkload(
-      request: CreateWorkloadRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateWorkloadRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getWorkload(
-      request: GetWorkloadRequest, options: GoogleCloudGax.RequestOptions
+      request: GetWorkloadRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.Workload
 
     func updateWorkload(
-      request: UpdateWorkloadRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateWorkloadRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteWorkload(
-      request: DeleteWorkloadRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteWorkloadRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listApplications(
-      request: ListApplicationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListApplicationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.ListApplicationsResponse
 
     func createApplication(
-      request: CreateApplicationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateApplicationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getApplication(
-      request: GetApplicationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetApplicationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppHubV1.Application
 
     func updateApplication(
-      request: UpdateApplicationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateApplicationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteApplication(
-      request: DeleteApplicationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteApplicationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func createNativeDashboard(
-      request: CreateNativeDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNativeDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.NativeDashboard {
       try await self._intercept(
         request: request,
         options: options,
         name: "createNativeDashboard",
         action: {
-          (r: CreateNativeDashboardRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateNativeDashboardRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.NativeDashboard
           in
           return try await self.inner.createNativeDashboard(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func getNativeDashboard(
-      request: GetNativeDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNativeDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.NativeDashboard {
       try await self._intercept(
         request: request,
         options: options,
         name: "getNativeDashboard",
         action: {
-          (r: GetNativeDashboardRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetNativeDashboardRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.NativeDashboard
           in
           return try await self.inner.getNativeDashboard(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func listNativeDashboards(
-      request: ListNativeDashboardsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNativeDashboardsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListNativeDashboardsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listNativeDashboards",
         action: {
-          (r: ListNativeDashboardsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListNativeDashboardsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.ListNativeDashboardsResponse
           in
           return try await self.inner.listNativeDashboards(request: r, options: o)
@@ -103,14 +103,14 @@ extension Clients {
     }
 
     public func updateNativeDashboard(
-      request: UpdateNativeDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNativeDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.NativeDashboard {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateNativeDashboard",
         action: {
-          (r: UpdateNativeDashboardRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateNativeDashboardRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.NativeDashboard
           in
           return try await self.inner.updateNativeDashboard(request: r, options: o)
@@ -118,14 +118,14 @@ extension Clients {
     }
 
     public func duplicateNativeDashboard(
-      request: DuplicateNativeDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: DuplicateNativeDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.NativeDashboard {
       try await self._intercept(
         request: request,
         options: options,
         name: "duplicateNativeDashboard",
         action: {
-          (r: DuplicateNativeDashboardRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DuplicateNativeDashboardRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.NativeDashboard
           in
           return try await self.inner.duplicateNativeDashboard(request: r, options: o)
@@ -133,28 +133,27 @@ extension Clients {
     }
 
     public func deleteNativeDashboard(
-      request: DeleteNativeDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNativeDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteNativeDashboard",
         action: {
-          (r: DeleteNativeDashboardRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void
-          in
+          (r: DeleteNativeDashboardRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteNativeDashboard(request: r, options: o)
         })
     }
 
     public func addChart(
-      request: AddChartRequest, options: GoogleCloudGax.RequestOptions
+      request: AddChartRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.AddChartResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "addChart",
         action: {
-          (r: AddChartRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AddChartRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.AddChartResponse
           in
           return try await self.inner.addChart(request: r, options: o)
@@ -162,14 +161,14 @@ extension Clients {
     }
 
     public func removeChart(
-      request: RemoveChartRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveChartRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.NativeDashboard {
       try await self._intercept(
         request: request,
         options: options,
         name: "removeChart",
         action: {
-          (r: RemoveChartRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RemoveChartRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.NativeDashboard
           in
           return try await self.inner.removeChart(request: r, options: o)
@@ -177,14 +176,14 @@ extension Clients {
     }
 
     public func editChart(
-      request: EditChartRequest, options: GoogleCloudGax.RequestOptions
+      request: EditChartRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.EditChartResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "editChart",
         action: {
-          (r: EditChartRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: EditChartRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.EditChartResponse
           in
           return try await self.inner.editChart(request: r, options: o)
@@ -192,14 +191,14 @@ extension Clients {
     }
 
     public func duplicateChart(
-      request: DuplicateChartRequest, options: GoogleCloudGax.RequestOptions
+      request: DuplicateChartRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DuplicateChartResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "duplicateChart",
         action: {
-          (r: DuplicateChartRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DuplicateChartRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.DuplicateChartResponse
           in
           return try await self.inner.duplicateChart(request: r, options: o)
@@ -207,14 +206,14 @@ extension Clients {
     }
 
     public func exportNativeDashboards(
-      request: ExportNativeDashboardsRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportNativeDashboardsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ExportNativeDashboardsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "exportNativeDashboards",
         action: {
-          (r: ExportNativeDashboardsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ExportNativeDashboardsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.ExportNativeDashboardsResponse
           in
           return try await self.inner.exportNativeDashboards(request: r, options: o)
@@ -222,14 +221,14 @@ extension Clients {
     }
 
     public func importNativeDashboards(
-      request: ImportNativeDashboardsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportNativeDashboardsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ImportNativeDashboardsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "importNativeDashboards",
         action: {
-          (r: ImportNativeDashboardsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ImportNativeDashboardsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.ImportNativeDashboardsResponse
           in
           return try await self.inner.importNativeDashboards(request: r, options: o)
@@ -237,29 +236,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -267,29 +266,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteOperation",
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "cancelOperation",
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

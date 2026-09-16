@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// BigQuery dataset information.
 /// See the [Dataset](/bigquery/docs/reference/v2/datasets) API resource
 /// for more details on individual fields.
-public struct Dataset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Dataset: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the dataset.
@@ -30,10 +30,10 @@ public struct Dataset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var info: DatasetInfo? = nil
 
   /// The time the dataset was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The time the dataset was last modified.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// The access control list for the dataset.
   public var acl: BigQueryAcl? = nil
@@ -42,9 +42,9 @@ public struct Dataset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// expiration time is assigned an expiration time by adding this
   /// duration to the table's `createTime`.  If this field is empty,
   /// there is no default table expiration time.
-  public var defaultTableExpireDuration: GoogleCloudWKT.Duration? = nil
+  public var defaultTableExpireDuration: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Dataset`.
   public init() {}
@@ -89,16 +89,14 @@ public struct Dataset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.datasetName = try container.decodeIfPresent(DatasetName.self, forKey: .datasetName)
     self.info = try container.decodeIfPresent(DatasetInfo.self, forKey: .info)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     self.acl = try container.decodeIfPresent(BigQueryAcl.self, forKey: .acl)
     self.defaultTableExpireDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .defaultTableExpireDuration)
+      GoogleWKT.Duration.self, forKey: .defaultTableExpireDuration)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -119,10 +117,10 @@ public struct Dataset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.logging.v1.Dataset"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

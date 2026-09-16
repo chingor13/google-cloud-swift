@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Web Risk API defines an interface to detect malicious URLs on your
 /// website and in client applications.
@@ -29,11 +29,11 @@ import GoogleCloudGax
 /// @Snippet(path: "WebRiskServiceQuickstart")
 public final class WebRiskServiceClient: Clients.WebRiskServiceProtocol, Sendable {
   let inner: any Clients.WebRiskServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `WebRiskServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.WebRiskServiceStub = try Clients.WebRiskServiceTransport(options)
     inner = Clients.WebRiskServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -53,7 +53,7 @@ public final class WebRiskServiceClient: Clients.WebRiskServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "WebRiskService_ComputeThreatListDiff")
   public func computeThreatListDiff(
-    request: ComputeThreatListDiffRequest, options: GoogleCloudGax.RequestOptions
+    request: ComputeThreatListDiffRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWebRiskV1.ComputeThreatListDiffResponse {
     try await self.inner.computeThreatListDiff(request: request, options: options)
   }
@@ -66,7 +66,7 @@ public final class WebRiskServiceClient: Clients.WebRiskServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "WebRiskService_SearchUris")
   public func searchUris(
-    request: SearchUrisRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchUrisRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWebRiskV1.SearchUrisResponse {
     try await self.inner.searchUris(request: request, options: options)
   }
@@ -79,7 +79,7 @@ public final class WebRiskServiceClient: Clients.WebRiskServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "WebRiskService_SearchHashes")
   public func searchHashes(
-    request: SearchHashesRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchHashesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWebRiskV1.SearchHashesResponse {
     try await self.inner.searchHashes(request: request, options: options)
   }
@@ -94,7 +94,7 @@ public final class WebRiskServiceClient: Clients.WebRiskServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "WebRiskService_CreateSubmission")
   public func createSubmission(
-    request: CreateSubmissionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSubmissionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWebRiskV1.Submission {
     try await self.inner.createSubmission(request: request, options: options)
   }
@@ -112,7 +112,7 @@ public final class WebRiskServiceClient: Clients.WebRiskServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "WebRiskService_SubmitUri")
   public func submitUri(
-    request: SubmitUriRequest, options: GoogleCloudGax.RequestOptions
+    request: SubmitUriRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.submitUri(request: request, options: options)
   }
@@ -130,21 +130,21 @@ public final class WebRiskServiceClient: Clients.WebRiskServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "WebRiskService_SubmitUri")
   public func submitUri(
-    withPolling: SubmitUriRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Submission> {
+    withPolling: SubmitUriRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Submission> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Submission>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Submission>.State
+      in
       return try op._extractStatus(Submission.self)
     }
     let rawOp = try await self.submitUri(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Submission>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Submission>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -158,7 +158,7 @@ public final class WebRiskServiceClient: Clients.WebRiskServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "WebRiskService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -169,7 +169,7 @@ public final class WebRiskServiceClient: Clients.WebRiskServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "WebRiskService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -177,7 +177,7 @@ public final class WebRiskServiceClient: Clients.WebRiskServiceProtocol, Sendabl
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -186,7 +186,7 @@ public final class WebRiskServiceClient: Clients.WebRiskServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "WebRiskService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -197,7 +197,7 @@ public final class WebRiskServiceClient: Clients.WebRiskServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "WebRiskService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -208,7 +208,7 @@ public final class WebRiskServiceClient: Clients.WebRiskServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "WebRiskService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -266,14 +266,15 @@ extension Clients {
     func submitUri(request: SubmitUriRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `WebRiskServiceClient.submitUri`.
-    func submitUri(withPolling: SubmitUriRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Submission>
+    func submitUri(withPolling: SubmitUriRequest) async throws -> any GoogleGax.PollableOperation<
+      Submission
+    >
 
     /// See `WebRiskServiceClient.submitUri`.
     func submitUri(
       parent: Swift.String,
       submission: Submission?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Submission>
+    ) async throws -> any GoogleGax.PollableOperation<Submission>
 
     /// See `WebRiskServiceClient.listOperations`.
     func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -308,52 +309,52 @@ extension Clients {
 
     /// See `WebRiskServiceClient.computeThreatListDiff`.
     func computeThreatListDiff(
-      request: ComputeThreatListDiffRequest, options: GoogleCloudGax.RequestOptions
+      request: ComputeThreatListDiffRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebRiskV1.ComputeThreatListDiffResponse
 
     /// See `WebRiskServiceClient.searchUris`.
     func searchUris(
-      request: SearchUrisRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchUrisRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebRiskV1.SearchUrisResponse
 
     /// See `WebRiskServiceClient.searchHashes`.
     func searchHashes(
-      request: SearchHashesRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchHashesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebRiskV1.SearchHashesResponse
 
     /// See `WebRiskServiceClient.createSubmission`.
     func createSubmission(
-      request: CreateSubmissionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSubmissionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebRiskV1.Submission
 
     /// See `WebRiskServiceClient.submitUri`.
     func submitUri(
-      request: SubmitUriRequest, options: GoogleCloudGax.RequestOptions
+      request: SubmitUriRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `WebRiskServiceClient.submitUri`.
     func submitUri(
-      withPolling: SubmitUriRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Submission>
+      withPolling: SubmitUriRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Submission>
 
     /// See `WebRiskServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `WebRiskServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `WebRiskServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `WebRiskServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -367,9 +368,9 @@ extension Clients.WebRiskServiceProtocol {
   }
 
   public func computeThreatListDiff(
-    request: ComputeThreatListDiffRequest, options: GoogleCloudGax.RequestOptions
+    request: ComputeThreatListDiffRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWebRiskV1.ComputeThreatListDiffResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func computeThreatListDiff(
@@ -392,9 +393,9 @@ extension Clients.WebRiskServiceProtocol {
   }
 
   public func searchUris(
-    request: SearchUrisRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchUrisRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWebRiskV1.SearchUrisResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func searchUris(
@@ -415,9 +416,9 @@ extension Clients.WebRiskServiceProtocol {
   }
 
   public func searchHashes(
-    request: SearchHashesRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchHashesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWebRiskV1.SearchHashesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func searchHashes(
@@ -438,9 +439,9 @@ extension Clients.WebRiskServiceProtocol {
   }
 
   public func createSubmission(
-    request: CreateSubmissionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSubmissionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWebRiskV1.Submission {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createSubmission(
@@ -459,31 +460,31 @@ extension Clients.WebRiskServiceProtocol {
   }
 
   public func submitUri(
-    request: SubmitUriRequest, options: GoogleCloudGax.RequestOptions
+    request: SubmitUriRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func submitUri(withPolling: SubmitUriRequest) async throws -> any GoogleCloudGax
+  public func submitUri(withPolling: SubmitUriRequest) async throws -> any GoogleGax
     .PollableOperation<Submission>
   {
     try await self.submitUri(withPolling: withPolling, options: .init())
   }
 
   public func submitUri(
-    withPolling: SubmitUriRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Submission> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Submission>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: SubmitUriRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Submission> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Submission>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func submitUri(
     parent: Swift.String,
     submission: Submission?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Submission> {
+  ) async throws -> any GoogleGax.PollableOperation<Submission> {
     let request = SubmitUriRequest().with {
       $0.parent = parent
       $0.submission = submission
@@ -498,9 +499,9 @@ extension Clients.WebRiskServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -510,13 +511,13 @@ extension Clients.WebRiskServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -537,9 +538,9 @@ extension Clients.WebRiskServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -556,9 +557,9 @@ extension Clients.WebRiskServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -575,9 +576,9 @@ extension Clients.WebRiskServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

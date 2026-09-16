@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Replication is a nested resource under Volume, that describes a
 /// cross-region replication relationship between 2 volumes in different
 /// regions.
-public struct Replication: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Replication: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the Replication.
@@ -52,7 +52,7 @@ public struct Replication: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var healthy: Swift.Bool? = nil
 
   /// Output only. Replication create time.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Full name of destination volume resource.
   /// Example : "projects/{project}/locations/{location}/volumes/{volume_id}"
@@ -88,7 +88,7 @@ public struct Replication: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// cluster by the customer.
   public var hybridReplicationUserCommands: UserCommands? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Replication`.
   public init() {}
@@ -178,8 +178,7 @@ public struct Replication: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.mirrorState = value
     }
     self.healthy = try container.decodeIfPresent(Swift.Bool.self, forKey: .healthy)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .destinationVolume) {
       self.destinationVolume = value
     }
@@ -208,7 +207,7 @@ public struct Replication: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       UserCommands.self, forKey: .hybridReplicationUserCommands)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -889,10 +888,10 @@ public struct Replication: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.netapp.v1.Replication"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

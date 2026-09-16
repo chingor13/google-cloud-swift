@@ -16,13 +16,13 @@
 
 #if Networks
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// [Output Only] Describes the state of a peering connection, not just the
   /// local peering. This field provides information about the effective settings
   /// for the connection as a whole, including pending delete/update requests for
   /// CONSENSUS peerings.
-  public struct NetworkPeeringConnectionStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NetworkPeeringConnectionStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The consensus state contains information about the status of update
@@ -37,7 +37,7 @@
     /// peering connection.
     public var updateStrategy: NetworkPeeringConnectionStatus.UpdateStrategy? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NetworkPeeringConnectionStatus`.
     public init() {}
@@ -82,7 +82,7 @@
         NetworkPeeringConnectionStatus.UpdateStrategy.self, forKey: .updateStrategy)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -214,11 +214,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.NetworkPeeringConnectionStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

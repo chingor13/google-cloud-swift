@@ -17,67 +17,67 @@
 #if ConversationModels
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ConversationModelsStub: Sendable {
       func createConversationModel(
-        request: CreateConversationModelRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateConversationModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func getConversationModel(
-        request: GetConversationModelRequest, options: GoogleCloudGax.RequestOptions
+        request: GetConversationModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ConversationModel
 
       func listConversationModels(
-        request: ListConversationModelsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListConversationModelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListConversationModelsResponse
 
       func deleteConversationModel(
-        request: DeleteConversationModelRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteConversationModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deployConversationModel(
-        request: DeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
+        request: DeployConversationModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func undeployConversationModel(
-        request: UndeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
+        request: UndeployConversationModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func getConversationModelEvaluation(
-        request: GetConversationModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
+        request: GetConversationModelEvaluationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ConversationModelEvaluation
 
       func listConversationModelEvaluations(
-        request: ListConversationModelEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListConversationModelEvaluationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListConversationModelEvaluationsResponse
 
       func createConversationModelEvaluation(
-        request: CreateConversationModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateConversationModelEvaluationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudDataprocV1
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, regionId: String, ) async throws {
   let client = try GoogleCloudDataprocV1.WorkflowTemplateServiceClient()

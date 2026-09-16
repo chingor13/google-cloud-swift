@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A request for the customer to approve access to a resource.
-public struct ApprovalRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ApprovalRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the request. Format is
@@ -44,16 +44,16 @@ public struct ApprovalRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var requestedLocations: AccessLocations? = nil
 
   /// The time at which approval was requested.
-  public var requestTime: GoogleCloudWKT.Timestamp? = nil
+  public var requestTime: GoogleWKT.Timestamp? = nil
 
   /// The requested expiration for the approval. If the request is approved,
   /// access will be granted from the time of approval until the expiration time.
-  public var requestedExpiration: GoogleCloudWKT.Timestamp? = nil
+  public var requestedExpiration: GoogleWKT.Timestamp? = nil
 
   /// The current decision on the approval request.
   public var decision: OneOf_Decision? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ApprovalRequest`.
   public init() {}
@@ -115,10 +115,9 @@ public struct ApprovalRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       AccessReason.self, forKey: .requestedReason)
     self.requestedLocations = try container.decodeIfPresent(
       AccessLocations.self, forKey: .requestedLocations)
-    self.requestTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .requestTime)
+    self.requestTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .requestTime)
     self.requestedExpiration = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .requestedExpiration)
+      GoogleWKT.Timestamp.self, forKey: .requestedExpiration)
 
     var decision: OneOf_Decision? = nil
     let decisionCheckAndSet = {
@@ -139,7 +138,7 @@ public struct ApprovalRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.decision = decision
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -178,10 +177,10 @@ public struct ApprovalRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.accessapproval.v1.ApprovalRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

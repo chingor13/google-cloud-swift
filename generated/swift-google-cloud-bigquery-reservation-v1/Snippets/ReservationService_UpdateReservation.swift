@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleBigQueryReservationV1
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(
   client: ReservationServiceClient, projectId: String, locationId: String, reservationId: String
@@ -30,7 +30,7 @@ func sample(
         $0.reservation = Reservation().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/reservations/\(reservationId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

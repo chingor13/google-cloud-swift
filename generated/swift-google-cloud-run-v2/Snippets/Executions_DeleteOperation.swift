@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudRunV2
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ExecutionsClient) async throws {
   try await client.deleteOperation(

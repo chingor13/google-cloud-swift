@@ -16,11 +16,11 @@
 
 #if OrganizationSecurityPolicies || RegionSecurityPolicies || SecurityPolicies
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a match condition that incoming network traffic is evaluated
   /// against.
-  public struct SecurityPolicyRuleNetworkMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SecurityPolicyRuleNetworkMatcher: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Destination IPv4/IPv6 addresses or CIDR prefixes, in standard text
@@ -55,7 +55,7 @@
     /// matching values for that field.
     public var userDefinedFields: [SecurityPolicyRuleNetworkMatcherUserDefinedFieldMatch] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SecurityPolicyRuleNetworkMatcher`.
     public init() {}
@@ -130,7 +130,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -152,11 +152,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.SecurityPolicyRuleNetworkMatcher"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

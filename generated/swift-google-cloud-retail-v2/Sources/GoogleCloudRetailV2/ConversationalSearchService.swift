@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for retail conversational search.
 ///
@@ -35,7 +35,7 @@ public final class ConversationalSearchServiceClient: Clients.ConversationalSear
   let inner: any Clients.ConversationalSearchServiceStub
 
   /// Creates a new `ConversationalSearchServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ConversationalSearchServiceStub =
       try Clients.ConversationalSearchServiceTransport(options)
     inner = Clients.ConversationalSearchServiceRetry(inner, options: options)
@@ -52,7 +52,7 @@ public final class ConversationalSearchServiceClient: Clients.ConversationalSear
   ///
   /// @Snippet(path: "ConversationalSearchService_ConversationalSearch")
   public func conversationalSearch(
-    request: ConversationalSearchRequest, options: GoogleCloudGax.RequestOptions
+    request: ConversationalSearchRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.ConversationalSearchResponse {
     try await self.inner.conversationalSearch(request: request, options: options)
   }
@@ -63,7 +63,7 @@ public final class ConversationalSearchServiceClient: Clients.ConversationalSear
   ///
   /// @Snippet(path: "ConversationalSearchService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -74,7 +74,7 @@ public final class ConversationalSearchServiceClient: Clients.ConversationalSear
   ///
   /// @Snippet(path: "ConversationalSearchService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -82,7 +82,7 @@ public final class ConversationalSearchServiceClient: Clients.ConversationalSear
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -91,7 +91,7 @@ public final class ConversationalSearchServiceClient: Clients.ConversationalSear
   ///
   /// @Snippet(path: "ConversationalSearchService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -125,17 +125,17 @@ extension Clients {
 
     /// See `ConversationalSearchServiceClient.conversationalSearch`.
     func conversationalSearch(
-      request: ConversationalSearchRequest, options: GoogleCloudGax.RequestOptions
+      request: ConversationalSearchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ConversationalSearchResponse
 
     /// See `ConversationalSearchServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `ConversationalSearchServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
   }
 }
@@ -149,9 +149,9 @@ extension Clients.ConversationalSearchServiceProtocol {
   }
 
   public func conversationalSearch(
-    request: ConversationalSearchRequest, options: GoogleCloudGax.RequestOptions
+    request: ConversationalSearchRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.ConversationalSearchResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -161,9 +161,9 @@ extension Clients.ConversationalSearchServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -173,13 +173,13 @@ extension Clients.ConversationalSearchServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -200,9 +200,9 @@ extension Clients.ConversationalSearchServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

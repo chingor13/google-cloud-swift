@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes violations in a client request. This error type focuses on the
 /// syntactic aspects of the request.
-public struct BadRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BadRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Describes all violations in a client request.
   public var fieldViolations: [BadRequest.FieldViolation] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BadRequest`.
   public init() {}
@@ -65,7 +65,7 @@ public struct BadRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -78,7 +78,7 @@ public struct BadRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// A message type used to describe a single bad request field.
-  public struct FieldViolation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FieldViolation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A path that leads to a field in the request body. The value will be a
@@ -135,7 +135,7 @@ public struct BadRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// return to the API consumer.
     public var localizedMessage: LocalizedMessage? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FieldViolation`.
     public init() {}
@@ -187,7 +187,7 @@ public struct BadRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         LocalizedMessage.self, forKey: .localizedMessage)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -205,21 +205,21 @@ public struct BadRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.rpc.BadRequest.FieldViolation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.rpc.BadRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

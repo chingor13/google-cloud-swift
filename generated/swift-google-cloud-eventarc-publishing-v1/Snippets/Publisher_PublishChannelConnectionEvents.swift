@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudEventarcPublishingV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: PublisherClient) async throws {
   let response = try await client.publishChannelConnectionEvents(

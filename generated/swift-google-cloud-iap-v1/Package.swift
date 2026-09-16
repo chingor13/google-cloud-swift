@@ -26,8 +26,8 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/googleapis/swift-google-auth", from: "0.0.0-preview"),
     .package(url: "https://github.com/googleapis/swift-google-gax", from: "0.0.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.1.0-preview"),
     .package(url: "https://github.com/googleapis/swift-google-iam-v1", from: "0.1.0-preview"),
+    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.1.0-preview"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
@@ -35,9 +35,9 @@ let package = Package(
       name: "GoogleCloudIAPV1",
       dependencies: [
         .product(name: "GoogleAuth", package: "swift-google-auth"),
-        .product(name: "GoogleCloudGax", package: "swift-google-gax"),
-        .product(name: "GoogleCloudWKT", package: "swift-google-wkt"),
+        .product(name: "GoogleGax", package: "swift-google-gax"),
         .product(name: "GoogleIAMV1", package: "swift-google-iam-v1"),
+        .product(name: "GoogleWKT", package: "swift-google-wkt"),
         .product(name: "Logging", package: "swift-log"),
       ],
     )

@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// A service for allocating Android devices and interacting with the
 /// live-allocated devices.
@@ -37,7 +37,7 @@ public final class DirectAccessServiceClient: Clients.DirectAccessServiceProtoco
   let inner: any Clients.DirectAccessServiceStub
 
   /// Creates a new `DirectAccessServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DirectAccessServiceStub = try Clients.DirectAccessServiceTransport(
       options)
     inner = Clients.DirectAccessServiceRetry(inner, options: options)
@@ -51,7 +51,7 @@ public final class DirectAccessServiceClient: Clients.DirectAccessServiceProtoco
   ///
   /// @Snippet(path: "DirectAccessService_CreateDeviceSession")
   public func createDeviceSession(
-    request: CreateDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDeviceSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession {
     try await self.inner.createDeviceSession(request: request, options: options)
   }
@@ -60,7 +60,7 @@ public final class DirectAccessServiceClient: Clients.DirectAccessServiceProtoco
   ///
   /// @Snippet(path: "DirectAccessService_ListDeviceSessions")
   public func listDeviceSessions(
-    request: ListDeviceSessionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeviceSessionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeviceStreamingV1.ListDeviceSessionsResponse {
     try await self.inner.listDeviceSessions(request: request, options: options)
   }
@@ -69,7 +69,7 @@ public final class DirectAccessServiceClient: Clients.DirectAccessServiceProtoco
   ///
   /// @Snippet(path: "DirectAccessService_ListDeviceSessions")
   public func listDeviceSessions(
-    byItem: ListDeviceSessionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeviceSessionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DeviceSession, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDeviceStreamingV1.ListDeviceSessionsResponse
@@ -78,7 +78,7 @@ public final class DirectAccessServiceClient: Clients.DirectAccessServiceProtoco
       request.pageToken = token
       return try await self.listDeviceSessions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a DeviceSession, which documents the allocation status and
@@ -87,7 +87,7 @@ public final class DirectAccessServiceClient: Clients.DirectAccessServiceProtoco
   ///
   /// @Snippet(path: "DirectAccessService_GetDeviceSession")
   public func getDeviceSession(
-    request: GetDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeviceSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession {
     try await self.inner.getDeviceSession(request: request, options: options)
   }
@@ -100,7 +100,7 @@ public final class DirectAccessServiceClient: Clients.DirectAccessServiceProtoco
   ///
   /// @Snippet(path: "DirectAccessService_CancelDeviceSession")
   public func cancelDeviceSession(
-    request: CancelDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelDeviceSessionRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelDeviceSession(request: request, options: options)
   }
@@ -110,7 +110,7 @@ public final class DirectAccessServiceClient: Clients.DirectAccessServiceProtoco
   ///
   /// @Snippet(path: "DirectAccessService_UpdateDeviceSession")
   public func updateDeviceSession(
-    request: UpdateDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDeviceSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession {
     try await self.inner.updateDeviceSession(request: request, options: options)
   }
@@ -167,37 +167,37 @@ extension Clients {
     /// See `DirectAccessServiceClient.updateDeviceSession`.
     func updateDeviceSession(
       deviceSession: DeviceSession?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession
 
     /// See `DirectAccessServiceClient.createDeviceSession`.
     func createDeviceSession(
-      request: CreateDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDeviceSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession
 
     /// See `DirectAccessServiceClient.listDeviceSessions`.
     func listDeviceSessions(
-      request: ListDeviceSessionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeviceSessionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeviceStreamingV1.ListDeviceSessionsResponse
 
     /// See `DirectAccessServiceClient.listDeviceSessions`.
     func listDeviceSessions(
-      byItem: ListDeviceSessionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDeviceSessionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DeviceSession, Swift.Error>
 
     /// See `DirectAccessServiceClient.getDeviceSession`.
     func getDeviceSession(
-      request: GetDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeviceSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession
 
     /// See `DirectAccessServiceClient.cancelDeviceSession`.
     func cancelDeviceSession(
-      request: CancelDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelDeviceSessionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `DirectAccessServiceClient.updateDeviceSession`.
     func updateDeviceSession(
-      request: UpdateDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDeviceSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession
   }
 }
@@ -211,9 +211,9 @@ extension Clients.DirectAccessServiceProtocol {
   }
 
   public func createDeviceSession(
-    request: CreateDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDeviceSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDeviceSession(
@@ -236,9 +236,9 @@ extension Clients.DirectAccessServiceProtocol {
   }
 
   public func listDeviceSessions(
-    request: ListDeviceSessionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeviceSessionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeviceStreamingV1.ListDeviceSessionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDeviceSessions(
@@ -248,14 +248,14 @@ extension Clients.DirectAccessServiceProtocol {
   }
 
   public func listDeviceSessions(
-    byItem: ListDeviceSessionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeviceSessionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DeviceSession, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDeviceStreamingV1.ListDeviceSessionsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDeviceSessions(
@@ -274,9 +274,9 @@ extension Clients.DirectAccessServiceProtocol {
   }
 
   public func getDeviceSession(
-    request: GetDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeviceSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDeviceSession(
@@ -293,9 +293,9 @@ extension Clients.DirectAccessServiceProtocol {
   }
 
   public func cancelDeviceSession(
-    request: CancelDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelDeviceSessionRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateDeviceSession(request: UpdateDeviceSessionRequest) async throws
@@ -305,14 +305,14 @@ extension Clients.DirectAccessServiceProtocol {
   }
 
   public func updateDeviceSession(
-    request: UpdateDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDeviceSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateDeviceSession(
     deviceSession: DeviceSession?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession {
     let request = UpdateDeviceSessionRequest().with {
       $0.deviceSession = deviceSession

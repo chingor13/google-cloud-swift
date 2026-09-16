@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// ConsumerProcurementService allows customers to make purchases of products
 /// served by the Cloud Commerce platform.
@@ -41,11 +41,11 @@ public final class ConsumerProcurementServiceClient: Clients.ConsumerProcurement
   Sendable
 {
   let inner: any Clients.ConsumerProcurementServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `ConsumerProcurementServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ConsumerProcurementServiceStub =
       try Clients.ConsumerProcurementServiceTransport(options)
     inner = Clients.ConsumerProcurementServiceRetry(inner, options: options)
@@ -72,7 +72,7 @@ public final class ConsumerProcurementServiceClient: Clients.ConsumerProcurement
   ///
   /// @Snippet(path: "ConsumerProcurementService_PlaceOrder")
   public func placeOrder(
-    request: PlaceOrderRequest, options: GoogleCloudGax.RequestOptions
+    request: PlaceOrderRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.placeOrder(request: request, options: options)
   }
@@ -92,21 +92,20 @@ public final class ConsumerProcurementServiceClient: Clients.ConsumerProcurement
   ///
   /// @Snippet(path: "ConsumerProcurementService_PlaceOrder")
   public func placeOrder(
-    withPolling: PlaceOrderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Order> {
+    withPolling: PlaceOrderRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Order> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Order>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Order>.State in
       return try op._extractStatus(Order.self)
     }
     let rawOp = try await self.placeOrder(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Order>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Order>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -121,7 +120,7 @@ public final class ConsumerProcurementServiceClient: Clients.ConsumerProcurement
   ///
   /// @Snippet(path: "ConsumerProcurementService_GetOrder")
   public func getOrder(
-    request: GetOrderRequest, options: GoogleCloudGax.RequestOptions
+    request: GetOrderRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCommerceConsumerProcurementV1.Order {
     try await self.inner.getOrder(request: request, options: options)
   }
@@ -134,7 +133,7 @@ public final class ConsumerProcurementServiceClient: Clients.ConsumerProcurement
   ///
   /// @Snippet(path: "ConsumerProcurementService_ListOrders")
   public func listOrders(
-    request: ListOrdersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListOrdersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCommerceConsumerProcurementV1.ListOrdersResponse {
     try await self.inner.listOrders(request: request, options: options)
   }
@@ -147,7 +146,7 @@ public final class ConsumerProcurementServiceClient: Clients.ConsumerProcurement
   ///
   /// @Snippet(path: "ConsumerProcurementService_ListOrders")
   public func listOrders(
-    byItem: ListOrdersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListOrdersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Order, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -156,7 +155,7 @@ public final class ConsumerProcurementServiceClient: Clients.ConsumerProcurement
       request.pageToken = token
       return try await self.listOrders(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Modifies an existing
@@ -166,7 +165,7 @@ public final class ConsumerProcurementServiceClient: Clients.ConsumerProcurement
   ///
   /// @Snippet(path: "ConsumerProcurementService_ModifyOrder")
   public func modifyOrder(
-    request: ModifyOrderRequest, options: GoogleCloudGax.RequestOptions
+    request: ModifyOrderRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.modifyOrder(request: request, options: options)
   }
@@ -178,21 +177,20 @@ public final class ConsumerProcurementServiceClient: Clients.ConsumerProcurement
   ///
   /// @Snippet(path: "ConsumerProcurementService_ModifyOrder")
   public func modifyOrder(
-    withPolling: ModifyOrderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Order> {
+    withPolling: ModifyOrderRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Order> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Order>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Order>.State in
       return try op._extractStatus(Order.self)
     }
     let rawOp = try await self.modifyOrder(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Order>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Order>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -208,7 +206,7 @@ public final class ConsumerProcurementServiceClient: Clients.ConsumerProcurement
   ///
   /// @Snippet(path: "ConsumerProcurementService_CancelOrder")
   public func cancelOrder(
-    request: CancelOrderRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelOrderRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.cancelOrder(request: request, options: options)
   }
@@ -221,21 +219,20 @@ public final class ConsumerProcurementServiceClient: Clients.ConsumerProcurement
   ///
   /// @Snippet(path: "ConsumerProcurementService_CancelOrder")
   public func cancelOrder(
-    withPolling: CancelOrderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Order> {
+    withPolling: CancelOrderRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Order> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Order>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Order>.State in
       return try op._extractStatus(Order.self)
     }
     let rawOp = try await self.cancelOrder(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Order>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Order>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -249,7 +246,7 @@ public final class ConsumerProcurementServiceClient: Clients.ConsumerProcurement
   ///
   /// @Snippet(path: "ConsumerProcurementService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -266,8 +263,9 @@ extension Clients {
     func placeOrder(request: PlaceOrderRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ConsumerProcurementServiceClient.placeOrder`.
-    func placeOrder(withPolling: PlaceOrderRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Order>
+    func placeOrder(withPolling: PlaceOrderRequest) async throws -> any GoogleGax.PollableOperation<
+      Order
+    >
 
     /// See `ConsumerProcurementServiceClient.getOrder`.
     func getOrder(request: GetOrderRequest) async throws
@@ -296,60 +294,60 @@ extension Clients {
     func modifyOrder(request: ModifyOrderRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ConsumerProcurementServiceClient.modifyOrder`.
-    func modifyOrder(withPolling: ModifyOrderRequest) async throws -> any GoogleCloudGax
+    func modifyOrder(withPolling: ModifyOrderRequest) async throws -> any GoogleGax
       .PollableOperation<Order>
 
     /// See `ConsumerProcurementServiceClient.cancelOrder`.
     func cancelOrder(request: CancelOrderRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ConsumerProcurementServiceClient.cancelOrder`.
-    func cancelOrder(withPolling: CancelOrderRequest) async throws -> any GoogleCloudGax
+    func cancelOrder(withPolling: CancelOrderRequest) async throws -> any GoogleGax
       .PollableOperation<Order>
 
     /// See `ConsumerProcurementServiceClient.placeOrder`.
     func placeOrder(
-      request: PlaceOrderRequest, options: GoogleCloudGax.RequestOptions
+      request: PlaceOrderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConsumerProcurementServiceClient.placeOrder`.
     func placeOrder(
-      withPolling: PlaceOrderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Order>
+      withPolling: PlaceOrderRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Order>
 
     /// See `ConsumerProcurementServiceClient.getOrder`.
     func getOrder(
-      request: GetOrderRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOrderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.Order
 
     /// See `ConsumerProcurementServiceClient.listOrders`.
     func listOrders(
-      request: ListOrdersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOrdersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.ListOrdersResponse
 
     /// See `ConsumerProcurementServiceClient.listOrders`.
     func listOrders(
-      byItem: ListOrdersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListOrdersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Order, Swift.Error>
 
     /// See `ConsumerProcurementServiceClient.modifyOrder`.
     func modifyOrder(
-      request: ModifyOrderRequest, options: GoogleCloudGax.RequestOptions
+      request: ModifyOrderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConsumerProcurementServiceClient.modifyOrder`.
     func modifyOrder(
-      withPolling: ModifyOrderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Order>
+      withPolling: ModifyOrderRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Order>
 
     /// See `ConsumerProcurementServiceClient.cancelOrder`.
     func cancelOrder(
-      request: CancelOrderRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelOrderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConsumerProcurementServiceClient.cancelOrder`.
     func cancelOrder(
-      withPolling: CancelOrderRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Order>
+      withPolling: CancelOrderRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Order>
   }
 }
 
@@ -360,24 +358,24 @@ extension Clients.ConsumerProcurementServiceProtocol {
   }
 
   public func placeOrder(
-    request: PlaceOrderRequest, options: GoogleCloudGax.RequestOptions
+    request: PlaceOrderRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func placeOrder(withPolling: PlaceOrderRequest) async throws -> any GoogleCloudGax
+  public func placeOrder(withPolling: PlaceOrderRequest) async throws -> any GoogleGax
     .PollableOperation<Order>
   {
     try await self.placeOrder(withPolling: withPolling, options: .init())
   }
 
   public func placeOrder(
-    withPolling: PlaceOrderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Order> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Order>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: PlaceOrderRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Order> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Order>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -388,9 +386,9 @@ extension Clients.ConsumerProcurementServiceProtocol {
   }
 
   public func getOrder(
-    request: GetOrderRequest, options: GoogleCloudGax.RequestOptions
+    request: GetOrderRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCommerceConsumerProcurementV1.Order {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOrder(
@@ -409,9 +407,9 @@ extension Clients.ConsumerProcurementServiceProtocol {
   }
 
   public func listOrders(
-    request: ListOrdersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListOrdersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCommerceConsumerProcurementV1.ListOrdersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOrders(
@@ -421,14 +419,14 @@ extension Clients.ConsumerProcurementServiceProtocol {
   }
 
   public func listOrders(
-    byItem: ListOrdersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListOrdersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Order, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudCommerceConsumerProcurementV1.ListOrdersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOrders(
@@ -445,24 +443,24 @@ extension Clients.ConsumerProcurementServiceProtocol {
   }
 
   public func modifyOrder(
-    request: ModifyOrderRequest, options: GoogleCloudGax.RequestOptions
+    request: ModifyOrderRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func modifyOrder(withPolling: ModifyOrderRequest) async throws -> any GoogleCloudGax
+  public func modifyOrder(withPolling: ModifyOrderRequest) async throws -> any GoogleGax
     .PollableOperation<Order>
   {
     try await self.modifyOrder(withPolling: withPolling, options: .init())
   }
 
   public func modifyOrder(
-    withPolling: ModifyOrderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Order> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Order>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ModifyOrderRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Order> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Order>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -471,24 +469,24 @@ extension Clients.ConsumerProcurementServiceProtocol {
   }
 
   public func cancelOrder(
-    request: CancelOrderRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelOrderRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func cancelOrder(withPolling: CancelOrderRequest) async throws -> any GoogleCloudGax
+  public func cancelOrder(withPolling: CancelOrderRequest) async throws -> any GoogleGax
     .PollableOperation<Order>
   {
     try await self.cancelOrder(withPolling: withPolling, options: .init())
   }
 
   public func cancelOrder(
-    withPolling: CancelOrderRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Order> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Order>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CancelOrderRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Order> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Order>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -499,9 +497,9 @@ extension Clients.ConsumerProcurementServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

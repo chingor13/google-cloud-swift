@@ -20,29 +20,29 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class ModelServiceRetry: ModelServiceStub {
       let inner: any ModelServiceStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any ModelServiceStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any ModelServiceStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -54,14 +54,14 @@
       }
 
       public func uploadModel(
-        request: UploadModelRequest, options: GoogleCloudGax.RequestOptions
+        request: UploadModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: UploadModelRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UploadModelRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.uploadModel(request: r, options: o)
@@ -69,14 +69,14 @@
       }
 
       public func getModel(
-        request: GetModelRequest, options: GoogleCloudGax.RequestOptions
+        request: GetModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Model {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetModelRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetModelRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.Model
             in
             return try await self.inner.getModel(request: r, options: o)
@@ -84,14 +84,14 @@
       }
 
       public func listModels(
-        request: ListModelsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListModelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListModelsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListModelsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListModelsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListModelsResponse
             in
             return try await self.inner.listModels(request: r, options: o)
@@ -99,14 +99,14 @@
       }
 
       public func listModelVersions(
-        request: ListModelVersionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListModelVersionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListModelVersionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListModelVersionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListModelVersionsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListModelVersionsResponse
             in
             return try await self.inner.listModelVersions(request: r, options: o)
@@ -114,14 +114,14 @@
       }
 
       public func listModelVersionCheckpoints(
-        request: ListModelVersionCheckpointsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListModelVersionCheckpointsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListModelVersionCheckpointsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListModelVersionCheckpointsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListModelVersionCheckpointsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListModelVersionCheckpointsResponse
             in
             return try await self.inner.listModelVersionCheckpoints(request: r, options: o)
@@ -129,14 +129,14 @@
       }
 
       public func updateModel(
-        request: UpdateModelRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Model {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: UpdateModelRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateModelRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.Model
             in
             return try await self.inner.updateModel(request: r, options: o)
@@ -144,14 +144,14 @@
       }
 
       public func updateExplanationDataset(
-        request: UpdateExplanationDatasetRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateExplanationDatasetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: UpdateExplanationDatasetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateExplanationDatasetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.updateExplanationDataset(request: r, options: o)
@@ -159,14 +159,14 @@
       }
 
       public func deleteModel(
-        request: DeleteModelRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: DeleteModelRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteModelRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteModel(request: r, options: o)
@@ -174,14 +174,14 @@
       }
 
       public func deleteModelVersion(
-        request: DeleteModelVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteModelVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: DeleteModelVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteModelVersionRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteModelVersion(request: r, options: o)
@@ -189,14 +189,14 @@
       }
 
       public func mergeVersionAliases(
-        request: MergeVersionAliasesRequest, options: GoogleCloudGax.RequestOptions
+        request: MergeVersionAliasesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Model {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: MergeVersionAliasesRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: MergeVersionAliasesRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.Model
             in
             return try await self.inner.mergeVersionAliases(request: r, options: o)
@@ -204,14 +204,14 @@
       }
 
       public func exportModel(
-        request: ExportModelRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ExportModelRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ExportModelRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.exportModel(request: r, options: o)
@@ -219,14 +219,14 @@
       }
 
       public func copyModel(
-        request: CopyModelRequest, options: GoogleCloudGax.RequestOptions
+        request: CopyModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: CopyModelRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CopyModelRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.copyModel(request: r, options: o)
@@ -234,14 +234,14 @@
       }
 
       public func importModelEvaluation(
-        request: ImportModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportModelEvaluationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ModelEvaluation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ImportModelEvaluationRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ImportModelEvaluationRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ModelEvaluation
             in
             return try await self.inner.importModelEvaluation(request: r, options: o)
@@ -249,44 +249,44 @@
       }
 
       public func batchImportModelEvaluationSlices(
-        request: BatchImportModelEvaluationSlicesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchImportModelEvaluationSlicesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.BatchImportModelEvaluationSlicesResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: BatchImportModelEvaluationSlicesRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudAIPlatformV1.BatchImportModelEvaluationSlicesResponse
+            (r: BatchImportModelEvaluationSlicesRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudAIPlatformV1.BatchImportModelEvaluationSlicesResponse
             in
             return try await self.inner.batchImportModelEvaluationSlices(request: r, options: o)
           })
       }
 
       public func batchImportEvaluatedAnnotations(
-        request: BatchImportEvaluatedAnnotationsRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchImportEvaluatedAnnotationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.BatchImportEvaluatedAnnotationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: BatchImportEvaluatedAnnotationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudAIPlatformV1.BatchImportEvaluatedAnnotationsResponse
+            (r: BatchImportEvaluatedAnnotationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudAIPlatformV1.BatchImportEvaluatedAnnotationsResponse
             in
             return try await self.inner.batchImportEvaluatedAnnotations(request: r, options: o)
           })
       }
 
       public func getModelEvaluation(
-        request: GetModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
+        request: GetModelEvaluationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ModelEvaluation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetModelEvaluationRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetModelEvaluationRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ModelEvaluation
             in
             return try await self.inner.getModelEvaluation(request: r, options: o)
@@ -294,14 +294,14 @@
       }
 
       public func listModelEvaluations(
-        request: ListModelEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListModelEvaluationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListModelEvaluationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListModelEvaluationsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListModelEvaluationsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListModelEvaluationsResponse
             in
             return try await self.inner.listModelEvaluations(request: r, options: o)
@@ -309,14 +309,14 @@
       }
 
       public func getModelEvaluationSlice(
-        request: GetModelEvaluationSliceRequest, options: GoogleCloudGax.RequestOptions
+        request: GetModelEvaluationSliceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ModelEvaluationSlice {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetModelEvaluationSliceRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetModelEvaluationSliceRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ModelEvaluationSlice
             in
             return try await self.inner.getModelEvaluationSlice(request: r, options: o)
@@ -324,14 +324,14 @@
       }
 
       public func listModelEvaluationSlices(
-        request: ListModelEvaluationSlicesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListModelEvaluationSlicesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListModelEvaluationSlicesResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListModelEvaluationSlicesRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListModelEvaluationSlicesRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListModelEvaluationSlicesResponse
             in
             return try await self.inner.listModelEvaluationSlices(request: r, options: o)
@@ -339,44 +339,44 @@
       }
 
       public func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.ListLocationsResponse
+            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.ListLocationsResponse
             in
             return try await self.inner.listLocations(request: r, options: o)
           })
       }
 
       public func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.Location
+            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.Location
             in
             return try await self.inner.getLocation(request: r, options: o)
           })
       }
 
       public func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleIAMV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
@@ -384,14 +384,14 @@
       }
 
       public func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleIAMV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
@@ -399,88 +399,88 @@
       }
 
       public func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleIAMV1.TestIamPermissionsResponse
+            (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleIAMV1.TestIamPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
           })
       }
 
       public func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.ListOperationsResponse
+            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.ListOperationsResponse
             in
             return try await self.inner.listOperations(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)
           })
       }
 
       public func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.deleteOperation(request: r, options: o)
           })
       }
 
       public func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.cancelOperation(request: r, options: o)
           })
       }
 
       public func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleLongRunning.WaitOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.WaitOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.waitOperation(request: r, options: o)
           })

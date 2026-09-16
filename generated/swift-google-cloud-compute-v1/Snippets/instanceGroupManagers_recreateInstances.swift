@@ -19,7 +19,7 @@
   // snippet.show
   import Foundation
   import GoogleCloudComputeV1
-  import GoogleCloudWKT
+  import GoogleWKT
 
   func sample(client: InstanceGroupManagersClient) async throws {
     let poller = try await client.recreateInstances(

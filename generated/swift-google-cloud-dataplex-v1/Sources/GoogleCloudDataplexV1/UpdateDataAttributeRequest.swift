@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Update DataAttribute request.
-public struct UpdateDataAttributeRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateDataAttributeRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Mask of fields to update.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Required. Only fields specified in `update_mask` are updated.
   public var dataAttribute: DataAttribute? = nil
@@ -31,7 +31,7 @@ public struct UpdateDataAttributeRequest: Codable, Equatable, GoogleCloudWKT._An
   /// The default is false.
   public var validateOnly: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateDataAttributeRequest`.
   public init() {}
@@ -68,15 +68,14 @@ public struct UpdateDataAttributeRequest: Codable, Equatable, GoogleCloudWKT._An
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.dataAttribute = try container.decodeIfPresent(DataAttribute.self, forKey: .dataAttribute)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .validateOnly) {
       self.validateOnly = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -93,10 +92,10 @@ public struct UpdateDataAttributeRequest: Codable, Equatable, GoogleCloudWKT._An
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.UpdateDataAttributeRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

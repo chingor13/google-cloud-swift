@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudLoggingV2
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: MetricsServiceV2Client, projectId: String, metricId: String) async throws {
   let response = try await client.getLogMetric(

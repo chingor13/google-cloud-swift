@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents an identifier of an object in the data source.
-public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SourceObjectIdentifier: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The identifier for an object in the data source.
   public var sourceIdentifier: OneOf_SourceIdentifier? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SourceObjectIdentifier`.
   public init() {}
@@ -111,7 +111,7 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
     self.sourceIdentifier = sourceIdentifier
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -140,7 +140,7 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
   }
 
   /// Oracle data source object identifier.
-  public struct OracleObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct OracleObjectIdentifier: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The schema name.
@@ -149,7 +149,7 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
     /// Required. The table name.
     public var table: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `OracleObjectIdentifier`.
     public init() {}
@@ -192,7 +192,7 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -209,16 +209,16 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.datastream.v1.SourceObjectIdentifier.OracleObjectIdentifier"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// PostgreSQL data source object identifier.
-  public struct PostgresqlObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PostgresqlObjectIdentifier: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The schema name.
@@ -227,7 +227,7 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
     /// Required. The table name.
     public var table: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PostgresqlObjectIdentifier`.
     public init() {}
@@ -270,7 +270,7 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -287,16 +287,16 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Mysql data source object identifier.
-  public struct MysqlObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MysqlObjectIdentifier: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The database name.
@@ -305,7 +305,7 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
     /// Required. The table name.
     public var table: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MysqlObjectIdentifier`.
     public init() {}
@@ -348,7 +348,7 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -365,16 +365,16 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.datastream.v1.SourceObjectIdentifier.MysqlObjectIdentifier"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// SQLServer data source object identifier.
-  public struct SqlServerObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SqlServerObjectIdentifier: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The schema name.
@@ -383,7 +383,7 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
     /// Required. The table name.
     public var table: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SqlServerObjectIdentifier`.
     public init() {}
@@ -426,7 +426,7 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -443,22 +443,22 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.datastream.v1.SourceObjectIdentifier.SqlServerObjectIdentifier"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Salesforce data source object identifier.
-  public struct SalesforceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SalesforceObjectIdentifier: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The object name.
     public var objectName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SalesforceObjectIdentifier`.
     public init() {}
@@ -496,7 +496,7 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -512,16 +512,16 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.datastream.v1.SourceObjectIdentifier.SalesforceObjectIdentifier"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// MongoDB data source object identifier.
-  public struct MongodbObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MongodbObjectIdentifier: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The database name.
@@ -530,7 +530,7 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
     /// Required. The collection name.
     public var collection: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MongodbObjectIdentifier`.
     public init() {}
@@ -573,7 +573,7 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -590,11 +590,11 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.datastream.v1.SourceObjectIdentifier.MongodbObjectIdentifier"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -617,10 +617,10 @@ public struct SourceObjectIdentifier: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datastream.v1.SourceObjectIdentifier"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

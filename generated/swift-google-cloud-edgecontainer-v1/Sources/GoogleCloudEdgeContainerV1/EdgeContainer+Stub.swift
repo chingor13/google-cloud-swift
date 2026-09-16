@@ -16,115 +16,115 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol EdgeContainerStub: Sendable {
     func listClusters(
-      request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.ListClustersResponse
 
     func getCluster(
-      request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.Cluster
 
     func createCluster(
-      request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateCluster(
-      request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func upgradeCluster(
-      request: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpgradeClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCluster(
-      request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func generateAccessToken(
-      request: GenerateAccessTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAccessTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.GenerateAccessTokenResponse
 
     func generateOfflineCredential(
-      request: GenerateOfflineCredentialRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateOfflineCredentialRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.GenerateOfflineCredentialResponse
 
     func listNodePools(
-      request: ListNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNodePoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.ListNodePoolsResponse
 
     func getNodePool(
-      request: GetNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.NodePool
 
     func createNodePool(
-      request: CreateNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateNodePool(
-      request: UpdateNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteNodePool(
-      request: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listMachines(
-      request: ListMachinesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMachinesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.ListMachinesResponse
 
     func getMachine(
-      request: GetMachineRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMachineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.Machine
 
     func listVpnConnections(
-      request: ListVpnConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVpnConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.ListVpnConnectionsResponse
 
     func getVpnConnection(
-      request: GetVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVpnConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.VpnConnection
 
     func createVpnConnection(
-      request: CreateVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateVpnConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteVpnConnection(
-      request: DeleteVpnConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteVpnConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getServerConfig(
-      request: GetServerConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServerConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeContainerV1.ServerConfig
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

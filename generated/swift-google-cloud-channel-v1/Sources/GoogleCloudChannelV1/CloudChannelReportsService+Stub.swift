@@ -15,39 +15,39 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CloudChannelReportsServiceStub: Sendable {
     func runReportJob(
-      request: RunReportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: RunReportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func fetchReportResults(
-      request: FetchReportResultsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchReportResultsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.FetchReportResultsResponse
 
     func listReports(
-      request: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReportsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListReportsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

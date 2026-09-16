@@ -19,9 +19,9 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service describing CmEnrollment related RPCs for
 /// complianceManager.
@@ -31,7 +31,7 @@ public final class CmEnrollmentServiceClient: Clients.CmEnrollmentServiceProtoco
   let inner: any Clients.CmEnrollmentServiceStub
 
   /// Creates a new `CmEnrollmentServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CmEnrollmentServiceStub = try Clients.CmEnrollmentServiceTransport(
       options)
     inner = Clients.CmEnrollmentServiceRetry(inner, options: options)
@@ -48,7 +48,7 @@ public final class CmEnrollmentServiceClient: Clients.CmEnrollmentServiceProtoco
   ///
   /// @Snippet(path: "CmEnrollmentService_UpdateCmEnrollment")
   public func updateCmEnrollment(
-    request: UpdateCmEnrollmentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCmEnrollmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityComplianceV1.CmEnrollment {
     try await self.inner.updateCmEnrollment(request: request, options: options)
   }
@@ -60,7 +60,7 @@ public final class CmEnrollmentServiceClient: Clients.CmEnrollmentServiceProtoco
   ///
   /// @Snippet(path: "CmEnrollmentService_CalculateEffectiveCmEnrollment")
   public func calculateEffectiveCmEnrollment(
-    request: CalculateEffectiveCmEnrollmentRequest, options: GoogleCloudGax.RequestOptions
+    request: CalculateEffectiveCmEnrollmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityComplianceV1.CalculateEffectiveCmEnrollmentResponse {
     try await self.inner.calculateEffectiveCmEnrollment(request: request, options: options)
   }
@@ -86,7 +86,7 @@ public final class CmEnrollmentServiceClient: Clients.CmEnrollmentServiceProtoco
   ///
   /// @Snippet(path: "CmEnrollmentService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -112,7 +112,7 @@ public final class CmEnrollmentServiceClient: Clients.CmEnrollmentServiceProtoco
   ///
   /// @Snippet(path: "CmEnrollmentService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -120,14 +120,14 @@ public final class CmEnrollmentServiceClient: Clients.CmEnrollmentServiceProtoco
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "CmEnrollmentService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -138,7 +138,7 @@ public final class CmEnrollmentServiceClient: Clients.CmEnrollmentServiceProtoco
   ///
   /// @Snippet(path: "CmEnrollmentService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -149,7 +149,7 @@ public final class CmEnrollmentServiceClient: Clients.CmEnrollmentServiceProtoco
   ///
   /// @Snippet(path: "CmEnrollmentService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -157,7 +157,7 @@ public final class CmEnrollmentServiceClient: Clients.CmEnrollmentServiceProtoco
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -166,7 +166,7 @@ public final class CmEnrollmentServiceClient: Clients.CmEnrollmentServiceProtoco
   ///
   /// @Snippet(path: "CmEnrollmentService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -177,7 +177,7 @@ public final class CmEnrollmentServiceClient: Clients.CmEnrollmentServiceProtoco
   ///
   /// @Snippet(path: "CmEnrollmentService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -188,7 +188,7 @@ public final class CmEnrollmentServiceClient: Clients.CmEnrollmentServiceProtoco
   ///
   /// @Snippet(path: "CmEnrollmentService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -208,7 +208,7 @@ extension Clients {
     /// See `CmEnrollmentServiceClient.updateCmEnrollment`.
     func updateCmEnrollment(
       cmEnrollment: CmEnrollment?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudSecurityComplianceV1.CmEnrollment
 
     /// See `CmEnrollmentServiceClient.calculateEffectiveCmEnrollment`.
@@ -266,47 +266,47 @@ extension Clients {
 
     /// See `CmEnrollmentServiceClient.updateCmEnrollment`.
     func updateCmEnrollment(
-      request: UpdateCmEnrollmentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCmEnrollmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityComplianceV1.CmEnrollment
 
     /// See `CmEnrollmentServiceClient.calculateEffectiveCmEnrollment`.
     func calculateEffectiveCmEnrollment(
-      request: CalculateEffectiveCmEnrollmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CalculateEffectiveCmEnrollmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityComplianceV1.CalculateEffectiveCmEnrollmentResponse
 
     /// See `CmEnrollmentServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `CmEnrollmentServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `CmEnrollmentServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `CmEnrollmentServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `CmEnrollmentServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `CmEnrollmentServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `CmEnrollmentServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -320,14 +320,14 @@ extension Clients.CmEnrollmentServiceProtocol {
   }
 
   public func updateCmEnrollment(
-    request: UpdateCmEnrollmentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCmEnrollmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityComplianceV1.CmEnrollment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCmEnrollment(
     cmEnrollment: CmEnrollment?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudSecurityComplianceV1.CmEnrollment {
     let request = UpdateCmEnrollmentRequest().with {
       $0.cmEnrollment = cmEnrollment
@@ -343,9 +343,9 @@ extension Clients.CmEnrollmentServiceProtocol {
   }
 
   public func calculateEffectiveCmEnrollment(
-    request: CalculateEffectiveCmEnrollmentRequest, options: GoogleCloudGax.RequestOptions
+    request: CalculateEffectiveCmEnrollmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityComplianceV1.CalculateEffectiveCmEnrollmentResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func calculateEffectiveCmEnrollment(
@@ -364,9 +364,9 @@ extension Clients.CmEnrollmentServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -376,13 +376,13 @@ extension Clients.CmEnrollmentServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -392,9 +392,9 @@ extension Clients.CmEnrollmentServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -404,9 +404,9 @@ extension Clients.CmEnrollmentServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -416,13 +416,13 @@ extension Clients.CmEnrollmentServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -443,9 +443,9 @@ extension Clients.CmEnrollmentServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -462,9 +462,9 @@ extension Clients.CmEnrollmentServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -481,9 +481,9 @@ extension Clients.CmEnrollmentServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

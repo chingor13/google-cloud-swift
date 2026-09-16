@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines a ranker using the Vertex AI ranking service.
 /// See https://cloud.google.com/generative-ai-app-builder/docs/ranking for
 /// details.
-public struct VertexRanker: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VertexRanker: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The model used for ranking documents. The list of available
@@ -36,7 +36,7 @@ public struct VertexRanker: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// set.
   public var recordSpec: OneOf_RecordSpec? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VertexRanker`.
   public init() {}
@@ -98,7 +98,7 @@ public struct VertexRanker: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.recordSpec = recordSpec
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -119,7 +119,7 @@ public struct VertexRanker: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The record spec for text search.
-  public struct TextRecordSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TextRecordSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The query against which the records are ranked and scored.
@@ -131,7 +131,7 @@ public struct VertexRanker: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The template used to generate the record's content.
     public var contentTemplate: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TextRecordSpec`.
     public init() {}
@@ -179,7 +179,7 @@ public struct VertexRanker: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -196,11 +196,11 @@ public struct VertexRanker: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vectorsearch.v1.VertexRanker.TextRecordSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -214,10 +214,10 @@ public struct VertexRanker: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vectorsearch.v1.VertexRanker"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

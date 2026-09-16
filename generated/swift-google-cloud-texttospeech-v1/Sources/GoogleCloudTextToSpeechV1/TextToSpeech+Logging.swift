@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func listVoices(
-      request: ListVoicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVoicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTextToSpeechV1.ListVoicesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listVoices",
         action: {
-          (r: ListVoicesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListVoicesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTextToSpeechV1.ListVoicesResponse
           in
           return try await self.inner.listVoices(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func synthesizeSpeech(
-      request: SynthesizeSpeechRequest, options: GoogleCloudGax.RequestOptions
+      request: SynthesizeSpeechRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTextToSpeechV1.SynthesizeSpeechResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "synthesizeSpeech",
         action: {
-          (r: SynthesizeSpeechRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SynthesizeSpeechRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTextToSpeechV1.SynthesizeSpeechResponse
           in
           return try await self.inner.synthesizeSpeech(request: r, options: o)
@@ -88,29 +88,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

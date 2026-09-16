@@ -16,43 +16,42 @@
 
 #if InterconnectAttachments
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol InterconnectAttachmentsStub: Sendable {
       func aggregatedList(
         request: InterconnectAttachmentsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentAggregatedList
 
       func delete(
-        request: InterconnectAttachmentsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: InterconnectAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachment
 
       func insert(
-        request: InterconnectAttachmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: InterconnectAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentList
 
       func patch(
-        request: InterconnectAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setLabels(
-        request: InterconnectAttachmentsClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentsClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

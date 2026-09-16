@@ -16,21 +16,21 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol LookupServiceStub: Sendable {
     func resolveService(
-      request: ResolveServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: ResolveServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.ResolveServiceResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }

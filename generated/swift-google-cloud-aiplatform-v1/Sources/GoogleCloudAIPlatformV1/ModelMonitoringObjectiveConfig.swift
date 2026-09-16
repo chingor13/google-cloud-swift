@@ -16,11 +16,11 @@
 
 #if JobService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The objective configuration for model monitoring, including the information
   /// needed to detect anomalies for one particular model.
-  public struct ModelMonitoringObjectiveConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ModelMonitoringObjectiveConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Training dataset for models. This field has to be set only if
@@ -38,7 +38,7 @@
     /// The config for integrating with Vertex Explainable AI.
     public var explanationConfig: ModelMonitoringObjectiveConfig.ExplanationConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ModelMonitoringObjectiveConfig`.
     public init() {}
@@ -91,7 +91,7 @@
         ModelMonitoringObjectiveConfig.ExplanationConfig.self, forKey: .explanationConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -109,7 +109,7 @@
     }
 
     /// Training Dataset information.
-    public struct TrainingDataset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct TrainingDataset: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Data format of the dataset, only applicable if the input is from
@@ -136,7 +136,7 @@
 
       public var dataSource: OneOf_DataSource? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `TrainingDataset`.
       public init() {}
@@ -212,7 +212,7 @@
         self.dataSource = dataSource
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -253,18 +253,17 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig.TrainingDataset"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The config for Training & Prediction data skew detection. It specifies the
     /// training dataset sources and the skew detection parameters.
-    public struct TrainingPredictionSkewDetectionConfig: Codable, Equatable, GoogleCloudWKT
-        ._AnyPackable,
+    public struct TrainingPredictionSkewDetectionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Key is the feature name and value is the threshold. If a feature needs to
@@ -283,7 +282,7 @@
       /// specify a threshold for all features.
       public var defaultSkewThreshold: ThresholdConfig? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `TrainingPredictionSkewDetectionConfig`.
       public init() {}
@@ -335,7 +334,7 @@
           ThresholdConfig.self, forKey: .defaultSkewThreshold)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -354,16 +353,16 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig.TrainingPredictionSkewDetectionConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The config for Prediction data drift detection.
-    public struct PredictionDriftDetectionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PredictionDriftDetectionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Key is the feature name and value is the threshold. If a feature needs to
@@ -381,7 +380,7 @@
       /// specify a threshold for all features.
       public var defaultDriftThreshold: ThresholdConfig? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PredictionDriftDetectionConfig`.
       public init() {}
@@ -433,7 +432,7 @@
           ThresholdConfig.self, forKey: .defaultDriftThreshold)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -452,17 +451,17 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig.PredictionDriftDetectionConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The config for integrating with Vertex Explainable AI. Only applicable if
     /// the Model has explanation_spec populated.
-    public struct ExplanationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ExplanationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// If want to analyze the Vertex Explainable AI feature attribute scores or
@@ -474,7 +473,7 @@
       public var explanationBaseline:
         ModelMonitoringObjectiveConfig.ExplanationConfig.ExplanationBaseline? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ExplanationConfig`.
       public init() {}
@@ -519,7 +518,7 @@
           forKey: .explanationBaseline)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -538,7 +537,7 @@
       /// attribution scores.
       ///
       /// [google.cloud.aiplatform.v1.BatchPredictionJob]: <doc:BatchPredictionJob>
-      public struct ExplanationBaseline: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct ExplanationBaseline: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// The storage format of the predictions generated BatchPrediction job.
@@ -550,8 +549,7 @@
         /// used to generate the baseline of feature attribution scores.
         public var destination: OneOf_Destination? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `ExplanationBaseline`.
         public init() {}
@@ -616,7 +614,7 @@
           self.destination = destination
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -755,11 +753,11 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig.ExplanationConfig.ExplanationBaseline"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -767,22 +765,22 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig.ExplanationConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

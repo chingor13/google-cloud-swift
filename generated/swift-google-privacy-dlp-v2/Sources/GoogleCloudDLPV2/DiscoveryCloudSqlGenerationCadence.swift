@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// How often existing tables should have their profiles refreshed.
 /// New tables are scanned as quickly as possible depending on system
 /// capacity.
-public struct DiscoveryCloudSqlGenerationCadence: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DiscoveryCloudSqlGenerationCadence: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// When to reprofile if the schema has changed.
@@ -37,7 +37,7 @@ public struct DiscoveryCloudSqlGenerationCadence: Codable, Equatable, GoogleClou
   /// If not set, changing the template will not cause a data profile to update.
   public var inspectTemplateModifiedCadence: DiscoveryInspectTemplateModifiedCadence? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DiscoveryCloudSqlGenerationCadence`.
   public init() {}
@@ -86,7 +86,7 @@ public struct DiscoveryCloudSqlGenerationCadence: Codable, Equatable, GoogleClou
       DiscoveryInspectTemplateModifiedCadence.self, forKey: .inspectTemplateModifiedCadence)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,7 +102,7 @@ public struct DiscoveryCloudSqlGenerationCadence: Codable, Equatable, GoogleClou
   }
 
   /// How frequently to modify the profile when the table's schema is modified.
-  public struct SchemaModifiedCadence: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SchemaModifiedCadence: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The types of schema modifications to consider.
@@ -114,7 +114,7 @@ public struct DiscoveryCloudSqlGenerationCadence: Codable, Equatable, GoogleClou
     /// Defaults to monthly.
     public var frequency: DataProfileUpdateFrequency = DataProfileUpdateFrequency()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SchemaModifiedCadence`.
     public init() {}
@@ -162,7 +162,7 @@ public struct DiscoveryCloudSqlGenerationCadence: Codable, Equatable, GoogleClou
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -285,21 +285,21 @@ public struct DiscoveryCloudSqlGenerationCadence: Codable, Equatable, GoogleClou
       return
         "type.googleapis.com/google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence.SchemaModifiedCadence"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryCloudSqlGenerationCadence"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

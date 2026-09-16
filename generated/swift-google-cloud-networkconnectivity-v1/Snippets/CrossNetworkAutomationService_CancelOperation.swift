@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudNetworkConnectivityV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CrossNetworkAutomationServiceClient) async throws {
   try await client.cancelOperation(

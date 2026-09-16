@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudChronicleV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: InstanceServiceClient) async throws {
   let items = try client.listOperations(

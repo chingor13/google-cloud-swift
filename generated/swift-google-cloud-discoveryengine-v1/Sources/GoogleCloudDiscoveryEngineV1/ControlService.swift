@@ -19,9 +19,9 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for performing CRUD operations on Controls.
   /// Controls allow for custom logic to be implemented in the serving path.
@@ -33,7 +33,7 @@
     let inner: any Clients.ControlServiceStub
 
     /// Creates a new `ControlServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.ControlServiceStub = try Clients.ControlServiceTransport(options)
       inner = Clients.ControlServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -53,7 +53,7 @@
     ///
     /// @Snippet(path: "ControlService_CreateControl")
     public func createControl(
-      request: CreateControlRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateControlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Control {
       try await self.inner.createControl(request: request, options: options)
     }
@@ -67,7 +67,7 @@
     ///
     /// @Snippet(path: "ControlService_DeleteControl")
     public func deleteControl(
-      request: DeleteControlRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteControlRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteControl(request: request, options: options)
     }
@@ -82,7 +82,7 @@
     ///
     /// @Snippet(path: "ControlService_UpdateControl")
     public func updateControl(
-      request: UpdateControlRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateControlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Control {
       try await self.inner.updateControl(request: request, options: options)
     }
@@ -91,7 +91,7 @@
     ///
     /// @Snippet(path: "ControlService_GetControl")
     public func getControl(
-      request: GetControlRequest, options: GoogleCloudGax.RequestOptions
+      request: GetControlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Control {
       try await self.inner.getControl(request: request, options: options)
     }
@@ -103,7 +103,7 @@
     ///
     /// @Snippet(path: "ControlService_ListControls")
     public func listControls(
-      request: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListControlsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListControlsResponse {
       try await self.inner.listControls(request: request, options: options)
     }
@@ -115,7 +115,7 @@
     ///
     /// @Snippet(path: "ControlService_ListControls")
     public func listControls(
-      byItem: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListControlsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Control, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListControlsResponse in
@@ -123,7 +123,7 @@
         request.pageToken = token
         return try await self.listControls(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -132,7 +132,7 @@
     ///
     /// @Snippet(path: "ControlService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -143,7 +143,7 @@
     ///
     /// @Snippet(path: "ControlService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -151,7 +151,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -160,7 +160,7 @@
     ///
     /// @Snippet(path: "ControlService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -171,7 +171,7 @@
     ///
     /// @Snippet(path: "ControlService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -210,7 +210,7 @@
       /// See `ControlServiceClient.updateControl`.
       func updateControl(
         control: Control?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDiscoveryEngineV1.Control
 
       /// See `ControlServiceClient.getControl`.
@@ -261,47 +261,47 @@
 
       /// See `ControlServiceClient.createControl`.
       func createControl(
-        request: CreateControlRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateControlRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Control
 
       /// See `ControlServiceClient.deleteControl`.
       func deleteControl(
-        request: DeleteControlRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteControlRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `ControlServiceClient.updateControl`.
       func updateControl(
-        request: UpdateControlRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateControlRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Control
 
       /// See `ControlServiceClient.getControl`.
       func getControl(
-        request: GetControlRequest, options: GoogleCloudGax.RequestOptions
+        request: GetControlRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Control
 
       /// See `ControlServiceClient.listControls`.
       func listControls(
-        request: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListControlsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListControlsResponse
 
       /// See `ControlServiceClient.listControls`.
       func listControls(
-        byItem: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListControlsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Control, Swift.Error>
 
       /// See `ControlServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `ControlServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `ControlServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -315,9 +315,9 @@
     }
 
     public func createControl(
-      request: CreateControlRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateControlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Control {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createControl(
@@ -338,9 +338,9 @@
     }
 
     public func deleteControl(
-      request: DeleteControlRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteControlRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteControl(
@@ -359,14 +359,14 @@
     }
 
     public func updateControl(
-      request: UpdateControlRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateControlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Control {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateControl(
       control: Control?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDiscoveryEngineV1.Control {
       let request = UpdateControlRequest().with {
         $0.control = control
@@ -382,9 +382,9 @@
     }
 
     public func getControl(
-      request: GetControlRequest, options: GoogleCloudGax.RequestOptions
+      request: GetControlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Control {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getControl(
@@ -403,9 +403,9 @@
     }
 
     public func listControls(
-      request: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListControlsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListControlsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listControls(
@@ -415,13 +415,13 @@
     }
 
     public func listControls(
-      byItem: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListControlsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Control, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListControlsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listControls(
@@ -440,9 +440,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -452,13 +452,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -479,9 +479,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -498,9 +498,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

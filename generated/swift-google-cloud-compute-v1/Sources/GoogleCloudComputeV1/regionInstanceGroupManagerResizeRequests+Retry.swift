@@ -19,19 +19,18 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class RegionInstanceGroupManagerResizeRequestsRetry:
       RegionInstanceGroupManagerResizeRequestsStub
     {
       let inner: any RegionInstanceGroupManagerResizeRequestsStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
       public init(
-        _ inner: any RegionInstanceGroupManagerResizeRequestsStub,
-        options: GoogleCloudGax.ClientOptions
+        _ inner: any RegionInstanceGroupManagerResizeRequestsStub, options: GoogleGax.ClientOptions
       ) {
         self.inner = inner
         self.options = options
@@ -39,11 +38,11 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -56,7 +55,7 @@
 
       public func cancel(
         request: RegionInstanceGroupManagerResizeRequestsClient.CancelRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
@@ -65,7 +64,7 @@
           action: {
             (
               r: RegionInstanceGroupManagerResizeRequestsClient.CancelRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.cancel(request: r, options: o)
@@ -74,7 +73,7 @@
 
       public func delete(
         request: RegionInstanceGroupManagerResizeRequestsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
@@ -83,7 +82,7 @@
           action: {
             (
               r: RegionInstanceGroupManagerResizeRequestsClient.DeleteRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -92,7 +91,7 @@
 
       public func `get`(
         request: RegionInstanceGroupManagerResizeRequestsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest {
         try await self._intercept(
           request: request,
@@ -101,7 +100,7 @@
           action: {
             (
               r: RegionInstanceGroupManagerResizeRequestsClient.GetRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -110,7 +109,7 @@
 
       public func insert(
         request: RegionInstanceGroupManagerResizeRequestsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
@@ -119,7 +118,7 @@
           action: {
             (
               r: RegionInstanceGroupManagerResizeRequestsClient.InsertRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -128,7 +127,7 @@
 
       public func list(
         request: RegionInstanceGroupManagerResizeRequestsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerResizeRequestsListResponse {
         try await self._intercept(
           request: request,
@@ -137,7 +136,7 @@
           action: {
             (
               r: RegionInstanceGroupManagerResizeRequestsClient.ListRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws
               -> GoogleCloudComputeV1.RegionInstanceGroupManagerResizeRequestsListResponse
             in
@@ -146,14 +145,14 @@
       }
 
       public func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RegionOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

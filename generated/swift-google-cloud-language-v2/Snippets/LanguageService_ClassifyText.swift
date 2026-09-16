@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudLanguageV2
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: LanguageServiceClient) async throws {
   let response = try await client.classifyText(

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The DeploymentEvent resource represents the deployment of the artifact within
 /// the InsightsConfig resource.
-public struct DeploymentEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DeploymentEvent: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The name of the DeploymentEvent. This name is provided by
@@ -28,10 +28,10 @@ public struct DeploymentEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The create time of the DeploymentEvent.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The update time of the DeploymentEvent.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The runtime configurations where the DeploymentEvent happened.
   public var runtimeConfig: RuntimeConfig? = nil
@@ -53,16 +53,16 @@ public struct DeploymentEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. The time at which the DeploymentEvent was deployed.
   /// This would be the min of all ArtifactDeployment deploy_times.
-  public var deployTime: GoogleCloudWKT.Timestamp? = nil
+  public var deployTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time at which the DeploymentEvent was undeployed, all
   /// artifacts are considered undeployed once this time is set. This would be
   /// the max of all ArtifactDeployment undeploy_times. If any ArtifactDeployment
   /// is still active (i.e. does not have an undeploy_time), this field will be
   /// empty.
-  public var undeployTime: GoogleCloudWKT.Timestamp? = nil
+  public var undeployTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DeploymentEvent`.
   public init() {}
@@ -114,10 +114,8 @@ public struct DeploymentEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     self.runtimeConfig = try container.decodeIfPresent(RuntimeConfig.self, forKey: .runtimeConfig)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .runtimeDeploymentUri) {
       self.runtimeDeploymentUri = value
@@ -130,13 +128,12 @@ public struct DeploymentEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.artifactDeployments = value
     }
-    self.deployTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deployTime)
+    self.deployTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deployTime)
     self.undeployTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .undeployTime)
+      GoogleWKT.Timestamp.self, forKey: .undeployTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -264,10 +261,10 @@ public struct DeploymentEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.developerconnect.v1.DeploymentEvent"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

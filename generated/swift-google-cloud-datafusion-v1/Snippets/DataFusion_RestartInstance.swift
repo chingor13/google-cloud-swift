@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudDataFusionV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: DataFusionClient) async throws {
   let poller = try await client.restartInstance(

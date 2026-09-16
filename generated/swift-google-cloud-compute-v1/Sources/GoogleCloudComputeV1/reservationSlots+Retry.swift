@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class ReservationSlotsRetry: ReservationSlotsStub {
       let inner: any ReservationSlotsStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any ReservationSlotsStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any ReservationSlotsStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@
       }
 
       public func `get`(
-        request: ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ReservationSlotsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ReservationSlotsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.ReservationSlotsGetResponse
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -65,44 +65,44 @@
       }
 
       public func getHealth(
-        request: ReservationSlotsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetHealthRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ReservationSlotsClient.GetHealthRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: ReservationSlotsClient.GetHealthRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getHealth(request: r, options: o)
           })
       }
 
       public func getVersion(
-        request: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ReservationSlotsClient.GetVersionRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: ReservationSlotsClient.GetVersionRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getVersion(request: r, options: o)
           })
       }
 
       public func list(
-        request: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ReservationSlotsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ReservationSlotsClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.ReservationSlotsListResponse
             in
             return try await self.inner.list(request: r, options: o)
@@ -110,14 +110,14 @@
       }
 
       public func update(
-        request: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ReservationSlotsClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ReservationSlotsClient.UpdateRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
@@ -125,14 +125,14 @@
       }
 
       public func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ZoneOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ZoneOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

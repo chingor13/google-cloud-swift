@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Version of a StoredInfoType, including the configuration used to build it,
 /// create timestamp, and current state.
-public struct StoredInfoTypeVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StoredInfoTypeVersion: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// StoredInfoType configuration.
@@ -27,7 +27,7 @@ public struct StoredInfoTypeVersion: Codable, Equatable, GoogleCloudWKT._AnyPack
 
   /// Output only. Create timestamp of the version. Read-only, determined by the
   /// system when the version is created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Stored info type version state. Read-only, updated by the
   /// system during dictionary creation.
@@ -51,7 +51,7 @@ public struct StoredInfoTypeVersion: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// Output only. Statistics about this storedInfoType version.
   public var stats: StoredInfoTypeStats? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StoredInfoTypeVersion`.
   public init() {}
@@ -93,8 +93,7 @@ public struct StoredInfoTypeVersion: Codable, Equatable, GoogleCloudWKT._AnyPack
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.config = try container.decodeIfPresent(StoredInfoTypeConfig.self, forKey: .config)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(StoredInfoTypeState.self, forKey: .state) {
       self.state = value
     }
@@ -104,7 +103,7 @@ public struct StoredInfoTypeVersion: Codable, Equatable, GoogleCloudWKT._AnyPack
     self.stats = try container.decodeIfPresent(StoredInfoTypeStats.self, forKey: .stats)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -123,10 +122,10 @@ public struct StoredInfoTypeVersion: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.StoredInfoTypeVersion"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request to create a new attachment.
-public struct CreateAttachmentRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateAttachmentRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the parent resource where the attachment will be
@@ -31,7 +31,7 @@ public struct CreateAttachmentRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// Required. The attachment to be created.
   public var attachment: Attachment? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateAttachmentRequest`.
   public init() {}
@@ -77,7 +77,7 @@ public struct CreateAttachmentRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
     self.attachment = try container.decodeIfPresent(Attachment.self, forKey: .attachment)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -94,10 +94,10 @@ public struct CreateAttachmentRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.CreateAttachmentRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

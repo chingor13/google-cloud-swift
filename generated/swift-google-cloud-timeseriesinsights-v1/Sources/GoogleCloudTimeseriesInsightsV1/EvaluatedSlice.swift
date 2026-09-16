@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Forecast result for a given slice.
-public struct EvaluatedSlice: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EvaluatedSlice: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Values for all categorical dimensions that uniquely identify this slice.
@@ -131,7 +131,7 @@ public struct EvaluatedSlice: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// - **"Internal server error"**: Internal unexpected error.
   public var status: GoogleRpc.Status? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EvaluatedSlice`.
   public init() {}
@@ -193,7 +193,7 @@ public struct EvaluatedSlice: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -215,10 +215,10 @@ public struct EvaluatedSlice: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.timeseriesinsights.v1.EvaluatedSlice"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [VmwareEngine.UpdateExternalAccessRule][google.cloud.vmwareengine.v1.VmwareEngine.UpdateExternalAccessRule]
 ///
 /// [google.cloud.vmwareengine.v1.VmwareEngine.UpdateExternalAccessRule]: <doc:VmwareEngineClient/updateExternalAccessRule(request:options:)>
-public struct UpdateExternalAccessRuleRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateExternalAccessRuleRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Field mask is used to specify the fields to be overwritten in the
@@ -29,7 +29,7 @@ public struct UpdateExternalAccessRuleRequest: Codable, Equatable, GoogleCloudWK
   /// The fields specified in the `update_mask` are relative to the resource, not
   /// the full request. A field will be overwritten if it is in the mask. If the
   /// user does not provide a mask then all fields will be overwritten.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Required. Description of the external access rule.
   public var externalAccessRule: ExternalAccessRule? = nil
@@ -50,7 +50,7 @@ public struct UpdateExternalAccessRuleRequest: Codable, Equatable, GoogleCloudWK
   /// not supported (00000000-0000-0000-0000-000000000000).
   public var requestId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateExternalAccessRuleRequest`.
   public init() {}
@@ -87,8 +87,7 @@ public struct UpdateExternalAccessRuleRequest: Codable, Equatable, GoogleCloudWK
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.externalAccessRule = try container.decodeIfPresent(
       ExternalAccessRule.self, forKey: .externalAccessRule)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .requestId) {
@@ -96,7 +95,7 @@ public struct UpdateExternalAccessRuleRequest: Codable, Equatable, GoogleCloudWK
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -113,10 +112,10 @@ public struct UpdateExternalAccessRuleRequest: Codable, Equatable, GoogleCloudWK
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmwareengine.v1.UpdateExternalAccessRuleRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

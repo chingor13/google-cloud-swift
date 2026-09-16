@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudBlockChainNodeEngineV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: BlockchainNodeEngineClient) async throws {
   let items = try client.listOperations(

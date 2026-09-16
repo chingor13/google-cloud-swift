@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudAuditManagerV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: AuditManagerClient, projectId: String, locationId: String, auditReportId: String

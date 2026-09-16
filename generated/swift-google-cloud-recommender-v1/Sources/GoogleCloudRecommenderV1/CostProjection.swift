@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Contains metadata about how much money a recommendation can save or incur.
-public struct CostProjection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CostProjection: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// An approximate projection on amount saved or amount incurred. Negative cost
@@ -31,12 +31,12 @@ public struct CostProjection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var cost: GoogleType.Money? = nil
 
   /// Duration for which this cost applies.
-  public var duration: GoogleCloudWKT.Duration? = nil
+  public var duration: GoogleWKT.Duration? = nil
 
   /// The approximate cost savings in the billing account's local currency.
   public var costInLocalCurrency: GoogleType.Money? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CostProjection`.
   public init() {}
@@ -74,12 +74,12 @@ public struct CostProjection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.cost = try container.decodeIfPresent(GoogleType.Money.self, forKey: .cost)
-    self.duration = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .duration)
+    self.duration = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .duration)
     self.costInLocalCurrency = try container.decodeIfPresent(
       GoogleType.Money.self, forKey: .costInLocalCurrency)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,10 +96,10 @@ public struct CostProjection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recommender.v1.CostProjection"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

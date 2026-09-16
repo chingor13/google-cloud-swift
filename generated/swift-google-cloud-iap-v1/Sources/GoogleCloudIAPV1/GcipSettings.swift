@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Allows customers to configure tenant IDs for a Cloud Identity Platform (GCIP)
 /// instance for each application.
-public struct GcipSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GcipSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. GCIP tenant IDs that are linked to the IAP resource. `tenant_ids`
@@ -33,9 +33,9 @@ public struct GcipSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Login page URI associated with the GCIP tenants.
   /// Typically, all resources within the same project share the same login page,
   /// though it could be overridden at the sub resource level.
-  public var loginPageUri: GoogleCloudWKT.StringValue? = nil
+  public var loginPageUri: GoogleWKT.StringValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GcipSettings`.
   public init() {}
@@ -74,10 +74,10 @@ public struct GcipSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.tenantIds = value
     }
     self.loginPageUri = try container.decodeIfPresent(
-      GoogleCloudWKT.StringValue.self, forKey: .loginPageUri)
+      GoogleWKT.StringValue.self, forKey: .loginPageUri)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -93,10 +93,10 @@ public struct GcipSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.iap.v1.GcipSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

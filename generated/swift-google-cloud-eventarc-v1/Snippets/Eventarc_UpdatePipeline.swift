@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudEventarcV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: EventarcClient, projectId: String, locationId: String, pipelineId: String)
   async throws
@@ -33,7 +33,7 @@ func sample(client: EventarcClient, projectId: String, locationId: String, pipel
         $0.pipeline = Pipeline().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/pipelines/\(pipelineId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

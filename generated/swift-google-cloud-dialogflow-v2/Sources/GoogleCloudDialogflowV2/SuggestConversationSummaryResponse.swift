@@ -16,13 +16,13 @@
 
 #if Conversations
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The response message for
   /// [Conversations.SuggestConversationSummary][google.cloud.dialogflow.v2.Conversations.SuggestConversationSummary].
   ///
   /// [google.cloud.dialogflow.v2.Conversations.SuggestConversationSummary]: <doc:ConversationsClient/suggestConversationSummary(request:options:)>
-  public struct SuggestConversationSummaryResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SuggestConversationSummaryResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Generated summary.
@@ -46,7 +46,7 @@
     /// [google.cloud.dialogflow.v2.SuggestConversationSummaryResponse.latest_message]: <doc:SuggestConversationSummaryResponse/latestMessage>
     public var contextSize: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SuggestConversationSummaryResponse`.
     public init() {}
@@ -93,7 +93,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -108,7 +108,7 @@
     }
 
     /// Generated summary for a conversation.
-    public struct Summary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Summary: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The summary content that is concatenated into one string.
@@ -132,7 +132,7 @@
       /// a baseline model was not used to generate this summary.
       public var baselineModelVersion: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Summary`.
       public init() {}
@@ -197,7 +197,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -214,7 +214,7 @@
       }
 
       /// A component of the generated summary.
-      public struct SummarySection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct SummarySection: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Output only. Name of the section.
@@ -223,8 +223,7 @@
         /// Output only. Summary text for the section.
         public var summary: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `SummarySection`.
         public init() {}
@@ -267,7 +266,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -284,11 +283,11 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.SuggestConversationSummaryResponse.Summary.SummarySection"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -296,22 +295,22 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SuggestConversationSummaryResponse.Summary"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.SuggestConversationSummaryResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

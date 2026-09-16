@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudBeyondCorpAppConnectorsV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: AppConnectorsServiceClient, projectId: String, locationId: String) async throws
 {

@@ -16,11 +16,11 @@
 
 #if RegionNotificationEndpoints
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a gRPC setting that describes one gRPC notification endpoint and
   /// the retry duration attempting to send notification to this endpoint.
-  public struct NotificationEndpointGrpcSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NotificationEndpointGrpcSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. If specified, this field is used to set the authority header by
@@ -48,7 +48,7 @@
     /// (1200s). Must be a positive number.
     public var retryDurationSec: Swift.UInt32? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NotificationEndpointGrpcSettings`.
     public init() {}
@@ -97,7 +97,7 @@
         Swift.UInt32.self, forKey: .retryDurationSec)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -116,11 +116,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.NotificationEndpointGrpcSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

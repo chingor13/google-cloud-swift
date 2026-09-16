@@ -19,19 +19,19 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `packetMirrorings` resource.
   ///
   /// @Snippet(path: "packetMirroringsQuickstart")
   public final class PacketMirroringsClient: Clients.PacketMirroringsProtocol, Sendable {
     let inner: any Clients.PacketMirroringsStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `PacketMirroringsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.PacketMirroringsStub = try Clients.PacketMirroringsTransport(options)
       inner = Clients.PacketMirroringsRetry(inner, options: options)
       if let logger = options.logger {
@@ -49,7 +49,7 @@
     ///
     /// @Snippet(path: "packetMirrorings_aggregatedList")
     public func aggregatedList(
-      request: PacketMirroringsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PacketMirroringAggregatedList {
       try await self.inner.aggregatedList(request: request, options: options)
     }
@@ -61,7 +61,7 @@
     ///
     /// @Snippet(path: "packetMirrorings_aggregatedList")
     public func aggregatedList(
-      byItem: PacketMirroringsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: PacketMirroringsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, PacketMirroringsScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.PacketMirroringAggregatedList in
@@ -69,14 +69,14 @@
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes the specified PacketMirroring resource.
     ///
     /// @Snippet(path: "packetMirrorings_delete")
     public func delete(
-      request: PacketMirroringsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.delete(request: request, options: options)
     }
@@ -85,18 +85,18 @@
     ///
     /// @Snippet(path: "packetMirrorings_delete")
     public func delete(
-      withPolling: PacketMirroringsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PacketMirroringsClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -104,8 +104,7 @@
       let rawOp = try await self.delete(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -114,7 +113,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -126,7 +125,7 @@
     ///
     /// @Snippet(path: "packetMirrorings_get")
     public func `get`(
-      request: PacketMirroringsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PacketMirroring {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -136,7 +135,7 @@
     ///
     /// @Snippet(path: "packetMirrorings_insert")
     public func insert(
-      request: PacketMirroringsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
     }
@@ -146,18 +145,18 @@
     ///
     /// @Snippet(path: "packetMirrorings_insert")
     public func insert(
-      withPolling: PacketMirroringsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PacketMirroringsClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -165,8 +164,7 @@
       let rawOp = try await self.insert(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -175,7 +173,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -188,7 +186,7 @@
     ///
     /// @Snippet(path: "packetMirrorings_list")
     public func list(
-      request: PacketMirroringsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PacketMirroringList {
       try await self.inner.list(request: request, options: options)
     }
@@ -198,7 +196,7 @@
     ///
     /// @Snippet(path: "packetMirrorings_list")
     public func list(
-      byItem: PacketMirroringsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: PacketMirroringsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PacketMirroring, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.PacketMirroringList in
@@ -206,7 +204,7 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Patches the specified PacketMirroring resource with the data included in
@@ -216,7 +214,7 @@
     ///
     /// @Snippet(path: "packetMirrorings_patch")
     public func patch(
-      request: PacketMirroringsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.patch(request: request, options: options)
     }
@@ -228,18 +226,18 @@
     ///
     /// @Snippet(path: "packetMirrorings_patch")
     public func patch(
-      withPolling: PacketMirroringsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PacketMirroringsClient.PatchRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -247,8 +245,7 @@
       let rawOp = try await self.patch(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -257,7 +254,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -269,8 +266,7 @@
     ///
     /// @Snippet(path: "packetMirrorings_testIamPermissions")
     public func testIamPermissions(
-      request: PacketMirroringsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -279,7 +275,7 @@
     ///
     /// @Snippet(path: "packetMirrorings_getOperation")
     func getOperation(
-      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -358,49 +354,47 @@
 
       /// See `PacketMirroringsClient.aggregatedList`.
       func aggregatedList(
-        request: PacketMirroringsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PacketMirroringAggregatedList
 
       /// See `PacketMirroringsClient.aggregatedList`.
       func aggregatedList(
-        byItem: PacketMirroringsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: PacketMirroringsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<(Swift.String, PacketMirroringsScopedList), Swift.Error>
 
       /// See `PacketMirroringsClient.delete`.
       func delete(
-        request: PacketMirroringsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `PacketMirroringsClient.`get``.
       func `get`(
-        request: PacketMirroringsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PacketMirroring
 
       /// See `PacketMirroringsClient.insert`.
       func insert(
-        request: PacketMirroringsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `PacketMirroringsClient.list`.
       func list(
-        request: PacketMirroringsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PacketMirroringList
 
       /// See `PacketMirroringsClient.list`.
       func list(
-        byItem: PacketMirroringsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: PacketMirroringsClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<PacketMirroring, Swift.Error>
 
       /// See `PacketMirroringsClient.patch`.
       func patch(
-        request: PacketMirroringsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `PacketMirroringsClient.testIamPermissions`.
       func testIamPermissions(
-        request: PacketMirroringsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PacketMirroringsClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
@@ -414,9 +408,9 @@
     }
 
     public func aggregatedList(
-      request: PacketMirroringsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PacketMirroringAggregatedList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
@@ -426,13 +420,13 @@
     }
 
     public func aggregatedList(
-      byItem: PacketMirroringsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: PacketMirroringsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, PacketMirroringsScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.PacketMirroringAggregatedList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func aggregatedList(
@@ -451,26 +445,25 @@
     }
 
     public func delete(
-      request: PacketMirroringsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func delete(
       withPolling: PacketMirroringsClient.DeleteRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
     }
 
     public func delete(
-      withPolling: PacketMirroringsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PacketMirroringsClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -478,7 +471,7 @@
       project: Swift.String,
       region: Swift.String,
       packetMirroring: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = PacketMirroringsClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
@@ -494,9 +487,9 @@
     }
 
     public func `get`(
-      request: PacketMirroringsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PacketMirroring {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -519,26 +512,25 @@
     }
 
     public func insert(
-      request: PacketMirroringsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func insert(
       withPolling: PacketMirroringsClient.InsertRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
     }
 
     public func insert(
-      withPolling: PacketMirroringsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PacketMirroringsClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -546,7 +538,7 @@
       project: Swift.String,
       region: Swift.String,
       body: PacketMirroring?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = PacketMirroringsClient.InsertRequest().with {
         $0.project = project
         $0.region = region
@@ -562,9 +554,9 @@
     }
 
     public func list(
-      request: PacketMirroringsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PacketMirroringList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -574,13 +566,13 @@
     }
 
     public func list(
-      byItem: PacketMirroringsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: PacketMirroringsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PacketMirroring, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.PacketMirroringList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(
@@ -601,26 +593,25 @@
     }
 
     public func patch(
-      request: PacketMirroringsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func patch(
       withPolling: PacketMirroringsClient.PatchRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
     }
 
     public func patch(
-      withPolling: PacketMirroringsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PacketMirroringsClient.PatchRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -629,7 +620,7 @@
       region: Swift.String,
       packetMirroring: Swift.String,
       body: PacketMirroring?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = PacketMirroringsClient.PatchRequest().with {
         $0.project = project
         $0.region = region
@@ -646,10 +637,9 @@
     }
 
     public func testIamPermissions(
-      request: PacketMirroringsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: PacketMirroringsClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(
@@ -674,9 +664,9 @@
     }
 
     public func getOperation(
-      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

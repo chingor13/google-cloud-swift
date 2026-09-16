@@ -17,50 +17,50 @@
 #if Generators
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol GeneratorsStub: Sendable {
       func createGenerator(
-        request: CreateGeneratorRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateGeneratorRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.Generator
 
       func getGenerator(
-        request: GetGeneratorRequest, options: GoogleCloudGax.RequestOptions
+        request: GetGeneratorRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.Generator
 
       func listGenerators(
-        request: ListGeneratorsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListGeneratorsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListGeneratorsResponse
 
       func deleteGenerator(
-        request: DeleteGeneratorRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteGeneratorRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func updateGenerator(
-        request: UpdateGeneratorRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateGeneratorRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.Generator
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

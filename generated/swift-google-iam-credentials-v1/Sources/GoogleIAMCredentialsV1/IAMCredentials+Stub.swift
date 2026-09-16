@@ -15,25 +15,25 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol IAMCredentialsStub: Sendable {
     func generateAccessToken(
-      request: GenerateAccessTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAccessTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMCredentialsV1.GenerateAccessTokenResponse
 
     func generateIdToken(
-      request: GenerateIdTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateIdTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMCredentialsV1.GenerateIdTokenResponse
 
     func signBlob(
-      request: SignBlobRequest, options: GoogleCloudGax.RequestOptions
+      request: SignBlobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMCredentialsV1.SignBlobResponse
 
     func signJwt(
-      request: SignJwtRequest, options: GoogleCloudGax.RequestOptions
+      request: SignJwtRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMCredentialsV1.SignJwtResponse
   }
 }

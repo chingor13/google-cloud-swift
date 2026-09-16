@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A unique identifier for a Datastore entity.
 /// If a key's partition ID or any of its path kinds or names are
 /// reserved/read-only, the key is reserved/read-only.
 /// A reserved/read-only key is forbidden in certain documented contexts.
-public struct Key: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Key: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Entities are partitioned into subsets, currently identified by a project
@@ -40,7 +40,7 @@ public struct Key: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// A path can never be empty, and a path can have at most 100 elements.
   public var path: [Key.PathElement] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Key`.
   public init() {}
@@ -81,7 +81,7 @@ public struct Key: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,7 +98,7 @@ public struct Key: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// If either name or ID is set, the element is complete.
   /// If neither is set, the element is incomplete.
-  public struct PathElement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PathElement: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The kind of the entity.
@@ -110,7 +110,7 @@ public struct Key: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The type of ID.
     public var idType: OneOf_IdType? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PathElement`.
     public init() {}
@@ -170,7 +170,7 @@ public struct Key: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.idType = idType
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -207,21 +207,21 @@ public struct Key: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.Key.PathElement"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.Key"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

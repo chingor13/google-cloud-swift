@@ -16,13 +16,13 @@
 
 #if MachineTypes
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a Machine Type resource.
   ///
   /// You can use specific machine types for your VM instances based on performance
   /// and pricing requirements. For more information, readMachine Types.
-  public struct MachineType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MachineType: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// [Output Only] A list of accelerator configurations assigned to this
@@ -85,7 +85,7 @@
     /// such as us-central1-a.
     public var zone: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MachineType`.
     public init() {}
@@ -179,7 +179,7 @@
       self.zone = try container.decodeIfPresent(Swift.String.self, forKey: .zone)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -211,7 +211,7 @@
     /// The message type for the [accelerators][google.cloud.compute.v1.MachineType.accelerators] field.
     ///
     /// [google.cloud.compute.v1.MachineType.accelerators]: <doc:MachineType/Accelerators>
-    public struct Accelerators: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Accelerators: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Number of accelerator cards exposed to the guest.
@@ -220,7 +220,7 @@
       /// The accelerator type resource name, not a full URL, e.g.nvidia-tesla-t4.
       public var guestAcceleratorType: Swift.String? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Accelerators`.
       public init() {}
@@ -261,7 +261,7 @@
           Swift.String.self, forKey: .guestAcceleratorType)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -277,11 +277,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.MachineType.accelerators"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -395,11 +395,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.MachineType"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -40,9 +40,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,14 +59,14 @@ extension Clients {
     }
 
     public func listCustomers(
-      request: ListCustomersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListCustomersResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listCustomers",
         action: {
-          (r: ListCustomersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCustomersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListCustomersResponse
           in
           return try await self.inner.listCustomers(request: r, options: o)
@@ -74,14 +74,14 @@ extension Clients {
     }
 
     public func getCustomer(
-      request: GetCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Customer {
       try await self._intercept(
         request: request,
         options: options,
         name: "getCustomer",
         action: {
-          (r: GetCustomerRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCustomerRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.Customer
           in
           return try await self.inner.getCustomer(request: r, options: o)
@@ -89,14 +89,14 @@ extension Clients {
     }
 
     public func checkCloudIdentityAccountsExist(
-      request: CheckCloudIdentityAccountsExistRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckCloudIdentityAccountsExistRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.CheckCloudIdentityAccountsExistResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "checkCloudIdentityAccountsExist",
         action: {
-          (r: CheckCloudIdentityAccountsExistRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CheckCloudIdentityAccountsExistRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.CheckCloudIdentityAccountsExistResponse
           in
           return try await self.inner.checkCloudIdentityAccountsExist(request: r, options: o)
@@ -104,14 +104,14 @@ extension Clients {
     }
 
     public func createCustomer(
-      request: CreateCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Customer {
       try await self._intercept(
         request: request,
         options: options,
         name: "createCustomer",
         action: {
-          (r: CreateCustomerRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateCustomerRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.Customer
           in
           return try await self.inner.createCustomer(request: r, options: o)
@@ -119,14 +119,14 @@ extension Clients {
     }
 
     public func updateCustomer(
-      request: UpdateCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Customer {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateCustomer",
         action: {
-          (r: UpdateCustomerRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateCustomerRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.Customer
           in
           return try await self.inner.updateCustomer(request: r, options: o)
@@ -134,27 +134,26 @@ extension Clients {
     }
 
     public func deleteCustomer(
-      request: DeleteCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteCustomer",
-        action: {
-          (r: DeleteCustomerRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteCustomerRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteCustomer(request: r, options: o)
         })
     }
 
     public func importCustomer(
-      request: ImportCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Customer {
       try await self._intercept(
         request: request,
         options: options,
         name: "importCustomer",
         action: {
-          (r: ImportCustomerRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ImportCustomerRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.Customer
           in
           return try await self.inner.importCustomer(request: r, options: o)
@@ -162,14 +161,14 @@ extension Clients {
     }
 
     public func provisionCloudIdentity(
-      request: ProvisionCloudIdentityRequest, options: GoogleCloudGax.RequestOptions
+      request: ProvisionCloudIdentityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "provisionCloudIdentity",
         action: {
-          (r: ProvisionCloudIdentityRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ProvisionCloudIdentityRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.provisionCloudIdentity(request: r, options: o)
@@ -177,14 +176,14 @@ extension Clients {
     }
 
     public func listEntitlements(
-      request: ListEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntitlementsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListEntitlementsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listEntitlements",
         action: {
-          (r: ListEntitlementsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListEntitlementsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListEntitlementsResponse
           in
           return try await self.inner.listEntitlements(request: r, options: o)
@@ -192,14 +191,14 @@ extension Clients {
     }
 
     public func listTransferableSkus(
-      request: ListTransferableSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTransferableSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListTransferableSkusResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listTransferableSkus",
         action: {
-          (r: ListTransferableSkusRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListTransferableSkusRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListTransferableSkusResponse
           in
           return try await self.inner.listTransferableSkus(request: r, options: o)
@@ -207,14 +206,14 @@ extension Clients {
     }
 
     public func listTransferableOffers(
-      request: ListTransferableOffersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTransferableOffersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListTransferableOffersResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listTransferableOffers",
         action: {
-          (r: ListTransferableOffersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListTransferableOffersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListTransferableOffersResponse
           in
           return try await self.inner.listTransferableOffers(request: r, options: o)
@@ -222,14 +221,14 @@ extension Clients {
     }
 
     public func getEntitlement(
-      request: GetEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Entitlement {
       try await self._intercept(
         request: request,
         options: options,
         name: "getEntitlement",
         action: {
-          (r: GetEntitlementRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetEntitlementRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.Entitlement
           in
           return try await self.inner.getEntitlement(request: r, options: o)
@@ -237,14 +236,14 @@ extension Clients {
     }
 
     public func createEntitlement(
-      request: CreateEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createEntitlement",
         action: {
-          (r: CreateEntitlementRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateEntitlementRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createEntitlement(request: r, options: o)
@@ -252,14 +251,14 @@ extension Clients {
     }
 
     public func changeParameters(
-      request: ChangeParametersRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangeParametersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "changeParameters",
         action: {
-          (r: ChangeParametersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ChangeParametersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.changeParameters(request: r, options: o)
@@ -267,14 +266,14 @@ extension Clients {
     }
 
     public func changeRenewalSettings(
-      request: ChangeRenewalSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangeRenewalSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "changeRenewalSettings",
         action: {
-          (r: ChangeRenewalSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ChangeRenewalSettingsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.changeRenewalSettings(request: r, options: o)
@@ -282,14 +281,14 @@ extension Clients {
     }
 
     public func changeOffer(
-      request: ChangeOfferRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangeOfferRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "changeOffer",
         action: {
-          (r: ChangeOfferRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ChangeOfferRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.changeOffer(request: r, options: o)
@@ -297,14 +296,14 @@ extension Clients {
     }
 
     public func startPaidService(
-      request: StartPaidServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: StartPaidServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "startPaidService",
         action: {
-          (r: StartPaidServiceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: StartPaidServiceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.startPaidService(request: r, options: o)
@@ -312,14 +311,14 @@ extension Clients {
     }
 
     public func suspendEntitlement(
-      request: SuspendEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: SuspendEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "suspendEntitlement",
         action: {
-          (r: SuspendEntitlementRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SuspendEntitlementRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.suspendEntitlement(request: r, options: o)
@@ -327,14 +326,14 @@ extension Clients {
     }
 
     public func cancelEntitlement(
-      request: CancelEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "cancelEntitlement",
         action: {
-          (r: CancelEntitlementRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CancelEntitlementRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.cancelEntitlement(request: r, options: o)
@@ -342,14 +341,14 @@ extension Clients {
     }
 
     public func activateEntitlement(
-      request: ActivateEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: ActivateEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "activateEntitlement",
         action: {
-          (r: ActivateEntitlementRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ActivateEntitlementRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.activateEntitlement(request: r, options: o)
@@ -357,14 +356,14 @@ extension Clients {
     }
 
     public func transferEntitlements(
-      request: TransferEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+      request: TransferEntitlementsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "transferEntitlements",
         action: {
-          (r: TransferEntitlementsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: TransferEntitlementsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.transferEntitlements(request: r, options: o)
@@ -372,14 +371,14 @@ extension Clients {
     }
 
     public func transferEntitlementsToGoogle(
-      request: TransferEntitlementsToGoogleRequest, options: GoogleCloudGax.RequestOptions
+      request: TransferEntitlementsToGoogleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "transferEntitlementsToGoogle",
         action: {
-          (r: TransferEntitlementsToGoogleRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: TransferEntitlementsToGoogleRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.transferEntitlementsToGoogle(request: r, options: o)
@@ -387,14 +386,14 @@ extension Clients {
     }
 
     public func listChannelPartnerLinks(
-      request: ListChannelPartnerLinksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListChannelPartnerLinksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListChannelPartnerLinksResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listChannelPartnerLinks",
         action: {
-          (r: ListChannelPartnerLinksRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListChannelPartnerLinksRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListChannelPartnerLinksResponse
           in
           return try await self.inner.listChannelPartnerLinks(request: r, options: o)
@@ -402,14 +401,14 @@ extension Clients {
     }
 
     public func getChannelPartnerLink(
-      request: GetChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: GetChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink {
       try await self._intercept(
         request: request,
         options: options,
         name: "getChannelPartnerLink",
         action: {
-          (r: GetChannelPartnerLinkRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetChannelPartnerLinkRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ChannelPartnerLink
           in
           return try await self.inner.getChannelPartnerLink(request: r, options: o)
@@ -417,14 +416,14 @@ extension Clients {
     }
 
     public func createChannelPartnerLink(
-      request: CreateChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink {
       try await self._intercept(
         request: request,
         options: options,
         name: "createChannelPartnerLink",
         action: {
-          (r: CreateChannelPartnerLinkRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateChannelPartnerLinkRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ChannelPartnerLink
           in
           return try await self.inner.createChannelPartnerLink(request: r, options: o)
@@ -432,14 +431,14 @@ extension Clients {
     }
 
     public func updateChannelPartnerLink(
-      request: UpdateChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateChannelPartnerLink",
         action: {
-          (r: UpdateChannelPartnerLinkRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateChannelPartnerLinkRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ChannelPartnerLink
           in
           return try await self.inner.updateChannelPartnerLink(request: r, options: o)
@@ -447,14 +446,14 @@ extension Clients {
     }
 
     public func getCustomerRepricingConfig(
-      request: GetCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "getCustomerRepricingConfig",
         action: {
-          (r: GetCustomerRepricingConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCustomerRepricingConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.CustomerRepricingConfig
           in
           return try await self.inner.getCustomerRepricingConfig(request: r, options: o)
@@ -462,14 +461,14 @@ extension Clients {
     }
 
     public func listCustomerRepricingConfigs(
-      request: ListCustomerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomerRepricingConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListCustomerRepricingConfigsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listCustomerRepricingConfigs",
         action: {
-          (r: ListCustomerRepricingConfigsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCustomerRepricingConfigsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListCustomerRepricingConfigsResponse
           in
           return try await self.inner.listCustomerRepricingConfigs(request: r, options: o)
@@ -477,14 +476,14 @@ extension Clients {
     }
 
     public func createCustomerRepricingConfig(
-      request: CreateCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "createCustomerRepricingConfig",
         action: {
-          (r: CreateCustomerRepricingConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateCustomerRepricingConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.CustomerRepricingConfig
           in
           return try await self.inner.createCustomerRepricingConfig(request: r, options: o)
@@ -492,14 +491,14 @@ extension Clients {
     }
 
     public func updateCustomerRepricingConfig(
-      request: UpdateCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateCustomerRepricingConfig",
         action: {
-          (r: UpdateCustomerRepricingConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateCustomerRepricingConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.CustomerRepricingConfig
           in
           return try await self.inner.updateCustomerRepricingConfig(request: r, options: o)
@@ -507,102 +506,102 @@ extension Clients {
     }
 
     public func deleteCustomerRepricingConfig(
-      request: DeleteCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteCustomerRepricingConfig",
         action: {
-          (r: DeleteCustomerRepricingConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteCustomerRepricingConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> Void in
           return try await self.inner.deleteCustomerRepricingConfig(request: r, options: o)
         })
     }
 
     public func getChannelPartnerRepricingConfig(
-      request: GetChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "getChannelPartnerRepricingConfig",
         action: {
-          (r: GetChannelPartnerRepricingConfigRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig
+          (r: GetChannelPartnerRepricingConfigRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig
           in
           return try await self.inner.getChannelPartnerRepricingConfig(request: r, options: o)
         })
     }
 
     public func listChannelPartnerRepricingConfigs(
-      request: ListChannelPartnerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListChannelPartnerRepricingConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListChannelPartnerRepricingConfigsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listChannelPartnerRepricingConfigs",
         action: {
-          (r: ListChannelPartnerRepricingConfigsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudChannelV1.ListChannelPartnerRepricingConfigsResponse
+          (r: ListChannelPartnerRepricingConfigsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudChannelV1.ListChannelPartnerRepricingConfigsResponse
           in
           return try await self.inner.listChannelPartnerRepricingConfigs(request: r, options: o)
         })
     }
 
     public func createChannelPartnerRepricingConfig(
-      request: CreateChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "createChannelPartnerRepricingConfig",
         action: {
-          (r: CreateChannelPartnerRepricingConfigRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig
+          (r: CreateChannelPartnerRepricingConfigRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig
           in
           return try await self.inner.createChannelPartnerRepricingConfig(request: r, options: o)
         })
     }
 
     public func updateChannelPartnerRepricingConfig(
-      request: UpdateChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateChannelPartnerRepricingConfig",
         action: {
-          (r: UpdateChannelPartnerRepricingConfigRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig
+          (r: UpdateChannelPartnerRepricingConfigRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig
           in
           return try await self.inner.updateChannelPartnerRepricingConfig(request: r, options: o)
         })
     }
 
     public func deleteChannelPartnerRepricingConfig(
-      request: DeleteChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteChannelPartnerRepricingConfig",
         action: {
-          (r: DeleteChannelPartnerRepricingConfigRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: DeleteChannelPartnerRepricingConfigRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteChannelPartnerRepricingConfig(request: r, options: o)
         })
     }
 
     public func listSkuGroups(
-      request: ListSkuGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSkuGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListSkuGroupsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listSkuGroups",
         action: {
-          (r: ListSkuGroupsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListSkuGroupsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListSkuGroupsResponse
           in
           return try await self.inner.listSkuGroups(request: r, options: o)
@@ -610,14 +609,14 @@ extension Clients {
     }
 
     public func listSkuGroupBillableSkus(
-      request: ListSkuGroupBillableSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSkuGroupBillableSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListSkuGroupBillableSkusResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listSkuGroupBillableSkus",
         action: {
-          (r: ListSkuGroupBillableSkusRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListSkuGroupBillableSkusRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListSkuGroupBillableSkusResponse
           in
           return try await self.inner.listSkuGroupBillableSkus(request: r, options: o)
@@ -625,14 +624,14 @@ extension Clients {
     }
 
     public func lookupOffer(
-      request: LookupOfferRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupOfferRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Offer {
       try await self._intercept(
         request: request,
         options: options,
         name: "lookupOffer",
         action: {
-          (r: LookupOfferRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: LookupOfferRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.Offer
           in
           return try await self.inner.lookupOffer(request: r, options: o)
@@ -640,14 +639,14 @@ extension Clients {
     }
 
     public func listProducts(
-      request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListProductsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listProducts",
         action: {
-          (r: ListProductsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListProductsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListProductsResponse
           in
           return try await self.inner.listProducts(request: r, options: o)
@@ -655,14 +654,14 @@ extension Clients {
     }
 
     public func listSkus(
-      request: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListSkusResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listSkus",
         action: {
-          (r: ListSkusRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListSkusRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListSkusResponse
           in
           return try await self.inner.listSkus(request: r, options: o)
@@ -670,14 +669,14 @@ extension Clients {
     }
 
     public func listOffers(
-      request: ListOffersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOffersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListOffersResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOffers",
         action: {
-          (r: ListOffersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListOffersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListOffersResponse
           in
           return try await self.inner.listOffers(request: r, options: o)
@@ -685,14 +684,14 @@ extension Clients {
     }
 
     public func listPurchasableSkus(
-      request: ListPurchasableSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPurchasableSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListPurchasableSkusResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listPurchasableSkus",
         action: {
-          (r: ListPurchasableSkusRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListPurchasableSkusRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListPurchasableSkusResponse
           in
           return try await self.inner.listPurchasableSkus(request: r, options: o)
@@ -700,14 +699,14 @@ extension Clients {
     }
 
     public func listPurchasableOffers(
-      request: ListPurchasableOffersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPurchasableOffersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListPurchasableOffersResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listPurchasableOffers",
         action: {
-          (r: ListPurchasableOffersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListPurchasableOffersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListPurchasableOffersResponse
           in
           return try await self.inner.listPurchasableOffers(request: r, options: o)
@@ -715,14 +714,14 @@ extension Clients {
     }
 
     public func queryEligibleBillingAccounts(
-      request: QueryEligibleBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryEligibleBillingAccountsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.QueryEligibleBillingAccountsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "queryEligibleBillingAccounts",
         action: {
-          (r: QueryEligibleBillingAccountsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: QueryEligibleBillingAccountsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.QueryEligibleBillingAccountsResponse
           in
           return try await self.inner.queryEligibleBillingAccounts(request: r, options: o)
@@ -730,14 +729,14 @@ extension Clients {
     }
 
     public func registerSubscriber(
-      request: RegisterSubscriberRequest, options: GoogleCloudGax.RequestOptions
+      request: RegisterSubscriberRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.RegisterSubscriberResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "registerSubscriber",
         action: {
-          (r: RegisterSubscriberRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RegisterSubscriberRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.RegisterSubscriberResponse
           in
           return try await self.inner.registerSubscriber(request: r, options: o)
@@ -745,14 +744,14 @@ extension Clients {
     }
 
     public func unregisterSubscriber(
-      request: UnregisterSubscriberRequest, options: GoogleCloudGax.RequestOptions
+      request: UnregisterSubscriberRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.UnregisterSubscriberResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "unregisterSubscriber",
         action: {
-          (r: UnregisterSubscriberRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UnregisterSubscriberRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.UnregisterSubscriberResponse
           in
           return try await self.inner.unregisterSubscriber(request: r, options: o)
@@ -760,14 +759,14 @@ extension Clients {
     }
 
     public func listSubscribers(
-      request: ListSubscribersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSubscribersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListSubscribersResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listSubscribers",
         action: {
-          (r: ListSubscribersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListSubscribersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListSubscribersResponse
           in
           return try await self.inner.listSubscribers(request: r, options: o)
@@ -775,14 +774,14 @@ extension Clients {
     }
 
     public func listEntitlementChanges(
-      request: ListEntitlementChangesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntitlementChangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListEntitlementChangesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listEntitlementChanges",
         action: {
-          (r: ListEntitlementChangesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListEntitlementChangesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChannelV1.ListEntitlementChangesResponse
           in
           return try await self.inner.listEntitlementChanges(request: r, options: o)
@@ -790,29 +789,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -820,29 +819,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteOperation",
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "cancelOperation",
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

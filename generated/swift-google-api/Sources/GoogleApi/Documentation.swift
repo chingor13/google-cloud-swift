@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// `Documentation` provides the information for describing a service.
 ///
@@ -72,7 +72,7 @@ import Foundation
 /// <pre><code>&#40;== resource_for v1.shelves.books ==&#41;</code></pre>
 /// The directive `suppress_warning` does not directly affect documentation
 /// and is documented together with service config validation.
-public struct Documentation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Documentation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A short description of what the service does. The summary must be plain
@@ -113,7 +113,7 @@ public struct Documentation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Note: you cannot specify both `overview` field and `pages` field.
   public var overview: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Documentation`.
   public init() {}
@@ -176,7 +176,7 @@ public struct Documentation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -196,10 +196,10 @@ public struct Documentation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.Documentation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

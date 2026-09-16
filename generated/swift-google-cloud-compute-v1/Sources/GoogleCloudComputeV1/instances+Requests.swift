@@ -16,13 +16,13 @@
 
 #if Instances
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   extension InstancesClient {
     /// Synthetic request message for the [addAccessConfig()][google.cloud.compute.v1.instances.addAccessConfig] method.
     ///
     /// [google.cloud.compute.v1.instances.addAccessConfig]: <doc:InstancesClient/addAccessConfig(request:options:)>
-    public struct AddAccessConfigRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AddAccessConfigRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The instance name for this request.
@@ -57,7 +57,7 @@
       /// [google.cloud.compute.v1.instances.addAccessConfig]: <doc:InstancesClient/addAccessConfig(request:options:)>
       public var body: AccessConfig? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AddAccessConfigRequest`.
       public init() {}
@@ -116,7 +116,7 @@
         self.body = try container.decodeIfPresent(AccessConfig.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -136,18 +136,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.addAccessConfigRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [addNetworkInterface()][google.cloud.compute.v1.instances.addNetworkInterface] method.
     ///
     /// [google.cloud.compute.v1.instances.addNetworkInterface]: <doc:InstancesClient/addNetworkInterface(request:options:)>
-    public struct AddNetworkInterfaceRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AddNetworkInterfaceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The instance name for this request stored as resource_id.
@@ -180,7 +180,7 @@
       /// [google.cloud.compute.v1.instances.addNetworkInterface]: <doc:InstancesClient/addNetworkInterface(request:options:)>
       public var body: NetworkInterface? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AddNetworkInterfaceRequest`.
       public init() {}
@@ -234,7 +234,7 @@
         self.body = try container.decodeIfPresent(NetworkInterface.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -253,18 +253,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.addNetworkInterfaceRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [addResourcePolicies()][google.cloud.compute.v1.instances.addResourcePolicies] method.
     ///
     /// [google.cloud.compute.v1.instances.addResourcePolicies]: <doc:InstancesClient/addResourcePolicies(request:options:)>
-    public struct AddResourcePoliciesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AddResourcePoliciesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The instance name for this request.
@@ -296,7 +296,7 @@
       /// [google.cloud.compute.v1.instances.addResourcePolicies]: <doc:InstancesClient/addResourcePolicies(request:options:)>
       public var body: InstancesAddResourcePoliciesRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AddResourcePoliciesRequest`.
       public init() {}
@@ -351,7 +351,7 @@
           InstancesAddResourcePoliciesRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -370,18 +370,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.addResourcePoliciesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.instances.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.instances.aggregatedList]: <doc:InstancesClient/aggregatedList(request:options:)>
-    public struct AggregatedListRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AggregatedListRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -493,7 +493,7 @@
       /// aggregated list request is invoked for subnetworks list-usable api.
       public var serviceProjectNumber: Swift.Int64? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AggregatedListRequest`.
       public init() {}
@@ -555,7 +555,7 @@
           Swift.Int64.self, forKey: .serviceProjectNumber)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -577,18 +577,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.aggregatedListRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [attachDisk()][google.cloud.compute.v1.instances.attachDisk] method.
     ///
     /// [google.cloud.compute.v1.instances.attachDisk]: <doc:InstancesClient/attachDisk(request:options:)>
-    public struct AttachDiskRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AttachDiskRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Whether to force attach the regional disk even if it's currently attached
@@ -625,7 +625,7 @@
       /// [google.cloud.compute.v1.instances.attachDisk]: <doc:InstancesClient/attachDisk(request:options:)>
       public var body: AttachedDisk? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AttachDiskRequest`.
       public init() {}
@@ -682,7 +682,7 @@
         self.body = try container.decodeIfPresent(AttachedDisk.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -702,18 +702,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.attachDiskRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [bulkInsert()][google.cloud.compute.v1.instances.bulkInsert] method.
     ///
     /// [google.cloud.compute.v1.instances.bulkInsert]: <doc:InstancesClient/bulkInsert(request:options:)>
-    public struct BulkInsertRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BulkInsertRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Project ID for this request.
@@ -742,7 +742,7 @@
       /// [google.cloud.compute.v1.instances.bulkInsert]: <doc:InstancesClient/bulkInsert(request:options:)>
       public var body: BulkInsertInstanceResource? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BulkInsertRequest`.
       public init() {}
@@ -791,7 +791,7 @@
         self.body = try container.decodeIfPresent(BulkInsertInstanceResource.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -809,18 +809,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.bulkInsertRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.instances.delete] method.
     ///
     /// [google.cloud.compute.v1.instances.delete]: <doc:InstancesClient/delete(request:options:)>
-    public struct DeleteRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DeleteRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance resource to delete.
@@ -850,7 +850,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DeleteRequest`.
       public init() {}
@@ -905,7 +905,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -924,18 +924,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.deleteRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [deleteAccessConfig()][google.cloud.compute.v1.instances.deleteAccessConfig] method.
     ///
     /// [google.cloud.compute.v1.instances.deleteAccessConfig]: <doc:InstancesClient/deleteAccessConfig(request:options:)>
-    public struct DeleteAccessConfigRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DeleteAccessConfigRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the access config to delete.
@@ -968,7 +968,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DeleteAccessConfigRequest`.
       public init() {}
@@ -1029,7 +1029,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1049,18 +1049,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.deleteAccessConfigRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [deleteNetworkInterface()][google.cloud.compute.v1.instances.deleteNetworkInterface] method.
     ///
     /// [google.cloud.compute.v1.instances.deleteNetworkInterface]: <doc:InstancesClient/deleteNetworkInterface(request:options:)>
-    public struct DeleteNetworkInterfaceRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DeleteNetworkInterfaceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The instance name for this request stored as resource_id.
@@ -1091,7 +1091,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DeleteNetworkInterfaceRequest`.
       public init() {}
@@ -1149,7 +1149,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1168,18 +1168,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.deleteNetworkInterfaceRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [detachDisk()][google.cloud.compute.v1.instances.detachDisk] method.
     ///
     /// [google.cloud.compute.v1.instances.detachDisk]: <doc:InstancesClient/detachDisk(request:options:)>
-    public struct DetachDiskRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DetachDiskRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The device name of the disk to detach. Make a get() request on
@@ -1210,7 +1210,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DetachDiskRequest`.
       public init() {}
@@ -1266,7 +1266,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1285,18 +1285,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.detachDiskRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [get()][google.cloud.compute.v1.instances.get] method.
     ///
     /// [google.cloud.compute.v1.instances.get]: <doc:InstancesClient/`get`(request:options:)>
-    public struct GetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance resource to return.
@@ -1308,7 +1308,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetRequest`.
       public init() {}
@@ -1356,7 +1356,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1373,18 +1373,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.getRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [getEffectiveFirewalls()][google.cloud.compute.v1.instances.getEffectiveFirewalls] method.
     ///
     /// [google.cloud.compute.v1.instances.getEffectiveFirewalls]: <doc:InstancesClient/getEffectiveFirewalls(request:options:)>
-    public struct GetEffectiveFirewallsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GetEffectiveFirewallsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -1399,7 +1399,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetEffectiveFirewallsRequest`.
       public init() {}
@@ -1452,7 +1452,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1470,18 +1470,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.getEffectiveFirewallsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [getGuestAttributes()][google.cloud.compute.v1.instances.getGuestAttributes] method.
     ///
     /// [google.cloud.compute.v1.instances.getGuestAttributes]: <doc:InstancesClient/getGuestAttributes(request:options:)>
-    public struct GetGuestAttributesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GetGuestAttributesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -1499,7 +1499,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetGuestAttributesRequest`.
       public init() {}
@@ -1553,7 +1553,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1572,18 +1572,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.getGuestAttributesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [getIamPolicy()][google.cloud.compute.v1.instances.getIamPolicy] method.
     ///
     /// [google.cloud.compute.v1.instances.getIamPolicy]: <doc:InstancesClient/getIamPolicy(request:options:)>
-    public struct GetIamPolicyRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GetIamPolicyRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Requested IAM Policy version.
@@ -1598,7 +1598,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetIamPolicyRequest`.
       public init() {}
@@ -1651,7 +1651,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1670,18 +1670,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.getIamPolicyRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [getScreenshot()][google.cloud.compute.v1.instances.getScreenshot] method.
     ///
     /// [google.cloud.compute.v1.instances.getScreenshot]: <doc:InstancesClient/getScreenshot(request:options:)>
-    public struct GetScreenshotRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GetScreenshotRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -1693,7 +1693,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetScreenshotRequest`.
       public init() {}
@@ -1741,7 +1741,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1758,18 +1758,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.getScreenshotRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [getSerialPortOutput()][google.cloud.compute.v1.instances.getSerialPortOutput] method.
     ///
     /// [google.cloud.compute.v1.instances.getSerialPortOutput]: <doc:InstancesClient/getSerialPortOutput(request:options:)>
-    public struct GetSerialPortOutputRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GetSerialPortOutputRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance for this request.
@@ -1803,7 +1803,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetSerialPortOutputRequest`.
       public init() {}
@@ -1857,7 +1857,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1876,19 +1876,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.getSerialPortOutputRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [getShieldedInstanceIdentity()][google.cloud.compute.v1.instances.getShieldedInstanceIdentity] method.
     ///
     /// [google.cloud.compute.v1.instances.getShieldedInstanceIdentity]: <doc:InstancesClient/getShieldedInstanceIdentity(request:options:)>
-    public struct GetShieldedInstanceIdentityRequest: Codable, Equatable, GoogleCloudWKT
-        ._AnyPackable,
+    public struct GetShieldedInstanceIdentityRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name or id of the instance scoping this request.
@@ -1900,7 +1899,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetShieldedInstanceIdentityRequest`.
       public init() {}
@@ -1948,7 +1947,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1966,18 +1965,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instances.getShieldedInstanceIdentityRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [insert()][google.cloud.compute.v1.instances.insert] method.
     ///
     /// [google.cloud.compute.v1.instances.insert]: <doc:InstancesClient/insert(request:options:)>
-    public struct InsertRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct InsertRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Project ID for this request.
@@ -2028,7 +2027,7 @@
       /// [google.cloud.compute.v1.instances.insert]: <doc:InstancesClient/insert(request:options:)>
       public var body: Instance? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `InsertRequest`.
       public init() {}
@@ -2085,7 +2084,7 @@
         self.body = try container.decodeIfPresent(Instance.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2105,18 +2104,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.insertRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [list()][google.cloud.compute.v1.instances.list] method.
     ///
     /// [google.cloud.compute.v1.instances.list]: <doc:InstancesClient/list(request:options:)>
-    public struct ListRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ListRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -2218,7 +2217,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListRequest`.
       public init() {}
@@ -2277,7 +2276,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2298,18 +2297,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.listRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [listReferrers()][google.cloud.compute.v1.instances.listReferrers] method.
     ///
     /// [google.cloud.compute.v1.instances.listReferrers]: <doc:InstancesClient/listReferrers(request:options:)>
-    public struct ListReferrersRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ListReferrersRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -2415,7 +2414,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListReferrersRequest`.
       public init() {}
@@ -2479,7 +2478,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2501,18 +2500,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.listReferrersRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [performMaintenance()][google.cloud.compute.v1.instances.performMaintenance] method.
     ///
     /// [google.cloud.compute.v1.instances.performMaintenance]: <doc:InstancesClient/performMaintenance(request:options:)>
-    public struct PerformMaintenanceRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PerformMaintenanceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -2539,7 +2538,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PerformMaintenanceRequest`.
       public init() {}
@@ -2590,7 +2589,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2608,18 +2607,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.performMaintenanceRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [removeResourcePolicies()][google.cloud.compute.v1.instances.removeResourcePolicies] method.
     ///
     /// [google.cloud.compute.v1.instances.removeResourcePolicies]: <doc:InstancesClient/removeResourcePolicies(request:options:)>
-    public struct RemoveResourcePoliciesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RemoveResourcePoliciesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The instance name for this request.
@@ -2651,7 +2650,7 @@
       /// [google.cloud.compute.v1.instances.removeResourcePolicies]: <doc:InstancesClient/removeResourcePolicies(request:options:)>
       public var body: InstancesRemoveResourcePoliciesRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RemoveResourcePoliciesRequest`.
       public init() {}
@@ -2706,7 +2705,7 @@
           InstancesRemoveResourcePoliciesRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2725,18 +2724,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.removeResourcePoliciesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [reportHostAsFaulty()][google.cloud.compute.v1.instances.reportHostAsFaulty] method.
     ///
     /// [google.cloud.compute.v1.instances.reportHostAsFaulty]: <doc:InstancesClient/reportHostAsFaulty(request:options:)>
-    public struct ReportHostAsFaultyRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ReportHostAsFaultyRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -2768,7 +2767,7 @@
       /// [google.cloud.compute.v1.instances.reportHostAsFaulty]: <doc:InstancesClient/reportHostAsFaulty(request:options:)>
       public var body: InstancesReportHostAsFaultyRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ReportHostAsFaultyRequest`.
       public init() {}
@@ -2823,7 +2822,7 @@
           InstancesReportHostAsFaultyRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2842,18 +2841,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.reportHostAsFaultyRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [reset()][google.cloud.compute.v1.instances.reset] method.
     ///
     /// [google.cloud.compute.v1.instances.reset]: <doc:InstancesClient/reset(request:options:)>
-    public struct ResetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ResetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -2880,7 +2879,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ResetRequest`.
       public init() {}
@@ -2931,7 +2930,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2949,18 +2948,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.resetRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [resume()][google.cloud.compute.v1.instances.resume] method.
     ///
     /// [google.cloud.compute.v1.instances.resume]: <doc:InstancesClient/resume(request:options:)>
-    public struct ResumeRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ResumeRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance resource to resume.
@@ -2987,7 +2986,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ResumeRequest`.
       public init() {}
@@ -3038,7 +3037,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -3056,18 +3055,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.resumeRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [sendDiagnosticInterrupt()][google.cloud.compute.v1.instances.sendDiagnosticInterrupt] method.
     ///
     /// [google.cloud.compute.v1.instances.sendDiagnosticInterrupt]: <doc:InstancesClient/sendDiagnosticInterrupt(request:options:)>
-    public struct SendDiagnosticInterruptRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SendDiagnosticInterruptRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -3079,7 +3078,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SendDiagnosticInterruptRequest`.
       public init() {}
@@ -3127,7 +3126,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -3145,18 +3144,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instances.sendDiagnosticInterruptRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setDeletionProtection()][google.cloud.compute.v1.instances.setDeletionProtection] method.
     ///
     /// [google.cloud.compute.v1.instances.setDeletionProtection]: <doc:InstancesClient/setDeletionProtection(request:options:)>
-    public struct SetDeletionProtectionRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetDeletionProtectionRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Whether the resource should be protected against deletion.
@@ -3186,7 +3185,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetDeletionProtectionRequest`.
       public init() {}
@@ -3241,7 +3240,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -3260,18 +3259,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.setDeletionProtectionRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setDiskAutoDelete()][google.cloud.compute.v1.instances.setDiskAutoDelete] method.
     ///
     /// [google.cloud.compute.v1.instances.setDiskAutoDelete]: <doc:InstancesClient/setDiskAutoDelete(request:options:)>
-    public struct SetDiskAutoDeleteRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetDiskAutoDeleteRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Whether to auto-delete the disk when the instance is deleted.
@@ -3305,7 +3304,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetDiskAutoDeleteRequest`.
       public init() {}
@@ -3366,7 +3365,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -3386,18 +3385,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.setDiskAutoDeleteRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setIamPolicy()][google.cloud.compute.v1.instances.setIamPolicy] method.
     ///
     /// [google.cloud.compute.v1.instances.setIamPolicy]: <doc:InstancesClient/setIamPolicy(request:options:)>
-    public struct SetIamPolicyRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetIamPolicyRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Project ID for this request.
@@ -3414,7 +3413,7 @@
       /// [google.cloud.compute.v1.instances.setIamPolicy]: <doc:InstancesClient/setIamPolicy(request:options:)>
       public var body: ZoneSetPolicyRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetIamPolicyRequest`.
       public init() {}
@@ -3465,7 +3464,7 @@
         self.body = try container.decodeIfPresent(ZoneSetPolicyRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -3483,18 +3482,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.setIamPolicyRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setLabels()][google.cloud.compute.v1.instances.setLabels] method.
     ///
     /// [google.cloud.compute.v1.instances.setLabels]: <doc:InstancesClient/setLabels(request:options:)>
-    public struct SetLabelsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetLabelsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -3526,7 +3525,7 @@
       /// [google.cloud.compute.v1.instances.setLabels]: <doc:InstancesClient/setLabels(request:options:)>
       public var body: InstancesSetLabelsRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetLabelsRequest`.
       public init() {}
@@ -3580,7 +3579,7 @@
         self.body = try container.decodeIfPresent(InstancesSetLabelsRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -3599,18 +3598,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.setLabelsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setMachineResources()][google.cloud.compute.v1.instances.setMachineResources] method.
     ///
     /// [google.cloud.compute.v1.instances.setMachineResources]: <doc:InstancesClient/setMachineResources(request:options:)>
-    public struct SetMachineResourcesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetMachineResourcesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -3642,7 +3641,7 @@
       /// [google.cloud.compute.v1.instances.setMachineResources]: <doc:InstancesClient/setMachineResources(request:options:)>
       public var body: InstancesSetMachineResourcesRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetMachineResourcesRequest`.
       public init() {}
@@ -3697,7 +3696,7 @@
           InstancesSetMachineResourcesRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -3716,18 +3715,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.setMachineResourcesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setMachineType()][google.cloud.compute.v1.instances.setMachineType] method.
     ///
     /// [google.cloud.compute.v1.instances.setMachineType]: <doc:InstancesClient/setMachineType(request:options:)>
-    public struct SetMachineTypeRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetMachineTypeRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -3759,7 +3758,7 @@
       /// [google.cloud.compute.v1.instances.setMachineType]: <doc:InstancesClient/setMachineType(request:options:)>
       public var body: InstancesSetMachineTypeRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetMachineTypeRequest`.
       public init() {}
@@ -3814,7 +3813,7 @@
           InstancesSetMachineTypeRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -3833,18 +3832,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.setMachineTypeRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setMetadata()][google.cloud.compute.v1.instances.setMetadata] method.
     ///
     /// [google.cloud.compute.v1.instances.setMetadata]: <doc:InstancesClient/setMetadata(request:options:)>
-    public struct SetMetadataRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetMetadataRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -3876,7 +3875,7 @@
       /// [google.cloud.compute.v1.instances.setMetadata]: <doc:InstancesClient/setMetadata(request:options:)>
       public var body: Metadata? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetMetadataRequest`.
       public init() {}
@@ -3930,7 +3929,7 @@
         self.body = try container.decodeIfPresent(Metadata.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -3949,18 +3948,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.setMetadataRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setMinCpuPlatform()][google.cloud.compute.v1.instances.setMinCpuPlatform] method.
     ///
     /// [google.cloud.compute.v1.instances.setMinCpuPlatform]: <doc:InstancesClient/setMinCpuPlatform(request:options:)>
-    public struct SetMinCpuPlatformRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetMinCpuPlatformRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -3992,7 +3991,7 @@
       /// [google.cloud.compute.v1.instances.setMinCpuPlatform]: <doc:InstancesClient/setMinCpuPlatform(request:options:)>
       public var body: InstancesSetMinCpuPlatformRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetMinCpuPlatformRequest`.
       public init() {}
@@ -4047,7 +4046,7 @@
           InstancesSetMinCpuPlatformRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -4066,18 +4065,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.setMinCpuPlatformRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setName()][google.cloud.compute.v1.instances.setName] method.
     ///
     /// [google.cloud.compute.v1.instances.setName]: <doc:InstancesClient/setName(request:options:)>
-    public struct SetNameRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetNameRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The instance name for this request.
@@ -4109,7 +4108,7 @@
       /// [google.cloud.compute.v1.instances.setName]: <doc:InstancesClient/setName(request:options:)>
       public var body: InstancesSetNameRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetNameRequest`.
       public init() {}
@@ -4163,7 +4162,7 @@
         self.body = try container.decodeIfPresent(InstancesSetNameRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -4182,18 +4181,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.setNameRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setScheduling()][google.cloud.compute.v1.instances.setScheduling] method.
     ///
     /// [google.cloud.compute.v1.instances.setScheduling]: <doc:InstancesClient/setScheduling(request:options:)>
-    public struct SetSchedulingRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetSchedulingRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Instance name for this request.
@@ -4225,7 +4224,7 @@
       /// [google.cloud.compute.v1.instances.setScheduling]: <doc:InstancesClient/setScheduling(request:options:)>
       public var body: Scheduling? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetSchedulingRequest`.
       public init() {}
@@ -4279,7 +4278,7 @@
         self.body = try container.decodeIfPresent(Scheduling.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -4298,18 +4297,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.setSchedulingRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setSecurityPolicy()][google.cloud.compute.v1.instances.setSecurityPolicy] method.
     ///
     /// [google.cloud.compute.v1.instances.setSecurityPolicy]: <doc:InstancesClient/setSecurityPolicy(request:options:)>
-    public struct SetSecurityPolicyRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetSecurityPolicyRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the Instance resource to which the security policy should be
@@ -4342,7 +4341,7 @@
       /// [google.cloud.compute.v1.instances.setSecurityPolicy]: <doc:InstancesClient/setSecurityPolicy(request:options:)>
       public var body: InstancesSetSecurityPolicyRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetSecurityPolicyRequest`.
       public init() {}
@@ -4397,7 +4396,7 @@
           InstancesSetSecurityPolicyRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -4416,18 +4415,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.setSecurityPolicyRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setServiceAccount()][google.cloud.compute.v1.instances.setServiceAccount] method.
     ///
     /// [google.cloud.compute.v1.instances.setServiceAccount]: <doc:InstancesClient/setServiceAccount(request:options:)>
-    public struct SetServiceAccountRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetServiceAccountRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance resource to start.
@@ -4459,7 +4458,7 @@
       /// [google.cloud.compute.v1.instances.setServiceAccount]: <doc:InstancesClient/setServiceAccount(request:options:)>
       public var body: InstancesSetServiceAccountRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetServiceAccountRequest`.
       public init() {}
@@ -4514,7 +4513,7 @@
           InstancesSetServiceAccountRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -4533,18 +4532,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.setServiceAccountRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setShieldedInstanceIntegrityPolicy()][google.cloud.compute.v1.instances.setShieldedInstanceIntegrityPolicy] method.
     ///
     /// [google.cloud.compute.v1.instances.setShieldedInstanceIntegrityPolicy]: <doc:InstancesClient/setShieldedInstanceIntegrityPolicy(request:options:)>
-    public struct SetShieldedInstanceIntegrityPolicyRequest: Codable, Equatable, GoogleCloudWKT
+    public struct SetShieldedInstanceIntegrityPolicyRequest: Codable, Equatable, GoogleWKT
         ._AnyPackable,
       Sendable
     {
@@ -4577,7 +4576,7 @@
       /// [google.cloud.compute.v1.instances.setShieldedInstanceIntegrityPolicy]: <doc:InstancesClient/setShieldedInstanceIntegrityPolicy(request:options:)>
       public var body: ShieldedInstanceIntegrityPolicy? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetShieldedInstanceIntegrityPolicyRequest`.
       public init() {}
@@ -4632,7 +4631,7 @@
           ShieldedInstanceIntegrityPolicy.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -4652,18 +4651,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instances.setShieldedInstanceIntegrityPolicyRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setTags()][google.cloud.compute.v1.instances.setTags] method.
     ///
     /// [google.cloud.compute.v1.instances.setTags]: <doc:InstancesClient/setTags(request:options:)>
-    public struct SetTagsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetTagsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -4695,7 +4694,7 @@
       /// [google.cloud.compute.v1.instances.setTags]: <doc:InstancesClient/setTags(request:options:)>
       public var body: Tags? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetTagsRequest`.
       public init() {}
@@ -4749,7 +4748,7 @@
         self.body = try container.decodeIfPresent(Tags.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -4768,18 +4767,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.setTagsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [simulateMaintenanceEvent()][google.cloud.compute.v1.instances.simulateMaintenanceEvent] method.
     ///
     /// [google.cloud.compute.v1.instances.simulateMaintenanceEvent]: <doc:InstancesClient/simulateMaintenanceEvent(request:options:)>
-    public struct SimulateMaintenanceEventRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SimulateMaintenanceEventRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -4810,7 +4809,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SimulateMaintenanceEventRequest`.
       public init() {}
@@ -4865,7 +4864,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -4886,18 +4885,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instances.simulateMaintenanceEventRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [start()][google.cloud.compute.v1.instances.start] method.
     ///
     /// [google.cloud.compute.v1.instances.start]: <doc:InstancesClient/start(request:options:)>
-    public struct StartRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct StartRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance resource to start.
@@ -4924,7 +4923,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `StartRequest`.
       public init() {}
@@ -4975,7 +4974,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -4993,18 +4992,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.startRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [startWithEncryptionKey()][google.cloud.compute.v1.instances.startWithEncryptionKey] method.
     ///
     /// [google.cloud.compute.v1.instances.startWithEncryptionKey]: <doc:InstancesClient/startWithEncryptionKey(request:options:)>
-    public struct StartWithEncryptionKeyRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct StartWithEncryptionKeyRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance resource to start.
@@ -5036,7 +5035,7 @@
       /// [google.cloud.compute.v1.instances.startWithEncryptionKey]: <doc:InstancesClient/startWithEncryptionKey(request:options:)>
       public var body: InstancesStartWithEncryptionKeyRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `StartWithEncryptionKeyRequest`.
       public init() {}
@@ -5091,7 +5090,7 @@
           InstancesStartWithEncryptionKeyRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -5110,18 +5109,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.startWithEncryptionKeyRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [stop()][google.cloud.compute.v1.instances.stop] method.
     ///
     /// [google.cloud.compute.v1.instances.stop]: <doc:InstancesClient/stop(request:options:)>
-    public struct StopRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct StopRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// This property is required if the instance has any attached Local SSD disks.
@@ -5156,7 +5155,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `StopRequest`.
       public init() {}
@@ -5215,7 +5214,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -5235,18 +5234,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.stopRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [suspend()][google.cloud.compute.v1.instances.suspend] method.
     ///
     /// [google.cloud.compute.v1.instances.suspend]: <doc:InstancesClient/suspend(request:options:)>
-    public struct SuspendRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SuspendRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// This property is required if the instance has any attached Local SSD disks.
@@ -5278,7 +5277,7 @@
       /// The name of the zone for this request.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SuspendRequest`.
       public init() {}
@@ -5333,7 +5332,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -5352,18 +5351,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.suspendRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [testIamPermissions()][google.cloud.compute.v1.instances.testIamPermissions] method.
     ///
     /// [google.cloud.compute.v1.instances.testIamPermissions]: <doc:InstancesClient/testIamPermissions(request:options:)>
-    public struct TestIamPermissionsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct TestIamPermissionsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Project ID for this request.
@@ -5380,7 +5379,7 @@
       /// [google.cloud.compute.v1.instances.testIamPermissions]: <doc:InstancesClient/testIamPermissions(request:options:)>
       public var body: TestPermissionsRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `TestIamPermissionsRequest`.
       public init() {}
@@ -5431,7 +5430,7 @@
         self.body = try container.decodeIfPresent(TestPermissionsRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -5449,18 +5448,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.testIamPermissionsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [update()][google.cloud.compute.v1.instances.update] method.
     ///
     /// [google.cloud.compute.v1.instances.update]: <doc:InstancesClient/update(request:options:)>
-    public struct UpdateRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct UpdateRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Whether to discard local SSDs from the instance during restart
@@ -5510,7 +5509,7 @@
       /// [google.cloud.compute.v1.instances.update]: <doc:InstancesClient/update(request:options:)>
       public var body: Instance? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `UpdateRequest`.
       public init() {}
@@ -5578,7 +5577,7 @@
         self.body = try container.decodeIfPresent(Instance.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -5827,18 +5826,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.updateRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [updateAccessConfig()][google.cloud.compute.v1.instances.updateAccessConfig] method.
     ///
     /// [google.cloud.compute.v1.instances.updateAccessConfig]: <doc:InstancesClient/updateAccessConfig(request:options:)>
-    public struct UpdateAccessConfigRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct UpdateAccessConfigRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The instance name for this request.
@@ -5873,7 +5872,7 @@
       /// [google.cloud.compute.v1.instances.updateAccessConfig]: <doc:InstancesClient/updateAccessConfig(request:options:)>
       public var body: AccessConfig? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `UpdateAccessConfigRequest`.
       public init() {}
@@ -5932,7 +5931,7 @@
         self.body = try container.decodeIfPresent(AccessConfig.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -5952,18 +5951,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.updateAccessConfigRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [updateDisplayDevice()][google.cloud.compute.v1.instances.updateDisplayDevice] method.
     ///
     /// [google.cloud.compute.v1.instances.updateDisplayDevice]: <doc:InstancesClient/updateDisplayDevice(request:options:)>
-    public struct UpdateDisplayDeviceRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct UpdateDisplayDeviceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the instance scoping this request.
@@ -5995,7 +5994,7 @@
       /// [google.cloud.compute.v1.instances.updateDisplayDevice]: <doc:InstancesClient/updateDisplayDevice(request:options:)>
       public var body: DisplayDevice? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `UpdateDisplayDeviceRequest`.
       public init() {}
@@ -6049,7 +6048,7 @@
         self.body = try container.decodeIfPresent(DisplayDevice.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -6068,18 +6067,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.updateDisplayDeviceRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [updateNetworkInterface()][google.cloud.compute.v1.instances.updateNetworkInterface] method.
     ///
     /// [google.cloud.compute.v1.instances.updateNetworkInterface]: <doc:InstancesClient/updateNetworkInterface(request:options:)>
-    public struct UpdateNetworkInterfaceRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct UpdateNetworkInterfaceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The instance name for this request.
@@ -6114,7 +6113,7 @@
       /// [google.cloud.compute.v1.instances.updateNetworkInterface]: <doc:InstancesClient/updateNetworkInterface(request:options:)>
       public var body: NetworkInterface? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `UpdateNetworkInterfaceRequest`.
       public init() {}
@@ -6173,7 +6172,7 @@
         self.body = try container.decodeIfPresent(NetworkInterface.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -6193,19 +6192,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instances.updateNetworkInterfaceRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [updateShieldedInstanceConfig()][google.cloud.compute.v1.instances.updateShieldedInstanceConfig] method.
     ///
     /// [google.cloud.compute.v1.instances.updateShieldedInstanceConfig]: <doc:InstancesClient/updateShieldedInstanceConfig(request:options:)>
-    public struct UpdateShieldedInstanceConfigRequest: Codable, Equatable, GoogleCloudWKT
-        ._AnyPackable,
+    public struct UpdateShieldedInstanceConfigRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name or id of the instance scoping this request.
@@ -6237,7 +6235,7 @@
       /// [google.cloud.compute.v1.instances.updateShieldedInstanceConfig]: <doc:InstancesClient/updateShieldedInstanceConfig(request:options:)>
       public var body: ShieldedInstanceConfig? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `UpdateShieldedInstanceConfigRequest`.
       public init() {}
@@ -6291,7 +6289,7 @@
         self.body = try container.decodeIfPresent(ShieldedInstanceConfig.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -6311,11 +6309,11 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instances.updateShieldedInstanceConfigRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
   }

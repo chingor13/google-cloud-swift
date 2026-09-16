@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for receiving packets.
-public struct ReceivePacketsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ReceivePacketsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Possible request types from the client.
   public var request: OneOf_Request? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ReceivePacketsRequest`.
   public init() {}
@@ -83,7 +83,7 @@ public struct ReceivePacketsRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
     self.request = request
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -104,7 +104,7 @@ public struct ReceivePacketsRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   }
 
   /// The message specifying the initial settings for the ReceivePackets session.
-  public struct SetupRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SetupRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The configurations that specify where packets are retrieved.
@@ -121,7 +121,7 @@ public struct ReceivePacketsRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
     /// The client must either receive a `Packet` or a heart beat message before
     /// this duration expires; otherwise, the client will automatically cancel
     /// the current connection and retry.
-    public var heartbeatInterval: GoogleCloudWKT.Duration? = nil
+    public var heartbeatInterval: GoogleWKT.Duration? = nil
 
     /// The grace period after which a `writes_done_request` is issued, that a
     /// `WritesDone` is expected from the client.
@@ -129,12 +129,12 @@ public struct ReceivePacketsRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
     /// The server is free to cancel the RPC should this expire.
     ///
     /// A system default will be chosen if unset.
-    public var writesDoneGracePeriod: GoogleCloudWKT.Duration? = nil
+    public var writesDoneGracePeriod: GoogleWKT.Duration? = nil
 
     /// The mode in which the consumer reads messages.
     public var consumerMode: OneOf_ConsumerMode? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SetupRequest`.
     public init() {}
@@ -182,9 +182,9 @@ public struct ReceivePacketsRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
         self.receiver = value
       }
       self.heartbeatInterval = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .heartbeatInterval)
+        GoogleWKT.Duration.self, forKey: .heartbeatInterval)
       self.writesDoneGracePeriod = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .writesDoneGracePeriod)
+        GoogleWKT.Duration.self, forKey: .writesDoneGracePeriod)
 
       var consumerMode: OneOf_ConsumerMode? = nil
       let consumerModeCheckAndSet = {
@@ -209,7 +209,7 @@ public struct ReceivePacketsRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
       self.consumerMode = consumerMode
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -244,11 +244,11 @@ public struct ReceivePacketsRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.ReceivePacketsRequest.SetupRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -265,10 +265,10 @@ public struct ReceivePacketsRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.ReceivePacketsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

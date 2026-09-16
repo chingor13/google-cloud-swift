@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for the
 /// [Recognize][google.cloud.speech.v2.Speech.Recognize] method. Either
@@ -24,7 +24,7 @@ import Foundation
 /// limits](https://cloud.google.com/speech-to-text/quotas#content).
 ///
 /// [google.cloud.speech.v2.Speech.Recognize]: <doc:SpeechClient/recognize(request:options:)>
-public struct RecognizeRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RecognizeRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the Recognizer to use during recognition. The
@@ -60,13 +60,13 @@ public struct RecognizeRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// [google.cloud.speech.v2.RecognizeRequest.config]: <doc:RecognizeRequest/config>
   /// [google.cloud.speech.v2.Recognizer.default_recognition_config]: <doc:Recognizer/defaultRecognitionConfig>
-  public var configMask: GoogleCloudWKT.FieldMask? = nil
+  public var configMask: GoogleWKT.FieldMask? = nil
 
   /// The audio source, which is either inline content or a Google Cloud
   /// Storage URI.
   public var audioSource: OneOf_AudioSource? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RecognizeRequest`.
   public init() {}
@@ -111,8 +111,7 @@ public struct RecognizeRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.recognizer = value
     }
     self.config = try container.decodeIfPresent(RecognitionConfig.self, forKey: .config)
-    self.configMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .configMask)
+    self.configMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .configMask)
 
     var audioSource: OneOf_AudioSource? = nil
     let audioSourceCheckAndSet = {
@@ -133,7 +132,7 @@ public struct RecognizeRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.audioSource = audioSource
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -182,10 +181,10 @@ public struct RecognizeRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.RecognizeRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

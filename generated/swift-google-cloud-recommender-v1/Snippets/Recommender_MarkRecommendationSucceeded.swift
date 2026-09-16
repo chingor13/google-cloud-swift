@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudRecommenderV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: RecommenderClient) async throws {
   let response = try await client.markRecommendationSucceeded(

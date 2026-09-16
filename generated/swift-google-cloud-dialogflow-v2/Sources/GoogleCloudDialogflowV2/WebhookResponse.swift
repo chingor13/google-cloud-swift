@@ -16,7 +16,7 @@
 
 #if Agents && AnswerRecords && Contexts && ConversationDatasets && ConversationModels && ConversationProfiles && Conversations && Documents && EncryptionSpecService && EntityTypes && Environments && Fulfillments && GeneratorEvaluations && Generators && Intents && KnowledgeBases && Participants && SessionEntityTypes && Sessions && SipTrunks && Tools && Versions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The response message for a webhook call.
   ///
@@ -35,7 +35,7 @@
   /// Guide](https://developers.google.com/protocol-buffers/docs/proto3#json).
   ///
   /// [google.cloud.dialogflow.v2.QueryResult.diagnostic_info]: <doc:QueryResult/diagnosticInfo>
-  public struct WebhookResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct WebhookResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The text response message intended for the end-user.
@@ -76,7 +76,7 @@
     /// format](https://developers.google.com/assistant/actions/build/json/dialogflow-webhook-json)
     ///
     /// [google.cloud.dialogflow.v2.QueryResult.webhook_payload]: <doc:QueryResult/webhookPayload>
-    public var payload: GoogleCloudWKT.Struct? = nil
+    public var payload: GoogleWKT.Struct? = nil
 
     /// Optional. The collection of output contexts that will overwrite currently
     /// active contexts for the session and reset their lifespans.
@@ -103,7 +103,7 @@
     /// [google.cloud.dialogflow.v2.SessionEntityType]: <doc:SessionEntityType>
     public var sessionEntityTypes: [SessionEntityType] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `WebhookResponse`.
     public init() {}
@@ -159,7 +159,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .source) {
         self.source = value
       }
-      self.payload = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .payload)
+      self.payload = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .payload)
       if let value = try container.decodeIfPresent([Context].self, forKey: .outputContexts) {
         self.outputContexts = value
       }
@@ -172,7 +172,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -193,11 +193,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.WebhookResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

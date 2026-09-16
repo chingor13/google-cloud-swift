@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [SecurityCenterManagement.UpdateSecurityHealthAnalyticsCustomModule][google.cloud.securitycentermanagement.v1.SecurityCenterManagement.UpdateSecurityHealthAnalyticsCustomModule].
 ///
 /// [google.cloud.securitycentermanagement.v1.SecurityCenterManagement.UpdateSecurityHealthAnalyticsCustomModule]: <doc:SecurityCenterManagementClient/updateSecurityHealthAnalyticsCustomModule(request:options:)>
-public struct UpdateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equatable, GoogleCloudWKT
+public struct UpdateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equatable, GoogleWKT
     ._AnyPackable,
   Sendable
 {
@@ -32,7 +32,7 @@ public struct UpdateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equatab
   ///
   /// If you omit this field or set it to the wildcard value `*`, then all
   /// eligible fields are updated.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Required. The resource being updated.
   public var securityHealthAnalyticsCustomModule: SecurityHealthAnalyticsCustomModule? = nil
@@ -52,7 +52,7 @@ public struct UpdateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equatab
   /// Defaults to `false`.
   public var validateOnly: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateSecurityHealthAnalyticsCustomModuleRequest`.
   public init() {}
@@ -90,8 +90,7 @@ public struct UpdateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equatab
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.securityHealthAnalyticsCustomModule = try container.decodeIfPresent(
       SecurityHealthAnalyticsCustomModule.self, forKey: .securityHealthAnalyticsCustomModule)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .validateOnly) {
@@ -99,7 +98,7 @@ public struct UpdateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equatab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -118,10 +117,10 @@ public struct UpdateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equatab
     return
       "type.googleapis.com/google.cloud.securitycentermanagement.v1.UpdateSecurityHealthAnalyticsCustomModuleRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

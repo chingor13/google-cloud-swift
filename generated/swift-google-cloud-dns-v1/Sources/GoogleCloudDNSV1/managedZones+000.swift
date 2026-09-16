@@ -18,19 +18,19 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for the `managedZones` resource.
 ///
 /// @Snippet(path: "managedZonesQuickstart")
 public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
   let inner: any Clients.ManagedZonesStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `ManagedZonesClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ManagedZonesStub = try Clients.ManagedZonesTransport(options)
     inner = Clients.ManagedZonesRetry(inner, options: options)
     if let logger = options.logger {
@@ -45,7 +45,7 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
   ///
   /// @Snippet(path: "managedZones_create")
   public func create(
-    request: ManagedZonesClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.CreateRequest, options: GoogleGax.RequestOptions
   ) async throws -> ManagedZone {
     try await self.inner.create(request: request, options: options)
   }
@@ -54,7 +54,7 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
   ///
   /// @Snippet(path: "managedZones_delete")
   public func delete(
-    request: ManagedZonesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.DeleteRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.delete(request: request, options: options)
   }
@@ -63,7 +63,7 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
   ///
   /// @Snippet(path: "managedZones_get")
   public func `get`(
-    request: ManagedZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> ManagedZone {
     try await self.inner.`get`(request: request, options: options)
   }
@@ -72,7 +72,7 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
   ///
   /// @Snippet(path: "managedZones_getIamPolicy")
   public func getIamPolicy(
-    request: ManagedZonesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIamV1Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -81,7 +81,7 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
   ///
   /// @Snippet(path: "managedZones_list")
   public func list(
-    request: ManagedZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.ListRequest, options: GoogleGax.RequestOptions
   ) async throws -> ManagedZonesListResponse {
     try await self.inner.list(request: request, options: options)
   }
@@ -90,21 +90,21 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
   ///
   /// @Snippet(path: "managedZones_list")
   public func list(
-    byItem: ManagedZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ManagedZonesClient.ListRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ManagedZone, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> ManagedZonesListResponse in
       var request = byItem
       request.pageToken = token
       return try await self.list(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Applies a partial update to an existing ManagedZone.
   ///
   /// @Snippet(path: "managedZones_patch")
   public func patch(
-    request: ManagedZonesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.PatchRequest, options: GoogleGax.RequestOptions
   ) async throws -> Operation {
     try await self.inner.patch(request: request, options: options)
   }
@@ -113,24 +113,24 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
   ///
   /// @Snippet(path: "managedZones_patch")
   public func patch(
-    withPolling: ManagedZonesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Operation> {
+    withPolling: ManagedZonesClient.PatchRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Operation> {
     let extractStatus = {
-      (op: Operation) throws -> GoogleCloudGax._PollableOperationImpl<Operation>.State in
+      (op: Operation) throws -> GoogleGax._PollableOperationImpl<Operation>.State in
       guard op._done() else {
         return .init(done: false, result: nil)
       }
 
       do {
         try op._detectErrors()
-      } catch let e as GoogleCloudGax.RequestError {
+      } catch let e as GoogleGax.RequestError {
         return .init(done: true, result: .failure(e))
       }
       return .init(done: true, result: .success(op))
     }
     let rawOp = try await self.patch(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Operation>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Operation>.State in
       let op = try await self.getOperation(
         request: .init().with {
           $0.operation = rawOp._name()
@@ -139,7 +139,7 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
         }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -151,7 +151,7 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
   ///
   /// @Snippet(path: "managedZones_setIamPolicy")
   public func setIamPolicy(
-    request: ManagedZonesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIamV1Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -160,7 +160,7 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
   ///
   /// @Snippet(path: "managedZones_testIamPermissions")
   public func testIamPermissions(
-    request: ManagedZonesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIamV1TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -169,7 +169,7 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
   ///
   /// @Snippet(path: "managedZones_update")
   public func update(
-    request: ManagedZonesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.UpdateRequest, options: GoogleGax.RequestOptions
   ) async throws -> Operation {
     try await self.inner.update(request: request, options: options)
   }
@@ -178,24 +178,24 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
   ///
   /// @Snippet(path: "managedZones_update")
   public func update(
-    withPolling: ManagedZonesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Operation> {
+    withPolling: ManagedZonesClient.UpdateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Operation> {
     let extractStatus = {
-      (op: Operation) throws -> GoogleCloudGax._PollableOperationImpl<Operation>.State in
+      (op: Operation) throws -> GoogleGax._PollableOperationImpl<Operation>.State in
       guard op._done() else {
         return .init(done: false, result: nil)
       }
 
       do {
         try op._detectErrors()
-      } catch let e as GoogleCloudGax.RequestError {
+      } catch let e as GoogleGax.RequestError {
         return .init(done: true, result: .failure(e))
       }
       return .init(done: true, result: .success(op))
     }
     let rawOp = try await self.update(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Operation>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Operation>.State in
       let op = try await self.getOperation(
         request: .init().with {
           $0.operation = rawOp._name()
@@ -204,7 +204,7 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
         }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -216,7 +216,7 @@ public final class ManagedZonesClient: Clients.ManagedZonesProtocol, Sendable {
   ///
   /// @Snippet(path: "managedZones_getOperation")
   func getOperation(
-    request: ManagedZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -307,52 +307,52 @@ extension Clients {
 
     /// See `ManagedZonesClient.create`.
     func create(
-      request: ManagedZonesClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.CreateRequest, options: GoogleGax.RequestOptions
     ) async throws -> ManagedZone
 
     /// See `ManagedZonesClient.delete`.
     func delete(
-      request: ManagedZonesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ManagedZonesClient.`get``.
     func `get`(
-      request: ManagedZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> ManagedZone
 
     /// See `ManagedZonesClient.getIamPolicy`.
     func getIamPolicy(
-      request: ManagedZonesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIamV1Policy
 
     /// See `ManagedZonesClient.list`.
     func list(
-      request: ManagedZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> ManagedZonesListResponse
 
     /// See `ManagedZonesClient.list`.
     func list(
-      byItem: ManagedZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ManagedZonesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ManagedZone, Swift.Error>
 
     /// See `ManagedZonesClient.patch`.
     func patch(
-      request: ManagedZonesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> Operation
 
     /// See `ManagedZonesClient.setIamPolicy`.
     func setIamPolicy(
-      request: ManagedZonesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIamV1Policy
 
     /// See `ManagedZonesClient.testIamPermissions`.
     func testIamPermissions(
-      request: ManagedZonesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIamV1TestIamPermissionsResponse
 
     /// See `ManagedZonesClient.update`.
     func update(
-      request: ManagedZonesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.UpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> Operation
   }
 }
@@ -364,9 +364,9 @@ extension Clients.ManagedZonesProtocol {
   }
 
   public func create(
-    request: ManagedZonesClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.CreateRequest, options: GoogleGax.RequestOptions
   ) async throws -> ManagedZone {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func create(
@@ -385,9 +385,9 @@ extension Clients.ManagedZonesProtocol {
   }
 
   public func delete(
-    request: ManagedZonesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.DeleteRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func delete(
@@ -406,9 +406,9 @@ extension Clients.ManagedZonesProtocol {
   }
 
   public func `get`(
-    request: ManagedZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> ManagedZone {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func `get`(
@@ -429,9 +429,9 @@ extension Clients.ManagedZonesProtocol {
   }
 
   public func getIamPolicy(
-    request: ManagedZonesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIamV1Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(
@@ -451,9 +451,9 @@ extension Clients.ManagedZonesProtocol {
   }
 
   public func list(
-    request: ManagedZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.ListRequest, options: GoogleGax.RequestOptions
   ) async throws -> ManagedZonesListResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func list(
@@ -463,12 +463,12 @@ extension Clients.ManagedZonesProtocol {
   }
 
   public func list(
-    byItem: ManagedZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ManagedZonesClient.ListRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ManagedZone, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> ManagedZonesListResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func list(
@@ -485,24 +485,24 @@ extension Clients.ManagedZonesProtocol {
   }
 
   public func patch(
-    request: ManagedZonesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.PatchRequest, options: GoogleGax.RequestOptions
   ) async throws -> Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func patch(
     withPolling: ManagedZonesClient.PatchRequest
-  ) async throws -> any GoogleCloudGax.PollableOperation<Operation> {
+  ) async throws -> any GoogleGax.PollableOperation<Operation> {
     try await self.patch(withPolling: withPolling, options: .init())
   }
 
   public func patch(
-    withPolling: ManagedZonesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Operation> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Operation>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ManagedZonesClient.PatchRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Operation> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Operation>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -510,7 +510,7 @@ extension Clients.ManagedZonesProtocol {
     project: Swift.String,
     managedZone: Swift.String,
     body: ManagedZone?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Operation> {
+  ) async throws -> any GoogleGax.PollableOperation<Operation> {
     let request = ManagedZonesClient.PatchRequest().with {
       $0.project = project
       $0.managedZone = managedZone
@@ -526,9 +526,9 @@ extension Clients.ManagedZonesProtocol {
   }
 
   public func setIamPolicy(
-    request: ManagedZonesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIamV1Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(
@@ -549,9 +549,9 @@ extension Clients.ManagedZonesProtocol {
   }
 
   public func testIamPermissions(
-    request: ManagedZonesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIamV1TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(
@@ -570,24 +570,24 @@ extension Clients.ManagedZonesProtocol {
   }
 
   public func update(
-    request: ManagedZonesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZonesClient.UpdateRequest, options: GoogleGax.RequestOptions
   ) async throws -> Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func update(
     withPolling: ManagedZonesClient.UpdateRequest
-  ) async throws -> any GoogleCloudGax.PollableOperation<Operation> {
+  ) async throws -> any GoogleGax.PollableOperation<Operation> {
     try await self.update(withPolling: withPolling, options: .init())
   }
 
   public func update(
-    withPolling: ManagedZonesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Operation> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Operation>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ManagedZonesClient.UpdateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Operation> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Operation>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -595,7 +595,7 @@ extension Clients.ManagedZonesProtocol {
     project: Swift.String,
     managedZone: Swift.String,
     body: ManagedZone?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Operation> {
+  ) async throws -> any GoogleGax.PollableOperation<Operation> {
     let request = ManagedZonesClient.UpdateRequest().with {
       $0.project = project
       $0.managedZone = managedZone
@@ -611,8 +611,8 @@ extension Clients.ManagedZonesProtocol {
   }
 
   public func getOperation(
-    request: ManagedZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

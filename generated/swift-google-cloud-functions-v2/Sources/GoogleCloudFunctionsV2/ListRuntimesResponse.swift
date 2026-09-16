@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response for the `ListRuntimes` method.
-public struct ListRuntimesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ListRuntimesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The runtimes that match the request.
   public var runtimes: [ListRuntimesResponse.Runtime] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListRuntimesResponse`.
   public init() {}
@@ -65,7 +65,7 @@ public struct ListRuntimesResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -79,7 +79,7 @@ public struct ListRuntimesResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   /// Describes a runtime and any special information (e.g., deprecation status)
   /// related to it.
-  public struct Runtime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Runtime: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the runtime, e.g., 'go113', 'nodejs12', etc.
@@ -103,7 +103,7 @@ public struct ListRuntimesResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Decommission date for the runtime.
     public var decommissionDate: GoogleType.Date? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Runtime`.
     public init() {}
@@ -171,7 +171,7 @@ public struct ListRuntimesResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
         GoogleType.Date.self, forKey: .decommissionDate)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -192,11 +192,11 @@ public struct ListRuntimesResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.functions.v2.ListRuntimesResponse.Runtime"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -336,10 +336,10 @@ public struct ListRuntimesResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.functions.v2.ListRuntimesResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

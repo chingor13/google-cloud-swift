@@ -15,52 +15,52 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol TagValuesStub: Sendable {
     func listTagValues(
-      request: ListTagValuesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTagValuesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudResourceManagerV3.ListTagValuesResponse
 
     func getTagValue(
-      request: GetTagValueRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTagValueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudResourceManagerV3.TagValue
 
     func getNamespacedTagValue(
-      request: GetNamespacedTagValueRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNamespacedTagValueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudResourceManagerV3.TagValue
 
     func createTagValue(
-      request: CreateTagValueRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTagValueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateTagValue(
-      request: UpdateTagValueRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTagValueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteTagValue(
-      request: DeleteTagValueRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTagValueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

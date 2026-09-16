@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message describing Endpoint object.
-public struct FirewallEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FirewallEndpoint: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Immutable. Identifier. Name of resource.
@@ -29,10 +29,10 @@ public struct FirewallEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var description: Swift.String = Swift.String()
 
   /// Output only. Create time stamp.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Update time stamp
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Labels as key value pairs
   public var labels: [Swift.String: Swift.String] = [:]
@@ -71,7 +71,7 @@ public struct FirewallEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Settings for the endpoint.
   public var endpointSettings: FirewallEndpoint.EndpointSettings? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FirewallEndpoint`.
   public init() {}
@@ -134,10 +134,8 @@ public struct FirewallEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -165,7 +163,7 @@ public struct FirewallEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       FirewallEndpoint.EndpointSettings.self, forKey: .endpointSettings)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -191,7 +189,7 @@ public struct FirewallEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// This is a subset of the FirewallEndpointAssociation message, containing
   /// fields to be used by the consumer.
-  public struct AssociationReference: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AssociationReference: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The resource name of the FirewallEndpointAssociation.
@@ -203,7 +201,7 @@ public struct FirewallEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// projects/{project}/global/networks/{name}.
     public var network: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AssociationReference`.
     public init() {}
@@ -246,7 +244,7 @@ public struct FirewallEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -263,23 +261,23 @@ public struct FirewallEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.networksecurity.v1.FirewallEndpoint.AssociationReference"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Settings for the endpoint.
-  public struct EndpointSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EndpointSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Immutable. Indicates whether Jumbo Frames are enabled.
     /// Default value is false.
     public var jumboFramesEnabled: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EndpointSettings`.
     public init() {}
@@ -317,7 +315,7 @@ public struct FirewallEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -332,11 +330,11 @@ public struct FirewallEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networksecurity.v1.FirewallEndpoint.EndpointSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -462,10 +460,10 @@ public struct FirewallEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networksecurity.v1.FirewallEndpoint"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudTalentV4
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: TenantServiceClient, parent: String) async throws {
   let response = try await client.createTenant(

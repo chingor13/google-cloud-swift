@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for private server accessible via PSC.
-public struct InternalServerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct InternalServerConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the service attachment.
@@ -40,7 +40,7 @@ public struct InternalServerConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// Output only. Details of endpoints created by the customer.
   public var pscEndpoints: [InternalServerConfig.PscEndpoint] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `InternalServerConfig`.
   public init() {}
@@ -99,7 +99,7 @@ public struct InternalServerConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -116,7 +116,7 @@ public struct InternalServerConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   /// A consumer project or network that is permitted to connect to the server
   /// via PSC.
-  public struct AllowedConsumer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AllowedConsumer: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The connection limit for the consumer.
@@ -126,7 +126,7 @@ public struct InternalServerConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Required. Specifies the type of consumer.
     public var consumerType: OneOf_ConsumerType? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AllowedConsumer`.
     public init() {}
@@ -181,7 +181,7 @@ public struct InternalServerConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
       self.consumerType = consumerType
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -210,23 +210,23 @@ public struct InternalServerConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ftp.v1.InternalServerConfig.AllowedConsumer"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A consumer project or network that is denied to connect to the server via
   /// PSC.
-  public struct DeniedConsumer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DeniedConsumer: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Specifies the type of consumer.
     public var consumerType: OneOf_ConsumerType? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DeniedConsumer`.
     public init() {}
@@ -276,7 +276,7 @@ public struct InternalServerConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
       self.consumerType = consumerType
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -304,16 +304,16 @@ public struct InternalServerConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ftp.v1.InternalServerConfig.DeniedConsumer"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Details of PSC endpoint created by customer.
-  public struct PscEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PscEndpoint: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. This is a Resource name for Private Service Connect
@@ -328,7 +328,7 @@ public struct InternalServerConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Output only. The status of the connected endpoint.
     public var status: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PscEndpoint`.
     public init() {}
@@ -376,7 +376,7 @@ public struct InternalServerConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -393,21 +393,21 @@ public struct InternalServerConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ftp.v1.InternalServerConfig.PscEndpoint"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ftp.v1.InternalServerConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

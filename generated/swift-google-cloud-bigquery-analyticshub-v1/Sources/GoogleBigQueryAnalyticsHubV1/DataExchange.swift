@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A data exchange is a container that lets you share data. Along with the
 /// descriptive information about the data exchange, it contains listings that
 /// reference shared datasets.
-public struct DataExchange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataExchange: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the data exchange.
@@ -69,7 +69,7 @@ public struct DataExchange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// If true, the DataExchange has an email sharing mandate enabled.
   public var logLinkedDatasetQueryUserEmail: Swift.Bool? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataExchange`.
   public init() {}
@@ -149,7 +149,7 @@ public struct DataExchange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       Swift.Bool.self, forKey: .logLinkedDatasetQueryUserEmail)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -174,10 +174,10 @@ public struct DataExchange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.DataExchange"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

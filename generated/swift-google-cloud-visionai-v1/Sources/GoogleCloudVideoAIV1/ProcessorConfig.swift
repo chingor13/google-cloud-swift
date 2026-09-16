@@ -15,19 +15,19 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Next ID: 35
-public struct ProcessorConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ProcessorConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Experimental configurations. Structured object containing not-yet-stable
   /// processor parameters.
-  public var experimentalConfig: GoogleCloudWKT.Struct? = nil
+  public var experimentalConfig: GoogleWKT.Struct? = nil
 
   public var processorConfig: OneOf_ProcessorConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ProcessorConfig`.
   public init() {}
@@ -96,7 +96,7 @@ public struct ProcessorConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.experimentalConfig = try container.decodeIfPresent(
-      GoogleCloudWKT.Struct.self, forKey: .experimentalConfig)
+      GoogleWKT.Struct.self, forKey: .experimentalConfig)
 
     var processorConfig: OneOf_ProcessorConfig? = nil
     let processorConfigCheckAndSet = {
@@ -193,7 +193,7 @@ public struct ProcessorConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.processorConfig = processorConfig
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -281,10 +281,10 @@ public struct ProcessorConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.ProcessorConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

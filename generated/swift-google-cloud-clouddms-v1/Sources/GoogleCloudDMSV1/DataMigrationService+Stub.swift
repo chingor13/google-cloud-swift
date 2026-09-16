@@ -16,212 +16,212 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DataMigrationServiceStub: Sendable {
     func listMigrationJobs(
-      request: ListMigrationJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMigrationJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.ListMigrationJobsResponse
 
     func getMigrationJob(
-      request: GetMigrationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMigrationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.MigrationJob
 
     func createMigrationJob(
-      request: CreateMigrationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMigrationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateMigrationJob(
-      request: UpdateMigrationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMigrationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteMigrationJob(
-      request: DeleteMigrationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMigrationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func startMigrationJob(
-      request: StartMigrationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: StartMigrationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func stopMigrationJob(
-      request: StopMigrationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: StopMigrationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func resumeMigrationJob(
-      request: ResumeMigrationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: ResumeMigrationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func promoteMigrationJob(
-      request: PromoteMigrationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: PromoteMigrationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func verifyMigrationJob(
-      request: VerifyMigrationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyMigrationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func restartMigrationJob(
-      request: RestartMigrationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: RestartMigrationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func generateSshScript(
-      request: GenerateSshScriptRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateSshScriptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.SshScript
 
     func generateTcpProxyScript(
-      request: GenerateTcpProxyScriptRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateTcpProxyScriptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.TcpProxyScript
 
     func listConnectionProfiles(
-      request: ListConnectionProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConnectionProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.ListConnectionProfilesResponse
 
     func getConnectionProfile(
-      request: GetConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.ConnectionProfile
 
     func createConnectionProfile(
-      request: CreateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateConnectionProfile(
-      request: UpdateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteConnectionProfile(
-      request: DeleteConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createPrivateConnection(
-      request: CreatePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePrivateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getPrivateConnection(
-      request: GetPrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPrivateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.PrivateConnection
 
     func listPrivateConnections(
-      request: ListPrivateConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPrivateConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.ListPrivateConnectionsResponse
 
     func deletePrivateConnection(
-      request: DeletePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePrivateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getConversionWorkspace(
-      request: GetConversionWorkspaceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConversionWorkspaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.ConversionWorkspace
 
     func listConversionWorkspaces(
-      request: ListConversionWorkspacesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConversionWorkspacesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.ListConversionWorkspacesResponse
 
     func createConversionWorkspace(
-      request: CreateConversionWorkspaceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConversionWorkspaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateConversionWorkspace(
-      request: UpdateConversionWorkspaceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConversionWorkspaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteConversionWorkspace(
-      request: DeleteConversionWorkspaceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConversionWorkspaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createMappingRule(
-      request: CreateMappingRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMappingRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.MappingRule
 
     func deleteMappingRule(
-      request: DeleteMappingRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMappingRuleRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listMappingRules(
-      request: ListMappingRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMappingRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.ListMappingRulesResponse
 
     func getMappingRule(
-      request: GetMappingRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMappingRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.MappingRule
 
     func seedConversionWorkspace(
-      request: SeedConversionWorkspaceRequest, options: GoogleCloudGax.RequestOptions
+      request: SeedConversionWorkspaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func importMappingRules(
-      request: ImportMappingRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportMappingRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func convertConversionWorkspace(
-      request: ConvertConversionWorkspaceRequest, options: GoogleCloudGax.RequestOptions
+      request: ConvertConversionWorkspaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func commitConversionWorkspace(
-      request: CommitConversionWorkspaceRequest, options: GoogleCloudGax.RequestOptions
+      request: CommitConversionWorkspaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func rollbackConversionWorkspace(
-      request: RollbackConversionWorkspaceRequest, options: GoogleCloudGax.RequestOptions
+      request: RollbackConversionWorkspaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func applyConversionWorkspace(
-      request: ApplyConversionWorkspaceRequest, options: GoogleCloudGax.RequestOptions
+      request: ApplyConversionWorkspaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func describeDatabaseEntities(
-      request: DescribeDatabaseEntitiesRequest, options: GoogleCloudGax.RequestOptions
+      request: DescribeDatabaseEntitiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.DescribeDatabaseEntitiesResponse
 
     func searchBackgroundJobs(
-      request: SearchBackgroundJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchBackgroundJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.SearchBackgroundJobsResponse
 
     func describeConversionWorkspaceRevisions(
-      request: DescribeConversionWorkspaceRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: DescribeConversionWorkspaceRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.DescribeConversionWorkspaceRevisionsResponse
 
     func fetchStaticIps(
-      request: FetchStaticIpsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchStaticIpsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDMSV1.FetchStaticIpsResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

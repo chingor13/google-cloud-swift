@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudChronicleV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: RuleServiceClient, projectId: String, locationId: String, instanceId: String,
@@ -33,7 +33,7 @@ func sample(
           $0.name =
             "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)/rules/\(ruleId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

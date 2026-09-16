@@ -16,42 +16,42 @@
 
 #if HttpsHealthChecks
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol HttpsHealthChecksStub: Sendable {
       func delete(
-        request: HttpsHealthChecksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: HttpsHealthChecksClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: HttpsHealthChecksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: HttpsHealthChecksClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HttpsHealthCheck
 
       func insert(
-        request: HttpsHealthChecksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: HttpsHealthChecksClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: HttpsHealthChecksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: HttpsHealthChecksClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HttpsHealthCheckList
 
       func patch(
-        request: HttpsHealthChecksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: HttpsHealthChecksClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
         request: HttpsHealthChecksClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: HttpsHealthChecksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: HttpsHealthChecksClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

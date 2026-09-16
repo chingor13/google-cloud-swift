@@ -15,39 +15,39 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DomainMappingsStub: Sendable {
     func listDomainMappings(
-      request: ListDomainMappingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDomainMappingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.ListDomainMappingsResponse
 
     func getDomainMapping(
-      request: GetDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDomainMappingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.DomainMapping
 
     func createDomainMapping(
-      request: CreateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDomainMappingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateDomainMapping(
-      request: UpdateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDomainMappingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteDomainMapping(
-      request: DeleteDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDomainMappingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

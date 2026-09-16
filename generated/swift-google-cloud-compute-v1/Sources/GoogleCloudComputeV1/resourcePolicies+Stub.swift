@@ -16,51 +16,49 @@
 
 #if ResourcePolicies
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ResourcePoliciesStub: Sendable {
       func aggregatedList(
-        request: ResourcePoliciesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ResourcePolicyAggregatedList
 
       func delete(
-        request: ResourcePoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: ResourcePoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ResourcePolicy
 
       func getIamPolicy(
-        request: ResourcePoliciesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: ResourcePoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ResourcePolicyList
 
       func patch(
-        request: ResourcePoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: ResourcePoliciesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: ResourcePoliciesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

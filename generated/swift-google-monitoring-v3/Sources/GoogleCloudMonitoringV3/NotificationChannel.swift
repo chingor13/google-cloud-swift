@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A `NotificationChannel` is a medium through which an alert is
 /// delivered when a policy violation is detected. Examples of channels
 /// include email, SMS, and third-party messaging applications. Fields
 /// containing sensitive information like authentication tokens or
 /// contact info are only partially populated on retrieval.
-public struct NotificationChannel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NotificationChannel: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The type of the notification channel. This field matches the
@@ -103,7 +103,7 @@ public struct NotificationChannel: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// the channel. This is a more convenient approach when the change is
   /// temporary and you want to receive notifications from the same set
   /// of alerting policies on the channel at some point in the future.
-  public var enabled: GoogleCloudWKT.BoolValue? = nil
+  public var enabled: GoogleWKT.BoolValue? = nil
 
   /// Record of the creation of this channel.
   public var creationRecord: MutationRecord? = nil
@@ -111,7 +111,7 @@ public struct NotificationChannel: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Records of the modification of this channel.
   public var mutationRecords: [MutationRecord] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NotificationChannel`.
   public init() {}
@@ -188,7 +188,7 @@ public struct NotificationChannel: Codable, Equatable, GoogleCloudWKT._AnyPackab
     {
       self.verificationStatus = value
     }
-    self.enabled = try container.decodeIfPresent(GoogleCloudWKT.BoolValue.self, forKey: .enabled)
+    self.enabled = try container.decodeIfPresent(GoogleWKT.BoolValue.self, forKey: .enabled)
     self.creationRecord = try container.decodeIfPresent(
       MutationRecord.self, forKey: .creationRecord)
     if let value = try container.decodeIfPresent([MutationRecord].self, forKey: .mutationRecords) {
@@ -196,7 +196,7 @@ public struct NotificationChannel: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -340,10 +340,10 @@ public struct NotificationChannel: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.NotificationChannel"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

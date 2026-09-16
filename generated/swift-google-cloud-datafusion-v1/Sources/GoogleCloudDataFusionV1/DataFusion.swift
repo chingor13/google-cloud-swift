@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for creating and managing Data Fusion instances.
 /// Data Fusion enables ETL developers to build code-free, data integration
@@ -30,11 +30,11 @@ import GoogleCloudGax
 /// @Snippet(path: "DataFusionQuickstart")
 public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   let inner: any Clients.DataFusionStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `DataFusionClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DataFusionStub = try Clients.DataFusionTransport(options)
     inner = Clients.DataFusionRetry(inner, options: options)
     if let logger = options.logger {
@@ -50,7 +50,7 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_ListAvailableVersions")
   public func listAvailableVersions(
-    request: ListAvailableVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAvailableVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataFusionV1.ListAvailableVersionsResponse {
     try await self.inner.listAvailableVersions(request: request, options: options)
   }
@@ -60,7 +60,7 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_ListAvailableVersions")
   public func listAvailableVersions(
-    byItem: ListAvailableVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAvailableVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Version, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataFusionV1.ListAvailableVersionsResponse in
@@ -68,14 +68,14 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
       request.pageToken = token
       return try await self.listAvailableVersions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists Data Fusion instances in the specified project and location.
   ///
   /// @Snippet(path: "DataFusion_ListInstances")
   public func listInstances(
-    request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataFusionV1.ListInstancesResponse {
     try await self.inner.listInstances(request: request, options: options)
   }
@@ -84,7 +84,7 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_ListInstances")
   public func listInstances(
-    byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Instance, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataFusionV1.ListInstancesResponse in
@@ -92,14 +92,14 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
       request.pageToken = token
       return try await self.listInstances(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Data Fusion instance.
   ///
   /// @Snippet(path: "DataFusion_GetInstance")
   public func getInstance(
-    request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataFusionV1.Instance {
     try await self.inner.getInstance(request: request, options: options)
   }
@@ -108,7 +108,7 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_CreateInstance")
   public func createInstance(
-    request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createInstance(request: request, options: options)
   }
@@ -117,21 +117,21 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_CreateInstance")
   public func createInstance(
-    withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    withPolling: CreateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Instance>.State
+      in
       return try op._extractStatus(Instance.self)
     }
     let rawOp = try await self.createInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -143,7 +143,7 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_DeleteInstance")
   public func deleteInstance(
-    request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteInstance(request: request, options: options)
   }
@@ -152,21 +152,21 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_DeleteInstance")
   public func deleteInstance(
-    withPolling: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -178,7 +178,7 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_UpdateInstance")
   public func updateInstance(
-    request: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateInstance(request: request, options: options)
   }
@@ -187,21 +187,21 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_UpdateInstance")
   public func updateInstance(
-    withPolling: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    withPolling: UpdateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Instance>.State
+      in
       return try op._extractStatus(Instance.self)
     }
     let rawOp = try await self.updateInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -214,7 +214,7 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_RestartInstance")
   public func restartInstance(
-    request: RestartInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: RestartInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.restartInstance(request: request, options: options)
   }
@@ -224,21 +224,21 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_RestartInstance")
   public func restartInstance(
-    withPolling: RestartInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    withPolling: RestartInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Instance>.State
+      in
       return try op._extractStatus(Instance.self)
     }
     let rawOp = try await self.restartInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -252,7 +252,7 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -263,7 +263,7 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -271,7 +271,7 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -280,7 +280,7 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -291,7 +291,7 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -302,7 +302,7 @@ public final class DataFusionClient: Clients.DataFusionProtocol, Sendable {
   ///
   /// @Snippet(path: "DataFusion_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -345,7 +345,7 @@ extension Clients {
     func createInstance(request: CreateInstanceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `DataFusionClient.createInstance`.
-    func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleCloudGax
+    func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleGax
       .PollableOperation<Instance>
 
     /// See `DataFusionClient.createInstance`.
@@ -353,39 +353,39 @@ extension Clients {
       parent: Swift.String,
       instance: Instance?,
       instanceId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `DataFusionClient.deleteInstance`.
     func deleteInstance(request: DeleteInstanceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `DataFusionClient.deleteInstance`.
-    func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleCloudGax
+    func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `DataFusionClient.deleteInstance`.
     func deleteInstance(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DataFusionClient.updateInstance`.
     func updateInstance(request: UpdateInstanceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `DataFusionClient.updateInstance`.
-    func updateInstance(withPolling: UpdateInstanceRequest) async throws -> any GoogleCloudGax
+    func updateInstance(withPolling: UpdateInstanceRequest) async throws -> any GoogleGax
       .PollableOperation<Instance>
 
     /// See `DataFusionClient.updateInstance`.
     func updateInstance(
       instance: Instance?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `DataFusionClient.restartInstance`.
     func restartInstance(request: RestartInstanceRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `DataFusionClient.restartInstance`.
-    func restartInstance(withPolling: RestartInstanceRequest) async throws -> any GoogleCloudGax
+    func restartInstance(withPolling: RestartInstanceRequest) async throws -> any GoogleGax
       .PollableOperation<Instance>
 
     /// See `DataFusionClient.listOperations`.
@@ -421,87 +421,87 @@ extension Clients {
 
     /// See `DataFusionClient.listAvailableVersions`.
     func listAvailableVersions(
-      request: ListAvailableVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAvailableVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFusionV1.ListAvailableVersionsResponse
 
     /// See `DataFusionClient.listAvailableVersions`.
     func listAvailableVersions(
-      byItem: ListAvailableVersionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAvailableVersionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Version, Swift.Error>
 
     /// See `DataFusionClient.listInstances`.
     func listInstances(
-      request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFusionV1.ListInstancesResponse
 
     /// See `DataFusionClient.listInstances`.
     func listInstances(
-      byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Instance, Swift.Error>
 
     /// See `DataFusionClient.getInstance`.
     func getInstance(
-      request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFusionV1.Instance
 
     /// See `DataFusionClient.createInstance`.
     func createInstance(
-      request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataFusionClient.createInstance`.
     func createInstance(
-      withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      withPolling: CreateInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `DataFusionClient.deleteInstance`.
     func deleteInstance(
-      request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataFusionClient.deleteInstance`.
     func deleteInstance(
-      withPolling: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DataFusionClient.updateInstance`.
     func updateInstance(
-      request: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataFusionClient.updateInstance`.
     func updateInstance(
-      withPolling: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      withPolling: UpdateInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `DataFusionClient.restartInstance`.
     func restartInstance(
-      request: RestartInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: RestartInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataFusionClient.restartInstance`.
     func restartInstance(
-      withPolling: RestartInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      withPolling: RestartInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `DataFusionClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `DataFusionClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `DataFusionClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `DataFusionClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -515,9 +515,9 @@ extension Clients.DataFusionProtocol {
   }
 
   public func listAvailableVersions(
-    request: ListAvailableVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAvailableVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataFusionV1.ListAvailableVersionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAvailableVersions(
@@ -527,13 +527,13 @@ extension Clients.DataFusionProtocol {
   }
 
   public func listAvailableVersions(
-    byItem: ListAvailableVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAvailableVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Version, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataFusionV1.ListAvailableVersionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAvailableVersions(
@@ -552,9 +552,9 @@ extension Clients.DataFusionProtocol {
   }
 
   public func listInstances(
-    request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataFusionV1.ListInstancesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listInstances(
@@ -564,13 +564,13 @@ extension Clients.DataFusionProtocol {
   }
 
   public func listInstances(
-    byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Instance, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataFusionV1.ListInstancesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getInstance(request: GetInstanceRequest) async throws
@@ -580,9 +580,9 @@ extension Clients.DataFusionProtocol {
   }
 
   public func getInstance(
-    request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataFusionV1.Instance {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createInstance(request: CreateInstanceRequest) async throws
@@ -592,24 +592,24 @@ extension Clients.DataFusionProtocol {
   }
 
   public func createInstance(
-    request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleCloudGax
+  public func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleGax
     .PollableOperation<Instance>
   {
     try await self.createInstance(withPolling: withPolling, options: .init())
   }
 
   public func createInstance(
-    withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -617,7 +617,7 @@ extension Clients.DataFusionProtocol {
     parent: Swift.String,
     instance: Instance?,
     instanceId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let request = CreateInstanceRequest().with {
       $0.parent = parent
       $0.instance = instance
@@ -633,30 +633,30 @@ extension Clients.DataFusionProtocol {
   }
 
   public func deleteInstance(
-    request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleCloudGax
+  public func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteInstance(withPolling: withPolling, options: .init())
   }
 
   public func deleteInstance(
-    withPolling: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteInstance(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteInstanceRequest().with {
       $0.name = name
     }
@@ -670,31 +670,31 @@ extension Clients.DataFusionProtocol {
   }
 
   public func updateInstance(
-    request: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateInstance(withPolling: UpdateInstanceRequest) async throws -> any GoogleCloudGax
+  public func updateInstance(withPolling: UpdateInstanceRequest) async throws -> any GoogleGax
     .PollableOperation<Instance>
   {
     try await self.updateInstance(withPolling: withPolling, options: .init())
   }
 
   public func updateInstance(
-    withPolling: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateInstance(
     instance: Instance?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let request = UpdateInstanceRequest().with {
       $0.instance = instance
       $0.updateMask = updateMask
@@ -709,24 +709,24 @@ extension Clients.DataFusionProtocol {
   }
 
   public func restartInstance(
-    request: RestartInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: RestartInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func restartInstance(withPolling: RestartInstanceRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Instance>
+  public func restartInstance(withPolling: RestartInstanceRequest) async throws -> any GoogleGax
+    .PollableOperation<Instance>
   {
     try await self.restartInstance(withPolling: withPolling, options: .init())
   }
 
   public func restartInstance(
-    withPolling: RestartInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: RestartInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -737,9 +737,9 @@ extension Clients.DataFusionProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -749,13 +749,13 @@ extension Clients.DataFusionProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -776,9 +776,9 @@ extension Clients.DataFusionProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -795,9 +795,9 @@ extension Clients.DataFusionProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -814,9 +814,9 @@ extension Clients.DataFusionProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

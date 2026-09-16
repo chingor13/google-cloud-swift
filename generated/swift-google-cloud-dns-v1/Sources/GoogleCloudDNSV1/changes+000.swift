@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for the `changes` resource.
 ///
@@ -28,7 +28,7 @@ public final class ChangesClient: Clients.ChangesProtocol, Sendable {
   let inner: any Clients.ChangesStub
 
   /// Creates a new `ChangesClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ChangesStub = try Clients.ChangesTransport(options)
     inner = Clients.ChangesRetry(inner, options: options)
     if let logger = options.logger {
@@ -41,7 +41,7 @@ public final class ChangesClient: Clients.ChangesProtocol, Sendable {
   ///
   /// @Snippet(path: "changes_create")
   public func create(
-    request: ChangesClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+    request: ChangesClient.CreateRequest, options: GoogleGax.RequestOptions
   ) async throws -> Change {
     try await self.inner.create(request: request, options: options)
   }
@@ -50,7 +50,7 @@ public final class ChangesClient: Clients.ChangesProtocol, Sendable {
   ///
   /// @Snippet(path: "changes_get")
   public func `get`(
-    request: ChangesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ChangesClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> Change {
     try await self.inner.`get`(request: request, options: options)
   }
@@ -59,7 +59,7 @@ public final class ChangesClient: Clients.ChangesProtocol, Sendable {
   ///
   /// @Snippet(path: "changes_list")
   public func list(
-    request: ChangesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    request: ChangesClient.ListRequest, options: GoogleGax.RequestOptions
   ) async throws -> ChangesListResponse {
     try await self.inner.list(request: request, options: options)
   }
@@ -68,14 +68,14 @@ public final class ChangesClient: Clients.ChangesProtocol, Sendable {
   ///
   /// @Snippet(path: "changes_list")
   public func list(
-    byItem: ChangesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ChangesClient.ListRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Change, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> ChangesListResponse in
       var request = byItem
       request.pageToken = token
       return try await self.list(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 }
 
@@ -122,22 +122,22 @@ extension Clients {
 
     /// See `ChangesClient.create`.
     func create(
-      request: ChangesClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangesClient.CreateRequest, options: GoogleGax.RequestOptions
     ) async throws -> Change
 
     /// See `ChangesClient.`get``.
     func `get`(
-      request: ChangesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> Change
 
     /// See `ChangesClient.list`.
     func list(
-      request: ChangesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> ChangesListResponse
 
     /// See `ChangesClient.list`.
     func list(
-      byItem: ChangesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ChangesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Change, Swift.Error>
   }
 }
@@ -149,9 +149,9 @@ extension Clients.ChangesProtocol {
   }
 
   public func create(
-    request: ChangesClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+    request: ChangesClient.CreateRequest, options: GoogleGax.RequestOptions
   ) async throws -> Change {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func create(
@@ -172,9 +172,9 @@ extension Clients.ChangesProtocol {
   }
 
   public func `get`(
-    request: ChangesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ChangesClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> Change {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func `get`(
@@ -195,9 +195,9 @@ extension Clients.ChangesProtocol {
   }
 
   public func list(
-    request: ChangesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    request: ChangesClient.ListRequest, options: GoogleGax.RequestOptions
   ) async throws -> ChangesListResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func list(
@@ -207,12 +207,12 @@ extension Clients.ChangesProtocol {
   }
 
   public func list(
-    byItem: ChangesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ChangesClient.ListRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Change, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> ChangesListResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func list(

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Rule for transferring to a specific agent.
-public struct TransferRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TransferRule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the child agent the rule applies to.
@@ -32,7 +32,7 @@ public struct TransferRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The rule type.
   public var ruleType: OneOf_RuleType? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TransferRule`.
   public init() {}
@@ -101,7 +101,7 @@ public struct TransferRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.ruleType = ruleType
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -125,13 +125,13 @@ public struct TransferRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Deterministic transfer rule. When the condition evaluates to true, the
   /// transfer occurs.
-  public struct DeterministicTransfer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DeterministicTransfer: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The condition to evaluate.
     public var conditionType: OneOf_ConditionType? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DeterministicTransfer`.
     public init() {}
@@ -190,7 +190,7 @@ public struct TransferRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.conditionType = conditionType
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -223,23 +223,23 @@ public struct TransferRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.TransferRule.DeterministicTransfer"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A rule that prevents the planner from transferring to the target agent.
-  public struct DisablePlannerTransfer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DisablePlannerTransfer: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. If the condition evaluates to true, planner will not be allowed
     /// to transfer to the target agent.
     public var expressionCondition: ExpressionCondition? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DisablePlannerTransfer`.
     public init() {}
@@ -276,7 +276,7 @@ public struct TransferRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         ExpressionCondition.self, forKey: .expressionCondition)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -291,11 +291,11 @@ public struct TransferRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.TransferRule.DisablePlannerTransfer"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -417,10 +417,10 @@ public struct TransferRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.TransferRule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

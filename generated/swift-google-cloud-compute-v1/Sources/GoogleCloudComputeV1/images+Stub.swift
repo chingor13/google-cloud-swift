@@ -16,57 +16,57 @@
 
 #if Images
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ImagesStub: Sendable {
       func delete(
-        request: ImagesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func deprecate(
-        request: ImagesClient.DeprecateRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.DeprecateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: ImagesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Image
 
       func getFromFamily(
-        request: ImagesClient.GetFromFamilyRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.GetFromFamilyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Image
 
       func getIamPolicy(
-        request: ImagesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: ImagesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: ImagesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ImageList
 
       func patch(
-        request: ImagesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: ImagesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setLabels(
-        request: ImagesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: ImagesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ImagesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

@@ -15,25 +15,25 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A test message for NullValue.
-public struct MessageWithNullValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MessageWithNullValue: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: GoogleCloudWKT.NullValue = GoogleCloudWKT.NullValue()
+  public var singular: GoogleWKT.NullValue = GoogleWKT.NullValue()
 
   /// An optional field.
-  public var `optional`: GoogleCloudWKT.NullValue? = nil
+  public var `optional`: GoogleWKT.NullValue? = nil
 
   /// A repeated field.
-  public var repeated: [GoogleCloudWKT.NullValue] = []
+  public var repeated: [GoogleWKT.NullValue] = []
 
   /// A map field, messages cannot be keys.
-  public var map: [Swift.String: GoogleCloudWKT.NullValue] = [:]
+  public var map: [Swift.String: GoogleWKT.NullValue] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MessageWithNullValue`.
   public init() {}
@@ -72,23 +72,21 @@ public struct MessageWithNullValue: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    if let value = try container.decodeIfPresent(GoogleCloudWKT.NullValue.self, forKey: .singular) {
+    if let value = try container.decodeIfPresent(GoogleWKT.NullValue.self, forKey: .singular) {
       self.singular = value
     }
-    self.`optional` = try container.decodeIfPresent(
-      GoogleCloudWKT.NullValue.self, forKey: .`optional`)
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.NullValue].self, forKey: .repeated)
-    {
+    self.`optional` = try container.decodeIfPresent(GoogleWKT.NullValue.self, forKey: .`optional`)
+    if let value = try container.decodeIfPresent([GoogleWKT.NullValue].self, forKey: .repeated) {
       self.repeated = value
     }
     if let value = try container.decodeIfPresent(
-      [Swift.String: GoogleCloudWKT.NullValue].self, forKey: .map)
+      [Swift.String: GoogleWKT.NullValue].self, forKey: .map)
     {
       self.map = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -106,10 +104,10 @@ public struct MessageWithNullValue: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.swift.sdk.test.MessageWithNullValue"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

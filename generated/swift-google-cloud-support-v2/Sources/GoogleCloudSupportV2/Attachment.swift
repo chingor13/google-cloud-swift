@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An Attachment contains metadata about a file that was uploaded to a
 /// case - it is NOT a file itself. That being said, the name of an Attachment
@@ -25,14 +25,14 @@ import Foundation
 /// While attachments can be uploaded in the console at the
 /// same time as a comment, they're associated on a "case" level, not a
 /// "comment" level.
-public struct Attachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Attachment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Identifier. The resource name of the attachment.
   public var name: Swift.String = Swift.String()
 
   /// Output only. The time at which the attachment was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The user who uploaded the attachment. Note, the name and email
   /// will be obfuscated if the attachment was uploaded by Google support.
@@ -47,7 +47,7 @@ public struct Attachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The size of the attachment in bytes.
   public var sizeBytes: Swift.Int64 = Swift.Int64()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Attachment`.
   public init() {}
@@ -93,8 +93,7 @@ public struct Attachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.creator = try container.decodeIfPresent(Actor.self, forKey: .creator)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .filename) {
       self.filename = value
@@ -107,7 +106,7 @@ public struct Attachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -127,10 +126,10 @@ public struct Attachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.support.v2.Attachment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

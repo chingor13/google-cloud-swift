@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A licensed user.
-public struct LicensedUser: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct LicensedUser: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Username.
@@ -26,14 +26,14 @@ public struct LicensedUser: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var username: Swift.String = Swift.String()
 
   /// Output only. Timestamp when the license was assigned.
-  public var assignTime: GoogleCloudWKT.Timestamp? = nil
+  public var assignTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Timestamp when the license was recently used. This may not be
   /// the most recent usage time, and will be updated regularly (within 24
   /// hours).
-  public var recentUsageTime: GoogleCloudWKT.Timestamp? = nil
+  public var recentUsageTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `LicensedUser`.
   public init() {}
@@ -73,13 +73,12 @@ public struct LicensedUser: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .username) {
       self.username = value
     }
-    self.assignTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .assignTime)
+    self.assignTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .assignTime)
     self.recentUsageTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .recentUsageTime)
+      GoogleWKT.Timestamp.self, forKey: .recentUsageTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,10 +95,10 @@ public struct LicensedUser: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.commerce.consumer.procurement.v1.LicensedUser"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

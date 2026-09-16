@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudApiGatewayV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ApiGatewayServiceClient, projectId: String, apiId: String, apiConfigId: String)
   async throws
@@ -31,7 +31,7 @@ func sample(client: ApiGatewayServiceClient, projectId: String, apiId: String, a
         $0.apiConfig = ApiConfig().with {
           $0.name = "projects/\(projectId)/locations/global/apis/\(apiId)/configs/\(apiConfigId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// DataQualityScan related setting.
-public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataQualitySpec: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The list of rules to evaluate against a data source. At least one
@@ -71,7 +71,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// for more details.
   public var filter: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataQualitySpec`.
   public init() {}
@@ -140,7 +140,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -159,7 +159,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The configuration of post scan actions of DataQualityScan.
-  public struct PostScanActions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PostScanActions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. If set, results will be exported to the provided BigQuery
@@ -170,7 +170,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// receipts upon triggers.
     public var notificationReport: DataQualitySpec.PostScanActions.NotificationReport? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PostScanActions`.
     public init() {}
@@ -211,7 +211,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         DataQualitySpec.PostScanActions.NotificationReport.self, forKey: .notificationReport)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -225,7 +225,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// The configuration of BigQuery export post scan action.
-    public struct BigQueryExport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BigQueryExport: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The BigQuery table to export DataQualityScan results to.
@@ -235,7 +235,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
       public var resultsTable: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BigQueryExport`.
       public init() {}
@@ -273,7 +273,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -289,24 +289,24 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.dataplex.v1.DataQualitySpec.PostScanActions.BigQueryExport"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The individuals or groups who are designated to receive notifications
     /// upon triggers.
-    public struct Recipients: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Recipients: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The email recipients who will receive the DataQualityScan
       /// results report.
       public var emails: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Recipients`.
       public init() {}
@@ -344,7 +344,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -360,23 +360,23 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.dataplex.v1.DataQualitySpec.PostScanActions.Recipients"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// This trigger is triggered when the DQ score in the job result is less
     /// than a specified input score.
-    public struct ScoreThresholdTrigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ScoreThresholdTrigger: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The score range is in [0,100].
       public var scoreThreshold: Swift.Float = Swift.Float()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ScoreThresholdTrigger`.
       public init() {}
@@ -414,7 +414,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -430,20 +430,20 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.dataplex.v1.DataQualitySpec.PostScanActions.ScoreThresholdTrigger"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// This trigger is triggered when the scan job itself fails, regardless of
     /// the result.
-    public struct JobFailureTrigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct JobFailureTrigger: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `JobFailureTrigger`.
       public init() {}
@@ -474,7 +474,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         let container = try decoder.container(keyedBy: CodingKeys.self)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -489,20 +489,20 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.dataplex.v1.DataQualitySpec.PostScanActions.JobFailureTrigger"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// This trigger is triggered whenever a scan job run ends, regardless
     /// of the result.
-    public struct JobEndTrigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct JobEndTrigger: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `JobEndTrigger`.
       public init() {}
@@ -533,7 +533,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         let container = try decoder.container(keyedBy: CodingKeys.self)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -548,16 +548,16 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.dataplex.v1.DataQualitySpec.PostScanActions.JobEndTrigger"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The configuration of notification report post scan action.
-    public struct NotificationReport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct NotificationReport: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The recipients who will receive the notification report.
@@ -572,7 +572,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Optional. If set, report will be sent when a scan job ends.
       public var jobEndTrigger: DataQualitySpec.PostScanActions.JobEndTrigger? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `NotificationReport`.
       public init() {}
@@ -622,7 +622,7 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           DataQualitySpec.PostScanActions.JobEndTrigger.self, forKey: .jobEndTrigger)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -641,32 +641,32 @@ public struct DataQualitySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.dataplex.v1.DataQualitySpec.PostScanActions.NotificationReport"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.DataQualitySpec.PostScanActions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.DataQualitySpec"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,7 +16,7 @@
 
 #if Environments
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// You can create multiple versions of your agent and publish them to separate
   /// environments.
@@ -36,7 +36,7 @@
   ///
   /// For more information, see the [versions and environments
   /// guide](https://cloud.google.com/dialogflow/docs/agents-versions).
-  public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Environment: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The unique identifier of this agent environment.
@@ -67,7 +67,7 @@
 
     /// Output only. The last update time of this environment. This field is
     /// read-only, i.e., it cannot be set by create and update methods.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. Text to speech settings for this environment.
     public var textToSpeechSettings: TextToSpeechSettings? = nil
@@ -75,7 +75,7 @@
     /// Optional. The fulfillment settings to use for this environment.
     public var fulfillment: Fulfillment? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Environment`.
     public init() {}
@@ -132,14 +132,13 @@
       if let value = try container.decodeIfPresent(Environment.State.self, forKey: .state) {
         self.state = value
       }
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       self.textToSpeechSettings = try container.decodeIfPresent(
         TextToSpeechSettings.self, forKey: .textToSpeechSettings)
       self.fulfillment = try container.decodeIfPresent(Fulfillment.self, forKey: .fulfillment)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -276,11 +275,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Environment"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

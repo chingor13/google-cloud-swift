@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func getReferenceList(
-      request: GetReferenceListRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReferenceListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ReferenceList {
       try await self._intercept(
         request: request,
         options: options,
         name: "getReferenceList",
         action: {
-          (r: GetReferenceListRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetReferenceListRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.ReferenceList
           in
           return try await self.inner.getReferenceList(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func listReferenceLists(
-      request: ListReferenceListsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReferenceListsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListReferenceListsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listReferenceLists",
         action: {
-          (r: ListReferenceListsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListReferenceListsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.ListReferenceListsResponse
           in
           return try await self.inner.listReferenceLists(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func createReferenceList(
-      request: CreateReferenceListRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReferenceListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ReferenceList {
       try await self._intercept(
         request: request,
         options: options,
         name: "createReferenceList",
         action: {
-          (r: CreateReferenceListRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateReferenceListRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.ReferenceList
           in
           return try await self.inner.createReferenceList(request: r, options: o)
@@ -103,14 +103,14 @@ extension Clients {
     }
 
     public func updateReferenceList(
-      request: UpdateReferenceListRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateReferenceListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ReferenceList {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateReferenceList",
         action: {
-          (r: UpdateReferenceListRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateReferenceListRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.ReferenceList
           in
           return try await self.inner.updateReferenceList(request: r, options: o)
@@ -118,14 +118,14 @@ extension Clients {
     }
 
     public func verifyReferenceList(
-      request: VerifyReferenceListRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyReferenceListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.VerifyReferenceListResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "verifyReferenceList",
         action: {
-          (r: VerifyReferenceListRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: VerifyReferenceListRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudChronicleV1.VerifyReferenceListResponse
           in
           return try await self.inner.verifyReferenceList(request: r, options: o)
@@ -133,29 +133,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -163,29 +163,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteOperation",
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "cancelOperation",
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

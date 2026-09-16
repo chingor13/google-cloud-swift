@@ -20,22 +20,22 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// A service for creating and managing Vertex AI's Index resources.
   ///
   /// @Snippet(path: "IndexServiceQuickstart")
   public final class IndexServiceClient: Clients.IndexServiceProtocol, Sendable {
     let inner: any Clients.IndexServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `IndexServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.IndexServiceStub = try Clients.IndexServiceTransport(options)
       inner = Clients.IndexServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -50,7 +50,7 @@
     ///
     /// @Snippet(path: "IndexService_CreateIndex")
     public func createIndex(
-      request: CreateIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createIndex(request: request, options: options)
     }
@@ -59,21 +59,20 @@
     ///
     /// @Snippet(path: "IndexService_CreateIndex")
     public func createIndex(
-      withPolling: CreateIndexRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Index> {
+      withPolling: CreateIndexRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Index> {
       let extractStatus = {
-        (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Index>.State in
+        (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Index>.State in
         return try op._extractStatus(Index.self)
       }
       let rawOp = try await self.createIndex(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Index>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Index>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -85,7 +84,7 @@
     ///
     /// @Snippet(path: "IndexService_GetIndex")
     public func getIndex(
-      request: GetIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Index {
       try await self.inner.getIndex(request: request, options: options)
     }
@@ -94,7 +93,7 @@
     ///
     /// @Snippet(path: "IndexService_ListIndexes")
     public func listIndexes(
-      request: ListIndexesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIndexesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListIndexesResponse {
       try await self.inner.listIndexes(request: request, options: options)
     }
@@ -103,7 +102,7 @@
     ///
     /// @Snippet(path: "IndexService_ListIndexes")
     public func listIndexes(
-      byItem: ListIndexesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListIndexesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Index, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListIndexesResponse in
@@ -111,14 +110,14 @@
         request.pageToken = token
         return try await self.listIndexes(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Updates an Index.
     ///
     /// @Snippet(path: "IndexService_UpdateIndex")
     public func updateIndex(
-      request: UpdateIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.updateIndex(request: request, options: options)
     }
@@ -127,21 +126,20 @@
     ///
     /// @Snippet(path: "IndexService_UpdateIndex")
     public func updateIndex(
-      withPolling: UpdateIndexRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Index> {
+      withPolling: UpdateIndexRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Index> {
       let extractStatus = {
-        (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Index>.State in
+        (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Index>.State in
         return try op._extractStatus(Index.self)
       }
       let rawOp = try await self.updateIndex(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Index>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Index>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -158,7 +156,7 @@
     ///
     /// @Snippet(path: "IndexService_DeleteIndex")
     public func deleteIndex(
-      request: DeleteIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteIndex(request: request, options: options)
     }
@@ -172,21 +170,21 @@
     ///
     /// @Snippet(path: "IndexService_DeleteIndex")
     public func deleteIndex(
-      withPolling: DeleteIndexRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteIndexRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteIndex(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -198,7 +196,7 @@
     ///
     /// @Snippet(path: "IndexService_UpsertDatapoints")
     public func upsertDatapoints(
-      request: UpsertDatapointsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpsertDatapointsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.UpsertDatapointsResponse {
       try await self.inner.upsertDatapoints(request: request, options: options)
     }
@@ -207,7 +205,7 @@
     ///
     /// @Snippet(path: "IndexService_RemoveDatapoints")
     public func removeDatapoints(
-      request: RemoveDatapointsRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveDatapointsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.RemoveDatapointsResponse {
       try await self.inner.removeDatapoints(request: request, options: options)
     }
@@ -216,7 +214,7 @@
     ///
     /// @Snippet(path: "IndexService_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -225,7 +223,7 @@
     ///
     /// @Snippet(path: "IndexService_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -233,14 +231,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "IndexService_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -253,7 +251,7 @@
     ///
     /// @Snippet(path: "IndexService_SetIamPolicy")
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -263,7 +261,7 @@
     ///
     /// @Snippet(path: "IndexService_GetIamPolicy")
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -278,7 +276,7 @@
     ///
     /// @Snippet(path: "IndexService_TestIamPermissions")
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -289,7 +287,7 @@
     ///
     /// @Snippet(path: "IndexService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -300,7 +298,7 @@
     ///
     /// @Snippet(path: "IndexService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -308,7 +306,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -317,7 +315,7 @@
     ///
     /// @Snippet(path: "IndexService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -328,7 +326,7 @@
     ///
     /// @Snippet(path: "IndexService_DeleteOperation")
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteOperation(request: request, options: options)
     }
@@ -339,7 +337,7 @@
     ///
     /// @Snippet(path: "IndexService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -350,7 +348,7 @@
     ///
     /// @Snippet(path: "IndexService_WaitOperation")
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.waitOperation(request: request, options: options)
     }
@@ -367,14 +365,14 @@
       func createIndex(request: CreateIndexRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `IndexServiceClient.createIndex`.
-      func createIndex(withPolling: CreateIndexRequest) async throws -> any GoogleCloudGax
+      func createIndex(withPolling: CreateIndexRequest) async throws -> any GoogleGax
         .PollableOperation<Index>
 
       /// See `IndexServiceClient.createIndex`.
       func createIndex(
         parent: Swift.String,
         index: Index?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Index>
+      ) async throws -> any GoogleGax.PollableOperation<Index>
 
       /// See `IndexServiceClient.getIndex`.
       func getIndex(request: GetIndexRequest) async throws -> GoogleCloudAIPlatformV1.Index
@@ -402,26 +400,26 @@
       func updateIndex(request: UpdateIndexRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `IndexServiceClient.updateIndex`.
-      func updateIndex(withPolling: UpdateIndexRequest) async throws -> any GoogleCloudGax
+      func updateIndex(withPolling: UpdateIndexRequest) async throws -> any GoogleGax
         .PollableOperation<Index>
 
       /// See `IndexServiceClient.updateIndex`.
       func updateIndex(
         index: Index?,
-        updateMask: GoogleCloudWKT.FieldMask?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Index>
+        updateMask: GoogleWKT.FieldMask?,
+      ) async throws -> any GoogleGax.PollableOperation<Index>
 
       /// See `IndexServiceClient.deleteIndex`.
       func deleteIndex(request: DeleteIndexRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `IndexServiceClient.deleteIndex`.
-      func deleteIndex(withPolling: DeleteIndexRequest) async throws -> any GoogleCloudGax
+      func deleteIndex(withPolling: DeleteIndexRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `IndexServiceClient.deleteIndex`.
       func deleteIndex(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `IndexServiceClient.upsertDatapoints`.
       func upsertDatapoints(request: UpsertDatapointsRequest) async throws
@@ -491,112 +489,112 @@
 
       /// See `IndexServiceClient.createIndex`.
       func createIndex(
-        request: CreateIndexRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateIndexRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `IndexServiceClient.createIndex`.
       func createIndex(
-        withPolling: CreateIndexRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Index>
+        withPolling: CreateIndexRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Index>
 
       /// See `IndexServiceClient.getIndex`.
       func getIndex(
-        request: GetIndexRequest, options: GoogleCloudGax.RequestOptions
+        request: GetIndexRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Index
 
       /// See `IndexServiceClient.listIndexes`.
       func listIndexes(
-        request: ListIndexesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListIndexesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListIndexesResponse
 
       /// See `IndexServiceClient.listIndexes`.
       func listIndexes(
-        byItem: ListIndexesRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListIndexesRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Index, Swift.Error>
 
       /// See `IndexServiceClient.updateIndex`.
       func updateIndex(
-        request: UpdateIndexRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateIndexRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `IndexServiceClient.updateIndex`.
       func updateIndex(
-        withPolling: UpdateIndexRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Index>
+        withPolling: UpdateIndexRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Index>
 
       /// See `IndexServiceClient.deleteIndex`.
       func deleteIndex(
-        request: DeleteIndexRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteIndexRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `IndexServiceClient.deleteIndex`.
       func deleteIndex(
-        withPolling: DeleteIndexRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteIndexRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `IndexServiceClient.upsertDatapoints`.
       func upsertDatapoints(
-        request: UpsertDatapointsRequest, options: GoogleCloudGax.RequestOptions
+        request: UpsertDatapointsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.UpsertDatapointsResponse
 
       /// See `IndexServiceClient.removeDatapoints`.
       func removeDatapoints(
-        request: RemoveDatapointsRequest, options: GoogleCloudGax.RequestOptions
+        request: RemoveDatapointsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.RemoveDatapointsResponse
 
       /// See `IndexServiceClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `IndexServiceClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `IndexServiceClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `IndexServiceClient.setIamPolicy`.
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `IndexServiceClient.getIamPolicy`.
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `IndexServiceClient.testIamPermissions`.
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       /// See `IndexServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `IndexServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `IndexServiceClient.deleteOperation`.
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `IndexServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `IndexServiceClient.waitOperation`.
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }
@@ -609,31 +607,31 @@
     }
 
     public func createIndex(
-      request: CreateIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func createIndex(withPolling: CreateIndexRequest) async throws -> any GoogleCloudGax
+    public func createIndex(withPolling: CreateIndexRequest) async throws -> any GoogleGax
       .PollableOperation<Index>
     {
       try await self.createIndex(withPolling: withPolling, options: .init())
     }
 
     public func createIndex(
-      withPolling: CreateIndexRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Index> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Index>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateIndexRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Index> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Index>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func createIndex(
       parent: Swift.String,
       index: Index?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Index> {
+    ) async throws -> any GoogleGax.PollableOperation<Index> {
       let request = CreateIndexRequest().with {
         $0.parent = parent
         $0.index = index
@@ -646,9 +644,9 @@
     }
 
     public func getIndex(
-      request: GetIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Index {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIndex(
@@ -667,9 +665,9 @@
     }
 
     public func listIndexes(
-      request: ListIndexesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIndexesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListIndexesResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listIndexes(
@@ -679,13 +677,13 @@
     }
 
     public func listIndexes(
-      byItem: ListIndexesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListIndexesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Index, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListIndexesResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listIndexes(
@@ -703,31 +701,31 @@
     }
 
     public func updateIndex(
-      request: UpdateIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func updateIndex(withPolling: UpdateIndexRequest) async throws -> any GoogleCloudGax
+    public func updateIndex(withPolling: UpdateIndexRequest) async throws -> any GoogleGax
       .PollableOperation<Index>
     {
       try await self.updateIndex(withPolling: withPolling, options: .init())
     }
 
     public func updateIndex(
-      withPolling: UpdateIndexRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Index> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Index>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: UpdateIndexRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Index> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Index>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func updateIndex(
       index: Index?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Index> {
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Index> {
       let request = UpdateIndexRequest().with {
         $0.index = index
         $0.updateMask = updateMask
@@ -741,30 +739,30 @@
     }
 
     public func deleteIndex(
-      request: DeleteIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func deleteIndex(withPolling: DeleteIndexRequest) async throws -> any GoogleCloudGax
+    public func deleteIndex(withPolling: DeleteIndexRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
     {
       try await self.deleteIndex(withPolling: withPolling, options: .init())
     }
 
     public func deleteIndex(
-      withPolling: DeleteIndexRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteIndexRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteIndex(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteIndexRequest().with {
         $0.name = name
       }
@@ -778,9 +776,9 @@
     }
 
     public func upsertDatapoints(
-      request: UpsertDatapointsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpsertDatapointsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.UpsertDatapointsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func removeDatapoints(request: RemoveDatapointsRequest) async throws
@@ -790,9 +788,9 @@
     }
 
     public func removeDatapoints(
-      request: RemoveDatapointsRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveDatapointsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.RemoveDatapointsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -802,9 +800,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -814,13 +812,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -830,9 +828,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -842,9 +840,9 @@
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -854,9 +852,9 @@
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -866,9 +864,9 @@
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -878,9 +876,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -890,13 +888,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -917,9 +915,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -936,9 +934,9 @@
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteOperation(
@@ -955,9 +953,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(
@@ -976,9 +974,9 @@
     }
 
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

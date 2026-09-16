@@ -16,17 +16,17 @@
 
 #if RegionInstances
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionInstancesStub: Sendable {
       func bulkInsert(
-        request: RegionInstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionInstancesClient.BulkInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

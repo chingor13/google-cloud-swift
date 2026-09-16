@@ -16,79 +16,79 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol TestingStub: Sendable {
     func createSession(
-      request: CreateSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Session
 
     func getSession(
-      request: GetSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Session
 
     func listSessions(
-      request: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSessionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.ListSessionsResponse
 
     func deleteSession(
-      request: DeleteSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSessionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func reportSession(
-      request: ReportSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: ReportSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.ReportSessionResponse
 
     func listTests(
-      request: ListTestsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTestsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.ListTestsResponse
 
     func deleteTest(
-      request: DeleteTestRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTestRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func verifyTest(
-      request: VerifyTestRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyTestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.VerifyTestResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

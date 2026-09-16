@@ -16,7 +16,7 @@
 
 #if Agents || Flows || Pages || Playbooks || Sessions || TestCases || TransitionRouteGroups
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Hierarchical advanced settings for agent/flow/page/fulfillment/parameter.
   /// Settings exposed at lower level overrides the settings exposed at higher
@@ -29,7 +29,7 @@
   /// levels define DTMF detections running in parallel.
   ///
   /// Hierarchy: Agent->Flow->Page->Fulfillment/Parameter.
-  public struct AdvancedSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AdvancedSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// If present, incoming audio is exported by Dialogflow to the configured
@@ -62,7 +62,7 @@
     /// - Agent level.
     public var loggingSettings: AdvancedSettings.LoggingSettings? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AdvancedSettings`.
     public init() {}
@@ -111,7 +111,7 @@
         AdvancedSettings.LoggingSettings.self, forKey: .loggingSettings)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -128,7 +128,7 @@
     }
 
     /// Define behaviors of speech to text detection.
-    public struct SpeechSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SpeechSettings: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Sensitivity of the speech model that detects the end of speech.
@@ -136,7 +136,7 @@
       public var endpointerSensitivity: Swift.Int32 = Swift.Int32()
 
       /// Timeout before detecting no speech.
-      public var noSpeechTimeout: GoogleCloudWKT.Duration? = nil
+      public var noSpeechTimeout: GoogleWKT.Duration? = nil
 
       /// Use timeout based endpointing, interpreting endpointer sensitivity as
       /// seconds of timeout value.
@@ -149,7 +149,7 @@
       /// models](https://cloud.google.com/dialogflow/cx/docs/concept/speech-models).
       public var models: [Swift.String: Swift.String] = [:]
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SpeechSettings`.
       public init() {}
@@ -195,7 +195,7 @@
           self.endpointerSensitivity = value
         }
         self.noSpeechTimeout = try container.decodeIfPresent(
-          GoogleCloudWKT.Duration.self, forKey: .noSpeechTimeout)
+          GoogleWKT.Duration.self, forKey: .noSpeechTimeout)
         if let value = try container.decodeIfPresent(
           Swift.Bool.self, forKey: .useTimeoutBasedEndpointing)
         {
@@ -208,7 +208,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -226,16 +226,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.AdvancedSettings.SpeechSettings"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Define behaviors for DTMF (dual tone multi frequency).
-    public struct DtmfSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DtmfSettings: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// If true, incoming audio is processed for DTMF (dual tone multi frequency)
@@ -253,12 +253,12 @@
       public var finishDigit: Swift.String = Swift.String()
 
       /// Interdigit timeout setting for matching dtmf input to regex.
-      public var interdigitTimeoutDuration: GoogleCloudWKT.Duration? = nil
+      public var interdigitTimeoutDuration: GoogleWKT.Duration? = nil
 
       /// Endpoint timeout setting for matching dtmf input to regex.
-      public var endpointingTimeoutDuration: GoogleCloudWKT.Duration? = nil
+      public var endpointingTimeoutDuration: GoogleWKT.Duration? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DtmfSettings`.
       public init() {}
@@ -310,12 +310,12 @@
           self.finishDigit = value
         }
         self.interdigitTimeoutDuration = try container.decodeIfPresent(
-          GoogleCloudWKT.Duration.self, forKey: .interdigitTimeoutDuration)
+          GoogleWKT.Duration.self, forKey: .interdigitTimeoutDuration)
         self.endpointingTimeoutDuration = try container.decodeIfPresent(
-          GoogleCloudWKT.Duration.self, forKey: .endpointingTimeoutDuration)
+          GoogleWKT.Duration.self, forKey: .endpointingTimeoutDuration)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -336,16 +336,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.AdvancedSettings.DtmfSettings"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Define behaviors on logging.
-    public struct LoggingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct LoggingSettings: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Enables Google Cloud Logging.
@@ -359,7 +359,7 @@
       /// used to determine if the utterance should be redacted.
       public var enableConsentBasedRedaction: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `LoggingSettings`.
       public init() {}
@@ -414,7 +414,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -431,22 +431,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.AdvancedSettings.LoggingSettings"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.AdvancedSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

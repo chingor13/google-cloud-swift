@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Prediction output format for Video Classification.
-public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource ID of the AnnotationSpec that had been identified.
@@ -41,7 +41,7 @@ public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleClo
   /// 'segment-classification' prediction type, this equals the original
   /// 'timeSegmentStart' from the input instance, for other types it is the
   /// start of a shot or a 1 second interval respectively.
-  public var timeSegmentStart: GoogleCloudWKT.Duration? = nil
+  public var timeSegmentStart: GoogleWKT.Duration? = nil
 
   /// The end, exclusive, of the video's time segment in which the
   /// AnnotationSpec has been identified. Expressed as a number of seconds as
@@ -50,13 +50,13 @@ public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleClo
   /// 'segment-classification' prediction type, this equals the original
   /// 'timeSegmentEnd' from the input instance, for other types it is the end
   /// of a shot or a 1 second interval respectively.
-  public var timeSegmentEnd: GoogleCloudWKT.Duration? = nil
+  public var timeSegmentEnd: GoogleWKT.Duration? = nil
 
   /// The Model's confidence in correction of this prediction, higher
   /// value means higher confidence.
-  public var confidence: GoogleCloudWKT.FloatValue? = nil
+  public var confidence: GoogleWKT.FloatValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VideoClassificationPredictionResult`.
   public init() {}
@@ -109,14 +109,13 @@ public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleClo
       self.type = value
     }
     self.timeSegmentStart = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .timeSegmentStart)
+      GoogleWKT.Duration.self, forKey: .timeSegmentStart)
     self.timeSegmentEnd = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .timeSegmentEnd)
-    self.confidence = try container.decodeIfPresent(
-      GoogleCloudWKT.FloatValue.self, forKey: .confidence)
+      GoogleWKT.Duration.self, forKey: .timeSegmentEnd)
+    self.confidence = try container.decodeIfPresent(GoogleWKT.FloatValue.self, forKey: .confidence)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -137,10 +136,10 @@ public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleClo
     return
       "type.googleapis.com/google.cloud.aiplatform.v1.schema.predict.prediction.VideoClassificationPredictionResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

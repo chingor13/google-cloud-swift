@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func updateQuotaAdjusterSettings(
-      request: UpdateQuotaAdjusterSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateQuotaAdjusterSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateQuotaAdjusterSettings",
         action: {
-          (r: UpdateQuotaAdjusterSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateQuotaAdjusterSettingsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings
           in
           return try await self.inner.updateQuotaAdjusterSettings(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func getQuotaAdjusterSettings(
-      request: GetQuotaAdjusterSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQuotaAdjusterSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings {
       try await self._intercept(
         request: request,
         options: options,
         name: "getQuotaAdjusterSettings",
         action: {
-          (r: GetQuotaAdjusterSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetQuotaAdjusterSettingsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiCloudQuotasV1.QuotaAdjusterSettings
           in
           return try await self.inner.getQuotaAdjusterSettings(request: r, options: o)

@@ -19,21 +19,21 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// This service is used for managing plugins inside the API Hub.
 ///
 /// @Snippet(path: "ApiHubPluginQuickstart")
 public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   let inner: any Clients.ApiHubPluginStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `ApiHubPluginClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ApiHubPluginStub = try Clients.ApiHubPluginTransport(options)
     inner = Clients.ApiHubPluginRetry(inner, options: options)
     if let logger = options.logger {
@@ -48,7 +48,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_GetPlugin")
   public func getPlugin(
-    request: GetPluginRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPluginRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Plugin {
     try await self.inner.getPlugin(request: request, options: options)
   }
@@ -58,7 +58,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_EnablePlugin")
   public func enablePlugin(
-    request: EnablePluginRequest, options: GoogleCloudGax.RequestOptions
+    request: EnablePluginRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Plugin {
     try await self.inner.enablePlugin(request: request, options: options)
   }
@@ -68,7 +68,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_DisablePlugin")
   public func disablePlugin(
-    request: DisablePluginRequest, options: GoogleCloudGax.RequestOptions
+    request: DisablePluginRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Plugin {
     try await self.inner.disablePlugin(request: request, options: options)
   }
@@ -78,7 +78,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_CreatePlugin")
   public func createPlugin(
-    request: CreatePluginRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePluginRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Plugin {
     try await self.inner.createPlugin(request: request, options: options)
   }
@@ -87,7 +87,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_ListPlugins")
   public func listPlugins(
-    request: ListPluginsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPluginsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.ListPluginsResponse {
     try await self.inner.listPlugins(request: request, options: options)
   }
@@ -96,14 +96,14 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_ListPlugins")
   public func listPlugins(
-    byItem: ListPluginsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPluginsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Plugin, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudApiHubV1.ListPluginsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listPlugins(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Delete a Plugin in API hub.
@@ -111,7 +111,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_DeletePlugin")
   public func deletePlugin(
-    request: DeletePluginRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePluginRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deletePlugin(request: request, options: options)
   }
@@ -121,21 +121,21 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_DeletePlugin")
   public func deletePlugin(
-    withPolling: DeletePluginRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeletePluginRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deletePlugin(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -147,7 +147,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_CreatePluginInstance")
   public func createPluginInstance(
-    request: CreatePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePluginInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createPluginInstance(request: request, options: options)
   }
@@ -156,21 +156,21 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_CreatePluginInstance")
   public func createPluginInstance(
-    withPolling: CreatePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PluginInstance> {
+    withPolling: CreatePluginInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PluginInstance> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PluginInstance>.State in
+        -> GoogleGax._PollableOperationImpl<PluginInstance>.State in
       return try op._extractStatus(PluginInstance.self)
     }
     let rawOp = try await self.createPluginInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PluginInstance>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PluginInstance>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -182,7 +182,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_ExecutePluginInstanceAction")
   public func executePluginInstanceAction(
-    request: ExecutePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
+    request: ExecutePluginInstanceActionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.executePluginInstanceAction(request: request, options: options)
   }
@@ -191,23 +191,23 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_ExecutePluginInstanceAction")
   public func executePluginInstanceAction(
-    withPolling: ExecutePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExecutePluginInstanceActionResponse> {
+    withPolling: ExecutePluginInstanceActionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ExecutePluginInstanceActionResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ExecutePluginInstanceActionResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ExecutePluginInstanceActionResponse>.State in
       return try op._extractStatus(ExecutePluginInstanceActionResponse.self)
     }
     let rawOp = try await self.executePluginInstanceAction(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<ExecutePluginInstanceActionResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<ExecutePluginInstanceActionResponse>.State
+      in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -219,7 +219,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_GetPluginInstance")
   public func getPluginInstance(
-    request: GetPluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPluginInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.PluginInstance {
     try await self.inner.getPluginInstance(request: request, options: options)
   }
@@ -229,7 +229,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_ListPluginInstances")
   public func listPluginInstances(
-    request: ListPluginInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPluginInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.ListPluginInstancesResponse {
     try await self.inner.listPluginInstances(request: request, options: options)
   }
@@ -239,7 +239,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_ListPluginInstances")
   public func listPluginInstances(
-    byItem: ListPluginInstancesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPluginInstancesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PluginInstance, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudApiHubV1.ListPluginInstancesResponse in
@@ -247,14 +247,14 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
       request.pageToken = token
       return try await self.listPluginInstances(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Enables a plugin instance in the API hub.
   ///
   /// @Snippet(path: "ApiHubPlugin_EnablePluginInstanceAction")
   public func enablePluginInstanceAction(
-    request: EnablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
+    request: EnablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.enablePluginInstanceAction(request: request, options: options)
   }
@@ -263,23 +263,23 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_EnablePluginInstanceAction")
   public func enablePluginInstanceAction(
-    withPolling: EnablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<EnablePluginInstanceActionResponse> {
+    withPolling: EnablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<EnablePluginInstanceActionResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<EnablePluginInstanceActionResponse>.State in
+        -> GoogleGax._PollableOperationImpl<EnablePluginInstanceActionResponse>.State in
       return try op._extractStatus(EnablePluginInstanceActionResponse.self)
     }
     let rawOp = try await self.enablePluginInstanceAction(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<EnablePluginInstanceActionResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<EnablePluginInstanceActionResponse>.State
+      in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -291,7 +291,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_DisablePluginInstanceAction")
   public func disablePluginInstanceAction(
-    request: DisablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
+    request: DisablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.disablePluginInstanceAction(request: request, options: options)
   }
@@ -300,23 +300,23 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_DisablePluginInstanceAction")
   public func disablePluginInstanceAction(
-    withPolling: DisablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DisablePluginInstanceActionResponse> {
+    withPolling: DisablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DisablePluginInstanceActionResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DisablePluginInstanceActionResponse>.State in
+        -> GoogleGax._PollableOperationImpl<DisablePluginInstanceActionResponse>.State in
       return try op._extractStatus(DisablePluginInstanceActionResponse.self)
     }
     let rawOp = try await self.disablePluginInstanceAction(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<DisablePluginInstanceActionResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<DisablePluginInstanceActionResponse>.State
+      in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -351,7 +351,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_UpdatePluginInstance")
   public func updatePluginInstance(
-    request: UpdatePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePluginInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.PluginInstance {
     try await self.inner.updatePluginInstance(request: request, options: options)
   }
@@ -360,7 +360,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_DeletePluginInstance")
   public func deletePluginInstance(
-    request: DeletePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePluginInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deletePluginInstance(request: request, options: options)
   }
@@ -369,21 +369,21 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_DeletePluginInstance")
   public func deletePluginInstance(
-    withPolling: DeletePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeletePluginInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deletePluginInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -395,7 +395,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -404,7 +404,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -412,14 +412,14 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "ApiHubPlugin_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -430,7 +430,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -441,7 +441,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -449,7 +449,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -458,7 +458,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -469,7 +469,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -480,7 +480,7 @@ public final class ApiHubPluginClient: Clients.ApiHubPluginProtocol, Sendable {
   ///
   /// @Snippet(path: "ApiHubPlugin_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -545,13 +545,13 @@ extension Clients {
     func deletePlugin(request: DeletePluginRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiHubPluginClient.deletePlugin`.
-    func deletePlugin(withPolling: DeletePluginRequest) async throws -> any GoogleCloudGax
+    func deletePlugin(withPolling: DeletePluginRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `ApiHubPluginClient.deletePlugin`.
     func deletePlugin(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ApiHubPluginClient.createPluginInstance`.
     func createPluginInstance(request: CreatePluginInstanceRequest) async throws
@@ -559,14 +559,14 @@ extension Clients {
 
     /// See `ApiHubPluginClient.createPluginInstance`.
     func createPluginInstance(withPolling: CreatePluginInstanceRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<PluginInstance>
+      -> any GoogleGax.PollableOperation<PluginInstance>
 
     /// See `ApiHubPluginClient.createPluginInstance`.
     func createPluginInstance(
       parent: Swift.String,
       pluginInstance: PluginInstance?,
       pluginInstanceId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PluginInstance>
+    ) async throws -> any GoogleGax.PollableOperation<PluginInstance>
 
     /// See `ApiHubPluginClient.executePluginInstanceAction`.
     func executePluginInstanceAction(request: ExecutePluginInstanceActionRequest) async throws
@@ -574,13 +574,13 @@ extension Clients {
 
     /// See `ApiHubPluginClient.executePluginInstanceAction`.
     func executePluginInstanceAction(withPolling: ExecutePluginInstanceActionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ExecutePluginInstanceActionResponse>
+      -> any GoogleGax.PollableOperation<ExecutePluginInstanceActionResponse>
 
     /// See `ApiHubPluginClient.executePluginInstanceAction`.
     func executePluginInstanceAction(
       name: Swift.String,
       actionExecutionDetail: ActionExecutionDetail?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExecutePluginInstanceActionResponse>
+    ) async throws -> any GoogleGax.PollableOperation<ExecutePluginInstanceActionResponse>
 
     /// See `ApiHubPluginClient.getPluginInstance`.
     func getPluginInstance(request: GetPluginInstanceRequest) async throws
@@ -611,13 +611,13 @@ extension Clients {
 
     /// See `ApiHubPluginClient.enablePluginInstanceAction`.
     func enablePluginInstanceAction(withPolling: EnablePluginInstanceActionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<EnablePluginInstanceActionResponse>
+      -> any GoogleGax.PollableOperation<EnablePluginInstanceActionResponse>
 
     /// See `ApiHubPluginClient.enablePluginInstanceAction`.
     func enablePluginInstanceAction(
       name: Swift.String,
       actionId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<EnablePluginInstanceActionResponse>
+    ) async throws -> any GoogleGax.PollableOperation<EnablePluginInstanceActionResponse>
 
     /// See `ApiHubPluginClient.disablePluginInstanceAction`.
     func disablePluginInstanceAction(request: DisablePluginInstanceActionRequest) async throws
@@ -625,13 +625,13 @@ extension Clients {
 
     /// See `ApiHubPluginClient.disablePluginInstanceAction`.
     func disablePluginInstanceAction(withPolling: DisablePluginInstanceActionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DisablePluginInstanceActionResponse>
+      -> any GoogleGax.PollableOperation<DisablePluginInstanceActionResponse>
 
     /// See `ApiHubPluginClient.disablePluginInstanceAction`.
     func disablePluginInstanceAction(
       name: Swift.String,
       actionId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DisablePluginInstanceActionResponse>
+    ) async throws -> any GoogleGax.PollableOperation<DisablePluginInstanceActionResponse>
 
     /// See `ApiHubPluginClient.updatePluginInstance`.
     func updatePluginInstance(request: UpdatePluginInstanceRequest) async throws
@@ -640,7 +640,7 @@ extension Clients {
     /// See `ApiHubPluginClient.updatePluginInstance`.
     func updatePluginInstance(
       pluginInstance: PluginInstance?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudApiHubV1.PluginInstance
 
     /// See `ApiHubPluginClient.deletePluginInstance`.
@@ -649,12 +649,12 @@ extension Clients {
 
     /// See `ApiHubPluginClient.deletePluginInstance`.
     func deletePluginInstance(withPolling: DeletePluginInstanceRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ApiHubPluginClient.deletePluginInstance`.
     func deletePluginInstance(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ApiHubPluginClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -702,147 +702,147 @@ extension Clients {
 
     /// See `ApiHubPluginClient.getPlugin`.
     func getPlugin(
-      request: GetPluginRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPluginRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.Plugin
 
     /// See `ApiHubPluginClient.enablePlugin`.
     func enablePlugin(
-      request: EnablePluginRequest, options: GoogleCloudGax.RequestOptions
+      request: EnablePluginRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.Plugin
 
     /// See `ApiHubPluginClient.disablePlugin`.
     func disablePlugin(
-      request: DisablePluginRequest, options: GoogleCloudGax.RequestOptions
+      request: DisablePluginRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.Plugin
 
     /// See `ApiHubPluginClient.createPlugin`.
     func createPlugin(
-      request: CreatePluginRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePluginRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.Plugin
 
     /// See `ApiHubPluginClient.listPlugins`.
     func listPlugins(
-      request: ListPluginsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPluginsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.ListPluginsResponse
 
     /// See `ApiHubPluginClient.listPlugins`.
     func listPlugins(
-      byItem: ListPluginsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPluginsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Plugin, Swift.Error>
 
     /// See `ApiHubPluginClient.deletePlugin`.
     func deletePlugin(
-      request: DeletePluginRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePluginRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiHubPluginClient.deletePlugin`.
     func deletePlugin(
-      withPolling: DeletePluginRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeletePluginRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ApiHubPluginClient.createPluginInstance`.
     func createPluginInstance(
-      request: CreatePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePluginInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiHubPluginClient.createPluginInstance`.
     func createPluginInstance(
-      withPolling: CreatePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PluginInstance>
+      withPolling: CreatePluginInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PluginInstance>
 
     /// See `ApiHubPluginClient.executePluginInstanceAction`.
     func executePluginInstanceAction(
-      request: ExecutePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
+      request: ExecutePluginInstanceActionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiHubPluginClient.executePluginInstanceAction`.
     func executePluginInstanceAction(
-      withPolling: ExecutePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExecutePluginInstanceActionResponse>
+      withPolling: ExecutePluginInstanceActionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExecutePluginInstanceActionResponse>
 
     /// See `ApiHubPluginClient.getPluginInstance`.
     func getPluginInstance(
-      request: GetPluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPluginInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.PluginInstance
 
     /// See `ApiHubPluginClient.listPluginInstances`.
     func listPluginInstances(
-      request: ListPluginInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPluginInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.ListPluginInstancesResponse
 
     /// See `ApiHubPluginClient.listPluginInstances`.
     func listPluginInstances(
-      byItem: ListPluginInstancesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPluginInstancesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PluginInstance, Swift.Error>
 
     /// See `ApiHubPluginClient.enablePluginInstanceAction`.
     func enablePluginInstanceAction(
-      request: EnablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
+      request: EnablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiHubPluginClient.enablePluginInstanceAction`.
     func enablePluginInstanceAction(
-      withPolling: EnablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<EnablePluginInstanceActionResponse>
+      withPolling: EnablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<EnablePluginInstanceActionResponse>
 
     /// See `ApiHubPluginClient.disablePluginInstanceAction`.
     func disablePluginInstanceAction(
-      request: DisablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
+      request: DisablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiHubPluginClient.disablePluginInstanceAction`.
     func disablePluginInstanceAction(
-      withPolling: DisablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DisablePluginInstanceActionResponse>
+      withPolling: DisablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DisablePluginInstanceActionResponse>
 
     /// See `ApiHubPluginClient.updatePluginInstance`.
     func updatePluginInstance(
-      request: UpdatePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePluginInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.PluginInstance
 
     /// See `ApiHubPluginClient.deletePluginInstance`.
     func deletePluginInstance(
-      request: DeletePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePluginInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiHubPluginClient.deletePluginInstance`.
     func deletePluginInstance(
-      withPolling: DeletePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeletePluginInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ApiHubPluginClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `ApiHubPluginClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `ApiHubPluginClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `ApiHubPluginClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `ApiHubPluginClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `ApiHubPluginClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ApiHubPluginClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -854,9 +854,9 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func getPlugin(
-    request: GetPluginRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPluginRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Plugin {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPlugin(
@@ -874,9 +874,9 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func enablePlugin(
-    request: EnablePluginRequest, options: GoogleCloudGax.RequestOptions
+    request: EnablePluginRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Plugin {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func enablePlugin(
@@ -895,9 +895,9 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func disablePlugin(
-    request: DisablePluginRequest, options: GoogleCloudGax.RequestOptions
+    request: DisablePluginRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Plugin {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func disablePlugin(
@@ -915,9 +915,9 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func createPlugin(
-    request: CreatePluginRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePluginRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Plugin {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createPlugin(
@@ -940,9 +940,9 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func listPlugins(
-    request: ListPluginsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPluginsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.ListPluginsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPlugins(
@@ -952,12 +952,12 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func listPlugins(
-    byItem: ListPluginsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPluginsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Plugin, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudApiHubV1.ListPluginsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPlugins(
@@ -975,30 +975,30 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func deletePlugin(
-    request: DeletePluginRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePluginRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deletePlugin(withPolling: DeletePluginRequest) async throws -> any GoogleCloudGax
+  public func deletePlugin(withPolling: DeletePluginRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deletePlugin(withPolling: withPolling, options: .init())
   }
 
   public func deletePlugin(
-    withPolling: DeletePluginRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeletePluginRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deletePlugin(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeletePluginRequest().with {
       $0.name = name
     }
@@ -1012,24 +1012,24 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func createPluginInstance(
-    request: CreatePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePluginInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createPluginInstance(withPolling: CreatePluginInstanceRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PluginInstance>
+    -> any GoogleGax.PollableOperation<PluginInstance>
   {
     try await self.createPluginInstance(withPolling: withPolling, options: .init())
   }
 
   public func createPluginInstance(
-    withPolling: CreatePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PluginInstance> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PluginInstance>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreatePluginInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PluginInstance> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PluginInstance>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1037,7 +1037,7 @@ extension Clients.ApiHubPluginProtocol {
     parent: Swift.String,
     pluginInstance: PluginInstance?,
     pluginInstanceId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PluginInstance> {
+  ) async throws -> any GoogleGax.PollableOperation<PluginInstance> {
     let request = CreatePluginInstanceRequest().with {
       $0.parent = parent
       $0.pluginInstance = pluginInstance
@@ -1053,33 +1053,33 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func executePluginInstanceAction(
-    request: ExecutePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
+    request: ExecutePluginInstanceActionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func executePluginInstanceAction(withPolling: ExecutePluginInstanceActionRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<ExecutePluginInstanceActionResponse>
+    async throws -> any GoogleGax.PollableOperation<ExecutePluginInstanceActionResponse>
   {
     try await self.executePluginInstanceAction(withPolling: withPolling, options: .init())
   }
 
   public func executePluginInstanceAction(
-    withPolling: ExecutePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExecutePluginInstanceActionResponse> {
+    withPolling: ExecutePluginInstanceActionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ExecutePluginInstanceActionResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<ExecutePluginInstanceActionResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<ExecutePluginInstanceActionResponse>.State
+      in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func executePluginInstanceAction(
     name: Swift.String,
     actionExecutionDetail: ActionExecutionDetail?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExecutePluginInstanceActionResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<ExecutePluginInstanceActionResponse> {
     let request = ExecutePluginInstanceActionRequest().with {
       $0.name = name
       $0.actionExecutionDetail = actionExecutionDetail
@@ -1094,9 +1094,9 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func getPluginInstance(
-    request: GetPluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPluginInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.PluginInstance {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPluginInstance(
@@ -1115,9 +1115,9 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func listPluginInstances(
-    request: ListPluginInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPluginInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.ListPluginInstancesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPluginInstances(
@@ -1127,13 +1127,13 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func listPluginInstances(
-    byItem: ListPluginInstancesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPluginInstancesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PluginInstance, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudApiHubV1.ListPluginInstancesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPluginInstances(
@@ -1152,33 +1152,33 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func enablePluginInstanceAction(
-    request: EnablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
+    request: EnablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func enablePluginInstanceAction(withPolling: EnablePluginInstanceActionRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<EnablePluginInstanceActionResponse>
+    async throws -> any GoogleGax.PollableOperation<EnablePluginInstanceActionResponse>
   {
     try await self.enablePluginInstanceAction(withPolling: withPolling, options: .init())
   }
 
   public func enablePluginInstanceAction(
-    withPolling: EnablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<EnablePluginInstanceActionResponse> {
+    withPolling: EnablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<EnablePluginInstanceActionResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<EnablePluginInstanceActionResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<EnablePluginInstanceActionResponse>.State
+      in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func enablePluginInstanceAction(
     name: Swift.String,
     actionId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<EnablePluginInstanceActionResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<EnablePluginInstanceActionResponse> {
     let request = EnablePluginInstanceActionRequest().with {
       $0.name = name
       $0.actionId = actionId
@@ -1193,33 +1193,33 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func disablePluginInstanceAction(
-    request: DisablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
+    request: DisablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func disablePluginInstanceAction(withPolling: DisablePluginInstanceActionRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<DisablePluginInstanceActionResponse>
+    async throws -> any GoogleGax.PollableOperation<DisablePluginInstanceActionResponse>
   {
     try await self.disablePluginInstanceAction(withPolling: withPolling, options: .init())
   }
 
   public func disablePluginInstanceAction(
-    withPolling: DisablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DisablePluginInstanceActionResponse> {
+    withPolling: DisablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DisablePluginInstanceActionResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<DisablePluginInstanceActionResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<DisablePluginInstanceActionResponse>.State
+      in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func disablePluginInstanceAction(
     name: Swift.String,
     actionId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DisablePluginInstanceActionResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<DisablePluginInstanceActionResponse> {
     let request = DisablePluginInstanceActionRequest().with {
       $0.name = name
       $0.actionId = actionId
@@ -1234,14 +1234,14 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func updatePluginInstance(
-    request: UpdatePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePluginInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.PluginInstance {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updatePluginInstance(
     pluginInstance: PluginInstance?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudApiHubV1.PluginInstance {
     let request = UpdatePluginInstanceRequest().with {
       $0.pluginInstance = pluginInstance
@@ -1257,30 +1257,30 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func deletePluginInstance(
-    request: DeletePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePluginInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deletePluginInstance(withPolling: DeletePluginInstanceRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deletePluginInstance(withPolling: withPolling, options: .init())
   }
 
   public func deletePluginInstance(
-    withPolling: DeletePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeletePluginInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deletePluginInstance(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeletePluginInstanceRequest().with {
       $0.name = name
     }
@@ -1294,9 +1294,9 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -1306,13 +1306,13 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1322,9 +1322,9 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1334,9 +1334,9 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1346,13 +1346,13 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1373,9 +1373,9 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1392,9 +1392,9 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1411,9 +1411,9 @@ extension Clients.ApiHubPluginProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

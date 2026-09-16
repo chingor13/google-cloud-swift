@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudFinancialServicesV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: AMLClient) async throws {
   let poller = try await client.exportBacktestResultMetadata(

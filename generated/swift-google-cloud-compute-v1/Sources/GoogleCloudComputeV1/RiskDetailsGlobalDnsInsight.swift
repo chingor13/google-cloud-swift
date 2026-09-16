@@ -16,17 +16,17 @@
 
 #if ReliabilityRisks
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Detailed insights for a global DNS reliability risk.
-  public struct RiskDetailsGlobalDnsInsight: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RiskDetailsGlobalDnsInsight: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Indicates whether the project's default DNS setting is global DNS.
     public var projectDefaultIsGlobalDns: Swift.Bool? = nil
 
     /// The observation window for the query counts.
-    public var queryObservationWindow: GoogleCloudWKT.Duration? = nil
+    public var queryObservationWindow: GoogleWKT.Duration? = nil
 
     /// The number of queries that are risky. This is always less than or
     /// equal to total_query_count.
@@ -35,7 +35,7 @@
     /// The total number of queries in the observation window.
     public var totalQueryCount: Swift.Int64? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RiskDetailsGlobalDnsInsight`.
     public init() {}
@@ -77,14 +77,14 @@
       self.projectDefaultIsGlobalDns = try container.decodeIfPresent(
         Swift.Bool.self, forKey: .projectDefaultIsGlobalDns)
       self.queryObservationWindow = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .queryObservationWindow)
+        GoogleWKT.Duration.self, forKey: .queryObservationWindow)
       self.riskyQueryCount = try container.decodeIfPresent(
         Swift.Int64.self, forKey: .riskyQueryCount)
       self.totalQueryCount = try container.decodeIfPresent(
         Swift.Int64.self, forKey: .totalQueryCount)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -103,11 +103,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.RiskDetailsGlobalDnsInsight"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

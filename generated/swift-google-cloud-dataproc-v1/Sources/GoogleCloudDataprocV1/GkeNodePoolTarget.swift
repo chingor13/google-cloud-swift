@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// GKE node pools that Dataproc workloads run on.
-public struct GkeNodePoolTarget: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GkeNodePoolTarget: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The target GKE node pool.
@@ -43,7 +43,7 @@ public struct GkeNodePoolTarget: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// This is an input only field. It will not be returned by the API.
   public var nodePoolConfig: GkeNodePoolConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GkeNodePoolTarget`.
   public init() {}
@@ -90,7 +90,7 @@ public struct GkeNodePoolTarget: Codable, Equatable, GoogleCloudWKT._AnyPackable
       GkeNodePoolConfig.self, forKey: .nodePoolConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -237,10 +237,10 @@ public struct GkeNodePoolTarget: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.v1.GkeNodePoolTarget"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,13 +16,13 @@
 
 #if InstanceGroupManagers || RegionInstanceGroupManagers
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The list of instance statuses and the number of instances in this managed
   /// instance group that have the status. For more information about how to
   /// interpret each status check the instance lifecycle documentation.
   /// Currently only shown for TPU MIGs.
-  public struct InstanceGroupManagerStatusInstanceStatusSummary: Codable, Equatable, GoogleCloudWKT
+  public struct InstanceGroupManagerStatusInstanceStatusSummary: Codable, Equatable, GoogleWKT
       ._AnyPackable,
     Sendable
   {
@@ -84,7 +84,7 @@
     /// that have TERMINATED status.
     public var terminated: Swift.Int32? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InstanceGroupManagerStatusInstanceStatusSummary`.
     public init() {}
@@ -156,7 +156,7 @@
       self.terminated = try container.decodeIfPresent(Swift.Int32.self, forKey: .terminated)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -184,11 +184,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerStatusInstanceStatusSummary"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

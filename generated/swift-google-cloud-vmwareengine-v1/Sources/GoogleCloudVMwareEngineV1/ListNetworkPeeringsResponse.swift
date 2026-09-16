@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudGax
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleGax
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for
 /// [VmwareEngine.ListNetworkPeerings][google.cloud.vmwareengine.v1.VmwareEngine.ListNetworkPeerings]
 ///
 /// [google.cloud.vmwareengine.v1.VmwareEngine.ListNetworkPeerings]: <doc:VmwareEngineClient/listNetworkPeerings(request:options:)>
-public struct ListNetworkPeeringsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
-  GoogleCloudGax._PaginatedResponse,
+public struct ListNetworkPeeringsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
+  GoogleGax._PaginatedResponse,
   Sendable
 {
   /// A list of network peerings.
@@ -36,7 +36,7 @@ public struct ListNetworkPeeringsResponse: Codable, Equatable, GoogleCloudWKT._A
   /// Unreachable resources.
   public var unreachable: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListNetworkPeeringsResponse`.
   public init() {}
@@ -84,7 +84,7 @@ public struct ListNetworkPeeringsResponse: Codable, Equatable, GoogleCloudWKT._A
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,11 +101,11 @@ public struct ListNetworkPeeringsResponse: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmwareengine.v1.ListNetworkPeeringsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 
   public func _getPaginatedItems() -> [NetworkPeering] {

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Cloud SCC's Notification
-public struct NotificationMessage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NotificationMessage: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Name of the notification config that generated current notification.
@@ -30,7 +30,7 @@ public struct NotificationMessage: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Notification Event.
   public var event: OneOf_Event? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NotificationMessage`.
   public init() {}
@@ -89,7 +89,7 @@ public struct NotificationMessage: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.event = event
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -119,10 +119,10 @@ public struct NotificationMessage: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.NotificationMessage"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -30,7 +30,7 @@ let package = Package(
     .target(
       name: "GoogleRpcContext",
       dependencies: [
-        .product(name: "GoogleCloudWKT", package: "swift-google-wkt")
+        .product(name: "GoogleWKT", package: "swift-google-wkt")
       ],
     )
   ]

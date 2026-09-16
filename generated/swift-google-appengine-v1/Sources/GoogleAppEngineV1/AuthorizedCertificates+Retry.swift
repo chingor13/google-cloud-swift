@@ -18,27 +18,27 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class AuthorizedCertificatesRetry: AuthorizedCertificatesStub {
     let inner: any AuthorizedCertificatesStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any AuthorizedCertificatesStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any AuthorizedCertificatesStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@ extension Clients {
     }
 
     public func listAuthorizedCertificates(
-      request: ListAuthorizedCertificatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAuthorizedCertificatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.ListAuthorizedCertificatesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListAuthorizedCertificatesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListAuthorizedCertificatesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleAppEngineV1.ListAuthorizedCertificatesResponse
           in
           return try await self.inner.listAuthorizedCertificates(request: r, options: o)
@@ -65,14 +65,14 @@ extension Clients {
     }
 
     public func getAuthorizedCertificate(
-      request: GetAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.AuthorizedCertificate {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetAuthorizedCertificateRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetAuthorizedCertificateRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleAppEngineV1.AuthorizedCertificate
           in
           return try await self.inner.getAuthorizedCertificate(request: r, options: o)
@@ -80,14 +80,14 @@ extension Clients {
     }
 
     public func createAuthorizedCertificate(
-      request: CreateAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.AuthorizedCertificate {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateAuthorizedCertificateRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateAuthorizedCertificateRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleAppEngineV1.AuthorizedCertificate
           in
           return try await self.inner.createAuthorizedCertificate(request: r, options: o)
@@ -95,14 +95,14 @@ extension Clients {
     }
 
     public func updateAuthorizedCertificate(
-      request: UpdateAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.AuthorizedCertificate {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateAuthorizedCertificateRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateAuthorizedCertificateRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleAppEngineV1.AuthorizedCertificate
           in
           return try await self.inner.updateAuthorizedCertificate(request: r, options: o)
@@ -110,43 +110,43 @@ extension Clients {
     }
 
     public func deleteAuthorizedCertificate(
-      request: DeleteAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteAuthorizedCertificateRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> Void in
+          (r: DeleteAuthorizedCertificateRequest, o: GoogleGax.RequestOptions) async throws -> Void
+          in
           return try await self.inner.deleteAuthorizedCertificate(request: r, options: o)
         })
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

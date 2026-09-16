@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// CreateNodePoolRequest creates a node pool for a cluster.
-public struct CreateNodePoolRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateNodePoolRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Deprecated. The Google Developers Console [project ID or project
@@ -47,7 +47,7 @@ public struct CreateNodePoolRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// `projects/*/locations/*/clusters/*`.
   public var parent: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateNodePoolRequest`.
   public init() {}
@@ -103,7 +103,7 @@ public struct CreateNodePoolRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -122,10 +122,10 @@ public struct CreateNodePoolRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.CreateNodePoolRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

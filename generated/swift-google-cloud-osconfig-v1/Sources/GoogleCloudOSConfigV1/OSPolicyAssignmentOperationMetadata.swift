@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// OS policy assignment operation metadata provided by OS policy assignment API
 /// methods that return long running operations.
-public struct OSPolicyAssignmentOperationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OSPolicyAssignmentOperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Reference to the `OSPolicyAssignment` API resource.
@@ -37,12 +37,12 @@ public struct OSPolicyAssignmentOperationMetadata: Codable, Equatable, GoogleClo
     OSPolicyAssignmentOperationMetadata.RolloutState()
 
   /// Rollout start time
-  public var rolloutStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var rolloutStartTime: GoogleWKT.Timestamp? = nil
 
   /// Rollout update time
-  public var rolloutUpdateTime: GoogleCloudWKT.Timestamp? = nil
+  public var rolloutUpdateTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OSPolicyAssignmentOperationMetadata`.
   public init() {}
@@ -97,12 +97,12 @@ public struct OSPolicyAssignmentOperationMetadata: Codable, Equatable, GoogleClo
       self.rolloutState = value
     }
     self.rolloutStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .rolloutStartTime)
+      GoogleWKT.Timestamp.self, forKey: .rolloutStartTime)
     self.rolloutUpdateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .rolloutUpdateTime)
+      GoogleWKT.Timestamp.self, forKey: .rolloutUpdateTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -352,10 +352,10 @@ public struct OSPolicyAssignmentOperationMetadata: Codable, Equatable, GoogleClo
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

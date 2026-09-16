@@ -16,48 +16,44 @@
 
 #if RegionNetworkEndpointGroups
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionNetworkEndpointGroupsStub: Sendable {
       func attachNetworkEndpoints(
         request: RegionNetworkEndpointGroupsClient.AttachNetworkEndpointsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: RegionNetworkEndpointGroupsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionNetworkEndpointGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func detachNetworkEndpoints(
         request: RegionNetworkEndpointGroupsClient.DetachNetworkEndpointsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RegionNetworkEndpointGroupsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionNetworkEndpointGroupsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroup
 
       func insert(
-        request: RegionNetworkEndpointGroupsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionNetworkEndpointGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RegionNetworkEndpointGroupsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionNetworkEndpointGroupsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupList
 
       func listNetworkEndpoints(
         request: RegionNetworkEndpointGroupsClient.ListNetworkEndpointsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEndpointGroupsListNetworkEndpoints
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

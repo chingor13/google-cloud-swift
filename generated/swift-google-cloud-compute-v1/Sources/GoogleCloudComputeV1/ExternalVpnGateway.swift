@@ -16,7 +16,7 @@
 
 #if ExternalVpnGateways
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents an external VPN gateway.
   ///
@@ -29,7 +29,7 @@
   ///
   /// For more information about using external VPN gateways, see
   /// Creating an HA VPN gateway and tunnel pair to a peer VPN.
-  public struct ExternalVpnGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExternalVpnGateway: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. [Output Only] Creation timestamp inRFC3339
@@ -89,7 +89,7 @@
     /// Output only. [Output Only] Server-defined URL for the resource.
     public var selfLink: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExternalVpnGateway`.
     public init() {}
@@ -153,7 +153,7 @@
       }
       self.kind = try container.decodeIfPresent(Swift.String.self, forKey: .kind)
       if let s = try container.decodeIfPresent(Swift.String.self, forKey: .labelFingerprint) {
-        guard let v = GoogleCloudWKT._DiscoveryBase64.decode(s) else {
+        guard let v = GoogleWKT._DiscoveryBase64.decode(s) else {
           throw DecodingError.dataCorrupted(
             DecodingError.Context(
               codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
@@ -173,7 +173,7 @@
       self.selfLink = try container.decodeIfPresent(Swift.String.self, forKey: .selfLink)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -186,7 +186,7 @@
       try container.encodeIfPresent(self.kind, forKey: .kind)
       if let v = labelFingerprint {
         try container.encode(
-          GoogleCloudWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
+          GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
       try container.encode(self.labels, forKey: .labels)
@@ -330,11 +330,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.ExternalVpnGateway"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

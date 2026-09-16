@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The metadata for a bulk delete conversations operation.
-public struct BulkDeleteConversationsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BulkDeleteConversationsMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The time the operation was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The time the operation finished running.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// The original request for bulk delete.
   public var request: BulkDeleteConversationsRequest? = nil
@@ -35,7 +35,7 @@ public struct BulkDeleteConversationsMetadata: Codable, Equatable, GoogleCloudWK
   /// the operation output to be incomplete.
   public var partialErrors: [GoogleRpc.Status] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BulkDeleteConversationsMetadata`.
   public init() {}
@@ -74,9 +74,8 @@ public struct BulkDeleteConversationsMetadata: Codable, Equatable, GoogleCloudWK
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     self.request = try container.decodeIfPresent(
       BulkDeleteConversationsRequest.self, forKey: .request)
     if let value = try container.decodeIfPresent([GoogleRpc.Status].self, forKey: .partialErrors) {
@@ -84,7 +83,7 @@ public struct BulkDeleteConversationsMetadata: Codable, Equatable, GoogleCloudWK
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,10 +102,10 @@ public struct BulkDeleteConversationsMetadata: Codable, Equatable, GoogleCloudWK
     return
       "type.googleapis.com/google.cloud.contactcenterinsights.v1.BulkDeleteConversationsMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

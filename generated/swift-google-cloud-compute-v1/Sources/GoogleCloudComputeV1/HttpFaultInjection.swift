@@ -16,7 +16,7 @@
 
 #if RegionUrlMaps || UrlMaps
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The specification for fault injection introduced into traffic to test
   /// the resiliency of clients to backend service failure. As part of fault
@@ -24,7 +24,7 @@
   /// introduced by the load balancer on a percentage of requests before sending
   /// those request to the backend service. Similarly requests from clients can be
   /// aborted by the load balancer for a percentage of requests.
-  public struct HttpFaultInjection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct HttpFaultInjection: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The specification for how client requests are aborted as part of fault
@@ -35,7 +35,7 @@
     /// injection, before being sent to a backend service.
     public var delay: HttpFaultDelay? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `HttpFaultInjection`.
     public init() {}
@@ -74,7 +74,7 @@
       self.delay = try container.decodeIfPresent(HttpFaultDelay.self, forKey: .delay)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -90,11 +90,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.HttpFaultInjection"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

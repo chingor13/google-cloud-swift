@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@
       }
 
       public func delete(
-        request: SqlBackupRunsDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlBackupRunsDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: SqlBackupRunsDeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlBackupRunsDeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -73,14 +73,14 @@
       }
 
       public func `get`(
-        request: SqlBackupRunsGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlBackupRunsGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.BackupRun {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: SqlBackupRunsGetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlBackupRunsGetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.BackupRun
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -88,14 +88,14 @@
       }
 
       public func insert(
-        request: SqlBackupRunsInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlBackupRunsInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: SqlBackupRunsInsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlBackupRunsInsertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -103,14 +103,14 @@
       }
 
       public func list(
-        request: SqlBackupRunsListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlBackupRunsListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.BackupRunsListResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: SqlBackupRunsListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlBackupRunsListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.BackupRunsListResponse
             in
             return try await self.inner.list(request: r, options: o)

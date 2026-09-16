@@ -16,53 +16,53 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ModelArmorStub: Sendable {
     func listTemplates(
-      request: ListTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTemplatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.ListTemplatesResponse
 
     func getTemplate(
-      request: GetTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.Template
 
     func createTemplate(
-      request: CreateTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.Template
 
     func updateTemplate(
-      request: UpdateTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.Template
 
     func deleteTemplate(
-      request: DeleteTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getFloorSetting(
-      request: GetFloorSettingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFloorSettingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.FloorSetting
 
     func updateFloorSetting(
-      request: UpdateFloorSettingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFloorSettingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.FloorSetting
 
     func sanitizeUserPrompt(
-      request: SanitizeUserPromptRequest, options: GoogleCloudGax.RequestOptions
+      request: SanitizeUserPromptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.SanitizeUserPromptResponse
 
     func sanitizeModelResponse(
-      request: SanitizeModelResponseRequest, options: GoogleCloudGax.RequestOptions
+      request: SanitizeModelResponseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.SanitizeModelResponseResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }

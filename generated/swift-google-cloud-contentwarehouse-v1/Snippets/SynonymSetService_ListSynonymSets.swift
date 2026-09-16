@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudContentWarehouseV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: SynonymSetServiceClient, parent: String) async throws {
   let items = try client.listSynonymSets(

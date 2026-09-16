@@ -19,19 +19,19 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `routers` resource.
   ///
   /// @Snippet(path: "routersQuickstart")
   public final class RoutersClient: Clients.RoutersProtocol, Sendable {
     let inner: any Clients.RoutersStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `RoutersClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.RoutersStub = try Clients.RoutersTransport(options)
       inner = Clients.RoutersRetry(inner, options: options)
       if let logger = options.logger {
@@ -49,7 +49,7 @@
     ///
     /// @Snippet(path: "routers_aggregatedList")
     public func aggregatedList(
-      request: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RouterAggregatedList {
       try await self.inner.aggregatedList(request: request, options: options)
     }
@@ -61,7 +61,7 @@
     ///
     /// @Snippet(path: "routers_aggregatedList")
     public func aggregatedList(
-      byItem: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.RouterAggregatedList in
@@ -69,14 +69,14 @@
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes the specified Router resource.
     ///
     /// @Snippet(path: "routers_delete")
     public func delete(
-      request: RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.delete(request: request, options: options)
     }
@@ -85,18 +85,18 @@
     ///
     /// @Snippet(path: "routers_delete")
     public func delete(
-      withPolling: RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -104,8 +104,7 @@
       let rawOp = try await self.delete(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -114,7 +113,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -126,7 +125,7 @@
     ///
     /// @Snippet(path: "routers_deleteNamedSet")
     public func deleteNamedSet(
-      request: RoutersClient.DeleteNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.DeleteNamedSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.deleteNamedSet(request: request, options: options)
     }
@@ -135,18 +134,18 @@
     ///
     /// @Snippet(path: "routers_deleteNamedSet")
     public func deleteNamedSet(
-      withPolling: RoutersClient.DeleteNamedSetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.DeleteNamedSetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -154,8 +153,7 @@
       let rawOp = try await self.deleteNamedSet(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -164,7 +162,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -176,7 +174,7 @@
     ///
     /// @Snippet(path: "routers_deleteRoutePolicy")
     public func deleteRoutePolicy(
-      request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.deleteRoutePolicy(request: request, options: options)
     }
@@ -185,18 +183,18 @@
     ///
     /// @Snippet(path: "routers_deleteRoutePolicy")
     public func deleteRoutePolicy(
-      withPolling: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.DeleteRoutePolicyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -204,8 +202,7 @@
       let rawOp = try await self.deleteRoutePolicy(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -214,7 +211,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -226,7 +223,7 @@
     ///
     /// @Snippet(path: "routers_get")
     public func `get`(
-      request: RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Router {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -235,7 +232,7 @@
     ///
     /// @Snippet(path: "routers_getNamedSet")
     public func getNamedSet(
-      request: RoutersClient.GetNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetNamedSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersGetNamedSetResponse {
       try await self.inner.getNamedSet(request: request, options: options)
     }
@@ -244,7 +241,7 @@
     ///
     /// @Snippet(path: "routers_getNatIpInfo")
     public func getNatIpInfo(
-      request: RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetNatIpInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse {
       try await self.inner.getNatIpInfo(request: request, options: options)
     }
@@ -253,7 +250,7 @@
     ///
     /// @Snippet(path: "routers_getNatMappingInfo")
     public func getNatMappingInfo(
-      request: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetNatMappingInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList {
       try await self.inner.getNatMappingInfo(request: request, options: options)
     }
@@ -262,7 +259,7 @@
     ///
     /// @Snippet(path: "routers_getNatMappingInfo")
     public func getNatMappingInfo(
-      byItem: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.GetNatMappingInfoRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList in
@@ -270,14 +267,14 @@
         request.pageToken = token
         return try await self.getNatMappingInfo(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Returns specified Route Policy
     ///
     /// @Snippet(path: "routers_getRoutePolicy")
     public func getRoutePolicy(
-      request: RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetRoutePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse {
       try await self.inner.getRoutePolicy(request: request, options: options)
     }
@@ -286,7 +283,7 @@
     ///
     /// @Snippet(path: "routers_getRouterStatus")
     public func getRouterStatus(
-      request: RoutersClient.GetRouterStatusRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetRouterStatusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RouterStatusResponse {
       try await self.inner.getRouterStatus(request: request, options: options)
     }
@@ -296,7 +293,7 @@
     ///
     /// @Snippet(path: "routers_insert")
     public func insert(
-      request: RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
     }
@@ -306,18 +303,18 @@
     ///
     /// @Snippet(path: "routers_insert")
     public func insert(
-      withPolling: RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -325,8 +322,7 @@
       let rawOp = try await self.insert(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -335,7 +331,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -347,7 +343,7 @@
     ///
     /// @Snippet(path: "routers_list")
     public func list(
-      request: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RouterList {
       try await self.inner.list(request: request, options: options)
     }
@@ -356,21 +352,21 @@
     ///
     /// @Snippet(path: "routers_list")
     public func list(
-      byItem: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Router, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.RouterList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves a list of router bgp routes available to the specified project.
     ///
     /// @Snippet(path: "routers_listBgpRoutes")
     public func listBgpRoutes(
-      request: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.ListBgpRoutesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes {
       try await self.inner.listBgpRoutes(request: request, options: options)
     }
@@ -379,7 +375,7 @@
     ///
     /// @Snippet(path: "routers_listBgpRoutes")
     public func listBgpRoutes(
-      byItem: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.ListBgpRoutesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BgpRoute, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes in
@@ -387,7 +383,7 @@
         request.pageToken = token
         return try await self.listBgpRoutes(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves a list of router named set subresources available to the
@@ -395,7 +391,7 @@
     ///
     /// @Snippet(path: "routers_listNamedSets")
     public func listNamedSets(
-      request: RoutersClient.ListNamedSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.ListNamedSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersListNamedSets {
       try await self.inner.listNamedSets(request: request, options: options)
     }
@@ -405,7 +401,7 @@
     ///
     /// @Snippet(path: "routers_listNamedSets")
     public func listNamedSets(
-      byItem: RoutersClient.ListNamedSetsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.ListNamedSetsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<NamedSet, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.RoutersListNamedSets in
@@ -413,7 +409,7 @@
         request.pageToken = token
         return try await self.listNamedSets(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves a list of router route policy subresources available to the
@@ -421,7 +417,7 @@
     ///
     /// @Snippet(path: "routers_listRoutePolicies")
     public func listRoutePolicies(
-      request: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.ListRoutePoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies {
       try await self.inner.listRoutePolicies(request: request, options: options)
     }
@@ -431,7 +427,7 @@
     ///
     /// @Snippet(path: "routers_listRoutePolicies")
     public func listRoutePolicies(
-      byItem: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.ListRoutePoliciesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<RoutePolicy, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies in
@@ -439,7 +435,7 @@
         request.pageToken = token
         return try await self.listRoutePolicies(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Patches the specified Router resource with the data included in the
@@ -449,7 +445,7 @@
     ///
     /// @Snippet(path: "routers_patch")
     public func patch(
-      request: RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.patch(request: request, options: options)
     }
@@ -461,18 +457,18 @@
     ///
     /// @Snippet(path: "routers_patch")
     public func patch(
-      withPolling: RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.PatchRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -480,8 +476,7 @@
       let rawOp = try await self.patch(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -490,7 +485,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -502,7 +497,7 @@
     ///
     /// @Snippet(path: "routers_patchNamedSet")
     public func patchNamedSet(
-      request: RoutersClient.PatchNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.PatchNamedSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.patchNamedSet(request: request, options: options)
     }
@@ -511,18 +506,18 @@
     ///
     /// @Snippet(path: "routers_patchNamedSet")
     public func patchNamedSet(
-      withPolling: RoutersClient.PatchNamedSetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.PatchNamedSetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -530,8 +525,7 @@
       let rawOp = try await self.patchNamedSet(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -540,7 +534,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -552,7 +546,7 @@
     ///
     /// @Snippet(path: "routers_patchRoutePolicy")
     public func patchRoutePolicy(
-      request: RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.PatchRoutePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.patchRoutePolicy(request: request, options: options)
     }
@@ -561,18 +555,18 @@
     ///
     /// @Snippet(path: "routers_patchRoutePolicy")
     public func patchRoutePolicy(
-      withPolling: RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.PatchRoutePolicyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -580,8 +574,7 @@
       let rawOp = try await self.patchRoutePolicy(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -590,7 +583,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -603,7 +596,7 @@
     ///
     /// @Snippet(path: "routers_preview")
     public func preview(
-      request: RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.PreviewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse {
       try await self.inner.preview(request: request, options: options)
     }
@@ -615,7 +608,7 @@
     ///
     /// @Snippet(path: "routers_update")
     public func update(
-      request: RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.UpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.update(request: request, options: options)
     }
@@ -627,18 +620,18 @@
     ///
     /// @Snippet(path: "routers_update")
     public func update(
-      withPolling: RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.UpdateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -646,8 +639,7 @@
       let rawOp = try await self.update(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -656,7 +648,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -668,7 +660,7 @@
     ///
     /// @Snippet(path: "routers_updateNamedSet")
     public func updateNamedSet(
-      request: RoutersClient.UpdateNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.UpdateNamedSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.updateNamedSet(request: request, options: options)
     }
@@ -677,18 +669,18 @@
     ///
     /// @Snippet(path: "routers_updateNamedSet")
     public func updateNamedSet(
-      withPolling: RoutersClient.UpdateNamedSetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.UpdateNamedSetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -696,8 +688,7 @@
       let rawOp = try await self.updateNamedSet(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -706,7 +697,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -718,7 +709,7 @@
     ///
     /// @Snippet(path: "routers_updateRoutePolicy")
     public func updateRoutePolicy(
-      request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.updateRoutePolicy(request: request, options: options)
     }
@@ -727,18 +718,18 @@
     ///
     /// @Snippet(path: "routers_updateRoutePolicy")
     public func updateRoutePolicy(
-      withPolling: RoutersClient.UpdateRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.UpdateRoutePolicyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -746,8 +737,7 @@
       let rawOp = try await self.updateRoutePolicy(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -756,7 +746,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -768,7 +758,7 @@
     ///
     /// @Snippet(path: "routers_getOperation")
     func getOperation(
-      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -980,142 +970,142 @@
 
       /// See `RoutersClient.aggregatedList`.
       func aggregatedList(
-        request: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouterAggregatedList
 
       /// See `RoutersClient.aggregatedList`.
       func aggregatedList(
-        byItem: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: RoutersClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error>
 
       /// See `RoutersClient.delete`.
       func delete(
-        request: RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RoutersClient.deleteNamedSet`.
       func deleteNamedSet(
-        request: RoutersClient.DeleteNamedSetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.DeleteNamedSetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RoutersClient.deleteRoutePolicy`.
       func deleteRoutePolicy(
-        request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RoutersClient.`get``.
       func `get`(
-        request: RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Router
 
       /// See `RoutersClient.getNamedSet`.
       func getNamedSet(
-        request: RoutersClient.GetNamedSetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetNamedSetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersGetNamedSetResponse
 
       /// See `RoutersClient.getNatIpInfo`.
       func getNatIpInfo(
-        request: RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetNatIpInfoRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse
 
       /// See `RoutersClient.getNatMappingInfo`.
       func getNatMappingInfo(
-        request: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetNatMappingInfoRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList
 
       /// See `RoutersClient.getNatMappingInfo`.
       func getNatMappingInfo(
-        byItem: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
+        byItem: RoutersClient.GetNatMappingInfoRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error>
 
       /// See `RoutersClient.getRoutePolicy`.
       func getRoutePolicy(
-        request: RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetRoutePolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse
 
       /// See `RoutersClient.getRouterStatus`.
       func getRouterStatus(
-        request: RoutersClient.GetRouterStatusRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetRouterStatusRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouterStatusResponse
 
       /// See `RoutersClient.insert`.
       func insert(
-        request: RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RoutersClient.list`.
       func list(
-        request: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouterList
 
       /// See `RoutersClient.list`.
       func list(
-        byItem: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: RoutersClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Router, Swift.Error>
 
       /// See `RoutersClient.listBgpRoutes`.
       func listBgpRoutes(
-        request: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListBgpRoutesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes
 
       /// See `RoutersClient.listBgpRoutes`.
       func listBgpRoutes(
-        byItem: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+        byItem: RoutersClient.ListBgpRoutesRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<BgpRoute, Swift.Error>
 
       /// See `RoutersClient.listNamedSets`.
       func listNamedSets(
-        request: RoutersClient.ListNamedSetsRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListNamedSetsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListNamedSets
 
       /// See `RoutersClient.listNamedSets`.
       func listNamedSets(
-        byItem: RoutersClient.ListNamedSetsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: RoutersClient.ListNamedSetsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<NamedSet, Swift.Error>
 
       /// See `RoutersClient.listRoutePolicies`.
       func listRoutePolicies(
-        request: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListRoutePoliciesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies
 
       /// See `RoutersClient.listRoutePolicies`.
       func listRoutePolicies(
-        byItem: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
+        byItem: RoutersClient.ListRoutePoliciesRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<RoutePolicy, Swift.Error>
 
       /// See `RoutersClient.patch`.
       func patch(
-        request: RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RoutersClient.patchNamedSet`.
       func patchNamedSet(
-        request: RoutersClient.PatchNamedSetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PatchNamedSetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RoutersClient.patchRoutePolicy`.
       func patchRoutePolicy(
-        request: RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PatchRoutePolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RoutersClient.preview`.
       func preview(
-        request: RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PreviewRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse
 
       /// See `RoutersClient.update`.
       func update(
-        request: RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RoutersClient.updateNamedSet`.
       func updateNamedSet(
-        request: RoutersClient.UpdateNamedSetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.UpdateNamedSetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RoutersClient.updateRoutePolicy`.
       func updateRoutePolicy(
-        request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
@@ -1129,9 +1119,9 @@
     }
 
     public func aggregatedList(
-      request: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RouterAggregatedList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
@@ -1141,13 +1131,13 @@
     }
 
     public func aggregatedList(
-      byItem: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, RoutersScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.RouterAggregatedList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func aggregatedList(
@@ -1166,26 +1156,25 @@
     }
 
     public func delete(
-      request: RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func delete(
       withPolling: RoutersClient.DeleteRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
     }
 
     public func delete(
-      withPolling: RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1193,7 +1182,7 @@
       project: Swift.String,
       region: Swift.String,
       router: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RoutersClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
@@ -1209,26 +1198,25 @@
     }
 
     public func deleteNamedSet(
-      request: RoutersClient.DeleteNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.DeleteNamedSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteNamedSet(
       withPolling: RoutersClient.DeleteNamedSetRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.deleteNamedSet(withPolling: withPolling, options: .init())
     }
 
     public func deleteNamedSet(
-      withPolling: RoutersClient.DeleteNamedSetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.DeleteNamedSetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1236,7 +1224,7 @@
       project: Swift.String,
       region: Swift.String,
       router: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RoutersClient.DeleteNamedSetRequest().with {
         $0.project = project
         $0.region = region
@@ -1252,26 +1240,25 @@
     }
 
     public func deleteRoutePolicy(
-      request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteRoutePolicy(
       withPolling: RoutersClient.DeleteRoutePolicyRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.deleteRoutePolicy(withPolling: withPolling, options: .init())
     }
 
     public func deleteRoutePolicy(
-      withPolling: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.DeleteRoutePolicyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1279,7 +1266,7 @@
       project: Swift.String,
       region: Swift.String,
       router: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RoutersClient.DeleteRoutePolicyRequest().with {
         $0.project = project
         $0.region = region
@@ -1294,9 +1281,9 @@
     }
 
     public func `get`(
-      request: RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Router {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -1319,9 +1306,9 @@
     }
 
     public func getNamedSet(
-      request: RoutersClient.GetNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetNamedSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersGetNamedSetResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getNamedSet(
@@ -1344,9 +1331,9 @@
     }
 
     public func getNatIpInfo(
-      request: RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetNatIpInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getNatIpInfo(
@@ -1369,9 +1356,9 @@
     }
 
     public func getNatMappingInfo(
-      request: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetNatMappingInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getNatMappingInfo(
@@ -1381,13 +1368,13 @@
     }
 
     public func getNatMappingInfo(
-      byItem: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.GetNatMappingInfoRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<VmEndpointNatMappings, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getNatMappingInfo(
@@ -1410,9 +1397,9 @@
     }
 
     public func getRoutePolicy(
-      request: RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetRoutePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getRoutePolicy(
@@ -1435,9 +1422,9 @@
     }
 
     public func getRouterStatus(
-      request: RoutersClient.GetRouterStatusRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.GetRouterStatusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RouterStatusResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getRouterStatus(
@@ -1460,26 +1447,25 @@
     }
 
     public func insert(
-      request: RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func insert(
       withPolling: RoutersClient.InsertRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
     }
 
     public func insert(
-      withPolling: RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1487,7 +1473,7 @@
       project: Swift.String,
       region: Swift.String,
       body: Router?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RoutersClient.InsertRequest().with {
         $0.project = project
         $0.region = region
@@ -1503,9 +1489,9 @@
     }
 
     public func list(
-      request: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RouterList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -1515,12 +1501,12 @@
     }
 
     public func list(
-      byItem: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Router, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.RouterList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(
@@ -1541,9 +1527,9 @@
     }
 
     public func listBgpRoutes(
-      request: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.ListBgpRoutesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listBgpRoutes(
@@ -1553,13 +1539,13 @@
     }
 
     public func listBgpRoutes(
-      byItem: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.ListBgpRoutesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BgpRoute, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listBgpRoutes(
@@ -1582,9 +1568,9 @@
     }
 
     public func listNamedSets(
-      request: RoutersClient.ListNamedSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.ListNamedSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersListNamedSets {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listNamedSets(
@@ -1594,13 +1580,13 @@
     }
 
     public func listNamedSets(
-      byItem: RoutersClient.ListNamedSetsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.ListNamedSetsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<NamedSet, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.RoutersListNamedSets in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listNamedSets(
@@ -1623,9 +1609,9 @@
     }
 
     public func listRoutePolicies(
-      request: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.ListRoutePoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listRoutePolicies(
@@ -1635,13 +1621,13 @@
     }
 
     public func listRoutePolicies(
-      byItem: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RoutersClient.ListRoutePoliciesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<RoutePolicy, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listRoutePolicies(
@@ -1664,26 +1650,25 @@
     }
 
     public func patch(
-      request: RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func patch(
       withPolling: RoutersClient.PatchRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
     }
 
     public func patch(
-      withPolling: RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.PatchRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1692,7 +1677,7 @@
       region: Swift.String,
       router: Swift.String,
       body: Router?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RoutersClient.PatchRequest().with {
         $0.project = project
         $0.region = region
@@ -1709,26 +1694,25 @@
     }
 
     public func patchNamedSet(
-      request: RoutersClient.PatchNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.PatchNamedSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func patchNamedSet(
       withPolling: RoutersClient.PatchNamedSetRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patchNamedSet(withPolling: withPolling, options: .init())
     }
 
     public func patchNamedSet(
-      withPolling: RoutersClient.PatchNamedSetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.PatchNamedSetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1737,7 +1721,7 @@
       region: Swift.String,
       router: Swift.String,
       body: NamedSet?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RoutersClient.PatchNamedSetRequest().with {
         $0.project = project
         $0.region = region
@@ -1754,26 +1738,25 @@
     }
 
     public func patchRoutePolicy(
-      request: RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.PatchRoutePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func patchRoutePolicy(
       withPolling: RoutersClient.PatchRoutePolicyRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patchRoutePolicy(withPolling: withPolling, options: .init())
     }
 
     public func patchRoutePolicy(
-      withPolling: RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.PatchRoutePolicyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1782,7 +1765,7 @@
       region: Swift.String,
       router: Swift.String,
       body: RoutePolicy?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RoutersClient.PatchRoutePolicyRequest().with {
         $0.project = project
         $0.region = region
@@ -1799,9 +1782,9 @@
     }
 
     public func preview(
-      request: RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.PreviewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func preview(
@@ -1826,26 +1809,25 @@
     }
 
     public func update(
-      request: RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.UpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func update(
       withPolling: RoutersClient.UpdateRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.update(withPolling: withPolling, options: .init())
     }
 
     public func update(
-      withPolling: RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.UpdateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1854,7 +1836,7 @@
       region: Swift.String,
       router: Swift.String,
       body: Router?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RoutersClient.UpdateRequest().with {
         $0.project = project
         $0.region = region
@@ -1871,26 +1853,25 @@
     }
 
     public func updateNamedSet(
-      request: RoutersClient.UpdateNamedSetRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.UpdateNamedSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateNamedSet(
       withPolling: RoutersClient.UpdateNamedSetRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.updateNamedSet(withPolling: withPolling, options: .init())
     }
 
     public func updateNamedSet(
-      withPolling: RoutersClient.UpdateNamedSetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.UpdateNamedSetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1899,7 +1880,7 @@
       region: Swift.String,
       router: Swift.String,
       body: NamedSet?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RoutersClient.UpdateNamedSetRequest().with {
         $0.project = project
         $0.region = region
@@ -1916,26 +1897,25 @@
     }
 
     public func updateRoutePolicy(
-      request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateRoutePolicy(
       withPolling: RoutersClient.UpdateRoutePolicyRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.updateRoutePolicy(withPolling: withPolling, options: .init())
     }
 
     public func updateRoutePolicy(
-      withPolling: RoutersClient.UpdateRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: RoutersClient.UpdateRoutePolicyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1944,7 +1924,7 @@
       region: Swift.String,
       router: Swift.String,
       body: RoutePolicy?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RoutersClient.UpdateRoutePolicyRequest().with {
         $0.project = project
         $0.region = region
@@ -1961,9 +1941,9 @@
     }
 
     public func getOperation(
-      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

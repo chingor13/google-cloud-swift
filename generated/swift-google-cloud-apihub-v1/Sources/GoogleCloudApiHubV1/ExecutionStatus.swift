@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The execution status for the plugin instance.
-public struct ExecutionStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExecutionStatus: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The current state of the execution.
@@ -28,7 +28,7 @@ public struct ExecutionStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The last execution of the plugin instance.
   public var lastExecution: ExecutionStatus.LastExecution? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExecutionStatus`.
   public init() {}
@@ -72,7 +72,7 @@ public struct ExecutionStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       ExecutionStatus.LastExecution.self, forKey: .lastExecution)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -86,7 +86,7 @@ public struct ExecutionStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The result of the last execution of the plugin instance.
-  public struct LastExecution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LastExecution: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The result of the last execution of the plugin instance.
@@ -97,12 +97,12 @@ public struct ExecutionStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var errorMessage: Swift.String = Swift.String()
 
     /// Output only. The last execution start time of the plugin instance.
-    public var startTime: GoogleCloudWKT.Timestamp? = nil
+    public var startTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. The last execution end time of the plugin instance.
-    public var endTime: GoogleCloudWKT.Timestamp? = nil
+    public var endTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LastExecution`.
     public init() {}
@@ -149,12 +149,11 @@ public struct ExecutionStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .errorMessage) {
         self.errorMessage = value
       }
-      self.startTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-      self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+      self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+      self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -277,11 +276,11 @@ public struct ExecutionStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.apihub.v1.ExecutionStatus.LastExecution"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -393,10 +392,10 @@ public struct ExecutionStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apihub.v1.ExecutionStatus"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

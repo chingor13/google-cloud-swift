@@ -16,13 +16,13 @@
 
 #if FeatureOnlineStoreAdminService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleRpc
   import GoogleType
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// FeatureViewSync is a representation of sync operation which copies data from
   /// data source to Feature View in Online Store.
-  public struct FeatureViewSync: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FeatureViewSync: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Identifier. Name of the FeatureViewSync. Format:
@@ -32,7 +32,7 @@
     /// Output only. Time when this FeatureViewSync is created. Creation of a
     /// FeatureViewSync means that the job is pending / waiting for sufficient
     /// resources but may not have started the actual data transfer yet.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Time when this FeatureViewSync is finished.
     public var runTime: GoogleType.Interval? = nil
@@ -49,7 +49,7 @@
     /// Output only. Reserved for future use.
     public var satisfiesPzi: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FeatureViewSync`.
     public init() {}
@@ -97,8 +97,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
         self.name = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
       self.runTime = try container.decodeIfPresent(GoogleType.Interval.self, forKey: .runTime)
       self.finalStatus = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .finalStatus)
       self.syncSummary = try container.decodeIfPresent(
@@ -111,7 +110,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -131,7 +130,7 @@
 
     /// Summary from the Sync job. For continuous syncs, the summary is updated
     /// periodically. For batch syncs, it gets updated on completion of the sync.
-    public struct SyncSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SyncSummary: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. Total number of rows synced.
@@ -142,9 +141,9 @@
 
       /// Lower bound of the system time watermark for the sync job. This is only
       /// set for continuously syncing feature views.
-      public var systemWatermarkTime: GoogleCloudWKT.Timestamp? = nil
+      public var systemWatermarkTime: GoogleWKT.Timestamp? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SyncSummary`.
       public init() {}
@@ -188,10 +187,10 @@
           self.totalSlot = value
         }
         self.systemWatermarkTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .systemWatermarkTime)
+          GoogleWKT.Timestamp.self, forKey: .systemWatermarkTime)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -208,22 +207,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureViewSync.SyncSummary"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureViewSync"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

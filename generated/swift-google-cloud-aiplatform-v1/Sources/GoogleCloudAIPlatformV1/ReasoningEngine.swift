@@ -16,11 +16,11 @@
 
 #if ReasoningEngineService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// ReasoningEngine provides a customizable runtime for models to determine
   /// which actions to take and in which order.
-  public struct ReasoningEngine: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ReasoningEngine: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Identifier. The resource name of the ReasoningEngine.
@@ -38,10 +38,10 @@
     public var spec: ReasoningEngineSpec? = nil
 
     /// Output only. Timestamp when this ReasoningEngine was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when this ReasoningEngine was most recently updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. Used to perform consistent read-modify-write updates. If not set,
     /// a blind "overwrite" update happens.
@@ -55,7 +55,7 @@
     /// Labels for the ReasoningEngine.
     public var labels: [Swift.String: Swift.String] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ReasoningEngine`.
     public init() {}
@@ -114,10 +114,8 @@
         self.description = value
       }
       self.spec = try container.decodeIfPresent(ReasoningEngineSpec.self, forKey: .spec)
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
         self.etag = value
       }
@@ -130,7 +128,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -153,11 +151,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngine"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

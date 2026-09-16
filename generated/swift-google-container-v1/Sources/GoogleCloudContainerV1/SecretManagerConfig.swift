@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// SecretManagerConfig is config for secret manager enablement.
-public struct SecretManagerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SecretManagerConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Enable/Disable Secret Manager Config.
@@ -27,7 +27,7 @@ public struct SecretManagerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Rotation config for secret manager.
   public var rotationConfig: SecretManagerConfig.RotationConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SecretManagerConfig`.
   public init() {}
@@ -67,7 +67,7 @@ public struct SecretManagerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       SecretManagerConfig.RotationConfig.self, forKey: .rotationConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -81,7 +81,7 @@ public struct SecretManagerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   }
 
   /// RotationConfig is config for secret manager auto rotation.
-  public struct RotationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RotationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Whether the rotation is enabled.
@@ -89,9 +89,9 @@ public struct SecretManagerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
 
     /// The interval between two consecutive rotations. Default rotation interval
     /// is 2 minutes.
-    public var rotationInterval: GoogleCloudWKT.Duration? = nil
+    public var rotationInterval: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RotationConfig`.
     public init() {}
@@ -128,10 +128,10 @@ public struct SecretManagerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.enabled = try container.decodeIfPresent(Swift.Bool.self, forKey: .enabled)
       self.rotationInterval = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .rotationInterval)
+        GoogleWKT.Duration.self, forKey: .rotationInterval)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -147,21 +147,21 @@ public struct SecretManagerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.SecretManagerConfig.RotationConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.SecretManagerConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

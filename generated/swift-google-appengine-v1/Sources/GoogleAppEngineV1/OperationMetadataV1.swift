@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metadata for the given [google.longrunning.Operation][google.longrunning.Operation].
 ///
 /// [google.longrunning.Operation]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation
-public struct OperationMetadataV1: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OperationMetadataV1: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// API method that initiated this operation. Example:
@@ -32,12 +32,12 @@ public struct OperationMetadataV1: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Time that this operation was created.
   ///
   /// @OutputOnly
-  public var insertTime: GoogleCloudWKT.Timestamp? = nil
+  public var insertTime: GoogleWKT.Timestamp? = nil
 
   /// Time that this operation completed.
   ///
   /// @OutputOnly
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// User who requested this operation.
   ///
@@ -62,7 +62,7 @@ public struct OperationMetadataV1: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// @OutputOnly
   public var methodMetadata: OneOf_MethodMetadata? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OperationMetadataV1`.
   public init() {}
@@ -112,9 +112,8 @@ public struct OperationMetadataV1: Codable, Equatable, GoogleCloudWKT._AnyPackab
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .method) {
       self.method = value
     }
-    self.insertTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .insertTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.insertTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .insertTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .user) {
       self.user = value
     }
@@ -146,7 +145,7 @@ public struct OperationMetadataV1: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.methodMetadata = methodMetadata
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -180,10 +179,10 @@ public struct OperationMetadataV1: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.OperationMetadataV1"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

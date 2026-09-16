@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The RuleDeployment resource represents the deployment state of a Rule.
-public struct RuleDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RuleDeployment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the rule deployment.
@@ -46,7 +46,7 @@ public struct RuleDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The timestamp when the rule deployment archive state was last
   /// set to true. If the rule deployment's current archive state is not set to
   /// true, the field will be empty.
-  public var archiveTime: GoogleCloudWKT.Timestamp? = nil
+  public var archiveTime: GoogleWKT.Timestamp? = nil
 
   /// The run frequency of the rule deployment.
   public var runFrequency: RunFrequency = RunFrequency()
@@ -70,9 +70,9 @@ public struct RuleDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// changed. This is filled regardless of the current alert state. E.g. if the
   /// current alert status is false, this timestamp will be the timestamp when
   /// the alert status was changed to false.
-  public var lastAlertStatusChangeTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastAlertStatusChangeTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RuleDeployment`.
   public init() {}
@@ -135,8 +135,7 @@ public struct RuleDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .archived) {
       self.archived = value
     }
-    self.archiveTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .archiveTime)
+    self.archiveTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .archiveTime)
     if let value = try container.decodeIfPresent(RunFrequency.self, forKey: .runFrequency) {
       self.runFrequency = value
     }
@@ -152,10 +151,10 @@ public struct RuleDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.consumerRules = value
     }
     self.lastAlertStatusChangeTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastAlertStatusChangeTime)
+      GoogleWKT.Timestamp.self, forKey: .lastAlertStatusChangeTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -292,10 +291,10 @@ public struct RuleDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.chronicle.v1.RuleDeployment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

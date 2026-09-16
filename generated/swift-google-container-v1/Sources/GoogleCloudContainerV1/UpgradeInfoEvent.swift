@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// UpgradeInfoEvent is a notification sent to customers about the upgrade
 /// information of a resource.
-public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpgradeInfoEvent: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource type associated with the upgrade.
@@ -29,10 +29,10 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var operation: Swift.String = Swift.String()
 
   /// The time when the operation was started.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// The time when the operation ended.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// The current version before the upgrade.
   public var currentVersion: Swift.String = Swift.String()
@@ -54,10 +54,10 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var state: UpgradeInfoEvent.State = UpgradeInfoEvent.State()
 
   /// The end of standard support timestamp.
-  public var standardSupportEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var standardSupportEndTime: GoogleWKT.Timestamp? = nil
 
   /// The end of extended support timestamp.
-  public var extendedSupportEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var extendedSupportEndTime: GoogleWKT.Timestamp? = nil
 
   /// A brief description of the event.
   public var description: Swift.String = Swift.String()
@@ -69,7 +69,7 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// when event_type is DISRUPTION_EVENT.
   public var disruptionEvent: DisruptionEvent? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpgradeInfoEvent`.
   public init() {}
@@ -136,9 +136,8 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .operation) {
       self.operation = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .currentVersion) {
       self.currentVersion = value
     }
@@ -160,9 +159,9 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.state = value
     }
     self.standardSupportEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .standardSupportEndTime)
+      GoogleWKT.Timestamp.self, forKey: .standardSupportEndTime)
     self.extendedSupportEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .extendedSupportEndTime)
+      GoogleWKT.Timestamp.self, forKey: .extendedSupportEndTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
@@ -175,7 +174,7 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       DisruptionEvent.self, forKey: .disruptionEvent)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -452,10 +451,10 @@ public struct UpgradeInfoEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.UpgradeInfoEvent"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

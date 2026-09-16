@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudMemoryStoreV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: MemorystoreClient) async throws {
   let items = try client.listLocations(

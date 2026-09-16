@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A result of Resource Search, containing information of a cloud resource.
-public struct ResourceSearchResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ResourceSearchResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The full resource name of this resource. Example:
@@ -174,7 +174,7 @@ public struct ResourceSearchResult: Codable, Equatable, GoogleCloudWKT._AnyPacka
   ///     - value in date string. Example: `createTime > 2021-01-01`
   ///     - value in date-time string (must be quoted). Example: `createTime >
   ///     "2021-01-01T00:00:00"`
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The last update timestamp of this resource, at which the resource was last
   /// modified or deleted. The granularity is in seconds. Timestamp.nanos will
@@ -188,7 +188,7 @@ public struct ResourceSearchResult: Codable, Equatable, GoogleCloudWKT._AnyPacka
   ///     - value in date string. Example: `updateTime < 2021-01-01`
   ///     - value in date-time string (must be quoted). Example: `updateTime <
   ///     "2021-01-01T00:00:00"`
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// The state of this resource. Different resources types have different state
   /// definitions that are mapped from various fields of different resource
@@ -231,7 +231,7 @@ public struct ResourceSearchResult: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// * Use a free text query to match the attributes values. Example: to search
   ///   `additional_attributes = { dnsName: "foobar" }`, you can issue a query
   ///   `foobar`.
-  public var additionalAttributes: GoogleCloudWKT.Struct? = nil
+  public var additionalAttributes: GoogleWKT.Struct? = nil
 
   /// The full resource name of this resource's parent, if it has one.
   /// To search against the `parent_full_resource_name`:
@@ -401,7 +401,7 @@ public struct ResourceSearchResult: Codable, Equatable, GoogleCloudWKT._AnyPacka
   ///     - query by a given key's existence. Example: `sccSecurityMarks.foo:*`
   public var sccSecurityMarks: [Swift.String: Swift.String] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ResourceSearchResult`.
   public init() {}
@@ -525,15 +525,13 @@ public struct ResourceSearchResult: Codable, Equatable, GoogleCloudWKT._AnyPacka
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .kmsKeys) {
       self.kmsKeys = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .state) {
       self.state = value
     }
     self.additionalAttributes = try container.decodeIfPresent(
-      GoogleCloudWKT.Struct.self, forKey: .additionalAttributes)
+      GoogleWKT.Struct.self, forKey: .additionalAttributes)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .parentFullResourceName)
     {
       self.parentFullResourceName = value
@@ -582,7 +580,7 @@ public struct ResourceSearchResult: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -624,10 +622,10 @@ public struct ResourceSearchResult: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.ResourceSearchResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

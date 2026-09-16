@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudVectorSearchV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: VectorSearchServiceClient) async throws {
   try await client.deleteOperation(

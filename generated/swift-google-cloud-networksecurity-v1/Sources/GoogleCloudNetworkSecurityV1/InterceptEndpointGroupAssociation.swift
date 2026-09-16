@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An endpoint group association represents a link between a network and an
 /// endpoint group in the organization.
@@ -24,7 +24,7 @@ import Foundation
 /// network to the endpoint group, but does not enable intercept by itself.
 /// To enable intercept, the user must also create a network firewall policy
 /// containing intercept rules and associate it with the network.
-public struct InterceptEndpointGroupAssociation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct InterceptEndpointGroupAssociation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Immutable. Identifier. The resource name of this endpoint group
@@ -35,11 +35,11 @@ public struct InterceptEndpointGroupAssociation: Codable, Equatable, GoogleCloud
 
   /// Output only. The timestamp when the resource was created.
   /// See https://google.aip.dev/148#timestamps.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when the resource was most recently updated.
   /// See https://google.aip.dev/148#timestamps.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Labels are key/value pairs that help to organize and filter
   /// resources.
@@ -81,7 +81,7 @@ public struct InterceptEndpointGroupAssociation: Codable, Equatable, GoogleCloud
   /// https://docs.cloud.google.com/network-security-integration/docs/understand-geneve#network_id
   public var networkCookie: Swift.UInt32 = Swift.UInt32()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `InterceptEndpointGroupAssociation`.
   public init() {}
@@ -137,10 +137,8 @@ public struct InterceptEndpointGroupAssociation: Codable, Equatable, GoogleCloud
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -173,7 +171,7 @@ public struct InterceptEndpointGroupAssociation: Codable, Equatable, GoogleCloud
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -197,7 +195,7 @@ public struct InterceptEndpointGroupAssociation: Codable, Equatable, GoogleCloud
 
   /// Contains details about the state of an association in a specific cloud
   /// location.
-  public struct LocationDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LocationDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The cloud location, e.g. "us-central1-a" or "asia-south1".
@@ -207,7 +205,7 @@ public struct InterceptEndpointGroupAssociation: Codable, Equatable, GoogleCloud
     public var state: InterceptEndpointGroupAssociation.LocationDetails.State =
       InterceptEndpointGroupAssociation.LocationDetails.State()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LocationDetails`.
     public init() {}
@@ -252,7 +250,7 @@ public struct InterceptEndpointGroupAssociation: Codable, Equatable, GoogleCloud
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -377,11 +375,11 @@ public struct InterceptEndpointGroupAssociation: Codable, Equatable, GoogleCloud
       return
         "type.googleapis.com/google.cloud.networksecurity.v1.InterceptEndpointGroupAssociation.LocationDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -527,10 +525,10 @@ public struct InterceptEndpointGroupAssociation: Codable, Equatable, GoogleCloud
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networksecurity.v1.InterceptEndpointGroupAssociation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

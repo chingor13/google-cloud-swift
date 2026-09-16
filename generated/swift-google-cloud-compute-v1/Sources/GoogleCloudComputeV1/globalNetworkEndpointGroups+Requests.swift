@@ -16,13 +16,13 @@
 
 #if GlobalNetworkEndpointGroups
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   extension GlobalNetworkEndpointGroupsClient {
     /// Synthetic request message for the [attachNetworkEndpoints()][google.cloud.compute.v1.globalNetworkEndpointGroups.attachNetworkEndpoints] method.
     ///
     /// [google.cloud.compute.v1.globalNetworkEndpointGroups.attachNetworkEndpoints]: <doc:GlobalNetworkEndpointGroupsClient/attachNetworkEndpoints(request:options:)>
-    public struct AttachNetworkEndpointsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AttachNetworkEndpointsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the network endpoint group where you are attaching network
@@ -52,7 +52,7 @@
       /// [google.cloud.compute.v1.globalNetworkEndpointGroups.attachNetworkEndpoints]: <doc:GlobalNetworkEndpointGroupsClient/attachNetworkEndpoints(request:options:)>
       public var body: GlobalNetworkEndpointGroupsAttachEndpointsRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AttachNetworkEndpointsRequest`.
       public init() {}
@@ -104,7 +104,7 @@
           GlobalNetworkEndpointGroupsAttachEndpointsRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -123,18 +123,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.attachNetworkEndpointsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.globalNetworkEndpointGroups.delete] method.
     ///
     /// [google.cloud.compute.v1.globalNetworkEndpointGroups.delete]: <doc:GlobalNetworkEndpointGroupsClient/delete(request:options:)>
-    public struct DeleteRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DeleteRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the network endpoint group to delete. It should comply with
@@ -159,7 +159,7 @@
       /// (00000000-0000-0000-0000-000000000000).
       public var requestId: Swift.String? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DeleteRequest`.
       public init() {}
@@ -207,7 +207,7 @@
         self.requestId = try container.decodeIfPresent(Swift.String.self, forKey: .requestId)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -225,18 +225,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.deleteRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [detachNetworkEndpoints()][google.cloud.compute.v1.globalNetworkEndpointGroups.detachNetworkEndpoints] method.
     ///
     /// [google.cloud.compute.v1.globalNetworkEndpointGroups.detachNetworkEndpoints]: <doc:GlobalNetworkEndpointGroupsClient/detachNetworkEndpoints(request:options:)>
-    public struct DetachNetworkEndpointsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DetachNetworkEndpointsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the network endpoint group where you are removing network
@@ -266,7 +266,7 @@
       /// [google.cloud.compute.v1.globalNetworkEndpointGroups.detachNetworkEndpoints]: <doc:GlobalNetworkEndpointGroupsClient/detachNetworkEndpoints(request:options:)>
       public var body: GlobalNetworkEndpointGroupsDetachEndpointsRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DetachNetworkEndpointsRequest`.
       public init() {}
@@ -318,7 +318,7 @@
           GlobalNetworkEndpointGroupsDetachEndpointsRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -337,18 +337,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.detachNetworkEndpointsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [get()][google.cloud.compute.v1.globalNetworkEndpointGroups.get] method.
     ///
     /// [google.cloud.compute.v1.globalNetworkEndpointGroups.get]: <doc:GlobalNetworkEndpointGroupsClient/`get`(request:options:)>
-    public struct GetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the network endpoint group. It should comply with RFC1035.
@@ -357,7 +357,7 @@
       /// Project ID for this request.
       public var project: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetRequest`.
       public init() {}
@@ -402,7 +402,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -418,18 +418,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.getRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [insert()][google.cloud.compute.v1.globalNetworkEndpointGroups.insert] method.
     ///
     /// [google.cloud.compute.v1.globalNetworkEndpointGroups.insert]: <doc:GlobalNetworkEndpointGroupsClient/insert(request:options:)>
-    public struct InsertRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct InsertRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Project ID for this request.
@@ -455,7 +455,7 @@
       /// [google.cloud.compute.v1.globalNetworkEndpointGroups.insert]: <doc:GlobalNetworkEndpointGroupsClient/insert(request:options:)>
       public var body: NetworkEndpointGroup? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `InsertRequest`.
       public init() {}
@@ -499,7 +499,7 @@
         self.body = try container.decodeIfPresent(NetworkEndpointGroup.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -517,18 +517,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.insertRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [list()][google.cloud.compute.v1.globalNetworkEndpointGroups.list] method.
     ///
     /// [google.cloud.compute.v1.globalNetworkEndpointGroups.list]: <doc:GlobalNetworkEndpointGroupsClient/list(request:options:)>
-    public struct ListRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ListRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -627,7 +627,7 @@
       /// with an error code.
       public var returnPartialSuccess: Swift.Bool? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListRequest`.
       public init() {}
@@ -681,7 +681,7 @@
           Swift.Bool.self, forKey: .returnPartialSuccess)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -701,18 +701,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.listRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [listNetworkEndpoints()][google.cloud.compute.v1.globalNetworkEndpointGroups.listNetworkEndpoints] method.
     ///
     /// [google.cloud.compute.v1.globalNetworkEndpointGroups.listNetworkEndpoints]: <doc:GlobalNetworkEndpointGroupsClient/listNetworkEndpoints(request:options:)>
-    public struct ListNetworkEndpointsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ListNetworkEndpointsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -815,7 +815,7 @@
       /// with an error code.
       public var returnPartialSuccess: Swift.Bool? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListNetworkEndpointsRequest`.
       public init() {}
@@ -876,7 +876,7 @@
           Swift.Bool.self, forKey: .returnPartialSuccess)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -898,11 +898,11 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.globalNetworkEndpointGroups.listNetworkEndpointsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
   }

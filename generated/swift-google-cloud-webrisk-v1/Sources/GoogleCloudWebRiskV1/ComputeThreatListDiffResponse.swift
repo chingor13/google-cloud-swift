@@ -15,9 +15,9 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
-public struct ComputeThreatListDiffResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ComputeThreatListDiffResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The type of response. This may indicate that an action must be taken by the
@@ -47,9 +47,9 @@ public struct ComputeThreatListDiffResponse: Codable, Equatable, GoogleCloudWKT.
   /// request. Querying sooner is unlikely to produce a meaningful diff.
   /// Waiting longer is acceptable considering the use case.
   /// If this field is not set clients may update as soon as they want.
-  public var recommendedNextDiff: GoogleCloudWKT.Timestamp? = nil
+  public var recommendedNextDiff: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ComputeThreatListDiffResponse`.
   public init() {}
@@ -105,10 +105,10 @@ public struct ComputeThreatListDiffResponse: Codable, Equatable, GoogleCloudWKT.
     self.checksum = try container.decodeIfPresent(
       ComputeThreatListDiffResponse.Checksum.self, forKey: .checksum)
     self.recommendedNextDiff = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .recommendedNextDiff)
+      GoogleWKT.Timestamp.self, forKey: .recommendedNextDiff)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -126,14 +126,14 @@ public struct ComputeThreatListDiffResponse: Codable, Equatable, GoogleCloudWKT.
   }
 
   /// The expected state of a client's local database.
-  public struct Checksum: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Checksum: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The SHA256 hash of the client state; that is, of the sorted list of all
     /// hashes present in the database.
     public var sha256: Foundation.Data = Foundation.Data()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Checksum`.
     public init() {}
@@ -171,7 +171,7 @@ public struct ComputeThreatListDiffResponse: Codable, Equatable, GoogleCloudWKT.
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -186,11 +186,11 @@ public struct ComputeThreatListDiffResponse: Codable, Equatable, GoogleCloudWKT.
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.webrisk.v1.ComputeThreatListDiffResponse.Checksum"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -304,10 +304,10 @@ public struct ComputeThreatListDiffResponse: Codable, Equatable, GoogleCloudWKT.
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.webrisk.v1.ComputeThreatListDiffResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

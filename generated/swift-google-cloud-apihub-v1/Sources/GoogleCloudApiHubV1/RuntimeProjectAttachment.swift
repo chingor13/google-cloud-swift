@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Runtime project attachment represents an attachment from the runtime project
 /// to the host project. Api Hub looks for deployments in the attached runtime
 /// projects and creates corresponding resources in Api Hub for the discovered
 /// deployments.
-public struct RuntimeProjectAttachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RuntimeProjectAttachment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of a runtime project attachment. Format:
@@ -35,9 +35,9 @@ public struct RuntimeProjectAttachment: Codable, Equatable, GoogleCloudWKT._AnyP
   public var runtimeProject: Swift.String = Swift.String()
 
   /// Output only. Create time.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RuntimeProjectAttachment`.
   public init() {}
@@ -80,11 +80,10 @@ public struct RuntimeProjectAttachment: Codable, Equatable, GoogleCloudWKT._AnyP
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .runtimeProject) {
       self.runtimeProject = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,10 +100,10 @@ public struct RuntimeProjectAttachment: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apihub.v1.RuntimeProjectAttachment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

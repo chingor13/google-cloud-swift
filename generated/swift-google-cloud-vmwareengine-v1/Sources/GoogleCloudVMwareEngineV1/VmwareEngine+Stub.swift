@@ -16,340 +16,340 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol VmwareEngineStub: Sendable {
     func listPrivateClouds(
-      request: ListPrivateCloudsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPrivateCloudsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListPrivateCloudsResponse
 
     func getPrivateCloud(
-      request: GetPrivateCloudRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPrivateCloudRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.PrivateCloud
 
     func createPrivateCloud(
-      request: CreatePrivateCloudRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePrivateCloudRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updatePrivateCloud(
-      request: UpdatePrivateCloudRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePrivateCloudRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deletePrivateCloud(
-      request: DeletePrivateCloudRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePrivateCloudRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func undeletePrivateCloud(
-      request: UndeletePrivateCloudRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeletePrivateCloudRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listClusters(
-      request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListClustersResponse
 
     func getCluster(
-      request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.Cluster
 
     func createCluster(
-      request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateCluster(
-      request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCluster(
-      request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listNodes(
-      request: ListNodesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNodesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListNodesResponse
 
     func getNode(
-      request: GetNodeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNodeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.Node
 
     func listExternalAddresses(
-      request: ListExternalAddressesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExternalAddressesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListExternalAddressesResponse
 
     func fetchNetworkPolicyExternalAddresses(
-      request: FetchNetworkPolicyExternalAddressesRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchNetworkPolicyExternalAddressesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.FetchNetworkPolicyExternalAddressesResponse
 
     func getExternalAddress(
-      request: GetExternalAddressRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExternalAddressRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ExternalAddress
 
     func createExternalAddress(
-      request: CreateExternalAddressRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExternalAddressRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateExternalAddress(
-      request: UpdateExternalAddressRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExternalAddressRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteExternalAddress(
-      request: DeleteExternalAddressRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExternalAddressRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listSubnets(
-      request: ListSubnetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSubnetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListSubnetsResponse
 
     func getSubnet(
-      request: GetSubnetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSubnetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.Subnet
 
     func updateSubnet(
-      request: UpdateSubnetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSubnetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listExternalAccessRules(
-      request: ListExternalAccessRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExternalAccessRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListExternalAccessRulesResponse
 
     func getExternalAccessRule(
-      request: GetExternalAccessRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExternalAccessRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ExternalAccessRule
 
     func createExternalAccessRule(
-      request: CreateExternalAccessRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExternalAccessRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateExternalAccessRule(
-      request: UpdateExternalAccessRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExternalAccessRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteExternalAccessRule(
-      request: DeleteExternalAccessRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExternalAccessRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLoggingServers(
-      request: ListLoggingServersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLoggingServersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListLoggingServersResponse
 
     func getLoggingServer(
-      request: GetLoggingServerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLoggingServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.LoggingServer
 
     func createLoggingServer(
-      request: CreateLoggingServerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLoggingServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateLoggingServer(
-      request: UpdateLoggingServerRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLoggingServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteLoggingServer(
-      request: DeleteLoggingServerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLoggingServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listNodeTypes(
-      request: ListNodeTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNodeTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListNodeTypesResponse
 
     func getNodeType(
-      request: GetNodeTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNodeTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.NodeType
 
     func showNsxCredentials(
-      request: ShowNsxCredentialsRequest, options: GoogleCloudGax.RequestOptions
+      request: ShowNsxCredentialsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.Credentials
 
     func showVcenterCredentials(
-      request: ShowVcenterCredentialsRequest, options: GoogleCloudGax.RequestOptions
+      request: ShowVcenterCredentialsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.Credentials
 
     func resetNsxCredentials(
-      request: ResetNsxCredentialsRequest, options: GoogleCloudGax.RequestOptions
+      request: ResetNsxCredentialsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func resetVcenterCredentials(
-      request: ResetVcenterCredentialsRequest, options: GoogleCloudGax.RequestOptions
+      request: ResetVcenterCredentialsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getDnsForwarding(
-      request: GetDnsForwardingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDnsForwardingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.DnsForwarding
 
     func updateDnsForwarding(
-      request: UpdateDnsForwardingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDnsForwardingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getNetworkPeering(
-      request: GetNetworkPeeringRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNetworkPeeringRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.NetworkPeering
 
     func listNetworkPeerings(
-      request: ListNetworkPeeringsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNetworkPeeringsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListNetworkPeeringsResponse
 
     func createNetworkPeering(
-      request: CreateNetworkPeeringRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNetworkPeeringRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteNetworkPeering(
-      request: DeleteNetworkPeeringRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNetworkPeeringRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateNetworkPeering(
-      request: UpdateNetworkPeeringRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNetworkPeeringRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listPeeringRoutes(
-      request: ListPeeringRoutesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPeeringRoutesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListPeeringRoutesResponse
 
     func createHcxActivationKey(
-      request: CreateHcxActivationKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateHcxActivationKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listHcxActivationKeys(
-      request: ListHcxActivationKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListHcxActivationKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListHcxActivationKeysResponse
 
     func getHcxActivationKey(
-      request: GetHcxActivationKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetHcxActivationKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.HcxActivationKey
 
     func getNetworkPolicy(
-      request: GetNetworkPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNetworkPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.NetworkPolicy
 
     func listNetworkPolicies(
-      request: ListNetworkPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNetworkPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListNetworkPoliciesResponse
 
     func createNetworkPolicy(
-      request: CreateNetworkPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNetworkPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateNetworkPolicy(
-      request: UpdateNetworkPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNetworkPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteNetworkPolicy(
-      request: DeleteNetworkPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNetworkPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listManagementDnsZoneBindings(
-      request: ListManagementDnsZoneBindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListManagementDnsZoneBindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListManagementDnsZoneBindingsResponse
 
     func getManagementDnsZoneBinding(
-      request: GetManagementDnsZoneBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetManagementDnsZoneBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ManagementDnsZoneBinding
 
     func createManagementDnsZoneBinding(
-      request: CreateManagementDnsZoneBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateManagementDnsZoneBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateManagementDnsZoneBinding(
-      request: UpdateManagementDnsZoneBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateManagementDnsZoneBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteManagementDnsZoneBinding(
-      request: DeleteManagementDnsZoneBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteManagementDnsZoneBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func repairManagementDnsZoneBinding(
-      request: RepairManagementDnsZoneBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: RepairManagementDnsZoneBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createVmwareEngineNetwork(
-      request: CreateVmwareEngineNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateVmwareEngineNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateVmwareEngineNetwork(
-      request: UpdateVmwareEngineNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateVmwareEngineNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteVmwareEngineNetwork(
-      request: DeleteVmwareEngineNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteVmwareEngineNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getVmwareEngineNetwork(
-      request: GetVmwareEngineNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVmwareEngineNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.VmwareEngineNetwork
 
     func listVmwareEngineNetworks(
-      request: ListVmwareEngineNetworksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVmwareEngineNetworksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListVmwareEngineNetworksResponse
 
     func createPrivateConnection(
-      request: CreatePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePrivateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getPrivateConnection(
-      request: GetPrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPrivateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.PrivateConnection
 
     func listPrivateConnections(
-      request: ListPrivateConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPrivateConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListPrivateConnectionsResponse
 
     func updatePrivateConnection(
-      request: UpdatePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePrivateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deletePrivateConnection(
-      request: DeletePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePrivateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listPrivateConnectionPeeringRoutes(
-      request: ListPrivateConnectionPeeringRoutesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPrivateConnectionPeeringRoutesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.ListPrivateConnectionPeeringRoutesResponse
 
     func grantDnsBindPermission(
-      request: GrantDnsBindPermissionRequest, options: GoogleCloudGax.RequestOptions
+      request: GrantDnsBindPermissionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getDnsBindPermission(
-      request: GetDnsBindPermissionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDnsBindPermissionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVMwareEngineV1.DnsBindPermission
 
     func revokeDnsBindPermission(
-      request: RevokeDnsBindPermissionRequest, options: GoogleCloudGax.RequestOptions
+      request: RevokeDnsBindPermissionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

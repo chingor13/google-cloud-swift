@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for BigtableInstanceAdmin.UpdateAppProfile.
-public struct UpdateAppProfileRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateAppProfileRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The app profile which will (partially) replace the current value.
@@ -26,12 +26,12 @@ public struct UpdateAppProfileRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
 
   /// Required. The subset of app profile fields which should be replaced.
   /// If unset, all fields will be replaced.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// If true, ignore safety checks when updating the app profile.
   public var ignoreWarnings: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateAppProfileRequest`.
   public init() {}
@@ -69,14 +69,13 @@ public struct UpdateAppProfileRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.appProfile = try container.decodeIfPresent(AppProfile.self, forKey: .appProfile)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .ignoreWarnings) {
       self.ignoreWarnings = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -93,10 +92,10 @@ public struct UpdateAppProfileRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.UpdateAppProfileRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

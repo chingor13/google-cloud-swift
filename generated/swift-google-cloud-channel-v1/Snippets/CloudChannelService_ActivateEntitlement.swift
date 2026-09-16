@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudChannelV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CloudChannelServiceClient) async throws {
   let poller = try await client.activateEntitlement(

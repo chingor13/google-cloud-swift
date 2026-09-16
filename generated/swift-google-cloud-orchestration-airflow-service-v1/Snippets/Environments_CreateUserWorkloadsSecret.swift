@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudOrchestrationAirflowServiceV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: EnvironmentsClient, projectId: String, locationId: String, environmentId: String

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A SchedulingDuration represents a fixed-length span of time represented
 /// as a count of seconds and fractions of seconds at nanosecond
 /// resolution. It is independent of any calendar and concepts like "day"
 /// or "month". Range is approximately 10,000 years.
-public struct SchedulingDuration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SchedulingDuration: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Span of time at a resolution of a second.
@@ -31,7 +31,7 @@ public struct SchedulingDuration: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// resolution.
   public var nanos: Swift.Int32? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SchedulingDuration`.
   public init() {}
@@ -70,7 +70,7 @@ public struct SchedulingDuration: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     self.nanos = try container.decodeIfPresent(Swift.Int32.self, forKey: .nanos)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -86,10 +86,10 @@ public struct SchedulingDuration: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.v1.SchedulingDuration"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

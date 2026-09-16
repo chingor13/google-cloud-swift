@@ -15,8 +15,8 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Capacity commitment is a way to purchase compute capacity for BigQuery jobs
 /// (in the form of slots) with some committed period of usage. Annual
@@ -28,7 +28,7 @@ import GoogleRpc
 ///
 /// A capacity commitment resource exists as a child resource of the admin
 /// project.
-public struct CapacityCommitment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CapacityCommitment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the capacity commitment, e.g.,
@@ -51,14 +51,14 @@ public struct CapacityCommitment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// only for ACTIVE capacity commitments. Note after the commitment is renewed,
   /// commitment_start_time won't be changed. It refers to the start time of the
   /// original commitment.
-  public var commitmentStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var commitmentStartTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The end of the current commitment period. It is applicable
   /// only for ACTIVE capacity commitments. Note after renewal,
   /// commitment_end_time is the time the renewed commitment expires. So itwould
   /// be at a time after commitment_start_time + committed period, because we
   /// don't change commitment_start_time ,
-  public var commitmentEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var commitmentEndTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. For FAILED commitment plan, provides the reason of failure.
   public var failureStatus: GoogleRpc.Status? = nil
@@ -88,7 +88,7 @@ public struct CapacityCommitment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// it's an edition commitment.
   public var isFlatRate: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CapacityCommitment`.
   public init() {}
@@ -156,9 +156,9 @@ public struct CapacityCommitment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       self.state = value
     }
     self.commitmentStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .commitmentStartTime)
+      GoogleWKT.Timestamp.self, forKey: .commitmentStartTime)
     self.commitmentEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .commitmentEndTime)
+      GoogleWKT.Timestamp.self, forKey: .commitmentEndTime)
     self.failureStatus = try container.decodeIfPresent(
       GoogleRpc.Status.self, forKey: .failureStatus)
     if let value = try container.decodeIfPresent(
@@ -177,7 +177,7 @@ public struct CapacityCommitment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -499,10 +499,10 @@ public struct CapacityCommitment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.reservation.v1.CapacityCommitment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

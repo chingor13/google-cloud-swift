@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ReplicationCycle contains information about the current replication cycle
 /// status.
-public struct ReplicationCycle: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ReplicationCycle: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The identifier of the ReplicationCycle.
@@ -30,13 +30,13 @@ public struct ReplicationCycle: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var cycleNumber: Swift.Int32 = Swift.Int32()
 
   /// The time the replication cycle has started.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// The time the replication cycle has ended.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// The accumulated duration the replication cycle was paused.
-  public var totalPauseDuration: GoogleCloudWKT.Duration? = nil
+  public var totalPauseDuration: GoogleWKT.Duration? = nil
 
   /// The current progress in percentage of this cycle.
   /// Was replaced by 'steps' field, which breaks down the cycle progression more
@@ -57,7 +57,7 @@ public struct ReplicationCycle: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. Warnings that occurred during the cycle.
   public var warnings: [MigrationWarning] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ReplicationCycle`.
   public init() {}
@@ -114,11 +114,10 @@ public struct ReplicationCycle: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .cycleNumber) {
       self.cycleNumber = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     self.totalPauseDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .totalPauseDuration)
+      GoogleWKT.Duration.self, forKey: .totalPauseDuration)
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .progressPercent) {
       self.progressPercent = value
     }
@@ -134,7 +133,7 @@ public struct ReplicationCycle: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -278,10 +277,10 @@ public struct ReplicationCycle: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmmigration.v1.ReplicationCycle"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

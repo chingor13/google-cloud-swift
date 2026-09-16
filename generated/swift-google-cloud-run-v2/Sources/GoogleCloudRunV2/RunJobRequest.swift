@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message to create a new Execution of a Job.
-public struct RunJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RunJobRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The full name of the Job.
@@ -38,7 +38,7 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// overrides will be applied to update the execution or task spec.
   public var overrides: RunJobRequest.Overrides? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RunJobRequest`.
   public init() {}
@@ -89,7 +89,7 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.overrides = try container.decodeIfPresent(RunJobRequest.Overrides.self, forKey: .overrides)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -105,7 +105,7 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// RunJob Overrides that contains Execution fields to be overridden.
-  public struct Overrides: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Overrides: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Per container override specification.
@@ -118,9 +118,9 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Duration in seconds the task may be active before the system will
     /// actively try to mark it failed and kill associated containers. Will
     /// replace existing timeout_seconds value.
-    public var timeout: GoogleCloudWKT.Duration? = nil
+    public var timeout: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Overrides`.
     public init() {}
@@ -165,10 +165,10 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .taskCount) {
         self.taskCount = value
       }
-      self.timeout = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .timeout)
+      self.timeout = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeout)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -183,7 +183,7 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Per-container override specification.
-    public struct ContainerOverride: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ContainerOverride: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the container specified as a DNS_LABEL.
@@ -200,7 +200,7 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Optional. True if the intention is to clear out existing args list.
       public var clearArgs: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ContainerOverride`.
       public init() {}
@@ -253,7 +253,7 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -271,32 +271,32 @@ public struct RunJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.run.v2.RunJobRequest.Overrides.ContainerOverride"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.run.v2.RunJobRequest.Overrides"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.RunJobRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

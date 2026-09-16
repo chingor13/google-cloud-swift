@@ -16,12 +16,12 @@
 
 #if Flows || Playbooks || Sessions || TestCases
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Defines the properties of a parameter.
   /// Used to define parameters used in the agent and the
   /// input / output parameters for each fulfillment.
-  public struct ParameterDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ParameterDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Name of parameter.
@@ -37,7 +37,7 @@
     /// Human-readable description of the parameter. Limited to 300 characters.
     public var description: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ParameterDefinition`.
     public init() {}
@@ -90,7 +90,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -109,7 +109,7 @@
     /// These types are consistent with
     /// [google.protobuf.Value][google.protobuf.Value].
     ///
-    /// [google.protobuf.Value]: https://www.google.com/search?q=Swift+google.protobuf+GoogleCloudWKT.Value
+    /// [google.protobuf.Value]: https://www.google.com/search?q=Swift+google.protobuf+GoogleWKT.Value
     public enum ParameterType: Codable, Equatable, Sendable {
       /// Not specified. No validation will be performed.
       case unspecified
@@ -245,11 +245,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ParameterDefinition"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

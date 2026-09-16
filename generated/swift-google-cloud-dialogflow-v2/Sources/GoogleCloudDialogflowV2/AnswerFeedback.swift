@@ -16,11 +16,11 @@
 
 #if AnswerRecords
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents feedback the customer has about the quality & correctness of a
   /// certain answer in a conversation.
-  public struct AnswerFeedback: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AnswerFeedback: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The correctness level of the specific answer.
@@ -33,19 +33,19 @@
     public var clicked: Swift.Bool = Swift.Bool()
 
     /// Time when the answer/item was clicked.
-    public var clickTime: GoogleCloudWKT.Timestamp? = nil
+    public var clickTime: GoogleWKT.Timestamp? = nil
 
     /// Indicates whether the answer/item was displayed to the human
     /// agent in the agent desktop UI. Default to false.
     public var displayed: Swift.Bool = Swift.Bool()
 
     /// Time when the answer/item was displayed.
-    public var displayTime: GoogleCloudWKT.Timestamp? = nil
+    public var displayTime: GoogleWKT.Timestamp? = nil
 
     /// Normally, detail feedback is provided when answer is not fully correct.
     public var detailFeedback: OneOf_DetailFeedback? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AnswerFeedback`.
     public init() {}
@@ -97,13 +97,12 @@
       if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .clicked) {
         self.clicked = value
       }
-      self.clickTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .clickTime)
+      self.clickTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .clickTime)
       if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .displayed) {
         self.displayed = value
       }
       self.displayTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .displayTime)
+        GoogleWKT.Timestamp.self, forKey: .displayTime)
 
       var detailFeedback: OneOf_DetailFeedback? = nil
       let detailFeedbackCheckAndSet = {
@@ -123,7 +122,7 @@
       self.detailFeedback = detailFeedback
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -267,11 +266,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.AnswerFeedback"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

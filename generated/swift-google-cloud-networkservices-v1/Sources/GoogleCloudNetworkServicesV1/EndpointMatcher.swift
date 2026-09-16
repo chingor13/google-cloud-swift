@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A definition of a matcher that selects endpoints to which the policies
 /// should be applied.
-public struct EndpointMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EndpointMatcher: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Specifies type of the matcher used for this endpoint matcher.
   public var matcherType: OneOf_MatcherType? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EndpointMatcher`.
   public init() {}
@@ -77,7 +77,7 @@ public struct EndpointMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.matcherType = matcherType
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,7 +96,7 @@ public struct EndpointMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The matcher that is based on node metadata presented by xDS clients.
-  public struct MetadataLabelMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MetadataLabelMatcher: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Specifies how matching should be done.
@@ -136,7 +136,7 @@ public struct EndpointMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// matches any client).
     public var metadataLabels: [EndpointMatcher.MetadataLabelMatcher.MetadataLabels] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MetadataLabelMatcher`.
     public init() {}
@@ -184,7 +184,7 @@ public struct EndpointMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -198,7 +198,7 @@ public struct EndpointMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Defines a name-pair value for a single label.
-    public struct MetadataLabels: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MetadataLabels: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Label name presented as key in xDS Node Metadata.
@@ -208,7 +208,7 @@ public struct EndpointMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// key, in xDS Node Metadata.
       public var labelValue: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MetadataLabels`.
       public init() {}
@@ -251,7 +251,7 @@ public struct EndpointMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -268,11 +268,11 @@ public struct EndpointMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.networkservices.v1.EndpointMatcher.MetadataLabelMatcher.MetadataLabels"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -387,11 +387,11 @@ public struct EndpointMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.networkservices.v1.EndpointMatcher.MetadataLabelMatcher"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -404,10 +404,10 @@ public struct EndpointMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkservices.v1.EndpointMatcher"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

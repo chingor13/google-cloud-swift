@@ -16,12 +16,12 @@
 
 #if PublicAdvertisedPrefixes
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A public advertised prefix represents an aggregated IP prefix or netblock
   /// which customers bring to cloud. The IP prefix is a single unit of route
   /// advertisement and is announced globally to the internet.
-  public struct PublicAdvertisedPrefix: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PublicAdvertisedPrefix: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. [Output Only] The version of BYOIP API.
@@ -107,7 +107,7 @@
     ///      - `PREFIX_REMOVAL_IN_PROGRESS`: The prefix is being removed.
     public var status: PublicAdvertisedPrefix.Status? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PublicAdvertisedPrefix`.
     public init() {}
@@ -176,7 +176,7 @@
       self.dnsVerificationIp = try container.decodeIfPresent(
         Swift.String.self, forKey: .dnsVerificationIp)
       if let s = try container.decodeIfPresent(Swift.String.self, forKey: .fingerprint) {
-        guard let v = GoogleCloudWKT._DiscoveryBase64.decode(s) else {
+        guard let v = GoogleWKT._DiscoveryBase64.decode(s) else {
           throw DecodingError.dataCorrupted(
             DecodingError.Context(
               codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
@@ -203,7 +203,7 @@
         PublicAdvertisedPrefix.Status.self, forKey: .status)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -215,7 +215,7 @@
       try container.encodeIfPresent(self.dnsVerificationIp, forKey: .dnsVerificationIp)
       if let v = fingerprint {
         try container.encode(
-          GoogleCloudWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
+          GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
       }
       try container.encodeIfPresent(self.id, forKey: .id)
@@ -705,11 +705,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.PublicAdvertisedPrefix"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

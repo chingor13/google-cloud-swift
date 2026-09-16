@@ -20,8 +20,8 @@
   import Foundation
   import GoogleCloudDialogflowV2
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
+  import GoogleWKT
 
   func sample(client: VersionsClient, projectId: String, versionId: String) async throws {
     try await client.deleteVersion(

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a Dataform workflow configuration.
-public struct WorkflowConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct WorkflowConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The workflow config's name.
@@ -52,17 +52,17 @@ public struct WorkflowConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var disabled: Swift.Bool = Swift.Bool()
 
   /// Output only. The timestamp of when the WorkflowConfig was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp of when the WorkflowConfig was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. All the metadata information that is used internally to serve
   /// the resource. For example: timestamps, flags, status fields, etc. The
   /// format of this field is a JSON string.
   public var internalMetadata: Swift.String? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `WorkflowConfig`.
   public init() {}
@@ -136,15 +136,13 @@ public struct WorkflowConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .disabled) {
       self.disabled = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     self.internalMetadata = try container.decodeIfPresent(
       Swift.String.self, forKey: .internalMetadata)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -168,16 +166,16 @@ public struct WorkflowConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// A record of an attempt to create a workflow invocation for this workflow
   /// config.
-  public struct ScheduledExecutionRecord: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ScheduledExecutionRecord: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The timestamp of this execution attempt.
-    public var executionTime: GoogleCloudWKT.Timestamp? = nil
+    public var executionTime: GoogleWKT.Timestamp? = nil
 
     /// The result of this execution attempt.
     public var result: OneOf_Result? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ScheduledExecutionRecord`.
     public init() {}
@@ -215,7 +213,7 @@ public struct WorkflowConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.executionTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .executionTime)
+        GoogleWKT.Timestamp.self, forKey: .executionTime)
 
       var result: OneOf_Result? = nil
       let resultCheckAndSet = {
@@ -240,7 +238,7 @@ public struct WorkflowConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.result = result
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -275,21 +273,21 @@ public struct WorkflowConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.WorkflowConfig.ScheduledExecutionRecord"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.WorkflowConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

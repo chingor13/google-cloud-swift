@@ -16,7 +16,7 @@
 
 #if DocumentService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Response message for
   /// [DocumentService.PurgeDocuments][google.cloud.discoveryengine.v1.DocumentService.PurgeDocuments]
@@ -24,7 +24,7 @@
   /// is returned by the google.longrunning.Operations.response field.
   ///
   /// [google.cloud.discoveryengine.v1.DocumentService.PurgeDocuments]: <doc:DocumentServiceClient/purgeDocuments(request:options:)>
-  public struct PurgeDocumentsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PurgeDocumentsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The total count of documents purged as a result of the operation.
@@ -35,7 +35,7 @@
     /// chosen at random.
     public var purgeSample: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PurgeDocumentsResponse`.
     public init() {}
@@ -78,7 +78,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -94,11 +94,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.PurgeDocumentsResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

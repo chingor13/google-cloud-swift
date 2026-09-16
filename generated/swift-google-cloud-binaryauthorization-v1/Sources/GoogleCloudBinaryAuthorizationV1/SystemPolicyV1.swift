@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// API for working with the system policy.
 ///
@@ -29,7 +29,7 @@ public final class SystemPolicyV1Client: Clients.SystemPolicyV1Protocol, Sendabl
   let inner: any Clients.SystemPolicyV1Stub
 
   /// Creates a new `SystemPolicyV1Client` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.SystemPolicyV1Stub = try Clients.SystemPolicyV1Transport(options)
     inner = Clients.SystemPolicyV1Retry(inner, options: options)
     if let logger = options.logger {
@@ -42,7 +42,7 @@ public final class SystemPolicyV1Client: Clients.SystemPolicyV1Protocol, Sendabl
   ///
   /// @Snippet(path: "SystemPolicyV1_GetSystemPolicy")
   public func getSystemPolicy(
-    request: GetSystemPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSystemPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
     try await self.inner.getSystemPolicy(request: request, options: options)
   }
@@ -55,7 +55,7 @@ public final class SystemPolicyV1Client: Clients.SystemPolicyV1Protocol, Sendabl
   ///
   /// @Snippet(path: "SystemPolicyV1_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -65,7 +65,7 @@ public final class SystemPolicyV1Client: Clients.SystemPolicyV1Protocol, Sendabl
   ///
   /// @Snippet(path: "SystemPolicyV1_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -80,7 +80,7 @@ public final class SystemPolicyV1Client: Clients.SystemPolicyV1Protocol, Sendabl
   ///
   /// @Snippet(path: "SystemPolicyV1_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -114,22 +114,22 @@ extension Clients {
 
     /// See `SystemPolicyV1Client.getSystemPolicy`.
     func getSystemPolicy(
-      request: GetSystemPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSystemPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy
 
     /// See `SystemPolicyV1Client.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SystemPolicyV1Client.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SystemPolicyV1Client.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
   }
 }
@@ -143,9 +143,9 @@ extension Clients.SystemPolicyV1Protocol {
   }
 
   public func getSystemPolicy(
-    request: GetSystemPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSystemPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSystemPolicy(
@@ -164,9 +164,9 @@ extension Clients.SystemPolicyV1Protocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -176,9 +176,9 @@ extension Clients.SystemPolicyV1Protocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -188,8 +188,8 @@ extension Clients.SystemPolicyV1Protocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

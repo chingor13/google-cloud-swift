@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func listExecutions(
-      request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExecutionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkflowsExecutionsV1.ListExecutionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listExecutions",
         action: {
-          (r: ListExecutionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListExecutionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWorkflowsExecutionsV1.ListExecutionsResponse
           in
           return try await self.inner.listExecutions(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func createExecution(
-      request: CreateExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution {
       try await self._intercept(
         request: request,
         options: options,
         name: "createExecution",
         action: {
-          (r: CreateExecutionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateExecutionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWorkflowsExecutionsV1.Execution
           in
           return try await self.inner.createExecution(request: r, options: o)
@@ -87,14 +87,14 @@ extension Clients {
     }
 
     public func getExecution(
-      request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution {
       try await self._intercept(
         request: request,
         options: options,
         name: "getExecution",
         action: {
-          (r: GetExecutionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetExecutionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWorkflowsExecutionsV1.Execution
           in
           return try await self.inner.getExecution(request: r, options: o)
@@ -102,14 +102,14 @@ extension Clients {
     }
 
     public func cancelExecution(
-      request: CancelExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution {
       try await self._intercept(
         request: request,
         options: options,
         name: "cancelExecution",
         action: {
-          (r: CancelExecutionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CancelExecutionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWorkflowsExecutionsV1.Execution
           in
           return try await self.inner.cancelExecution(request: r, options: o)

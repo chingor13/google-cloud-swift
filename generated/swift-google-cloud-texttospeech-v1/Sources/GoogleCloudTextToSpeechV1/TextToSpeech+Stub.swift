@@ -15,26 +15,26 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol TextToSpeechStub: Sendable {
     func listVoices(
-      request: ListVoicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVoicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTextToSpeechV1.ListVoicesResponse
 
     func synthesizeSpeech(
-      request: SynthesizeSpeechRequest, options: GoogleCloudGax.RequestOptions
+      request: SynthesizeSpeechRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTextToSpeechV1.SynthesizeSpeechResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

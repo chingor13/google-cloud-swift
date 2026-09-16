@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A speech recognition result corresponding to a portion of the audio.
-public struct SpeechRecognitionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SpeechRecognitionResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// May contain one or more recognition hypotheses. These alternatives are
@@ -34,14 +34,14 @@ public struct SpeechRecognitionResult: Codable, Equatable, GoogleCloudWKT._AnyPa
 
   /// Time offset of the end of this result relative to the beginning of the
   /// audio.
-  public var resultEndOffset: GoogleCloudWKT.Duration? = nil
+  public var resultEndOffset: GoogleWKT.Duration? = nil
 
   /// Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
   /// language tag of the language in this result. This language code was
   /// detected to have the most likelihood of being spoken in the audio.
   public var languageCode: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SpeechRecognitionResult`.
   public init() {}
@@ -89,13 +89,13 @@ public struct SpeechRecognitionResult: Codable, Equatable, GoogleCloudWKT._AnyPa
       self.channelTag = value
     }
     self.resultEndOffset = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .resultEndOffset)
+      GoogleWKT.Duration.self, forKey: .resultEndOffset)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .languageCode) {
       self.languageCode = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -113,10 +113,10 @@ public struct SpeechRecognitionResult: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.SpeechRecognitionResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,13 +16,13 @@
 
 #if Conversations
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a conversation.
   /// A conversation is an interaction between an agent, including live agents
   /// and Dialogflow agents, and a support customer. Conversations can
   /// include phone calls and text-based chat sessions.
-  public struct Conversation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Conversation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Identifier. The unique identifier of this conversation.
@@ -44,10 +44,10 @@
     public var phoneNumber: ConversationPhoneNumber? = nil
 
     /// Output only. The time the conversation was started.
-    public var startTime: GoogleCloudWKT.Timestamp? = nil
+    public var startTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. The time the conversation was finished.
-    public var endTime: GoogleCloudWKT.Timestamp? = nil
+    public var endTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. The stage of a conversation. It indicates whether the virtual
     /// agent or a human agent is handling the conversation.
@@ -85,7 +85,7 @@
     /// value.
     public var initialGeneratorContexts: [Swift.String: Conversation.GeneratorContext] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Conversation`.
     public init() {}
@@ -152,9 +152,8 @@
       }
       self.phoneNumber = try container.decodeIfPresent(
         ConversationPhoneNumber.self, forKey: .phoneNumber)
-      self.startTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-      self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+      self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+      self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
       if let value = try container.decodeIfPresent(
         Conversation.ConversationStage.self, forKey: .conversationStage)
       {
@@ -176,7 +175,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -201,7 +200,7 @@
 
     /// The information about phone calls connected via phone gateway to the
     /// conversation.
-    public struct TelephonyConnectionInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct TelephonyConnectionInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The number dialed to connect this call in E.164 format.
@@ -218,7 +217,7 @@
       /// Output only. The mime content from the initial SIP INVITE.
       public var extraMimeContents: [Conversation.TelephonyConnectionInfo.MimeContent] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `TelephonyConnectionInfo`.
       public init() {}
@@ -275,7 +274,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -291,7 +290,7 @@
       }
 
       /// The SIP headers from the initial SIP INVITE.
-      public struct SipHeader: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct SipHeader: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. The name of the header.
@@ -300,8 +299,7 @@
         /// Optional. The value of the header.
         public var value: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `SipHeader`.
         public init() {}
@@ -344,7 +342,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -361,16 +359,16 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.Conversation.TelephonyConnectionInfo.SipHeader"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// The mime content from the initial SIP INVITE.
-      public struct MimeContent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct MimeContent: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. The mime type of the content.
@@ -379,8 +377,7 @@
         /// Optional. The content payload.
         public var content: Foundation.Data = Foundation.Data()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `MimeContent`.
         public init() {}
@@ -423,7 +420,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -440,27 +437,27 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.Conversation.TelephonyConnectionInfo.MimeContent"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Conversation.TelephonyConnectionInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Represents a section of ingested context information.
-    public struct ContextReference: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ContextReference: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The list of content updates for a context reference.
@@ -475,9 +472,9 @@
       public var languageCode: Swift.String = Swift.String()
 
       /// Output only. The time the context reference was first created.
-      public var createTime: GoogleCloudWKT.Timestamp? = nil
+      public var createTime: GoogleWKT.Timestamp? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ContextReference`.
       public init() {}
@@ -530,10 +527,10 @@
           self.languageCode = value
         }
         self.createTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+          GoogleWKT.Timestamp.self, forKey: .createTime)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -549,7 +546,7 @@
       }
 
       /// Contents ingested.
-      public struct ContextContent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct ContextContent: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The information ingested in a single request.
@@ -561,7 +558,7 @@
 
         /// Output only. The time when this information was incorporated into the
         /// relevant context reference.
-        public var ingestionTime: GoogleCloudWKT.Timestamp? = nil
+        public var ingestionTime: GoogleWKT.Timestamp? = nil
 
         /// If the context content was generated from a tool call, specify the
         /// answer record associated with the tool call.
@@ -569,8 +566,7 @@
         /// ID>/answerRecords/<Answer Record ID>`.
         public var answerRecord: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `ContextContent`.
         public init() {}
@@ -618,13 +614,13 @@
             self.contentFormat = value
           }
           self.ingestionTime = try container.decodeIfPresent(
-            GoogleCloudWKT.Timestamp.self, forKey: .ingestionTime)
+            GoogleWKT.Timestamp.self, forKey: .ingestionTime)
           if let value = try container.decodeIfPresent(Swift.String.self, forKey: .answerRecord) {
             self.answerRecord = value
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -748,11 +744,11 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.Conversation.ContextReference.ContextContent"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -864,23 +860,23 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Conversation.ContextReference"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Represents the context of a generator.
-    public struct GeneratorContext: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GeneratorContext: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The type of the generator.
       public var generatorType: Conversation.GeneratorContext.GeneratorType = Conversation
         .GeneratorContext.GeneratorType()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GeneratorContext`.
       public init() {}
@@ -920,7 +916,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1069,11 +1065,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.Conversation.GeneratorContext"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1295,11 +1291,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Conversation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

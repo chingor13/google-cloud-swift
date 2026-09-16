@@ -20,10 +20,10 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing
   /// [ConversationProfiles][google.cloud.dialogflow.v2.ConversationProfile].
@@ -33,11 +33,11 @@
   /// @Snippet(path: "ConversationProfilesQuickstart")
   public final class ConversationProfilesClient: Clients.ConversationProfilesProtocol, Sendable {
     let inner: any Clients.ConversationProfilesStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `ConversationProfilesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.ConversationProfilesStub = try Clients.ConversationProfilesTransport(
         options)
       inner = Clients.ConversationProfilesRetry(inner, options: options)
@@ -53,7 +53,7 @@
     ///
     /// @Snippet(path: "ConversationProfiles_ListConversationProfiles")
     public func listConversationProfiles(
-      request: ListConversationProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConversationProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ListConversationProfilesResponse {
       try await self.inner.listConversationProfiles(request: request, options: options)
     }
@@ -62,7 +62,7 @@
     ///
     /// @Snippet(path: "ConversationProfiles_ListConversationProfiles")
     public func listConversationProfiles(
-      byItem: ListConversationProfilesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConversationProfilesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ConversationProfile, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -71,14 +71,14 @@
         request.pageToken = token
         return try await self.listConversationProfiles(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves the specified conversation profile.
     ///
     /// @Snippet(path: "ConversationProfiles_GetConversationProfile")
     public func getConversationProfile(
-      request: GetConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConversationProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ConversationProfile {
       try await self.inner.getConversationProfile(request: request, options: options)
     }
@@ -98,7 +98,7 @@
     ///
     /// @Snippet(path: "ConversationProfiles_CreateConversationProfile")
     public func createConversationProfile(
-      request: CreateConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConversationProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ConversationProfile {
       try await self.inner.createConversationProfile(request: request, options: options)
     }
@@ -118,7 +118,7 @@
     ///
     /// @Snippet(path: "ConversationProfiles_UpdateConversationProfile")
     public func updateConversationProfile(
-      request: UpdateConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConversationProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ConversationProfile {
       try await self.inner.updateConversationProfile(request: request, options: options)
     }
@@ -127,7 +127,7 @@
     ///
     /// @Snippet(path: "ConversationProfiles_DeleteConversationProfile")
     public func deleteConversationProfile(
-      request: DeleteConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConversationProfileRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteConversationProfile(request: request, options: options)
     }
@@ -156,7 +156,7 @@
     ///
     /// @Snippet(path: "ConversationProfiles_SetSuggestionFeatureConfig")
     public func setSuggestionFeatureConfig(
-      request: SetSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: SetSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.setSuggestionFeatureConfig(request: request, options: options)
     }
@@ -185,22 +185,21 @@
     ///
     /// @Snippet(path: "ConversationProfiles_SetSuggestionFeatureConfig")
     public func setSuggestionFeatureConfig(
-      withPolling: SetSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile> {
+      withPolling: SetSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ConversationProfile> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ConversationProfile>.State in
+          -> GoogleGax._PollableOperationImpl<ConversationProfile>.State in
         return try op._extractStatus(ConversationProfile.self)
       }
       let rawOp = try await self.setSuggestionFeatureConfig(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ConversationProfile>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConversationProfile>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -225,7 +224,7 @@
     ///
     /// @Snippet(path: "ConversationProfiles_ClearSuggestionFeatureConfig")
     public func clearSuggestionFeatureConfig(
-      request: ClearSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: ClearSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.clearSuggestionFeatureConfig(request: request, options: options)
     }
@@ -247,23 +246,22 @@
     ///
     /// @Snippet(path: "ConversationProfiles_ClearSuggestionFeatureConfig")
     public func clearSuggestionFeatureConfig(
-      withPolling: ClearSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile> {
+      withPolling: ClearSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ConversationProfile> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ConversationProfile>.State in
+          -> GoogleGax._PollableOperationImpl<ConversationProfile>.State in
         return try op._extractStatus(ConversationProfile.self)
       }
       let rawOp = try await self.clearSuggestionFeatureConfig(
         request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ConversationProfile>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConversationProfile>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -292,7 +290,7 @@
     ///
     /// @Snippet(path: "ConversationProfiles_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -318,7 +316,7 @@
     ///
     /// @Snippet(path: "ConversationProfiles_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -326,14 +324,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "ConversationProfiles_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -344,7 +342,7 @@
     ///
     /// @Snippet(path: "ConversationProfiles_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -355,7 +353,7 @@
     ///
     /// @Snippet(path: "ConversationProfiles_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -363,7 +361,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -372,7 +370,7 @@
     ///
     /// @Snippet(path: "ConversationProfiles_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -383,7 +381,7 @@
     ///
     /// @Snippet(path: "ConversationProfiles_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -436,7 +434,7 @@
       /// See `ConversationProfilesClient.updateConversationProfile`.
       func updateConversationProfile(
         conversationProfile: ConversationProfile?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDialogflowV2.ConversationProfile
 
       /// See `ConversationProfilesClient.deleteConversationProfile`.
@@ -453,19 +451,19 @@
 
       /// See `ConversationProfilesClient.setSuggestionFeatureConfig`.
       func setSuggestionFeatureConfig(withPolling: SetSuggestionFeatureConfigRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<ConversationProfile>
+        -> any GoogleGax.PollableOperation<ConversationProfile>
 
       /// See `ConversationProfilesClient.setSuggestionFeatureConfig`.
       func setSuggestionFeatureConfig(
         conversationProfile: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile>
+      ) async throws -> any GoogleGax.PollableOperation<ConversationProfile>
 
       /// See `ConversationProfilesClient.setSuggestionFeatureConfig`.
       func setSuggestionFeatureConfig(
         conversationProfile: Swift.String,
         participantRole: Participant.Role,
         suggestionFeatureConfig: HumanAgentAssistantConfig.SuggestionFeatureConfig?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile>
+      ) async throws -> any GoogleGax.PollableOperation<ConversationProfile>
 
       /// See `ConversationProfilesClient.clearSuggestionFeatureConfig`.
       func clearSuggestionFeatureConfig(request: ClearSuggestionFeatureConfigRequest) async throws
@@ -473,19 +471,19 @@
 
       /// See `ConversationProfilesClient.clearSuggestionFeatureConfig`.
       func clearSuggestionFeatureConfig(withPolling: ClearSuggestionFeatureConfigRequest)
-        async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile>
+        async throws -> any GoogleGax.PollableOperation<ConversationProfile>
 
       /// See `ConversationProfilesClient.clearSuggestionFeatureConfig`.
       func clearSuggestionFeatureConfig(
         conversationProfile: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile>
+      ) async throws -> any GoogleGax.PollableOperation<ConversationProfile>
 
       /// See `ConversationProfilesClient.clearSuggestionFeatureConfig`.
       func clearSuggestionFeatureConfig(
         conversationProfile: Swift.String,
         participantRole: Participant.Role,
         suggestionFeatureType: SuggestionFeature.Type_,
-      ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile>
+      ) async throws -> any GoogleGax.PollableOperation<ConversationProfile>
 
       /// See `ConversationProfilesClient.listLocations`.
       func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -525,82 +523,82 @@
 
       /// See `ConversationProfilesClient.listConversationProfiles`.
       func listConversationProfiles(
-        request: ListConversationProfilesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListConversationProfilesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListConversationProfilesResponse
 
       /// See `ConversationProfilesClient.listConversationProfiles`.
       func listConversationProfiles(
-        byItem: ListConversationProfilesRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListConversationProfilesRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<ConversationProfile, Swift.Error>
 
       /// See `ConversationProfilesClient.getConversationProfile`.
       func getConversationProfile(
-        request: GetConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+        request: GetConversationProfileRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ConversationProfile
 
       /// See `ConversationProfilesClient.createConversationProfile`.
       func createConversationProfile(
-        request: CreateConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateConversationProfileRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ConversationProfile
 
       /// See `ConversationProfilesClient.updateConversationProfile`.
       func updateConversationProfile(
-        request: UpdateConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateConversationProfileRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ConversationProfile
 
       /// See `ConversationProfilesClient.deleteConversationProfile`.
       func deleteConversationProfile(
-        request: DeleteConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteConversationProfileRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `ConversationProfilesClient.setSuggestionFeatureConfig`.
       func setSuggestionFeatureConfig(
-        request: SetSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: SetSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `ConversationProfilesClient.setSuggestionFeatureConfig`.
       func setSuggestionFeatureConfig(
-        withPolling: SetSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile>
+        withPolling: SetSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ConversationProfile>
 
       /// See `ConversationProfilesClient.clearSuggestionFeatureConfig`.
       func clearSuggestionFeatureConfig(
-        request: ClearSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: ClearSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `ConversationProfilesClient.clearSuggestionFeatureConfig`.
       func clearSuggestionFeatureConfig(
-        withPolling: ClearSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile>
+        withPolling: ClearSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ConversationProfile>
 
       /// See `ConversationProfilesClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `ConversationProfilesClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `ConversationProfilesClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `ConversationProfilesClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `ConversationProfilesClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `ConversationProfilesClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -614,9 +612,9 @@
     }
 
     public func listConversationProfiles(
-      request: ListConversationProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConversationProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ListConversationProfilesResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listConversationProfiles(
@@ -626,14 +624,14 @@
     }
 
     public func listConversationProfiles(
-      byItem: ListConversationProfilesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConversationProfilesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ConversationProfile, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudDialogflowV2.ListConversationProfilesResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listConversationProfiles(
@@ -652,9 +650,9 @@
     }
 
     public func getConversationProfile(
-      request: GetConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConversationProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ConversationProfile {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getConversationProfile(
@@ -673,9 +671,9 @@
     }
 
     public func createConversationProfile(
-      request: CreateConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConversationProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ConversationProfile {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createConversationProfile(
@@ -696,14 +694,14 @@
     }
 
     public func updateConversationProfile(
-      request: UpdateConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConversationProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ConversationProfile {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateConversationProfile(
       conversationProfile: ConversationProfile?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDialogflowV2.ConversationProfile {
       let request = UpdateConversationProfileRequest().with {
         $0.conversationProfile = conversationProfile
@@ -717,9 +715,9 @@
     }
 
     public func deleteConversationProfile(
-      request: DeleteConversationProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConversationProfileRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteConversationProfile(
@@ -738,31 +736,30 @@
     }
 
     public func setSuggestionFeatureConfig(
-      request: SetSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: SetSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setSuggestionFeatureConfig(withPolling: SetSuggestionFeatureConfigRequest)
-      async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile>
+      async throws -> any GoogleGax.PollableOperation<ConversationProfile>
     {
       try await self.setSuggestionFeatureConfig(withPolling: withPolling, options: .init())
     }
 
     public func setSuggestionFeatureConfig(
-      withPolling: SetSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile> {
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ConversationProfile>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: SetSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ConversationProfile> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConversationProfile>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func setSuggestionFeatureConfig(
       conversationProfile: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile> {
+    ) async throws -> any GoogleGax.PollableOperation<ConversationProfile> {
       let request = SetSuggestionFeatureConfigRequest().with {
         $0.conversationProfile = conversationProfile
       }
@@ -773,7 +770,7 @@
       conversationProfile: Swift.String,
       participantRole: Participant.Role,
       suggestionFeatureConfig: HumanAgentAssistantConfig.SuggestionFeatureConfig?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile> {
+    ) async throws -> any GoogleGax.PollableOperation<ConversationProfile> {
       let request = SetSuggestionFeatureConfigRequest().with {
         $0.conversationProfile = conversationProfile
         $0.participantRole = participantRole
@@ -789,31 +786,30 @@
     }
 
     public func clearSuggestionFeatureConfig(
-      request: ClearSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: ClearSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func clearSuggestionFeatureConfig(withPolling: ClearSuggestionFeatureConfigRequest)
-      async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile>
+      async throws -> any GoogleGax.PollableOperation<ConversationProfile>
     {
       try await self.clearSuggestionFeatureConfig(withPolling: withPolling, options: .init())
     }
 
     public func clearSuggestionFeatureConfig(
-      withPolling: ClearSuggestionFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile> {
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ConversationProfile>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: ClearSuggestionFeatureConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ConversationProfile> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConversationProfile>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func clearSuggestionFeatureConfig(
       conversationProfile: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile> {
+    ) async throws -> any GoogleGax.PollableOperation<ConversationProfile> {
       let request = ClearSuggestionFeatureConfigRequest().with {
         $0.conversationProfile = conversationProfile
       }
@@ -824,7 +820,7 @@
       conversationProfile: Swift.String,
       participantRole: Participant.Role,
       suggestionFeatureType: SuggestionFeature.Type_,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationProfile> {
+    ) async throws -> any GoogleGax.PollableOperation<ConversationProfile> {
       let request = ClearSuggestionFeatureConfigRequest().with {
         $0.conversationProfile = conversationProfile
         $0.participantRole = participantRole
@@ -840,9 +836,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -852,13 +848,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -868,9 +864,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -880,9 +876,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -892,13 +888,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -919,9 +915,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -938,9 +934,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

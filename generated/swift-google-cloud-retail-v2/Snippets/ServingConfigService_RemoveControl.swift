@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudRetailV2
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: ServingConfigServiceClient) async throws {
   let response = try await client.removeControl(

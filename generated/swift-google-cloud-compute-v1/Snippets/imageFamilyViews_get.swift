@@ -19,7 +19,7 @@
   // snippet.show
   import Foundation
   import GoogleCloudComputeV1
-  import GoogleCloudWKT
+  import GoogleWKT
 
   func sample(client: ImageFamilyViewsClient) async throws {
     let response = try await client.`get`(

@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Experiment for the deployment.
-public struct ExperimentConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExperimentConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Version release for the experiment.
   public var versionRelease: ExperimentConfig.VersionRelease? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExperimentConfig`.
   public init() {}
@@ -61,7 +61,7 @@ public struct ExperimentConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       ExperimentConfig.VersionRelease.self, forKey: .versionRelease)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -74,7 +74,7 @@ public struct ExperimentConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Version release for the experiment.
-  public struct VersionRelease: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct VersionRelease: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. State of the version release.
@@ -83,7 +83,7 @@ public struct ExperimentConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. Traffic allocations for the version release.
     public var trafficAllocations: [ExperimentConfig.VersionRelease.TrafficAllocation] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `VersionRelease`.
     public init() {}
@@ -128,7 +128,7 @@ public struct ExperimentConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -142,7 +142,7 @@ public struct ExperimentConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Traffic allocation for the version release.
-    public struct TrafficAllocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct TrafficAllocation: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Id of the traffic allocation.
@@ -158,7 +158,7 @@ public struct ExperimentConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// `projects/{project}/locations/{location}/apps/{app}/versions/{version}`
       public var appVersion: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `TrafficAllocation`.
       public init() {}
@@ -206,7 +206,7 @@ public struct ExperimentConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -224,22 +224,22 @@ public struct ExperimentConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.ces.v1.ExperimentConfig.VersionRelease.TrafficAllocation"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.ExperimentConfig.VersionRelease"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -365,10 +365,10 @@ public struct ExperimentConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.ExperimentConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

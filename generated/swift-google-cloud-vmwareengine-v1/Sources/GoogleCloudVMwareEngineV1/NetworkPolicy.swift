@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a network policy resource. Network policies are regional
 /// resources. You can use a network policy to enable or disable internet access
@@ -23,7 +23,7 @@ import Foundation
 /// network, which might span across regions. For a given region, a network
 /// policy applies to all private clouds in the VMware Engine network associated
 /// with the policy.
-public struct NetworkPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NetworkPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of this network policy.
@@ -34,10 +34,10 @@ public struct NetworkPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. Creation time of this resource.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Last update time of this resource.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Network service that allows VMware workloads to access the internet.
   public var internetAccess: NetworkPolicy.NetworkService? = nil
@@ -69,7 +69,7 @@ public struct NetworkPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `projects/{project_number}/locations/{location}/vmwareEngineNetworks/{vmware_engine_network_id}`
   public var vmwareEngineNetworkCanonical: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NetworkPolicy`.
   public init() {}
@@ -124,10 +124,8 @@ public struct NetworkPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     self.internetAccess = try container.decodeIfPresent(
       NetworkPolicy.NetworkService.self, forKey: .internetAccess)
     self.externalIp = try container.decodeIfPresent(
@@ -151,7 +149,7 @@ public struct NetworkPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -177,7 +175,7 @@ public struct NetworkPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// VMware workloads. For example, whether the VMware workloads in the
   /// private clouds governed by a network policy can access or be accessed from
   /// the internet.
-  public struct NetworkService: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NetworkService: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// True if the service is enabled; false otherwise.
@@ -187,7 +185,7 @@ public struct NetworkPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// when appropriate.
     public var state: NetworkPolicy.NetworkService.State = NetworkPolicy.NetworkService.State()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NetworkService`.
     public init() {}
@@ -232,7 +230,7 @@ public struct NetworkPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -361,21 +359,21 @@ public struct NetworkPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vmwareengine.v1.NetworkPolicy.NetworkService"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmwareengine.v1.NetworkPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

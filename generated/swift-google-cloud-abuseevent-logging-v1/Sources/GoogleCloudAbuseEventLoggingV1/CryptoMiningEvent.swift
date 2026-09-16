@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Information about a cryptocurrency mining event observed on the monitored
 /// resource.
-public struct CryptoMiningEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CryptoMiningEvent: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// VM and zone in which cryptocurrency mining occurred.
@@ -27,16 +27,16 @@ public struct CryptoMiningEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public var vmResource: [Swift.String] = []
 
   /// Detected start time of the cryptocurrency mining.
-  public var detectedMiningStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var detectedMiningStartTime: GoogleWKT.Timestamp? = nil
 
   /// Detected end time of the cryptocurrency mining.
-  public var detectedMiningEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var detectedMiningEndTime: GoogleWKT.Timestamp? = nil
 
   /// The IP address(es) of the VM associated with the cryptocurrency mining.
   /// This field may be empty if this information is not available.
   public var vmIp: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CryptoMiningEvent`.
   public init() {}
@@ -79,15 +79,15 @@ public struct CryptoMiningEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable
       self.vmResource = value
     }
     self.detectedMiningStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .detectedMiningStartTime)
+      GoogleWKT.Timestamp.self, forKey: .detectedMiningStartTime)
     self.detectedMiningEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .detectedMiningEndTime)
+      GoogleWKT.Timestamp.self, forKey: .detectedMiningEndTime)
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .vmIp) {
       self.vmIp = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -105,10 +105,10 @@ public struct CryptoMiningEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.abuseevent.logging.v1.CryptoMiningEvent"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

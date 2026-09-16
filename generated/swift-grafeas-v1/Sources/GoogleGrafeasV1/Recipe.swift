@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Steps taken to build the artifact.
 /// For a TaskRun, typically each container corresponds to one step in the
 /// recipe.
-public struct Recipe: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Recipe: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// URI indicating what type of recipe was performed. It determines the meaning
@@ -47,15 +47,15 @@ public struct Recipe: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// the target, which is captured in recipe.entryPoint. Since the arguments
   /// field can greatly vary in structure, depending on the builder and recipe
   /// type, this is of form "Any".
-  public var arguments: [GoogleCloudWKT.`Any`] = []
+  public var arguments: [GoogleWKT.`Any`] = []
 
   /// Any other builder-controlled inputs necessary for correctly evaluating the
   /// recipe. Usually only needed for reproducing the build but not evaluated as
   /// part of policy. Since the environment field can greatly vary in structure,
   /// depending on the builder and recipe type, this is of form "Any".
-  public var environment: [GoogleCloudWKT.`Any`] = []
+  public var environment: [GoogleWKT.`Any`] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Recipe`.
   public init() {}
@@ -105,16 +105,15 @@ public struct Recipe: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .entryPoint) {
       self.entryPoint = value
     }
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.`Any`].self, forKey: .arguments) {
+    if let value = try container.decodeIfPresent([GoogleWKT.`Any`].self, forKey: .arguments) {
       self.arguments = value
     }
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.`Any`].self, forKey: .environment)
-    {
+    if let value = try container.decodeIfPresent([GoogleWKT.`Any`].self, forKey: .environment) {
       self.environment = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -133,10 +132,10 @@ public struct Recipe: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.Recipe"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

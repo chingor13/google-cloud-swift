@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A representation of a Google Cloud resource.
-public struct Resource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Resource: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The API version. Example: `v1`
@@ -60,13 +60,13 @@ public struct Resource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// The content of the resource, in which some sensitive fields are removed
   /// and may not be present.
-  public var data: GoogleCloudWKT.Struct? = nil
+  public var data: GoogleWKT.Struct? = nil
 
   /// The location of the resource in Google Cloud, such as its zone and region.
   /// For more information, see https://cloud.google.com/about/locations/.
   public var location: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Resource`.
   public init() {}
@@ -126,13 +126,13 @@ public struct Resource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .parent) {
       self.parent = value
     }
-    self.data = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .data)
+    self.data = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .data)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .location) {
       self.location = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -153,10 +153,10 @@ public struct Resource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.Resource"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

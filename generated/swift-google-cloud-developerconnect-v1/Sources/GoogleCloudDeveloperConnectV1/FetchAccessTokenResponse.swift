@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message for responding to getting an OAuth access token.
-public struct FetchAccessTokenResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FetchAccessTokenResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The token content.
   public var token: Swift.String = Swift.String()
 
   /// Expiration timestamp. Can be empty if unknown or non-expiring.
-  public var expirationTime: GoogleCloudWKT.Timestamp? = nil
+  public var expirationTime: GoogleWKT.Timestamp? = nil
 
   /// The scopes of the access token.
   public var scopes: [Swift.String] = []
@@ -33,7 +33,7 @@ public struct FetchAccessTokenResponse: Codable, Equatable, GoogleCloudWKT._AnyP
   /// The error resulted from exchanging OAuth tokens from the service provider.
   public var exchangeError: ExchangeError? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FetchAccessTokenResponse`.
   public init() {}
@@ -76,14 +76,14 @@ public struct FetchAccessTokenResponse: Codable, Equatable, GoogleCloudWKT._AnyP
       self.token = value
     }
     self.expirationTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .expirationTime)
+      GoogleWKT.Timestamp.self, forKey: .expirationTime)
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .scopes) {
       self.scopes = value
     }
     self.exchangeError = try container.decodeIfPresent(ExchangeError.self, forKey: .exchangeError)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,10 +101,10 @@ public struct FetchAccessTokenResponse: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.developerconnect.v1.FetchAccessTokenResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

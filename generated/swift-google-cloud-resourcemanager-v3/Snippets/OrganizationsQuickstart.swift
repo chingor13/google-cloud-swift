@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudResourceManagerV3
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(organizationId: String, ) async throws {
   let client = try GoogleCloudResourceManagerV3.OrganizationsClient()

@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Identifies a subset of entities in a project. This is specified as
 /// combinations of kinds and namespaces (either or both of which may be all, as
@@ -36,7 +36,7 @@ import Foundation
 ///
 /// The entire Baz namespace:
 ///   kinds=[], namespace_ids=['Baz']
-public struct EntityFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EntityFilter: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// If empty, then this represents all kinds.
@@ -51,7 +51,7 @@ public struct EntityFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Each namespace in this list must be unique.
   public var namespaceIds: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EntityFilter`.
   public init() {}
@@ -94,7 +94,7 @@ public struct EntityFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -110,10 +110,10 @@ public struct EntityFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.datastore.admin.v1.EntityFilter"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

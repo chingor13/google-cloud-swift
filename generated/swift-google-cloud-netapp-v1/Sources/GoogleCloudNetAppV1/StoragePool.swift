@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// StoragePool is a container for volumes with a service level and capacity.
 /// Volumes can be created in a pool of sufficient available capacity.
 /// StoragePool capacity is what you are billed for.
-public struct StoragePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StoragePool: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Name of the storage pool
@@ -45,7 +45,7 @@ public struct StoragePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var stateDetails: Swift.String = Swift.String()
 
   /// Output only. Create time of the storage pool
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Description of the storage pool
   public var description: Swift.String = Swift.String()
@@ -148,7 +148,7 @@ public struct StoragePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `SCALE_TYPE_DEFAULT` if not specified.
   public var scaleType: ScaleType = ScaleType()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StoragePool`.
   public init() {}
@@ -268,8 +268,7 @@ public struct StoragePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .stateDetails) {
       self.stateDetails = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
@@ -348,7 +347,7 @@ public struct StoragePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -536,10 +535,10 @@ public struct StoragePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.netapp.v1.StoragePool"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

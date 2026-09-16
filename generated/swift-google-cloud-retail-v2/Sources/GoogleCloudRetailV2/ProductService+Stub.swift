@@ -15,67 +15,67 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ProductServiceStub: Sendable {
     func createProduct(
-      request: CreateProductRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.Product
 
     func getProduct(
-      request: GetProductRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.Product
 
     func listProducts(
-      request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ListProductsResponse
 
     func updateProduct(
-      request: UpdateProductRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.Product
 
     func deleteProduct(
-      request: DeleteProductRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProductRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func purgeProducts(
-      request: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func importProducts(
-      request: ImportProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func setInventory(
-      request: SetInventoryRequest, options: GoogleCloudGax.RequestOptions
+      request: SetInventoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func addFulfillmentPlaces(
-      request: AddFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
+      request: AddFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func removeFulfillmentPlaces(
-      request: RemoveFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func addLocalInventories(
-      request: AddLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: AddLocalInventoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func removeLocalInventories(
-      request: RemoveLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveLocalInventoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

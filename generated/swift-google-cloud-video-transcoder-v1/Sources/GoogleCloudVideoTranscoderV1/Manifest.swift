@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Manifest configuration.
-public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Manifest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the generated file. The default is `manifest` with the
@@ -47,7 +47,7 @@ public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Specifies the manifest configuration.
   public var manifestConfig: OneOf_ManifestConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Manifest`.
   public init() {}
@@ -112,7 +112,7 @@ public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.manifestConfig = manifestConfig
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -134,7 +134,7 @@ public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// `DASH` manifest configuration.
-  public struct DashConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DashConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The segment reference scheme for a `DASH` manifest. The default is
@@ -142,7 +142,7 @@ public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var segmentReferenceScheme: Manifest.DashConfig.SegmentReferenceScheme = Manifest
       .DashConfig.SegmentReferenceScheme()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DashConfig`.
     public init() {}
@@ -182,7 +182,7 @@ public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -327,11 +327,11 @@ public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.Manifest.DashConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -449,10 +449,10 @@ public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.transcoder.v1.Manifest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

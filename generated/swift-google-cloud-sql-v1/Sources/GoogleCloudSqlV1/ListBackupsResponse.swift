@@ -16,12 +16,12 @@
 
 #if SqlBackupsService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The response payload containing a list of the backups.
-  public struct ListBackupsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
-    GoogleCloudGax._PaginatedResponse,
+  public struct ListBackupsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
+    GoogleGax._PaginatedResponse,
     Sendable
   {
     /// A list of backups.
@@ -35,7 +35,7 @@
     /// message is returned.
     public var warnings: [ApiWarning] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ListBackupsResponse`.
     public init() {}
@@ -83,7 +83,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -100,11 +100,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.ListBackupsResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
 
     public func _getPaginatedItems() -> [Backup] {

@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Task Retry Policy is implemented on a best-effort
 /// basis.
@@ -26,18 +26,18 @@ import Foundation
 /// ConnectCluster is in rebalancing state or if the ConnectCluster is
 /// unresponsive etc. The default values for minimum and maximum backoffs are
 /// 60 seconds and 30 minutes respectively.
-public struct TaskRetryPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TaskRetryPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The minimum amount of time to wait before retrying a failed task.
   /// This sets a lower bound for the backoff delay.
-  public var minimumBackoff: GoogleCloudWKT.Duration? = nil
+  public var minimumBackoff: GoogleWKT.Duration? = nil
 
   /// Optional. The maximum amount of time to wait before retrying a failed task.
   /// This sets an upper bound for the backoff delay.
-  public var maximumBackoff: GoogleCloudWKT.Duration? = nil
+  public var maximumBackoff: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TaskRetryPolicy`.
   public init() {}
@@ -73,12 +73,12 @@ public struct TaskRetryPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.minimumBackoff = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .minimumBackoff)
+      GoogleWKT.Duration.self, forKey: .minimumBackoff)
     self.maximumBackoff = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .maximumBackoff)
+      GoogleWKT.Duration.self, forKey: .maximumBackoff)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -94,10 +94,10 @@ public struct TaskRetryPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.managedkafka.v1.TaskRetryPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

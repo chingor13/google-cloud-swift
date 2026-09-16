@@ -18,16 +18,16 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class PublicCertificateAuthorityServiceRetry: PublicCertificateAuthorityServiceStub {
     let inner: any PublicCertificateAuthorityServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
     public init(
-      _ inner: any PublicCertificateAuthorityServiceStub, options: GoogleCloudGax.ClientOptions
+      _ inner: any PublicCertificateAuthorityServiceStub, options: GoogleGax.ClientOptions
     ) {
       self.inner = inner
       self.options = options
@@ -35,11 +35,11 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -51,14 +51,14 @@ extension Clients {
     }
 
     public func createExternalAccountKey(
-      request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExternalAccountKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPublicCAV1.ExternalAccountKey {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateExternalAccountKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateExternalAccountKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityPublicCAV1.ExternalAccountKey
           in
           return try await self.inner.createExternalAccountKey(request: r, options: o)

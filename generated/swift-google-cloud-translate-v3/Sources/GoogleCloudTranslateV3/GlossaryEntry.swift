@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a single entry in a glossary.
-public struct GlossaryEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GlossaryEntry: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the entry.
@@ -33,7 +33,7 @@ public struct GlossaryEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// sets).
   public var data: OneOf_Data? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GlossaryEntry`.
   public init() {}
@@ -102,7 +102,7 @@ public struct GlossaryEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.data = data
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -125,7 +125,7 @@ public struct GlossaryEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Represents a single entry for an unidirectional glossary.
-  public struct GlossaryTermsPair: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GlossaryTermsPair: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The source term is the term that will get match in the text,
@@ -134,7 +134,7 @@ public struct GlossaryEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The term that will replace the match source term.
     public var targetTerm: GlossaryTerm? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GlossaryTermsPair`.
     public init() {}
@@ -173,7 +173,7 @@ public struct GlossaryEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.targetTerm = try container.decodeIfPresent(GlossaryTerm.self, forKey: .targetTerm)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -189,25 +189,25 @@ public struct GlossaryEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Represents a single entry for an equivalent term set glossary. This is used
   /// for equivalent term sets where each term can be replaced by the other terms
   /// in the set.
-  public struct GlossaryTermsSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GlossaryTermsSet: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Each term in the set represents a term that can be replaced by the other
     /// terms.
     public var terms: [GlossaryTerm] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GlossaryTermsSet`.
     public init() {}
@@ -245,7 +245,7 @@ public struct GlossaryEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -260,11 +260,11 @@ public struct GlossaryEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -280,10 +280,10 @@ public struct GlossaryEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.translation.v3.GlossaryEntry"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

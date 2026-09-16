@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// GitHubEnterpriseConfig represents a configuration for a GitHub Enterprise
 /// server.
-public struct GitHubEnterpriseConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GitHubEnterpriseConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The full resource name for the GitHubEnterpriseConfig
@@ -35,7 +35,7 @@ public struct GitHubEnterpriseConfig: Codable, Equatable, GoogleCloudWKT._AnyPac
   public var appId: Swift.Int64 = Swift.Int64()
 
   /// Output only. Time when the installation was associated with the project.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The key that should be attached to webhook calls to the ReceiveWebhook
   /// endpoint.
@@ -62,7 +62,7 @@ public struct GitHubEnterpriseConfig: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// Optional. SSL certificate to use for requests to GitHub Enterprise.
   public var sslCa: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GitHubEnterpriseConfig`.
   public init() {}
@@ -120,8 +120,7 @@ public struct GitHubEnterpriseConfig: Codable, Equatable, GoogleCloudWKT._AnyPac
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .appId) {
       self.appId = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .webhookKey) {
       self.webhookKey = value
     }
@@ -137,7 +136,7 @@ public struct GitHubEnterpriseConfig: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -160,10 +159,10 @@ public struct GitHubEnterpriseConfig: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudbuild.v1.GitHubEnterpriseConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

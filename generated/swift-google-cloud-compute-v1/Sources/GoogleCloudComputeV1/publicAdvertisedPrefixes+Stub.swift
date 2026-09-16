@@ -16,45 +16,41 @@
 
 #if PublicAdvertisedPrefixes
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol PublicAdvertisedPrefixesStub: Sendable {
       func announce(
-        request: PublicAdvertisedPrefixesClient.AnnounceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PublicAdvertisedPrefixesClient.AnnounceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: PublicAdvertisedPrefixesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PublicAdvertisedPrefixesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: PublicAdvertisedPrefixesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: PublicAdvertisedPrefixesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefix
 
       func insert(
-        request: PublicAdvertisedPrefixesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PublicAdvertisedPrefixesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: PublicAdvertisedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: PublicAdvertisedPrefixesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicAdvertisedPrefixList
 
       func patch(
-        request: PublicAdvertisedPrefixesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: PublicAdvertisedPrefixesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func withdraw(
-        request: PublicAdvertisedPrefixesClient.WithdrawRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PublicAdvertisedPrefixesClient.WithdrawRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

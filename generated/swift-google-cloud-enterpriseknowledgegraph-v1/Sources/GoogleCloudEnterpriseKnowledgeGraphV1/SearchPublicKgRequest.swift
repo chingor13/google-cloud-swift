@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [EnterpriseKnowledgeGraphService.Search][google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.Search].
 ///
 /// [google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.Search]: <doc:EnterpriseKnowledgeGraphServiceClient/search(request:options:)>
-public struct SearchPublicKgRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SearchPublicKgRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the Entity's parent resource.
@@ -42,9 +42,9 @@ public struct SearchPublicKgRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public var types: [Swift.String] = []
 
   /// Limits the number of entities to be returned.
-  public var limit: GoogleCloudWKT.Int32Value? = nil
+  public var limit: GoogleWKT.Int32Value? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SearchPublicKgRequest`.
   public init() {}
@@ -97,10 +97,10 @@ public struct SearchPublicKgRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .types) {
       self.types = value
     }
-    self.limit = try container.decodeIfPresent(GoogleCloudWKT.Int32Value.self, forKey: .limit)
+    self.limit = try container.decodeIfPresent(GoogleWKT.Int32Value.self, forKey: .limit)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -119,10 +119,10 @@ public struct SearchPublicKgRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.enterpriseknowledgegraph.v1.SearchPublicKgRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,7 +16,7 @@
 
 #if Pages || Sessions || TestCases
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A form is a data model that groups related parameters that can be collected
   /// from the user. The process in which the agent prompts the user and collects
@@ -27,13 +27,13 @@
   ///
   /// [google.cloud.dialogflow.cx.v3.Page]: <doc:Page>
   /// [google.cloud.dialogflow.cx.v3.SessionInfo.parameters]: <doc:SessionInfo/parameters>
-  public struct Form: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Form: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Parameters to collect from the user.
     public var parameters: [Form.Parameter] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Form`.
     public init() {}
@@ -71,7 +71,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -84,7 +84,7 @@
     }
 
     /// Represents a form parameter.
-    public struct Parameter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Parameter: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The human-readable name of the parameter, unique within the
@@ -113,7 +113,7 @@
 
       /// The default value of an optional parameter. If the parameter is required,
       /// the default value will be ignored.
-      public var defaultValue: GoogleCloudWKT.Value? = nil
+      public var defaultValue: GoogleWKT.Value? = nil
 
       /// Indicates whether the parameter content should be redacted in log.  If
       /// redaction is enabled, the parameter content will be replaced by parameter
@@ -129,7 +129,7 @@
       /// at the lower level overrides the settings exposed at the higher level.
       public var advancedSettings: AdvancedSettings? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Parameter`.
       public init() {}
@@ -191,7 +191,7 @@
         self.fillBehavior = try container.decodeIfPresent(
           Form.Parameter.FillBehavior.self, forKey: .fillBehavior)
         self.defaultValue = try container.decodeIfPresent(
-          GoogleCloudWKT.Value.self, forKey: .defaultValue)
+          GoogleWKT.Value.self, forKey: .defaultValue)
         if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .redact) {
           self.redact = value
         }
@@ -199,7 +199,7 @@
           AdvancedSettings.self, forKey: .advancedSettings)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -219,7 +219,7 @@
       }
 
       /// Configuration for how the filling of a parameter should be handled.
-      public struct FillBehavior: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct FillBehavior: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The fulfillment to provide the initial prompt that the agent
@@ -260,8 +260,7 @@
         /// parameter, `initial_prompt_fulfillment` will be re-prompted.
         public var repromptEventHandlers: [EventHandler] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `FillBehavior`.
         public init() {}
@@ -305,7 +304,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -322,33 +321,33 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Form.Parameter.FillBehavior"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Form.Parameter"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Form"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

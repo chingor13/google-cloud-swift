@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Dataproc workflow template resource.
-public struct WorkflowTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct WorkflowTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   public var id: Swift.String = Swift.String()
@@ -47,10 +47,10 @@ public struct WorkflowTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var version: Swift.Int32 = Swift.Int32()
 
   /// Output only. The time template was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time template was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The labels to associate with this template. These labels
   /// will be propagated to all jobs and clusters created by the workflow
@@ -87,13 +87,13 @@ public struct WorkflowTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [managed
   /// cluster](/dataproc/docs/concepts/workflows/using-workflows#configuring_or_selecting_a_cluster),
   /// the cluster is deleted.
-  public var dagTimeout: GoogleCloudWKT.Duration? = nil
+  public var dagTimeout: GoogleWKT.Duration? = nil
 
   /// Optional. Encryption settings for encrypting workflow template job
   /// arguments.
   public var encryptionConfig: WorkflowTemplate.EncryptionConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `WorkflowTemplate`.
   public init() {}
@@ -155,10 +155,8 @@ public struct WorkflowTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .version) {
       self.version = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -171,13 +169,12 @@ public struct WorkflowTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent([TemplateParameter].self, forKey: .parameters) {
       self.parameters = value
     }
-    self.dagTimeout = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .dagTimeout)
+    self.dagTimeout = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .dagTimeout)
     self.encryptionConfig = try container.decodeIfPresent(
       WorkflowTemplate.EncryptionConfig.self, forKey: .encryptionConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -200,7 +197,7 @@ public struct WorkflowTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Encryption settings for encrypting workflow template job arguments.
-  public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EncryptionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The Cloud KMS key name to use for encrypting
@@ -233,7 +230,7 @@ public struct WorkflowTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     ///   scriptVariables and queryList.queries
     public var kmsKey: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EncryptionConfig`.
     public init() {}
@@ -271,7 +268,7 @@ public struct WorkflowTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -286,21 +283,21 @@ public struct WorkflowTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataproc.v1.WorkflowTemplate.EncryptionConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.v1.WorkflowTemplate"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

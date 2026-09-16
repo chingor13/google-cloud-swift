@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudDomainsV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
 import GoogleType
+import GoogleWKT
 
 func sample(client: DomainsClient, projectId: String, locationId: String, registrationId: String)
   async throws

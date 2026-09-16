@@ -16,12 +16,12 @@
 
 #if DatasetService || JobService || ModelGardenService || ModelService || PipelineService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Specification of a container for serving predictions. Some fields in this
   /// message correspond to fields in the [Kubernetes Container v1 core
   /// specification](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#container-v1-core).
-  public struct ModelContainerSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ModelContainerSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Immutable. URI of the Docker image to be used as the custom
@@ -278,7 +278,7 @@
 
     /// Immutable. Deployment timeout.
     /// Limit for deployment timeout is 2 hours.
-    public var deploymentTimeout: GoogleCloudWKT.Duration? = nil
+    public var deploymentTimeout: GoogleWKT.Duration? = nil
 
     /// Immutable. The amount of the VM memory to reserve as the shared memory for
     /// the model in megabytes.
@@ -293,7 +293,7 @@
     /// Immutable. Specification for Kubernetes liveness probe.
     public var livenessProbe: Probe? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ModelContainerSpec`.
     public init() {}
@@ -380,7 +380,7 @@
         self.grpcPorts = value
       }
       self.deploymentTimeout = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .deploymentTimeout)
+        GoogleWKT.Duration.self, forKey: .deploymentTimeout)
       if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .sharedMemorySizeMb) {
         self.sharedMemorySizeMb = value
       }
@@ -389,7 +389,7 @@
       self.livenessProbe = try container.decodeIfPresent(Probe.self, forKey: .livenessProbe)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -417,11 +417,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ModelContainerSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

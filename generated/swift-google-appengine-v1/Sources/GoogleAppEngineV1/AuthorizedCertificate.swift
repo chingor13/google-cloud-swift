@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An SSL certificate that a user has been authorized to administer. A user
 /// is authorized to administer any certificate that applies to one of their
 /// authorized domains.
-public struct AuthorizedCertificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AuthorizedCertificate: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Full path to the `AuthorizedCertificate` resource in the API. Example:
@@ -50,7 +50,7 @@ public struct AuthorizedCertificate: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// using [`AuthorizedCertificates.UpdateAuthorizedCertificate`]().
   ///
   /// @OutputOnly
-  public var expireTime: GoogleCloudWKT.Timestamp? = nil
+  public var expireTime: GoogleWKT.Timestamp? = nil
 
   /// The SSL certificate serving the `AuthorizedCertificate` resource. This
   /// must be obtained independently from a certificate authority.
@@ -87,7 +87,7 @@ public struct AuthorizedCertificate: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// @OutputOnly
   public var domainMappingsCount: Swift.Int32 = Swift.Int32()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AuthorizedCertificate`.
   public init() {}
@@ -148,8 +148,7 @@ public struct AuthorizedCertificate: Codable, Equatable, GoogleCloudWKT._AnyPack
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .domainNames) {
       self.domainNames = value
     }
-    self.expireTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .expireTime)
+    self.expireTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .expireTime)
     self.certificateRawData = try container.decodeIfPresent(
       CertificateRawData.self, forKey: .certificateRawData)
     self.managedCertificate = try container.decodeIfPresent(
@@ -164,7 +163,7 @@ public struct AuthorizedCertificate: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -187,10 +186,10 @@ public struct AuthorizedCertificate: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.AuthorizedCertificate"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

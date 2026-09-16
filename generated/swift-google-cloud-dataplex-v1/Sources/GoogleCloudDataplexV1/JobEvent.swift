@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The payload associated with Job logs that contains events describing jobs
 /// that have run within a Lake.
-public struct JobEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct JobEvent: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The log message.
@@ -29,10 +29,10 @@ public struct JobEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var jobId: Swift.String = Swift.String()
 
   /// The time when the job started running.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// The time when the job ended running.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// The job state on completion.
   public var state: JobEvent.State = JobEvent.State()
@@ -52,7 +52,7 @@ public struct JobEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Job execution trigger.
   public var executionTrigger: JobEvent.ExecutionTrigger = JobEvent.ExecutionTrigger()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `JobEvent`.
   public init() {}
@@ -109,9 +109,8 @@ public struct JobEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .jobId) {
       self.jobId = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(JobEvent.State.self, forKey: .state) {
       self.state = value
     }
@@ -134,7 +133,7 @@ public struct JobEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -586,10 +585,10 @@ public struct JobEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.JobEvent"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

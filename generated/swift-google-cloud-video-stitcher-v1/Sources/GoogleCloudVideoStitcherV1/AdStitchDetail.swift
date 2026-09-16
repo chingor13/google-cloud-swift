@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metadata for a stitched ad.
-public struct AdStitchDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AdStitchDetail: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The ad break ID of the processed ad.
@@ -28,15 +28,15 @@ public struct AdStitchDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var adId: Swift.String = Swift.String()
 
   /// Required. The time offset of the processed ad.
-  public var adTimeOffset: GoogleCloudWKT.Duration? = nil
+  public var adTimeOffset: GoogleWKT.Duration? = nil
 
   /// Optional. Indicates the reason why the ad has been skipped.
   public var skipReason: Swift.String = Swift.String()
 
   /// Optional. The metadata of the chosen media file for the ad.
-  public var media: [Swift.String: GoogleCloudWKT.Value] = [:]
+  public var media: [Swift.String: GoogleWKT.Value] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AdStitchDetail`.
   public init() {}
@@ -84,18 +84,18 @@ public struct AdStitchDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.adId = value
     }
     self.adTimeOffset = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .adTimeOffset)
+      GoogleWKT.Duration.self, forKey: .adTimeOffset)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .skipReason) {
       self.skipReason = value
     }
     if let value = try container.decodeIfPresent(
-      [Swift.String: GoogleCloudWKT.Value].self, forKey: .media)
+      [Swift.String: GoogleWKT.Value].self, forKey: .media)
     {
       self.media = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -114,10 +114,10 @@ public struct AdStitchDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.stitcher.v1.AdStitchDetail"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

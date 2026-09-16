@@ -15,25 +15,25 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol OperationsStub: Sendable {
     func listOperations(
-      request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

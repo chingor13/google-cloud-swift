@@ -16,26 +16,25 @@
 
 #if LicenseCodes
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol LicenseCodesStub: Sendable {
       func `get`(
-        request: LicenseCodesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.LicenseCode
 
       func getIamPolicy(
-        request: LicenseCodesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setIamPolicy(
-        request: LicenseCodesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: LicenseCodesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }

@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class TraceServiceRetry: TraceServiceStub {
     let inner: any TraceServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any TraceServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any TraceServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func listTraces(
-      request: ListTracesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTracesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTraceV1.ListTracesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListTracesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListTracesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTraceV1.ListTracesResponse
           in
           return try await self.inner.listTraces(request: r, options: o)
@@ -64,28 +64,27 @@ extension Clients {
     }
 
     public func getTrace(
-      request: GetTraceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTraceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTraceV1.Trace {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetTraceRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudTraceV1.Trace
+          (r: GetTraceRequest, o: GoogleGax.RequestOptions) async throws -> GoogleCloudTraceV1.Trace
           in
           return try await self.inner.getTrace(request: r, options: o)
         })
     }
 
     public func patchTraces(
-      request: PatchTracesRequest, options: GoogleCloudGax.RequestOptions
+      request: PatchTracesRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: { (r: PatchTracesRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: PatchTracesRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.patchTraces(request: r, options: o)
         })
     }

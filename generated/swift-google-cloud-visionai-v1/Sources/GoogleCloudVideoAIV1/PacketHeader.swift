@@ -15,20 +15,20 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The message that represents packet header.
-public struct PacketHeader: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PacketHeader: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Input only. The capture time of the packet.
-  public var captureTime: GoogleCloudWKT.Timestamp? = nil
+  public var captureTime: GoogleWKT.Timestamp? = nil
 
   /// Input only. Immutable. The type of the payload.
   public var type: PacketType? = nil
 
   /// Input only. This field is for users to attach user managed metadata.
-  public var metadata: GoogleCloudWKT.Struct? = nil
+  public var metadata: GoogleWKT.Struct? = nil
 
   /// Output only. Metadata that the server appends to each packet before sending
   /// it to receivers. You don't need to set a value for this field when sending
@@ -55,7 +55,7 @@ public struct PacketHeader: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///           v  trace_id                         span_id          options
   public var traceContext: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PacketHeader`.
   public init() {}
@@ -100,10 +100,9 @@ public struct PacketHeader: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.captureTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .captureTime)
+    self.captureTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .captureTime)
     self.type = try container.decodeIfPresent(PacketType.self, forKey: .type)
-    self.metadata = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .metadata)
+    self.metadata = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .metadata)
     self.serverMetadata = try container.decodeIfPresent(
       ServerMetadata.self, forKey: .serverMetadata)
     self.seriesMetadata = try container.decodeIfPresent(
@@ -116,7 +115,7 @@ public struct PacketHeader: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -137,10 +136,10 @@ public struct PacketHeader: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.PacketHeader"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

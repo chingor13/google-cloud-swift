@@ -15,47 +15,47 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ApiKeysStub: Sendable {
     func createKey(
-      request: CreateKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listKeys(
-      request: ListKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiApiKeysV1.ListKeysResponse
 
     func getKey(
-      request: GetKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiApiKeysV1.Key
 
     func getKeyString(
-      request: GetKeyStringRequest, options: GoogleCloudGax.RequestOptions
+      request: GetKeyStringRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiApiKeysV1.GetKeyStringResponse
 
     func updateKey(
-      request: UpdateKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteKey(
-      request: DeleteKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func undeleteKey(
-      request: UndeleteKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func lookupKey(
-      request: LookupKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiApiKeysV1.LookupKeyResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

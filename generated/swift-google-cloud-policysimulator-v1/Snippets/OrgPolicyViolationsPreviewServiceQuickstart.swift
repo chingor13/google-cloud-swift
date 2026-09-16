@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudPolicySimulatorV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(organizationId: String, locationId: String, ) async throws {
   let client = try GoogleCloudPolicySimulatorV1.OrgPolicyViolationsPreviewServiceClient()

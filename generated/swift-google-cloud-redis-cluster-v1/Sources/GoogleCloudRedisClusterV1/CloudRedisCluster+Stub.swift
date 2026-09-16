@@ -16,95 +16,95 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CloudRedisClusterStub: Sendable {
     func listClusters(
-      request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRedisClusterV1.ListClustersResponse
 
     func getCluster(
-      request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRedisClusterV1.Cluster
 
     func updateCluster(
-      request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCluster(
-      request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createCluster(
-      request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getClusterCertificateAuthority(
-      request: GetClusterCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClusterCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRedisClusterV1.CertificateAuthority
 
     func getSharedRegionalCertificateAuthority(
-      request: GetSharedRegionalCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSharedRegionalCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRedisClusterV1.SharedRegionalCertificateAuthority
 
     func rescheduleClusterMaintenance(
-      request: RescheduleClusterMaintenanceRequest, options: GoogleCloudGax.RequestOptions
+      request: RescheduleClusterMaintenanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listBackupCollections(
-      request: ListBackupCollectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBackupCollectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRedisClusterV1.ListBackupCollectionsResponse
 
     func getBackupCollection(
-      request: GetBackupCollectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBackupCollectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRedisClusterV1.BackupCollection
 
     func listBackups(
-      request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBackupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRedisClusterV1.ListBackupsResponse
 
     func getBackup(
-      request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRedisClusterV1.Backup
 
     func deleteBackup(
-      request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func exportBackup(
-      request: ExportBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func backupCluster(
-      request: BackupClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: BackupClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// This API allows users to manage their BigQuery reservations.
 ///
@@ -43,7 +43,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   let inner: any Clients.ReservationServiceStub
 
   /// Creates a new `ReservationServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ReservationServiceStub = try Clients.ReservationServiceTransport(options)
     inner = Clients.ReservationServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -56,7 +56,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_CreateReservation")
   public func createReservation(
-    request: CreateReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateReservationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Reservation {
     try await self.inner.createReservation(request: request, options: options)
   }
@@ -65,7 +65,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_ListReservations")
   public func listReservations(
-    request: ListReservationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReservationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ListReservationsResponse {
     try await self.inner.listReservations(request: request, options: options)
   }
@@ -74,7 +74,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_ListReservations")
   public func listReservations(
-    byItem: ListReservationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReservationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Reservation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryReservationV1.ListReservationsResponse in
@@ -82,14 +82,14 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
       request.pageToken = token
       return try await self.listReservations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns information about the reservation.
   ///
   /// @Snippet(path: "ReservationService_GetReservation")
   public func getReservation(
-    request: GetReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetReservationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Reservation {
     try await self.inner.getReservation(request: request, options: options)
   }
@@ -100,7 +100,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_DeleteReservation")
   public func deleteReservation(
-    request: DeleteReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteReservationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteReservation(request: request, options: options)
   }
@@ -109,7 +109,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_UpdateReservation")
   public func updateReservation(
-    request: UpdateReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateReservationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Reservation {
     try await self.inner.updateReservation(request: request, options: options)
   }
@@ -122,7 +122,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_FailoverReservation")
   public func failoverReservation(
-    request: FailoverReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: FailoverReservationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Reservation {
     try await self.inner.failoverReservation(request: request, options: options)
   }
@@ -131,7 +131,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_CreateCapacityCommitment")
   public func createCapacityCommitment(
-    request: CreateCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCapacityCommitmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment {
     try await self.inner.createCapacityCommitment(request: request, options: options)
   }
@@ -140,7 +140,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_ListCapacityCommitments")
   public func listCapacityCommitments(
-    request: ListCapacityCommitmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCapacityCommitmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ListCapacityCommitmentsResponse {
     try await self.inner.listCapacityCommitments(request: request, options: options)
   }
@@ -149,7 +149,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_ListCapacityCommitments")
   public func listCapacityCommitments(
-    byItem: ListCapacityCommitmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCapacityCommitmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CapacityCommitment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -158,14 +158,14 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
       request.pageToken = token
       return try await self.listCapacityCommitments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns information about the capacity commitment.
   ///
   /// @Snippet(path: "ReservationService_GetCapacityCommitment")
   public func getCapacityCommitment(
-    request: GetCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCapacityCommitmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment {
     try await self.inner.getCapacityCommitment(request: request, options: options)
   }
@@ -176,7 +176,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_DeleteCapacityCommitment")
   public func deleteCapacityCommitment(
-    request: DeleteCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCapacityCommitmentRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteCapacityCommitment(request: request, options: options)
   }
@@ -191,7 +191,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_UpdateCapacityCommitment")
   public func updateCapacityCommitment(
-    request: UpdateCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCapacityCommitmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment {
     try await self.inner.updateCapacityCommitment(request: request, options: options)
   }
@@ -207,7 +207,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_SplitCapacityCommitment")
   public func splitCapacityCommitment(
-    request: SplitCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+    request: SplitCapacityCommitmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.SplitCapacityCommitmentResponse {
     try await self.inner.splitCapacityCommitment(request: request, options: options)
   }
@@ -222,7 +222,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_MergeCapacityCommitments")
   public func mergeCapacityCommitments(
-    request: MergeCapacityCommitmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: MergeCapacityCommitmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment {
     try await self.inner.mergeCapacityCommitments(request: request, options: options)
   }
@@ -265,7 +265,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_CreateAssignment")
   public func createAssignment(
-    request: CreateAssignmentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAssignmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Assignment {
     try await self.inner.createAssignment(request: request, options: options)
   }
@@ -294,7 +294,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_ListAssignments")
   public func listAssignments(
-    request: ListAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAssignmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ListAssignmentsResponse {
     try await self.inner.listAssignments(request: request, options: options)
   }
@@ -323,7 +323,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_ListAssignments")
   public func listAssignments(
-    byItem: ListAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAssignmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Assignment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryReservationV1.ListAssignmentsResponse in
@@ -331,7 +331,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
       request.pageToken = token
       return try await self.listAssignments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes a assignment. No expansion will happen.
@@ -352,7 +352,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_DeleteAssignment")
   public func deleteAssignment(
-    request: DeleteAssignmentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAssignmentRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteAssignment(request: request, options: options)
   }
@@ -384,7 +384,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   /// @Snippet(path: "ReservationService_SearchAssignments")
   @available(*, deprecated)
   public func searchAssignments(
-    request: SearchAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchAssignmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.SearchAssignmentsResponse {
     try await self.inner.searchAssignments(request: request, options: options)
   }
@@ -416,7 +416,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   /// @Snippet(path: "ReservationService_SearchAssignments")
   @available(*, deprecated)
   public func searchAssignments(
-    byItem: SearchAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: SearchAssignmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Assignment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryReservationV1.SearchAssignmentsResponse in
@@ -424,7 +424,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
       request.pageToken = token
       return try await self.searchAssignments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Looks up assignments for a specified resource for a particular region.
@@ -450,7 +450,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_SearchAllAssignments")
   public func searchAllAssignments(
-    request: SearchAllAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchAllAssignmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.SearchAllAssignmentsResponse {
     try await self.inner.searchAllAssignments(request: request, options: options)
   }
@@ -478,7 +478,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_SearchAllAssignments")
   public func searchAllAssignments(
-    byItem: SearchAllAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: SearchAllAssignmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Assignment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryReservationV1.SearchAllAssignmentsResponse
@@ -487,7 +487,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
       request.pageToken = token
       return try await self.searchAllAssignments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Moves an assignment under a new reservation.
@@ -498,7 +498,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_MoveAssignment")
   public func moveAssignment(
-    request: MoveAssignmentRequest, options: GoogleCloudGax.RequestOptions
+    request: MoveAssignmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Assignment {
     try await self.inner.moveAssignment(request: request, options: options)
   }
@@ -509,7 +509,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_UpdateAssignment")
   public func updateAssignment(
-    request: UpdateAssignmentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAssignmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Assignment {
     try await self.inner.updateAssignment(request: request, options: options)
   }
@@ -518,7 +518,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_GetBiReservation")
   public func getBiReservation(
-    request: GetBiReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBiReservationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.BiReservation {
     try await self.inner.getBiReservation(request: request, options: options)
   }
@@ -534,7 +534,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_UpdateBiReservation")
   public func updateBiReservation(
-    request: UpdateBiReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBiReservationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.BiReservation {
     try await self.inner.updateBiReservation(request: request, options: options)
   }
@@ -557,7 +557,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -575,7 +575,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -590,7 +590,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -599,7 +599,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_CreateReservationGroup")
   public func createReservationGroup(
-    request: CreateReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateReservationGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ReservationGroup {
     try await self.inner.createReservationGroup(request: request, options: options)
   }
@@ -608,7 +608,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_GetReservationGroup")
   public func getReservationGroup(
-    request: GetReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetReservationGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ReservationGroup {
     try await self.inner.getReservationGroup(request: request, options: options)
   }
@@ -619,7 +619,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_DeleteReservationGroup")
   public func deleteReservationGroup(
-    request: DeleteReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteReservationGroupRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteReservationGroup(request: request, options: options)
   }
@@ -628,7 +628,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_ListReservationGroups")
   public func listReservationGroups(
-    request: ListReservationGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReservationGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ListReservationGroupsResponse {
     try await self.inner.listReservationGroups(request: request, options: options)
   }
@@ -637,7 +637,7 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
   ///
   /// @Snippet(path: "ReservationService_ListReservationGroups")
   public func listReservationGroups(
-    byItem: ListReservationGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReservationGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ReservationGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -646,14 +646,14 @@ public final class ReservationServiceClient: Clients.ReservationServiceProtocol,
       request.pageToken = token
       return try await self.listReservationGroups(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates an existing reservation group resource.
   ///
   /// @Snippet(path: "ReservationService_UpdateReservationGroup")
   public func updateReservationGroup(
-    request: UpdateReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateReservationGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ReservationGroup {
     try await self.inner.updateReservationGroup(request: request, options: options)
   }
@@ -715,7 +715,7 @@ extension Clients {
     /// See `ReservationServiceClient.updateReservation`.
     func updateReservation(
       reservation: Reservation?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleBigQueryReservationV1.Reservation
 
     /// See `ReservationServiceClient.failoverReservation`.
@@ -770,7 +770,7 @@ extension Clients {
     /// See `ReservationServiceClient.updateCapacityCommitment`.
     func updateCapacityCommitment(
       capacityCommitment: CapacityCommitment?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment
 
     /// See `ReservationServiceClient.splitCapacityCommitment`.
@@ -875,7 +875,7 @@ extension Clients {
     /// See `ReservationServiceClient.updateAssignment`.
     func updateAssignment(
       assignment: Assignment?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleBigQueryReservationV1.Assignment
 
     /// See `ReservationServiceClient.getBiReservation`.
@@ -894,7 +894,7 @@ extension Clients {
     /// See `ReservationServiceClient.updateBiReservation`.
     func updateBiReservation(
       biReservation: BiReservation?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleBigQueryReservationV1.BiReservation
 
     /// See `ReservationServiceClient.getIamPolicy`.
@@ -960,189 +960,189 @@ extension Clients {
     /// See `ReservationServiceClient.updateReservationGroup`.
     func updateReservationGroup(
       reservationGroup: ReservationGroup?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleBigQueryReservationV1.ReservationGroup
 
     /// See `ReservationServiceClient.createReservation`.
     func createReservation(
-      request: CreateReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Reservation
 
     /// See `ReservationServiceClient.listReservations`.
     func listReservations(
-      request: ListReservationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReservationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ListReservationsResponse
 
     /// See `ReservationServiceClient.listReservations`.
     func listReservations(
-      byItem: ListReservationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListReservationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Reservation, Swift.Error>
 
     /// See `ReservationServiceClient.getReservation`.
     func getReservation(
-      request: GetReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Reservation
 
     /// See `ReservationServiceClient.deleteReservation`.
     func deleteReservation(
-      request: DeleteReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReservationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ReservationServiceClient.updateReservation`.
     func updateReservation(
-      request: UpdateReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Reservation
 
     /// See `ReservationServiceClient.failoverReservation`.
     func failoverReservation(
-      request: FailoverReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: FailoverReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Reservation
 
     /// See `ReservationServiceClient.createCapacityCommitment`.
     func createCapacityCommitment(
-      request: CreateCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment
 
     /// See `ReservationServiceClient.listCapacityCommitments`.
     func listCapacityCommitments(
-      request: ListCapacityCommitmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCapacityCommitmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ListCapacityCommitmentsResponse
 
     /// See `ReservationServiceClient.listCapacityCommitments`.
     func listCapacityCommitments(
-      byItem: ListCapacityCommitmentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCapacityCommitmentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<CapacityCommitment, Swift.Error>
 
     /// See `ReservationServiceClient.getCapacityCommitment`.
     func getCapacityCommitment(
-      request: GetCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment
 
     /// See `ReservationServiceClient.deleteCapacityCommitment`.
     func deleteCapacityCommitment(
-      request: DeleteCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ReservationServiceClient.updateCapacityCommitment`.
     func updateCapacityCommitment(
-      request: UpdateCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment
 
     /// See `ReservationServiceClient.splitCapacityCommitment`.
     func splitCapacityCommitment(
-      request: SplitCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+      request: SplitCapacityCommitmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.SplitCapacityCommitmentResponse
 
     /// See `ReservationServiceClient.mergeCapacityCommitments`.
     func mergeCapacityCommitments(
-      request: MergeCapacityCommitmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: MergeCapacityCommitmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment
 
     /// See `ReservationServiceClient.createAssignment`.
     func createAssignment(
-      request: CreateAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Assignment
 
     /// See `ReservationServiceClient.listAssignments`.
     func listAssignments(
-      request: ListAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAssignmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ListAssignmentsResponse
 
     /// See `ReservationServiceClient.listAssignments`.
     func listAssignments(
-      byItem: ListAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAssignmentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Assignment, Swift.Error>
 
     /// See `ReservationServiceClient.deleteAssignment`.
     func deleteAssignment(
-      request: DeleteAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ReservationServiceClient.searchAssignments`.
     @available(*, deprecated)
     func searchAssignments(
-      request: SearchAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchAssignmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.SearchAssignmentsResponse
 
     /// See `ReservationServiceClient.searchAssignments`.
     @available(*, deprecated)
     func searchAssignments(
-      byItem: SearchAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchAssignmentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Assignment, Swift.Error>
 
     /// See `ReservationServiceClient.searchAllAssignments`.
     func searchAllAssignments(
-      request: SearchAllAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchAllAssignmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.SearchAllAssignmentsResponse
 
     /// See `ReservationServiceClient.searchAllAssignments`.
     func searchAllAssignments(
-      byItem: SearchAllAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchAllAssignmentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Assignment, Swift.Error>
 
     /// See `ReservationServiceClient.moveAssignment`.
     func moveAssignment(
-      request: MoveAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: MoveAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Assignment
 
     /// See `ReservationServiceClient.updateAssignment`.
     func updateAssignment(
-      request: UpdateAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.Assignment
 
     /// See `ReservationServiceClient.getBiReservation`.
     func getBiReservation(
-      request: GetBiReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBiReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.BiReservation
 
     /// See `ReservationServiceClient.updateBiReservation`.
     func updateBiReservation(
-      request: UpdateBiReservationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBiReservationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.BiReservation
 
     /// See `ReservationServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `ReservationServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `ReservationServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `ReservationServiceClient.createReservationGroup`.
     func createReservationGroup(
-      request: CreateReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReservationGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ReservationGroup
 
     /// See `ReservationServiceClient.getReservationGroup`.
     func getReservationGroup(
-      request: GetReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReservationGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ReservationGroup
 
     /// See `ReservationServiceClient.deleteReservationGroup`.
     func deleteReservationGroup(
-      request: DeleteReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReservationGroupRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ReservationServiceClient.listReservationGroups`.
     func listReservationGroups(
-      request: ListReservationGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReservationGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ListReservationGroupsResponse
 
     /// See `ReservationServiceClient.listReservationGroups`.
     func listReservationGroups(
-      byItem: ListReservationGroupsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListReservationGroupsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ReservationGroup, Swift.Error>
 
     /// See `ReservationServiceClient.updateReservationGroup`.
     func updateReservationGroup(
-      request: UpdateReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateReservationGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryReservationV1.ReservationGroup
   }
 }
@@ -1156,9 +1156,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func createReservation(
-    request: CreateReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateReservationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Reservation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createReservation(
@@ -1181,9 +1181,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func listReservations(
-    request: ListReservationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReservationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ListReservationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listReservations(
@@ -1193,13 +1193,13 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func listReservations(
-    byItem: ListReservationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReservationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Reservation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryReservationV1.ListReservationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listReservations(
@@ -1218,9 +1218,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func getReservation(
-    request: GetReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetReservationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Reservation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getReservation(
@@ -1237,9 +1237,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func deleteReservation(
-    request: DeleteReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteReservationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteReservation(
@@ -1258,14 +1258,14 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func updateReservation(
-    request: UpdateReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateReservationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Reservation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateReservation(
     reservation: Reservation?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleBigQueryReservationV1.Reservation {
     let request = UpdateReservationRequest().with {
       $0.reservation = reservation
@@ -1281,9 +1281,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func failoverReservation(
-    request: FailoverReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: FailoverReservationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Reservation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createCapacityCommitment(request: CreateCapacityCommitmentRequest) async throws
@@ -1293,9 +1293,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func createCapacityCommitment(
-    request: CreateCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCapacityCommitmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createCapacityCommitment(
@@ -1316,9 +1316,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func listCapacityCommitments(
-    request: ListCapacityCommitmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCapacityCommitmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ListCapacityCommitmentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCapacityCommitments(
@@ -1328,14 +1328,14 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func listCapacityCommitments(
-    byItem: ListCapacityCommitmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCapacityCommitmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CapacityCommitment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleBigQueryReservationV1.ListCapacityCommitmentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCapacityCommitments(
@@ -1354,9 +1354,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func getCapacityCommitment(
-    request: GetCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCapacityCommitmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCapacityCommitment(
@@ -1373,9 +1373,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func deleteCapacityCommitment(
-    request: DeleteCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCapacityCommitmentRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteCapacityCommitment(
@@ -1394,14 +1394,14 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func updateCapacityCommitment(
-    request: UpdateCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCapacityCommitmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCapacityCommitment(
     capacityCommitment: CapacityCommitment?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment {
     let request = UpdateCapacityCommitmentRequest().with {
       $0.capacityCommitment = capacityCommitment
@@ -1417,9 +1417,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func splitCapacityCommitment(
-    request: SplitCapacityCommitmentRequest, options: GoogleCloudGax.RequestOptions
+    request: SplitCapacityCommitmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.SplitCapacityCommitmentResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func splitCapacityCommitment(
@@ -1440,9 +1440,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func mergeCapacityCommitments(
-    request: MergeCapacityCommitmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: MergeCapacityCommitmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.CapacityCommitment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func mergeCapacityCommitments(
@@ -1463,9 +1463,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func createAssignment(
-    request: CreateAssignmentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAssignmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Assignment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createAssignment(
@@ -1486,9 +1486,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func listAssignments(
-    request: ListAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAssignmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ListAssignmentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAssignments(
@@ -1498,13 +1498,13 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func listAssignments(
-    byItem: ListAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAssignmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Assignment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryReservationV1.ListAssignmentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAssignments(
@@ -1521,9 +1521,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func deleteAssignment(
-    request: DeleteAssignmentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAssignmentRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAssignment(
@@ -1544,9 +1544,9 @@ extension Clients.ReservationServiceProtocol {
 
   @available(*, deprecated)
   public func searchAssignments(
-    request: SearchAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchAssignmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.SearchAssignmentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1558,13 +1558,13 @@ extension Clients.ReservationServiceProtocol {
 
   @available(*, deprecated)
   public func searchAssignments(
-    byItem: SearchAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: SearchAssignmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Assignment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryReservationV1.SearchAssignmentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   @available(*, deprecated)
@@ -1586,9 +1586,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func searchAllAssignments(
-    request: SearchAllAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchAllAssignmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.SearchAllAssignmentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func searchAllAssignments(
@@ -1598,14 +1598,14 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func searchAllAssignments(
-    byItem: SearchAllAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: SearchAllAssignmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Assignment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryReservationV1.SearchAllAssignmentsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func searchAllAssignments(
@@ -1626,9 +1626,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func moveAssignment(
-    request: MoveAssignmentRequest, options: GoogleCloudGax.RequestOptions
+    request: MoveAssignmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Assignment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func moveAssignment(
@@ -1649,14 +1649,14 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func updateAssignment(
-    request: UpdateAssignmentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAssignmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.Assignment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAssignment(
     assignment: Assignment?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleBigQueryReservationV1.Assignment {
     let request = UpdateAssignmentRequest().with {
       $0.assignment = assignment
@@ -1672,9 +1672,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func getBiReservation(
-    request: GetBiReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBiReservationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.BiReservation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getBiReservation(
@@ -1693,14 +1693,14 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func updateBiReservation(
-    request: UpdateBiReservationRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBiReservationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.BiReservation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateBiReservation(
     biReservation: BiReservation?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleBigQueryReservationV1.BiReservation {
     let request = UpdateBiReservationRequest().with {
       $0.biReservation = biReservation
@@ -1716,9 +1716,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(
@@ -1737,9 +1737,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(
@@ -1760,9 +1760,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createReservationGroup(request: CreateReservationGroupRequest) async throws
@@ -1772,9 +1772,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func createReservationGroup(
-    request: CreateReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateReservationGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ReservationGroup {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getReservationGroup(request: GetReservationGroupRequest) async throws
@@ -1784,9 +1784,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func getReservationGroup(
-    request: GetReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetReservationGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ReservationGroup {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getReservationGroup(
@@ -1803,9 +1803,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func deleteReservationGroup(
-    request: DeleteReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteReservationGroupRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteReservationGroup(
@@ -1824,9 +1824,9 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func listReservationGroups(
-    request: ListReservationGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReservationGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ListReservationGroupsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listReservationGroups(
@@ -1836,14 +1836,14 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func listReservationGroups(
-    byItem: ListReservationGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReservationGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ReservationGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleBigQueryReservationV1.ListReservationGroupsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listReservationGroups(
@@ -1862,14 +1862,14 @@ extension Clients.ReservationServiceProtocol {
   }
 
   public func updateReservationGroup(
-    request: UpdateReservationGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateReservationGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryReservationV1.ReservationGroup {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateReservationGroup(
     reservationGroup: ReservationGroup?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleBigQueryReservationV1.ReservationGroup {
     let request = UpdateReservationGroupRequest().with {
       $0.reservationGroup = reservationGroup

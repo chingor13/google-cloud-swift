@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol KeyTrackingServiceStub: Sendable {
     func getProtectedResourcesSummary(
-      request: GetProtectedResourcesSummaryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProtectedResourcesSummaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSInventoryV1.ProtectedResourcesSummary
 
     func searchProtectedResources(
-      request: SearchProtectedResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchProtectedResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSInventoryV1.SearchProtectedResourcesResponse
   }
 }

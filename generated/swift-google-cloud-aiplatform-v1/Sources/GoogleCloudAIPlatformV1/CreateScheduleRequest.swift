@@ -16,13 +16,13 @@
 
 #if ScheduleService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [ScheduleService.CreateSchedule][google.cloud.aiplatform.v1.ScheduleService.CreateSchedule].
   ///
   /// [google.cloud.aiplatform.v1.ScheduleService.CreateSchedule]: <doc:ScheduleServiceClient/createSchedule(request:options:)>
-  public struct CreateScheduleRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CreateScheduleRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The resource name of the Location to create the Schedule in.
@@ -32,7 +32,7 @@
     /// Required. The Schedule to create.
     public var schedule: Schedule? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CreateScheduleRequest`.
     public init() {}
@@ -73,7 +73,7 @@
       self.schedule = try container.decodeIfPresent(Schedule.self, forKey: .schedule)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -89,11 +89,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.CreateScheduleRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

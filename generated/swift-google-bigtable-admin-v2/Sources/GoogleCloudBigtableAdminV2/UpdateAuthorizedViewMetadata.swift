@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metadata for the google.longrunning.Operation returned by
 /// [UpdateAuthorizedView][google.bigtable.admin.v2.BigtableTableAdmin.UpdateAuthorizedView].
 ///
 /// [google.bigtable.admin.v2.BigtableTableAdmin.UpdateAuthorizedView]: <doc:BigtableTableAdminClient/updateAuthorizedView(request:options:)>
-public struct UpdateAuthorizedViewMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateAuthorizedViewMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The request that prompted the initiation of this UpdateAuthorizedView
@@ -29,12 +29,12 @@ public struct UpdateAuthorizedViewMetadata: Codable, Equatable, GoogleCloudWKT._
   public var originalRequest: UpdateAuthorizedViewRequest? = nil
 
   /// The time at which the original request was received.
-  public var requestTime: GoogleCloudWKT.Timestamp? = nil
+  public var requestTime: GoogleWKT.Timestamp? = nil
 
   /// The time at which the operation failed or was completed successfully.
-  public var finishTime: GoogleCloudWKT.Timestamp? = nil
+  public var finishTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateAuthorizedViewMetadata`.
   public init() {}
@@ -73,13 +73,11 @@ public struct UpdateAuthorizedViewMetadata: Codable, Equatable, GoogleCloudWKT._
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.originalRequest = try container.decodeIfPresent(
       UpdateAuthorizedViewRequest.self, forKey: .originalRequest)
-    self.requestTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .requestTime)
-    self.finishTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .finishTime)
+    self.requestTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .requestTime)
+    self.finishTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .finishTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,10 +94,10 @@ public struct UpdateAuthorizedViewMetadata: Codable, Equatable, GoogleCloudWKT._
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.UpdateAuthorizedViewMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -20,9 +20,9 @@ import Foundation
 import GoogleCloudFilestoreV1
 import GoogleCloudCommon
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CloudFilestoreManagerClient) async throws {
   let poller = try await client.restoreInstance(

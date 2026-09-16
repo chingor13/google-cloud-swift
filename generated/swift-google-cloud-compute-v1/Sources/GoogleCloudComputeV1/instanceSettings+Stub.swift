@@ -16,21 +16,21 @@
 
 #if InstanceSettings
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol InstanceSettingsStub: Sendable {
       func `get`(
-        request: InstanceSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceSettingsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceSettings
 
       func patch(
-        request: InstanceSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceSettingsClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

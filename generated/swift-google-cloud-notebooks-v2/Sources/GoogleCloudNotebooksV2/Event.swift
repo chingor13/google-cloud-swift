@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The definition of an Event for a managed / semi-managed notebook instance.
-public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Event: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Event report time.
-  public var reportTime: GoogleCloudWKT.Timestamp? = nil
+  public var reportTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Event type.
   public var type: Event.EventType = Event.EventType()
@@ -30,7 +30,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Event details. This field is used to pass event information.
   public var details: [Swift.String: Swift.String] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Event`.
   public init() {}
@@ -67,8 +67,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.reportTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .reportTime)
+    self.reportTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .reportTime)
     if let value = try container.decodeIfPresent(Event.EventType.self, forKey: .type) {
       self.type = value
     }
@@ -79,7 +78,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -230,10 +229,10 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.notebooks.v2.Event"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,127 +16,121 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol SecurityCenterManagementStub: Sendable {
     func listEffectiveSecurityHealthAnalyticsCustomModules(
       request: ListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1
       .ListEffectiveSecurityHealthAnalyticsCustomModulesResponse
 
     func getEffectiveSecurityHealthAnalyticsCustomModule(
       request: GetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1.EffectiveSecurityHealthAnalyticsCustomModule
 
     func listSecurityHealthAnalyticsCustomModules(
-      request: ListSecurityHealthAnalyticsCustomModulesRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ListSecurityHealthAnalyticsCustomModulesRequest, options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1.ListSecurityHealthAnalyticsCustomModulesResponse
 
     func listDescendantSecurityHealthAnalyticsCustomModules(
       request: ListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1
       .ListDescendantSecurityHealthAnalyticsCustomModulesResponse
 
     func getSecurityHealthAnalyticsCustomModule(
-      request: GetSecurityHealthAnalyticsCustomModuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSecurityHealthAnalyticsCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.SecurityHealthAnalyticsCustomModule
 
     func createSecurityHealthAnalyticsCustomModule(
-      request: CreateSecurityHealthAnalyticsCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: CreateSecurityHealthAnalyticsCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.SecurityHealthAnalyticsCustomModule
 
     func updateSecurityHealthAnalyticsCustomModule(
-      request: UpdateSecurityHealthAnalyticsCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: UpdateSecurityHealthAnalyticsCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.SecurityHealthAnalyticsCustomModule
 
     func deleteSecurityHealthAnalyticsCustomModule(
-      request: DeleteSecurityHealthAnalyticsCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: DeleteSecurityHealthAnalyticsCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func simulateSecurityHealthAnalyticsCustomModule(
-      request: SimulateSecurityHealthAnalyticsCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: SimulateSecurityHealthAnalyticsCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1.SimulateSecurityHealthAnalyticsCustomModuleResponse
 
     func listEffectiveEventThreatDetectionCustomModules(
       request: ListEffectiveEventThreatDetectionCustomModulesRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1
       .ListEffectiveEventThreatDetectionCustomModulesResponse
 
     func getEffectiveEventThreatDetectionCustomModule(
       request: GetEffectiveEventThreatDetectionCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1.EffectiveEventThreatDetectionCustomModule
 
     func listEventThreatDetectionCustomModules(
-      request: ListEventThreatDetectionCustomModulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEventThreatDetectionCustomModulesRequest, options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1.ListEventThreatDetectionCustomModulesResponse
 
     func listDescendantEventThreatDetectionCustomModules(
       request: ListDescendantEventThreatDetectionCustomModulesRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1
       .ListDescendantEventThreatDetectionCustomModulesResponse
 
     func getEventThreatDetectionCustomModule(
-      request: GetEventThreatDetectionCustomModuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEventThreatDetectionCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.EventThreatDetectionCustomModule
 
     func createEventThreatDetectionCustomModule(
-      request: CreateEventThreatDetectionCustomModuleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEventThreatDetectionCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.EventThreatDetectionCustomModule
 
     func updateEventThreatDetectionCustomModule(
-      request: UpdateEventThreatDetectionCustomModuleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEventThreatDetectionCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.EventThreatDetectionCustomModule
 
     func deleteEventThreatDetectionCustomModule(
-      request: DeleteEventThreatDetectionCustomModuleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEventThreatDetectionCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func validateEventThreatDetectionCustomModule(
-      request: ValidateEventThreatDetectionCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ValidateEventThreatDetectionCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1.ValidateEventThreatDetectionCustomModuleResponse
 
     func getSecurityCenterService(
-      request: GetSecurityCenterServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSecurityCenterServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.SecurityCenterService
 
     func listSecurityCenterServices(
-      request: ListSecurityCenterServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSecurityCenterServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.ListSecurityCenterServicesResponse
 
     func updateSecurityCenterService(
-      request: UpdateSecurityCenterServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSecurityCenterServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.SecurityCenterService
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }

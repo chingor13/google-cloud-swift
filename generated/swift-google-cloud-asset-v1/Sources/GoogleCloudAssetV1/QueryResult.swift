@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Execution results of the query.
 ///
 /// The result is formatted as rows represented by BigQuery compatible [schema].
 /// When pagination is necessary, it will contains the page token to retrieve
 /// the results of following pages.
-public struct QueryResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct QueryResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Each row hold a query result in the format of `Struct`.
-  public var rows: [GoogleCloudWKT.Struct] = []
+  public var rows: [GoogleWKT.Struct] = []
 
   /// Describes the format of the [rows].
   public var schema: TableSchema? = nil
@@ -37,7 +37,7 @@ public struct QueryResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Total rows of the whole query results.
   public var totalRows: Swift.Int64 = Swift.Int64()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `QueryResult`.
   public init() {}
@@ -76,7 +76,7 @@ public struct QueryResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.Struct].self, forKey: .rows) {
+    if let value = try container.decodeIfPresent([GoogleWKT.Struct].self, forKey: .rows) {
       self.rows = value
     }
     self.schema = try container.decodeIfPresent(TableSchema.self, forKey: .schema)
@@ -88,7 +88,7 @@ public struct QueryResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -106,10 +106,10 @@ public struct QueryResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.QueryResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 extension ResponsePoliciesClient {
   /// Synthetic request message for the [create()][.responsePolicies.create] method.
-  public struct CreateRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CreateRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
@@ -31,7 +31,7 @@ extension ResponsePoliciesClient {
     /// Synthetic request body field for the [create()][.responsePolicies.create] method.
     public var body: ResponsePolicy? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CreateRequest`.
     public init() {}
@@ -76,7 +76,7 @@ extension ResponsePoliciesClient {
       self.body = try container.decodeIfPresent(ResponsePolicy.self, forKey: .body)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -93,16 +93,16 @@ extension ResponsePoliciesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.responsePolicies.createRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Synthetic request message for the [delete()][.responsePolicies.delete] method.
-  public struct DeleteRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DeleteRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
@@ -114,7 +114,7 @@ extension ResponsePoliciesClient {
     /// User assigned name of the Response Policy addressed by this request.
     public var responsePolicy: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DeleteRequest`.
     public init() {}
@@ -161,7 +161,7 @@ extension ResponsePoliciesClient {
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -178,16 +178,16 @@ extension ResponsePoliciesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.responsePolicies.deleteRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Synthetic request message for the [get()][.responsePolicies.get] method.
-  public struct GetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
@@ -199,7 +199,7 @@ extension ResponsePoliciesClient {
     /// User assigned name of the Response Policy addressed by this request.
     public var responsePolicy: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GetRequest`.
     public init() {}
@@ -246,7 +246,7 @@ extension ResponsePoliciesClient {
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -263,16 +263,16 @@ extension ResponsePoliciesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.responsePolicies.getRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Synthetic request message for the [list()][.responsePolicies.list] method.
-  public struct ListRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ListRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Maximum number of results to be returned. If unspecified, the server decides how many results to return.
@@ -284,7 +284,7 @@ extension ResponsePoliciesClient {
     /// Identifies the project addressed by this request.
     public var project: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ListRequest`.
     public init() {}
@@ -328,7 +328,7 @@ extension ResponsePoliciesClient {
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -345,16 +345,16 @@ extension ResponsePoliciesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.responsePolicies.listRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Synthetic request message for the [patch()][.responsePolicies.patch] method.
-  public struct PatchRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PatchRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
@@ -369,7 +369,7 @@ extension ResponsePoliciesClient {
     /// Synthetic request body field for the [patch()][.responsePolicies.patch] method.
     public var body: ResponsePolicy? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PatchRequest`.
     public init() {}
@@ -419,7 +419,7 @@ extension ResponsePoliciesClient {
       self.body = try container.decodeIfPresent(ResponsePolicy.self, forKey: .body)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -437,16 +437,16 @@ extension ResponsePoliciesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.responsePolicies.patchRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Synthetic request message for the [update()][.responsePolicies.update] method.
-  public struct UpdateRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UpdateRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
@@ -461,7 +461,7 @@ extension ResponsePoliciesClient {
     /// Synthetic request body field for the [update()][.responsePolicies.update] method.
     public var body: ResponsePolicy? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UpdateRequest`.
     public init() {}
@@ -511,7 +511,7 @@ extension ResponsePoliciesClient {
       self.body = try container.decodeIfPresent(ResponsePolicy.self, forKey: .body)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -529,11 +529,11 @@ extension ResponsePoliciesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.responsePolicies.updateRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 }

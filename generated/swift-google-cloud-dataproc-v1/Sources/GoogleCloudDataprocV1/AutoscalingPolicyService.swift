@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The API interface for managing autoscaling policies in the
 /// Dataproc API.
@@ -33,7 +33,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   let inner: any Clients.AutoscalingPolicyServiceStub
 
   /// Creates a new `AutoscalingPolicyServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.AutoscalingPolicyServiceStub =
       try Clients.AutoscalingPolicyServiceTransport(options)
     inner = Clients.AutoscalingPolicyServiceRetry(inner, options: options)
@@ -47,7 +47,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_CreateAutoscalingPolicy")
   public func createAutoscalingPolicy(
-    request: CreateAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.AutoscalingPolicy {
     try await self.inner.createAutoscalingPolicy(request: request, options: options)
   }
@@ -59,7 +59,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_UpdateAutoscalingPolicy")
   public func updateAutoscalingPolicy(
-    request: UpdateAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.AutoscalingPolicy {
     try await self.inner.updateAutoscalingPolicy(request: request, options: options)
   }
@@ -68,7 +68,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_GetAutoscalingPolicy")
   public func getAutoscalingPolicy(
-    request: GetAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.AutoscalingPolicy {
     try await self.inner.getAutoscalingPolicy(request: request, options: options)
   }
@@ -77,7 +77,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_ListAutoscalingPolicies")
   public func listAutoscalingPolicies(
-    request: ListAutoscalingPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAutoscalingPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.ListAutoscalingPoliciesResponse {
     try await self.inner.listAutoscalingPolicies(request: request, options: options)
   }
@@ -86,7 +86,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_ListAutoscalingPolicies")
   public func listAutoscalingPolicies(
-    byItem: ListAutoscalingPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAutoscalingPoliciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AutoscalingPolicy, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataprocV1.ListAutoscalingPoliciesResponse in
@@ -94,7 +94,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
       request.pageToken = token
       return try await self.listAutoscalingPolicies(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes an autoscaling policy. It is an error to delete an autoscaling
@@ -102,7 +102,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_DeleteAutoscalingPolicy")
   public func deleteAutoscalingPolicy(
-    request: DeleteAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteAutoscalingPolicy(request: request, options: options)
   }
@@ -115,7 +115,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -125,7 +125,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -140,7 +140,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -151,7 +151,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -162,7 +162,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -170,7 +170,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -179,7 +179,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -190,7 +190,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -201,7 +201,7 @@ public final class AutoscalingPolicyServiceClient: Clients.AutoscalingPolicyServ
   ///
   /// @Snippet(path: "AutoscalingPolicyService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -307,67 +307,67 @@ extension Clients {
 
     /// See `AutoscalingPolicyServiceClient.createAutoscalingPolicy`.
     func createAutoscalingPolicy(
-      request: CreateAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.AutoscalingPolicy
 
     /// See `AutoscalingPolicyServiceClient.updateAutoscalingPolicy`.
     func updateAutoscalingPolicy(
-      request: UpdateAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.AutoscalingPolicy
 
     /// See `AutoscalingPolicyServiceClient.getAutoscalingPolicy`.
     func getAutoscalingPolicy(
-      request: GetAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.AutoscalingPolicy
 
     /// See `AutoscalingPolicyServiceClient.listAutoscalingPolicies`.
     func listAutoscalingPolicies(
-      request: ListAutoscalingPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAutoscalingPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.ListAutoscalingPoliciesResponse
 
     /// See `AutoscalingPolicyServiceClient.listAutoscalingPolicies`.
     func listAutoscalingPolicies(
-      byItem: ListAutoscalingPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAutoscalingPoliciesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AutoscalingPolicy, Swift.Error>
 
     /// See `AutoscalingPolicyServiceClient.deleteAutoscalingPolicy`.
     func deleteAutoscalingPolicy(
-      request: DeleteAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AutoscalingPolicyServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `AutoscalingPolicyServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `AutoscalingPolicyServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `AutoscalingPolicyServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `AutoscalingPolicyServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `AutoscalingPolicyServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AutoscalingPolicyServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -381,9 +381,9 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func createAutoscalingPolicy(
-    request: CreateAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.AutoscalingPolicy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createAutoscalingPolicy(
@@ -404,9 +404,9 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func updateAutoscalingPolicy(
-    request: UpdateAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.AutoscalingPolicy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAutoscalingPolicy(
@@ -425,9 +425,9 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func getAutoscalingPolicy(
-    request: GetAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.AutoscalingPolicy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAutoscalingPolicy(
@@ -446,9 +446,9 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func listAutoscalingPolicies(
-    request: ListAutoscalingPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAutoscalingPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.ListAutoscalingPoliciesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAutoscalingPolicies(
@@ -458,13 +458,13 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func listAutoscalingPolicies(
-    byItem: ListAutoscalingPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAutoscalingPoliciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AutoscalingPolicy, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataprocV1.ListAutoscalingPoliciesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAutoscalingPolicies(
@@ -481,9 +481,9 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func deleteAutoscalingPolicy(
-    request: DeleteAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAutoscalingPolicy(
@@ -502,9 +502,9 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -514,9 +514,9 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -526,9 +526,9 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -538,9 +538,9 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -550,13 +550,13 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -577,9 +577,9 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -596,9 +596,9 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -615,9 +615,9 @@ extension Clients.AutoscalingPolicyServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

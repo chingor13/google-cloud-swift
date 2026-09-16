@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Optional arguments to enable specific features of builds.
-public struct BuildOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BuildOptions: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Requested hash for SourceProvenance.
@@ -109,7 +109,7 @@ public struct BuildOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// If true, JSON-formatted logs are parsed as structured logs.
   public var enableStructuredLogging: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BuildOptions`.
   public init() {}
@@ -233,7 +233,7 @@ public struct BuildOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -265,7 +265,7 @@ public struct BuildOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// See [running builds in a private
   /// pool](https://cloud.google.com/build/docs/private-pools/run-builds-in-private-pool)
   /// for more information.
-  public struct PoolOption: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PoolOption: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The `WorkerPool` resource to execute the build on.
@@ -275,7 +275,7 @@ public struct BuildOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Format projects/{project}/locations/{location}/workerPools/{workerPoolId}
     public var name: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PoolOption`.
     public init() {}
@@ -313,7 +313,7 @@ public struct BuildOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -328,11 +328,11 @@ public struct BuildOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudbuild.v1.BuildOptions.PoolOption"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1025,10 +1025,10 @@ public struct BuildOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudbuild.v1.BuildOptions"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

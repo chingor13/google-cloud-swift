@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Dataproc job status.
-public struct JobStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct JobStatus: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. A state message specifying the overall job state.
@@ -29,13 +29,13 @@ public struct JobStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var details: Swift.String = Swift.String()
 
   /// Output only. The time when this state was entered.
-  public var stateStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var stateStartTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Additional state information, which includes
   /// status reported by the agent.
   public var substate: JobStatus.Substate = JobStatus.Substate()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `JobStatus`.
   public init() {}
@@ -81,13 +81,13 @@ public struct JobStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.details = value
     }
     self.stateStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .stateStartTime)
+      GoogleWKT.Timestamp.self, forKey: .stateStartTime)
     if let value = try container.decodeIfPresent(JobStatus.Substate.self, forKey: .substate) {
       self.substate = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -386,10 +386,10 @@ public struct JobStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.v1.JobStatus"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

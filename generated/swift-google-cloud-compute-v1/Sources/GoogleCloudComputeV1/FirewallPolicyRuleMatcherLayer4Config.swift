@@ -16,10 +16,9 @@
 
 #if FirewallPolicies || Instances || NetworkFirewallPolicies || Networks || RegionNetworkFirewallPolicies
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct FirewallPolicyRuleMatcherLayer4Config: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
+  public struct FirewallPolicyRuleMatcherLayer4Config: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The IP protocol to which this rule applies. The protocol type is
@@ -36,7 +35,7 @@
     /// Example inputs include: ["22"],["80","443"], and ["12345-12349"].
     public var ports: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FirewallPolicyRuleMatcherLayer4Config`.
     public init() {}
@@ -77,7 +76,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -93,11 +92,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.FirewallPolicyRuleMatcherLayer4Config"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

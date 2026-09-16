@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// DataTaxonomy represents a set of hierarchical DataAttributes resources,
 /// grouped with a common theme Eg: 'SensitiveDataTaxonomy' can have attributes
 /// to manage PII data. It is defined at project level.
 @available(*, deprecated)
-public struct DataTaxonomy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataTaxonomy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The relative resource name of the DataTaxonomy, of the form:
@@ -34,10 +34,10 @@ public struct DataTaxonomy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var uid: Swift.String = Swift.String()
 
   /// Output only. The time when the DataTaxonomy was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the DataTaxonomy was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Description of the DataTaxonomy.
   public var description: Swift.String = Swift.String()
@@ -59,7 +59,7 @@ public struct DataTaxonomy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The number of classes in the DataTaxonomy.
   public var classCount: Swift.Int32 = Swift.Int32()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataTaxonomy`.
   public init() {}
@@ -116,10 +116,8 @@ public struct DataTaxonomy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .uid) {
       self.uid = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
@@ -141,7 +139,7 @@ public struct DataTaxonomy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -165,10 +163,10 @@ public struct DataTaxonomy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.DataTaxonomy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

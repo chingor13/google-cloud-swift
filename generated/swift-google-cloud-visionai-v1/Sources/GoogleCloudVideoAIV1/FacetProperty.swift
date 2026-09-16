@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Central configuration for a facet.
-public struct FacetProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FacetProperty: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Name of the facets, which are the dimensions users want to use to refine
@@ -50,7 +50,7 @@ public struct FacetProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public var rangeFacetConfig: OneOf_RangeFacetConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FacetProperty`.
   public init() {}
@@ -136,7 +136,7 @@ public struct FacetProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.rangeFacetConfig = rangeFacetConfig
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -169,7 +169,7 @@ public struct FacetProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// will be aggregated via the following buckets:
   /// [-inf, 0), [0, 10), [10, 20), [20, 30), [30, inf).
   /// Notably, bucket_count <= 1 is an invalid spec.
-  public struct FixedRangeBucketSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FixedRangeBucketSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Lower bound of the bucket. NOTE: Only integer type is currently supported
@@ -183,7 +183,7 @@ public struct FacetProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Total number of buckets.
     public var bucketCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FixedRangeBucketSpec`.
     public init() {}
@@ -228,7 +228,7 @@ public struct FacetProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -245,11 +245,11 @@ public struct FacetProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.FacetProperty.FixedRangeBucketSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -261,13 +261,13 @@ public struct FacetProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// - endpoints must be listed in ascending order. Otherwise, the SearchConfig
   ///   API will reject the facet config.
   /// - < 1 endpoints is an invalid spec.
-  public struct CustomRangeBucketSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CustomRangeBucketSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Currently, only integer type is supported for this field.
     public var endpoints: [FacetValue] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CustomRangeBucketSpec`.
     public init() {}
@@ -305,7 +305,7 @@ public struct FacetProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -320,23 +320,23 @@ public struct FacetProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.FacetProperty.CustomRangeBucketSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// If bucket type is DATE, specify how date values are bucketized.
-  public struct DateTimeBucketSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DateTimeBucketSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Granularity of date type facet.
     public var granularity: FacetProperty.DateTimeBucketSpec.Granularity = FacetProperty
       .DateTimeBucketSpec.Granularity()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DateTimeBucketSpec`.
     public init() {}
@@ -376,7 +376,7 @@ public struct FacetProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -503,11 +503,11 @@ public struct FacetProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.FacetProperty.DateTimeBucketSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -523,10 +523,10 @@ public struct FacetProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.FacetProperty"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

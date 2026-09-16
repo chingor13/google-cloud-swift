@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudNetAppV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: NetAppClient, projectId: String, locationId: String, backupVaultId: String,
@@ -34,7 +34,7 @@ func sample(
           $0.name =
             "projects/\(projectId)/locations/\(locationId)/backupVaults/\(backupVaultId)/backups/\(backupId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

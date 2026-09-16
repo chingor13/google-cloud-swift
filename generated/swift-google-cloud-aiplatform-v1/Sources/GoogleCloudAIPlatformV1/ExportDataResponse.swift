@@ -16,13 +16,13 @@
 
 #if DatasetService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Response message for
   /// [DatasetService.ExportData][google.cloud.aiplatform.v1.DatasetService.ExportData].
   ///
   /// [google.cloud.aiplatform.v1.DatasetService.ExportData]: <doc:DatasetServiceClient/exportData(request:options:)>
-  public struct ExportDataResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExportDataResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// All of the files that are exported in this export operation. For custom
@@ -36,7 +36,7 @@
     /// the export operation.
     public var dataStats: Model.DataStats? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExportDataResponse`.
     public init() {}
@@ -77,7 +77,7 @@
       self.dataStats = try container.decodeIfPresent(Model.DataStats.self, forKey: .dataStats)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -93,11 +93,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ExportDataResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

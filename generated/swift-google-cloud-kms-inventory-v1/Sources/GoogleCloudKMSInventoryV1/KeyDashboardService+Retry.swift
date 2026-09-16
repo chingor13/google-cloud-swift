@@ -19,26 +19,26 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudKMSV1
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class KeyDashboardServiceRetry: KeyDashboardServiceStub {
     let inner: any KeyDashboardServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any KeyDashboardServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any KeyDashboardServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@ extension Clients {
     }
 
     public func listCryptoKeys(
-      request: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSInventoryV1.ListCryptoKeysResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListCryptoKeysRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCryptoKeysRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSInventoryV1.ListCryptoKeysResponse
           in
           return try await self.inner.listCryptoKeys(request: r, options: o)

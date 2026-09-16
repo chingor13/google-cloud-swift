@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudMigrationCenterV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: MigrationCenterClient, projectId: String, locationId: String, assetId: String)
   async throws
@@ -32,7 +32,7 @@ func sample(client: MigrationCenterClient, projectId: String, locationId: String
         $0.asset = Asset().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/assets/\(assetId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

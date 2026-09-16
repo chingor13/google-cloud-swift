@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A request for an attestation token, providing all the necessary information
 /// needed for this service to verify the platform state of the requestor.
-public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the Challenge whose nonce was used to generate the
@@ -51,7 +51,7 @@ public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleCloudWKT
   /// claims.
   public var teeAttestation: OneOf_TeeAttestation? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VerifyConfidentialSpaceRequest`.
   public init() {}
@@ -134,7 +134,7 @@ public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleCloudWKT
     self.teeAttestation = teeAttestation
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -161,7 +161,7 @@ public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleCloudWKT
   }
 
   /// Token options for Confidential Space attestation.
-  public struct ConfidentialSpaceOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConfidentialSpaceOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Optional string to issue the token with a custom audience
@@ -183,7 +183,7 @@ public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleCloudWKT
     /// An optional additional configuration per token type.
     public var tokenProfileOptions: OneOf_TokenProfileOptions? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConfidentialSpaceOptions`.
     public init() {}
@@ -255,7 +255,7 @@ public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleCloudWKT
       self.tokenProfileOptions = tokenProfileOptions
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -287,11 +287,11 @@ public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleCloudWKT
       return
         "type.googleapis.com/google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest.ConfidentialSpaceOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -309,10 +309,10 @@ public struct VerifyConfidentialSpaceRequest: Codable, Equatable, GoogleCloudWKT
     return
       "type.googleapis.com/google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

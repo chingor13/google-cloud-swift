@@ -16,71 +16,71 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol SequenceServiceStub: Sendable {
     func createSequence(
-      request: CreateSequenceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSequenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Sequence
 
     func createStreamingSequence(
-      request: CreateStreamingSequenceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateStreamingSequenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.StreamingSequence
 
     func getSequenceReport(
-      request: GetSequenceReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSequenceReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.SequenceReport
 
     func getStreamingSequenceReport(
-      request: GetStreamingSequenceReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetStreamingSequenceReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.StreamingSequenceReport
 
     func attemptSequence(
-      request: AttemptSequenceRequest, options: GoogleCloudGax.RequestOptions
+      request: AttemptSequenceRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func attemptStreamingSequence(
-      request: AttemptStreamingSequenceRequest, options: GoogleCloudGax.RequestOptions
+      request: AttemptStreamingSequenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.AttemptStreamingSequenceResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

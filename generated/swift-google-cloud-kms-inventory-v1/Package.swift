@@ -25,8 +25,8 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/googleapis/swift-google-auth", from: "0.0.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-gax", from: "0.0.0-preview"),
     .package(url: "https://github.com/googleapis/swift-google-cloud-kms-v1", from: "0.1.0-preview"),
+    .package(url: "https://github.com/googleapis/swift-google-gax", from: "0.0.0-preview"),
     .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.1.0-preview"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
@@ -35,9 +35,9 @@ let package = Package(
       name: "GoogleCloudKMSInventoryV1",
       dependencies: [
         .product(name: "GoogleAuth", package: "swift-google-auth"),
-        .product(name: "GoogleCloudGax", package: "swift-google-gax"),
         .product(name: "GoogleCloudKMSV1", package: "swift-google-cloud-kms-v1"),
-        .product(name: "GoogleCloudWKT", package: "swift-google-wkt"),
+        .product(name: "GoogleGax", package: "swift-google-gax"),
+        .product(name: "GoogleWKT", package: "swift-google-wkt"),
         .product(name: "Logging", package: "swift-log"),
       ],
     )

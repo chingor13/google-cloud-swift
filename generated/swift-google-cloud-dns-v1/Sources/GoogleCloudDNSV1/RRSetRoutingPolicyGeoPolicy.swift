@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configures a `RRSetRoutingPolicy` that routes based on the geo location of the querying user.
-public struct RRSetRoutingPolicyGeoPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RRSetRoutingPolicyGeoPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Without fencing, if health check fails for all configured items in the current geo bucket, we failover to the next nearest geo bucket. With fencing, if health checking is enabled, as long as some targets in the current geo bucket are healthy, we return only the healthy targets. However, if all targets are unhealthy, we don't failover to the next nearest bucket; instead, we return all the items in the current bucket even when all targets are unhealthy.
@@ -29,7 +29,7 @@ public struct RRSetRoutingPolicyGeoPolicy: Codable, Equatable, GoogleCloudWKT._A
 
   public var kind: Swift.String? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RRSetRoutingPolicyGeoPolicy`.
   public init() {}
@@ -75,7 +75,7 @@ public struct RRSetRoutingPolicyGeoPolicy: Codable, Equatable, GoogleCloudWKT._A
     self.kind = try container.decodeIfPresent(Swift.String.self, forKey: .kind)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -92,10 +92,10 @@ public struct RRSetRoutingPolicyGeoPolicy: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/.RRSetRoutingPolicyGeoPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

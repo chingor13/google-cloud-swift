@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Response Policy Rule is a selector that applies its behavior to queries that match the selector. Selectors are DNS names, which may be wildcards or exact matches. Each DNS query subject to a Response Policy matches at most one ResponsePolicyRule, as identified by the dns_name field with the longest matching suffix.
-public struct ResponsePolicyRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ResponsePolicyRule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Answer this query with a behavior rather than DNS data.
@@ -35,7 +35,7 @@ public struct ResponsePolicyRule: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// An identifier for this rule. Must be unique with the ResponsePolicy.
   public var ruleName: Swift.String? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ResponsePolicyRule`.
   public init() {}
@@ -85,7 +85,7 @@ public struct ResponsePolicyRule: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     self.ruleName = try container.decodeIfPresent(Swift.String.self, forKey: .ruleName)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -201,10 +201,10 @@ public struct ResponsePolicyRule: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/.ResponsePolicyRule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

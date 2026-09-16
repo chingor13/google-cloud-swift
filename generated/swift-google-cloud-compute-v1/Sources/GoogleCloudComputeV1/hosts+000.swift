@@ -19,19 +19,19 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `hosts` resource.
   ///
   /// @Snippet(path: "hostsQuickstart")
   public final class HostsClient: Clients.HostsProtocol, Sendable {
     let inner: any Clients.HostsStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `HostsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.HostsStub = try Clients.HostsTransport(options)
       inner = Clients.HostsRetry(inner, options: options)
       if let logger = options.logger {
@@ -46,7 +46,7 @@
     ///
     /// @Snippet(path: "hosts_get")
     public func `get`(
-      request: HostsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: HostsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Host {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -55,7 +55,7 @@
     ///
     /// @Snippet(path: "hosts_getVersion")
     public func getVersion(
-      request: HostsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: HostsClient.GetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.getVersion(request: request, options: options)
     }
@@ -64,18 +64,18 @@
     ///
     /// @Snippet(path: "hosts_getVersion")
     public func getVersion(
-      withPolling: HostsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: HostsClient.GetVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -83,8 +83,7 @@
       let rawOp = try await self.getVersion(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -93,7 +92,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -105,7 +104,7 @@
     ///
     /// @Snippet(path: "hosts_list")
     public func list(
-      request: HostsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: HostsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.HostsListResponse {
       try await self.inner.list(request: request, options: options)
     }
@@ -114,7 +113,7 @@
     ///
     /// @Snippet(path: "hosts_list")
     public func list(
-      byItem: HostsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: HostsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Host, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.HostsListResponse in
@@ -122,14 +121,14 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves the specified zone-specific Operations resource.
     ///
     /// @Snippet(path: "hosts_getOperation")
     func getOperation(
-      request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -175,22 +174,22 @@
 
       /// See `HostsClient.`get``.
       func `get`(
-        request: HostsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: HostsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Host
 
       /// See `HostsClient.getVersion`.
       func getVersion(
-        request: HostsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: HostsClient.GetVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `HostsClient.list`.
       func list(
-        request: HostsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: HostsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HostsListResponse
 
       /// See `HostsClient.list`.
       func list(
-        byItem: HostsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: HostsClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Host, Swift.Error>
     }
   }
@@ -202,9 +201,9 @@
     }
 
     public func `get`(
-      request: HostsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: HostsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Host {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -229,26 +228,25 @@
     }
 
     public func getVersion(
-      request: HostsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: HostsClient.GetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getVersion(
       withPolling: HostsClient.GetVersionRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.getVersion(withPolling: withPolling, options: .init())
     }
 
     public func getVersion(
-      withPolling: HostsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: HostsClient.GetVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -258,7 +256,7 @@
       association: Swift.String,
       host: Swift.String,
       body: HostsGetVersionRequest?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = HostsClient.GetVersionRequest().with {
         $0.project = project
         $0.zone = zone
@@ -276,9 +274,9 @@
     }
 
     public func list(
-      request: HostsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: HostsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.HostsListResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -288,13 +286,13 @@
     }
 
     public func list(
-      byItem: HostsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: HostsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Host, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.HostsListResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(
@@ -317,9 +315,9 @@
     }
 
     public func getOperation(
-      request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

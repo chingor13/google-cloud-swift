@@ -16,11 +16,11 @@
 
 #if TestCases
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleRpc
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Error info for importing a test.
-  public struct TestCaseError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TestCaseError: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The test case.
@@ -29,7 +29,7 @@
     /// The status associated with the test case.
     public var status: GoogleRpc.Status? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TestCaseError`.
     public init() {}
@@ -68,7 +68,7 @@
       self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -84,11 +84,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.TestCaseError"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

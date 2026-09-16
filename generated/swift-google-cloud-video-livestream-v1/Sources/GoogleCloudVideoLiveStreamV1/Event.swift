@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Event is a sub-resource of a channel, which can be scheduled by the user to
 /// execute operations on a channel resource without having to stop the channel.
-public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Event: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the event, in the form of:
@@ -28,10 +28,10 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The creation time.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The update time.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// User-defined key/value metadata.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -54,7 +54,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// or else the event can't be created.
   ///
   /// [google.cloud.video.livestream.v1.Event.execute_now]: <doc:Event/executeNow>
-  public var executionTime: GoogleCloudWKT.Timestamp? = nil
+  public var executionTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The state of the event.
   public var state: Event.State = Event.State()
@@ -66,7 +66,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Required. Operation to be executed by this event.
   public var task: OneOf_Task? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Event`.
   public init() {}
@@ -130,10 +130,8 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -142,7 +140,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.executeNow = value
     }
     self.executionTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .executionTime)
+      GoogleWKT.Timestamp.self, forKey: .executionTime)
     if let value = try container.decodeIfPresent(Event.State.self, forKey: .state) {
       self.state = value
     }
@@ -188,7 +186,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.task = task
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -227,7 +225,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Switches to another input stream. Automatic failover is then disabled.
-  public struct InputSwitchTask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InputSwitchTask: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The
@@ -237,7 +235,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.cloud.video.livestream.v1.InputAttachment.key]: <doc:InputAttachment/key>
     public var inputKey: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InputSwitchTask`.
     public init() {}
@@ -275,7 +273,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -290,22 +288,22 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.livestream.v1.Event.InputSwitchTask"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Inserts a new ad opportunity.
-  public struct AdBreakTask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AdBreakTask: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Duration of an ad opportunity. Must be greater than 0.
-    public var duration: GoogleCloudWKT.Duration? = nil
+    public var duration: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AdBreakTask`.
     public init() {}
@@ -338,10 +336,10 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.duration = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .duration)
+      self.duration = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .duration)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -356,21 +354,21 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.livestream.v1.Event.AdBreakTask"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Inserts a slate.
-  public struct SlateTask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SlateTask: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Duration of the slate. Must be greater than 0 if specified.
     /// Omit this field for a long running slate.
-    public var duration: GoogleCloudWKT.Duration? = nil
+    public var duration: GoogleWKT.Duration? = nil
 
     /// Slate asset to use for the duration. If its duration is less than the
     /// duration of the SlateTask, then the slate loops. The slate must be
@@ -378,7 +376,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// `projects/{project}/locations/{location}/assets/{assetId}`.
     public var asset: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SlateTask`.
     public init() {}
@@ -413,13 +411,13 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.duration = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .duration)
+      self.duration = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .duration)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .asset) {
         self.asset = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -435,20 +433,20 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.livestream.v1.Event.SlateTask"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Stops any events which are currently running. This only applies to events
   /// with a duration.
-  public struct ReturnToProgramTask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ReturnToProgramTask: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ReturnToProgramTask`.
     public init() {}
@@ -479,7 +477,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -493,23 +491,23 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.livestream.v1.Event.ReturnToProgramTask"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Mutes the stream.
-  public struct MuteTask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MuteTask: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Duration for which the stream should be muted. If omitted, the stream
     /// will be muted until an UnmuteTask event is sent.
-    public var duration: GoogleCloudWKT.Duration? = nil
+    public var duration: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MuteTask`.
     public init() {}
@@ -542,10 +540,10 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.duration = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .duration)
+      self.duration = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .duration)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -560,19 +558,19 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.livestream.v1.Event.MuteTask"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Unmutes the stream. The task fails if the stream is not currently muted.
-  public struct UnmuteTask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UnmuteTask: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UnmuteTask`.
     public init() {}
@@ -603,7 +601,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -617,16 +615,16 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.livestream.v1.Event.UnmuteTask"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Update encryption settings.
-  public struct UpdateEncryptionsTask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UpdateEncryptionsTask: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. A list of
@@ -636,7 +634,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.cloud.video.livestream.v1.EncryptionUpdate]: <doc:EncryptionUpdate>
     public var encryptions: [EncryptionUpdate] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UpdateEncryptionsTask`.
     public init() {}
@@ -674,7 +672,7 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -689,11 +687,11 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.livestream.v1.Event.UpdateEncryptionsTask"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -851,10 +849,10 @@ public struct Event: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.livestream.v1.Event"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

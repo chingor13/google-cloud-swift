@@ -19,22 +19,22 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service describing handlers for resources.
 ///
 /// @Snippet(path: "DepServiceQuickstart")
 public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   let inner: any Clients.DepServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `DepServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DepServiceStub = try Clients.DepServiceTransport(options)
     inner = Clients.DepServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -49,7 +49,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_ListLbTrafficExtensions")
   public func listLbTrafficExtensions(
-    request: ListLbTrafficExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLbTrafficExtensionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.ListLbTrafficExtensionsResponse {
     try await self.inner.listLbTrafficExtensions(request: request, options: options)
   }
@@ -58,7 +58,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_ListLbTrafficExtensions")
   public func listLbTrafficExtensions(
-    byItem: ListLbTrafficExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLbTrafficExtensionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<LbTrafficExtension, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -67,14 +67,14 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listLbTrafficExtensions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of the specified `LbTrafficExtension` resource.
   ///
   /// @Snippet(path: "DepService_GetLbTrafficExtension")
   public func getLbTrafficExtension(
-    request: GetLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.LbTrafficExtension {
     try await self.inner.getLbTrafficExtension(request: request, options: options)
   }
@@ -84,7 +84,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_CreateLbTrafficExtension")
   public func createLbTrafficExtension(
-    request: CreateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createLbTrafficExtension(request: request, options: options)
   }
@@ -94,22 +94,21 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_CreateLbTrafficExtension")
   public func createLbTrafficExtension(
-    withPolling: CreateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbTrafficExtension> {
+    withPolling: CreateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LbTrafficExtension> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<LbTrafficExtension>.State in
+        -> GoogleGax._PollableOperationImpl<LbTrafficExtension>.State in
       return try op._extractStatus(LbTrafficExtension.self)
     }
     let rawOp = try await self.createLbTrafficExtension(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<LbTrafficExtension>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LbTrafficExtension>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -121,7 +120,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_UpdateLbTrafficExtension")
   public func updateLbTrafficExtension(
-    request: UpdateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateLbTrafficExtension(request: request, options: options)
   }
@@ -130,22 +129,21 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_UpdateLbTrafficExtension")
   public func updateLbTrafficExtension(
-    withPolling: UpdateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbTrafficExtension> {
+    withPolling: UpdateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LbTrafficExtension> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<LbTrafficExtension>.State in
+        -> GoogleGax._PollableOperationImpl<LbTrafficExtension>.State in
       return try op._extractStatus(LbTrafficExtension.self)
     }
     let rawOp = try await self.updateLbTrafficExtension(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<LbTrafficExtension>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LbTrafficExtension>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -157,7 +155,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_DeleteLbTrafficExtension")
   public func deleteLbTrafficExtension(
-    request: DeleteLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteLbTrafficExtension(request: request, options: options)
   }
@@ -166,21 +164,21 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_DeleteLbTrafficExtension")
   public func deleteLbTrafficExtension(
-    withPolling: DeleteLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteLbTrafficExtension(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -192,7 +190,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_ListLbRouteExtensions")
   public func listLbRouteExtensions(
-    request: ListLbRouteExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLbRouteExtensionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.ListLbRouteExtensionsResponse {
     try await self.inner.listLbRouteExtensions(request: request, options: options)
   }
@@ -201,7 +199,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_ListLbRouteExtensions")
   public func listLbRouteExtensions(
-    byItem: ListLbRouteExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLbRouteExtensionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<LbRouteExtension, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -210,14 +208,14 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listLbRouteExtensions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of the specified `LbRouteExtension` resource.
   ///
   /// @Snippet(path: "DepService_GetLbRouteExtension")
   public func getLbRouteExtension(
-    request: GetLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLbRouteExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.LbRouteExtension {
     try await self.inner.getLbRouteExtension(request: request, options: options)
   }
@@ -226,7 +224,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_CreateLbRouteExtension")
   public func createLbRouteExtension(
-    request: CreateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createLbRouteExtension(request: request, options: options)
   }
@@ -235,21 +233,21 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_CreateLbRouteExtension")
   public func createLbRouteExtension(
-    withPolling: CreateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbRouteExtension> {
+    withPolling: CreateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LbRouteExtension> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<LbRouteExtension>.State in
+        -> GoogleGax._PollableOperationImpl<LbRouteExtension>.State in
       return try op._extractStatus(LbRouteExtension.self)
     }
     let rawOp = try await self.createLbRouteExtension(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LbRouteExtension>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LbRouteExtension>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -261,7 +259,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_UpdateLbRouteExtension")
   public func updateLbRouteExtension(
-    request: UpdateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateLbRouteExtension(request: request, options: options)
   }
@@ -270,21 +268,21 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_UpdateLbRouteExtension")
   public func updateLbRouteExtension(
-    withPolling: UpdateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbRouteExtension> {
+    withPolling: UpdateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LbRouteExtension> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<LbRouteExtension>.State in
+        -> GoogleGax._PollableOperationImpl<LbRouteExtension>.State in
       return try op._extractStatus(LbRouteExtension.self)
     }
     let rawOp = try await self.updateLbRouteExtension(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LbRouteExtension>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LbRouteExtension>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -296,7 +294,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_DeleteLbRouteExtension")
   public func deleteLbRouteExtension(
-    request: DeleteLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteLbRouteExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteLbRouteExtension(request: request, options: options)
   }
@@ -305,21 +303,21 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_DeleteLbRouteExtension")
   public func deleteLbRouteExtension(
-    withPolling: DeleteLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteLbRouteExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteLbRouteExtension(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -331,7 +329,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_ListLbEdgeExtensions")
   public func listLbEdgeExtensions(
-    request: ListLbEdgeExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLbEdgeExtensionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.ListLbEdgeExtensionsResponse {
     try await self.inner.listLbEdgeExtensions(request: request, options: options)
   }
@@ -340,7 +338,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_ListLbEdgeExtensions")
   public func listLbEdgeExtensions(
-    byItem: ListLbEdgeExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLbEdgeExtensionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<LbEdgeExtension, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -349,14 +347,14 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listLbEdgeExtensions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of the specified `LbEdgeExtension` resource.
   ///
   /// @Snippet(path: "DepService_GetLbEdgeExtension")
   public func getLbEdgeExtension(
-    request: GetLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.LbEdgeExtension {
     try await self.inner.getLbEdgeExtension(request: request, options: options)
   }
@@ -365,7 +363,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_CreateLbEdgeExtension")
   public func createLbEdgeExtension(
-    request: CreateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createLbEdgeExtension(request: request, options: options)
   }
@@ -374,21 +372,21 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_CreateLbEdgeExtension")
   public func createLbEdgeExtension(
-    withPolling: CreateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbEdgeExtension> {
+    withPolling: CreateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LbEdgeExtension> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<LbEdgeExtension>.State in
+        -> GoogleGax._PollableOperationImpl<LbEdgeExtension>.State in
       return try op._extractStatus(LbEdgeExtension.self)
     }
     let rawOp = try await self.createLbEdgeExtension(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LbEdgeExtension>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LbEdgeExtension>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -400,7 +398,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_UpdateLbEdgeExtension")
   public func updateLbEdgeExtension(
-    request: UpdateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateLbEdgeExtension(request: request, options: options)
   }
@@ -409,21 +407,21 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_UpdateLbEdgeExtension")
   public func updateLbEdgeExtension(
-    withPolling: UpdateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbEdgeExtension> {
+    withPolling: UpdateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LbEdgeExtension> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<LbEdgeExtension>.State in
+        -> GoogleGax._PollableOperationImpl<LbEdgeExtension>.State in
       return try op._extractStatus(LbEdgeExtension.self)
     }
     let rawOp = try await self.updateLbEdgeExtension(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LbEdgeExtension>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LbEdgeExtension>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -435,7 +433,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_DeleteLbEdgeExtension")
   public func deleteLbEdgeExtension(
-    request: DeleteLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteLbEdgeExtension(request: request, options: options)
   }
@@ -444,21 +442,21 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_DeleteLbEdgeExtension")
   public func deleteLbEdgeExtension(
-    withPolling: DeleteLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteLbEdgeExtension(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -470,7 +468,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_ListAuthzExtensions")
   public func listAuthzExtensions(
-    request: ListAuthzExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAuthzExtensionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.ListAuthzExtensionsResponse {
     try await self.inner.listAuthzExtensions(request: request, options: options)
   }
@@ -479,7 +477,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_ListAuthzExtensions")
   public func listAuthzExtensions(
-    byItem: ListAuthzExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAuthzExtensionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AuthzExtension, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudNetworkServicesV1.ListAuthzExtensionsResponse
@@ -488,14 +486,14 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listAuthzExtensions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of the specified `AuthzExtension` resource.
   ///
   /// @Snippet(path: "DepService_GetAuthzExtension")
   public func getAuthzExtension(
-    request: GetAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAuthzExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.AuthzExtension {
     try await self.inner.getAuthzExtension(request: request, options: options)
   }
@@ -505,7 +503,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_CreateAuthzExtension")
   public func createAuthzExtension(
-    request: CreateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAuthzExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createAuthzExtension(request: request, options: options)
   }
@@ -515,21 +513,21 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_CreateAuthzExtension")
   public func createAuthzExtension(
-    withPolling: CreateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthzExtension> {
+    withPolling: CreateAuthzExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AuthzExtension> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AuthzExtension>.State in
+        -> GoogleGax._PollableOperationImpl<AuthzExtension>.State in
       return try op._extractStatus(AuthzExtension.self)
     }
     let rawOp = try await self.createAuthzExtension(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AuthzExtension>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AuthzExtension>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -542,7 +540,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_UpdateAuthzExtension")
   public func updateAuthzExtension(
-    request: UpdateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAuthzExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateAuthzExtension(request: request, options: options)
   }
@@ -552,21 +550,21 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_UpdateAuthzExtension")
   public func updateAuthzExtension(
-    withPolling: UpdateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthzExtension> {
+    withPolling: UpdateAuthzExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AuthzExtension> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AuthzExtension>.State in
+        -> GoogleGax._PollableOperationImpl<AuthzExtension>.State in
       return try op._extractStatus(AuthzExtension.self)
     }
     let rawOp = try await self.updateAuthzExtension(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AuthzExtension>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AuthzExtension>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -578,7 +576,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_DeleteAuthzExtension")
   public func deleteAuthzExtension(
-    request: DeleteAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAuthzExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteAuthzExtension(request: request, options: options)
   }
@@ -587,21 +585,21 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_DeleteAuthzExtension")
   public func deleteAuthzExtension(
-    withPolling: DeleteAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteAuthzExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteAuthzExtension(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -613,7 +611,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -622,7 +620,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -630,14 +628,14 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "DepService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -650,7 +648,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -660,7 +658,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -675,7 +673,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -686,7 +684,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -697,7 +695,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -705,7 +703,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -714,7 +712,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -725,7 +723,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -736,7 +734,7 @@ public final class DepServiceClient: Clients.DepServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "DepService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -778,14 +776,14 @@ extension Clients {
 
     /// See `DepServiceClient.createLbTrafficExtension`.
     func createLbTrafficExtension(withPolling: CreateLbTrafficExtensionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<LbTrafficExtension>
+      -> any GoogleGax.PollableOperation<LbTrafficExtension>
 
     /// See `DepServiceClient.createLbTrafficExtension`.
     func createLbTrafficExtension(
       parent: Swift.String,
       lbTrafficExtension: LbTrafficExtension?,
       lbTrafficExtensionId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<LbTrafficExtension>
+    ) async throws -> any GoogleGax.PollableOperation<LbTrafficExtension>
 
     /// See `DepServiceClient.updateLbTrafficExtension`.
     func updateLbTrafficExtension(request: UpdateLbTrafficExtensionRequest) async throws
@@ -793,13 +791,13 @@ extension Clients {
 
     /// See `DepServiceClient.updateLbTrafficExtension`.
     func updateLbTrafficExtension(withPolling: UpdateLbTrafficExtensionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<LbTrafficExtension>
+      -> any GoogleGax.PollableOperation<LbTrafficExtension>
 
     /// See `DepServiceClient.updateLbTrafficExtension`.
     func updateLbTrafficExtension(
       lbTrafficExtension: LbTrafficExtension?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<LbTrafficExtension>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<LbTrafficExtension>
 
     /// See `DepServiceClient.deleteLbTrafficExtension`.
     func deleteLbTrafficExtension(request: DeleteLbTrafficExtensionRequest) async throws
@@ -807,12 +805,12 @@ extension Clients {
 
     /// See `DepServiceClient.deleteLbTrafficExtension`.
     func deleteLbTrafficExtension(withPolling: DeleteLbTrafficExtensionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DepServiceClient.deleteLbTrafficExtension`.
     func deleteLbTrafficExtension(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DepServiceClient.listLbRouteExtensions`.
     func listLbRouteExtensions(request: ListLbRouteExtensionsRequest) async throws
@@ -843,14 +841,14 @@ extension Clients {
 
     /// See `DepServiceClient.createLbRouteExtension`.
     func createLbRouteExtension(withPolling: CreateLbRouteExtensionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<LbRouteExtension>
+      -> any GoogleGax.PollableOperation<LbRouteExtension>
 
     /// See `DepServiceClient.createLbRouteExtension`.
     func createLbRouteExtension(
       parent: Swift.String,
       lbRouteExtension: LbRouteExtension?,
       lbRouteExtensionId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<LbRouteExtension>
+    ) async throws -> any GoogleGax.PollableOperation<LbRouteExtension>
 
     /// See `DepServiceClient.updateLbRouteExtension`.
     func updateLbRouteExtension(request: UpdateLbRouteExtensionRequest) async throws
@@ -858,13 +856,13 @@ extension Clients {
 
     /// See `DepServiceClient.updateLbRouteExtension`.
     func updateLbRouteExtension(withPolling: UpdateLbRouteExtensionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<LbRouteExtension>
+      -> any GoogleGax.PollableOperation<LbRouteExtension>
 
     /// See `DepServiceClient.updateLbRouteExtension`.
     func updateLbRouteExtension(
       lbRouteExtension: LbRouteExtension?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<LbRouteExtension>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<LbRouteExtension>
 
     /// See `DepServiceClient.deleteLbRouteExtension`.
     func deleteLbRouteExtension(request: DeleteLbRouteExtensionRequest) async throws
@@ -872,12 +870,12 @@ extension Clients {
 
     /// See `DepServiceClient.deleteLbRouteExtension`.
     func deleteLbRouteExtension(withPolling: DeleteLbRouteExtensionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DepServiceClient.deleteLbRouteExtension`.
     func deleteLbRouteExtension(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DepServiceClient.listLbEdgeExtensions`.
     func listLbEdgeExtensions(request: ListLbEdgeExtensionsRequest) async throws
@@ -908,14 +906,14 @@ extension Clients {
 
     /// See `DepServiceClient.createLbEdgeExtension`.
     func createLbEdgeExtension(withPolling: CreateLbEdgeExtensionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<LbEdgeExtension>
+      -> any GoogleGax.PollableOperation<LbEdgeExtension>
 
     /// See `DepServiceClient.createLbEdgeExtension`.
     func createLbEdgeExtension(
       parent: Swift.String,
       lbEdgeExtension: LbEdgeExtension?,
       lbEdgeExtensionId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<LbEdgeExtension>
+    ) async throws -> any GoogleGax.PollableOperation<LbEdgeExtension>
 
     /// See `DepServiceClient.updateLbEdgeExtension`.
     func updateLbEdgeExtension(request: UpdateLbEdgeExtensionRequest) async throws
@@ -923,13 +921,13 @@ extension Clients {
 
     /// See `DepServiceClient.updateLbEdgeExtension`.
     func updateLbEdgeExtension(withPolling: UpdateLbEdgeExtensionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<LbEdgeExtension>
+      -> any GoogleGax.PollableOperation<LbEdgeExtension>
 
     /// See `DepServiceClient.updateLbEdgeExtension`.
     func updateLbEdgeExtension(
       lbEdgeExtension: LbEdgeExtension?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<LbEdgeExtension>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<LbEdgeExtension>
 
     /// See `DepServiceClient.deleteLbEdgeExtension`.
     func deleteLbEdgeExtension(request: DeleteLbEdgeExtensionRequest) async throws
@@ -937,12 +935,12 @@ extension Clients {
 
     /// See `DepServiceClient.deleteLbEdgeExtension`.
     func deleteLbEdgeExtension(withPolling: DeleteLbEdgeExtensionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DepServiceClient.deleteLbEdgeExtension`.
     func deleteLbEdgeExtension(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DepServiceClient.listAuthzExtensions`.
     func listAuthzExtensions(request: ListAuthzExtensionsRequest) async throws
@@ -973,14 +971,14 @@ extension Clients {
 
     /// See `DepServiceClient.createAuthzExtension`.
     func createAuthzExtension(withPolling: CreateAuthzExtensionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<AuthzExtension>
+      -> any GoogleGax.PollableOperation<AuthzExtension>
 
     /// See `DepServiceClient.createAuthzExtension`.
     func createAuthzExtension(
       parent: Swift.String,
       authzExtension: AuthzExtension?,
       authzExtensionId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AuthzExtension>
+    ) async throws -> any GoogleGax.PollableOperation<AuthzExtension>
 
     /// See `DepServiceClient.updateAuthzExtension`.
     func updateAuthzExtension(request: UpdateAuthzExtensionRequest) async throws
@@ -988,13 +986,13 @@ extension Clients {
 
     /// See `DepServiceClient.updateAuthzExtension`.
     func updateAuthzExtension(withPolling: UpdateAuthzExtensionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<AuthzExtension>
+      -> any GoogleGax.PollableOperation<AuthzExtension>
 
     /// See `DepServiceClient.updateAuthzExtension`.
     func updateAuthzExtension(
       authzExtension: AuthzExtension?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AuthzExtension>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<AuthzExtension>
 
     /// See `DepServiceClient.deleteAuthzExtension`.
     func deleteAuthzExtension(request: DeleteAuthzExtensionRequest) async throws
@@ -1002,12 +1000,12 @@ extension Clients {
 
     /// See `DepServiceClient.deleteAuthzExtension`.
     func deleteAuthzExtension(withPolling: DeleteAuthzExtensionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DepServiceClient.deleteAuthzExtension`.
     func deleteAuthzExtension(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DepServiceClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -1065,232 +1063,232 @@ extension Clients {
 
     /// See `DepServiceClient.listLbTrafficExtensions`.
     func listLbTrafficExtensions(
-      request: ListLbTrafficExtensionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLbTrafficExtensionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.ListLbTrafficExtensionsResponse
 
     /// See `DepServiceClient.listLbTrafficExtensions`.
     func listLbTrafficExtensions(
-      byItem: ListLbTrafficExtensionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListLbTrafficExtensionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<LbTrafficExtension, Swift.Error>
 
     /// See `DepServiceClient.getLbTrafficExtension`.
     func getLbTrafficExtension(
-      request: GetLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.LbTrafficExtension
 
     /// See `DepServiceClient.createLbTrafficExtension`.
     func createLbTrafficExtension(
-      request: CreateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DepServiceClient.createLbTrafficExtension`.
     func createLbTrafficExtension(
-      withPolling: CreateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<LbTrafficExtension>
+      withPolling: CreateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<LbTrafficExtension>
 
     /// See `DepServiceClient.updateLbTrafficExtension`.
     func updateLbTrafficExtension(
-      request: UpdateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DepServiceClient.updateLbTrafficExtension`.
     func updateLbTrafficExtension(
-      withPolling: UpdateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<LbTrafficExtension>
+      withPolling: UpdateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<LbTrafficExtension>
 
     /// See `DepServiceClient.deleteLbTrafficExtension`.
     func deleteLbTrafficExtension(
-      request: DeleteLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DepServiceClient.deleteLbTrafficExtension`.
     func deleteLbTrafficExtension(
-      withPolling: DeleteLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DepServiceClient.listLbRouteExtensions`.
     func listLbRouteExtensions(
-      request: ListLbRouteExtensionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLbRouteExtensionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.ListLbRouteExtensionsResponse
 
     /// See `DepServiceClient.listLbRouteExtensions`.
     func listLbRouteExtensions(
-      byItem: ListLbRouteExtensionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListLbRouteExtensionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<LbRouteExtension, Swift.Error>
 
     /// See `DepServiceClient.getLbRouteExtension`.
     func getLbRouteExtension(
-      request: GetLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLbRouteExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.LbRouteExtension
 
     /// See `DepServiceClient.createLbRouteExtension`.
     func createLbRouteExtension(
-      request: CreateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DepServiceClient.createLbRouteExtension`.
     func createLbRouteExtension(
-      withPolling: CreateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<LbRouteExtension>
+      withPolling: CreateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<LbRouteExtension>
 
     /// See `DepServiceClient.updateLbRouteExtension`.
     func updateLbRouteExtension(
-      request: UpdateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DepServiceClient.updateLbRouteExtension`.
     func updateLbRouteExtension(
-      withPolling: UpdateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<LbRouteExtension>
+      withPolling: UpdateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<LbRouteExtension>
 
     /// See `DepServiceClient.deleteLbRouteExtension`.
     func deleteLbRouteExtension(
-      request: DeleteLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLbRouteExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DepServiceClient.deleteLbRouteExtension`.
     func deleteLbRouteExtension(
-      withPolling: DeleteLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteLbRouteExtensionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DepServiceClient.listLbEdgeExtensions`.
     func listLbEdgeExtensions(
-      request: ListLbEdgeExtensionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLbEdgeExtensionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.ListLbEdgeExtensionsResponse
 
     /// See `DepServiceClient.listLbEdgeExtensions`.
     func listLbEdgeExtensions(
-      byItem: ListLbEdgeExtensionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListLbEdgeExtensionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<LbEdgeExtension, Swift.Error>
 
     /// See `DepServiceClient.getLbEdgeExtension`.
     func getLbEdgeExtension(
-      request: GetLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.LbEdgeExtension
 
     /// See `DepServiceClient.createLbEdgeExtension`.
     func createLbEdgeExtension(
-      request: CreateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DepServiceClient.createLbEdgeExtension`.
     func createLbEdgeExtension(
-      withPolling: CreateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<LbEdgeExtension>
+      withPolling: CreateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<LbEdgeExtension>
 
     /// See `DepServiceClient.updateLbEdgeExtension`.
     func updateLbEdgeExtension(
-      request: UpdateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DepServiceClient.updateLbEdgeExtension`.
     func updateLbEdgeExtension(
-      withPolling: UpdateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<LbEdgeExtension>
+      withPolling: UpdateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<LbEdgeExtension>
 
     /// See `DepServiceClient.deleteLbEdgeExtension`.
     func deleteLbEdgeExtension(
-      request: DeleteLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DepServiceClient.deleteLbEdgeExtension`.
     func deleteLbEdgeExtension(
-      withPolling: DeleteLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DepServiceClient.listAuthzExtensions`.
     func listAuthzExtensions(
-      request: ListAuthzExtensionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAuthzExtensionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.ListAuthzExtensionsResponse
 
     /// See `DepServiceClient.listAuthzExtensions`.
     func listAuthzExtensions(
-      byItem: ListAuthzExtensionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAuthzExtensionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AuthzExtension, Swift.Error>
 
     /// See `DepServiceClient.getAuthzExtension`.
     func getAuthzExtension(
-      request: GetAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAuthzExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.AuthzExtension
 
     /// See `DepServiceClient.createAuthzExtension`.
     func createAuthzExtension(
-      request: CreateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAuthzExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DepServiceClient.createAuthzExtension`.
     func createAuthzExtension(
-      withPolling: CreateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AuthzExtension>
+      withPolling: CreateAuthzExtensionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AuthzExtension>
 
     /// See `DepServiceClient.updateAuthzExtension`.
     func updateAuthzExtension(
-      request: UpdateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAuthzExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DepServiceClient.updateAuthzExtension`.
     func updateAuthzExtension(
-      withPolling: UpdateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AuthzExtension>
+      withPolling: UpdateAuthzExtensionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AuthzExtension>
 
     /// See `DepServiceClient.deleteAuthzExtension`.
     func deleteAuthzExtension(
-      request: DeleteAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAuthzExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DepServiceClient.deleteAuthzExtension`.
     func deleteAuthzExtension(
-      withPolling: DeleteAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteAuthzExtensionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DepServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `DepServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `DepServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `DepServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `DepServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `DepServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `DepServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `DepServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `DepServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `DepServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1304,9 +1302,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func listLbTrafficExtensions(
-    request: ListLbTrafficExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLbTrafficExtensionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.ListLbTrafficExtensionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLbTrafficExtensions(
@@ -1316,14 +1314,14 @@ extension Clients.DepServiceProtocol {
   }
 
   public func listLbTrafficExtensions(
-    byItem: ListLbTrafficExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLbTrafficExtensionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<LbTrafficExtension, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudNetworkServicesV1.ListLbTrafficExtensionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listLbTrafficExtensions(
@@ -1342,9 +1340,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func getLbTrafficExtension(
-    request: GetLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.LbTrafficExtension {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getLbTrafficExtension(
@@ -1363,25 +1361,24 @@ extension Clients.DepServiceProtocol {
   }
 
   public func createLbTrafficExtension(
-    request: CreateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createLbTrafficExtension(withPolling: CreateLbTrafficExtensionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<LbTrafficExtension>
+    -> any GoogleGax.PollableOperation<LbTrafficExtension>
   {
     try await self.createLbTrafficExtension(withPolling: withPolling, options: .init())
   }
 
   public func createLbTrafficExtension(
-    withPolling: CreateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbTrafficExtension> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<LbTrafficExtension>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LbTrafficExtension> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LbTrafficExtension>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1389,7 +1386,7 @@ extension Clients.DepServiceProtocol {
     parent: Swift.String,
     lbTrafficExtension: LbTrafficExtension?,
     lbTrafficExtensionId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbTrafficExtension> {
+  ) async throws -> any GoogleGax.PollableOperation<LbTrafficExtension> {
     let request = CreateLbTrafficExtensionRequest().with {
       $0.parent = parent
       $0.lbTrafficExtension = lbTrafficExtension
@@ -1405,32 +1402,31 @@ extension Clients.DepServiceProtocol {
   }
 
   public func updateLbTrafficExtension(
-    request: UpdateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateLbTrafficExtension(withPolling: UpdateLbTrafficExtensionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<LbTrafficExtension>
+    -> any GoogleGax.PollableOperation<LbTrafficExtension>
   {
     try await self.updateLbTrafficExtension(withPolling: withPolling, options: .init())
   }
 
   public func updateLbTrafficExtension(
-    withPolling: UpdateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbTrafficExtension> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<LbTrafficExtension>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LbTrafficExtension> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LbTrafficExtension>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateLbTrafficExtension(
     lbTrafficExtension: LbTrafficExtension?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbTrafficExtension> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<LbTrafficExtension> {
     let request = UpdateLbTrafficExtensionRequest().with {
       $0.lbTrafficExtension = lbTrafficExtension
       $0.updateMask = updateMask
@@ -1445,30 +1441,30 @@ extension Clients.DepServiceProtocol {
   }
 
   public func deleteLbTrafficExtension(
-    request: DeleteLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteLbTrafficExtension(withPolling: DeleteLbTrafficExtensionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteLbTrafficExtension(withPolling: withPolling, options: .init())
   }
 
   public func deleteLbTrafficExtension(
-    withPolling: DeleteLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteLbTrafficExtension(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteLbTrafficExtensionRequest().with {
       $0.name = name
     }
@@ -1482,9 +1478,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func listLbRouteExtensions(
-    request: ListLbRouteExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLbRouteExtensionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.ListLbRouteExtensionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLbRouteExtensions(
@@ -1494,14 +1490,14 @@ extension Clients.DepServiceProtocol {
   }
 
   public func listLbRouteExtensions(
-    byItem: ListLbRouteExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLbRouteExtensionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<LbRouteExtension, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudNetworkServicesV1.ListLbRouteExtensionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listLbRouteExtensions(
@@ -1520,9 +1516,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func getLbRouteExtension(
-    request: GetLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLbRouteExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.LbRouteExtension {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getLbRouteExtension(
@@ -1541,24 +1537,24 @@ extension Clients.DepServiceProtocol {
   }
 
   public func createLbRouteExtension(
-    request: CreateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createLbRouteExtension(withPolling: CreateLbRouteExtensionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<LbRouteExtension>
+    -> any GoogleGax.PollableOperation<LbRouteExtension>
   {
     try await self.createLbRouteExtension(withPolling: withPolling, options: .init())
   }
 
   public func createLbRouteExtension(
-    withPolling: CreateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbRouteExtension> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LbRouteExtension>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LbRouteExtension> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LbRouteExtension>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1566,7 +1562,7 @@ extension Clients.DepServiceProtocol {
     parent: Swift.String,
     lbRouteExtension: LbRouteExtension?,
     lbRouteExtensionId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbRouteExtension> {
+  ) async throws -> any GoogleGax.PollableOperation<LbRouteExtension> {
     let request = CreateLbRouteExtensionRequest().with {
       $0.parent = parent
       $0.lbRouteExtension = lbRouteExtension
@@ -1582,31 +1578,31 @@ extension Clients.DepServiceProtocol {
   }
 
   public func updateLbRouteExtension(
-    request: UpdateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateLbRouteExtension(withPolling: UpdateLbRouteExtensionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<LbRouteExtension>
+    -> any GoogleGax.PollableOperation<LbRouteExtension>
   {
     try await self.updateLbRouteExtension(withPolling: withPolling, options: .init())
   }
 
   public func updateLbRouteExtension(
-    withPolling: UpdateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbRouteExtension> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LbRouteExtension>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LbRouteExtension> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LbRouteExtension>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateLbRouteExtension(
     lbRouteExtension: LbRouteExtension?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbRouteExtension> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<LbRouteExtension> {
     let request = UpdateLbRouteExtensionRequest().with {
       $0.lbRouteExtension = lbRouteExtension
       $0.updateMask = updateMask
@@ -1621,30 +1617,30 @@ extension Clients.DepServiceProtocol {
   }
 
   public func deleteLbRouteExtension(
-    request: DeleteLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteLbRouteExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteLbRouteExtension(withPolling: DeleteLbRouteExtensionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteLbRouteExtension(withPolling: withPolling, options: .init())
   }
 
   public func deleteLbRouteExtension(
-    withPolling: DeleteLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteLbRouteExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteLbRouteExtension(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteLbRouteExtensionRequest().with {
       $0.name = name
     }
@@ -1658,9 +1654,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func listLbEdgeExtensions(
-    request: ListLbEdgeExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLbEdgeExtensionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.ListLbEdgeExtensionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLbEdgeExtensions(
@@ -1670,14 +1666,14 @@ extension Clients.DepServiceProtocol {
   }
 
   public func listLbEdgeExtensions(
-    byItem: ListLbEdgeExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLbEdgeExtensionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<LbEdgeExtension, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudNetworkServicesV1.ListLbEdgeExtensionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listLbEdgeExtensions(
@@ -1696,9 +1692,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func getLbEdgeExtension(
-    request: GetLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.LbEdgeExtension {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getLbEdgeExtension(
@@ -1717,24 +1713,24 @@ extension Clients.DepServiceProtocol {
   }
 
   public func createLbEdgeExtension(
-    request: CreateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createLbEdgeExtension(withPolling: CreateLbEdgeExtensionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<LbEdgeExtension>
+    -> any GoogleGax.PollableOperation<LbEdgeExtension>
   {
     try await self.createLbEdgeExtension(withPolling: withPolling, options: .init())
   }
 
   public func createLbEdgeExtension(
-    withPolling: CreateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbEdgeExtension> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LbEdgeExtension>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LbEdgeExtension> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LbEdgeExtension>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1742,7 +1738,7 @@ extension Clients.DepServiceProtocol {
     parent: Swift.String,
     lbEdgeExtension: LbEdgeExtension?,
     lbEdgeExtensionId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbEdgeExtension> {
+  ) async throws -> any GoogleGax.PollableOperation<LbEdgeExtension> {
     let request = CreateLbEdgeExtensionRequest().with {
       $0.parent = parent
       $0.lbEdgeExtension = lbEdgeExtension
@@ -1758,31 +1754,31 @@ extension Clients.DepServiceProtocol {
   }
 
   public func updateLbEdgeExtension(
-    request: UpdateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateLbEdgeExtension(withPolling: UpdateLbEdgeExtensionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<LbEdgeExtension>
+    -> any GoogleGax.PollableOperation<LbEdgeExtension>
   {
     try await self.updateLbEdgeExtension(withPolling: withPolling, options: .init())
   }
 
   public func updateLbEdgeExtension(
-    withPolling: UpdateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbEdgeExtension> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LbEdgeExtension>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LbEdgeExtension> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LbEdgeExtension>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateLbEdgeExtension(
     lbEdgeExtension: LbEdgeExtension?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<LbEdgeExtension> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<LbEdgeExtension> {
     let request = UpdateLbEdgeExtensionRequest().with {
       $0.lbEdgeExtension = lbEdgeExtension
       $0.updateMask = updateMask
@@ -1797,30 +1793,30 @@ extension Clients.DepServiceProtocol {
   }
 
   public func deleteLbEdgeExtension(
-    request: DeleteLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteLbEdgeExtension(withPolling: DeleteLbEdgeExtensionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteLbEdgeExtension(withPolling: withPolling, options: .init())
   }
 
   public func deleteLbEdgeExtension(
-    withPolling: DeleteLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteLbEdgeExtension(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteLbEdgeExtensionRequest().with {
       $0.name = name
     }
@@ -1834,9 +1830,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func listAuthzExtensions(
-    request: ListAuthzExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAuthzExtensionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.ListAuthzExtensionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAuthzExtensions(
@@ -1846,14 +1842,14 @@ extension Clients.DepServiceProtocol {
   }
 
   public func listAuthzExtensions(
-    byItem: ListAuthzExtensionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAuthzExtensionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AuthzExtension, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudNetworkServicesV1.ListAuthzExtensionsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAuthzExtensions(
@@ -1872,9 +1868,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func getAuthzExtension(
-    request: GetAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAuthzExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkServicesV1.AuthzExtension {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAuthzExtension(
@@ -1893,24 +1889,24 @@ extension Clients.DepServiceProtocol {
   }
 
   public func createAuthzExtension(
-    request: CreateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAuthzExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createAuthzExtension(withPolling: CreateAuthzExtensionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AuthzExtension>
+    -> any GoogleGax.PollableOperation<AuthzExtension>
   {
     try await self.createAuthzExtension(withPolling: withPolling, options: .init())
   }
 
   public func createAuthzExtension(
-    withPolling: CreateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthzExtension> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AuthzExtension>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateAuthzExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AuthzExtension> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AuthzExtension>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1918,7 +1914,7 @@ extension Clients.DepServiceProtocol {
     parent: Swift.String,
     authzExtension: AuthzExtension?,
     authzExtensionId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthzExtension> {
+  ) async throws -> any GoogleGax.PollableOperation<AuthzExtension> {
     let request = CreateAuthzExtensionRequest().with {
       $0.parent = parent
       $0.authzExtension = authzExtension
@@ -1934,31 +1930,31 @@ extension Clients.DepServiceProtocol {
   }
 
   public func updateAuthzExtension(
-    request: UpdateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAuthzExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAuthzExtension(withPolling: UpdateAuthzExtensionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AuthzExtension>
+    -> any GoogleGax.PollableOperation<AuthzExtension>
   {
     try await self.updateAuthzExtension(withPolling: withPolling, options: .init())
   }
 
   public func updateAuthzExtension(
-    withPolling: UpdateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthzExtension> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AuthzExtension>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateAuthzExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AuthzExtension> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AuthzExtension>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateAuthzExtension(
     authzExtension: AuthzExtension?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthzExtension> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<AuthzExtension> {
     let request = UpdateAuthzExtensionRequest().with {
       $0.authzExtension = authzExtension
       $0.updateMask = updateMask
@@ -1973,30 +1969,30 @@ extension Clients.DepServiceProtocol {
   }
 
   public func deleteAuthzExtension(
-    request: DeleteAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAuthzExtensionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAuthzExtension(withPolling: DeleteAuthzExtensionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteAuthzExtension(withPolling: withPolling, options: .init())
   }
 
   public func deleteAuthzExtension(
-    withPolling: DeleteAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteAuthzExtensionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteAuthzExtension(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteAuthzExtensionRequest().with {
       $0.name = name
     }
@@ -2010,9 +2006,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -2022,13 +2018,13 @@ extension Clients.DepServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -2038,9 +2034,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -2050,9 +2046,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -2062,9 +2058,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -2074,9 +2070,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -2086,9 +2082,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -2098,13 +2094,13 @@ extension Clients.DepServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -2125,9 +2121,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -2144,9 +2140,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -2163,9 +2159,9 @@ extension Clients.DepServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

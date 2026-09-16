@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A simple descriptor of a resource type.
 ///
@@ -64,7 +64,7 @@ import Foundation
 ///       pattern: "folders/{folder}/logs/{log}"
 ///       pattern: "organizations/{organization}/logs/{log}"
 ///       pattern: "billingAccounts/{billing_account}/logs/{log}"
-public struct ResourceDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ResourceDescriptor: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource type. It must be in the format of
@@ -146,7 +146,7 @@ public struct ResourceDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// style. See the specific style flags for additional information.
   public var style: [ResourceDescriptor.Style] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ResourceDescriptor`.
   public init() {}
@@ -215,7 +215,7 @@ public struct ResourceDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -450,10 +450,10 @@ public struct ResourceDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.ResourceDescriptor"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

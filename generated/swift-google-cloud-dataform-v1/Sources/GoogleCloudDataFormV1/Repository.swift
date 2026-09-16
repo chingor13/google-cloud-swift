@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a Dataform Git repository.
-public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Repository: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The repository's name.
@@ -38,7 +38,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var teamFolderName: Swift.String? = nil
 
   /// Output only. The timestamp of when the repository was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The repository's user-friendly name.
   public var displayName: Swift.String = Swift.String()
@@ -84,7 +84,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// format of this field is a JSON string.
   public var internalMetadata: Swift.String? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Repository`.
   public init() {}
@@ -151,8 +151,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.containingFolder = try container.decodeIfPresent(
       Swift.String.self, forKey: .containingFolder)
     self.teamFolderName = try container.decodeIfPresent(Swift.String.self, forKey: .teamFolderName)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
       self.displayName = value
     }
@@ -186,7 +185,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       Swift.String.self, forKey: .internalMetadata)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -214,7 +213,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Controls Git remote configuration for a repository.
-  public struct GitRemoteSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GitRemoteSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The Git remote's URL.
@@ -248,7 +247,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var tokenStatus: Repository.GitRemoteSettings.TokenStatus = Repository.GitRemoteSettings
       .TokenStatus()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GitRemoteSettings`.
     public init() {}
@@ -321,7 +320,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -341,7 +340,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Configures fields for performing SSH authentication.
-    public struct SshAuthenticationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SshAuthenticationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The name of the Secret Manager secret version to use as a
@@ -353,7 +352,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Git host.
       public var hostPublicKey: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SshAuthenticationConfig`.
       public init() {}
@@ -399,7 +398,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -416,11 +415,11 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.dataform.v1.Repository.GitRemoteSettings.SshAuthenticationConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -540,16 +539,16 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.Repository.GitRemoteSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configures workspace compilation overrides for a repository.
-  public struct WorkspaceCompilationOverrides: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct WorkspaceCompilationOverrides: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The default database (Google Cloud project ID).
@@ -562,7 +561,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The prefix that should be prepended to all table names.
     public var tablePrefix: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `WorkspaceCompilationOverrides`.
     public init() {}
@@ -610,7 +609,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -627,21 +626,21 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.Repository.WorkspaceCompilationOverrides"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.Repository"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudDeviceStreamingV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: DirectAccessServiceClient) async throws {
   try await client.cancelDeviceSession(

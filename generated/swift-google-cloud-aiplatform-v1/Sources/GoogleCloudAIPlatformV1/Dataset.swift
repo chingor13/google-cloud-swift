@@ -16,10 +16,10 @@
 
 #if DatasetService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A collection of DataItems and Annotations on them.
-  public struct Dataset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Dataset: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Identifier. The resource name of the Dataset.
@@ -42,17 +42,17 @@
     public var metadataSchemaUri: Swift.String = Swift.String()
 
     /// Required. Additional information about the Dataset.
-    public var metadata: GoogleCloudWKT.Value? = nil
+    public var metadata: GoogleWKT.Value? = nil
 
     /// Output only. The number of DataItems in this Dataset. Only apply for
     /// non-structured Dataset.
     public var dataItemCount: Swift.Int64 = Swift.Int64()
 
     /// Output only. Timestamp when this Dataset was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when this Dataset was last updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Used to perform consistent read-modify-write updates. If not set, a blind
     /// "overwrite" update happens.
@@ -109,7 +109,7 @@
     /// Output only. Reserved for future use.
     public var satisfiesPzi: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Dataset`.
     public init() {}
@@ -184,14 +184,12 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .metadataSchemaUri) {
         self.metadataSchemaUri = value
       }
-      self.metadata = try container.decodeIfPresent(GoogleCloudWKT.Value.self, forKey: .metadata)
+      self.metadata = try container.decodeIfPresent(GoogleWKT.Value.self, forKey: .metadata)
       if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .dataItemCount) {
         self.dataItemCount = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
         self.etag = value
       }
@@ -219,7 +217,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -249,11 +247,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Dataset"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

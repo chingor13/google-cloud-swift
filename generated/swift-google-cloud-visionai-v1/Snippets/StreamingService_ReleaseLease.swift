@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudVideoAIV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: StreamingServiceClient) async throws {
   let response = try await client.releaseLease(

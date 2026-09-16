@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudTelcoAutomationV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: TelcoAutomationClient) async throws {
   let response = try await client.rollbackDeployment(

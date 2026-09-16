@@ -18,22 +18,22 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Allow users to create and manage tag keys.
 ///
 /// @Snippet(path: "TagKeysQuickstart")
 public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   let inner: any Clients.TagKeysStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `TagKeysClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.TagKeysStub = try Clients.TagKeysTransport(options)
     inner = Clients.TagKeysRetry(inner, options: options)
     if let logger = options.logger {
@@ -48,7 +48,7 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_ListTagKeys")
   public func listTagKeys(
-    request: ListTagKeysRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTagKeysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudResourceManagerV3.ListTagKeysResponse {
     try await self.inner.listTagKeys(request: request, options: options)
   }
@@ -57,7 +57,7 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_ListTagKeys")
   public func listTagKeys(
-    byItem: ListTagKeysRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTagKeysRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TagKey, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudResourceManagerV3.ListTagKeysResponse in
@@ -65,7 +65,7 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
       request.pageToken = token
       return try await self.listTagKeys(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Retrieves a TagKey. This method will return `PERMISSION_DENIED` if the
@@ -73,7 +73,7 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_GetTagKey")
   public func getTagKey(
-    request: GetTagKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTagKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudResourceManagerV3.TagKey {
     try await self.inner.getTagKey(request: request, options: options)
   }
@@ -84,7 +84,7 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_GetNamespacedTagKey")
   public func getNamespacedTagKey(
-    request: GetNamespacedTagKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetNamespacedTagKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudResourceManagerV3.TagKey {
     try await self.inner.getNamespacedTagKey(request: request, options: options)
   }
@@ -96,7 +96,7 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_CreateTagKey")
   public func createTagKey(
-    request: CreateTagKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTagKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createTagKey(request: request, options: options)
   }
@@ -108,21 +108,20 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_CreateTagKey")
   public func createTagKey(
-    withPolling: CreateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
+    withPolling: CreateTagKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<TagKey> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<TagKey>.State in
       return try op._extractStatus(TagKey.self)
     }
     let rawOp = try await self.createTagKey(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<TagKey>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -134,7 +133,7 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_UpdateTagKey")
   public func updateTagKey(
-    request: UpdateTagKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateTagKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateTagKey(request: request, options: options)
   }
@@ -143,21 +142,20 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_UpdateTagKey")
   public func updateTagKey(
-    withPolling: UpdateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
+    withPolling: UpdateTagKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<TagKey> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<TagKey>.State in
       return try op._extractStatus(TagKey.self)
     }
     let rawOp = try await self.updateTagKey(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<TagKey>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -170,7 +168,7 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_DeleteTagKey")
   public func deleteTagKey(
-    request: DeleteTagKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteTagKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteTagKey(request: request, options: options)
   }
@@ -180,21 +178,20 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_DeleteTagKey")
   public func deleteTagKey(
-    withPolling: DeleteTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
+    withPolling: DeleteTagKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<TagKey> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<TagKey>.State in
       return try op._extractStatus(TagKey.self)
     }
     let rawOp = try await self.deleteTagKey(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<TagKey>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -211,7 +208,7 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -224,7 +221,7 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -237,7 +234,7 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -248,7 +245,7 @@ public final class TagKeysClient: Clients.TagKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "TagKeys_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -296,38 +293,38 @@ extension Clients {
     func createTagKey(request: CreateTagKeyRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `TagKeysClient.createTagKey`.
-    func createTagKey(withPolling: CreateTagKeyRequest) async throws -> any GoogleCloudGax
+    func createTagKey(withPolling: CreateTagKeyRequest) async throws -> any GoogleGax
       .PollableOperation<TagKey>
 
     /// See `TagKeysClient.createTagKey`.
     func createTagKey(
       tagKey: TagKey?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
+    ) async throws -> any GoogleGax.PollableOperation<TagKey>
 
     /// See `TagKeysClient.updateTagKey`.
     func updateTagKey(request: UpdateTagKeyRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `TagKeysClient.updateTagKey`.
-    func updateTagKey(withPolling: UpdateTagKeyRequest) async throws -> any GoogleCloudGax
+    func updateTagKey(withPolling: UpdateTagKeyRequest) async throws -> any GoogleGax
       .PollableOperation<TagKey>
 
     /// See `TagKeysClient.updateTagKey`.
     func updateTagKey(
       tagKey: TagKey?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<TagKey>
 
     /// See `TagKeysClient.deleteTagKey`.
     func deleteTagKey(request: DeleteTagKeyRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `TagKeysClient.deleteTagKey`.
-    func deleteTagKey(withPolling: DeleteTagKeyRequest) async throws -> any GoogleCloudGax
+    func deleteTagKey(withPolling: DeleteTagKeyRequest) async throws -> any GoogleGax
       .PollableOperation<TagKey>
 
     /// See `TagKeysClient.deleteTagKey`.
     func deleteTagKey(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
+    ) async throws -> any GoogleGax.PollableOperation<TagKey>
 
     /// See `TagKeysClient.getIamPolicy`.
     func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws -> GoogleIAMV1.Policy
@@ -358,67 +355,67 @@ extension Clients {
 
     /// See `TagKeysClient.listTagKeys`.
     func listTagKeys(
-      request: ListTagKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTagKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudResourceManagerV3.ListTagKeysResponse
 
     /// See `TagKeysClient.listTagKeys`.
     func listTagKeys(
-      byItem: ListTagKeysRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTagKeysRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TagKey, Swift.Error>
 
     /// See `TagKeysClient.getTagKey`.
     func getTagKey(
-      request: GetTagKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTagKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudResourceManagerV3.TagKey
 
     /// See `TagKeysClient.getNamespacedTagKey`.
     func getNamespacedTagKey(
-      request: GetNamespacedTagKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNamespacedTagKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudResourceManagerV3.TagKey
 
     /// See `TagKeysClient.createTagKey`.
     func createTagKey(
-      request: CreateTagKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTagKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `TagKeysClient.createTagKey`.
     func createTagKey(
-      withPolling: CreateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
+      withPolling: CreateTagKeyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<TagKey>
 
     /// See `TagKeysClient.updateTagKey`.
     func updateTagKey(
-      request: UpdateTagKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTagKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `TagKeysClient.updateTagKey`.
     func updateTagKey(
-      withPolling: UpdateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
+      withPolling: UpdateTagKeyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<TagKey>
 
     /// See `TagKeysClient.deleteTagKey`.
     func deleteTagKey(
-      request: DeleteTagKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTagKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `TagKeysClient.deleteTagKey`.
     func deleteTagKey(
-      withPolling: DeleteTagKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TagKey>
+      withPolling: DeleteTagKeyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<TagKey>
 
     /// See `TagKeysClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `TagKeysClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `TagKeysClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
   }
 }
@@ -432,9 +429,9 @@ extension Clients.TagKeysProtocol {
   }
 
   public func listTagKeys(
-    request: ListTagKeysRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTagKeysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudResourceManagerV3.ListTagKeysResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTagKeys(
@@ -444,13 +441,13 @@ extension Clients.TagKeysProtocol {
   }
 
   public func listTagKeys(
-    byItem: ListTagKeysRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTagKeysRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TagKey, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudResourceManagerV3.ListTagKeysResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listTagKeys(
@@ -469,9 +466,9 @@ extension Clients.TagKeysProtocol {
   }
 
   public func getTagKey(
-    request: GetTagKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTagKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudResourceManagerV3.TagKey {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getTagKey(
@@ -490,9 +487,9 @@ extension Clients.TagKeysProtocol {
   }
 
   public func getNamespacedTagKey(
-    request: GetNamespacedTagKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetNamespacedTagKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudResourceManagerV3.TagKey {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getNamespacedTagKey(
@@ -510,30 +507,30 @@ extension Clients.TagKeysProtocol {
   }
 
   public func createTagKey(
-    request: CreateTagKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTagKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createTagKey(withPolling: CreateTagKeyRequest) async throws -> any GoogleCloudGax
+  public func createTagKey(withPolling: CreateTagKeyRequest) async throws -> any GoogleGax
     .PollableOperation<TagKey>
   {
     try await self.createTagKey(withPolling: withPolling, options: .init())
   }
 
   public func createTagKey(
-    withPolling: CreateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateTagKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<TagKey> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<TagKey>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func createTagKey(
     tagKey: TagKey?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
+  ) async throws -> any GoogleGax.PollableOperation<TagKey> {
     let request = CreateTagKeyRequest().with {
       $0.tagKey = tagKey
     }
@@ -546,31 +543,31 @@ extension Clients.TagKeysProtocol {
   }
 
   public func updateTagKey(
-    request: UpdateTagKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateTagKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateTagKey(withPolling: UpdateTagKeyRequest) async throws -> any GoogleCloudGax
+  public func updateTagKey(withPolling: UpdateTagKeyRequest) async throws -> any GoogleGax
     .PollableOperation<TagKey>
   {
     try await self.updateTagKey(withPolling: withPolling, options: .init())
   }
 
   public func updateTagKey(
-    withPolling: UpdateTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateTagKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<TagKey> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<TagKey>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateTagKey(
     tagKey: TagKey?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<TagKey> {
     let request = UpdateTagKeyRequest().with {
       $0.tagKey = tagKey
       $0.updateMask = updateMask
@@ -584,30 +581,30 @@ extension Clients.TagKeysProtocol {
   }
 
   public func deleteTagKey(
-    request: DeleteTagKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteTagKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteTagKey(withPolling: DeleteTagKeyRequest) async throws -> any GoogleCloudGax
+  public func deleteTagKey(withPolling: DeleteTagKeyRequest) async throws -> any GoogleGax
     .PollableOperation<TagKey>
   {
     try await self.deleteTagKey(withPolling: withPolling, options: .init())
   }
 
   public func deleteTagKey(
-    withPolling: DeleteTagKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TagKey>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteTagKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<TagKey> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<TagKey>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteTagKey(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<TagKey> {
+  ) async throws -> any GoogleGax.PollableOperation<TagKey> {
     let request = DeleteTagKeyRequest().with {
       $0.name = name
     }
@@ -621,9 +618,9 @@ extension Clients.TagKeysProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(
@@ -642,9 +639,9 @@ extension Clients.TagKeysProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(
@@ -665,9 +662,9 @@ extension Clients.TagKeysProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(
@@ -688,9 +685,9 @@ extension Clients.TagKeysProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

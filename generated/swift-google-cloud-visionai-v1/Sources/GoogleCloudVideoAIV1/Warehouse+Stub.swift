@@ -16,283 +16,283 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol WarehouseStub: Sendable {
     func createAsset(
-      request: CreateAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Asset
 
     func updateAsset(
-      request: UpdateAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Asset
 
     func getAsset(
-      request: GetAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Asset
 
     func listAssets(
-      request: ListAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListAssetsResponse
 
     func deleteAsset(
-      request: DeleteAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func uploadAsset(
-      request: UploadAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: UploadAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func generateRetrievalUrl(
-      request: GenerateRetrievalUrlRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateRetrievalUrlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.GenerateRetrievalUrlResponse
 
     func analyzeAsset(
-      request: AnalyzeAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func indexAsset(
-      request: IndexAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: IndexAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func removeIndexAsset(
-      request: RemoveIndexAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveIndexAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func viewIndexedAssets(
-      request: ViewIndexedAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ViewIndexedAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ViewIndexedAssetsResponse
 
     func createIndex(
-      request: CreateIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateIndex(
-      request: UpdateIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getIndex(
-      request: GetIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Index
 
     func listIndexes(
-      request: ListIndexesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIndexesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListIndexesResponse
 
     func deleteIndex(
-      request: DeleteIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createCorpus(
-      request: CreateCorpusRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCorpusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getCorpus(
-      request: GetCorpusRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCorpusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Corpus
 
     func updateCorpus(
-      request: UpdateCorpusRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCorpusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Corpus
 
     func listCorpora(
-      request: ListCorporaRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCorporaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListCorporaResponse
 
     func deleteCorpus(
-      request: DeleteCorpusRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCorpusRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func analyzeCorpus(
-      request: AnalyzeCorpusRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeCorpusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createDataSchema(
-      request: CreateDataSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.DataSchema
 
     func updateDataSchema(
-      request: UpdateDataSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.DataSchema
 
     func getDataSchema(
-      request: GetDataSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.DataSchema
 
     func deleteDataSchema(
-      request: DeleteDataSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listDataSchemas(
-      request: ListDataSchemasRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataSchemasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListDataSchemasResponse
 
     func createAnnotation(
-      request: CreateAnnotationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAnnotationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Annotation
 
     func getAnnotation(
-      request: GetAnnotationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAnnotationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Annotation
 
     func listAnnotations(
-      request: ListAnnotationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAnnotationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListAnnotationsResponse
 
     func updateAnnotation(
-      request: UpdateAnnotationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAnnotationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Annotation
 
     func deleteAnnotation(
-      request: DeleteAnnotationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAnnotationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func clipAsset(
-      request: ClipAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: ClipAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ClipAssetResponse
 
     func generateHlsUri(
-      request: GenerateHlsUriRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateHlsUriRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.GenerateHlsUriResponse
 
     func importAssets(
-      request: ImportAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createSearchConfig(
-      request: CreateSearchConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSearchConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.SearchConfig
 
     func updateSearchConfig(
-      request: UpdateSearchConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSearchConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.SearchConfig
 
     func getSearchConfig(
-      request: GetSearchConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSearchConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.SearchConfig
 
     func deleteSearchConfig(
-      request: DeleteSearchConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSearchConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listSearchConfigs(
-      request: ListSearchConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSearchConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListSearchConfigsResponse
 
     func createSearchHypernym(
-      request: CreateSearchHypernymRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSearchHypernymRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.SearchHypernym
 
     func updateSearchHypernym(
-      request: UpdateSearchHypernymRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSearchHypernymRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.SearchHypernym
 
     func getSearchHypernym(
-      request: GetSearchHypernymRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSearchHypernymRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.SearchHypernym
 
     func deleteSearchHypernym(
-      request: DeleteSearchHypernymRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSearchHypernymRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listSearchHypernyms(
-      request: ListSearchHypernymsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSearchHypernymsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListSearchHypernymsResponse
 
     func searchAssets(
-      request: SearchAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.SearchAssetsResponse
 
     func searchIndexEndpoint(
-      request: SearchIndexEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchIndexEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.SearchIndexEndpointResponse
 
     func createIndexEndpoint(
-      request: CreateIndexEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIndexEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getIndexEndpoint(
-      request: GetIndexEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIndexEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.IndexEndpoint
 
     func listIndexEndpoints(
-      request: ListIndexEndpointsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIndexEndpointsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListIndexEndpointsResponse
 
     func updateIndexEndpoint(
-      request: UpdateIndexEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIndexEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteIndexEndpoint(
-      request: DeleteIndexEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIndexEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deployIndex(
-      request: DeployIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: DeployIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func undeployIndex(
-      request: UndeployIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeployIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createCollection(
-      request: CreateCollectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCollectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCollection(
-      request: DeleteCollectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCollectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getCollection(
-      request: GetCollectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCollectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Collection
 
     func updateCollection(
-      request: UpdateCollectionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCollectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Collection
 
     func listCollections(
-      request: ListCollectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCollectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListCollectionsResponse
 
     func addCollectionItem(
-      request: AddCollectionItemRequest, options: GoogleCloudGax.RequestOptions
+      request: AddCollectionItemRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.AddCollectionItemResponse
 
     func removeCollectionItem(
-      request: RemoveCollectionItemRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveCollectionItemRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.RemoveCollectionItemResponse
 
     func viewCollectionItems(
-      request: ViewCollectionItemsRequest, options: GoogleCloudGax.RequestOptions
+      request: ViewCollectionItemsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ViewCollectionItemsResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

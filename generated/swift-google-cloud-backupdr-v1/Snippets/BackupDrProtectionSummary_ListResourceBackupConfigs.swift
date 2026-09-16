@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudBackupDRV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: BackupDrProtectionSummaryClient, parent: String) async throws {
   let items = try client.listResourceBackupConfigs(

@@ -19,8 +19,8 @@
   // snippet.show
   import Foundation
   import GoogleCloudDiscoveryEngineV1
-  import GoogleCloudWKT
   import GoogleLongRunning
+  import GoogleWKT
 
   func sample(client: SessionServiceClient) async throws {
     try await client.cancelOperation(

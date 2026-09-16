@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A response from a batch search operation.
-public struct BatchSearchDataObjectsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchSearchDataObjectsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. A list of search responses, one for each request in the batch.
   /// If a ranker is used, a single ranked list of results is returned.
   public var results: [SearchDataObjectsResponse] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchSearchDataObjectsResponse`.
   public init() {}
@@ -64,7 +64,7 @@ public struct BatchSearchDataObjectsResponse: Codable, Equatable, GoogleCloudWKT
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -79,10 +79,10 @@ public struct BatchSearchDataObjectsResponse: Codable, Equatable, GoogleCloudWKT
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vectorsearch.v1.BatchSearchDataObjectsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

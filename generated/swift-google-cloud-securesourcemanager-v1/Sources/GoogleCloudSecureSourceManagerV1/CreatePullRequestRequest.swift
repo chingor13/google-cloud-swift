@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// CreatePullRequestRequest is the request to create a pull request.
-public struct CreatePullRequestRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreatePullRequestRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The repository that the pull request is created from. Format:
@@ -28,7 +28,7 @@ public struct CreatePullRequestRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   /// Required. The pull request to create.
   public var pullRequest: PullRequest? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreatePullRequestRequest`.
   public init() {}
@@ -69,7 +69,7 @@ public struct CreatePullRequestRequest: Codable, Equatable, GoogleCloudWKT._AnyP
     self.pullRequest = try container.decodeIfPresent(PullRequest.self, forKey: .pullRequest)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -85,10 +85,10 @@ public struct CreatePullRequestRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securesourcemanager.v1.CreatePullRequestRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

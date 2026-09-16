@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudDataplexV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: CatalogServiceClient, projectId: String, locationId: String, entryGroupId: String

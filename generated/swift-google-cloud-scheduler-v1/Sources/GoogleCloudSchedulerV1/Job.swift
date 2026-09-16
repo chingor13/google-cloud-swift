@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for a job.
 /// The maximum allowed size for a job is 1MB.
-public struct Job: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optionally caller-specified in
@@ -104,7 +104,7 @@ public struct Job: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var timeZone: Swift.String = Swift.String()
 
   /// Output only. The creation time of the job.
-  public var userUpdateTime: GoogleCloudWKT.Timestamp? = nil
+  public var userUpdateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. State of the job.
   public var state: Job.State = Job.State()
@@ -115,10 +115,10 @@ public struct Job: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The next time the job is scheduled. Note that this may be a
   /// retry of a previously failed attempt or the next execution time
   /// according to the schedule.
-  public var scheduleTime: GoogleCloudWKT.Timestamp? = nil
+  public var scheduleTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time the last job attempt started.
-  public var lastAttemptTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastAttemptTime: GoogleWKT.Timestamp? = nil
 
   /// Settings that determine the retry behavior.
   public var retryConfig: RetryConfig? = nil
@@ -150,14 +150,14 @@ public struct Job: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.scheduler.v1.Job.http_target]: <doc:Job/OneOf_Target/httpTarget(_:)>
   /// [google.cloud.scheduler.v1.Job.pubsub_target]: <doc:Job/OneOf_Target/pubsubTarget(_:)>
   /// [google.cloud.scheduler.v1.RetryConfig]: <doc:RetryConfig>
-  public var attemptDeadline: GoogleCloudWKT.Duration? = nil
+  public var attemptDeadline: GoogleWKT.Duration? = nil
 
   /// Required.
   ///
   /// Delivery settings containing destination and parameters.
   public var target: OneOf_Target? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Job`.
   public init() {}
@@ -229,18 +229,18 @@ public struct Job: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.timeZone = value
     }
     self.userUpdateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .userUpdateTime)
+      GoogleWKT.Timestamp.self, forKey: .userUpdateTime)
     if let value = try container.decodeIfPresent(Job.State.self, forKey: .state) {
       self.state = value
     }
     self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
     self.scheduleTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .scheduleTime)
+      GoogleWKT.Timestamp.self, forKey: .scheduleTime)
     self.lastAttemptTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastAttemptTime)
+      GoogleWKT.Timestamp.self, forKey: .lastAttemptTime)
     self.retryConfig = try container.decodeIfPresent(RetryConfig.self, forKey: .retryConfig)
     self.attemptDeadline = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .attemptDeadline)
+      GoogleWKT.Duration.self, forKey: .attemptDeadline)
 
     var target: OneOf_Target? = nil
     let targetCheckAndSet = {
@@ -266,7 +266,7 @@ public struct Job: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.target = target
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -444,10 +444,10 @@ public struct Job: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.scheduler.v1.Job"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

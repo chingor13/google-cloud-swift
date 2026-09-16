@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// RevisionTemplate describes the data a revision should have when created from
 /// a template.
-public struct RevisionTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RevisionTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The unique name for the revision. If this field is omitted, it
@@ -61,7 +61,7 @@ public struct RevisionTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var vpcAccess: VpcAccess? = nil
 
   /// Optional. Max allowed time for an instance to respond to a request.
-  public var timeout: GoogleCloudWKT.Duration? = nil
+  public var timeout: GoogleWKT.Duration? = nil
 
   /// Optional. Email address of the IAM service account associated with the
   /// revision of the service. The service account represents the identity of the
@@ -98,7 +98,7 @@ public struct RevisionTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Optional. If encryption_key_revocation_action is SHUTDOWN, the duration
   /// before shutting down all instances. The minimum increment is 1 hour.
-  public var encryptionKeyShutdownDuration: GoogleCloudWKT.Duration? = nil
+  public var encryptionKeyShutdownDuration: GoogleWKT.Duration? = nil
 
   /// Optional. Enable session affinity.
   public var sessionAffinity: Swift.Bool = Swift.Bool()
@@ -112,7 +112,7 @@ public struct RevisionTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. True if GPU zonal redundancy is disabled on this revision.
   public var gpuZonalRedundancyDisabled: Swift.Bool? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RevisionTemplate`.
   public init() {}
@@ -198,7 +198,7 @@ public struct RevisionTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     self.scaling = try container.decodeIfPresent(RevisionScaling.self, forKey: .scaling)
     self.vpcAccess = try container.decodeIfPresent(VpcAccess.self, forKey: .vpcAccess)
-    self.timeout = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .timeout)
+    self.timeout = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeout)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .serviceAccount) {
       self.serviceAccount = value
     }
@@ -228,7 +228,7 @@ public struct RevisionTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.encryptionKeyRevocationAction = value
     }
     self.encryptionKeyShutdownDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .encryptionKeyShutdownDuration)
+      GoogleWKT.Duration.self, forKey: .encryptionKeyShutdownDuration)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .sessionAffinity) {
       self.sessionAffinity = value
     }
@@ -240,7 +240,7 @@ public struct RevisionTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       Swift.Bool.self, forKey: .gpuZonalRedundancyDisabled)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -275,10 +275,10 @@ public struct RevisionTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.RevisionTemplate"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

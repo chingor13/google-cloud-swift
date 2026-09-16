@@ -20,8 +20,8 @@
   import Foundation
   import GoogleCloudDialogflowV2
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
+  import GoogleWKT
 
   func sample(client: VersionsClient, projectId: String, versionId: String) async throws {
     let response = try await client.updateVersion(
@@ -30,7 +30,7 @@
           $0.version = Version().with {
             $0.name = "projects/\(projectId)/agent/versions/\(versionId)"
           }
-          $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+          $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
         }
     )
     print("Success: \(response)")

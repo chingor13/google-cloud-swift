@@ -16,11 +16,11 @@
 
 #if PersistentResourceService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents the spec of a group of resources of the same type,
   /// for example machine type, disk, and accelerators, in a PersistentResource.
-  public struct ResourcePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ResourcePool: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. The unique ID in a PersistentResource for referring to this
@@ -44,7 +44,7 @@
     /// Optional. Optional spec to configure GKE or Ray-on-Vertex autoscaling
     public var autoscalingSpec: ResourcePool.AutoscalingSpec? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ResourcePool`.
     public init() {}
@@ -100,7 +100,7 @@
         ResourcePool.AutoscalingSpec.self, forKey: .autoscalingSpec)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -118,7 +118,7 @@
     }
 
     /// The min/max number of replicas allowed if enabling autoscaling
-    public struct AutoscalingSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AutoscalingSpec: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. min replicas in the node pool,
@@ -135,7 +135,7 @@
       /// must be ≥ replica_count and > min_replica_count or will throw error
       public var maxReplicaCount: Swift.Int64? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AutoscalingSpec`.
       public init() {}
@@ -176,7 +176,7 @@
           Swift.Int64.self, forKey: .maxReplicaCount)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -192,22 +192,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ResourcePool.AutoscalingSpec"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ResourcePool"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

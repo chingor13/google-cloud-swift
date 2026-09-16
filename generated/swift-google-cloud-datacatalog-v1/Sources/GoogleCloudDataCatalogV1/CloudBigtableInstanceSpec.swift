@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Specification that applies to Instance
 /// entries that are part of `CLOUD_BIGTABLE` system.
 /// (user_specified_type)
-public struct CloudBigtableInstanceSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CloudBigtableInstanceSpec: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The list of clusters for the Instance.
   public var cloudBigtableClusterSpecs: [CloudBigtableInstanceSpec.CloudBigtableClusterSpec] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CloudBigtableInstanceSpec`.
   public init() {}
@@ -66,7 +66,7 @@ public struct CloudBigtableInstanceSpec: Codable, Equatable, GoogleCloudWKT._Any
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -79,7 +79,7 @@ public struct CloudBigtableInstanceSpec: Codable, Equatable, GoogleCloudWKT._Any
   }
 
   /// Spec that applies to clusters of an Instance of Cloud Bigtable.
-  public struct CloudBigtableClusterSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CloudBigtableClusterSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Name of the cluster.
@@ -94,7 +94,7 @@ public struct CloudBigtableInstanceSpec: Codable, Equatable, GoogleCloudWKT._Any
     /// A link back to the parent resource, in this case Instance.
     public var linkedResource: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CloudBigtableClusterSpec`.
     public init() {}
@@ -147,7 +147,7 @@ public struct CloudBigtableInstanceSpec: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -166,21 +166,21 @@ public struct CloudBigtableInstanceSpec: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.datacatalog.v1.CloudBigtableInstanceSpec.CloudBigtableClusterSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.v1.CloudBigtableInstanceSpec"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

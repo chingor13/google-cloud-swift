@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A DataAccessLabel is a label on events to define user access to data.
-public struct DataAccessLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataAccessLabel: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The unique resource name of the data access label.
@@ -29,10 +29,10 @@ public struct DataAccessLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var displayName: Swift.String = Swift.String()
 
   /// Output only. The time at which the data access label was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time at which the data access label was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The user who created the data access label.
   public var author: Swift.String = Swift.String()
@@ -48,7 +48,7 @@ public struct DataAccessLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// data gets tagged with this label.
   public var definition: OneOf_Definition? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataAccessLabel`.
   public init() {}
@@ -101,10 +101,8 @@ public struct DataAccessLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
       self.displayName = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .author) {
       self.author = value
     }
@@ -131,7 +129,7 @@ public struct DataAccessLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.definition = definition
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -167,10 +165,10 @@ public struct DataAccessLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.chronicle.v1.DataAccessLabel"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

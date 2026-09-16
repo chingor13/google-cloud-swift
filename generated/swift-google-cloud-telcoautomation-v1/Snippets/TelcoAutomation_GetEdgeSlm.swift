@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudTelcoAutomationV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: TelcoAutomationClient, projectId: String, locationId: String, edgeSlmId: String)
   async throws

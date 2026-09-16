@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Details about data retention deletion violations, in which the data is
 /// non-compliant based on their retention or deletion time, as defined in the
@@ -26,11 +26,11 @@ import Foundation
 /// types: maximum storage length (max TTL) and minimum storage length (min TTL).
 /// Both are aimed at helping organizations meet regulatory and data management
 /// commitments.
-public struct DataRetentionDeletionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataRetentionDeletionEvent: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Timestamp indicating when the event was detected.
-  public var eventDetectionTime: GoogleCloudWKT.Timestamp? = nil
+  public var eventDetectionTime: GoogleWKT.Timestamp? = nil
 
   /// Number of objects that violated the policy for this resource. If the number
   /// is less than 1,000, then the value of this field is the exact number. If
@@ -44,13 +44,13 @@ public struct DataRetentionDeletionEvent: Codable, Equatable, GoogleCloudWKT._An
   /// However, an object in that bucket is 100 days old. In this case, a
   /// DataRetentionDeletionEvent will be generated for that Cloud Storage bucket,
   /// and the max_retention_allowed is 90 days.
-  public var maxRetentionAllowed: GoogleCloudWKT.Duration? = nil
+  public var maxRetentionAllowed: GoogleWKT.Duration? = nil
 
   /// Type of the DRD event.
   public var eventType: DataRetentionDeletionEvent.EventType =
     DataRetentionDeletionEvent.EventType()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataRetentionDeletionEvent`.
   public init() {}
@@ -90,12 +90,12 @@ public struct DataRetentionDeletionEvent: Codable, Equatable, GoogleCloudWKT._An
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.eventDetectionTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .eventDetectionTime)
+      GoogleWKT.Timestamp.self, forKey: .eventDetectionTime)
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .dataObjectCount) {
       self.dataObjectCount = value
     }
     self.maxRetentionAllowed = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .maxRetentionAllowed)
+      GoogleWKT.Duration.self, forKey: .maxRetentionAllowed)
     if let value = try container.decodeIfPresent(
       DataRetentionDeletionEvent.EventType.self, forKey: .eventType)
     {
@@ -103,7 +103,7 @@ public struct DataRetentionDeletionEvent: Codable, Equatable, GoogleCloudWKT._An
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -219,10 +219,10 @@ public struct DataRetentionDeletionEvent: Codable, Equatable, GoogleCloudWKT._An
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.DataRetentionDeletionEvent"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

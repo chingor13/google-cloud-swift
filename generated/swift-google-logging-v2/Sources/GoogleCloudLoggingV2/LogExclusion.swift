@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Specifies a set of log entries that are filtered out by a sink. If
 /// your Google Cloud resource receives a large volume of log entries, you can
 /// use exclusions to reduce your chargeable logs. Note that exclusions on
 /// organization-level and folder-level sinks don't apply to child resources.
 /// Note also that you cannot modify the _Required sink or exclude logs from it.
-public struct LogExclusion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct LogExclusion: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. A client-assigned identifier, such as
@@ -57,14 +57,14 @@ public struct LogExclusion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The creation timestamp of the exclusion.
   ///
   /// This field may not be present for older exclusions.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The last update timestamp of the exclusion.
   ///
   /// This field may not be present for older exclusions.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `LogExclusion`.
   public init() {}
@@ -119,13 +119,11 @@ public struct LogExclusion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .disabled) {
       self.disabled = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -145,10 +143,10 @@ public struct LogExclusion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.logging.v2.LogExclusion"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,11 +16,11 @@
 
 #if SqlBackupsService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleType
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A backup resource.
-  public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Backup: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The resource name of the backup.
@@ -83,7 +83,7 @@
 
     /// Optional. Output only. Timestamp in UTC of when the instance associated
     /// with this backup is deleted.
-    public var instanceDeletionTime: GoogleCloudWKT.Timestamp? = nil
+    public var instanceDeletionTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. Output only. The instance setting of the source instance that's
     /// associated with this backup.
@@ -95,16 +95,16 @@
     /// Output only. This status indicates whether the backup satisfies PZS.
     ///
     /// The status is reserved for future use.
-    public var satisfiesPzs: GoogleCloudWKT.BoolValue? = nil
+    public var satisfiesPzs: GoogleWKT.BoolValue? = nil
 
     /// Output only. This status indicates whether the backup satisfies PZI.
     ///
     /// The status is reserved for future use.
-    public var satisfiesPzi: GoogleCloudWKT.BoolValue? = nil
+    public var satisfiesPzi: GoogleWKT.BoolValue? = nil
 
     public var expiration: OneOf_Expiration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Backup`.
     public init() {}
@@ -228,16 +228,16 @@
       self.maxChargeableBytes = try container.decodeIfPresent(
         Swift.Int64.self, forKey: .maxChargeableBytes)
       self.instanceDeletionTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .instanceDeletionTime)
+        GoogleWKT.Timestamp.self, forKey: .instanceDeletionTime)
       self.instanceSettings = try container.decodeIfPresent(
         DatabaseInstance.self, forKey: .instanceSettings)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .backupRun) {
         self.backupRun = value
       }
       self.satisfiesPzs = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .satisfiesPzs)
+        GoogleWKT.BoolValue.self, forKey: .satisfiesPzs)
       self.satisfiesPzi = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .satisfiesPzi)
+        GoogleWKT.BoolValue.self, forKey: .satisfiesPzi)
 
       var expiration: OneOf_Expiration? = nil
       let expirationCheckAndSet = {
@@ -253,14 +253,14 @@
         try expirationCheckAndSet(.ttlDays(ttlDays))
       }
       if let expiryTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp?.self, forKey: .expiryTime)
+        GoogleWKT.Timestamp?.self, forKey: .expiryTime)
       {
         try expirationCheckAndSet(.expiryTime(expiryTime))
       }
       self.expiration = expiration
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -554,17 +554,17 @@
       case ttlDays(Swift.Int64)
       /// Backup expiration time.
       /// A UTC timestamp of when this backup expired.
-      indirect case expiryTime(GoogleCloudWKT.Timestamp?)
+      indirect case expiryTime(GoogleWKT.Timestamp?)
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.Backup"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

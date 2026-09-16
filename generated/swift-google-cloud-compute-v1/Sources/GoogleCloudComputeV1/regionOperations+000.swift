@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `regionOperations` resource.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.RegionOperationsStub
 
     /// Creates a new `RegionOperationsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.RegionOperationsStub = try Clients.RegionOperationsTransport(options)
       inner = Clients.RegionOperationsRetry(inner, options: options)
       if let logger = options.logger {
@@ -42,7 +42,7 @@
     ///
     /// @Snippet(path: "regionOperations_delete")
     public func delete(
-      request: RegionOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.delete(request: request, options: options)
     }
@@ -51,7 +51,7 @@
     ///
     /// @Snippet(path: "regionOperations_get")
     public func `get`(
-      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -61,7 +61,7 @@
     ///
     /// @Snippet(path: "regionOperations_list")
     public func list(
-      request: RegionOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.OperationList {
       try await self.inner.list(request: request, options: options)
     }
@@ -71,14 +71,14 @@
     ///
     /// @Snippet(path: "regionOperations_list")
     public func list(
-      byItem: RegionOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionOperationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.OperationList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Waits for the specified Operation resource to return as `DONE`
@@ -100,7 +100,7 @@
     ///
     /// @Snippet(path: "regionOperations_wait")
     public func wait(
-      request: RegionOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.WaitRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.wait(request: request, options: options)
     }
@@ -162,27 +162,27 @@
 
       /// See `RegionOperationsClient.delete`.
       func delete(
-        request: RegionOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `RegionOperationsClient.`get``.
       func `get`(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionOperationsClient.list`.
       func list(
-        request: RegionOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationList
 
       /// See `RegionOperationsClient.list`.
       func list(
-        byItem: RegionOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: RegionOperationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Operation, Swift.Error>
 
       /// See `RegionOperationsClient.wait`.
       func wait(
-        request: RegionOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.WaitRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
@@ -194,9 +194,9 @@
     }
 
     public func delete(
-      request: RegionOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func delete(
@@ -219,9 +219,9 @@
     }
 
     public func `get`(
-      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -244,9 +244,9 @@
     }
 
     public func list(
-      request: RegionOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.OperationList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -256,12 +256,12 @@
     }
 
     public func list(
-      byItem: RegionOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionOperationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.OperationList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(
@@ -282,9 +282,9 @@
     }
 
     public func wait(
-      request: RegionOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.WaitRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func wait(

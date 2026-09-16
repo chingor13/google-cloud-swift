@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Provides configuration information for the StreamingRecognize request.
-public struct StreamingRecognitionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StreamingRecognitionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Features and audio metadata to use for the Automatic Speech
@@ -48,13 +48,13 @@ public struct StreamingRecognitionConfig: Codable, Equatable, GoogleCloudWKT._An
   ///
   /// [google.cloud.speech.v2.Recognizer.default_recognition_config]: <doc:Recognizer/defaultRecognitionConfig>
   /// [google.cloud.speech.v2.StreamingRecognitionConfig.config]: <doc:StreamingRecognitionConfig/config>
-  public var configMask: GoogleCloudWKT.FieldMask? = nil
+  public var configMask: GoogleWKT.FieldMask? = nil
 
   /// Speech recognition features to enable specific to streaming audio
   /// recognition requests.
   public var streamingFeatures: StreamingRecognitionFeatures? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StreamingRecognitionConfig`.
   public init() {}
@@ -92,13 +92,12 @@ public struct StreamingRecognitionConfig: Codable, Equatable, GoogleCloudWKT._An
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.config = try container.decodeIfPresent(RecognitionConfig.self, forKey: .config)
-    self.configMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .configMask)
+    self.configMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .configMask)
     self.streamingFeatures = try container.decodeIfPresent(
       StreamingRecognitionFeatures.self, forKey: .streamingFeatures)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -115,10 +114,10 @@ public struct StreamingRecognitionConfig: Codable, Equatable, GoogleCloudWKT._An
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.StreamingRecognitionConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

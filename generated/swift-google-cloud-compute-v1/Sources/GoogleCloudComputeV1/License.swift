@@ -16,7 +16,7 @@
 
 #if Licenses
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a License resource.
   ///
@@ -24,7 +24,7 @@
   ///  *Caution* This resource is intended for
   /// use only by third-party partners who are creatingCloud Marketplace
   /// images.
-  public struct License: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct License: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Specifies licenseCodes of licenses that can replace this license. Note:
@@ -112,7 +112,7 @@
     /// text format.
     public var updateTimestamp: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `License`.
     public init() {}
@@ -231,7 +231,7 @@
         Swift.String.self, forKey: .updateTimestamp)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -267,11 +267,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.License"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

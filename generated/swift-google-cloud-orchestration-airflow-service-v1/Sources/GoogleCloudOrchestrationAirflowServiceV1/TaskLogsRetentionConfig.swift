@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The configuration setting for Task Logs.
-public struct TaskLogsRetentionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TaskLogsRetentionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The mode of storage for Airflow workers task logs.
   public var storageMode: TaskLogsRetentionConfig.TaskLogsStorageMode =
     TaskLogsRetentionConfig.TaskLogsStorageMode()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TaskLogsRetentionConfig`.
   public init() {}
@@ -65,7 +65,7 @@ public struct TaskLogsRetentionConfig: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -188,10 +188,10 @@ public struct TaskLogsRetentionConfig: Codable, Equatable, GoogleCloudWKT._AnyPa
     return
       "type.googleapis.com/google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

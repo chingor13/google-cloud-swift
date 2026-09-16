@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [DataObjectSearchService.AggregateDataObjects][google.cloud.vectorsearch.v1.DataObjectSearchService.AggregateDataObjects].
 ///
 /// [google.cloud.vectorsearch.v1.DataObjectSearchService.AggregateDataObjects]: <doc:DataObjectSearchServiceClient/aggregateDataObjects(request:options:)>
-public struct AggregateDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AggregateDataObjectsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the Collection for which to query.
@@ -30,12 +30,12 @@ public struct AggregateDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._A
 
   /// Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
   /// represented as a google.protobuf.Struct.
-  public var filter: GoogleCloudWKT.Struct? = nil
+  public var filter: GoogleWKT.Struct? = nil
 
   /// Required. The aggregation method to apply to the query.
   public var aggregate: AggregationMethod = AggregationMethod()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AggregateDataObjectsRequest`.
   public init() {}
@@ -75,13 +75,13 @@ public struct AggregateDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._A
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .parent) {
       self.parent = value
     }
-    self.filter = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .filter)
+    self.filter = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .filter)
     if let value = try container.decodeIfPresent(AggregationMethod.self, forKey: .aggregate) {
       self.aggregate = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,10 +98,10 @@ public struct AggregateDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vectorsearch.v1.AggregateDataObjectsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

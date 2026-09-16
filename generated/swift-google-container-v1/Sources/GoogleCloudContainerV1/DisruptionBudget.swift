@@ -15,29 +15,29 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// DisruptionBudget defines the upgrade disruption budget for the cluster
 /// control plane.
-public struct DisruptionBudget: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DisruptionBudget: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The minimum duration between two minor version upgrades of the
   /// control plane.
-  public var minorVersionDisruptionInterval: GoogleCloudWKT.Duration? = nil
+  public var minorVersionDisruptionInterval: GoogleWKT.Duration? = nil
 
   /// Optional. The minimum duration between two patch version upgrades of the
   /// control plane.
-  public var patchVersionDisruptionInterval: GoogleCloudWKT.Duration? = nil
+  public var patchVersionDisruptionInterval: GoogleWKT.Duration? = nil
 
   /// Output only. The last time a minor version upgrade was performed on the
   /// control plane.
-  public var lastMinorVersionDisruptionTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastMinorVersionDisruptionTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The last time a disruption was performed on the control plane.
-  public var lastDisruptionTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastDisruptionTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DisruptionBudget`.
   public init() {}
@@ -80,16 +80,16 @@ public struct DisruptionBudget: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.minorVersionDisruptionInterval = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .minorVersionDisruptionInterval)
+      GoogleWKT.Duration.self, forKey: .minorVersionDisruptionInterval)
     self.patchVersionDisruptionInterval = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .patchVersionDisruptionInterval)
+      GoogleWKT.Duration.self, forKey: .patchVersionDisruptionInterval)
     self.lastMinorVersionDisruptionTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastMinorVersionDisruptionTime)
+      GoogleWKT.Timestamp.self, forKey: .lastMinorVersionDisruptionTime)
     self.lastDisruptionTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastDisruptionTime)
+      GoogleWKT.Timestamp.self, forKey: .lastDisruptionTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -110,10 +110,10 @@ public struct DisruptionBudget: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.DisruptionBudget"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

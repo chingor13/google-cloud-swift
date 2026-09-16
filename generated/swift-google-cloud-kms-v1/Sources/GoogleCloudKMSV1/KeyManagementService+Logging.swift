@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -42,9 +42,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -61,14 +61,14 @@ extension Clients {
     }
 
     public func listKeyRings(
-      request: ListKeyRingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListKeyRingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListKeyRingsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listKeyRings",
         action: {
-          (r: ListKeyRingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListKeyRingsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.ListKeyRingsResponse
           in
           return try await self.inner.listKeyRings(request: r, options: o)
@@ -76,14 +76,14 @@ extension Clients {
     }
 
     public func listCryptoKeys(
-      request: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListCryptoKeysResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listCryptoKeys",
         action: {
-          (r: ListCryptoKeysRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCryptoKeysRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.ListCryptoKeysResponse
           in
           return try await self.inner.listCryptoKeys(request: r, options: o)
@@ -91,14 +91,14 @@ extension Clients {
     }
 
     public func listCryptoKeyVersions(
-      request: ListCryptoKeyVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCryptoKeyVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListCryptoKeyVersionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listCryptoKeyVersions",
         action: {
-          (r: ListCryptoKeyVersionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCryptoKeyVersionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.ListCryptoKeyVersionsResponse
           in
           return try await self.inner.listCryptoKeyVersions(request: r, options: o)
@@ -106,14 +106,14 @@ extension Clients {
     }
 
     public func listImportJobs(
-      request: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListImportJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListImportJobsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listImportJobs",
         action: {
-          (r: ListImportJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListImportJobsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.ListImportJobsResponse
           in
           return try await self.inner.listImportJobs(request: r, options: o)
@@ -121,14 +121,14 @@ extension Clients {
     }
 
     public func listRetiredResources(
-      request: ListRetiredResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRetiredResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListRetiredResourcesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listRetiredResources",
         action: {
-          (r: ListRetiredResourcesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListRetiredResourcesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.ListRetiredResourcesResponse
           in
           return try await self.inner.listRetiredResources(request: r, options: o)
@@ -136,14 +136,14 @@ extension Clients {
     }
 
     public func getKeyRing(
-      request: GetKeyRingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetKeyRingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.KeyRing {
       try await self._intercept(
         request: request,
         options: options,
         name: "getKeyRing",
         action: {
-          (r: GetKeyRingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetKeyRingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.KeyRing
           in
           return try await self.inner.getKeyRing(request: r, options: o)
@@ -151,14 +151,14 @@ extension Clients {
     }
 
     public func getCryptoKey(
-      request: GetCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCryptoKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKey {
       try await self._intercept(
         request: request,
         options: options,
         name: "getCryptoKey",
         action: {
-          (r: GetCryptoKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCryptoKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.CryptoKey
           in
           return try await self.inner.getCryptoKey(request: r, options: o)
@@ -166,14 +166,14 @@ extension Clients {
     }
 
     public func getCryptoKeyVersion(
-      request: GetCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
       try await self._intercept(
         request: request,
         options: options,
         name: "getCryptoKeyVersion",
         action: {
-          (r: GetCryptoKeyVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCryptoKeyVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.CryptoKeyVersion
           in
           return try await self.inner.getCryptoKeyVersion(request: r, options: o)
@@ -181,14 +181,14 @@ extension Clients {
     }
 
     public func getPublicKey(
-      request: GetPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.PublicKey {
       try await self._intercept(
         request: request,
         options: options,
         name: "getPublicKey",
         action: {
-          (r: GetPublicKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetPublicKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.PublicKey
           in
           return try await self.inner.getPublicKey(request: r, options: o)
@@ -196,14 +196,14 @@ extension Clients {
     }
 
     public func getImportJob(
-      request: GetImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ImportJob {
       try await self._intercept(
         request: request,
         options: options,
         name: "getImportJob",
         action: {
-          (r: GetImportJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetImportJobRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.ImportJob
           in
           return try await self.inner.getImportJob(request: r, options: o)
@@ -211,14 +211,14 @@ extension Clients {
     }
 
     public func getRetiredResource(
-      request: GetRetiredResourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRetiredResourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.RetiredResource {
       try await self._intercept(
         request: request,
         options: options,
         name: "getRetiredResource",
         action: {
-          (r: GetRetiredResourceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetRetiredResourceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.RetiredResource
           in
           return try await self.inner.getRetiredResource(request: r, options: o)
@@ -226,14 +226,14 @@ extension Clients {
     }
 
     public func createKeyRing(
-      request: CreateKeyRingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateKeyRingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.KeyRing {
       try await self._intercept(
         request: request,
         options: options,
         name: "createKeyRing",
         action: {
-          (r: CreateKeyRingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateKeyRingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.KeyRing
           in
           return try await self.inner.createKeyRing(request: r, options: o)
@@ -241,14 +241,14 @@ extension Clients {
     }
 
     public func createCryptoKey(
-      request: CreateCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCryptoKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKey {
       try await self._intercept(
         request: request,
         options: options,
         name: "createCryptoKey",
         action: {
-          (r: CreateCryptoKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateCryptoKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.CryptoKey
           in
           return try await self.inner.createCryptoKey(request: r, options: o)
@@ -256,14 +256,14 @@ extension Clients {
     }
 
     public func createCryptoKeyVersion(
-      request: CreateCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
       try await self._intercept(
         request: request,
         options: options,
         name: "createCryptoKeyVersion",
         action: {
-          (r: CreateCryptoKeyVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateCryptoKeyVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.CryptoKeyVersion
           in
           return try await self.inner.createCryptoKeyVersion(request: r, options: o)
@@ -271,14 +271,14 @@ extension Clients {
     }
 
     public func deleteCryptoKey(
-      request: DeleteCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCryptoKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteCryptoKey",
         action: {
-          (r: DeleteCryptoKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteCryptoKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteCryptoKey(request: r, options: o)
@@ -286,14 +286,14 @@ extension Clients {
     }
 
     public func deleteCryptoKeyVersion(
-      request: DeleteCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteCryptoKeyVersion",
         action: {
-          (r: DeleteCryptoKeyVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteCryptoKeyVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteCryptoKeyVersion(request: r, options: o)
@@ -301,14 +301,14 @@ extension Clients {
     }
 
     public func importCryptoKeyVersion(
-      request: ImportCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
       try await self._intercept(
         request: request,
         options: options,
         name: "importCryptoKeyVersion",
         action: {
-          (r: ImportCryptoKeyVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ImportCryptoKeyVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.CryptoKeyVersion
           in
           return try await self.inner.importCryptoKeyVersion(request: r, options: o)
@@ -316,15 +316,14 @@ extension Clients {
     }
 
     public func importTrustedKeyWrappedCryptoKeyVersion(
-      request: ImportTrustedKeyWrappedCryptoKeyVersionRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ImportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
       try await self._intercept(
         request: request,
         options: options,
         name: "importTrustedKeyWrappedCryptoKeyVersion",
         action: {
-          (r: ImportTrustedKeyWrappedCryptoKeyVersionRequest, o: GoogleCloudGax.RequestOptions)
+          (r: ImportTrustedKeyWrappedCryptoKeyVersionRequest, o: GoogleGax.RequestOptions)
             async throws -> GoogleCloudKMSV1.CryptoKeyVersion
           in
           return try await self.inner.importTrustedKeyWrappedCryptoKeyVersion(
@@ -333,15 +332,14 @@ extension Clients {
     }
 
     public func exportTrustedKeyWrappedCryptoKeyVersion(
-      request: ExportTrustedKeyWrappedCryptoKeyVersionRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ExportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "exportTrustedKeyWrappedCryptoKeyVersion",
         action: {
-          (r: ExportTrustedKeyWrappedCryptoKeyVersionRequest, o: GoogleCloudGax.RequestOptions)
+          (r: ExportTrustedKeyWrappedCryptoKeyVersionRequest, o: GoogleGax.RequestOptions)
             async throws -> GoogleCloudKMSV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse
           in
           return try await self.inner.exportTrustedKeyWrappedCryptoKeyVersion(
@@ -350,14 +348,14 @@ extension Clients {
     }
 
     public func createImportJob(
-      request: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ImportJob {
       try await self._intercept(
         request: request,
         options: options,
         name: "createImportJob",
         action: {
-          (r: CreateImportJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateImportJobRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.ImportJob
           in
           return try await self.inner.createImportJob(request: r, options: o)
@@ -365,14 +363,14 @@ extension Clients {
     }
 
     public func updateCryptoKey(
-      request: UpdateCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCryptoKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKey {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateCryptoKey",
         action: {
-          (r: UpdateCryptoKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateCryptoKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.CryptoKey
           in
           return try await self.inner.updateCryptoKey(request: r, options: o)
@@ -380,14 +378,14 @@ extension Clients {
     }
 
     public func updateCryptoKeyVersion(
-      request: UpdateCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateCryptoKeyVersion",
         action: {
-          (r: UpdateCryptoKeyVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateCryptoKeyVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.CryptoKeyVersion
           in
           return try await self.inner.updateCryptoKeyVersion(request: r, options: o)
@@ -395,14 +393,14 @@ extension Clients {
     }
 
     public func updateCryptoKeyPrimaryVersion(
-      request: UpdateCryptoKeyPrimaryVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCryptoKeyPrimaryVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKey {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateCryptoKeyPrimaryVersion",
         action: {
-          (r: UpdateCryptoKeyPrimaryVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateCryptoKeyPrimaryVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.CryptoKey
           in
           return try await self.inner.updateCryptoKeyPrimaryVersion(request: r, options: o)
@@ -410,14 +408,14 @@ extension Clients {
     }
 
     public func destroyCryptoKeyVersion(
-      request: DestroyCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DestroyCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
       try await self._intercept(
         request: request,
         options: options,
         name: "destroyCryptoKeyVersion",
         action: {
-          (r: DestroyCryptoKeyVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DestroyCryptoKeyVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.CryptoKeyVersion
           in
           return try await self.inner.destroyCryptoKeyVersion(request: r, options: o)
@@ -425,14 +423,14 @@ extension Clients {
     }
 
     public func restoreCryptoKeyVersion(
-      request: RestoreCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
       try await self._intercept(
         request: request,
         options: options,
         name: "restoreCryptoKeyVersion",
         action: {
-          (r: RestoreCryptoKeyVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RestoreCryptoKeyVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.CryptoKeyVersion
           in
           return try await self.inner.restoreCryptoKeyVersion(request: r, options: o)
@@ -440,14 +438,14 @@ extension Clients {
     }
 
     public func encrypt(
-      request: EncryptRequest, options: GoogleCloudGax.RequestOptions
+      request: EncryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.EncryptResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "encrypt",
         action: {
-          (r: EncryptRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: EncryptRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.EncryptResponse
           in
           return try await self.inner.encrypt(request: r, options: o)
@@ -455,14 +453,14 @@ extension Clients {
     }
 
     public func decrypt(
-      request: DecryptRequest, options: GoogleCloudGax.RequestOptions
+      request: DecryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.DecryptResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "decrypt",
         action: {
-          (r: DecryptRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DecryptRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.DecryptResponse
           in
           return try await self.inner.decrypt(request: r, options: o)
@@ -470,14 +468,14 @@ extension Clients {
     }
 
     public func rawEncrypt(
-      request: RawEncryptRequest, options: GoogleCloudGax.RequestOptions
+      request: RawEncryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.RawEncryptResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "rawEncrypt",
         action: {
-          (r: RawEncryptRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RawEncryptRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.RawEncryptResponse
           in
           return try await self.inner.rawEncrypt(request: r, options: o)
@@ -485,14 +483,14 @@ extension Clients {
     }
 
     public func rawDecrypt(
-      request: RawDecryptRequest, options: GoogleCloudGax.RequestOptions
+      request: RawDecryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.RawDecryptResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "rawDecrypt",
         action: {
-          (r: RawDecryptRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RawDecryptRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.RawDecryptResponse
           in
           return try await self.inner.rawDecrypt(request: r, options: o)
@@ -500,14 +498,14 @@ extension Clients {
     }
 
     public func asymmetricSign(
-      request: AsymmetricSignRequest, options: GoogleCloudGax.RequestOptions
+      request: AsymmetricSignRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.AsymmetricSignResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "asymmetricSign",
         action: {
-          (r: AsymmetricSignRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AsymmetricSignRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.AsymmetricSignResponse
           in
           return try await self.inner.asymmetricSign(request: r, options: o)
@@ -515,14 +513,14 @@ extension Clients {
     }
 
     public func asymmetricDecrypt(
-      request: AsymmetricDecryptRequest, options: GoogleCloudGax.RequestOptions
+      request: AsymmetricDecryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.AsymmetricDecryptResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "asymmetricDecrypt",
         action: {
-          (r: AsymmetricDecryptRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AsymmetricDecryptRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.AsymmetricDecryptResponse
           in
           return try await self.inner.asymmetricDecrypt(request: r, options: o)
@@ -530,14 +528,14 @@ extension Clients {
     }
 
     public func macSign(
-      request: MacSignRequest, options: GoogleCloudGax.RequestOptions
+      request: MacSignRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.MacSignResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "macSign",
         action: {
-          (r: MacSignRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: MacSignRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.MacSignResponse
           in
           return try await self.inner.macSign(request: r, options: o)
@@ -545,14 +543,14 @@ extension Clients {
     }
 
     public func macVerify(
-      request: MacVerifyRequest, options: GoogleCloudGax.RequestOptions
+      request: MacVerifyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.MacVerifyResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "macVerify",
         action: {
-          (r: MacVerifyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: MacVerifyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.MacVerifyResponse
           in
           return try await self.inner.macVerify(request: r, options: o)
@@ -560,14 +558,14 @@ extension Clients {
     }
 
     public func decapsulate(
-      request: DecapsulateRequest, options: GoogleCloudGax.RequestOptions
+      request: DecapsulateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.DecapsulateResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "decapsulate",
         action: {
-          (r: DecapsulateRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DecapsulateRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.DecapsulateResponse
           in
           return try await self.inner.decapsulate(request: r, options: o)
@@ -575,14 +573,14 @@ extension Clients {
     }
 
     public func generateRandomBytes(
-      request: GenerateRandomBytesRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateRandomBytesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.GenerateRandomBytesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "generateRandomBytes",
         action: {
-          (r: GenerateRandomBytesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GenerateRandomBytesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSV1.GenerateRandomBytesResponse
           in
           return try await self.inner.generateRandomBytes(request: r, options: o)
@@ -590,29 +588,29 @@ extension Clients {
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLocations",
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLocation",
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)
@@ -620,14 +618,14 @@ extension Clients {
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "setIamPolicy",
         action: {
-          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.setIamPolicy(request: r, options: o)
@@ -635,14 +633,14 @@ extension Clients {
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getIamPolicy",
         action: {
-          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.getIamPolicy(request: r, options: o)
@@ -650,14 +648,14 @@ extension Clients {
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "testIamPermissions",
         action: {
-          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.TestIamPermissionsResponse
           in
           return try await self.inner.testIamPermissions(request: r, options: o)
@@ -665,14 +663,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

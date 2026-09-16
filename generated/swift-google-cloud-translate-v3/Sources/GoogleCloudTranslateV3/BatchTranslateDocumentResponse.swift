@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Stored in the
 /// [google.longrunning.Operation.response][google.longrunning.Operation.response]
@@ -23,7 +23,7 @@ import Foundation
 /// translated successfully.
 ///
 /// [google.longrunning.Operation.response]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation/OneOf_Result/response(_:)
-public struct BatchTranslateDocumentResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchTranslateDocumentResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Total number of pages to translate in all documents. Documents without
@@ -58,16 +58,16 @@ public struct BatchTranslateDocumentResponse: Codable, Equatable, GoogleCloudWKT
   public var totalBillableCharacters: Swift.Int64 = Swift.Int64()
 
   /// Time when the operation was submitted.
-  public var submitTime: GoogleCloudWKT.Timestamp? = nil
+  public var submitTime: GoogleWKT.Timestamp? = nil
 
   /// The time when the operation is finished and
   /// [google.longrunning.Operation.done][google.longrunning.Operation.done] is
   /// set to true.
   ///
   /// [google.longrunning.Operation.done]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation/done
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchTranslateDocumentResponse`.
   public init() {}
@@ -143,12 +143,11 @@ public struct BatchTranslateDocumentResponse: Codable, Equatable, GoogleCloudWKT
     {
       self.totalBillableCharacters = value
     }
-    self.submitTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .submitTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.submitTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .submitTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -172,10 +171,10 @@ public struct BatchTranslateDocumentResponse: Codable, Equatable, GoogleCloudWKT
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.translation.v3.BatchTranslateDocumentResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,13 +16,13 @@
 
 import Foundation
 import GoogleCloudKMSV1
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol KeyDashboardServiceStub: Sendable {
     func listCryptoKeys(
-      request: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSInventoryV1.ListCryptoKeysResponse
   }
 }

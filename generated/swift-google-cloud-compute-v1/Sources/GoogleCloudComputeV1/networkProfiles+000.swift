@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `networkProfiles` resource.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.NetworkProfilesStub
 
     /// Creates a new `NetworkProfilesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.NetworkProfilesStub = try Clients.NetworkProfilesTransport(options)
       inner = Clients.NetworkProfilesRetry(inner, options: options)
       if let logger = options.logger {
@@ -42,7 +42,7 @@
     ///
     /// @Snippet(path: "networkProfiles_get")
     public func `get`(
-      request: NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: NetworkProfilesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NetworkProfile {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -52,7 +52,7 @@
     ///
     /// @Snippet(path: "networkProfiles_list")
     public func list(
-      request: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: NetworkProfilesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse {
       try await self.inner.list(request: request, options: options)
     }
@@ -62,7 +62,7 @@
     ///
     /// @Snippet(path: "networkProfiles_list")
     public func list(
-      byItem: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: NetworkProfilesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<NetworkProfile, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse in
@@ -70,7 +70,7 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
   }
 
@@ -107,17 +107,17 @@
 
       /// See `NetworkProfilesClient.`get``.
       func `get`(
-        request: NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworkProfilesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkProfile
 
       /// See `NetworkProfilesClient.list`.
       func list(
-        request: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworkProfilesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse
 
       /// See `NetworkProfilesClient.list`.
       func list(
-        byItem: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: NetworkProfilesClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<NetworkProfile, Swift.Error>
     }
   }
@@ -131,9 +131,9 @@
     }
 
     public func `get`(
-      request: NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: NetworkProfilesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NetworkProfile {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -154,9 +154,9 @@
     }
 
     public func list(
-      request: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: NetworkProfilesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -166,13 +166,13 @@
     }
 
     public func list(
-      byItem: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: NetworkProfilesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<NetworkProfile, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(

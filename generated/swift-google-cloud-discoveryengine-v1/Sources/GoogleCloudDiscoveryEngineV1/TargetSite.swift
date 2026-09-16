@@ -16,10 +16,10 @@
 
 #if SiteSearchEngineService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A target site for the SiteSearchEngine.
-  public struct TargetSite: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TargetSite: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The fully qualified resource name of the target site.
@@ -56,12 +56,12 @@
     public var indexingStatus: TargetSite.IndexingStatus = TargetSite.IndexingStatus()
 
     /// Output only. The target site's last updated time.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Failure reason.
     public var failureReason: TargetSite.FailureReason? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TargetSite`.
     public init() {}
@@ -138,13 +138,12 @@
       {
         self.indexingStatus = value
       }
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       self.failureReason = try container.decodeIfPresent(
         TargetSite.FailureReason.self, forKey: .failureReason)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -166,13 +165,13 @@
     }
 
     /// Site search indexing failure reasons.
-    public struct FailureReason: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct FailureReason: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Failure reason.
       public var failure: OneOf_Failure? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `FailureReason`.
       public init() {}
@@ -224,7 +223,7 @@
         self.failure = failure
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -243,15 +242,14 @@
       }
 
       /// Failed due to insufficient quota.
-      public struct QuotaFailure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct QuotaFailure: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// This number is an estimation on how much total quota this project needs
         /// to successfully complete indexing.
         public var totalRequiredQuota: Swift.Int64 = Swift.Int64()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `QuotaFailure`.
         public init() {}
@@ -291,7 +289,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -307,11 +305,11 @@
           return
             "type.googleapis.com/google.cloud.discoveryengine.v1.TargetSite.FailureReason.QuotaFailure"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -324,11 +322,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.discoveryengine.v1.TargetSite.FailureReason"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -580,11 +578,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.TargetSite"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

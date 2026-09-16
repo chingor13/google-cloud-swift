@@ -19,8 +19,8 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleApi
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Manages metric descriptors, monitored resource descriptors, and
 /// time series data.
@@ -30,7 +30,7 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
   let inner: any Clients.MetricServiceStub
 
   /// Creates a new `MetricServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.MetricServiceStub = try Clients.MetricServiceTransport(options)
     inner = Clients.MetricServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -43,7 +43,7 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "MetricService_ListMonitoredResourceDescriptors")
   public func listMonitoredResourceDescriptors(
-    request: ListMonitoredResourceDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListMonitoredResourceDescriptorsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListMonitoredResourceDescriptorsResponse {
     try await self.inner.listMonitoredResourceDescriptors(request: request, options: options)
   }
@@ -52,7 +52,7 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "MetricService_ListMonitoredResourceDescriptors")
   public func listMonitoredResourceDescriptors(
-    byItem: ListMonitoredResourceDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListMonitoredResourceDescriptorsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleApi.MonitoredResourceDescriptor, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -61,14 +61,14 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
       request.pageToken = token
       return try await self.listMonitoredResourceDescriptors(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a single monitored resource descriptor.
   ///
   /// @Snippet(path: "MetricService_GetMonitoredResourceDescriptor")
   public func getMonitoredResourceDescriptor(
-    request: GetMonitoredResourceDescriptorRequest, options: GoogleCloudGax.RequestOptions
+    request: GetMonitoredResourceDescriptorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApi.MonitoredResourceDescriptor {
     try await self.inner.getMonitoredResourceDescriptor(request: request, options: options)
   }
@@ -77,7 +77,7 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "MetricService_ListMetricDescriptors")
   public func listMetricDescriptors(
-    request: ListMetricDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListMetricDescriptorsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListMetricDescriptorsResponse {
     try await self.inner.listMetricDescriptors(request: request, options: options)
   }
@@ -86,7 +86,7 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "MetricService_ListMetricDescriptors")
   public func listMetricDescriptors(
-    byItem: ListMetricDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListMetricDescriptorsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleApi.MetricDescriptor, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.ListMetricDescriptorsResponse in
@@ -94,14 +94,14 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
       request.pageToken = token
       return try await self.listMetricDescriptors(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a single metric descriptor.
   ///
   /// @Snippet(path: "MetricService_GetMetricDescriptor")
   public func getMetricDescriptor(
-    request: GetMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+    request: GetMetricDescriptorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApi.MetricDescriptor {
     try await self.inner.getMetricDescriptor(request: request, options: options)
   }
@@ -115,7 +115,7 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "MetricService_CreateMetricDescriptor")
   public func createMetricDescriptor(
-    request: CreateMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateMetricDescriptorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApi.MetricDescriptor {
     try await self.inner.createMetricDescriptor(request: request, options: options)
   }
@@ -126,7 +126,7 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "MetricService_DeleteMetricDescriptor")
   public func deleteMetricDescriptor(
-    request: DeleteMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteMetricDescriptorRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteMetricDescriptor(request: request, options: options)
   }
@@ -135,7 +135,7 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "MetricService_ListTimeSeries")
   public func listTimeSeries(
-    request: ListTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTimeSeriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListTimeSeriesResponse {
     try await self.inner.listTimeSeries(request: request, options: options)
   }
@@ -144,7 +144,7 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "MetricService_ListTimeSeries")
   public func listTimeSeries(
-    byItem: ListTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTimeSeriesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TimeSeries, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.ListTimeSeriesResponse in
@@ -152,7 +152,7 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
       request.pageToken = token
       return try await self.listTimeSeries(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates or adds data to one or more time series.
@@ -165,7 +165,7 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "MetricService_CreateTimeSeries")
   public func createTimeSeries(
-    request: CreateTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTimeSeriesRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.createTimeSeries(request: request, options: options)
   }
@@ -184,7 +184,7 @@ public final class MetricServiceClient: Clients.MetricServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "MetricService_CreateServiceTimeSeries")
   public func createServiceTimeSeries(
-    request: CreateTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTimeSeriesRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.createServiceTimeSeries(request: request, options: options)
   }
@@ -298,62 +298,62 @@ extension Clients {
 
     /// See `MetricServiceClient.listMonitoredResourceDescriptors`.
     func listMonitoredResourceDescriptors(
-      request: ListMonitoredResourceDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMonitoredResourceDescriptorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListMonitoredResourceDescriptorsResponse
 
     /// See `MetricServiceClient.listMonitoredResourceDescriptors`.
     func listMonitoredResourceDescriptors(
-      byItem: ListMonitoredResourceDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListMonitoredResourceDescriptorsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleApi.MonitoredResourceDescriptor, Swift.Error>
 
     /// See `MetricServiceClient.getMonitoredResourceDescriptor`.
     func getMonitoredResourceDescriptor(
-      request: GetMonitoredResourceDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMonitoredResourceDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.MonitoredResourceDescriptor
 
     /// See `MetricServiceClient.listMetricDescriptors`.
     func listMetricDescriptors(
-      request: ListMetricDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMetricDescriptorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListMetricDescriptorsResponse
 
     /// See `MetricServiceClient.listMetricDescriptors`.
     func listMetricDescriptors(
-      byItem: ListMetricDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListMetricDescriptorsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleApi.MetricDescriptor, Swift.Error>
 
     /// See `MetricServiceClient.getMetricDescriptor`.
     func getMetricDescriptor(
-      request: GetMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetricDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.MetricDescriptor
 
     /// See `MetricServiceClient.createMetricDescriptor`.
     func createMetricDescriptor(
-      request: CreateMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMetricDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.MetricDescriptor
 
     /// See `MetricServiceClient.deleteMetricDescriptor`.
     func deleteMetricDescriptor(
-      request: DeleteMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMetricDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `MetricServiceClient.listTimeSeries`.
     func listTimeSeries(
-      request: ListTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTimeSeriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListTimeSeriesResponse
 
     /// See `MetricServiceClient.listTimeSeries`.
     func listTimeSeries(
-      byItem: ListTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTimeSeriesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TimeSeries, Swift.Error>
 
     /// See `MetricServiceClient.createTimeSeries`.
     func createTimeSeries(
-      request: CreateTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTimeSeriesRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `MetricServiceClient.createServiceTimeSeries`.
     func createServiceTimeSeries(
-      request: CreateTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTimeSeriesRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -367,9 +367,9 @@ extension Clients.MetricServiceProtocol {
   }
 
   public func listMonitoredResourceDescriptors(
-    request: ListMonitoredResourceDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListMonitoredResourceDescriptorsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListMonitoredResourceDescriptorsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listMonitoredResourceDescriptors(
@@ -379,14 +379,14 @@ extension Clients.MetricServiceProtocol {
   }
 
   public func listMonitoredResourceDescriptors(
-    byItem: ListMonitoredResourceDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListMonitoredResourceDescriptorsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleApi.MonitoredResourceDescriptor, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudMonitoringV3.ListMonitoredResourceDescriptorsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listMonitoredResourceDescriptors(
@@ -405,9 +405,9 @@ extension Clients.MetricServiceProtocol {
   }
 
   public func getMonitoredResourceDescriptor(
-    request: GetMonitoredResourceDescriptorRequest, options: GoogleCloudGax.RequestOptions
+    request: GetMonitoredResourceDescriptorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApi.MonitoredResourceDescriptor {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getMonitoredResourceDescriptor(
@@ -426,9 +426,9 @@ extension Clients.MetricServiceProtocol {
   }
 
   public func listMetricDescriptors(
-    request: ListMetricDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListMetricDescriptorsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListMetricDescriptorsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listMetricDescriptors(
@@ -438,13 +438,13 @@ extension Clients.MetricServiceProtocol {
   }
 
   public func listMetricDescriptors(
-    byItem: ListMetricDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListMetricDescriptorsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleApi.MetricDescriptor, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.ListMetricDescriptorsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listMetricDescriptors(
@@ -463,9 +463,9 @@ extension Clients.MetricServiceProtocol {
   }
 
   public func getMetricDescriptor(
-    request: GetMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+    request: GetMetricDescriptorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApi.MetricDescriptor {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getMetricDescriptor(
@@ -484,9 +484,9 @@ extension Clients.MetricServiceProtocol {
   }
 
   public func createMetricDescriptor(
-    request: CreateMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateMetricDescriptorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApi.MetricDescriptor {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createMetricDescriptor(
@@ -505,9 +505,9 @@ extension Clients.MetricServiceProtocol {
   }
 
   public func deleteMetricDescriptor(
-    request: DeleteMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteMetricDescriptorRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteMetricDescriptor(
@@ -526,9 +526,9 @@ extension Clients.MetricServiceProtocol {
   }
 
   public func listTimeSeries(
-    request: ListTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTimeSeriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListTimeSeriesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTimeSeries(
@@ -538,13 +538,13 @@ extension Clients.MetricServiceProtocol {
   }
 
   public func listTimeSeries(
-    byItem: ListTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTimeSeriesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TimeSeries, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.ListTimeSeriesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listTimeSeries(
@@ -567,9 +567,9 @@ extension Clients.MetricServiceProtocol {
   }
 
   public func createTimeSeries(
-    request: CreateTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTimeSeriesRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createTimeSeries(
@@ -588,9 +588,9 @@ extension Clients.MetricServiceProtocol {
   }
 
   public func createServiceTimeSeries(
-    request: CreateTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTimeSeriesRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createServiceTimeSeries(

@@ -15,23 +15,23 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request for the `UpdateRecommenderConfig` method.
-public struct UpdateRecommenderConfigRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateRecommenderConfigRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The RecommenderConfig to update.
   public var recommenderConfig: RecommenderConfig? = nil
 
   /// The list of fields to be updated.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// If true, validate the request and preview the change, but do not actually
   /// update it.
   public var validateOnly: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateRecommenderConfigRequest`.
   public init() {}
@@ -70,14 +70,13 @@ public struct UpdateRecommenderConfigRequest: Codable, Equatable, GoogleCloudWKT
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.recommenderConfig = try container.decodeIfPresent(
       RecommenderConfig.self, forKey: .recommenderConfig)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .validateOnly) {
       self.validateOnly = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -94,10 +93,10 @@ public struct UpdateRecommenderConfigRequest: Codable, Equatable, GoogleCloudWKT
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recommender.v1.UpdateRecommenderConfigRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

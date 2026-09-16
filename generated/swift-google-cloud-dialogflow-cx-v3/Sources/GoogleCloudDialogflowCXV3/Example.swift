@@ -16,13 +16,13 @@
 
 #if Examples || Playbooks
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Example represents a sample execution of the playbook in the conversation.
   ///
   /// An example consists of a list of ordered actions performed by end user
   /// or Dialogflow agent according the playbook instructions to fulfill the task.
-  public struct Example: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Example: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The unique identifier of the playbook example.
@@ -52,10 +52,10 @@
     public var tokenCount: Swift.Int64 = Swift.Int64()
 
     /// Output only. The timestamp of initial example creation.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Last time the example was updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Required. Example's output state.
     public var conversationState: OutputState = OutputState()
@@ -66,7 +66,7 @@
     /// Note: example's language code is not currently used in dialogflow agents.
     public var languageCode: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Example`.
     public init() {}
@@ -137,10 +137,8 @@
       if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .tokenCount) {
         self.tokenCount = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(OutputState.self, forKey: .conversationState) {
         self.conversationState = value
       }
@@ -149,7 +147,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -174,11 +172,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Example"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

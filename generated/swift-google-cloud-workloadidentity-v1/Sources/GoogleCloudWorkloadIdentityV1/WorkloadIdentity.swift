@@ -19,21 +19,21 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service describing handlers for resources
 ///
 /// @Snippet(path: "WorkloadIdentityQuickstart")
 public final class WorkloadIdentityClient: Clients.WorkloadIdentityProtocol, Sendable {
   let inner: any Clients.WorkloadIdentityStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `WorkloadIdentityClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.WorkloadIdentityStub = try Clients.WorkloadIdentityTransport(options)
     inner = Clients.WorkloadIdentityRetry(inner, options: options)
     if let logger = options.logger {
@@ -49,7 +49,7 @@ public final class WorkloadIdentityClient: Clients.WorkloadIdentityProtocol, Sen
   ///
   /// @Snippet(path: "WorkloadIdentity_GenerateServiceAgents")
   public func generateServiceAgents(
-    request: GenerateServiceAgentsRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateServiceAgentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.generateServiceAgents(request: request, options: options)
   }
@@ -59,23 +59,22 @@ public final class WorkloadIdentityClient: Clients.WorkloadIdentityProtocol, Sen
   ///
   /// @Snippet(path: "WorkloadIdentity_GenerateServiceAgents")
   public func generateServiceAgents(
-    withPolling: GenerateServiceAgentsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GenerateServiceAgentsResponse> {
+    withPolling: GenerateServiceAgentsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<GenerateServiceAgentsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<GenerateServiceAgentsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<GenerateServiceAgentsResponse>.State in
       return try op._extractStatus(GenerateServiceAgentsResponse.self)
     }
     let rawOp = try await self.generateServiceAgents(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<GenerateServiceAgentsResponse>.State
-      in
+      () async throws -> GoogleGax._PollableOperationImpl<GenerateServiceAgentsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -104,7 +103,7 @@ public final class WorkloadIdentityClient: Clients.WorkloadIdentityProtocol, Sen
   ///
   /// @Snippet(path: "WorkloadIdentity_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -130,7 +129,7 @@ public final class WorkloadIdentityClient: Clients.WorkloadIdentityProtocol, Sen
   ///
   /// @Snippet(path: "WorkloadIdentity_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -138,14 +137,14 @@ public final class WorkloadIdentityClient: Clients.WorkloadIdentityProtocol, Sen
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "WorkloadIdentity_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -156,7 +155,7 @@ public final class WorkloadIdentityClient: Clients.WorkloadIdentityProtocol, Sen
   ///
   /// @Snippet(path: "WorkloadIdentity_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -167,7 +166,7 @@ public final class WorkloadIdentityClient: Clients.WorkloadIdentityProtocol, Sen
   ///
   /// @Snippet(path: "WorkloadIdentity_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -175,7 +174,7 @@ public final class WorkloadIdentityClient: Clients.WorkloadIdentityProtocol, Sen
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -184,7 +183,7 @@ public final class WorkloadIdentityClient: Clients.WorkloadIdentityProtocol, Sen
   ///
   /// @Snippet(path: "WorkloadIdentity_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -195,7 +194,7 @@ public final class WorkloadIdentityClient: Clients.WorkloadIdentityProtocol, Sen
   ///
   /// @Snippet(path: "WorkloadIdentity_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -206,7 +205,7 @@ public final class WorkloadIdentityClient: Clients.WorkloadIdentityProtocol, Sen
   ///
   /// @Snippet(path: "WorkloadIdentity_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -225,12 +224,12 @@ extension Clients {
 
     /// See `WorkloadIdentityClient.generateServiceAgents`.
     func generateServiceAgents(withPolling: GenerateServiceAgentsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<GenerateServiceAgentsResponse>
+      -> any GoogleGax.PollableOperation<GenerateServiceAgentsResponse>
 
     /// See `WorkloadIdentityClient.generateServiceAgents`.
     func generateServiceAgents(
       parent: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GenerateServiceAgentsResponse>
+    ) async throws -> any GoogleGax.PollableOperation<GenerateServiceAgentsResponse>
 
     /// See `WorkloadIdentityClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -278,47 +277,47 @@ extension Clients {
 
     /// See `WorkloadIdentityClient.generateServiceAgents`.
     func generateServiceAgents(
-      request: GenerateServiceAgentsRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateServiceAgentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `WorkloadIdentityClient.generateServiceAgents`.
     func generateServiceAgents(
-      withPolling: GenerateServiceAgentsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GenerateServiceAgentsResponse>
+      withPolling: GenerateServiceAgentsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GenerateServiceAgentsResponse>
 
     /// See `WorkloadIdentityClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `WorkloadIdentityClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `WorkloadIdentityClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `WorkloadIdentityClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `WorkloadIdentityClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `WorkloadIdentityClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `WorkloadIdentityClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -332,32 +331,31 @@ extension Clients.WorkloadIdentityProtocol {
   }
 
   public func generateServiceAgents(
-    request: GenerateServiceAgentsRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateServiceAgentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func generateServiceAgents(withPolling: GenerateServiceAgentsRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<GenerateServiceAgentsResponse>
+    -> any GoogleGax.PollableOperation<GenerateServiceAgentsResponse>
   {
     try await self.generateServiceAgents(withPolling: withPolling, options: .init())
   }
 
   public func generateServiceAgents(
-    withPolling: GenerateServiceAgentsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GenerateServiceAgentsResponse> {
+    withPolling: GenerateServiceAgentsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<GenerateServiceAgentsResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<GenerateServiceAgentsResponse>.State
-      in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<GenerateServiceAgentsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func generateServiceAgents(
     parent: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<GenerateServiceAgentsResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<GenerateServiceAgentsResponse> {
     let request = GenerateServiceAgentsRequest().with {
       $0.parent = parent
     }
@@ -371,9 +369,9 @@ extension Clients.WorkloadIdentityProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -383,13 +381,13 @@ extension Clients.WorkloadIdentityProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -399,9 +397,9 @@ extension Clients.WorkloadIdentityProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -411,9 +409,9 @@ extension Clients.WorkloadIdentityProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -423,13 +421,13 @@ extension Clients.WorkloadIdentityProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -450,9 +448,9 @@ extension Clients.WorkloadIdentityProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -469,9 +467,9 @@ extension Clients.WorkloadIdentityProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -488,9 +486,9 @@ extension Clients.WorkloadIdentityProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

@@ -18,21 +18,21 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// An API that lets users analyze and explore their business conversation data.
 ///
 /// @Snippet(path: "ContactCenterInsightsQuickstart")
 public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsProtocol, Sendable {
   let inner: any Clients.ContactCenterInsightsStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `ContactCenterInsightsClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ContactCenterInsightsStub = try Clients.ContactCenterInsightsTransport(
       options)
     inner = Clients.ContactCenterInsightsRetry(inner, options: options)
@@ -50,7 +50,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_CreateConversation")
   public func createConversation(
-    request: CreateConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateConversationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation {
     try await self.inner.createConversation(request: request, options: options)
   }
@@ -61,7 +61,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_UploadConversation")
   public func uploadConversation(
-    request: UploadConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: UploadConversationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.uploadConversation(request: request, options: options)
   }
@@ -72,21 +72,21 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_UploadConversation")
   public func uploadConversation(
-    withPolling: UploadConversationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Conversation> {
+    withPolling: UploadConversationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Conversation> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Conversation>.State in
+        -> GoogleGax._PollableOperationImpl<Conversation>.State in
       return try op._extractStatus(Conversation.self)
     }
     let rawOp = try await self.uploadConversation(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Conversation>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Conversation>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -98,7 +98,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_UpdateConversation")
   public func updateConversation(
-    request: UpdateConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConversationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation {
     try await self.inner.updateConversation(request: request, options: options)
   }
@@ -107,7 +107,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_GetConversation")
   public func getConversation(
-    request: GetConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConversationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation {
     try await self.inner.getConversation(request: request, options: options)
   }
@@ -116,7 +116,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListConversations")
   public func listConversations(
-    request: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConversationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListConversationsResponse {
     try await self.inner.listConversations(request: request, options: options)
   }
@@ -125,7 +125,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListConversations")
   public func listConversations(
-    byItem: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConversationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Conversation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -134,14 +134,14 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
       request.pageToken = token
       return try await self.listConversations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes a conversation.
   ///
   /// @Snippet(path: "ContactCenterInsights_DeleteConversation")
   public func deleteConversation(
-    request: DeleteConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConversationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteConversation(request: request, options: options)
   }
@@ -151,7 +151,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_CreateAnalysis")
   public func createAnalysis(
-    request: CreateAnalysisRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAnalysisRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createAnalysis(request: request, options: options)
   }
@@ -161,21 +161,21 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_CreateAnalysis")
   public func createAnalysis(
-    withPolling: CreateAnalysisRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Analysis> {
+    withPolling: CreateAnalysisRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Analysis> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Analysis>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Analysis>.State
+      in
       return try op._extractStatus(Analysis.self)
     }
     let rawOp = try await self.createAnalysis(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Analysis>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Analysis>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -187,7 +187,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_GetAnalysis")
   public func getAnalysis(
-    request: GetAnalysisRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAnalysisRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Analysis {
     try await self.inner.getAnalysis(request: request, options: options)
   }
@@ -196,7 +196,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListAnalyses")
   public func listAnalyses(
-    request: ListAnalysesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAnalysesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListAnalysesResponse {
     try await self.inner.listAnalyses(request: request, options: options)
   }
@@ -205,7 +205,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListAnalyses")
   public func listAnalyses(
-    byItem: ListAnalysesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAnalysesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Analysis, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudContactCenterInsightsV1.ListAnalysesResponse
@@ -214,14 +214,14 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
       request.pageToken = token
       return try await self.listAnalyses(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes an analysis.
   ///
   /// @Snippet(path: "ContactCenterInsights_DeleteAnalysis")
   public func deleteAnalysis(
-    request: DeleteAnalysisRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAnalysisRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteAnalysis(request: request, options: options)
   }
@@ -230,7 +230,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_BulkAnalyzeConversations")
   public func bulkAnalyzeConversations(
-    request: BulkAnalyzeConversationsRequest, options: GoogleCloudGax.RequestOptions
+    request: BulkAnalyzeConversationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.bulkAnalyzeConversations(request: request, options: options)
   }
@@ -239,23 +239,22 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_BulkAnalyzeConversations")
   public func bulkAnalyzeConversations(
-    withPolling: BulkAnalyzeConversationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkAnalyzeConversationsResponse> {
+    withPolling: BulkAnalyzeConversationsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BulkAnalyzeConversationsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<BulkAnalyzeConversationsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<BulkAnalyzeConversationsResponse>.State in
       return try op._extractStatus(BulkAnalyzeConversationsResponse.self)
     }
     let rawOp = try await self.bulkAnalyzeConversations(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<BulkAnalyzeConversationsResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<BulkAnalyzeConversationsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -267,7 +266,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_BulkDeleteConversations")
   public func bulkDeleteConversations(
-    request: BulkDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
+    request: BulkDeleteConversationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.bulkDeleteConversations(request: request, options: options)
   }
@@ -276,23 +275,22 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_BulkDeleteConversations")
   public func bulkDeleteConversations(
-    withPolling: BulkDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkDeleteConversationsResponse> {
+    withPolling: BulkDeleteConversationsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BulkDeleteConversationsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<BulkDeleteConversationsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<BulkDeleteConversationsResponse>.State in
       return try op._extractStatus(BulkDeleteConversationsResponse.self)
     }
     let rawOp = try await self.bulkDeleteConversations(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<BulkDeleteConversationsResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<BulkDeleteConversationsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -305,7 +303,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_IngestConversations")
   public func ingestConversations(
-    request: IngestConversationsRequest, options: GoogleCloudGax.RequestOptions
+    request: IngestConversationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.ingestConversations(request: request, options: options)
   }
@@ -315,22 +313,22 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_IngestConversations")
   public func ingestConversations(
-    withPolling: IngestConversationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<IngestConversationsResponse> {
+    withPolling: IngestConversationsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<IngestConversationsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<IngestConversationsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<IngestConversationsResponse>.State in
       return try op._extractStatus(IngestConversationsResponse.self)
     }
     let rawOp = try await self.ingestConversations(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<IngestConversationsResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<IngestConversationsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -342,7 +340,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ExportInsightsData")
   public func exportInsightsData(
-    request: ExportInsightsDataRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportInsightsDataRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.exportInsightsData(request: request, options: options)
   }
@@ -351,22 +349,22 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ExportInsightsData")
   public func exportInsightsData(
-    withPolling: ExportInsightsDataRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportInsightsDataResponse> {
+    withPolling: ExportInsightsDataRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ExportInsightsDataResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ExportInsightsDataResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ExportInsightsDataResponse>.State in
       return try op._extractStatus(ExportInsightsDataResponse.self)
     }
     let rawOp = try await self.exportInsightsData(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ExportInsightsDataResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<ExportInsightsDataResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -378,7 +376,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_CreateIssueModel")
   public func createIssueModel(
-    request: CreateIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createIssueModel(request: request, options: options)
   }
@@ -387,21 +385,21 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_CreateIssueModel")
   public func createIssueModel(
-    withPolling: CreateIssueModelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<IssueModel> {
+    withPolling: CreateIssueModelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<IssueModel> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<IssueModel>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<IssueModel>.State
+      in
       return try op._extractStatus(IssueModel.self)
     }
     let rawOp = try await self.createIssueModel(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<IssueModel>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<IssueModel>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -413,7 +411,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_UpdateIssueModel")
   public func updateIssueModel(
-    request: UpdateIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.IssueModel {
     try await self.inner.updateIssueModel(request: request, options: options)
   }
@@ -422,7 +420,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_GetIssueModel")
   public func getIssueModel(
-    request: GetIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: GetIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.IssueModel {
     try await self.inner.getIssueModel(request: request, options: options)
   }
@@ -431,7 +429,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListIssueModels")
   public func listIssueModels(
-    request: ListIssueModelsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListIssueModelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListIssueModelsResponse {
     try await self.inner.listIssueModels(request: request, options: options)
   }
@@ -440,7 +438,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_DeleteIssueModel")
   public func deleteIssueModel(
-    request: DeleteIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteIssueModel(request: request, options: options)
   }
@@ -449,21 +447,21 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_DeleteIssueModel")
   public func deleteIssueModel(
-    withPolling: DeleteIssueModelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteIssueModelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteIssueModel(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -476,7 +474,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_DeployIssueModel")
   public func deployIssueModel(
-    request: DeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: DeployIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deployIssueModel(request: request, options: options)
   }
@@ -486,22 +484,22 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_DeployIssueModel")
   public func deployIssueModel(
-    withPolling: DeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeployIssueModelResponse> {
+    withPolling: DeployIssueModelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeployIssueModelResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DeployIssueModelResponse>.State in
+        -> GoogleGax._PollableOperationImpl<DeployIssueModelResponse>.State in
       return try op._extractStatus(DeployIssueModelResponse.self)
     }
     let rawOp = try await self.deployIssueModel(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DeployIssueModelResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<DeployIssueModelResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -514,7 +512,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_UndeployIssueModel")
   public func undeployIssueModel(
-    request: UndeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeployIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.undeployIssueModel(request: request, options: options)
   }
@@ -524,22 +522,22 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_UndeployIssueModel")
   public func undeployIssueModel(
-    withPolling: UndeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<UndeployIssueModelResponse> {
+    withPolling: UndeployIssueModelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<UndeployIssueModelResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<UndeployIssueModelResponse>.State in
+        -> GoogleGax._PollableOperationImpl<UndeployIssueModelResponse>.State in
       return try op._extractStatus(UndeployIssueModelResponse.self)
     }
     let rawOp = try await self.undeployIssueModel(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<UndeployIssueModelResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<UndeployIssueModelResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -551,7 +549,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ExportIssueModel")
   public func exportIssueModel(
-    request: ExportIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.exportIssueModel(request: request, options: options)
   }
@@ -560,22 +558,22 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ExportIssueModel")
   public func exportIssueModel(
-    withPolling: ExportIssueModelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportIssueModelResponse> {
+    withPolling: ExportIssueModelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ExportIssueModelResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ExportIssueModelResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ExportIssueModelResponse>.State in
       return try op._extractStatus(ExportIssueModelResponse.self)
     }
     let rawOp = try await self.exportIssueModel(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ExportIssueModelResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<ExportIssueModelResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -587,7 +585,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ImportIssueModel")
   public func importIssueModel(
-    request: ImportIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.importIssueModel(request: request, options: options)
   }
@@ -596,22 +594,22 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ImportIssueModel")
   public func importIssueModel(
-    withPolling: ImportIssueModelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportIssueModelResponse> {
+    withPolling: ImportIssueModelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportIssueModelResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ImportIssueModelResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ImportIssueModelResponse>.State in
       return try op._extractStatus(ImportIssueModelResponse.self)
     }
     let rawOp = try await self.importIssueModel(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ImportIssueModelResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<ImportIssueModelResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -623,7 +621,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_GetIssue")
   public func getIssue(
-    request: GetIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: GetIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Issue {
     try await self.inner.getIssue(request: request, options: options)
   }
@@ -632,7 +630,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListIssues")
   public func listIssues(
-    request: ListIssuesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListIssuesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListIssuesResponse {
     try await self.inner.listIssues(request: request, options: options)
   }
@@ -641,7 +639,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_UpdateIssue")
   public func updateIssue(
-    request: UpdateIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Issue {
     try await self.inner.updateIssue(request: request, options: options)
   }
@@ -650,7 +648,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_DeleteIssue")
   public func deleteIssue(
-    request: DeleteIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteIssueRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteIssue(request: request, options: options)
   }
@@ -659,7 +657,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_CalculateIssueModelStats")
   public func calculateIssueModelStats(
-    request: CalculateIssueModelStatsRequest, options: GoogleCloudGax.RequestOptions
+    request: CalculateIssueModelStatsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.CalculateIssueModelStatsResponse {
     try await self.inner.calculateIssueModelStats(request: request, options: options)
   }
@@ -668,7 +666,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_CreatePhraseMatcher")
   public func createPhraseMatcher(
-    request: CreatePhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePhraseMatcherRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher {
     try await self.inner.createPhraseMatcher(request: request, options: options)
   }
@@ -677,7 +675,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_GetPhraseMatcher")
   public func getPhraseMatcher(
-    request: GetPhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPhraseMatcherRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher {
     try await self.inner.getPhraseMatcher(request: request, options: options)
   }
@@ -686,7 +684,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListPhraseMatchers")
   public func listPhraseMatchers(
-    request: ListPhraseMatchersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPhraseMatchersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListPhraseMatchersResponse {
     try await self.inner.listPhraseMatchers(request: request, options: options)
   }
@@ -695,7 +693,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListPhraseMatchers")
   public func listPhraseMatchers(
-    byItem: ListPhraseMatchersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPhraseMatchersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PhraseMatcher, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -704,14 +702,14 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
       request.pageToken = token
       return try await self.listPhraseMatchers(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes a phrase matcher.
   ///
   /// @Snippet(path: "ContactCenterInsights_DeletePhraseMatcher")
   public func deletePhraseMatcher(
-    request: DeletePhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePhraseMatcherRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deletePhraseMatcher(request: request, options: options)
   }
@@ -720,7 +718,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_UpdatePhraseMatcher")
   public func updatePhraseMatcher(
-    request: UpdatePhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePhraseMatcherRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher {
     try await self.inner.updatePhraseMatcher(request: request, options: options)
   }
@@ -729,7 +727,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_CalculateStats")
   public func calculateStats(
-    request: CalculateStatsRequest, options: GoogleCloudGax.RequestOptions
+    request: CalculateStatsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.CalculateStatsResponse {
     try await self.inner.calculateStats(request: request, options: options)
   }
@@ -738,7 +736,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_GetSettings")
   public func getSettings(
-    request: GetSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Settings {
     try await self.inner.getSettings(request: request, options: options)
   }
@@ -747,7 +745,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_UpdateSettings")
   public func updateSettings(
-    request: UpdateSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Settings {
     try await self.inner.updateSettings(request: request, options: options)
   }
@@ -756,7 +754,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_CreateAnalysisRule")
   public func createAnalysisRule(
-    request: CreateAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAnalysisRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule {
     try await self.inner.createAnalysisRule(request: request, options: options)
   }
@@ -765,7 +763,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_GetAnalysisRule")
   public func getAnalysisRule(
-    request: GetAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAnalysisRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule {
     try await self.inner.getAnalysisRule(request: request, options: options)
   }
@@ -774,7 +772,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListAnalysisRules")
   public func listAnalysisRules(
-    request: ListAnalysisRulesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAnalysisRulesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListAnalysisRulesResponse {
     try await self.inner.listAnalysisRules(request: request, options: options)
   }
@@ -783,7 +781,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListAnalysisRules")
   public func listAnalysisRules(
-    byItem: ListAnalysisRulesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAnalysisRulesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AnalysisRule, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -792,14 +790,14 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
       request.pageToken = token
       return try await self.listAnalysisRules(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates a analysis rule.
   ///
   /// @Snippet(path: "ContactCenterInsights_UpdateAnalysisRule")
   public func updateAnalysisRule(
-    request: UpdateAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAnalysisRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule {
     try await self.inner.updateAnalysisRule(request: request, options: options)
   }
@@ -808,7 +806,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_DeleteAnalysisRule")
   public func deleteAnalysisRule(
-    request: DeleteAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAnalysisRuleRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteAnalysisRule(request: request, options: options)
   }
@@ -817,7 +815,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_GetEncryptionSpec")
   public func getEncryptionSpec(
-    request: GetEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEncryptionSpecRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.EncryptionSpec {
     try await self.inner.getEncryptionSpec(request: request, options: options)
   }
@@ -830,7 +828,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_InitializeEncryptionSpec")
   public func initializeEncryptionSpec(
-    request: InitializeEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+    request: InitializeEncryptionSpecRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.initializeEncryptionSpec(request: request, options: options)
   }
@@ -843,23 +841,22 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_InitializeEncryptionSpec")
   public func initializeEncryptionSpec(
-    withPolling: InitializeEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse> {
+    withPolling: InitializeEncryptionSpecRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<InitializeEncryptionSpecResponse>.State in
+        -> GoogleGax._PollableOperationImpl<InitializeEncryptionSpecResponse>.State in
       return try op._extractStatus(InitializeEncryptionSpecResponse.self)
     }
     let rawOp = try await self.initializeEncryptionSpec(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<InitializeEncryptionSpecResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<InitializeEncryptionSpecResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -871,7 +868,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_CreateView")
   public func createView(
-    request: CreateViewRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.View {
     try await self.inner.createView(request: request, options: options)
   }
@@ -880,7 +877,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_GetView")
   public func getView(
-    request: GetViewRequest, options: GoogleCloudGax.RequestOptions
+    request: GetViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.View {
     try await self.inner.getView(request: request, options: options)
   }
@@ -889,7 +886,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListViews")
   public func listViews(
-    request: ListViewsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListViewsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListViewsResponse {
     try await self.inner.listViews(request: request, options: options)
   }
@@ -898,7 +895,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListViews")
   public func listViews(
-    byItem: ListViewsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListViewsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<View, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudContactCenterInsightsV1.ListViewsResponse in
@@ -906,14 +903,14 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
       request.pageToken = token
       return try await self.listViews(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates a view.
   ///
   /// @Snippet(path: "ContactCenterInsights_UpdateView")
   public func updateView(
-    request: UpdateViewRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.View {
     try await self.inner.updateView(request: request, options: options)
   }
@@ -922,7 +919,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_DeleteView")
   public func deleteView(
-    request: DeleteViewRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteViewRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteView(request: request, options: options)
   }
@@ -931,7 +928,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_QueryMetrics")
   public func queryMetrics(
-    request: QueryMetricsRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryMetricsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.queryMetrics(request: request, options: options)
   }
@@ -940,22 +937,21 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_QueryMetrics")
   public func queryMetrics(
-    withPolling: QueryMetricsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<QueryMetricsResponse> {
+    withPolling: QueryMetricsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<QueryMetricsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<QueryMetricsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<QueryMetricsResponse>.State in
       return try op._extractStatus(QueryMetricsResponse.self)
     }
     let rawOp = try await self.queryMetrics(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<QueryMetricsResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<QueryMetricsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -967,7 +963,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_CreateQaQuestion")
   public func createQaQuestion(
-    request: CreateQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateQaQuestionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion {
     try await self.inner.createQaQuestion(request: request, options: options)
   }
@@ -976,7 +972,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_GetQaQuestion")
   public func getQaQuestion(
-    request: GetQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetQaQuestionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion {
     try await self.inner.getQaQuestion(request: request, options: options)
   }
@@ -985,7 +981,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_UpdateQaQuestion")
   public func updateQaQuestion(
-    request: UpdateQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateQaQuestionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion {
     try await self.inner.updateQaQuestion(request: request, options: options)
   }
@@ -994,7 +990,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_DeleteQaQuestion")
   public func deleteQaQuestion(
-    request: DeleteQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteQaQuestionRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteQaQuestion(request: request, options: options)
   }
@@ -1003,7 +999,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListQaQuestions")
   public func listQaQuestions(
-    request: ListQaQuestionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListQaQuestionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListQaQuestionsResponse {
     try await self.inner.listQaQuestions(request: request, options: options)
   }
@@ -1012,7 +1008,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListQaQuestions")
   public func listQaQuestions(
-    byItem: ListQaQuestionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListQaQuestionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<QaQuestion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -1021,14 +1017,14 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
       request.pageToken = token
       return try await self.listQaQuestions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Create a QaScorecard.
   ///
   /// @Snippet(path: "ContactCenterInsights_CreateQaScorecard")
   public func createQaScorecard(
-    request: CreateQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateQaScorecardRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard {
     try await self.inner.createQaScorecard(request: request, options: options)
   }
@@ -1037,7 +1033,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_GetQaScorecard")
   public func getQaScorecard(
-    request: GetQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+    request: GetQaScorecardRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard {
     try await self.inner.getQaScorecard(request: request, options: options)
   }
@@ -1046,7 +1042,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_UpdateQaScorecard")
   public func updateQaScorecard(
-    request: UpdateQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateQaScorecardRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard {
     try await self.inner.updateQaScorecard(request: request, options: options)
   }
@@ -1055,7 +1051,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_DeleteQaScorecard")
   public func deleteQaScorecard(
-    request: DeleteQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteQaScorecardRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteQaScorecard(request: request, options: options)
   }
@@ -1064,7 +1060,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListQaScorecards")
   public func listQaScorecards(
-    request: ListQaScorecardsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListQaScorecardsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListQaScorecardsResponse {
     try await self.inner.listQaScorecards(request: request, options: options)
   }
@@ -1073,7 +1069,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListQaScorecards")
   public func listQaScorecards(
-    byItem: ListQaScorecardsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListQaScorecardsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<QaScorecard, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -1082,14 +1078,14 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
       request.pageToken = token
       return try await self.listQaScorecards(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a QaScorecardRevision.
   ///
   /// @Snippet(path: "ContactCenterInsights_CreateQaScorecardRevision")
   public func createQaScorecardRevision(
-    request: CreateQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision {
     try await self.inner.createQaScorecardRevision(request: request, options: options)
   }
@@ -1098,7 +1094,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_GetQaScorecardRevision")
   public func getQaScorecardRevision(
-    request: GetQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision {
     try await self.inner.getQaScorecardRevision(request: request, options: options)
   }
@@ -1107,7 +1103,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_TuneQaScorecardRevision")
   public func tuneQaScorecardRevision(
-    request: TuneQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: TuneQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.tuneQaScorecardRevision(request: request, options: options)
   }
@@ -1116,23 +1112,22 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_TuneQaScorecardRevision")
   public func tuneQaScorecardRevision(
-    withPolling: TuneQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TuneQaScorecardRevisionResponse> {
+    withPolling: TuneQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<TuneQaScorecardRevisionResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<TuneQaScorecardRevisionResponse>.State in
+        -> GoogleGax._PollableOperationImpl<TuneQaScorecardRevisionResponse>.State in
       return try op._extractStatus(TuneQaScorecardRevisionResponse.self)
     }
     let rawOp = try await self.tuneQaScorecardRevision(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<TuneQaScorecardRevisionResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<TuneQaScorecardRevisionResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1144,7 +1139,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_DeployQaScorecardRevision")
   public func deployQaScorecardRevision(
-    request: DeployQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeployQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision {
     try await self.inner.deployQaScorecardRevision(request: request, options: options)
   }
@@ -1153,7 +1148,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_UndeployQaScorecardRevision")
   public func undeployQaScorecardRevision(
-    request: UndeployQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeployQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision {
     try await self.inner.undeployQaScorecardRevision(request: request, options: options)
   }
@@ -1162,7 +1157,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_DeleteQaScorecardRevision")
   public func deleteQaScorecardRevision(
-    request: DeleteQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteQaScorecardRevision(request: request, options: options)
   }
@@ -1171,7 +1166,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListQaScorecardRevisions")
   public func listQaScorecardRevisions(
-    request: ListQaScorecardRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListQaScorecardRevisionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListQaScorecardRevisionsResponse {
     try await self.inner.listQaScorecardRevisions(request: request, options: options)
   }
@@ -1180,7 +1175,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListQaScorecardRevisions")
   public func listQaScorecardRevisions(
-    byItem: ListQaScorecardRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListQaScorecardRevisionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<QaScorecardRevision, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -1189,14 +1184,14 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
       request.pageToken = token
       return try await self.listQaScorecardRevisions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Create feedback label.
   ///
   /// @Snippet(path: "ContactCenterInsights_CreateFeedbackLabel")
   public func createFeedbackLabel(
-    request: CreateFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateFeedbackLabelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel {
     try await self.inner.createFeedbackLabel(request: request, options: options)
   }
@@ -1205,7 +1200,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListFeedbackLabels")
   public func listFeedbackLabels(
-    request: ListFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListFeedbackLabelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListFeedbackLabelsResponse {
     try await self.inner.listFeedbackLabels(request: request, options: options)
   }
@@ -1214,7 +1209,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListFeedbackLabels")
   public func listFeedbackLabels(
-    byItem: ListFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListFeedbackLabelsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<FeedbackLabel, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -1223,14 +1218,14 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
       request.pageToken = token
       return try await self.listFeedbackLabels(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Get feedback label.
   ///
   /// @Snippet(path: "ContactCenterInsights_GetFeedbackLabel")
   public func getFeedbackLabel(
-    request: GetFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+    request: GetFeedbackLabelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel {
     try await self.inner.getFeedbackLabel(request: request, options: options)
   }
@@ -1239,7 +1234,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_UpdateFeedbackLabel")
   public func updateFeedbackLabel(
-    request: UpdateFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateFeedbackLabelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel {
     try await self.inner.updateFeedbackLabel(request: request, options: options)
   }
@@ -1248,7 +1243,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_DeleteFeedbackLabel")
   public func deleteFeedbackLabel(
-    request: DeleteFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteFeedbackLabelRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteFeedbackLabel(request: request, options: options)
   }
@@ -1257,7 +1252,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListAllFeedbackLabels")
   public func listAllFeedbackLabels(
-    request: ListAllFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAllFeedbackLabelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListAllFeedbackLabelsResponse {
     try await self.inner.listAllFeedbackLabels(request: request, options: options)
   }
@@ -1266,7 +1261,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListAllFeedbackLabels")
   public func listAllFeedbackLabels(
-    byItem: ListAllFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAllFeedbackLabelsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<FeedbackLabel, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -1275,14 +1270,14 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
       request.pageToken = token
       return try await self.listAllFeedbackLabels(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Upload feedback labels in bulk.
   ///
   /// @Snippet(path: "ContactCenterInsights_BulkUploadFeedbackLabels")
   public func bulkUploadFeedbackLabels(
-    request: BulkUploadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+    request: BulkUploadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.bulkUploadFeedbackLabels(request: request, options: options)
   }
@@ -1291,23 +1286,22 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_BulkUploadFeedbackLabels")
   public func bulkUploadFeedbackLabels(
-    withPolling: BulkUploadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkUploadFeedbackLabelsResponse> {
+    withPolling: BulkUploadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BulkUploadFeedbackLabelsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<BulkUploadFeedbackLabelsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<BulkUploadFeedbackLabelsResponse>.State in
       return try op._extractStatus(BulkUploadFeedbackLabelsResponse.self)
     }
     let rawOp = try await self.bulkUploadFeedbackLabels(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<BulkUploadFeedbackLabelsResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<BulkUploadFeedbackLabelsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1319,7 +1313,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_BulkDownloadFeedbackLabels")
   public func bulkDownloadFeedbackLabels(
-    request: BulkDownloadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+    request: BulkDownloadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.bulkDownloadFeedbackLabels(request: request, options: options)
   }
@@ -1328,23 +1322,23 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_BulkDownloadFeedbackLabels")
   public func bulkDownloadFeedbackLabels(
-    withPolling: BulkDownloadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkDownloadFeedbackLabelsResponse> {
+    withPolling: BulkDownloadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BulkDownloadFeedbackLabelsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<BulkDownloadFeedbackLabelsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<BulkDownloadFeedbackLabelsResponse>.State in
       return try op._extractStatus(BulkDownloadFeedbackLabelsResponse.self)
     }
     let rawOp = try await self.bulkDownloadFeedbackLabels(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<BulkDownloadFeedbackLabelsResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<BulkDownloadFeedbackLabelsResponse>.State
+      in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1358,7 +1352,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -1369,7 +1363,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -1377,7 +1371,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -1386,7 +1380,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -1397,7 +1391,7 @@ public final class ContactCenterInsightsClient: Clients.ContactCenterInsightsPro
   ///
   /// @Snippet(path: "ContactCenterInsights_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -1426,8 +1420,8 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.uploadConversation`.
-    func uploadConversation(withPolling: UploadConversationRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Conversation>
+    func uploadConversation(withPolling: UploadConversationRequest) async throws -> any GoogleGax
+      .PollableOperation<Conversation>
 
     /// See `ContactCenterInsightsClient.updateConversation`.
     func updateConversation(request: UpdateConversationRequest) async throws
@@ -1436,7 +1430,7 @@ extension Clients {
     /// See `ContactCenterInsightsClient.updateConversation`.
     func updateConversation(
       conversation: Conversation?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation
 
     /// See `ContactCenterInsightsClient.getConversation`.
@@ -1474,14 +1468,14 @@ extension Clients {
     func createAnalysis(request: CreateAnalysisRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.createAnalysis`.
-    func createAnalysis(withPolling: CreateAnalysisRequest) async throws -> any GoogleCloudGax
+    func createAnalysis(withPolling: CreateAnalysisRequest) async throws -> any GoogleGax
       .PollableOperation<Analysis>
 
     /// See `ContactCenterInsightsClient.createAnalysis`.
     func createAnalysis(
       parent: Swift.String,
       analysis: Analysis?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Analysis>
+    ) async throws -> any GoogleGax.PollableOperation<Analysis>
 
     /// See `ContactCenterInsightsClient.getAnalysis`.
     func getAnalysis(request: GetAnalysisRequest) async throws
@@ -1520,14 +1514,14 @@ extension Clients {
 
     /// See `ContactCenterInsightsClient.bulkAnalyzeConversations`.
     func bulkAnalyzeConversations(withPolling: BulkAnalyzeConversationsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<BulkAnalyzeConversationsResponse>
+      -> any GoogleGax.PollableOperation<BulkAnalyzeConversationsResponse>
 
     /// See `ContactCenterInsightsClient.bulkAnalyzeConversations`.
     func bulkAnalyzeConversations(
       parent: Swift.String,
       filter: Swift.String,
       analysisPercentage: Swift.Float,
-    ) async throws -> any GoogleCloudGax.PollableOperation<BulkAnalyzeConversationsResponse>
+    ) async throws -> any GoogleGax.PollableOperation<BulkAnalyzeConversationsResponse>
 
     /// See `ContactCenterInsightsClient.bulkDeleteConversations`.
     func bulkDeleteConversations(request: BulkDeleteConversationsRequest) async throws
@@ -1535,53 +1529,53 @@ extension Clients {
 
     /// See `ContactCenterInsightsClient.bulkDeleteConversations`.
     func bulkDeleteConversations(withPolling: BulkDeleteConversationsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<BulkDeleteConversationsResponse>
+      -> any GoogleGax.PollableOperation<BulkDeleteConversationsResponse>
 
     /// See `ContactCenterInsightsClient.bulkDeleteConversations`.
     func bulkDeleteConversations(
       parent: Swift.String,
       filter: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<BulkDeleteConversationsResponse>
+    ) async throws -> any GoogleGax.PollableOperation<BulkDeleteConversationsResponse>
 
     /// See `ContactCenterInsightsClient.ingestConversations`.
     func ingestConversations(request: IngestConversationsRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.ingestConversations`.
-    func ingestConversations(withPolling: IngestConversationsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<IngestConversationsResponse>
+    func ingestConversations(withPolling: IngestConversationsRequest) async throws -> any GoogleGax
+      .PollableOperation<IngestConversationsResponse>
 
     /// See `ContactCenterInsightsClient.ingestConversations`.
     func ingestConversations(
       parent: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<IngestConversationsResponse>
+    ) async throws -> any GoogleGax.PollableOperation<IngestConversationsResponse>
 
     /// See `ContactCenterInsightsClient.exportInsightsData`.
     func exportInsightsData(request: ExportInsightsDataRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.exportInsightsData`.
-    func exportInsightsData(withPolling: ExportInsightsDataRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ExportInsightsDataResponse>
+    func exportInsightsData(withPolling: ExportInsightsDataRequest) async throws -> any GoogleGax
+      .PollableOperation<ExportInsightsDataResponse>
 
     /// See `ContactCenterInsightsClient.exportInsightsData`.
     func exportInsightsData(
       parent: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportInsightsDataResponse>
+    ) async throws -> any GoogleGax.PollableOperation<ExportInsightsDataResponse>
 
     /// See `ContactCenterInsightsClient.createIssueModel`.
     func createIssueModel(request: CreateIssueModelRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.createIssueModel`.
-    func createIssueModel(withPolling: CreateIssueModelRequest) async throws -> any GoogleCloudGax
+    func createIssueModel(withPolling: CreateIssueModelRequest) async throws -> any GoogleGax
       .PollableOperation<IssueModel>
 
     /// See `ContactCenterInsightsClient.createIssueModel`.
     func createIssueModel(
       parent: Swift.String,
       issueModel: IssueModel?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<IssueModel>
+    ) async throws -> any GoogleGax.PollableOperation<IssueModel>
 
     /// See `ContactCenterInsightsClient.updateIssueModel`.
     func updateIssueModel(request: UpdateIssueModelRequest) async throws
@@ -1590,7 +1584,7 @@ extension Clients {
     /// See `ContactCenterInsightsClient.updateIssueModel`.
     func updateIssueModel(
       issueModel: IssueModel?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudContactCenterInsightsV1.IssueModel
 
     /// See `ContactCenterInsightsClient.getIssueModel`.
@@ -1616,65 +1610,65 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.deleteIssueModel`.
-    func deleteIssueModel(withPolling: DeleteIssueModelRequest) async throws -> any GoogleCloudGax
+    func deleteIssueModel(withPolling: DeleteIssueModelRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `ContactCenterInsightsClient.deleteIssueModel`.
     func deleteIssueModel(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ContactCenterInsightsClient.deployIssueModel`.
     func deployIssueModel(request: DeployIssueModelRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.deployIssueModel`.
-    func deployIssueModel(withPolling: DeployIssueModelRequest) async throws -> any GoogleCloudGax
+    func deployIssueModel(withPolling: DeployIssueModelRequest) async throws -> any GoogleGax
       .PollableOperation<DeployIssueModelResponse>
 
     /// See `ContactCenterInsightsClient.deployIssueModel`.
     func deployIssueModel(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeployIssueModelResponse>
+    ) async throws -> any GoogleGax.PollableOperation<DeployIssueModelResponse>
 
     /// See `ContactCenterInsightsClient.undeployIssueModel`.
     func undeployIssueModel(request: UndeployIssueModelRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.undeployIssueModel`.
-    func undeployIssueModel(withPolling: UndeployIssueModelRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<UndeployIssueModelResponse>
+    func undeployIssueModel(withPolling: UndeployIssueModelRequest) async throws -> any GoogleGax
+      .PollableOperation<UndeployIssueModelResponse>
 
     /// See `ContactCenterInsightsClient.undeployIssueModel`.
     func undeployIssueModel(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<UndeployIssueModelResponse>
+    ) async throws -> any GoogleGax.PollableOperation<UndeployIssueModelResponse>
 
     /// See `ContactCenterInsightsClient.exportIssueModel`.
     func exportIssueModel(request: ExportIssueModelRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.exportIssueModel`.
-    func exportIssueModel(withPolling: ExportIssueModelRequest) async throws -> any GoogleCloudGax
+    func exportIssueModel(withPolling: ExportIssueModelRequest) async throws -> any GoogleGax
       .PollableOperation<ExportIssueModelResponse>
 
     /// See `ContactCenterInsightsClient.exportIssueModel`.
     func exportIssueModel(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportIssueModelResponse>
+    ) async throws -> any GoogleGax.PollableOperation<ExportIssueModelResponse>
 
     /// See `ContactCenterInsightsClient.importIssueModel`.
     func importIssueModel(request: ImportIssueModelRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.importIssueModel`.
-    func importIssueModel(withPolling: ImportIssueModelRequest) async throws -> any GoogleCloudGax
+    func importIssueModel(withPolling: ImportIssueModelRequest) async throws -> any GoogleGax
       .PollableOperation<ImportIssueModelResponse>
 
     /// See `ContactCenterInsightsClient.importIssueModel`.
     func importIssueModel(
       parent: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportIssueModelResponse>
+    ) async throws -> any GoogleGax.PollableOperation<ImportIssueModelResponse>
 
     /// See `ContactCenterInsightsClient.getIssue`.
     func getIssue(request: GetIssueRequest) async throws -> GoogleCloudContactCenterInsightsV1.Issue
@@ -1700,7 +1694,7 @@ extension Clients {
     /// See `ContactCenterInsightsClient.updateIssue`.
     func updateIssue(
       issue: Issue?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudContactCenterInsightsV1.Issue
 
     /// See `ContactCenterInsightsClient.deleteIssue`.
@@ -1768,7 +1762,7 @@ extension Clients {
     /// See `ContactCenterInsightsClient.updatePhraseMatcher`.
     func updatePhraseMatcher(
       phraseMatcher: PhraseMatcher?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher
 
     /// See `ContactCenterInsightsClient.calculateStats`.
@@ -1796,7 +1790,7 @@ extension Clients {
     /// See `ContactCenterInsightsClient.updateSettings`.
     func updateSettings(
       settings: Settings?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudContactCenterInsightsV1.Settings
 
     /// See `ContactCenterInsightsClient.createAnalysisRule`.
@@ -1839,7 +1833,7 @@ extension Clients {
     /// See `ContactCenterInsightsClient.updateAnalysisRule`.
     func updateAnalysisRule(
       analysisRule: AnalysisRule?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule
 
     /// See `ContactCenterInsightsClient.deleteAnalysisRule`.
@@ -1865,12 +1859,12 @@ extension Clients {
 
     /// See `ContactCenterInsightsClient.initializeEncryptionSpec`.
     func initializeEncryptionSpec(withPolling: InitializeEncryptionSpecRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse>
+      -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse>
 
     /// See `ContactCenterInsightsClient.initializeEncryptionSpec`.
     func initializeEncryptionSpec(
       encryptionSpec: EncryptionSpec?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse>
+    ) async throws -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse>
 
     /// See `ContactCenterInsightsClient.createView`.
     func createView(request: CreateViewRequest) async throws
@@ -1911,7 +1905,7 @@ extension Clients {
     /// See `ContactCenterInsightsClient.updateView`.
     func updateView(
       view: View?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudContactCenterInsightsV1.View
 
     /// See `ContactCenterInsightsClient.deleteView`.
@@ -1926,7 +1920,7 @@ extension Clients {
     func queryMetrics(request: QueryMetricsRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.queryMetrics`.
-    func queryMetrics(withPolling: QueryMetricsRequest) async throws -> any GoogleCloudGax
+    func queryMetrics(withPolling: QueryMetricsRequest) async throws -> any GoogleGax
       .PollableOperation<QueryMetricsResponse>
 
     /// See `ContactCenterInsightsClient.createQaQuestion`.
@@ -1956,7 +1950,7 @@ extension Clients {
     /// See `ContactCenterInsightsClient.updateQaQuestion`.
     func updateQaQuestion(
       qaQuestion: QaQuestion?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion
 
     /// See `ContactCenterInsightsClient.deleteQaQuestion`.
@@ -2008,7 +2002,7 @@ extension Clients {
     /// See `ContactCenterInsightsClient.updateQaScorecard`.
     func updateQaScorecard(
       qaScorecard: QaScorecard?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard
 
     /// See `ContactCenterInsightsClient.deleteQaScorecard`.
@@ -2059,14 +2053,14 @@ extension Clients {
 
     /// See `ContactCenterInsightsClient.tuneQaScorecardRevision`.
     func tuneQaScorecardRevision(withPolling: TuneQaScorecardRevisionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<TuneQaScorecardRevisionResponse>
+      -> any GoogleGax.PollableOperation<TuneQaScorecardRevisionResponse>
 
     /// See `ContactCenterInsightsClient.tuneQaScorecardRevision`.
     func tuneQaScorecardRevision(
       parent: Swift.String,
       filter: Swift.String,
       validateOnly: Swift.Bool,
-    ) async throws -> any GoogleCloudGax.PollableOperation<TuneQaScorecardRevisionResponse>
+    ) async throws -> any GoogleGax.PollableOperation<TuneQaScorecardRevisionResponse>
 
     /// See `ContactCenterInsightsClient.deployQaScorecardRevision`.
     func deployQaScorecardRevision(request: DeployQaScorecardRevisionRequest) async throws
@@ -2139,7 +2133,7 @@ extension Clients {
     /// See `ContactCenterInsightsClient.updateFeedbackLabel`.
     func updateFeedbackLabel(
       feedbackLabel: FeedbackLabel?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel
 
     /// See `ContactCenterInsightsClient.deleteFeedbackLabel`.
@@ -2170,12 +2164,12 @@ extension Clients {
 
     /// See `ContactCenterInsightsClient.bulkUploadFeedbackLabels`.
     func bulkUploadFeedbackLabels(withPolling: BulkUploadFeedbackLabelsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<BulkUploadFeedbackLabelsResponse>
+      -> any GoogleGax.PollableOperation<BulkUploadFeedbackLabelsResponse>
 
     /// See `ContactCenterInsightsClient.bulkUploadFeedbackLabels`.
     func bulkUploadFeedbackLabels(
       parent: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<BulkUploadFeedbackLabelsResponse>
+    ) async throws -> any GoogleGax.PollableOperation<BulkUploadFeedbackLabelsResponse>
 
     /// See `ContactCenterInsightsClient.bulkDownloadFeedbackLabels`.
     func bulkDownloadFeedbackLabels(request: BulkDownloadFeedbackLabelsRequest) async throws
@@ -2183,12 +2177,12 @@ extension Clients {
 
     /// See `ContactCenterInsightsClient.bulkDownloadFeedbackLabels`.
     func bulkDownloadFeedbackLabels(withPolling: BulkDownloadFeedbackLabelsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<BulkDownloadFeedbackLabelsResponse>
+      -> any GoogleGax.PollableOperation<BulkDownloadFeedbackLabelsResponse>
 
     /// See `ContactCenterInsightsClient.bulkDownloadFeedbackLabels`.
     func bulkDownloadFeedbackLabels(
       parent: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<BulkDownloadFeedbackLabelsResponse>
+    ) async throws -> any GoogleGax.PollableOperation<BulkDownloadFeedbackLabelsResponse>
 
     /// See `ContactCenterInsightsClient.listOperations`.
     func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -2215,522 +2209,522 @@ extension Clients {
 
     /// See `ContactCenterInsightsClient.createConversation`.
     func createConversation(
-      request: CreateConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation
 
     /// See `ContactCenterInsightsClient.uploadConversation`.
     func uploadConversation(
-      request: UploadConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: UploadConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.uploadConversation`.
     func uploadConversation(
-      withPolling: UploadConversationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Conversation>
+      withPolling: UploadConversationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Conversation>
 
     /// See `ContactCenterInsightsClient.updateConversation`.
     func updateConversation(
-      request: UpdateConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation
 
     /// See `ContactCenterInsightsClient.getConversation`.
     func getConversation(
-      request: GetConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation
 
     /// See `ContactCenterInsightsClient.listConversations`.
     func listConversations(
-      request: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListConversationsResponse
 
     /// See `ContactCenterInsightsClient.listConversations`.
     func listConversations(
-      byItem: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConversationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Conversation, Swift.Error>
 
     /// See `ContactCenterInsightsClient.deleteConversation`.
     func deleteConversation(
-      request: DeleteConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConversationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ContactCenterInsightsClient.createAnalysis`.
     func createAnalysis(
-      request: CreateAnalysisRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAnalysisRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.createAnalysis`.
     func createAnalysis(
-      withPolling: CreateAnalysisRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Analysis>
+      withPolling: CreateAnalysisRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Analysis>
 
     /// See `ContactCenterInsightsClient.getAnalysis`.
     func getAnalysis(
-      request: GetAnalysisRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAnalysisRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Analysis
 
     /// See `ContactCenterInsightsClient.listAnalyses`.
     func listAnalyses(
-      request: ListAnalysesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAnalysesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListAnalysesResponse
 
     /// See `ContactCenterInsightsClient.listAnalyses`.
     func listAnalyses(
-      byItem: ListAnalysesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAnalysesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Analysis, Swift.Error>
 
     /// See `ContactCenterInsightsClient.deleteAnalysis`.
     func deleteAnalysis(
-      request: DeleteAnalysisRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAnalysisRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ContactCenterInsightsClient.bulkAnalyzeConversations`.
     func bulkAnalyzeConversations(
-      request: BulkAnalyzeConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkAnalyzeConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.bulkAnalyzeConversations`.
     func bulkAnalyzeConversations(
-      withPolling: BulkAnalyzeConversationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BulkAnalyzeConversationsResponse>
+      withPolling: BulkAnalyzeConversationsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BulkAnalyzeConversationsResponse>
 
     /// See `ContactCenterInsightsClient.bulkDeleteConversations`.
     func bulkDeleteConversations(
-      request: BulkDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkDeleteConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.bulkDeleteConversations`.
     func bulkDeleteConversations(
-      withPolling: BulkDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BulkDeleteConversationsResponse>
+      withPolling: BulkDeleteConversationsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BulkDeleteConversationsResponse>
 
     /// See `ContactCenterInsightsClient.ingestConversations`.
     func ingestConversations(
-      request: IngestConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: IngestConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.ingestConversations`.
     func ingestConversations(
-      withPolling: IngestConversationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<IngestConversationsResponse>
+      withPolling: IngestConversationsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<IngestConversationsResponse>
 
     /// See `ContactCenterInsightsClient.exportInsightsData`.
     func exportInsightsData(
-      request: ExportInsightsDataRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportInsightsDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.exportInsightsData`.
     func exportInsightsData(
-      withPolling: ExportInsightsDataRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportInsightsDataResponse>
+      withPolling: ExportInsightsDataRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportInsightsDataResponse>
 
     /// See `ContactCenterInsightsClient.createIssueModel`.
     func createIssueModel(
-      request: CreateIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.createIssueModel`.
     func createIssueModel(
-      withPolling: CreateIssueModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<IssueModel>
+      withPolling: CreateIssueModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<IssueModel>
 
     /// See `ContactCenterInsightsClient.updateIssueModel`.
     func updateIssueModel(
-      request: UpdateIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.IssueModel
 
     /// See `ContactCenterInsightsClient.getIssueModel`.
     func getIssueModel(
-      request: GetIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.IssueModel
 
     /// See `ContactCenterInsightsClient.listIssueModels`.
     func listIssueModels(
-      request: ListIssueModelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIssueModelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListIssueModelsResponse
 
     /// See `ContactCenterInsightsClient.deleteIssueModel`.
     func deleteIssueModel(
-      request: DeleteIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.deleteIssueModel`.
     func deleteIssueModel(
-      withPolling: DeleteIssueModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteIssueModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ContactCenterInsightsClient.deployIssueModel`.
     func deployIssueModel(
-      request: DeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeployIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.deployIssueModel`.
     func deployIssueModel(
-      withPolling: DeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeployIssueModelResponse>
+      withPolling: DeployIssueModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DeployIssueModelResponse>
 
     /// See `ContactCenterInsightsClient.undeployIssueModel`.
     func undeployIssueModel(
-      request: UndeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeployIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.undeployIssueModel`.
     func undeployIssueModel(
-      withPolling: UndeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<UndeployIssueModelResponse>
+      withPolling: UndeployIssueModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<UndeployIssueModelResponse>
 
     /// See `ContactCenterInsightsClient.exportIssueModel`.
     func exportIssueModel(
-      request: ExportIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.exportIssueModel`.
     func exportIssueModel(
-      withPolling: ExportIssueModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportIssueModelResponse>
+      withPolling: ExportIssueModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportIssueModelResponse>
 
     /// See `ContactCenterInsightsClient.importIssueModel`.
     func importIssueModel(
-      request: ImportIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.importIssueModel`.
     func importIssueModel(
-      withPolling: ImportIssueModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportIssueModelResponse>
+      withPolling: ImportIssueModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportIssueModelResponse>
 
     /// See `ContactCenterInsightsClient.getIssue`.
     func getIssue(
-      request: GetIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Issue
 
     /// See `ContactCenterInsightsClient.listIssues`.
     func listIssues(
-      request: ListIssuesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIssuesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListIssuesResponse
 
     /// See `ContactCenterInsightsClient.updateIssue`.
     func updateIssue(
-      request: UpdateIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Issue
 
     /// See `ContactCenterInsightsClient.deleteIssue`.
     func deleteIssue(
-      request: DeleteIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIssueRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ContactCenterInsightsClient.calculateIssueModelStats`.
     func calculateIssueModelStats(
-      request: CalculateIssueModelStatsRequest, options: GoogleCloudGax.RequestOptions
+      request: CalculateIssueModelStatsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.CalculateIssueModelStatsResponse
 
     /// See `ContactCenterInsightsClient.createPhraseMatcher`.
     func createPhraseMatcher(
-      request: CreatePhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePhraseMatcherRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher
 
     /// See `ContactCenterInsightsClient.getPhraseMatcher`.
     func getPhraseMatcher(
-      request: GetPhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPhraseMatcherRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher
 
     /// See `ContactCenterInsightsClient.listPhraseMatchers`.
     func listPhraseMatchers(
-      request: ListPhraseMatchersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPhraseMatchersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListPhraseMatchersResponse
 
     /// See `ContactCenterInsightsClient.listPhraseMatchers`.
     func listPhraseMatchers(
-      byItem: ListPhraseMatchersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPhraseMatchersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PhraseMatcher, Swift.Error>
 
     /// See `ContactCenterInsightsClient.deletePhraseMatcher`.
     func deletePhraseMatcher(
-      request: DeletePhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePhraseMatcherRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ContactCenterInsightsClient.updatePhraseMatcher`.
     func updatePhraseMatcher(
-      request: UpdatePhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePhraseMatcherRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher
 
     /// See `ContactCenterInsightsClient.calculateStats`.
     func calculateStats(
-      request: CalculateStatsRequest, options: GoogleCloudGax.RequestOptions
+      request: CalculateStatsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.CalculateStatsResponse
 
     /// See `ContactCenterInsightsClient.getSettings`.
     func getSettings(
-      request: GetSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Settings
 
     /// See `ContactCenterInsightsClient.updateSettings`.
     func updateSettings(
-      request: UpdateSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Settings
 
     /// See `ContactCenterInsightsClient.createAnalysisRule`.
     func createAnalysisRule(
-      request: CreateAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAnalysisRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule
 
     /// See `ContactCenterInsightsClient.getAnalysisRule`.
     func getAnalysisRule(
-      request: GetAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAnalysisRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule
 
     /// See `ContactCenterInsightsClient.listAnalysisRules`.
     func listAnalysisRules(
-      request: ListAnalysisRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAnalysisRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListAnalysisRulesResponse
 
     /// See `ContactCenterInsightsClient.listAnalysisRules`.
     func listAnalysisRules(
-      byItem: ListAnalysisRulesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAnalysisRulesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AnalysisRule, Swift.Error>
 
     /// See `ContactCenterInsightsClient.updateAnalysisRule`.
     func updateAnalysisRule(
-      request: UpdateAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAnalysisRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule
 
     /// See `ContactCenterInsightsClient.deleteAnalysisRule`.
     func deleteAnalysisRule(
-      request: DeleteAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAnalysisRuleRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ContactCenterInsightsClient.getEncryptionSpec`.
     func getEncryptionSpec(
-      request: GetEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEncryptionSpecRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.EncryptionSpec
 
     /// See `ContactCenterInsightsClient.initializeEncryptionSpec`.
     func initializeEncryptionSpec(
-      request: InitializeEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+      request: InitializeEncryptionSpecRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.initializeEncryptionSpec`.
     func initializeEncryptionSpec(
-      withPolling: InitializeEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse>
+      withPolling: InitializeEncryptionSpecRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse>
 
     /// See `ContactCenterInsightsClient.createView`.
     func createView(
-      request: CreateViewRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.View
 
     /// See `ContactCenterInsightsClient.getView`.
     func getView(
-      request: GetViewRequest, options: GoogleCloudGax.RequestOptions
+      request: GetViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.View
 
     /// See `ContactCenterInsightsClient.listViews`.
     func listViews(
-      request: ListViewsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListViewsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListViewsResponse
 
     /// See `ContactCenterInsightsClient.listViews`.
     func listViews(
-      byItem: ListViewsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListViewsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<View, Swift.Error>
 
     /// See `ContactCenterInsightsClient.updateView`.
     func updateView(
-      request: UpdateViewRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.View
 
     /// See `ContactCenterInsightsClient.deleteView`.
     func deleteView(
-      request: DeleteViewRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteViewRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ContactCenterInsightsClient.queryMetrics`.
     func queryMetrics(
-      request: QueryMetricsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryMetricsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.queryMetrics`.
     func queryMetrics(
-      withPolling: QueryMetricsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<QueryMetricsResponse>
+      withPolling: QueryMetricsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<QueryMetricsResponse>
 
     /// See `ContactCenterInsightsClient.createQaQuestion`.
     func createQaQuestion(
-      request: CreateQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateQaQuestionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion
 
     /// See `ContactCenterInsightsClient.getQaQuestion`.
     func getQaQuestion(
-      request: GetQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQaQuestionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion
 
     /// See `ContactCenterInsightsClient.updateQaQuestion`.
     func updateQaQuestion(
-      request: UpdateQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateQaQuestionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion
 
     /// See `ContactCenterInsightsClient.deleteQaQuestion`.
     func deleteQaQuestion(
-      request: DeleteQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteQaQuestionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ContactCenterInsightsClient.listQaQuestions`.
     func listQaQuestions(
-      request: ListQaQuestionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQaQuestionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListQaQuestionsResponse
 
     /// See `ContactCenterInsightsClient.listQaQuestions`.
     func listQaQuestions(
-      byItem: ListQaQuestionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListQaQuestionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<QaQuestion, Swift.Error>
 
     /// See `ContactCenterInsightsClient.createQaScorecard`.
     func createQaScorecard(
-      request: CreateQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateQaScorecardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard
 
     /// See `ContactCenterInsightsClient.getQaScorecard`.
     func getQaScorecard(
-      request: GetQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQaScorecardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard
 
     /// See `ContactCenterInsightsClient.updateQaScorecard`.
     func updateQaScorecard(
-      request: UpdateQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateQaScorecardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard
 
     /// See `ContactCenterInsightsClient.deleteQaScorecard`.
     func deleteQaScorecard(
-      request: DeleteQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteQaScorecardRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ContactCenterInsightsClient.listQaScorecards`.
     func listQaScorecards(
-      request: ListQaScorecardsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQaScorecardsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListQaScorecardsResponse
 
     /// See `ContactCenterInsightsClient.listQaScorecards`.
     func listQaScorecards(
-      byItem: ListQaScorecardsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListQaScorecardsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<QaScorecard, Swift.Error>
 
     /// See `ContactCenterInsightsClient.createQaScorecardRevision`.
     func createQaScorecardRevision(
-      request: CreateQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision
 
     /// See `ContactCenterInsightsClient.getQaScorecardRevision`.
     func getQaScorecardRevision(
-      request: GetQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision
 
     /// See `ContactCenterInsightsClient.tuneQaScorecardRevision`.
     func tuneQaScorecardRevision(
-      request: TuneQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: TuneQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.tuneQaScorecardRevision`.
     func tuneQaScorecardRevision(
-      withPolling: TuneQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TuneQaScorecardRevisionResponse>
+      withPolling: TuneQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<TuneQaScorecardRevisionResponse>
 
     /// See `ContactCenterInsightsClient.deployQaScorecardRevision`.
     func deployQaScorecardRevision(
-      request: DeployQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeployQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision
 
     /// See `ContactCenterInsightsClient.undeployQaScorecardRevision`.
     func undeployQaScorecardRevision(
-      request: UndeployQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeployQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision
 
     /// See `ContactCenterInsightsClient.deleteQaScorecardRevision`.
     func deleteQaScorecardRevision(
-      request: DeleteQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ContactCenterInsightsClient.listQaScorecardRevisions`.
     func listQaScorecardRevisions(
-      request: ListQaScorecardRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQaScorecardRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListQaScorecardRevisionsResponse
 
     /// See `ContactCenterInsightsClient.listQaScorecardRevisions`.
     func listQaScorecardRevisions(
-      byItem: ListQaScorecardRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListQaScorecardRevisionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<QaScorecardRevision, Swift.Error>
 
     /// See `ContactCenterInsightsClient.createFeedbackLabel`.
     func createFeedbackLabel(
-      request: CreateFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFeedbackLabelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel
 
     /// See `ContactCenterInsightsClient.listFeedbackLabels`.
     func listFeedbackLabels(
-      request: ListFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFeedbackLabelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListFeedbackLabelsResponse
 
     /// See `ContactCenterInsightsClient.listFeedbackLabels`.
     func listFeedbackLabels(
-      byItem: ListFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListFeedbackLabelsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<FeedbackLabel, Swift.Error>
 
     /// See `ContactCenterInsightsClient.getFeedbackLabel`.
     func getFeedbackLabel(
-      request: GetFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFeedbackLabelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel
 
     /// See `ContactCenterInsightsClient.updateFeedbackLabel`.
     func updateFeedbackLabel(
-      request: UpdateFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFeedbackLabelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel
 
     /// See `ContactCenterInsightsClient.deleteFeedbackLabel`.
     func deleteFeedbackLabel(
-      request: DeleteFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFeedbackLabelRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ContactCenterInsightsClient.listAllFeedbackLabels`.
     func listAllFeedbackLabels(
-      request: ListAllFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAllFeedbackLabelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListAllFeedbackLabelsResponse
 
     /// See `ContactCenterInsightsClient.listAllFeedbackLabels`.
     func listAllFeedbackLabels(
-      byItem: ListAllFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAllFeedbackLabelsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<FeedbackLabel, Swift.Error>
 
     /// See `ContactCenterInsightsClient.bulkUploadFeedbackLabels`.
     func bulkUploadFeedbackLabels(
-      request: BulkUploadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkUploadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.bulkUploadFeedbackLabels`.
     func bulkUploadFeedbackLabels(
-      withPolling: BulkUploadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BulkUploadFeedbackLabelsResponse>
+      withPolling: BulkUploadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BulkUploadFeedbackLabelsResponse>
 
     /// See `ContactCenterInsightsClient.bulkDownloadFeedbackLabels`.
     func bulkDownloadFeedbackLabels(
-      request: BulkDownloadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkDownloadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ContactCenterInsightsClient.bulkDownloadFeedbackLabels`.
     func bulkDownloadFeedbackLabels(
-      withPolling: BulkDownloadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BulkDownloadFeedbackLabelsResponse>
+      withPolling: BulkDownloadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BulkDownloadFeedbackLabelsResponse>
 
     /// See `ContactCenterInsightsClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `ContactCenterInsightsClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `ContactCenterInsightsClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -2744,9 +2738,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func createConversation(
-    request: CreateConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateConversationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createConversation(
@@ -2769,24 +2763,24 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func uploadConversation(
-    request: UploadConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: UploadConversationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func uploadConversation(withPolling: UploadConversationRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Conversation>
+    -> any GoogleGax.PollableOperation<Conversation>
   {
     try await self.uploadConversation(withPolling: withPolling, options: .init())
   }
 
   public func uploadConversation(
-    withPolling: UploadConversationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Conversation> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Conversation>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UploadConversationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Conversation> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Conversation>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2797,14 +2791,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func updateConversation(
-    request: UpdateConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConversationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateConversation(
     conversation: Conversation?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation {
     let request = UpdateConversationRequest().with {
       $0.conversation = conversation
@@ -2820,9 +2814,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getConversation(
-    request: GetConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConversationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getConversation(
@@ -2841,9 +2835,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listConversations(
-    request: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConversationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListConversationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listConversations(
@@ -2853,14 +2847,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listConversations(
-    byItem: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConversationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Conversation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudContactCenterInsightsV1.ListConversationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listConversations(
@@ -2877,9 +2871,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func deleteConversation(
-    request: DeleteConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConversationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteConversation(
@@ -2898,31 +2892,31 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func createAnalysis(
-    request: CreateAnalysisRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAnalysisRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createAnalysis(withPolling: CreateAnalysisRequest) async throws -> any GoogleCloudGax
+  public func createAnalysis(withPolling: CreateAnalysisRequest) async throws -> any GoogleGax
     .PollableOperation<Analysis>
   {
     try await self.createAnalysis(withPolling: withPolling, options: .init())
   }
 
   public func createAnalysis(
-    withPolling: CreateAnalysisRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Analysis> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Analysis>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateAnalysisRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Analysis> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Analysis>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func createAnalysis(
     parent: Swift.String,
     analysis: Analysis?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Analysis> {
+  ) async throws -> any GoogleGax.PollableOperation<Analysis> {
     let request = CreateAnalysisRequest().with {
       $0.parent = parent
       $0.analysis = analysis
@@ -2937,9 +2931,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getAnalysis(
-    request: GetAnalysisRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAnalysisRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Analysis {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAnalysis(
@@ -2958,9 +2952,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listAnalyses(
-    request: ListAnalysesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAnalysesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListAnalysesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAnalyses(
@@ -2970,14 +2964,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listAnalyses(
-    byItem: ListAnalysesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAnalysesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Analysis, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudContactCenterInsightsV1.ListAnalysesResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAnalyses(
@@ -2994,9 +2988,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func deleteAnalysis(
-    request: DeleteAnalysisRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAnalysisRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAnalysis(
@@ -3015,26 +3009,25 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func bulkAnalyzeConversations(
-    request: BulkAnalyzeConversationsRequest, options: GoogleCloudGax.RequestOptions
+    request: BulkAnalyzeConversationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func bulkAnalyzeConversations(withPolling: BulkAnalyzeConversationsRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<BulkAnalyzeConversationsResponse>
+    -> any GoogleGax.PollableOperation<BulkAnalyzeConversationsResponse>
   {
     try await self.bulkAnalyzeConversations(withPolling: withPolling, options: .init())
   }
 
   public func bulkAnalyzeConversations(
-    withPolling: BulkAnalyzeConversationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkAnalyzeConversationsResponse> {
+    withPolling: BulkAnalyzeConversationsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BulkAnalyzeConversationsResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<BulkAnalyzeConversationsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<BulkAnalyzeConversationsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3042,7 +3035,7 @@ extension Clients.ContactCenterInsightsProtocol {
     parent: Swift.String,
     filter: Swift.String,
     analysisPercentage: Swift.Float,
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkAnalyzeConversationsResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<BulkAnalyzeConversationsResponse> {
     let request = BulkAnalyzeConversationsRequest().with {
       $0.parent = parent
       $0.filter = filter
@@ -3058,33 +3051,32 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func bulkDeleteConversations(
-    request: BulkDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
+    request: BulkDeleteConversationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func bulkDeleteConversations(withPolling: BulkDeleteConversationsRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<BulkDeleteConversationsResponse>
+    -> any GoogleGax.PollableOperation<BulkDeleteConversationsResponse>
   {
     try await self.bulkDeleteConversations(withPolling: withPolling, options: .init())
   }
 
   public func bulkDeleteConversations(
-    withPolling: BulkDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkDeleteConversationsResponse> {
+    withPolling: BulkDeleteConversationsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BulkDeleteConversationsResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<BulkDeleteConversationsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<BulkDeleteConversationsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func bulkDeleteConversations(
     parent: Swift.String,
     filter: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkDeleteConversationsResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<BulkDeleteConversationsResponse> {
     let request = BulkDeleteConversationsRequest().with {
       $0.parent = parent
       $0.filter = filter
@@ -3099,31 +3091,31 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func ingestConversations(
-    request: IngestConversationsRequest, options: GoogleCloudGax.RequestOptions
+    request: IngestConversationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func ingestConversations(withPolling: IngestConversationsRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<IngestConversationsResponse>
+    -> any GoogleGax.PollableOperation<IngestConversationsResponse>
   {
     try await self.ingestConversations(withPolling: withPolling, options: .init())
   }
 
   public func ingestConversations(
-    withPolling: IngestConversationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<IngestConversationsResponse> {
+    withPolling: IngestConversationsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<IngestConversationsResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<IngestConversationsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<IngestConversationsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func ingestConversations(
     parent: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<IngestConversationsResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<IngestConversationsResponse> {
     let request = IngestConversationsRequest().with {
       $0.parent = parent
     }
@@ -3137,31 +3129,31 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func exportInsightsData(
-    request: ExportInsightsDataRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportInsightsDataRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func exportInsightsData(withPolling: ExportInsightsDataRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ExportInsightsDataResponse>
+    -> any GoogleGax.PollableOperation<ExportInsightsDataResponse>
   {
     try await self.exportInsightsData(withPolling: withPolling, options: .init())
   }
 
   public func exportInsightsData(
-    withPolling: ExportInsightsDataRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportInsightsDataResponse> {
+    withPolling: ExportInsightsDataRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ExportInsightsDataResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ExportInsightsDataResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<ExportInsightsDataResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func exportInsightsData(
     parent: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportInsightsDataResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<ExportInsightsDataResponse> {
     let request = ExportInsightsDataRequest().with {
       $0.parent = parent
     }
@@ -3175,31 +3167,31 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func createIssueModel(
-    request: CreateIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createIssueModel(withPolling: CreateIssueModelRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<IssueModel>
+  public func createIssueModel(withPolling: CreateIssueModelRequest) async throws -> any GoogleGax
+    .PollableOperation<IssueModel>
   {
     try await self.createIssueModel(withPolling: withPolling, options: .init())
   }
 
   public func createIssueModel(
-    withPolling: CreateIssueModelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<IssueModel> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<IssueModel>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateIssueModelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<IssueModel> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<IssueModel>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func createIssueModel(
     parent: Swift.String,
     issueModel: IssueModel?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<IssueModel> {
+  ) async throws -> any GoogleGax.PollableOperation<IssueModel> {
     let request = CreateIssueModelRequest().with {
       $0.parent = parent
       $0.issueModel = issueModel
@@ -3214,14 +3206,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func updateIssueModel(
-    request: UpdateIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.IssueModel {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateIssueModel(
     issueModel: IssueModel?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudContactCenterInsightsV1.IssueModel {
     let request = UpdateIssueModelRequest().with {
       $0.issueModel = issueModel
@@ -3237,9 +3229,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getIssueModel(
-    request: GetIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: GetIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.IssueModel {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIssueModel(
@@ -3258,9 +3250,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listIssueModels(
-    request: ListIssueModelsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListIssueModelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListIssueModelsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listIssueModels(
@@ -3279,30 +3271,30 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func deleteIssueModel(
-    request: DeleteIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteIssueModel(withPolling: DeleteIssueModelRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteIssueModel(withPolling: DeleteIssueModelRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteIssueModel(withPolling: withPolling, options: .init())
   }
 
   public func deleteIssueModel(
-    withPolling: DeleteIssueModelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteIssueModelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteIssueModel(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteIssueModelRequest().with {
       $0.name = name
     }
@@ -3316,31 +3308,31 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func deployIssueModel(
-    request: DeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: DeployIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deployIssueModel(withPolling: DeployIssueModelRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DeployIssueModelResponse>
+  public func deployIssueModel(withPolling: DeployIssueModelRequest) async throws -> any GoogleGax
+    .PollableOperation<DeployIssueModelResponse>
   {
     try await self.deployIssueModel(withPolling: withPolling, options: .init())
   }
 
   public func deployIssueModel(
-    withPolling: DeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeployIssueModelResponse> {
+    withPolling: DeployIssueModelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeployIssueModelResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DeployIssueModelResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<DeployIssueModelResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deployIssueModel(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeployIssueModelResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<DeployIssueModelResponse> {
     let request = DeployIssueModelRequest().with {
       $0.name = name
     }
@@ -3354,31 +3346,31 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func undeployIssueModel(
-    request: UndeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeployIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func undeployIssueModel(withPolling: UndeployIssueModelRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<UndeployIssueModelResponse>
+    -> any GoogleGax.PollableOperation<UndeployIssueModelResponse>
   {
     try await self.undeployIssueModel(withPolling: withPolling, options: .init())
   }
 
   public func undeployIssueModel(
-    withPolling: UndeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<UndeployIssueModelResponse> {
+    withPolling: UndeployIssueModelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<UndeployIssueModelResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<UndeployIssueModelResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<UndeployIssueModelResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func undeployIssueModel(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<UndeployIssueModelResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<UndeployIssueModelResponse> {
     let request = UndeployIssueModelRequest().with {
       $0.name = name
     }
@@ -3392,31 +3384,31 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func exportIssueModel(
-    request: ExportIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func exportIssueModel(withPolling: ExportIssueModelRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ExportIssueModelResponse>
+  public func exportIssueModel(withPolling: ExportIssueModelRequest) async throws -> any GoogleGax
+    .PollableOperation<ExportIssueModelResponse>
   {
     try await self.exportIssueModel(withPolling: withPolling, options: .init())
   }
 
   public func exportIssueModel(
-    withPolling: ExportIssueModelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportIssueModelResponse> {
+    withPolling: ExportIssueModelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ExportIssueModelResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ExportIssueModelResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<ExportIssueModelResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func exportIssueModel(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportIssueModelResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<ExportIssueModelResponse> {
     let request = ExportIssueModelRequest().with {
       $0.name = name
     }
@@ -3430,31 +3422,31 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func importIssueModel(
-    request: ImportIssueModelRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportIssueModelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func importIssueModel(withPolling: ImportIssueModelRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ImportIssueModelResponse>
+  public func importIssueModel(withPolling: ImportIssueModelRequest) async throws -> any GoogleGax
+    .PollableOperation<ImportIssueModelResponse>
   {
     try await self.importIssueModel(withPolling: withPolling, options: .init())
   }
 
   public func importIssueModel(
-    withPolling: ImportIssueModelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportIssueModelResponse> {
+    withPolling: ImportIssueModelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportIssueModelResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ImportIssueModelResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<ImportIssueModelResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func importIssueModel(
     parent: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportIssueModelResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<ImportIssueModelResponse> {
     let request = ImportIssueModelRequest().with {
       $0.parent = parent
     }
@@ -3468,9 +3460,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getIssue(
-    request: GetIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: GetIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Issue {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIssue(
@@ -3489,9 +3481,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listIssues(
-    request: ListIssuesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListIssuesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListIssuesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listIssues(
@@ -3510,14 +3502,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func updateIssue(
-    request: UpdateIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Issue {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateIssue(
     issue: Issue?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudContactCenterInsightsV1.Issue {
     let request = UpdateIssueRequest().with {
       $0.issue = issue
@@ -3531,9 +3523,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func deleteIssue(
-    request: DeleteIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteIssueRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteIssue(
@@ -3552,9 +3544,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func calculateIssueModelStats(
-    request: CalculateIssueModelStatsRequest, options: GoogleCloudGax.RequestOptions
+    request: CalculateIssueModelStatsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.CalculateIssueModelStatsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func calculateIssueModelStats(
@@ -3573,9 +3565,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func createPhraseMatcher(
-    request: CreatePhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePhraseMatcherRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createPhraseMatcher(
@@ -3596,9 +3588,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getPhraseMatcher(
-    request: GetPhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPhraseMatcherRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPhraseMatcher(
@@ -3617,9 +3609,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listPhraseMatchers(
-    request: ListPhraseMatchersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPhraseMatchersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListPhraseMatchersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPhraseMatchers(
@@ -3629,14 +3621,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listPhraseMatchers(
-    byItem: ListPhraseMatchersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPhraseMatchersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PhraseMatcher, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudContactCenterInsightsV1.ListPhraseMatchersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPhraseMatchers(
@@ -3653,9 +3645,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func deletePhraseMatcher(
-    request: DeletePhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePhraseMatcherRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deletePhraseMatcher(
@@ -3674,14 +3666,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func updatePhraseMatcher(
-    request: UpdatePhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePhraseMatcherRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updatePhraseMatcher(
     phraseMatcher: PhraseMatcher?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher {
     let request = UpdatePhraseMatcherRequest().with {
       $0.phraseMatcher = phraseMatcher
@@ -3697,9 +3689,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func calculateStats(
-    request: CalculateStatsRequest, options: GoogleCloudGax.RequestOptions
+    request: CalculateStatsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.CalculateStatsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func calculateStats(
@@ -3718,9 +3710,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getSettings(
-    request: GetSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Settings {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSettings(
@@ -3739,14 +3731,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func updateSettings(
-    request: UpdateSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.Settings {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateSettings(
     settings: Settings?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudContactCenterInsightsV1.Settings {
     let request = UpdateSettingsRequest().with {
       $0.settings = settings
@@ -3762,9 +3754,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func createAnalysisRule(
-    request: CreateAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAnalysisRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createAnalysisRule(
@@ -3785,9 +3777,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getAnalysisRule(
-    request: GetAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAnalysisRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAnalysisRule(
@@ -3806,9 +3798,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listAnalysisRules(
-    request: ListAnalysisRulesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAnalysisRulesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListAnalysisRulesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAnalysisRules(
@@ -3818,14 +3810,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listAnalysisRules(
-    byItem: ListAnalysisRulesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAnalysisRulesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AnalysisRule, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudContactCenterInsightsV1.ListAnalysisRulesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAnalysisRules(
@@ -3844,14 +3836,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func updateAnalysisRule(
-    request: UpdateAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAnalysisRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAnalysisRule(
     analysisRule: AnalysisRule?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule {
     let request = UpdateAnalysisRuleRequest().with {
       $0.analysisRule = analysisRule
@@ -3865,9 +3857,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func deleteAnalysisRule(
-    request: DeleteAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAnalysisRuleRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAnalysisRule(
@@ -3886,9 +3878,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getEncryptionSpec(
-    request: GetEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEncryptionSpecRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.EncryptionSpec {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getEncryptionSpec(
@@ -3907,32 +3899,31 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func initializeEncryptionSpec(
-    request: InitializeEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+    request: InitializeEncryptionSpecRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func initializeEncryptionSpec(withPolling: InitializeEncryptionSpecRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse>
+    -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse>
   {
     try await self.initializeEncryptionSpec(withPolling: withPolling, options: .init())
   }
 
   public func initializeEncryptionSpec(
-    withPolling: InitializeEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse> {
+    withPolling: InitializeEncryptionSpecRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<InitializeEncryptionSpecResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<InitializeEncryptionSpecResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func initializeEncryptionSpec(
     encryptionSpec: EncryptionSpec?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse> {
     let request = InitializeEncryptionSpecRequest().with {
       $0.encryptionSpec = encryptionSpec
     }
@@ -3946,9 +3937,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func createView(
-    request: CreateViewRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.View {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createView(
@@ -3969,9 +3960,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getView(
-    request: GetViewRequest, options: GoogleCloudGax.RequestOptions
+    request: GetViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.View {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getView(
@@ -3990,9 +3981,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listViews(
-    request: ListViewsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListViewsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListViewsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listViews(
@@ -4002,13 +3993,13 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listViews(
-    byItem: ListViewsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListViewsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<View, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudContactCenterInsightsV1.ListViewsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listViews(
@@ -4027,14 +4018,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func updateView(
-    request: UpdateViewRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.View {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateView(
     view: View?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudContactCenterInsightsV1.View {
     let request = UpdateViewRequest().with {
       $0.view = view
@@ -4048,9 +4039,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func deleteView(
-    request: DeleteViewRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteViewRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteView(
@@ -4068,25 +4059,24 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func queryMetrics(
-    request: QueryMetricsRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryMetricsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func queryMetrics(withPolling: QueryMetricsRequest) async throws -> any GoogleCloudGax
+  public func queryMetrics(withPolling: QueryMetricsRequest) async throws -> any GoogleGax
     .PollableOperation<QueryMetricsResponse>
   {
     try await self.queryMetrics(withPolling: withPolling, options: .init())
   }
 
   public func queryMetrics(
-    withPolling: QueryMetricsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<QueryMetricsResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<QueryMetricsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: QueryMetricsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<QueryMetricsResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<QueryMetricsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -4097,9 +4087,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func createQaQuestion(
-    request: CreateQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateQaQuestionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createQaQuestion(
@@ -4122,9 +4112,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getQaQuestion(
-    request: GetQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetQaQuestionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getQaQuestion(
@@ -4143,14 +4133,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func updateQaQuestion(
-    request: UpdateQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateQaQuestionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateQaQuestion(
     qaQuestion: QaQuestion?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion {
     let request = UpdateQaQuestionRequest().with {
       $0.qaQuestion = qaQuestion
@@ -4164,9 +4154,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func deleteQaQuestion(
-    request: DeleteQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteQaQuestionRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteQaQuestion(
@@ -4185,9 +4175,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listQaQuestions(
-    request: ListQaQuestionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListQaQuestionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListQaQuestionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listQaQuestions(
@@ -4197,14 +4187,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listQaQuestions(
-    byItem: ListQaQuestionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListQaQuestionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<QaQuestion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudContactCenterInsightsV1.ListQaQuestionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listQaQuestions(
@@ -4223,9 +4213,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func createQaScorecard(
-    request: CreateQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateQaScorecardRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createQaScorecard(
@@ -4248,9 +4238,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getQaScorecard(
-    request: GetQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+    request: GetQaScorecardRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getQaScorecard(
@@ -4269,14 +4259,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func updateQaScorecard(
-    request: UpdateQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateQaScorecardRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateQaScorecard(
     qaScorecard: QaScorecard?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard {
     let request = UpdateQaScorecardRequest().with {
       $0.qaScorecard = qaScorecard
@@ -4290,9 +4280,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func deleteQaScorecard(
-    request: DeleteQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteQaScorecardRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteQaScorecard(
@@ -4311,9 +4301,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listQaScorecards(
-    request: ListQaScorecardsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListQaScorecardsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListQaScorecardsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listQaScorecards(
@@ -4323,14 +4313,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listQaScorecards(
-    byItem: ListQaScorecardsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListQaScorecardsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<QaScorecard, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudContactCenterInsightsV1.ListQaScorecardsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listQaScorecards(
@@ -4349,9 +4339,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func createQaScorecardRevision(
-    request: CreateQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createQaScorecardRevision(
@@ -4374,9 +4364,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getQaScorecardRevision(
-    request: GetQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getQaScorecardRevision(
@@ -4395,26 +4385,25 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func tuneQaScorecardRevision(
-    request: TuneQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: TuneQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func tuneQaScorecardRevision(withPolling: TuneQaScorecardRevisionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<TuneQaScorecardRevisionResponse>
+    -> any GoogleGax.PollableOperation<TuneQaScorecardRevisionResponse>
   {
     try await self.tuneQaScorecardRevision(withPolling: withPolling, options: .init())
   }
 
   public func tuneQaScorecardRevision(
-    withPolling: TuneQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TuneQaScorecardRevisionResponse> {
+    withPolling: TuneQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<TuneQaScorecardRevisionResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<TuneQaScorecardRevisionResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<TuneQaScorecardRevisionResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -4422,7 +4411,7 @@ extension Clients.ContactCenterInsightsProtocol {
     parent: Swift.String,
     filter: Swift.String,
     validateOnly: Swift.Bool,
-  ) async throws -> any GoogleCloudGax.PollableOperation<TuneQaScorecardRevisionResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<TuneQaScorecardRevisionResponse> {
     let request = TuneQaScorecardRevisionRequest().with {
       $0.parent = parent
       $0.filter = filter
@@ -4438,9 +4427,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func deployQaScorecardRevision(
-    request: DeployQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeployQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func undeployQaScorecardRevision(request: UndeployQaScorecardRevisionRequest) async throws
@@ -4450,9 +4439,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func undeployQaScorecardRevision(
-    request: UndeployQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeployQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteQaScorecardRevision(request: DeleteQaScorecardRevisionRequest) async throws {
@@ -4460,9 +4449,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func deleteQaScorecardRevision(
-    request: DeleteQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteQaScorecardRevision(
@@ -4481,9 +4470,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listQaScorecardRevisions(
-    request: ListQaScorecardRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListQaScorecardRevisionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListQaScorecardRevisionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listQaScorecardRevisions(
@@ -4493,14 +4482,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listQaScorecardRevisions(
-    byItem: ListQaScorecardRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListQaScorecardRevisionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<QaScorecardRevision, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudContactCenterInsightsV1.ListQaScorecardRevisionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listQaScorecardRevisions(
@@ -4519,9 +4508,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func createFeedbackLabel(
-    request: CreateFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateFeedbackLabelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createFeedbackLabel(
@@ -4544,9 +4533,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listFeedbackLabels(
-    request: ListFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListFeedbackLabelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListFeedbackLabelsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listFeedbackLabels(
@@ -4556,14 +4545,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listFeedbackLabels(
-    byItem: ListFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListFeedbackLabelsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<FeedbackLabel, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudContactCenterInsightsV1.ListFeedbackLabelsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listFeedbackLabels(
@@ -4582,9 +4571,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getFeedbackLabel(
-    request: GetFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+    request: GetFeedbackLabelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getFeedbackLabel(
@@ -4603,14 +4592,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func updateFeedbackLabel(
-    request: UpdateFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateFeedbackLabelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateFeedbackLabel(
     feedbackLabel: FeedbackLabel?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel {
     let request = UpdateFeedbackLabelRequest().with {
       $0.feedbackLabel = feedbackLabel
@@ -4624,9 +4613,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func deleteFeedbackLabel(
-    request: DeleteFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteFeedbackLabelRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteFeedbackLabel(
@@ -4645,9 +4634,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listAllFeedbackLabels(
-    request: ListAllFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAllFeedbackLabelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContactCenterInsightsV1.ListAllFeedbackLabelsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAllFeedbackLabels(
@@ -4657,14 +4646,14 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listAllFeedbackLabels(
-    byItem: ListAllFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAllFeedbackLabelsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<FeedbackLabel, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudContactCenterInsightsV1.ListAllFeedbackLabelsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAllFeedbackLabels(
@@ -4683,32 +4672,31 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func bulkUploadFeedbackLabels(
-    request: BulkUploadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+    request: BulkUploadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func bulkUploadFeedbackLabels(withPolling: BulkUploadFeedbackLabelsRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<BulkUploadFeedbackLabelsResponse>
+    -> any GoogleGax.PollableOperation<BulkUploadFeedbackLabelsResponse>
   {
     try await self.bulkUploadFeedbackLabels(withPolling: withPolling, options: .init())
   }
 
   public func bulkUploadFeedbackLabels(
-    withPolling: BulkUploadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkUploadFeedbackLabelsResponse> {
+    withPolling: BulkUploadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BulkUploadFeedbackLabelsResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<BulkUploadFeedbackLabelsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<BulkUploadFeedbackLabelsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func bulkUploadFeedbackLabels(
     parent: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkUploadFeedbackLabelsResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<BulkUploadFeedbackLabelsResponse> {
     let request = BulkUploadFeedbackLabelsRequest().with {
       $0.parent = parent
     }
@@ -4722,32 +4710,32 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func bulkDownloadFeedbackLabels(
-    request: BulkDownloadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+    request: BulkDownloadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func bulkDownloadFeedbackLabels(withPolling: BulkDownloadFeedbackLabelsRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<BulkDownloadFeedbackLabelsResponse>
+    async throws -> any GoogleGax.PollableOperation<BulkDownloadFeedbackLabelsResponse>
   {
     try await self.bulkDownloadFeedbackLabels(withPolling: withPolling, options: .init())
   }
 
   public func bulkDownloadFeedbackLabels(
-    withPolling: BulkDownloadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkDownloadFeedbackLabelsResponse> {
+    withPolling: BulkDownloadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BulkDownloadFeedbackLabelsResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<BulkDownloadFeedbackLabelsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<BulkDownloadFeedbackLabelsResponse>.State
+      in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func bulkDownloadFeedbackLabels(
     parent: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkDownloadFeedbackLabelsResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<BulkDownloadFeedbackLabelsResponse> {
     let request = BulkDownloadFeedbackLabelsRequest().with {
       $0.parent = parent
     }
@@ -4761,9 +4749,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -4773,13 +4761,13 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -4800,9 +4788,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -4819,9 +4807,9 @@ extension Clients.ContactCenterInsightsProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

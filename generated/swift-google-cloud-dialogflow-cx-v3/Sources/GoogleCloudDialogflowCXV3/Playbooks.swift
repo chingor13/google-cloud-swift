@@ -20,10 +20,10 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing [Playbooks][google.cloud.dialogflow.cx.v3.Playbook].
   ///
@@ -32,11 +32,11 @@
   /// @Snippet(path: "PlaybooksQuickstart")
   public final class PlaybooksClient: Clients.PlaybooksProtocol, Sendable {
     let inner: any Clients.PlaybooksStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `PlaybooksClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.PlaybooksStub = try Clients.PlaybooksTransport(options)
       inner = Clients.PlaybooksRetry(inner, options: options)
       if let logger = options.logger {
@@ -51,7 +51,7 @@
     ///
     /// @Snippet(path: "Playbooks_CreatePlaybook")
     public func createPlaybook(
-      request: CreatePlaybookRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePlaybookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Playbook {
       try await self.inner.createPlaybook(request: request, options: options)
     }
@@ -60,7 +60,7 @@
     ///
     /// @Snippet(path: "Playbooks_DeletePlaybook")
     public func deletePlaybook(
-      request: DeletePlaybookRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePlaybookRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deletePlaybook(request: request, options: options)
     }
@@ -69,7 +69,7 @@
     ///
     /// @Snippet(path: "Playbooks_ListPlaybooks")
     public func listPlaybooks(
-      request: ListPlaybooksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPlaybooksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListPlaybooksResponse {
       try await self.inner.listPlaybooks(request: request, options: options)
     }
@@ -78,7 +78,7 @@
     ///
     /// @Snippet(path: "Playbooks_ListPlaybooks")
     public func listPlaybooks(
-      byItem: ListPlaybooksRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPlaybooksRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Playbook, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListPlaybooksResponse in
@@ -86,14 +86,14 @@
         request.pageToken = token
         return try await self.listPlaybooks(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves the specified Playbook.
     ///
     /// @Snippet(path: "Playbooks_GetPlaybook")
     public func getPlaybook(
-      request: GetPlaybookRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPlaybookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Playbook {
       try await self.inner.getPlaybook(request: request, options: options)
     }
@@ -105,7 +105,7 @@
     ///
     /// @Snippet(path: "Playbooks_ExportPlaybook")
     public func exportPlaybook(
-      request: ExportPlaybookRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportPlaybookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.exportPlaybook(request: request, options: options)
     }
@@ -117,22 +117,22 @@
     ///
     /// @Snippet(path: "Playbooks_ExportPlaybook")
     public func exportPlaybook(
-      withPolling: ExportPlaybookRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportPlaybookResponse> {
+      withPolling: ExportPlaybookRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportPlaybookResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ExportPlaybookResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ExportPlaybookResponse>.State in
         return try op._extractStatus(ExportPlaybookResponse.self)
       }
       let rawOp = try await self.exportPlaybook(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportPlaybookResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<ExportPlaybookResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -144,7 +144,7 @@
     ///
     /// @Snippet(path: "Playbooks_ImportPlaybook")
     public func importPlaybook(
-      request: ImportPlaybookRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportPlaybookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.importPlaybook(request: request, options: options)
     }
@@ -153,22 +153,22 @@
     ///
     /// @Snippet(path: "Playbooks_ImportPlaybook")
     public func importPlaybook(
-      withPolling: ImportPlaybookRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportPlaybookResponse> {
+      withPolling: ImportPlaybookRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportPlaybookResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ImportPlaybookResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ImportPlaybookResponse>.State in
         return try op._extractStatus(ImportPlaybookResponse.self)
       }
       let rawOp = try await self.importPlaybook(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportPlaybookResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<ImportPlaybookResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -180,7 +180,7 @@
     ///
     /// @Snippet(path: "Playbooks_UpdatePlaybook")
     public func updatePlaybook(
-      request: UpdatePlaybookRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePlaybookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Playbook {
       try await self.inner.updatePlaybook(request: request, options: options)
     }
@@ -189,7 +189,7 @@
     ///
     /// @Snippet(path: "Playbooks_CreatePlaybookVersion")
     public func createPlaybookVersion(
-      request: CreatePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePlaybookVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.PlaybookVersion {
       try await self.inner.createPlaybookVersion(request: request, options: options)
     }
@@ -198,7 +198,7 @@
     ///
     /// @Snippet(path: "Playbooks_GetPlaybookVersion")
     public func getPlaybookVersion(
-      request: GetPlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPlaybookVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.PlaybookVersion {
       try await self.inner.getPlaybookVersion(request: request, options: options)
     }
@@ -208,7 +208,7 @@
     ///
     /// @Snippet(path: "Playbooks_RestorePlaybookVersion")
     public func restorePlaybookVersion(
-      request: RestorePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: RestorePlaybookVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.RestorePlaybookVersionResponse {
       try await self.inner.restorePlaybookVersion(request: request, options: options)
     }
@@ -217,7 +217,7 @@
     ///
     /// @Snippet(path: "Playbooks_ListPlaybookVersions")
     public func listPlaybookVersions(
-      request: ListPlaybookVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPlaybookVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListPlaybookVersionsResponse {
       try await self.inner.listPlaybookVersions(request: request, options: options)
     }
@@ -226,7 +226,7 @@
     ///
     /// @Snippet(path: "Playbooks_ListPlaybookVersions")
     public func listPlaybookVersions(
-      byItem: ListPlaybookVersionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPlaybookVersionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PlaybookVersion, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListPlaybookVersionsResponse
@@ -235,14 +235,14 @@
         request.pageToken = token
         return try await self.listPlaybookVersions(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes the specified version of the Playbook.
     ///
     /// @Snippet(path: "Playbooks_DeletePlaybookVersion")
     public func deletePlaybookVersion(
-      request: DeletePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePlaybookVersionRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deletePlaybookVersion(request: request, options: options)
     }
@@ -268,7 +268,7 @@
     ///
     /// @Snippet(path: "Playbooks_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -294,7 +294,7 @@
     ///
     /// @Snippet(path: "Playbooks_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -302,14 +302,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "Playbooks_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -320,7 +320,7 @@
     ///
     /// @Snippet(path: "Playbooks_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -331,7 +331,7 @@
     ///
     /// @Snippet(path: "Playbooks_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -339,7 +339,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -348,7 +348,7 @@
     ///
     /// @Snippet(path: "Playbooks_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -359,7 +359,7 @@
     ///
     /// @Snippet(path: "Playbooks_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -418,7 +418,7 @@
         -> GoogleLongRunning.Operation
 
       /// See `PlaybooksClient.exportPlaybook`.
-      func exportPlaybook(withPolling: ExportPlaybookRequest) async throws -> any GoogleCloudGax
+      func exportPlaybook(withPolling: ExportPlaybookRequest) async throws -> any GoogleGax
         .PollableOperation<ExportPlaybookResponse>
 
       /// See `PlaybooksClient.importPlaybook`.
@@ -426,7 +426,7 @@
         -> GoogleLongRunning.Operation
 
       /// See `PlaybooksClient.importPlaybook`.
-      func importPlaybook(withPolling: ImportPlaybookRequest) async throws -> any GoogleCloudGax
+      func importPlaybook(withPolling: ImportPlaybookRequest) async throws -> any GoogleGax
         .PollableOperation<ImportPlaybookResponse>
 
       /// See `PlaybooksClient.updatePlaybook`.
@@ -436,7 +436,7 @@
       /// See `PlaybooksClient.updatePlaybook`.
       func updatePlaybook(
         playbook: Playbook?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDialogflowCXV3.Playbook
 
       /// See `PlaybooksClient.createPlaybookVersion`.
@@ -527,112 +527,112 @@
 
       /// See `PlaybooksClient.createPlaybook`.
       func createPlaybook(
-        request: CreatePlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: CreatePlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Playbook
 
       /// See `PlaybooksClient.deletePlaybook`.
       func deletePlaybook(
-        request: DeletePlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: DeletePlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `PlaybooksClient.listPlaybooks`.
       func listPlaybooks(
-        request: ListPlaybooksRequest, options: GoogleCloudGax.RequestOptions
+        request: ListPlaybooksRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListPlaybooksResponse
 
       /// See `PlaybooksClient.listPlaybooks`.
       func listPlaybooks(
-        byItem: ListPlaybooksRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListPlaybooksRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Playbook, Swift.Error>
 
       /// See `PlaybooksClient.getPlaybook`.
       func getPlaybook(
-        request: GetPlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: GetPlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Playbook
 
       /// See `PlaybooksClient.exportPlaybook`.
       func exportPlaybook(
-        request: ExportPlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportPlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `PlaybooksClient.exportPlaybook`.
       func exportPlaybook(
-        withPolling: ExportPlaybookRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ExportPlaybookResponse>
+        withPolling: ExportPlaybookRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ExportPlaybookResponse>
 
       /// See `PlaybooksClient.importPlaybook`.
       func importPlaybook(
-        request: ImportPlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportPlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `PlaybooksClient.importPlaybook`.
       func importPlaybook(
-        withPolling: ImportPlaybookRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ImportPlaybookResponse>
+        withPolling: ImportPlaybookRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ImportPlaybookResponse>
 
       /// See `PlaybooksClient.updatePlaybook`.
       func updatePlaybook(
-        request: UpdatePlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdatePlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Playbook
 
       /// See `PlaybooksClient.createPlaybookVersion`.
       func createPlaybookVersion(
-        request: CreatePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: CreatePlaybookVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.PlaybookVersion
 
       /// See `PlaybooksClient.getPlaybookVersion`.
       func getPlaybookVersion(
-        request: GetPlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: GetPlaybookVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.PlaybookVersion
 
       /// See `PlaybooksClient.restorePlaybookVersion`.
       func restorePlaybookVersion(
-        request: RestorePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: RestorePlaybookVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.RestorePlaybookVersionResponse
 
       /// See `PlaybooksClient.listPlaybookVersions`.
       func listPlaybookVersions(
-        request: ListPlaybookVersionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListPlaybookVersionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListPlaybookVersionsResponse
 
       /// See `PlaybooksClient.listPlaybookVersions`.
       func listPlaybookVersions(
-        byItem: ListPlaybookVersionsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListPlaybookVersionsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<PlaybookVersion, Swift.Error>
 
       /// See `PlaybooksClient.deletePlaybookVersion`.
       func deletePlaybookVersion(
-        request: DeletePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: DeletePlaybookVersionRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `PlaybooksClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `PlaybooksClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `PlaybooksClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `PlaybooksClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `PlaybooksClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `PlaybooksClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -646,9 +646,9 @@
     }
 
     public func createPlaybook(
-      request: CreatePlaybookRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePlaybookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Playbook {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createPlaybook(
@@ -667,9 +667,9 @@
     }
 
     public func deletePlaybook(
-      request: DeletePlaybookRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePlaybookRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deletePlaybook(
@@ -688,9 +688,9 @@
     }
 
     public func listPlaybooks(
-      request: ListPlaybooksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPlaybooksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListPlaybooksResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listPlaybooks(
@@ -700,13 +700,13 @@
     }
 
     public func listPlaybooks(
-      byItem: ListPlaybooksRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPlaybooksRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Playbook, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListPlaybooksResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listPlaybooks(
@@ -725,9 +725,9 @@
     }
 
     public func getPlaybook(
-      request: GetPlaybookRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPlaybookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Playbook {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getPlaybook(
@@ -746,25 +746,25 @@
     }
 
     public func exportPlaybook(
-      request: ExportPlaybookRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportPlaybookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func exportPlaybook(withPolling: ExportPlaybookRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ExportPlaybookResponse>
+    public func exportPlaybook(withPolling: ExportPlaybookRequest) async throws -> any GoogleGax
+      .PollableOperation<ExportPlaybookResponse>
     {
       try await self.exportPlaybook(withPolling: withPolling, options: .init())
     }
 
     public func exportPlaybook(
-      withPolling: ExportPlaybookRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportPlaybookResponse> {
+      withPolling: ExportPlaybookRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportPlaybookResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportPlaybookResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<ExportPlaybookResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -775,25 +775,25 @@
     }
 
     public func importPlaybook(
-      request: ImportPlaybookRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportPlaybookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func importPlaybook(withPolling: ImportPlaybookRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ImportPlaybookResponse>
+    public func importPlaybook(withPolling: ImportPlaybookRequest) async throws -> any GoogleGax
+      .PollableOperation<ImportPlaybookResponse>
     {
       try await self.importPlaybook(withPolling: withPolling, options: .init())
     }
 
     public func importPlaybook(
-      withPolling: ImportPlaybookRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportPlaybookResponse> {
+      withPolling: ImportPlaybookRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportPlaybookResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportPlaybookResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<ImportPlaybookResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -804,14 +804,14 @@
     }
 
     public func updatePlaybook(
-      request: UpdatePlaybookRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePlaybookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Playbook {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updatePlaybook(
       playbook: Playbook?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDialogflowCXV3.Playbook {
       let request = UpdatePlaybookRequest().with {
         $0.playbook = playbook
@@ -827,9 +827,9 @@
     }
 
     public func createPlaybookVersion(
-      request: CreatePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePlaybookVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.PlaybookVersion {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createPlaybookVersion(
@@ -850,9 +850,9 @@
     }
 
     public func getPlaybookVersion(
-      request: GetPlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPlaybookVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.PlaybookVersion {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getPlaybookVersion(
@@ -871,9 +871,9 @@
     }
 
     public func restorePlaybookVersion(
-      request: RestorePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: RestorePlaybookVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.RestorePlaybookVersionResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func restorePlaybookVersion(
@@ -892,9 +892,9 @@
     }
 
     public func listPlaybookVersions(
-      request: ListPlaybookVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPlaybookVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListPlaybookVersionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listPlaybookVersions(
@@ -904,14 +904,14 @@
     }
 
     public func listPlaybookVersions(
-      byItem: ListPlaybookVersionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPlaybookVersionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PlaybookVersion, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListPlaybookVersionsResponse
         in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listPlaybookVersions(
@@ -928,9 +928,9 @@
     }
 
     public func deletePlaybookVersion(
-      request: DeletePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePlaybookVersionRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deletePlaybookVersion(
@@ -949,9 +949,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -961,13 +961,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -977,9 +977,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -989,9 +989,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -1001,13 +1001,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -1028,9 +1028,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -1047,9 +1047,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudBuildV2
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: RepositoryManagerClient, projectId: String, locationId: String) async throws {
   let items = try client.listConnections(

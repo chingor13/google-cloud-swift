@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for a V1 `PrivatePool`.
-public struct PrivatePoolV1Config: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PrivatePoolV1Config: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Machine configuration for the workers in the pool.
@@ -30,7 +30,7 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Immutable. Private Service Connect(PSC) Network configuration for the pool.
   public var privateServiceConnect: PrivatePoolV1Config.PrivateServiceConnect? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PrivatePoolV1Config`.
   public init() {}
@@ -75,7 +75,7 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleCloudWKT._AnyPackab
       PrivatePoolV1Config.PrivateServiceConnect.self, forKey: .privateServiceConnect)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -91,7 +91,7 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleCloudWKT._AnyPackab
 
   /// Defines the configuration to be used for creating workers in
   /// the pool.
-  public struct WorkerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct WorkerConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Machine type of a worker, such as `e2-medium`.
@@ -111,7 +111,7 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// machine type. By default, nested virtualization is disabled.
     public var enableNestedVirtualization: Swift.Bool? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `WorkerConfig`.
     public init() {}
@@ -158,7 +158,7 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleCloudWKT._AnyPackab
         Swift.Bool.self, forKey: .enableNestedVirtualization)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -176,16 +176,16 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudbuild.v1.PrivatePoolV1Config.WorkerConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Defines the network configuration for the pool.
-  public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Immutable. The network definition that the workers are peered
@@ -212,7 +212,7 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// If unspecified, a value of `/24` will be used.
     public var peeredNetworkIpRange: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NetworkConfig`.
     public init() {}
@@ -263,7 +263,7 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -387,16 +387,16 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Defines the Private Service Connect network configuration for the pool.
-  public struct PrivateServiceConnect: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PrivateServiceConnect: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Immutable. The network attachment that the worker network
@@ -426,7 +426,7 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// 192.168.0.0/16) and RFC 6598 (100.64.0.0/10) through PSC interface.
     public var routeAllTraffic: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PrivateServiceConnect`.
     public init() {}
@@ -476,7 +476,7 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -494,21 +494,21 @@ public struct PrivatePoolV1Config: Codable, Equatable, GoogleCloudWKT._AnyPackab
       return
         "type.googleapis.com/google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudbuild.v1.PrivatePoolV1Config"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

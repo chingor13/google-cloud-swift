@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   ///
   /// @Snippet(path: "SqlInstancesServiceQuickstart")
@@ -28,7 +28,7 @@
     let inner: any Clients.SqlInstancesServiceStub
 
     /// Creates a new `SqlInstancesServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlInstancesServiceStub = try Clients.SqlInstancesServiceTransport(
         options)
       inner = Clients.SqlInstancesServiceRetry(inner, options: options)
@@ -48,7 +48,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_AddServerCa")
     public func addServerCa(
-      request: SqlInstancesAddServerCaRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesAddServerCaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.addServerCa(request: request, options: options)
     }
@@ -63,7 +63,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_AddServerCertificate")
     public func addServerCertificate(
-      request: SqlInstancesAddServerCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesAddServerCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.addServerCertificate(request: request, options: options)
     }
@@ -74,7 +74,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_AddEntraIdCertificate")
     public func addEntraIdCertificate(
-      request: SqlInstancesAddEntraIdCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesAddEntraIdCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.addEntraIdCertificate(request: request, options: options)
     }
@@ -84,7 +84,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_Clone")
     public func clone(
-      request: SqlInstancesCloneRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesCloneRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.clone(request: request, options: options)
     }
@@ -93,7 +93,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_Delete")
     public func delete(
-      request: SqlInstancesDeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesDeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.delete(request: request, options: options)
     }
@@ -103,7 +103,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_DemoteMaster")
     public func demoteMaster(
-      request: SqlInstancesDemoteMasterRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesDemoteMasterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.demoteMaster(request: request, options: options)
     }
@@ -113,7 +113,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_Demote")
     public func demote(
-      request: SqlInstancesDemoteRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesDemoteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.demote(request: request, options: options)
     }
@@ -123,7 +123,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_Export")
     public func export(
-      request: SqlInstancesExportRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.export(request: request, options: options)
     }
@@ -139,7 +139,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_Failover")
     public func failover(
-      request: SqlInstancesFailoverRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesFailoverRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.failover(request: request, options: options)
     }
@@ -148,7 +148,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_Reencrypt")
     public func reencrypt(
-      request: SqlInstancesReencryptRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesReencryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.reencrypt(request: request, options: options)
     }
@@ -157,7 +157,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_Get")
     public func `get`(
-      request: SqlInstancesGetRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesGetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.DatabaseInstance {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -167,7 +167,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_Import")
     public func `import`(
-      request: SqlInstancesImportRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesImportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.`import`(request: request, options: options)
     }
@@ -176,7 +176,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_Insert")
     public func insert(
-      request: SqlInstancesInsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesInsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.insert(request: request, options: options)
     }
@@ -185,7 +185,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_List")
     public func list(
-      request: SqlInstancesListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.InstancesListResponse {
       try await self.inner.list(request: request, options: options)
     }
@@ -194,7 +194,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_List")
     public func list(
-      byItem: SqlInstancesListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SqlInstancesListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ApiWarning, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudSqlV1.InstancesListResponse in
@@ -202,7 +202,7 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Lists all of the trusted Certificate Authorities (CAs) for the specified
@@ -213,7 +213,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_ListServerCas")
     public func listServerCas(
-      request: SqlInstancesListServerCasRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesListServerCasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.InstancesListServerCasResponse {
       try await self.inner.listServerCas(request: request, options: options)
     }
@@ -227,7 +227,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_ListServerCertificates")
     public func listServerCertificates(
-      request: SqlInstancesListServerCertificatesRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesListServerCertificatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.InstancesListServerCertificatesResponse {
       try await self.inner.listServerCertificates(request: request, options: options)
     }
@@ -239,7 +239,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_ListEntraIdCertificates")
     public func listEntraIdCertificates(
-      request: SqlInstancesListEntraIdCertificatesRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesListEntraIdCertificatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.InstancesListEntraIdCertificatesResponse {
       try await self.inner.listEntraIdCertificates(request: request, options: options)
     }
@@ -249,7 +249,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_Patch")
     public func patch(
-      request: SqlInstancesPatchRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesPatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.patch(request: request, options: options)
     }
@@ -260,7 +260,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_PromoteReplica")
     public func promoteReplica(
-      request: SqlInstancesPromoteReplicaRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesPromoteReplicaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.promoteReplica(request: request, options: options)
     }
@@ -270,7 +270,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_Switchover")
     public func switchover(
-      request: SqlInstancesSwitchoverRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesSwitchoverRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.switchover(request: request, options: options)
     }
@@ -280,7 +280,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_ResetSslConfig")
     public func resetSslConfig(
-      request: SqlInstancesResetSslConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesResetSslConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.resetSslConfig(request: request, options: options)
     }
@@ -289,7 +289,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_Restart")
     public func restart(
-      request: SqlInstancesRestartRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesRestartRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.restart(request: request, options: options)
     }
@@ -299,7 +299,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_RestoreBackup")
     public func restoreBackup(
-      request: SqlInstancesRestoreBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesRestoreBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.restoreBackup(request: request, options: options)
     }
@@ -311,7 +311,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_RotateServerCa")
     public func rotateServerCa(
-      request: SqlInstancesRotateServerCaRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesRotateServerCaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.rotateServerCa(request: request, options: options)
     }
@@ -322,7 +322,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_RotateServerCertificate")
     public func rotateServerCertificate(
-      request: SqlInstancesRotateServerCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesRotateServerCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.rotateServerCertificate(request: request, options: options)
     }
@@ -332,7 +332,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_RotateEntraIdCertificate")
     public func rotateEntraIdCertificate(
-      request: SqlInstancesRotateEntraIdCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesRotateEntraIdCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.rotateEntraIdCertificate(request: request, options: options)
     }
@@ -341,7 +341,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_StartReplica")
     public func startReplica(
-      request: SqlInstancesStartReplicaRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesStartReplicaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.startReplica(request: request, options: options)
     }
@@ -350,7 +350,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_StopReplica")
     public func stopReplica(
-      request: SqlInstancesStopReplicaRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesStopReplicaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.stopReplica(request: request, options: options)
     }
@@ -360,7 +360,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_TruncateLog")
     public func truncateLog(
-      request: SqlInstancesTruncateLogRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesTruncateLogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.truncateLog(request: request, options: options)
     }
@@ -370,7 +370,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_Update")
     public func update(
-      request: SqlInstancesUpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesUpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.update(request: request, options: options)
     }
@@ -382,7 +382,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_CreateEphemeral")
     public func createEphemeral(
-      request: SqlInstancesCreateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesCreateEphemeralCertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SslCert {
       try await self.inner.createEphemeral(request: request, options: options)
     }
@@ -391,7 +391,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_RescheduleMaintenance")
     public func rescheduleMaintenance(
-      request: SqlInstancesRescheduleMaintenanceRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesRescheduleMaintenanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.rescheduleMaintenance(request: request, options: options)
     }
@@ -400,7 +400,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_VerifyExternalSyncSettings")
     public func verifyExternalSyncSettings(
-      request: SqlInstancesVerifyExternalSyncSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesVerifyExternalSyncSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SqlInstancesVerifyExternalSyncSettingsResponse {
       try await self.inner.verifyExternalSyncSettings(request: request, options: options)
     }
@@ -409,7 +409,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_StartExternalSync")
     public func startExternalSync(
-      request: SqlInstancesStartExternalSyncRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesStartExternalSyncRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.startExternalSync(request: request, options: options)
     }
@@ -418,7 +418,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_PerformDiskShrink")
     public func performDiskShrink(
-      request: SqlInstancesPerformDiskShrinkRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesPerformDiskShrinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.performDiskShrink(request: request, options: options)
     }
@@ -427,7 +427,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_GetDiskShrinkConfig")
     public func getDiskShrinkConfig(
-      request: SqlInstancesGetDiskShrinkConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesGetDiskShrinkConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SqlInstancesGetDiskShrinkConfigResponse {
       try await self.inner.getDiskShrinkConfig(request: request, options: options)
     }
@@ -436,7 +436,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_ResetReplicaSize")
     public func resetReplicaSize(
-      request: SqlInstancesResetReplicaSizeRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesResetReplicaSizeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.resetReplicaSize(request: request, options: options)
     }
@@ -445,7 +445,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_GetLatestRecoveryTime")
     public func getLatestRecoveryTime(
-      request: SqlInstancesGetLatestRecoveryTimeRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesGetLatestRecoveryTimeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SqlInstancesGetLatestRecoveryTimeResponse {
       try await self.inner.getLatestRecoveryTime(request: request, options: options)
     }
@@ -454,7 +454,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_ExecuteSql")
     public func executeSql(
-      request: SqlInstancesExecuteSqlRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesExecuteSqlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SqlInstancesExecuteSqlResponse {
       try await self.inner.executeSql(request: request, options: options)
     }
@@ -463,7 +463,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_AcquireSsrsLease")
     public func acquireSsrsLease(
-      request: SqlInstancesAcquireSsrsLeaseRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesAcquireSsrsLeaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SqlInstancesAcquireSsrsLeaseResponse {
       try await self.inner.acquireSsrsLease(request: request, options: options)
     }
@@ -472,7 +472,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_ReleaseSsrsLease")
     public func releaseSsrsLease(
-      request: SqlInstancesReleaseSsrsLeaseRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesReleaseSsrsLeaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SqlInstancesReleaseSsrsLeaseResponse {
       try await self.inner.releaseSsrsLease(request: request, options: options)
     }
@@ -481,8 +481,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_PreCheckMajorVersionUpgrade")
     public func preCheckMajorVersionUpgrade(
-      request: SqlInstancesPreCheckMajorVersionUpgradeRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesPreCheckMajorVersionUpgradeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.preCheckMajorVersionUpgrade(request: request, options: options)
     }
@@ -492,7 +491,7 @@
     ///
     /// @Snippet(path: "SqlInstancesService_PointInTimeRestore")
     public func pointInTimeRestore(
-      request: SqlInstancesPointInTimeRestoreRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesPointInTimeRestoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.pointInTimeRestore(request: request, options: options)
     }
@@ -673,224 +672,222 @@
 
       /// See `SqlInstancesServiceClient.addServerCa`.
       func addServerCa(
-        request: SqlInstancesAddServerCaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesAddServerCaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.addServerCertificate`.
       func addServerCertificate(
-        request: SqlInstancesAddServerCertificateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesAddServerCertificateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.addEntraIdCertificate`.
       func addEntraIdCertificate(
-        request: SqlInstancesAddEntraIdCertificateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesAddEntraIdCertificateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.clone`.
       func clone(
-        request: SqlInstancesCloneRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesCloneRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.delete`.
       func delete(
-        request: SqlInstancesDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.demoteMaster`.
       func demoteMaster(
-        request: SqlInstancesDemoteMasterRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesDemoteMasterRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.demote`.
       func demote(
-        request: SqlInstancesDemoteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesDemoteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.export`.
       func export(
-        request: SqlInstancesExportRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesExportRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.failover`.
       func failover(
-        request: SqlInstancesFailoverRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesFailoverRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.reencrypt`.
       func reencrypt(
-        request: SqlInstancesReencryptRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesReencryptRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.`get``.
       func `get`(
-        request: SqlInstancesGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.DatabaseInstance
 
       /// See `SqlInstancesServiceClient.`import``.
       func `import`(
-        request: SqlInstancesImportRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesImportRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.insert`.
       func insert(
-        request: SqlInstancesInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.list`.
       func list(
-        request: SqlInstancesListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.InstancesListResponse
 
       /// See `SqlInstancesServiceClient.list`.
       func list(
-        byItem: SqlInstancesListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: SqlInstancesListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<ApiWarning, Swift.Error>
 
       /// See `SqlInstancesServiceClient.listServerCas`.
       func listServerCas(
-        request: SqlInstancesListServerCasRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesListServerCasRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.InstancesListServerCasResponse
 
       /// See `SqlInstancesServiceClient.listServerCertificates`.
       func listServerCertificates(
-        request: SqlInstancesListServerCertificatesRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesListServerCertificatesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.InstancesListServerCertificatesResponse
 
       /// See `SqlInstancesServiceClient.listEntraIdCertificates`.
       func listEntraIdCertificates(
-        request: SqlInstancesListEntraIdCertificatesRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesListEntraIdCertificatesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.InstancesListEntraIdCertificatesResponse
 
       /// See `SqlInstancesServiceClient.patch`.
       func patch(
-        request: SqlInstancesPatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.promoteReplica`.
       func promoteReplica(
-        request: SqlInstancesPromoteReplicaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPromoteReplicaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.switchover`.
       func switchover(
-        request: SqlInstancesSwitchoverRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesSwitchoverRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.resetSslConfig`.
       func resetSslConfig(
-        request: SqlInstancesResetSslConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesResetSslConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.restart`.
       func restart(
-        request: SqlInstancesRestartRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRestartRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.restoreBackup`.
       func restoreBackup(
-        request: SqlInstancesRestoreBackupRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRestoreBackupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.rotateServerCa`.
       func rotateServerCa(
-        request: SqlInstancesRotateServerCaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRotateServerCaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.rotateServerCertificate`.
       func rotateServerCertificate(
-        request: SqlInstancesRotateServerCertificateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRotateServerCertificateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.rotateEntraIdCertificate`.
       func rotateEntraIdCertificate(
-        request: SqlInstancesRotateEntraIdCertificateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRotateEntraIdCertificateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.startReplica`.
       func startReplica(
-        request: SqlInstancesStartReplicaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesStartReplicaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.stopReplica`.
       func stopReplica(
-        request: SqlInstancesStopReplicaRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesStopReplicaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.truncateLog`.
       func truncateLog(
-        request: SqlInstancesTruncateLogRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesTruncateLogRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.update`.
       func update(
-        request: SqlInstancesUpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesUpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.createEphemeral`.
       func createEphemeral(
-        request: SqlInstancesCreateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesCreateEphemeralCertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SslCert
 
       /// See `SqlInstancesServiceClient.rescheduleMaintenance`.
       func rescheduleMaintenance(
-        request: SqlInstancesRescheduleMaintenanceRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesRescheduleMaintenanceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.verifyExternalSyncSettings`.
       func verifyExternalSyncSettings(
-        request: SqlInstancesVerifyExternalSyncSettingsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesVerifyExternalSyncSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesVerifyExternalSyncSettingsResponse
 
       /// See `SqlInstancesServiceClient.startExternalSync`.
       func startExternalSync(
-        request: SqlInstancesStartExternalSyncRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesStartExternalSyncRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.performDiskShrink`.
       func performDiskShrink(
-        request: SqlInstancesPerformDiskShrinkRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPerformDiskShrinkRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.getDiskShrinkConfig`.
       func getDiskShrinkConfig(
-        request: SqlInstancesGetDiskShrinkConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesGetDiskShrinkConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesGetDiskShrinkConfigResponse
 
       /// See `SqlInstancesServiceClient.resetReplicaSize`.
       func resetReplicaSize(
-        request: SqlInstancesResetReplicaSizeRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesResetReplicaSizeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.getLatestRecoveryTime`.
       func getLatestRecoveryTime(
-        request: SqlInstancesGetLatestRecoveryTimeRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesGetLatestRecoveryTimeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesGetLatestRecoveryTimeResponse
 
       /// See `SqlInstancesServiceClient.executeSql`.
       func executeSql(
-        request: SqlInstancesExecuteSqlRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesExecuteSqlRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesExecuteSqlResponse
 
       /// See `SqlInstancesServiceClient.acquireSsrsLease`.
       func acquireSsrsLease(
-        request: SqlInstancesAcquireSsrsLeaseRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesAcquireSsrsLeaseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesAcquireSsrsLeaseResponse
 
       /// See `SqlInstancesServiceClient.releaseSsrsLease`.
       func releaseSsrsLease(
-        request: SqlInstancesReleaseSsrsLeaseRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesReleaseSsrsLeaseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SqlInstancesReleaseSsrsLeaseResponse
 
       /// See `SqlInstancesServiceClient.preCheckMajorVersionUpgrade`.
       func preCheckMajorVersionUpgrade(
-        request: SqlInstancesPreCheckMajorVersionUpgradeRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPreCheckMajorVersionUpgradeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlInstancesServiceClient.pointInTimeRestore`.
       func pointInTimeRestore(
-        request: SqlInstancesPointInTimeRestoreRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlInstancesPointInTimeRestoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
     }
   }
@@ -904,9 +901,9 @@
     }
 
     public func addServerCa(
-      request: SqlInstancesAddServerCaRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesAddServerCaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func addServerCertificate(request: SqlInstancesAddServerCertificateRequest) async throws
@@ -916,9 +913,9 @@
     }
 
     public func addServerCertificate(
-      request: SqlInstancesAddServerCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesAddServerCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func addEntraIdCertificate(request: SqlInstancesAddEntraIdCertificateRequest)
@@ -928,9 +925,9 @@
     }
 
     public func addEntraIdCertificate(
-      request: SqlInstancesAddEntraIdCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesAddEntraIdCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func clone(request: SqlInstancesCloneRequest) async throws -> GoogleCloudSqlV1.Operation
@@ -939,9 +936,9 @@
     }
 
     public func clone(
-      request: SqlInstancesCloneRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesCloneRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func delete(request: SqlInstancesDeleteRequest) async throws
@@ -951,9 +948,9 @@
     }
 
     public func delete(
-      request: SqlInstancesDeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesDeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func demoteMaster(request: SqlInstancesDemoteMasterRequest) async throws
@@ -963,9 +960,9 @@
     }
 
     public func demoteMaster(
-      request: SqlInstancesDemoteMasterRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesDemoteMasterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func demote(request: SqlInstancesDemoteRequest) async throws
@@ -975,9 +972,9 @@
     }
 
     public func demote(
-      request: SqlInstancesDemoteRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesDemoteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func export(request: SqlInstancesExportRequest) async throws
@@ -987,9 +984,9 @@
     }
 
     public func export(
-      request: SqlInstancesExportRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func failover(request: SqlInstancesFailoverRequest) async throws
@@ -999,9 +996,9 @@
     }
 
     public func failover(
-      request: SqlInstancesFailoverRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesFailoverRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func reencrypt(request: SqlInstancesReencryptRequest) async throws
@@ -1011,9 +1008,9 @@
     }
 
     public func reencrypt(
-      request: SqlInstancesReencryptRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesReencryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(request: SqlInstancesGetRequest) async throws
@@ -1023,9 +1020,9 @@
     }
 
     public func `get`(
-      request: SqlInstancesGetRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesGetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.DatabaseInstance {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `import`(request: SqlInstancesImportRequest) async throws
@@ -1035,9 +1032,9 @@
     }
 
     public func `import`(
-      request: SqlInstancesImportRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesImportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func insert(request: SqlInstancesInsertRequest) async throws
@@ -1047,9 +1044,9 @@
     }
 
     public func insert(
-      request: SqlInstancesInsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesInsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(request: SqlInstancesListRequest) async throws
@@ -1059,9 +1056,9 @@
     }
 
     public func list(
-      request: SqlInstancesListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.InstancesListResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -1071,13 +1068,13 @@
     }
 
     public func list(
-      byItem: SqlInstancesListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SqlInstancesListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ApiWarning, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudSqlV1.InstancesListResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listServerCas(request: SqlInstancesListServerCasRequest) async throws
@@ -1087,9 +1084,9 @@
     }
 
     public func listServerCas(
-      request: SqlInstancesListServerCasRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesListServerCasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.InstancesListServerCasResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listServerCertificates(request: SqlInstancesListServerCertificatesRequest)
@@ -1099,9 +1096,9 @@
     }
 
     public func listServerCertificates(
-      request: SqlInstancesListServerCertificatesRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesListServerCertificatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.InstancesListServerCertificatesResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listEntraIdCertificates(request: SqlInstancesListEntraIdCertificatesRequest)
@@ -1111,9 +1108,9 @@
     }
 
     public func listEntraIdCertificates(
-      request: SqlInstancesListEntraIdCertificatesRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesListEntraIdCertificatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.InstancesListEntraIdCertificatesResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func patch(request: SqlInstancesPatchRequest) async throws -> GoogleCloudSqlV1.Operation
@@ -1122,9 +1119,9 @@
     }
 
     public func patch(
-      request: SqlInstancesPatchRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesPatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func promoteReplica(request: SqlInstancesPromoteReplicaRequest) async throws
@@ -1134,9 +1131,9 @@
     }
 
     public func promoteReplica(
-      request: SqlInstancesPromoteReplicaRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesPromoteReplicaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func switchover(request: SqlInstancesSwitchoverRequest) async throws
@@ -1146,9 +1143,9 @@
     }
 
     public func switchover(
-      request: SqlInstancesSwitchoverRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesSwitchoverRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func resetSslConfig(request: SqlInstancesResetSslConfigRequest) async throws
@@ -1158,9 +1155,9 @@
     }
 
     public func resetSslConfig(
-      request: SqlInstancesResetSslConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesResetSslConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func restart(request: SqlInstancesRestartRequest) async throws
@@ -1170,9 +1167,9 @@
     }
 
     public func restart(
-      request: SqlInstancesRestartRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesRestartRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func restoreBackup(request: SqlInstancesRestoreBackupRequest) async throws
@@ -1182,9 +1179,9 @@
     }
 
     public func restoreBackup(
-      request: SqlInstancesRestoreBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesRestoreBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func rotateServerCa(request: SqlInstancesRotateServerCaRequest) async throws
@@ -1194,9 +1191,9 @@
     }
 
     public func rotateServerCa(
-      request: SqlInstancesRotateServerCaRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesRotateServerCaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func rotateServerCertificate(request: SqlInstancesRotateServerCertificateRequest)
@@ -1206,9 +1203,9 @@
     }
 
     public func rotateServerCertificate(
-      request: SqlInstancesRotateServerCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesRotateServerCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func rotateEntraIdCertificate(request: SqlInstancesRotateEntraIdCertificateRequest)
@@ -1218,9 +1215,9 @@
     }
 
     public func rotateEntraIdCertificate(
-      request: SqlInstancesRotateEntraIdCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesRotateEntraIdCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func startReplica(request: SqlInstancesStartReplicaRequest) async throws
@@ -1230,9 +1227,9 @@
     }
 
     public func startReplica(
-      request: SqlInstancesStartReplicaRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesStartReplicaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func stopReplica(request: SqlInstancesStopReplicaRequest) async throws
@@ -1242,9 +1239,9 @@
     }
 
     public func stopReplica(
-      request: SqlInstancesStopReplicaRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesStopReplicaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func truncateLog(request: SqlInstancesTruncateLogRequest) async throws
@@ -1254,9 +1251,9 @@
     }
 
     public func truncateLog(
-      request: SqlInstancesTruncateLogRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesTruncateLogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func update(request: SqlInstancesUpdateRequest) async throws
@@ -1266,9 +1263,9 @@
     }
 
     public func update(
-      request: SqlInstancesUpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesUpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createEphemeral(request: SqlInstancesCreateEphemeralCertRequest) async throws
@@ -1278,9 +1275,9 @@
     }
 
     public func createEphemeral(
-      request: SqlInstancesCreateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesCreateEphemeralCertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SslCert {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func rescheduleMaintenance(request: SqlInstancesRescheduleMaintenanceRequest)
@@ -1290,9 +1287,9 @@
     }
 
     public func rescheduleMaintenance(
-      request: SqlInstancesRescheduleMaintenanceRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesRescheduleMaintenanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func verifyExternalSyncSettings(request: SqlInstancesVerifyExternalSyncSettingsRequest)
@@ -1302,9 +1299,9 @@
     }
 
     public func verifyExternalSyncSettings(
-      request: SqlInstancesVerifyExternalSyncSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesVerifyExternalSyncSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SqlInstancesVerifyExternalSyncSettingsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func startExternalSync(request: SqlInstancesStartExternalSyncRequest) async throws
@@ -1314,9 +1311,9 @@
     }
 
     public func startExternalSync(
-      request: SqlInstancesStartExternalSyncRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesStartExternalSyncRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func performDiskShrink(request: SqlInstancesPerformDiskShrinkRequest) async throws
@@ -1326,9 +1323,9 @@
     }
 
     public func performDiskShrink(
-      request: SqlInstancesPerformDiskShrinkRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesPerformDiskShrinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getDiskShrinkConfig(request: SqlInstancesGetDiskShrinkConfigRequest) async throws
@@ -1338,9 +1335,9 @@
     }
 
     public func getDiskShrinkConfig(
-      request: SqlInstancesGetDiskShrinkConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesGetDiskShrinkConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SqlInstancesGetDiskShrinkConfigResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func resetReplicaSize(request: SqlInstancesResetReplicaSizeRequest) async throws
@@ -1350,9 +1347,9 @@
     }
 
     public func resetReplicaSize(
-      request: SqlInstancesResetReplicaSizeRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesResetReplicaSizeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getLatestRecoveryTime(request: SqlInstancesGetLatestRecoveryTimeRequest)
@@ -1362,9 +1359,9 @@
     }
 
     public func getLatestRecoveryTime(
-      request: SqlInstancesGetLatestRecoveryTimeRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesGetLatestRecoveryTimeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SqlInstancesGetLatestRecoveryTimeResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func executeSql(request: SqlInstancesExecuteSqlRequest) async throws
@@ -1374,9 +1371,9 @@
     }
 
     public func executeSql(
-      request: SqlInstancesExecuteSqlRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesExecuteSqlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SqlInstancesExecuteSqlResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func acquireSsrsLease(request: SqlInstancesAcquireSsrsLeaseRequest) async throws
@@ -1386,9 +1383,9 @@
     }
 
     public func acquireSsrsLease(
-      request: SqlInstancesAcquireSsrsLeaseRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesAcquireSsrsLeaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SqlInstancesAcquireSsrsLeaseResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func releaseSsrsLease(request: SqlInstancesReleaseSsrsLeaseRequest) async throws
@@ -1398,9 +1395,9 @@
     }
 
     public func releaseSsrsLease(
-      request: SqlInstancesReleaseSsrsLeaseRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesReleaseSsrsLeaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SqlInstancesReleaseSsrsLeaseResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func preCheckMajorVersionUpgrade(request: SqlInstancesPreCheckMajorVersionUpgradeRequest)
@@ -1410,10 +1407,9 @@
     }
 
     public func preCheckMajorVersionUpgrade(
-      request: SqlInstancesPreCheckMajorVersionUpgradeRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesPreCheckMajorVersionUpgradeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func pointInTimeRestore(request: SqlInstancesPointInTimeRestoreRequest) async throws
@@ -1423,9 +1419,9 @@
     }
 
     public func pointInTimeRestore(
-      request: SqlInstancesPointInTimeRestoreRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlInstancesPointInTimeRestoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

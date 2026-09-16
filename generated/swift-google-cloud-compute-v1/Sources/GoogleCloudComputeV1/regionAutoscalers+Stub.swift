@@ -16,42 +16,42 @@
 
 #if RegionAutoscalers
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionAutoscalersStub: Sendable {
       func delete(
-        request: RegionAutoscalersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RegionAutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Autoscaler
 
       func insert(
-        request: RegionAutoscalersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RegionAutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionAutoscalerList
 
       func patch(
-        request: RegionAutoscalersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
         request: RegionAutoscalersClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: RegionAutoscalersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionAutoscalersClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

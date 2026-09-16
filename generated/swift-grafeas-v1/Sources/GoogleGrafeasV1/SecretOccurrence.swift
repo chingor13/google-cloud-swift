@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The occurrence provides details of a secret.
-public struct SecretOccurrence: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SecretOccurrence: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Type of secret.
@@ -31,13 +31,13 @@ public struct SecretOccurrence: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var statuses: [SecretStatus] = []
 
   /// Scan result of the secret.
-  public var data: GoogleCloudWKT.`Any`? = nil
+  public var data: GoogleWKT.`Any`? = nil
 
   /// Hash value, typically a digest for the secret data, that allows unique
   /// identification of a specific secret.
   public var digest: Digest? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SecretOccurrence`.
   public init() {}
@@ -87,11 +87,11 @@ public struct SecretOccurrence: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent([SecretStatus].self, forKey: .statuses) {
       self.statuses = value
     }
-    self.data = try container.decodeIfPresent(GoogleCloudWKT.`Any`.self, forKey: .data)
+    self.data = try container.decodeIfPresent(GoogleWKT.`Any`.self, forKey: .data)
     self.digest = try container.decodeIfPresent(Digest.self, forKey: .digest)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -110,10 +110,10 @@ public struct SecretOccurrence: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.SecretOccurrence"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

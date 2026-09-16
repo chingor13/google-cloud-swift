@@ -16,10 +16,10 @@
 
 import Foundation
 import GoogleCloudOrgPolicyV2
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The proposed changes to OrgPolicy.
-public struct OrgPolicyOverlay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OrgPolicyOverlay: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The OrgPolicy changes to preview violations for.
@@ -41,7 +41,7 @@ public struct OrgPolicyOverlay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// evaluates a single constraint.
   public var customConstraints: [OrgPolicyOverlay.CustomConstraintOverlay] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OrgPolicyOverlay`.
   public init() {}
@@ -88,7 +88,7 @@ public struct OrgPolicyOverlay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,7 +102,7 @@ public struct OrgPolicyOverlay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// A change to an OrgPolicy.
-  public struct PolicyOverlay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PolicyOverlay: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The parent of the policy we are attaching to.
@@ -112,7 +112,7 @@ public struct OrgPolicyOverlay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The new or updated OrgPolicy.
     public var policy: GoogleCloudOrgPolicyV2.Policy? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PolicyOverlay`.
     public init() {}
@@ -154,7 +154,7 @@ public struct OrgPolicyOverlay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         GoogleCloudOrgPolicyV2.Policy.self, forKey: .policy)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -170,16 +170,16 @@ public struct OrgPolicyOverlay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.policysimulator.v1.OrgPolicyOverlay.PolicyOverlay"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A change to an OrgPolicy custom constraint.
-  public struct CustomConstraintOverlay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CustomConstraintOverlay: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Resource the constraint is attached to.
@@ -189,7 +189,7 @@ public struct OrgPolicyOverlay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The new or updated custom constraint.
     public var customConstraint: GoogleCloudOrgPolicyV2.CustomConstraint? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CustomConstraintOverlay`.
     public init() {}
@@ -233,7 +233,7 @@ public struct OrgPolicyOverlay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         GoogleCloudOrgPolicyV2.CustomConstraint.self, forKey: .customConstraint)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -250,21 +250,21 @@ public struct OrgPolicyOverlay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.policysimulator.v1.OrgPolicyOverlay.CustomConstraintOverlay"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.policysimulator.v1.OrgPolicyOverlay"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

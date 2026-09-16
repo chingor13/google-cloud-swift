@@ -16,10 +16,10 @@
 
 #if Flows || Pages || Playbooks || Sessions || TestCases || TransitionRouteGroups
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a call of a specific tool's action with the specified inputs.
-  public struct ToolCall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ToolCall: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The [tool][google.cloud.dialogflow.cx.v3.Tool] associated with
@@ -33,9 +33,9 @@
     public var action: Swift.String = Swift.String()
 
     /// Optional. The action's input parameters.
-    public var inputParameters: GoogleCloudWKT.Struct? = nil
+    public var inputParameters: GoogleWKT.Struct? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ToolCall`.
     public init() {}
@@ -79,10 +79,10 @@
         self.action = value
       }
       self.inputParameters = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .inputParameters)
+        GoogleWKT.Struct.self, forKey: .inputParameters)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -99,11 +99,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ToolCall"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

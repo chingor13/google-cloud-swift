@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for
 /// [SecurityCenterManagement.ValidateEventThreatDetectionCustomModule][google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ValidateEventThreatDetectionCustomModule].
 ///
 /// [google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ValidateEventThreatDetectionCustomModule]: <doc:SecurityCenterManagementClient/validateEventThreatDetectionCustomModule(request:options:)>
-public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatable, GoogleCloudWKT
+public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatable, GoogleWKT
     ._AnyPackable,
   Sendable
 {
@@ -30,7 +30,7 @@ public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatab
   public var errors:
     [ValidateEventThreatDetectionCustomModuleResponse.CustomModuleValidationError] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ValidateEventThreatDetectionCustomModuleResponse`.
   public init() {}
@@ -71,7 +71,7 @@ public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -85,7 +85,7 @@ public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatab
 
   /// An error encountered while validating the uploaded configuration of an
   /// Event Threat Detection custom module.
-  public struct CustomModuleValidationError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CustomModuleValidationError: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A human-readable description of the error.
@@ -106,7 +106,7 @@ public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatab
     /// computed.
     public var end: ValidateEventThreatDetectionCustomModuleResponse.Position? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CustomModuleValidationError`.
     public init() {}
@@ -157,7 +157,7 @@ public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatab
         ValidateEventThreatDetectionCustomModuleResponse.Position.self, forKey: .end)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -176,16 +176,16 @@ public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatab
       return
         "type.googleapis.com/google.cloud.securitycentermanagement.v1.ValidateEventThreatDetectionCustomModuleResponse.CustomModuleValidationError"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A position in the uploaded text version of a module.
-  public struct Position: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Position: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The line position in the text.
@@ -194,7 +194,7 @@ public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatab
     /// The column position in the line.
     public var columnNumber: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Position`.
     public init() {}
@@ -237,7 +237,7 @@ public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -254,11 +254,11 @@ public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatab
       return
         "type.googleapis.com/google.cloud.securitycentermanagement.v1.ValidateEventThreatDetectionCustomModuleResponse.Position"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -266,10 +266,10 @@ public struct ValidateEventThreatDetectionCustomModuleResponse: Codable, Equatab
     return
       "type.googleapis.com/google.cloud.securitycentermanagement.v1.ValidateEventThreatDetectionCustomModuleResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

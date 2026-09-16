@@ -19,28 +19,27 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class GlobalPublicDelegatedPrefixesRetry: GlobalPublicDelegatedPrefixesStub {
       let inner: any GlobalPublicDelegatedPrefixesStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(
-        _ inner: any GlobalPublicDelegatedPrefixesStub, options: GoogleCloudGax.ClientOptions
-      ) {
+      public init(_ inner: any GlobalPublicDelegatedPrefixesStub, options: GoogleGax.ClientOptions)
+      {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -53,14 +52,14 @@
 
       public func delete(
         request: GlobalPublicDelegatedPrefixesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GlobalPublicDelegatedPrefixesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+            (r: GlobalPublicDelegatedPrefixesClient.DeleteRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -68,15 +67,14 @@
       }
 
       public func `get`(
-        request: GlobalPublicDelegatedPrefixesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalPublicDelegatedPrefixesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GlobalPublicDelegatedPrefixesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+            (r: GlobalPublicDelegatedPrefixesClient.GetRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -85,14 +83,14 @@
 
       public func insert(
         request: GlobalPublicDelegatedPrefixesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GlobalPublicDelegatedPrefixesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: GlobalPublicDelegatedPrefixesClient.InsertRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -100,15 +98,14 @@
       }
 
       public func list(
-        request: GlobalPublicDelegatedPrefixesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalPublicDelegatedPrefixesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GlobalPublicDelegatedPrefixesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: GlobalPublicDelegatedPrefixesClient.ListRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList
             in
             return try await self.inner.list(request: r, options: o)
@@ -116,15 +113,14 @@
       }
 
       public func patch(
-        request: GlobalPublicDelegatedPrefixesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalPublicDelegatedPrefixesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GlobalPublicDelegatedPrefixesClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
+            (r: GlobalPublicDelegatedPrefixesClient.PatchRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -132,14 +128,14 @@
       }
 
       public func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GlobalOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GlobalOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

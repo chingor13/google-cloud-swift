@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudVideoAIV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: WarehouseClient, projectNumberId: String, locationId: String, corpusId: String)
   async throws
@@ -32,7 +32,7 @@ func sample(client: WarehouseClient, projectNumberId: String, locationId: String
         $0.corpus = Corpus().with {
           $0.name = "projects/\(projectNumberId)/locations/\(locationId)/corpora/\(corpusId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Artifacts produced by a build that should be uploaded upon
 /// successful completion of all build steps.
-public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Artifacts: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A list of images to be pushed upon the successful completion of all build
@@ -80,7 +80,7 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// If any packages fail to be pushed, the build is marked FAILURE.
   public var npmPackages: [Artifacts.NpmPackage] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Artifacts`.
   public init() {}
@@ -146,7 +146,7 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -165,7 +165,7 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Files in the workspace to upload to Cloud Storage upon successful
   /// completion of all build steps.
-  public struct ArtifactObjects: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ArtifactObjects: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Cloud Storage bucket and optional object path, in the form
@@ -182,7 +182,7 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. Stores timing information for pushing all artifact objects.
     public var timing: TimeSpan? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ArtifactObjects`.
     public init() {}
@@ -228,7 +228,7 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.timing = try container.decodeIfPresent(TimeSpan.self, forKey: .timing)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -245,17 +245,17 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudbuild.v1.Artifacts.ArtifactObjects"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A Maven artifact to upload to Artifact Registry upon successful completion
   /// of all build steps.
-  public struct MavenArtifact: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MavenArtifact: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Artifact Registry repository, in the form
@@ -285,7 +285,7 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Registry.
     public var version: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MavenArtifact`.
     public init() {}
@@ -343,7 +343,7 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -362,17 +362,17 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudbuild.v1.Artifacts.MavenArtifact"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Go module to upload to Artifact Registry upon successful completion of all
   /// build steps. A module refers to all dependencies in a go.mod file.
-  public struct GoModule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GoModule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Artifact Registry repository name.
@@ -405,7 +405,7 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// e.g. v0.2.3-alpha.x.12m.5
     public var moduleVersion: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GoModule`.
     public init() {}
@@ -469,7 +469,7 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -489,18 +489,18 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudbuild.v1.Artifacts.GoModule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Python package to upload to Artifact Registry upon successful completion
   /// of all build steps. A package can encapsulate multiple objects to be
   /// uploaded to a single repository.
-  public struct PythonPackage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PythonPackage: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Artifact Registry repository, in the form
@@ -515,7 +515,7 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// file.
     public var paths: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PythonPackage`.
     public init() {}
@@ -558,7 +558,7 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -574,17 +574,17 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudbuild.v1.Artifacts.PythonPackage"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Npm package to upload to Artifact Registry upon successful completion
   /// of all build steps.
-  public struct NpmPackage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NpmPackage: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Artifact Registry repository, in the form
@@ -600,7 +600,7 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Only one of `archive` or `package_path` can be specified.
     public var packagePath: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NpmPackage`.
     public init() {}
@@ -643,7 +643,7 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -659,21 +659,21 @@ public struct Artifacts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudbuild.v1.Artifacts.NpmPackage"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudbuild.v1.Artifacts"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

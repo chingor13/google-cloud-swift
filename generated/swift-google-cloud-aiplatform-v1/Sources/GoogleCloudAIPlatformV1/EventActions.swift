@@ -16,10 +16,10 @@
 
 #if SessionService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Actions are parts of events that are executed by the agent.
-  public struct EventActions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EventActions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. If true, it won't call model to summarize function response.
@@ -28,7 +28,7 @@
 
     /// Optional. Indicates that the event is updating the state with the given
     /// delta.
-    public var stateDelta: GoogleCloudWKT.Struct? = nil
+    public var stateDelta: GoogleWKT.Struct? = nil
 
     /// Optional. Indicates that the event is updating an artifact. key is the
     /// filename, value is the version.
@@ -41,12 +41,12 @@
     /// Struct key is the function call id since one function call response (from
     /// model) could correspond to multiple function calls. Struct value is the
     /// required auth config, which can be another struct.
-    public var requestedAuthConfigs: GoogleCloudWKT.Struct? = nil
+    public var requestedAuthConfigs: GoogleWKT.Struct? = nil
 
     /// Optional. If set, the event transfers to the specified agent.
     public var transferAgent: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EventActions`.
     public init() {}
@@ -92,8 +92,7 @@
       if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .skipSummarization) {
         self.skipSummarization = value
       }
-      self.stateDelta = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .stateDelta)
+      self.stateDelta = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .stateDelta)
       if let value = try container.decodeIfPresent(
         [Swift.String: Swift.Int32].self, forKey: .artifactDelta)
       {
@@ -103,13 +102,13 @@
         self.escalate = value
       }
       self.requestedAuthConfigs = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .requestedAuthConfigs)
+        GoogleWKT.Struct.self, forKey: .requestedAuthConfigs)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .transferAgent) {
         self.transferAgent = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -129,11 +128,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.EventActions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

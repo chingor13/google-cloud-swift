@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request used by the GetAuthorizationPolicy method.
-public struct GetAuthorizationPolicyRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GetAuthorizationPolicyRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. A name of the AuthorizationPolicy to get. Must be in the format
   /// `projects/{project}/locations/{location}/authorizationPolicies/*`.
   public var name: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GetAuthorizationPolicyRequest`.
   public init() {}
@@ -63,7 +63,7 @@ public struct GetAuthorizationPolicyRequest: Codable, Equatable, GoogleCloudWKT.
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -78,10 +78,10 @@ public struct GetAuthorizationPolicyRequest: Codable, Equatable, GoogleCloudWKT.
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

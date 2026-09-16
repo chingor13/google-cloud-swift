@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// A Service that manage/custom customer specified SynonymSets.
 ///
@@ -29,7 +29,7 @@ public final class SynonymSetServiceClient: Clients.SynonymSetServiceProtocol, S
   let inner: any Clients.SynonymSetServiceStub
 
   /// Creates a new `SynonymSetServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.SynonymSetServiceStub = try Clients.SynonymSetServiceTransport(options)
     inner = Clients.SynonymSetServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -44,7 +44,7 @@ public final class SynonymSetServiceClient: Clients.SynonymSetServiceProtocol, S
   ///
   /// @Snippet(path: "SynonymSetService_CreateSynonymSet")
   public func createSynonymSet(
-    request: CreateSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSynonymSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet {
     try await self.inner.createSynonymSet(request: request, options: options)
   }
@@ -55,7 +55,7 @@ public final class SynonymSetServiceClient: Clients.SynonymSetServiceProtocol, S
   ///
   /// @Snippet(path: "SynonymSetService_GetSynonymSet")
   public func getSynonymSet(
-    request: GetSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSynonymSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet {
     try await self.inner.getSynonymSet(request: request, options: options)
   }
@@ -66,7 +66,7 @@ public final class SynonymSetServiceClient: Clients.SynonymSetServiceProtocol, S
   ///
   /// @Snippet(path: "SynonymSetService_UpdateSynonymSet")
   public func updateSynonymSet(
-    request: UpdateSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSynonymSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet {
     try await self.inner.updateSynonymSet(request: request, options: options)
   }
@@ -76,7 +76,7 @@ public final class SynonymSetServiceClient: Clients.SynonymSetServiceProtocol, S
   ///
   /// @Snippet(path: "SynonymSetService_DeleteSynonymSet")
   public func deleteSynonymSet(
-    request: DeleteSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSynonymSetRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteSynonymSet(request: request, options: options)
   }
@@ -85,7 +85,7 @@ public final class SynonymSetServiceClient: Clients.SynonymSetServiceProtocol, S
   ///
   /// @Snippet(path: "SynonymSetService_ListSynonymSets")
   public func listSynonymSets(
-    request: ListSynonymSetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSynonymSetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.ListSynonymSetsResponse {
     try await self.inner.listSynonymSets(request: request, options: options)
   }
@@ -94,7 +94,7 @@ public final class SynonymSetServiceClient: Clients.SynonymSetServiceProtocol, S
   ///
   /// @Snippet(path: "SynonymSetService_ListSynonymSets")
   public func listSynonymSets(
-    byItem: ListSynonymSetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSynonymSetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SynonymSet, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudContentWarehouseV1.ListSynonymSetsResponse in
@@ -102,7 +102,7 @@ public final class SynonymSetServiceClient: Clients.SynonymSetServiceProtocol, S
       request.pageToken = token
       return try await self.listSynonymSets(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -111,7 +111,7 @@ public final class SynonymSetServiceClient: Clients.SynonymSetServiceProtocol, S
   ///
   /// @Snippet(path: "SynonymSetService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -177,32 +177,32 @@ extension Clients {
 
     /// See `SynonymSetServiceClient.createSynonymSet`.
     func createSynonymSet(
-      request: CreateSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSynonymSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet
 
     /// See `SynonymSetServiceClient.getSynonymSet`.
     func getSynonymSet(
-      request: GetSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSynonymSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet
 
     /// See `SynonymSetServiceClient.updateSynonymSet`.
     func updateSynonymSet(
-      request: UpdateSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSynonymSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet
 
     /// See `SynonymSetServiceClient.deleteSynonymSet`.
     func deleteSynonymSet(
-      request: DeleteSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSynonymSetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `SynonymSetServiceClient.listSynonymSets`.
     func listSynonymSets(
-      request: ListSynonymSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSynonymSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.ListSynonymSetsResponse
 
     /// See `SynonymSetServiceClient.listSynonymSets`.
     func listSynonymSets(
-      byItem: ListSynonymSetsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSynonymSetsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SynonymSet, Swift.Error>
   }
 }
@@ -216,9 +216,9 @@ extension Clients.SynonymSetServiceProtocol {
   }
 
   public func createSynonymSet(
-    request: CreateSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSynonymSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createSynonymSet(
@@ -239,9 +239,9 @@ extension Clients.SynonymSetServiceProtocol {
   }
 
   public func getSynonymSet(
-    request: GetSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSynonymSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSynonymSet(
@@ -260,9 +260,9 @@ extension Clients.SynonymSetServiceProtocol {
   }
 
   public func updateSynonymSet(
-    request: UpdateSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSynonymSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateSynonymSet(
@@ -281,9 +281,9 @@ extension Clients.SynonymSetServiceProtocol {
   }
 
   public func deleteSynonymSet(
-    request: DeleteSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSynonymSetRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteSynonymSet(
@@ -302,9 +302,9 @@ extension Clients.SynonymSetServiceProtocol {
   }
 
   public func listSynonymSets(
-    request: ListSynonymSetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSynonymSetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.ListSynonymSetsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSynonymSets(
@@ -314,13 +314,13 @@ extension Clients.SynonymSetServiceProtocol {
   }
 
   public func listSynonymSets(
-    byItem: ListSynonymSetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSynonymSetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SynonymSet, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudContentWarehouseV1.ListSynonymSetsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSynonymSets(
@@ -339,9 +339,9 @@ extension Clients.SynonymSetServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

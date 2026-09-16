@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Summary of a single transformation.
 /// Only one of 'transformation', 'field_transformation', or 'record_suppress'
 /// will be set.
-public struct TransformationSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TransformationSummary: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Set if the transformation was limited to a specific InfoType.
@@ -46,7 +46,7 @@ public struct TransformationSummary: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// Total size in bytes that were transformed in some way.
   public var transformedBytes: Swift.Int64 = Swift.Int64()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TransformationSummary`.
   public init() {}
@@ -112,7 +112,7 @@ public struct TransformationSummary: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -132,7 +132,7 @@ public struct TransformationSummary: Codable, Equatable, GoogleCloudWKT._AnyPack
 
   /// A collection that informs the user the number of times a particular
   /// `TransformationResultCode` and error details occurred.
-  public struct SummaryResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SummaryResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Number of transformations counted by this result.
@@ -146,7 +146,7 @@ public struct TransformationSummary: Codable, Equatable, GoogleCloudWKT._AnyPack
     /// work as expected.
     public var details: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SummaryResult`.
     public init() {}
@@ -196,7 +196,7 @@ public struct TransformationSummary: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -213,11 +213,11 @@ public struct TransformationSummary: Codable, Equatable, GoogleCloudWKT._AnyPack
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.TransformationSummary.SummaryResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -329,10 +329,10 @@ public struct TransformationSummary: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.TransformationSummary"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

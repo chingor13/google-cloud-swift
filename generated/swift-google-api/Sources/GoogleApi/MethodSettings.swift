@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes the generator configuration for a method.
-public struct MethodSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MethodSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The fully qualified name of the method, for which the options below apply.
@@ -74,7 +74,7 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///           delay_threshold_millis: 10
   public var batching: BatchingConfigProto? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MethodSettings`.
   public init() {}
@@ -125,7 +125,7 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.batching = try container.decodeIfPresent(BatchingConfigProto.self, forKey: .batching)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -145,12 +145,12 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// All default values below are from those used in the client library
   /// generators (e.g.
   /// [Java](https://github.com/googleapis/gapic-generator-java/blob/04c2faa191a9b5a10b92392fe8482279c4404803/src/main/java/com/google/api/generator/gapic/composer/common/RetrySettingsComposer.java)).
-  public struct LongRunning: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LongRunning: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Initial delay after which the first poll request will be made.
     /// Default value: 5 seconds.
-    public var initialPollDelay: GoogleCloudWKT.Duration? = nil
+    public var initialPollDelay: GoogleWKT.Duration? = nil
 
     /// Multiplier to gradually increase delay between subsequent polls until it
     /// reaches max_poll_delay.
@@ -159,13 +159,13 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     /// Maximum time between two subsequent poll requests.
     /// Default value: 45 seconds.
-    public var maxPollDelay: GoogleCloudWKT.Duration? = nil
+    public var maxPollDelay: GoogleWKT.Duration? = nil
 
     /// Total polling timeout.
     /// Default value: 5 minutes.
-    public var totalPollTimeout: GoogleCloudWKT.Duration? = nil
+    public var totalPollTimeout: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LongRunning`.
     public init() {}
@@ -205,17 +205,17 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.initialPollDelay = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .initialPollDelay)
+        GoogleWKT.Duration.self, forKey: .initialPollDelay)
       if let value = try container.decodeIfPresent(Swift.Float.self, forKey: .pollDelayMultiplier) {
         self.pollDelayMultiplier = value
       }
       self.maxPollDelay = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .maxPollDelay)
+        GoogleWKT.Duration.self, forKey: .maxPollDelay)
       self.totalPollTimeout = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .totalPollTimeout)
+        GoogleWKT.Duration.self, forKey: .totalPollTimeout)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -233,21 +233,21 @@ public struct MethodSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.MethodSettings.LongRunning"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.MethodSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

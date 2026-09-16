@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudLicenseManagerV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudLicenseManagerV1.LicenseManagerClient()

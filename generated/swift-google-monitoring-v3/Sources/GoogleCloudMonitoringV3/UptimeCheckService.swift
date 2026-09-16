@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The UptimeCheckService API is used to manage (list, create, delete, edit)
 /// Uptime check configurations in the Cloud Monitoring product. An Uptime
@@ -35,7 +35,7 @@ public final class UptimeCheckServiceClient: Clients.UptimeCheckServiceProtocol,
   let inner: any Clients.UptimeCheckServiceStub
 
   /// Creates a new `UptimeCheckServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.UptimeCheckServiceStub = try Clients.UptimeCheckServiceTransport(options)
     inner = Clients.UptimeCheckServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -49,7 +49,7 @@ public final class UptimeCheckServiceClient: Clients.UptimeCheckServiceProtocol,
   ///
   /// @Snippet(path: "UptimeCheckService_ListUptimeCheckConfigs")
   public func listUptimeCheckConfigs(
-    request: ListUptimeCheckConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUptimeCheckConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckConfigsResponse {
     try await self.inner.listUptimeCheckConfigs(request: request, options: options)
   }
@@ -59,7 +59,7 @@ public final class UptimeCheckServiceClient: Clients.UptimeCheckServiceProtocol,
   ///
   /// @Snippet(path: "UptimeCheckService_ListUptimeCheckConfigs")
   public func listUptimeCheckConfigs(
-    byItem: ListUptimeCheckConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUptimeCheckConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<UptimeCheckConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckConfigsResponse
@@ -68,14 +68,14 @@ public final class UptimeCheckServiceClient: Clients.UptimeCheckServiceProtocol,
       request.pageToken = token
       return try await self.listUptimeCheckConfigs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a single Uptime check configuration.
   ///
   /// @Snippet(path: "UptimeCheckService_GetUptimeCheckConfig")
   public func getUptimeCheckConfig(
-    request: GetUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig {
     try await self.inner.getUptimeCheckConfig(request: request, options: options)
   }
@@ -84,7 +84,7 @@ public final class UptimeCheckServiceClient: Clients.UptimeCheckServiceProtocol,
   ///
   /// @Snippet(path: "UptimeCheckService_CreateUptimeCheckConfig")
   public func createUptimeCheckConfig(
-    request: CreateUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig {
     try await self.inner.createUptimeCheckConfig(request: request, options: options)
   }
@@ -96,7 +96,7 @@ public final class UptimeCheckServiceClient: Clients.UptimeCheckServiceProtocol,
   ///
   /// @Snippet(path: "UptimeCheckService_UpdateUptimeCheckConfig")
   public func updateUptimeCheckConfig(
-    request: UpdateUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig {
     try await self.inner.updateUptimeCheckConfig(request: request, options: options)
   }
@@ -107,7 +107,7 @@ public final class UptimeCheckServiceClient: Clients.UptimeCheckServiceProtocol,
   ///
   /// @Snippet(path: "UptimeCheckService_DeleteUptimeCheckConfig")
   public func deleteUptimeCheckConfig(
-    request: DeleteUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteUptimeCheckConfig(request: request, options: options)
   }
@@ -116,7 +116,7 @@ public final class UptimeCheckServiceClient: Clients.UptimeCheckServiceProtocol,
   ///
   /// @Snippet(path: "UptimeCheckService_ListUptimeCheckIps")
   public func listUptimeCheckIps(
-    request: ListUptimeCheckIpsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUptimeCheckIpsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckIpsResponse {
     try await self.inner.listUptimeCheckIps(request: request, options: options)
   }
@@ -125,7 +125,7 @@ public final class UptimeCheckServiceClient: Clients.UptimeCheckServiceProtocol,
   ///
   /// @Snippet(path: "UptimeCheckService_ListUptimeCheckIps")
   public func listUptimeCheckIps(
-    byItem: ListUptimeCheckIpsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUptimeCheckIpsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<UptimeCheckIp, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckIpsResponse in
@@ -133,7 +133,7 @@ public final class UptimeCheckServiceClient: Clients.UptimeCheckServiceProtocol,
       request.pageToken = token
       return try await self.listUptimeCheckIps(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 }
 
@@ -205,42 +205,42 @@ extension Clients {
 
     /// See `UptimeCheckServiceClient.listUptimeCheckConfigs`.
     func listUptimeCheckConfigs(
-      request: ListUptimeCheckConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUptimeCheckConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckConfigsResponse
 
     /// See `UptimeCheckServiceClient.listUptimeCheckConfigs`.
     func listUptimeCheckConfigs(
-      byItem: ListUptimeCheckConfigsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListUptimeCheckConfigsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<UptimeCheckConfig, Swift.Error>
 
     /// See `UptimeCheckServiceClient.getUptimeCheckConfig`.
     func getUptimeCheckConfig(
-      request: GetUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig
 
     /// See `UptimeCheckServiceClient.createUptimeCheckConfig`.
     func createUptimeCheckConfig(
-      request: CreateUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig
 
     /// See `UptimeCheckServiceClient.updateUptimeCheckConfig`.
     func updateUptimeCheckConfig(
-      request: UpdateUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig
 
     /// See `UptimeCheckServiceClient.deleteUptimeCheckConfig`.
     func deleteUptimeCheckConfig(
-      request: DeleteUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `UptimeCheckServiceClient.listUptimeCheckIps`.
     func listUptimeCheckIps(
-      request: ListUptimeCheckIpsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUptimeCheckIpsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckIpsResponse
 
     /// See `UptimeCheckServiceClient.listUptimeCheckIps`.
     func listUptimeCheckIps(
-      byItem: ListUptimeCheckIpsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListUptimeCheckIpsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<UptimeCheckIp, Swift.Error>
   }
 }
@@ -254,9 +254,9 @@ extension Clients.UptimeCheckServiceProtocol {
   }
 
   public func listUptimeCheckConfigs(
-    request: ListUptimeCheckConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUptimeCheckConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckConfigsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listUptimeCheckConfigs(
@@ -266,14 +266,14 @@ extension Clients.UptimeCheckServiceProtocol {
   }
 
   public func listUptimeCheckConfigs(
-    byItem: ListUptimeCheckConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUptimeCheckConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<UptimeCheckConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckConfigsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listUptimeCheckConfigs(
@@ -292,9 +292,9 @@ extension Clients.UptimeCheckServiceProtocol {
   }
 
   public func getUptimeCheckConfig(
-    request: GetUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getUptimeCheckConfig(
@@ -313,9 +313,9 @@ extension Clients.UptimeCheckServiceProtocol {
   }
 
   public func createUptimeCheckConfig(
-    request: CreateUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createUptimeCheckConfig(
@@ -336,9 +336,9 @@ extension Clients.UptimeCheckServiceProtocol {
   }
 
   public func updateUptimeCheckConfig(
-    request: UpdateUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.UptimeCheckConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateUptimeCheckConfig(
@@ -355,9 +355,9 @@ extension Clients.UptimeCheckServiceProtocol {
   }
 
   public func deleteUptimeCheckConfig(
-    request: DeleteUptimeCheckConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteUptimeCheckConfigRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteUptimeCheckConfig(
@@ -376,9 +376,9 @@ extension Clients.UptimeCheckServiceProtocol {
   }
 
   public func listUptimeCheckIps(
-    request: ListUptimeCheckIpsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUptimeCheckIpsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckIpsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listUptimeCheckIps(
@@ -388,12 +388,12 @@ extension Clients.UptimeCheckServiceProtocol {
   }
 
   public func listUptimeCheckIps(
-    byItem: ListUptimeCheckIpsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUptimeCheckIpsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<UptimeCheckIp, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.ListUptimeCheckIpsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 }

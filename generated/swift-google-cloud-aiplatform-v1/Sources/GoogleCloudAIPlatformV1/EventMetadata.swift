@@ -16,10 +16,10 @@
 
 #if SessionService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Metadata relating to a LLM response event.
-  public struct EventMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EventMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Metadata returned to client when grounding is enabled.
@@ -50,7 +50,7 @@
     public var branch: Swift.String = Swift.String()
 
     /// The custom metadata of the LlmResponse.
-    public var customMetadata: GoogleCloudWKT.Struct? = nil
+    public var customMetadata: GoogleWKT.Struct? = nil
 
     /// Optional. Audio transcription of user input.
     public var inputTranscription: Transcription? = nil
@@ -58,7 +58,7 @@
     /// Optional. Audio transcription of model output.
     public var outputTranscription: Transcription? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EventMetadata`.
     public init() {}
@@ -126,14 +126,14 @@
         self.branch = value
       }
       self.customMetadata = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .customMetadata)
+        GoogleWKT.Struct.self, forKey: .customMetadata)
       self.inputTranscription = try container.decodeIfPresent(
         Transcription.self, forKey: .inputTranscription)
       self.outputTranscription = try container.decodeIfPresent(
         Transcription.self, forKey: .outputTranscription)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -156,11 +156,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.EventMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

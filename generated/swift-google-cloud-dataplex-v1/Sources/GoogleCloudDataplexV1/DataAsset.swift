@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a data asset resource that can be packaged and shared via a data
 /// product.
-public struct DataAsset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataAsset: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Resource name of the data asset.
@@ -33,10 +33,10 @@ public struct DataAsset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var uid: Swift.String = Swift.String()
 
   /// Output only. The time at which the data asset was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time at which the data asset was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. This checksum is computed by the server based on the value of
   /// other fields, and may be sent on update and delete requests to ensure the
@@ -83,7 +83,7 @@ public struct DataAsset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// https://cloud.google.com/iam/docs/creating-custom-roles.
   public var accessGroupConfigs: [Swift.String: DataAsset.AccessGroupConfig] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataAsset`.
   public init() {}
@@ -136,10 +136,8 @@ public struct DataAsset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .uid) {
       self.uid = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
       self.etag = value
     }
@@ -157,7 +155,7 @@ public struct DataAsset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -177,7 +175,7 @@ public struct DataAsset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Configuration for access group inherited from the parent data product.
-  public struct AccessGroupConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AccessGroupConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. IAM roles granted on the resource to this access group. Role
@@ -186,7 +184,7 @@ public struct DataAsset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Example: `[ "roles/bigquery.dataViewer" ]`
     public var iamRoles: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AccessGroupConfig`.
     public init() {}
@@ -224,7 +222,7 @@ public struct DataAsset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -239,21 +237,21 @@ public struct DataAsset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.DataAsset.AccessGroupConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.DataAsset"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,7 +16,7 @@
 
 #if BackendServices || RegionBackendServices
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a Backend Service resource.
   ///
@@ -36,7 +36,7 @@
   ///
   /// For more information, seeBackend
   /// Services.
-  public struct BackendService: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BackendService: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Lifetime of cookies in seconds. This setting is applicable to Application
@@ -546,7 +546,7 @@
     /// Output only. [Output Only] List of resources referencing given backend service.
     public var usedBy: [BackendServiceUsedBy] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BackendService`.
     public init() {}
@@ -730,7 +730,7 @@
       self.failoverPolicy = try container.decodeIfPresent(
         BackendServiceFailoverPolicy.self, forKey: .failoverPolicy)
       if let s = try container.decodeIfPresent(Swift.String.self, forKey: .fingerprint) {
-        guard let v = GoogleCloudWKT._DiscoveryBase64.decode(s) else {
+        guard let v = GoogleWKT._DiscoveryBase64.decode(s) else {
           throw DecodingError.dataCorrupted(
             DecodingError.Context(
               codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
@@ -803,7 +803,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -833,7 +833,7 @@
       try container.encodeIfPresent(self.failoverPolicy, forKey: .failoverPolicy)
       if let v = fingerprint {
         try container.encode(
-          GoogleCloudWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
+          GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
       }
       try container.encodeIfPresent(self.haPolicy, forKey: .haPolicy)
@@ -1839,11 +1839,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.BackendService"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

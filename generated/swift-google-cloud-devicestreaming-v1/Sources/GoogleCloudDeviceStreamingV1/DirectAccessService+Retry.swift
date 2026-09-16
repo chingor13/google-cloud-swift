@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class DirectAccessServiceRetry: DirectAccessServiceStub {
     let inner: any DirectAccessServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any DirectAccessServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any DirectAccessServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func createDeviceSession(
-      request: CreateDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDeviceSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateDeviceSessionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateDeviceSessionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDeviceStreamingV1.DeviceSession
           in
           return try await self.inner.createDeviceSession(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func listDeviceSessions(
-      request: ListDeviceSessionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeviceSessionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeviceStreamingV1.ListDeviceSessionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListDeviceSessionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDeviceSessionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDeviceStreamingV1.ListDeviceSessionsResponse
           in
           return try await self.inner.listDeviceSessions(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func getDeviceSession(
-      request: GetDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeviceSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetDeviceSessionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetDeviceSessionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDeviceStreamingV1.DeviceSession
           in
           return try await self.inner.getDeviceSession(request: r, options: o)
@@ -94,27 +94,27 @@ extension Clients {
     }
 
     public func cancelDeviceSession(
-      request: CancelDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelDeviceSessionRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CancelDeviceSessionRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          (r: CancelDeviceSessionRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.cancelDeviceSession(request: r, options: o)
         })
     }
 
     public func updateDeviceSession(
-      request: UpdateDeviceSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDeviceSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDeviceStreamingV1.DeviceSession {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateDeviceSessionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateDeviceSessionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDeviceStreamingV1.DeviceSession
           in
           return try await self.inner.updateDeviceSession(request: r, options: o)

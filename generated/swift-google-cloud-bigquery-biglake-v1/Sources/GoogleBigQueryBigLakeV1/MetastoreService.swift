@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// BigLake Metastore is a serverless, highly available, multi-tenant runtime
 /// metastore for Google Cloud Data Analytics products.
@@ -37,7 +37,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   let inner: any Clients.MetastoreServiceStub
 
   /// Creates a new `MetastoreServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.MetastoreServiceStub = try Clients.MetastoreServiceTransport(options)
     inner = Clients.MetastoreServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -50,7 +50,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_CreateCatalog")
   public func createCatalog(
-    request: CreateCatalogRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCatalogRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Catalog {
     try await self.inner.createCatalog(request: request, options: options)
   }
@@ -59,7 +59,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_DeleteCatalog")
   public func deleteCatalog(
-    request: DeleteCatalogRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCatalogRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Catalog {
     try await self.inner.deleteCatalog(request: request, options: options)
   }
@@ -68,7 +68,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_GetCatalog")
   public func getCatalog(
-    request: GetCatalogRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCatalogRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Catalog {
     try await self.inner.getCatalog(request: request, options: options)
   }
@@ -77,7 +77,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_ListCatalogs")
   public func listCatalogs(
-    request: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCatalogsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.ListCatalogsResponse {
     try await self.inner.listCatalogs(request: request, options: options)
   }
@@ -86,7 +86,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_ListCatalogs")
   public func listCatalogs(
-    byItem: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCatalogsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Catalog, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryBigLakeV1.ListCatalogsResponse in
@@ -94,14 +94,14 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
       request.pageToken = token
       return try await self.listCatalogs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a new database.
   ///
   /// @Snippet(path: "MetastoreService_CreateDatabase")
   public func createDatabase(
-    request: CreateDatabaseRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDatabaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Database {
     try await self.inner.createDatabase(request: request, options: options)
   }
@@ -110,7 +110,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_DeleteDatabase")
   public func deleteDatabase(
-    request: DeleteDatabaseRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDatabaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Database {
     try await self.inner.deleteDatabase(request: request, options: options)
   }
@@ -119,7 +119,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_UpdateDatabase")
   public func updateDatabase(
-    request: UpdateDatabaseRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDatabaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Database {
     try await self.inner.updateDatabase(request: request, options: options)
   }
@@ -128,7 +128,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_GetDatabase")
   public func getDatabase(
-    request: GetDatabaseRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDatabaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Database {
     try await self.inner.getDatabase(request: request, options: options)
   }
@@ -137,7 +137,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_ListDatabases")
   public func listDatabases(
-    request: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDatabasesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.ListDatabasesResponse {
     try await self.inner.listDatabases(request: request, options: options)
   }
@@ -146,7 +146,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_ListDatabases")
   public func listDatabases(
-    byItem: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDatabasesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Database, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryBigLakeV1.ListDatabasesResponse in
@@ -154,14 +154,14 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
       request.pageToken = token
       return try await self.listDatabases(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a new table.
   ///
   /// @Snippet(path: "MetastoreService_CreateTable")
   public func createTable(
-    request: CreateTableRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Table {
     try await self.inner.createTable(request: request, options: options)
   }
@@ -170,7 +170,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_DeleteTable")
   public func deleteTable(
-    request: DeleteTableRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Table {
     try await self.inner.deleteTable(request: request, options: options)
   }
@@ -179,7 +179,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_UpdateTable")
   public func updateTable(
-    request: UpdateTableRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Table {
     try await self.inner.updateTable(request: request, options: options)
   }
@@ -188,7 +188,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_RenameTable")
   public func renameTable(
-    request: RenameTableRequest, options: GoogleCloudGax.RequestOptions
+    request: RenameTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Table {
     try await self.inner.renameTable(request: request, options: options)
   }
@@ -197,7 +197,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_GetTable")
   public func getTable(
-    request: GetTableRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Table {
     try await self.inner.getTable(request: request, options: options)
   }
@@ -206,7 +206,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_ListTables")
   public func listTables(
-    request: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTablesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.ListTablesResponse {
     try await self.inner.listTables(request: request, options: options)
   }
@@ -215,7 +215,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
   ///
   /// @Snippet(path: "MetastoreService_ListTables")
   public func listTables(
-    byItem: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTablesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Table, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryBigLakeV1.ListTablesResponse in
@@ -223,7 +223,7 @@ public final class MetastoreServiceClient: Clients.MetastoreServiceProtocol, Sen
       request.pageToken = token
       return try await self.listTables(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 }
 
@@ -303,7 +303,7 @@ extension Clients {
     /// See `MetastoreServiceClient.updateDatabase`.
     func updateDatabase(
       database: Database?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleBigQueryBigLakeV1.Database
 
     /// See `MetastoreServiceClient.getDatabase`.
@@ -352,7 +352,7 @@ extension Clients {
     /// See `MetastoreServiceClient.updateTable`.
     func updateTable(
       table: Table?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleBigQueryBigLakeV1.Table
 
     /// See `MetastoreServiceClient.renameTable`.
@@ -388,92 +388,92 @@ extension Clients {
 
     /// See `MetastoreServiceClient.createCatalog`.
     func createCatalog(
-      request: CreateCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Catalog
 
     /// See `MetastoreServiceClient.deleteCatalog`.
     func deleteCatalog(
-      request: DeleteCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Catalog
 
     /// See `MetastoreServiceClient.getCatalog`.
     func getCatalog(
-      request: GetCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Catalog
 
     /// See `MetastoreServiceClient.listCatalogs`.
     func listCatalogs(
-      request: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCatalogsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.ListCatalogsResponse
 
     /// See `MetastoreServiceClient.listCatalogs`.
     func listCatalogs(
-      byItem: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCatalogsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Catalog, Swift.Error>
 
     /// See `MetastoreServiceClient.createDatabase`.
     func createDatabase(
-      request: CreateDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Database
 
     /// See `MetastoreServiceClient.deleteDatabase`.
     func deleteDatabase(
-      request: DeleteDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Database
 
     /// See `MetastoreServiceClient.updateDatabase`.
     func updateDatabase(
-      request: UpdateDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Database
 
     /// See `MetastoreServiceClient.getDatabase`.
     func getDatabase(
-      request: GetDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Database
 
     /// See `MetastoreServiceClient.listDatabases`.
     func listDatabases(
-      request: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDatabasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.ListDatabasesResponse
 
     /// See `MetastoreServiceClient.listDatabases`.
     func listDatabases(
-      byItem: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDatabasesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Database, Swift.Error>
 
     /// See `MetastoreServiceClient.createTable`.
     func createTable(
-      request: CreateTableRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Table
 
     /// See `MetastoreServiceClient.deleteTable`.
     func deleteTable(
-      request: DeleteTableRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Table
 
     /// See `MetastoreServiceClient.updateTable`.
     func updateTable(
-      request: UpdateTableRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Table
 
     /// See `MetastoreServiceClient.renameTable`.
     func renameTable(
-      request: RenameTableRequest, options: GoogleCloudGax.RequestOptions
+      request: RenameTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Table
 
     /// See `MetastoreServiceClient.getTable`.
     func getTable(
-      request: GetTableRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Table
 
     /// See `MetastoreServiceClient.listTables`.
     func listTables(
-      request: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTablesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.ListTablesResponse
 
     /// See `MetastoreServiceClient.listTables`.
     func listTables(
-      byItem: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTablesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Table, Swift.Error>
   }
 }
@@ -487,9 +487,9 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func createCatalog(
-    request: CreateCatalogRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCatalogRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Catalog {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createCatalog(
@@ -512,9 +512,9 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func deleteCatalog(
-    request: DeleteCatalogRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCatalogRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Catalog {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteCatalog(
@@ -532,9 +532,9 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func getCatalog(
-    request: GetCatalogRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCatalogRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Catalog {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCatalog(
@@ -553,9 +553,9 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func listCatalogs(
-    request: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCatalogsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.ListCatalogsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCatalogs(
@@ -565,13 +565,13 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func listCatalogs(
-    byItem: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCatalogsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Catalog, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryBigLakeV1.ListCatalogsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCatalogs(
@@ -590,9 +590,9 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func createDatabase(
-    request: CreateDatabaseRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDatabaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Database {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDatabase(
@@ -615,9 +615,9 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func deleteDatabase(
-    request: DeleteDatabaseRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDatabaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Database {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteDatabase(
@@ -636,14 +636,14 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func updateDatabase(
-    request: UpdateDatabaseRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDatabaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Database {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateDatabase(
     database: Database?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleBigQueryBigLakeV1.Database {
     let request = UpdateDatabaseRequest().with {
       $0.database = database
@@ -659,9 +659,9 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func getDatabase(
-    request: GetDatabaseRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDatabaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Database {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDatabase(
@@ -680,9 +680,9 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func listDatabases(
-    request: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDatabasesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.ListDatabasesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDatabases(
@@ -692,13 +692,13 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func listDatabases(
-    byItem: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDatabasesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Database, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryBigLakeV1.ListDatabasesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDatabases(
@@ -716,9 +716,9 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func createTable(
-    request: CreateTableRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Table {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createTable(
@@ -740,9 +740,9 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func deleteTable(
-    request: DeleteTableRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Table {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteTable(
@@ -760,14 +760,14 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func updateTable(
-    request: UpdateTableRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Table {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateTable(
     table: Table?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleBigQueryBigLakeV1.Table {
     let request = UpdateTableRequest().with {
       $0.table = table
@@ -782,9 +782,9 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func renameTable(
-    request: RenameTableRequest, options: GoogleCloudGax.RequestOptions
+    request: RenameTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Table {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func renameTable(
@@ -803,9 +803,9 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func getTable(
-    request: GetTableRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTableRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.Table {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getTable(
@@ -824,9 +824,9 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func listTables(
-    request: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTablesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryBigLakeV1.ListTablesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTables(
@@ -836,13 +836,13 @@ extension Clients.MetastoreServiceProtocol {
   }
 
   public func listTables(
-    byItem: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTablesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Table, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryBigLakeV1.ListTablesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listTables(

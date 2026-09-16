@@ -19,10 +19,10 @@
 import Foundation
 import GoogleShowcaseV1Beta1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample() async throws {
   let client = try GoogleShowcaseV1Beta1.EchoClient()

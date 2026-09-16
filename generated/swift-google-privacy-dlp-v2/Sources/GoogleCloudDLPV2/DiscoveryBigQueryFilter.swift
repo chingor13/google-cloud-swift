@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Determines what tables will have profiles generated within an organization
 /// or project. Includes the ability to filter by regular expression patterns
 /// on project ID, dataset ID, and table ID.
-public struct DiscoveryBigQueryFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DiscoveryBigQueryFilter: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Whether the filter applies to a specific set of tables or all other tables
@@ -29,7 +29,7 @@ public struct DiscoveryBigQueryFilter: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// `other_tables`.
   public var filter: OneOf_Filter? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DiscoveryBigQueryFilter`.
   public init() {}
@@ -93,7 +93,7 @@ public struct DiscoveryBigQueryFilter: Codable, Equatable, GoogleCloudWKT._AnyPa
     self.filter = filter
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -118,10 +118,10 @@ public struct DiscoveryBigQueryFilter: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// Catch-all for all other tables not specified by other filters. Should
   /// always be last, except for single-table configurations, which will only
   /// have a TableReference target.
-  public struct AllOtherBigQueryTables: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AllOtherBigQueryTables: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AllOtherBigQueryTables`.
     public init() {}
@@ -152,7 +152,7 @@ public struct DiscoveryBigQueryFilter: Codable, Equatable, GoogleCloudWKT._AnyPa
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -167,11 +167,11 @@ public struct DiscoveryBigQueryFilter: Codable, Equatable, GoogleCloudWKT._AnyPa
       return
         "type.googleapis.com/google.privacy.dlp.v2.DiscoveryBigQueryFilter.AllOtherBigQueryTables"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -199,10 +199,10 @@ public struct DiscoveryBigQueryFilter: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryBigQueryFilter"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

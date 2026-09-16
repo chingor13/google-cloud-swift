@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudWorkstationsV1
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   projectId: String, locationId: String, workstationClusterId: String, workstationConfigId: String,

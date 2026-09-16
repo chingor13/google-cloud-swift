@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Custom information type provided by the user. Used to find domain-specific
 /// sensitive information configurable to the data in question.
-public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CustomInfoType: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// CustomInfoType can either be a new infoType, or an extension of built-in
@@ -55,7 +55,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Type of custom detector.
   public var type: OneOf_Type? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CustomInfoType`.
   public init() {}
@@ -164,7 +164,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.type = type
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -220,13 +220,13 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// page contains details about the size limits of dictionaries. For
   /// dictionaries that do not fit within these constraints, consider using
   /// `LargeCustomDictionaryConfig` in the `StoredInfoType` API.
-  public struct Dictionary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Dictionary: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The potential places the data can be read from.
     public var source: OneOf_Source? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Dictionary`.
     public init() {}
@@ -285,7 +285,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.source = source
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -306,7 +306,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Message defining a list of words or phrases to search for in the data.
-    public struct WordList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct WordList: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Words or phrases defining the dictionary. The dictionary must contain
@@ -314,7 +314,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// that are letters or digits. [required]
       public var words: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `WordList`.
       public init() {}
@@ -352,7 +352,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -367,11 +367,11 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.Dictionary.WordList"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -387,16 +387,16 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.Dictionary"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Message defining a custom regular expression.
-  public struct Regex: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Regex: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Pattern defining the regular expression. Its syntax
@@ -408,7 +408,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// specified, the entire match is returned. No more than 3 may be included.
     public var groupIndexes: [Swift.Int32] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Regex`.
     public init() {}
@@ -451,7 +451,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -467,11 +467,11 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.Regex"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -483,10 +483,10 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// output. This should be used in conjunction with a field on the
   /// transformation such as `surrogate_info_type`. This CustomInfoType does
   /// not support the use of `detection_rules`.
-  public struct SurrogateType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SurrogateType: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SurrogateType`.
     public init() {}
@@ -517,7 +517,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -531,17 +531,17 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.SurrogateType"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for a custom infoType that detects key-value pairs in the
   /// metadata matching the specified regular expressions.
-  public struct MetadataKeyValueExpression: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MetadataKeyValueExpression: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The regular expression for the key. Key should be
@@ -551,7 +551,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The regular expression for the value. Value should be non-empty.
     public var valueRegex: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MetadataKeyValueExpression`.
     public init() {}
@@ -594,7 +594,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -610,22 +610,22 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.MetadataKeyValueExpression"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for a custom infoType that detects file labels.
-  public struct FileLabelInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FileLabelInfoType: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The type of file label to detect.
     public var type: OneOf_Type? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FileLabelInfoType`.
     public init() {}
@@ -684,7 +684,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.type = type
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -705,13 +705,13 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Sensitivity labels published by Microsoft.
-    public struct SensitivityLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SensitivityLabel: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The GUID of the sensitivity label.
       public var guid: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SensitivityLabel`.
       public init() {}
@@ -749,7 +749,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -765,16 +765,16 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.FileLabelInfoType.SensitivityLabel"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Google Drive labels published by Google.
-    public struct GoogleDriveLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GoogleDriveLabel: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The [label
@@ -786,7 +786,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public var labelFieldsToMatch:
         [CustomInfoType.FileLabelInfoType.GoogleDriveLabel.LabelField] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GoogleDriveLabel`.
       public init() {}
@@ -832,7 +832,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -846,7 +846,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
 
       /// The field values of the Google Drive label to match.
-      public struct LabelField: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct LabelField: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// The identifier of the Label Field.
@@ -855,8 +855,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         /// The value of the Label Field to match.
         public var value: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `LabelField`.
         public init() {}
@@ -899,7 +898,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -916,11 +915,11 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           return
             "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.FileLabelInfoType.GoogleDriveLabel.LabelField"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -928,11 +927,11 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.FileLabelInfoType.GoogleDriveLabel"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -947,11 +946,11 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.FileLabelInfoType"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -959,13 +958,13 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `CustomInfoType` to alter behavior under certain circumstances, depending
   /// on the specific details of the rule. Not supported for the `surrogate_type`
   /// custom infoType.
-  public struct DetectionRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DetectionRule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Type of hotword rule.
     public var type: OneOf_Type? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DetectionRule`.
     public init() {}
@@ -1017,7 +1016,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.type = type
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1037,7 +1036,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     /// Message for specifying a window around a finding to apply a detection
     /// rule.
-    public struct Proximity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Proximity: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Number of characters before the finding to consider. For tabular data,
@@ -1050,7 +1049,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Number of characters after the finding to consider.
       public var windowAfter: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Proximity`.
       public init() {}
@@ -1093,7 +1092,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1109,23 +1108,23 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.DetectionRule.Proximity"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Message for specifying an adjustment to the likelihood of a finding as
     /// part of a detection rule.
-    public struct LikelihoodAdjustment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct LikelihoodAdjustment: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// How the likelihood will be modified.
       public var adjustment: OneOf_Adjustment? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `LikelihoodAdjustment`.
       public init() {}
@@ -1184,7 +1183,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.adjustment = adjustment
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1223,17 +1222,17 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.DetectionRule.LikelihoodAdjustment"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The rule that adjusts the likelihood of findings within a certain
     /// proximity of hotwords.
-    public struct HotwordRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct HotwordRule: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Regular expression pattern defining what qualifies as a hotword.
@@ -1257,7 +1256,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Likelihood adjustment to apply to all matching findings.
       public var likelihoodAdjustment: CustomInfoType.DetectionRule.LikelihoodAdjustment? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `HotwordRule`.
       public init() {}
@@ -1302,7 +1301,7 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           CustomInfoType.DetectionRule.LikelihoodAdjustment.self, forKey: .likelihoodAdjustment)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1319,11 +1318,11 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.DetectionRule.HotwordRule"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1336,11 +1335,11 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType.DetectionRule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1463,10 +1462,10 @@ public struct CustomInfoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.CustomInfoType"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

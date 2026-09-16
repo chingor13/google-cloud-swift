@@ -16,14 +16,14 @@
 
 #if RegionHealthSources
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a health source.
   ///
   /// A health source resource specifies the source resources and the health
   /// aggregation policy applied to the source resources to determine the
   /// aggregated health status.
-  public struct HealthSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct HealthSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. [Output Only] Creation timestamp inRFC3339
@@ -87,7 +87,7 @@
     /// mutated.
     public var sources: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `HealthSource`.
     public init() {}
@@ -146,7 +146,7 @@
         Swift.String.self, forKey: .creationTimestamp)
       self.description = try container.decodeIfPresent(Swift.String.self, forKey: .description)
       if let s = try container.decodeIfPresent(Swift.String.self, forKey: .fingerprint) {
-        guard let v = GoogleCloudWKT._DiscoveryBase64.decode(s) else {
+        guard let v = GoogleWKT._DiscoveryBase64.decode(s) else {
           throw DecodingError.dataCorrupted(
             DecodingError.Context(
               codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
@@ -170,7 +170,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -180,7 +180,7 @@
       try container.encodeIfPresent(self.description, forKey: .description)
       if let v = fingerprint {
         try container.encode(
-          GoogleCloudWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
+          GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
       }
       try container.encodeIfPresent(self.healthAggregationPolicy, forKey: .healthAggregationPolicy)
@@ -292,11 +292,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.HealthSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudTalentV4
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample() async throws {
   let client = try GoogleCloudTalentV4.EventServiceClient()

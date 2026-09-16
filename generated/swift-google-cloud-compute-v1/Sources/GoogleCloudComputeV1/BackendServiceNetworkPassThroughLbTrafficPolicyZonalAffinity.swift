@@ -16,10 +16,10 @@
 
 #if BackendServices || RegionBackendServices
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   public struct BackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinity: Codable, Equatable,
-    GoogleCloudWKT._AnyPackable,
+    GoogleWKT._AnyPackable,
     Sendable
   {
     /// This field indicates whether zonal affinity is enabled or not. The
@@ -52,7 +52,7 @@
     /// connections to all healthy endpoints across all zones.
     public var spilloverRatio: Swift.Float? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinity`.
     public init() {}
@@ -93,7 +93,7 @@
       self.spilloverRatio = try container.decodeIfPresent(Swift.Float.self, forKey: .spilloverRatio)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -216,11 +216,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.BackendServiceNetworkPassThroughLbTrafficPolicyZonalAffinity"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

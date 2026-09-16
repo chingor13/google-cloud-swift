@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for the
 /// [BatchRecognize][google.cloud.speech.v2.Speech.BatchRecognize]
 /// method.
 ///
 /// [google.cloud.speech.v2.Speech.BatchRecognize]: <doc:SpeechClient/batchRecognize(request:options:)>
-public struct BatchRecognizeRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchRecognizeRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the Recognizer to use during recognition. The
@@ -58,7 +58,7 @@ public struct BatchRecognizeRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   ///
   /// [google.cloud.speech.v2.BatchRecognizeRequest.config]: <doc:BatchRecognizeRequest/config>
   /// [google.cloud.speech.v2.Recognizer.default_recognition_config]: <doc:Recognizer/defaultRecognitionConfig>
-  public var configMask: GoogleCloudWKT.FieldMask? = nil
+  public var configMask: GoogleWKT.FieldMask? = nil
 
   /// Audio files with file metadata for ASR.
   /// The maximum number of files allowed to be specified is 15.
@@ -71,7 +71,7 @@ public struct BatchRecognizeRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public var processingStrategy: BatchRecognizeRequest.ProcessingStrategy =
     BatchRecognizeRequest.ProcessingStrategy()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchRecognizeRequest`.
   public init() {}
@@ -118,8 +118,7 @@ public struct BatchRecognizeRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
       self.recognizer = value
     }
     self.config = try container.decodeIfPresent(RecognitionConfig.self, forKey: .config)
-    self.configMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .configMask)
+    self.configMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .configMask)
     if let value = try container.decodeIfPresent([BatchRecognizeFileMetadata].self, forKey: .files)
     {
       self.files = value
@@ -133,7 +132,7 @@ public struct BatchRecognizeRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -253,10 +252,10 @@ public struct BatchRecognizeRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.BatchRecognizeRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

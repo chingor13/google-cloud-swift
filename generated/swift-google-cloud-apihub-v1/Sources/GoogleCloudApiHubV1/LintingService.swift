@@ -19,9 +19,9 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// This service provides all methods related to the 1p Linter.
 ///
@@ -30,7 +30,7 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
   let inner: any Clients.LintingServiceStub
 
   /// Creates a new `LintingServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.LintingServiceStub = try Clients.LintingServiceTransport(options)
     inner = Clients.LintingServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -43,7 +43,7 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "LintingService_GetStyleGuide")
   public func getStyleGuide(
-    request: GetStyleGuideRequest, options: GoogleCloudGax.RequestOptions
+    request: GetStyleGuideRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.StyleGuide {
     try await self.inner.getStyleGuide(request: request, options: options)
   }
@@ -52,7 +52,7 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "LintingService_UpdateStyleGuide")
   public func updateStyleGuide(
-    request: UpdateStyleGuideRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateStyleGuideRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.StyleGuide {
     try await self.inner.updateStyleGuide(request: request, options: options)
   }
@@ -61,7 +61,7 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "LintingService_GetStyleGuideContents")
   public func getStyleGuideContents(
-    request: GetStyleGuideContentsRequest, options: GoogleCloudGax.RequestOptions
+    request: GetStyleGuideContentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.StyleGuideContents {
     try await self.inner.getStyleGuideContents(request: request, options: options)
   }
@@ -72,7 +72,7 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "LintingService_LintSpec")
   public func lintSpec(
-    request: LintSpecRequest, options: GoogleCloudGax.RequestOptions
+    request: LintSpecRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.lintSpec(request: request, options: options)
   }
@@ -81,7 +81,7 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "LintingService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -90,7 +90,7 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "LintingService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -98,14 +98,14 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "LintingService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -116,7 +116,7 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "LintingService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -127,7 +127,7 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "LintingService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -135,7 +135,7 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -144,7 +144,7 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "LintingService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -155,7 +155,7 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "LintingService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -166,7 +166,7 @@ public final class LintingServiceClient: Clients.LintingServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "LintingService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -194,7 +194,7 @@ extension Clients {
     /// See `LintingServiceClient.updateStyleGuide`.
     func updateStyleGuide(
       styleGuide: StyleGuide?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudApiHubV1.StyleGuide
 
     /// See `LintingServiceClient.getStyleGuideContents`.
@@ -255,57 +255,57 @@ extension Clients {
 
     /// See `LintingServiceClient.getStyleGuide`.
     func getStyleGuide(
-      request: GetStyleGuideRequest, options: GoogleCloudGax.RequestOptions
+      request: GetStyleGuideRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.StyleGuide
 
     /// See `LintingServiceClient.updateStyleGuide`.
     func updateStyleGuide(
-      request: UpdateStyleGuideRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateStyleGuideRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.StyleGuide
 
     /// See `LintingServiceClient.getStyleGuideContents`.
     func getStyleGuideContents(
-      request: GetStyleGuideContentsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetStyleGuideContentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.StyleGuideContents
 
     /// See `LintingServiceClient.lintSpec`.
     func lintSpec(
-      request: LintSpecRequest, options: GoogleCloudGax.RequestOptions
+      request: LintSpecRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `LintingServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `LintingServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `LintingServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `LintingServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `LintingServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `LintingServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `LintingServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -319,9 +319,9 @@ extension Clients.LintingServiceProtocol {
   }
 
   public func getStyleGuide(
-    request: GetStyleGuideRequest, options: GoogleCloudGax.RequestOptions
+    request: GetStyleGuideRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.StyleGuide {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getStyleGuide(
@@ -340,14 +340,14 @@ extension Clients.LintingServiceProtocol {
   }
 
   public func updateStyleGuide(
-    request: UpdateStyleGuideRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateStyleGuideRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.StyleGuide {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateStyleGuide(
     styleGuide: StyleGuide?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudApiHubV1.StyleGuide {
     let request = UpdateStyleGuideRequest().with {
       $0.styleGuide = styleGuide
@@ -363,9 +363,9 @@ extension Clients.LintingServiceProtocol {
   }
 
   public func getStyleGuideContents(
-    request: GetStyleGuideContentsRequest, options: GoogleCloudGax.RequestOptions
+    request: GetStyleGuideContentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.StyleGuideContents {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getStyleGuideContents(
@@ -382,9 +382,9 @@ extension Clients.LintingServiceProtocol {
   }
 
   public func lintSpec(
-    request: LintSpecRequest, options: GoogleCloudGax.RequestOptions
+    request: LintSpecRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -394,9 +394,9 @@ extension Clients.LintingServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -406,13 +406,13 @@ extension Clients.LintingServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -422,9 +422,9 @@ extension Clients.LintingServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -434,9 +434,9 @@ extension Clients.LintingServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -446,13 +446,13 @@ extension Clients.LintingServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -473,9 +473,9 @@ extension Clients.LintingServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -492,9 +492,9 @@ extension Clients.LintingServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -511,9 +511,9 @@ extension Clients.LintingServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

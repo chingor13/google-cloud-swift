@@ -16,10 +16,9 @@
 
 #if InterconnectGroups || Interconnects
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct InterconnectDiagnosticsLinkOpticalPower: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
+  public struct InterconnectDiagnosticsLinkOpticalPower: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The status of the current value when compared to the warning and alarm
@@ -44,7 +43,7 @@
     /// alarm are good optical value estimates for most links.
     public var value: Swift.Float? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InterconnectDiagnosticsLinkOpticalPower`.
     public init() {}
@@ -84,7 +83,7 @@
       self.value = try container.decodeIfPresent(Swift.Float.self, forKey: .value)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -225,11 +224,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.InterconnectDiagnosticsLinkOpticalPower"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

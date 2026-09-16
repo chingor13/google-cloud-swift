@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The details for a finding.
-public struct FindingSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FindingSummary: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The category of the finding.
@@ -34,7 +34,7 @@ public struct FindingSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var findingCount: Swift.Int64 = Swift.Int64()
 
   /// Output only. The last updated time of the finding.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The list of compliance frameworks that the finding belongs to.
   public var relatedFrameworks: [Swift.String] = []
@@ -42,7 +42,7 @@ public struct FindingSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Identifier. The name of the finding summary.
   public var name: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FindingSummary`.
   public init() {}
@@ -99,8 +99,7 @@ public struct FindingSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .findingCount) {
       self.findingCount = value
     }
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .relatedFrameworks) {
       self.relatedFrameworks = value
     }
@@ -109,7 +108,7 @@ public struct FindingSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -130,10 +129,10 @@ public struct FindingSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.cloudsecuritycompliance.v1.FindingSummary"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

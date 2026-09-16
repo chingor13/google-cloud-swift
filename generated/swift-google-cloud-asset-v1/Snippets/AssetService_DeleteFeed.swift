@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudAssetV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: AssetServiceClient, projectId: String, feedId: String) async throws {
   try await client.deleteFeed(

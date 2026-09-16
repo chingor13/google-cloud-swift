@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Node kubelet configs.
-public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NodeKubeletConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Control the CPU management policy on the node.
@@ -53,7 +53,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// your pods to be in Guaranteed QoS class by specifying the CPU limits.
   ///
   /// The default value is 'true' if unspecified.
-  public var cpuCfsQuota: GoogleCloudWKT.BoolValue? = nil
+  public var cpuCfsQuota: GoogleWKT.BoolValue? = nil
 
   /// Set the CPU CFS quota period value 'cpu.cfs_period_us'.
   ///
@@ -217,7 +217,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// Range: [0, 120].
   public var shutdownGracePeriodCriticalPodsSeconds: Swift.Int32? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NodeKubeletConfig`.
   public init() {}
@@ -303,8 +303,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.topologyManager = try container.decodeIfPresent(
       TopologyManager.self, forKey: .topologyManager)
     self.memoryManager = try container.decodeIfPresent(MemoryManager.self, forKey: .memoryManager)
-    self.cpuCfsQuota = try container.decodeIfPresent(
-      GoogleCloudWKT.BoolValue.self, forKey: .cpuCfsQuota)
+    self.cpuCfsQuota = try container.decodeIfPresent(GoogleWKT.BoolValue.self, forKey: .cpuCfsQuota)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .cpuCfsQuotaPeriod) {
       self.cpuCfsQuotaPeriod = value
     }
@@ -362,7 +361,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       Swift.Int32.self, forKey: .shutdownGracePeriodCriticalPodsSeconds)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -402,7 +401,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
 
   /// Contains config to modify node-level parameters for container restart
   /// behavior.
-  public struct CrashLoopBackOffConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CrashLoopBackOffConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The maximum duration the backoff delay can accrue to for
@@ -418,7 +417,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// for more details.
     public var maxContainerRestartPeriod: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CrashLoopBackOffConfig`.
     public init() {}
@@ -458,7 +457,7 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -473,21 +472,21 @@ public struct NodeKubeletConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NodeKubeletConfig.CrashLoopBackOffConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.NodeKubeletConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

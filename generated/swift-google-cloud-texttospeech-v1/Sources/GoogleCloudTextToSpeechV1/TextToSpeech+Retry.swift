@@ -18,27 +18,27 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class TextToSpeechRetry: TextToSpeechStub {
     let inner: any TextToSpeechStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any TextToSpeechStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any TextToSpeechStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@ extension Clients {
     }
 
     public func listVoices(
-      request: ListVoicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVoicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTextToSpeechV1.ListVoicesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListVoicesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListVoicesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTextToSpeechV1.ListVoicesResponse
           in
           return try await self.inner.listVoices(request: r, options: o)
@@ -65,14 +65,14 @@ extension Clients {
     }
 
     public func synthesizeSpeech(
-      request: SynthesizeSpeechRequest, options: GoogleCloudGax.RequestOptions
+      request: SynthesizeSpeechRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTextToSpeechV1.SynthesizeSpeechResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: SynthesizeSpeechRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SynthesizeSpeechRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTextToSpeechV1.SynthesizeSpeechResponse
           in
           return try await self.inner.synthesizeSpeech(request: r, options: o)
@@ -80,29 +80,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A [SingleTenantHsmInstance][google.cloud.kms.v1.SingleTenantHsmInstance]
 /// represents a single-tenant HSM instance. It can be used for creating
@@ -28,7 +28,7 @@ import Foundation
 /// [google.cloud.kms.v1.CryptoKey]: <doc:CryptoKey>
 /// [google.cloud.kms.v1.ProtectionLevel]: <doc:ProtectionLevel>
 /// [google.cloud.kms.v1.SingleTenantHsmInstance]: <doc:SingleTenantHsmInstance>
-public struct SingleTenantHsmInstance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SingleTenantHsmInstance: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name for this
@@ -43,7 +43,7 @@ public struct SingleTenantHsmInstance: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// created.
   ///
   /// [google.cloud.kms.v1.SingleTenantHsmInstance]: <doc:SingleTenantHsmInstance>
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The state of the
   /// [SingleTenantHsmInstance][google.cloud.kms.v1.SingleTenantHsmInstance].
@@ -62,12 +62,12 @@ public struct SingleTenantHsmInstance: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// deleted.
   ///
   /// [google.cloud.kms.v1.SingleTenantHsmInstance]: <doc:SingleTenantHsmInstance>
-  public var deleteTime: GoogleCloudWKT.Timestamp? = nil
+  public var deleteTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The system-defined duration that an instance can remain
   /// unrefreshed until it is automatically disabled. This will have a value of
   /// 730 days.
-  public var unrefreshedDurationUntilDisable: GoogleCloudWKT.Duration? = nil
+  public var unrefreshedDurationUntilDisable: GoogleWKT.Duration? = nil
 
   /// Output only. The time at which the instance will be automatically disabled
   /// if not refreshed. This field is updated upon creation and after each
@@ -79,7 +79,7 @@ public struct SingleTenantHsmInstance: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// become disabled.
   ///
   /// [google.cloud.kms.v1.SingleTenantHsmInstance]: <doc:SingleTenantHsmInstance>
-  public var disableTime: GoogleCloudWKT.Timestamp? = nil
+  public var disableTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Immutable. Indicates whether key portability is enabled for the
   /// [SingleTenantHsmInstance][google.cloud.kms.v1.SingleTenantHsmInstance].
@@ -89,7 +89,7 @@ public struct SingleTenantHsmInstance: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// [google.cloud.kms.v1.SingleTenantHsmInstance]: <doc:SingleTenantHsmInstance>
   public var keyPortabilityEnabled: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SingleTenantHsmInstance`.
   public init() {}
@@ -140,26 +140,23 @@ public struct SingleTenantHsmInstance: Codable, Equatable, GoogleCloudWKT._AnyPa
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(SingleTenantHsmInstance.State.self, forKey: .state)
     {
       self.state = value
     }
     self.quorumAuth = try container.decodeIfPresent(
       SingleTenantHsmInstance.QuorumAuth.self, forKey: .quorumAuth)
-    self.deleteTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deleteTime)
+    self.deleteTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deleteTime)
     self.unrefreshedDurationUntilDisable = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .unrefreshedDurationUntilDisable)
-    self.disableTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .disableTime)
+      GoogleWKT.Duration.self, forKey: .unrefreshedDurationUntilDisable)
+    self.disableTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .disableTime)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .keyPortabilityEnabled) {
       self.keyPortabilityEnabled = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -180,7 +177,7 @@ public struct SingleTenantHsmInstance: Codable, Equatable, GoogleCloudWKT._AnyPa
   }
 
   /// Configuration for M of N quorum auth.
-  public struct QuorumAuth: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QuorumAuth: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The total number of approvers. This is the N value used
@@ -201,7 +198,7 @@ public struct SingleTenantHsmInstance: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// quorum auth.
     public var twoFactorPublicKeyPems: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QuorumAuth`.
     public init() {}
@@ -252,7 +249,7 @@ public struct SingleTenantHsmInstance: Codable, Equatable, GoogleCloudWKT._AnyPa
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -269,11 +266,11 @@ public struct SingleTenantHsmInstance: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.kms.v1.SingleTenantHsmInstance.QuorumAuth"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -474,10 +471,10 @@ public struct SingleTenantHsmInstance: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.SingleTenantHsmInstance"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

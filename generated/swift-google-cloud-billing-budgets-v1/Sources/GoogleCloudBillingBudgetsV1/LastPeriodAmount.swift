@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes a budget amount targeted to the last
 /// [Filter.calendar_period][google.cloud.billing.budgets.v1.Filter.calendar_period]
@@ -27,10 +27,10 @@ import Foundation
 ///
 /// [google.cloud.billing.budgets.v1.Filter.calendar_period]: <doc:Filter/OneOf_UsagePeriod/calendarPeriod(_:)>
 /// [google.cloud.billing.budgets.v1.Filter.custom_period]: <doc:Filter/OneOf_UsagePeriod/customPeriod(_:)>
-public struct LastPeriodAmount: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct LastPeriodAmount: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `LastPeriodAmount`.
   public init() {}
@@ -61,7 +61,7 @@ public struct LastPeriodAmount: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     let container = try decoder.container(keyedBy: CodingKeys.self)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -75,10 +75,10 @@ public struct LastPeriodAmount: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.billing.budgets.v1.LastPeriodAmount"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,62 +15,62 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CatalogServiceStub: Sendable {
     func listCatalogs(
-      request: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCatalogsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ListCatalogsResponse
 
     func updateCatalog(
-      request: UpdateCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.Catalog
 
     func setDefaultBranch(
-      request: SetDefaultBranchRequest, options: GoogleCloudGax.RequestOptions
+      request: SetDefaultBranchRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getDefaultBranch(
-      request: GetDefaultBranchRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDefaultBranchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.GetDefaultBranchResponse
 
     func getCompletionConfig(
-      request: GetCompletionConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCompletionConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.CompletionConfig
 
     func updateCompletionConfig(
-      request: UpdateCompletionConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCompletionConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.CompletionConfig
 
     func getAttributesConfig(
-      request: GetAttributesConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAttributesConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig
 
     func updateAttributesConfig(
-      request: UpdateAttributesConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAttributesConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig
 
     func addCatalogAttribute(
-      request: AddCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+      request: AddCatalogAttributeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig
 
     func removeCatalogAttribute(
-      request: RemoveCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveCatalogAttributeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig
 
     func replaceCatalogAttribute(
-      request: ReplaceCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+      request: ReplaceCatalogAttributeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

@@ -15,22 +15,22 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
-public struct Status: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Status: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The status code, which should be an enum value of google.rpc.Code.
   public var code: Swift.Int32? = nil
 
   /// A list of messages that carry the error details. There is a common set of message types for APIs to use.
-  public var details: [GoogleCloudWKT.`Any`] = []
+  public var details: [GoogleWKT.`Any`] = []
 
   /// A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
   public var message: Swift.String? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Status`.
   public init() {}
@@ -68,13 +68,13 @@ public struct Status: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.code = try container.decodeIfPresent(Swift.Int32.self, forKey: .code)
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.`Any`].self, forKey: .details) {
+    if let value = try container.decodeIfPresent([GoogleWKT.`Any`].self, forKey: .details) {
       self.details = value
     }
     self.message = try container.decodeIfPresent(Swift.String.self, forKey: .message)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -91,10 +91,10 @@ public struct Status: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/.Status"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

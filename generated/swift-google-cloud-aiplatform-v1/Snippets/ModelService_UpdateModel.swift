@@ -20,10 +20,10 @@
   import Foundation
   import GoogleCloudAIPlatformV1
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
+  import GoogleWKT
 
   func sample(client: ModelServiceClient, projectId: String, locationId: String, modelId: String)
     async throws
@@ -34,7 +34,7 @@
           $0.model = Model().with {
             $0.name = "projects/\(projectId)/locations/\(locationId)/models/\(modelId)"
           }
-          $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+          $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
         }
     )
     print("Success: \(response)")

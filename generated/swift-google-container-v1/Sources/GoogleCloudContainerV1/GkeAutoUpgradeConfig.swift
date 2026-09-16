@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// GkeAutoUpgradeConfig is the configuration for GKE auto upgrades.
-public struct GkeAutoUpgradeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GkeAutoUpgradeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// PatchMode specifies how auto upgrade patch builds should be
   /// selected.
   public var patchMode: GkeAutoUpgradeConfig.PatchMode = GkeAutoUpgradeConfig.PatchMode()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GkeAutoUpgradeConfig`.
   public init() {}
@@ -65,7 +65,7 @@ public struct GkeAutoUpgradeConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -182,10 +182,10 @@ public struct GkeAutoUpgradeConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.GkeAutoUpgradeConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

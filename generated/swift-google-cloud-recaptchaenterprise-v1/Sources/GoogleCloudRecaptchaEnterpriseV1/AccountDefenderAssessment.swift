@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Account defense risk assessment.
-public struct AccountDefenderAssessment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AccountDefenderAssessment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Labels for this request.
@@ -27,7 +27,7 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleCloudWKT._Any
   /// Output only. Account takeover risk assessment for this request.
   public var accountTakeoverVerdict: AccountDefenderAssessment.AccountTakeoverVerdict? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AccountDefenderAssessment`.
   public init() {}
@@ -71,7 +71,7 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleCloudWKT._Any
       AccountDefenderAssessment.AccountTakeoverVerdict.self, forKey: .accountTakeoverVerdict)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -85,7 +85,7 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleCloudWKT._Any
   }
 
   /// Account takeover risk assessment.
-  public struct AccountTakeoverVerdict: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AccountTakeoverVerdict: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Account takeover attempt probability.
@@ -102,7 +102,7 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleCloudWKT._Any
     /// can still have some trust signals.
     public var trustReasons: [AccountDefenderAssessment.AccountTrustReason] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AccountTakeoverVerdict`.
     public init() {}
@@ -154,7 +154,7 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -172,23 +172,23 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountTakeoverVerdict"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Risk explainability reasons for Account defense.
-  public struct AccountRiskReason: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AccountRiskReason: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. A risk reason associated with this request.
     public var reason: AccountDefenderAssessment.AccountRiskReason.RiskReason =
       AccountDefenderAssessment.AccountRiskReason.RiskReason()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AccountRiskReason`.
     public init() {}
@@ -228,7 +228,7 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -374,23 +374,23 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountRiskReason"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Trust explainability reasons for Account defense.
-  public struct AccountTrustReason: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AccountTrustReason: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. A trust reason associated with this request.
     public var reason: AccountDefenderAssessment.AccountTrustReason.TrustReason =
       AccountDefenderAssessment.AccountTrustReason.TrustReason()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AccountTrustReason`.
     public init() {}
@@ -430,7 +430,7 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -571,11 +571,11 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountTrustReason"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -706,10 +706,10 @@ public struct AccountDefenderAssessment: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

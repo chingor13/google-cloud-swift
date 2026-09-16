@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// IP rule information.
-public struct IpRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IpRule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The IP protocol this rule applies to. This value can either be one of the
@@ -31,7 +31,7 @@ public struct IpRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// either an integer or a range including a min and max port number.
   public var portRanges: [IpRule.PortRange] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IpRule`.
   public init() {}
@@ -74,7 +74,7 @@ public struct IpRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -91,7 +91,7 @@ public struct IpRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Values are between 0 and 2^16-1. The max can be equal / must be not smaller
   /// than the min value. If min and max are equal this indicates that it is a
   /// single port.
-  public struct PortRange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PortRange: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Minimum port value.
@@ -100,7 +100,7 @@ public struct IpRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Maximum port value.
     public var max: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PortRange`.
     public init() {}
@@ -143,7 +143,7 @@ public struct IpRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -159,21 +159,21 @@ public struct IpRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.IpRule.PortRange"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.IpRule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

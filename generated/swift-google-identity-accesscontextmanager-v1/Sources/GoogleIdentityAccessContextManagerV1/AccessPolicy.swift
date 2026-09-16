@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// `AccessPolicy` is a container for `AccessLevels` (which define the necessary
 /// attributes to use Google Cloud services) and `ServicePerimeters` (which
 /// define regions of services able to freely pass data within a perimeter). An
 /// access policy is globally visible within an organization, and the
 /// restrictions it specifies apply to all projects within an organization.
-public struct AccessPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AccessPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Resource name of the `AccessPolicy`. Format:
@@ -54,10 +54,10 @@ public struct AccessPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var scopes: [Swift.String] = []
 
   /// Output only. Time the `AccessPolicy` was created in UTC.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time the `AccessPolicy` was updated in UTC.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. An opaque identifier for the current version of the
   /// `AccessPolicy`. This will always be a strongly validated etag, meaning that
@@ -65,7 +65,7 @@ public struct AccessPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// identical. Clients should not expect this to be in any specific format.
   public var etag: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AccessPolicy`.
   public init() {}
@@ -122,16 +122,14 @@ public struct AccessPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .scopes) {
       self.scopes = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
       self.etag = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -152,10 +150,10 @@ public struct AccessPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.identity.accesscontextmanager.v1.AccessPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

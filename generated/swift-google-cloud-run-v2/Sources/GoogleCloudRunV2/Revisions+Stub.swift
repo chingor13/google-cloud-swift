@@ -15,39 +15,39 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol RevisionsStub: Sendable {
     func getRevision(
-      request: GetRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRunV2.Revision
 
     func listRevisions(
-      request: ListRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRunV2.ListRevisionsResponse
 
     func deleteRevision(
-      request: DeleteRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

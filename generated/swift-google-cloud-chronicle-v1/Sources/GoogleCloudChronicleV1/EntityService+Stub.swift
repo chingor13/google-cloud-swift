@@ -15,46 +15,46 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol EntityServiceStub: Sendable {
     func getWatchlist(
-      request: GetWatchlistRequest, options: GoogleCloudGax.RequestOptions
+      request: GetWatchlistRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.Watchlist
 
     func listWatchlists(
-      request: ListWatchlistsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWatchlistsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListWatchlistsResponse
 
     func createWatchlist(
-      request: CreateWatchlistRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateWatchlistRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.Watchlist
 
     func updateWatchlist(
-      request: UpdateWatchlistRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateWatchlistRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.Watchlist
 
     func deleteWatchlist(
-      request: DeleteWatchlistRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteWatchlistRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

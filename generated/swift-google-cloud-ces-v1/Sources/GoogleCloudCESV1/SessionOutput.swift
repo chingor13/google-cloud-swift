@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Output for the session.
-public struct SessionOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SessionOutput: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Indicates the sequential order of conversation turn to which this output
@@ -35,12 +35,12 @@ public struct SessionOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var diagnosticInfo: SessionOutput.DiagnosticInfo? = nil
 
   /// Context messages for external supervision guardrails.
-  public var context: [GoogleCloudWKT.`Any`] = []
+  public var context: [GoogleWKT.`Any`] = []
 
   /// The type of the output.
   public var outputType: OneOf_OutputType? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SessionOutput`.
   public init() {}
@@ -101,7 +101,7 @@ public struct SessionOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     self.diagnosticInfo = try container.decodeIfPresent(
       SessionOutput.DiagnosticInfo.self, forKey: .diagnosticInfo)
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.`Any`].self, forKey: .context) {
+    if let value = try container.decodeIfPresent([GoogleWKT.`Any`].self, forKey: .context) {
       self.context = value
     }
 
@@ -135,13 +135,13 @@ public struct SessionOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let endSession = try container.decodeIfPresent(EndSession?.self, forKey: .endSession) {
       try outputTypeCheckAndSet(.endSession(endSession))
     }
-    if let payload = try container.decodeIfPresent(GoogleCloudWKT.Struct?.self, forKey: .payload) {
+    if let payload = try container.decodeIfPresent(GoogleWKT.Struct?.self, forKey: .payload) {
       try outputTypeCheckAndSet(.payload(payload))
     }
     self.outputType = outputType
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -176,7 +176,7 @@ public struct SessionOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Contains execution details during the processing.
-  public struct DiagnosticInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DiagnosticInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// List of the messages that happened during the processing.
@@ -186,7 +186,7 @@ public struct SessionOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// This span can contain nested child spans for specific operations.
     public var rootSpan: Span? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DiagnosticInfo`.
     public init() {}
@@ -227,7 +227,7 @@ public struct SessionOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.rootSpan = try container.decodeIfPresent(Span.self, forKey: .rootSpan)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -243,11 +243,11 @@ public struct SessionOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.SessionOutput.DiagnosticInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -270,16 +270,16 @@ public struct SessionOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Indicates the session has ended.
     indirect case endSession(EndSession?)
     /// Custom payload with structured output from the CES agent.
-    indirect case payload(GoogleCloudWKT.Struct?)
+    indirect case payload(GoogleWKT.Struct?)
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.SessionOutput"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

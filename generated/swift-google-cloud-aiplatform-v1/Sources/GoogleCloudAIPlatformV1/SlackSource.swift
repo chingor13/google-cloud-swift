@@ -16,16 +16,16 @@
 
 #if VertexRagDataService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The Slack source for the ImportRagFilesRequest.
-  public struct SlackSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SlackSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The Slack channels.
     public var channels: [SlackSource.SlackChannels] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SlackSource`.
     public init() {}
@@ -65,7 +65,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -78,7 +78,7 @@
     }
 
     /// SlackChannels contains the Slack channels and corresponding access token.
-    public struct SlackChannels: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SlackChannels: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The Slack channel IDs.
@@ -90,7 +90,7 @@
       /// See: https://api.slack.com/tutorials/tracks/getting-a-token.
       public var apiKeyConfig: ApiAuth.ApiKeyConfig? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SlackChannels`.
       public init() {}
@@ -134,7 +134,7 @@
           ApiAuth.ApiKeyConfig.self, forKey: .apiKeyConfig)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -148,20 +148,19 @@
       }
 
       /// SlackChannel contains the Slack channel ID and the time range to import.
-      public struct SlackChannel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct SlackChannel: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The Slack channel ID.
         public var channelId: Swift.String = Swift.String()
 
         /// Optional. The starting timestamp for messages to import.
-        public var startTime: GoogleCloudWKT.Timestamp? = nil
+        public var startTime: GoogleWKT.Timestamp? = nil
 
         /// Optional. The ending timestamp for messages to import.
-        public var endTime: GoogleCloudWKT.Timestamp? = nil
+        public var endTime: GoogleWKT.Timestamp? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `SlackChannel`.
         public init() {}
@@ -202,12 +201,11 @@
             self.channelId = value
           }
           self.startTime = try container.decodeIfPresent(
-            GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-          self.endTime = try container.decodeIfPresent(
-            GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+            GoogleWKT.Timestamp.self, forKey: .startTime)
+          self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -225,33 +223,33 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.SlackSource.SlackChannels.SlackChannel"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.SlackSource.SlackChannels"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SlackSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

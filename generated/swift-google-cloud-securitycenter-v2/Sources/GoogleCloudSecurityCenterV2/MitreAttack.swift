@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// MITRE ATT&CK tactics and techniques related to this finding.
 /// See: https://attack.mitre.org
-public struct MitreAttack: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MitreAttack: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The MITRE ATT&CK tactic most closely represented by this finding, if any.
@@ -43,7 +43,7 @@ public struct MitreAttack: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The MITRE ATT&CK version referenced by the above fields. E.g. "8".
   public var version: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MitreAttack`.
   public init() {}
@@ -107,7 +107,7 @@ public struct MitreAttack: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -1420,10 +1420,10 @@ public struct MitreAttack: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.MitreAttack"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

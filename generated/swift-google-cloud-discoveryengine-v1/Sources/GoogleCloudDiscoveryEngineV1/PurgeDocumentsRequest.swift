@@ -16,14 +16,14 @@
 
 #if DocumentService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [DocumentService.PurgeDocuments][google.cloud.discoveryengine.v1.DocumentService.PurgeDocuments]
   /// method.
   ///
   /// [google.cloud.discoveryengine.v1.DocumentService.PurgeDocuments]: <doc:DocumentServiceClient/purgeDocuments(request:options:)>
-  public struct PurgeDocumentsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PurgeDocumentsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The parent resource name, such as
@@ -45,7 +45,7 @@
     /// The desired input source for the purging documents based on document IDs.
     public var source: OneOf_Source? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PurgeDocumentsRequest`.
     public init() {}
@@ -120,7 +120,7 @@
       self.source = source
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -149,7 +149,7 @@
     /// method.
     ///
     /// [google.cloud.discoveryengine.v1.DocumentService.PurgeDocuments]: <doc:DocumentServiceClient/purgeDocuments(request:options:)>
-    public struct InlineSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct InlineSource: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. A list of full resource name of documents to purge. In the
@@ -158,7 +158,7 @@
       /// Recommended max of 100 items.
       public var documents: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `InlineSource`.
       public init() {}
@@ -196,7 +196,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -212,11 +212,11 @@
         return
           "type.googleapis.com/google.cloud.discoveryengine.v1.PurgeDocumentsRequest.InlineSource"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -236,11 +236,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.PurgeDocumentsRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

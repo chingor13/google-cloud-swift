@@ -16,10 +16,10 @@
 
 #if RecommendationService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Response message for Recommend method.
-  public struct RecommendResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RecommendResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A list of recommended Documents. The order represents the ranking (from the
@@ -45,7 +45,7 @@
     /// [google.cloud.discoveryengine.v1.RecommendRequest.validate_only]: <doc:RecommendRequest/validateOnly>
     public var validateOnly: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RecommendResponse`.
     public init() {}
@@ -100,7 +100,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -117,7 +117,7 @@
 
     /// RecommendationResult represents a generic recommendation result with
     /// associated metadata.
-    public struct RecommendationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RecommendationResult: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Resource ID of the recommended Document.
@@ -138,9 +138,9 @@
       ///   [RecommendRequest.params][google.cloud.discoveryengine.v1.RecommendRequest.params].
       ///
       /// [google.cloud.discoveryengine.v1.RecommendRequest.params]: <doc:RecommendRequest/params>
-      public var metadata: [Swift.String: GoogleCloudWKT.Value] = [:]
+      public var metadata: [Swift.String: GoogleWKT.Value] = [:]
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RecommendationResult`.
       public init() {}
@@ -182,13 +182,13 @@
         }
         self.document = try container.decodeIfPresent(Document.self, forKey: .document)
         if let value = try container.decodeIfPresent(
-          [Swift.String: GoogleCloudWKT.Value].self, forKey: .metadata)
+          [Swift.String: GoogleWKT.Value].self, forKey: .metadata)
         {
           self.metadata = value
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -206,22 +206,22 @@
         return
           "type.googleapis.com/google.cloud.discoveryengine.v1.RecommendResponse.RecommendationResult"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.RecommendResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

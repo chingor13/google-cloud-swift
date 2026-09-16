@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service that implements Google Cloud Text-to-Speech API.
 ///
@@ -29,7 +29,7 @@ public final class TextToSpeechClient: Clients.TextToSpeechProtocol, Sendable {
   let inner: any Clients.TextToSpeechStub
 
   /// Creates a new `TextToSpeechClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.TextToSpeechStub = try Clients.TextToSpeechTransport(options)
     inner = Clients.TextToSpeechRetry(inner, options: options)
     if let logger = options.logger {
@@ -42,7 +42,7 @@ public final class TextToSpeechClient: Clients.TextToSpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "TextToSpeech_ListVoices")
   public func listVoices(
-    request: ListVoicesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListVoicesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTextToSpeechV1.ListVoicesResponse {
     try await self.inner.listVoices(request: request, options: options)
   }
@@ -52,7 +52,7 @@ public final class TextToSpeechClient: Clients.TextToSpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "TextToSpeech_SynthesizeSpeech")
   public func synthesizeSpeech(
-    request: SynthesizeSpeechRequest, options: GoogleCloudGax.RequestOptions
+    request: SynthesizeSpeechRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTextToSpeechV1.SynthesizeSpeechResponse {
     try await self.inner.synthesizeSpeech(request: request, options: options)
   }
@@ -63,7 +63,7 @@ public final class TextToSpeechClient: Clients.TextToSpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "TextToSpeech_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -74,7 +74,7 @@ public final class TextToSpeechClient: Clients.TextToSpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "TextToSpeech_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -82,7 +82,7 @@ public final class TextToSpeechClient: Clients.TextToSpeechProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -91,7 +91,7 @@ public final class TextToSpeechClient: Clients.TextToSpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "TextToSpeech_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -141,22 +141,22 @@ extension Clients {
 
     /// See `TextToSpeechClient.listVoices`.
     func listVoices(
-      request: ListVoicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVoicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTextToSpeechV1.ListVoicesResponse
 
     /// See `TextToSpeechClient.synthesizeSpeech`.
     func synthesizeSpeech(
-      request: SynthesizeSpeechRequest, options: GoogleCloudGax.RequestOptions
+      request: SynthesizeSpeechRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTextToSpeechV1.SynthesizeSpeechResponse
 
     /// See `TextToSpeechClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `TextToSpeechClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
   }
 }
@@ -170,9 +170,9 @@ extension Clients.TextToSpeechProtocol {
   }
 
   public func listVoices(
-    request: ListVoicesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListVoicesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTextToSpeechV1.ListVoicesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listVoices(
@@ -191,9 +191,9 @@ extension Clients.TextToSpeechProtocol {
   }
 
   public func synthesizeSpeech(
-    request: SynthesizeSpeechRequest, options: GoogleCloudGax.RequestOptions
+    request: SynthesizeSpeechRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTextToSpeechV1.SynthesizeSpeechResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func synthesizeSpeech(
@@ -216,9 +216,9 @@ extension Clients.TextToSpeechProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -228,13 +228,13 @@ extension Clients.TextToSpeechProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -255,9 +255,9 @@ extension Clients.TextToSpeechProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

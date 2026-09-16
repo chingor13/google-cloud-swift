@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class CommentServiceRetry: CommentServiceStub {
     let inner: any CommentServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any CommentServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any CommentServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func listComments(
-      request: ListCommentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCommentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.ListCommentsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListCommentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCommentsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.ListCommentsResponse
           in
           return try await self.inner.listComments(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func createComment(
-      request: CreateCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Comment {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateCommentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateCommentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.Comment
           in
           return try await self.inner.createComment(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func getComment(
-      request: GetCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Comment {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetCommentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCommentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.Comment
           in
           return try await self.inner.getComment(request: r, options: o)

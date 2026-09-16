@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class ReservationSubBlocksRetry: ReservationSubBlocksStub {
       let inner: any ReservationSubBlocksStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any ReservationSubBlocksStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any ReservationSubBlocksStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,30 +50,29 @@
       }
 
       public func `get`(
-        request: ReservationSubBlocksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSubBlocksClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSubBlocksGetResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ReservationSubBlocksClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.ReservationSubBlocksGetResponse
+            (r: ReservationSubBlocksClient.GetRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.ReservationSubBlocksGetResponse
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func getIamPolicy(
-        request: ReservationSubBlocksClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSubBlocksClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ReservationSubBlocksClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ReservationSubBlocksClient.GetIamPolicyRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
@@ -81,15 +80,14 @@
       }
 
       public func getVersion(
-        request: ReservationSubBlocksClient.GetVersionRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSubBlocksClient.GetVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ReservationSubBlocksClient.GetVersionRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ReservationSubBlocksClient.GetVersionRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getVersion(request: r, options: o)
@@ -97,15 +95,15 @@
       }
 
       public func list(
-        request: ReservationSubBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSubBlocksClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSubBlocksListResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ReservationSubBlocksClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.ReservationSubBlocksListResponse
+            (r: ReservationSubBlocksClient.ListRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.ReservationSubBlocksListResponse
             in
             return try await self.inner.list(request: r, options: o)
           })
@@ -113,32 +111,29 @@
 
       public func performMaintenance(
         request: ReservationSubBlocksClient.PerformMaintenanceRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (
-              r: ReservationSubBlocksClient.PerformMaintenanceRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.Operation
+            (r: ReservationSubBlocksClient.PerformMaintenanceRequest, o: GoogleGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.performMaintenance(request: r, options: o)
           })
       }
 
       public func reportFaulty(
-        request: ReservationSubBlocksClient.ReportFaultyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSubBlocksClient.ReportFaultyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ReservationSubBlocksClient.ReportFaultyRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ReservationSubBlocksClient.ReportFaultyRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.reportFaulty(request: r, options: o)
@@ -146,15 +141,14 @@
       }
 
       public func setIamPolicy(
-        request: ReservationSubBlocksClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationSubBlocksClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ReservationSubBlocksClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ReservationSubBlocksClient.SetIamPolicyRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
@@ -163,31 +157,29 @@
 
       public func testIamPermissions(
         request: ReservationSubBlocksClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (
-              r: ReservationSubBlocksClient.TestIamPermissionsRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+            (r: ReservationSubBlocksClient.TestIamPermissionsRequest, o: GoogleGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ZoneOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ZoneOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

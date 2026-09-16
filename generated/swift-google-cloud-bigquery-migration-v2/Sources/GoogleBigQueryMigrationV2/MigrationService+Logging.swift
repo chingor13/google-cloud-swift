@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func createMigrationWorkflow(
-      request: CreateMigrationWorkflowRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMigrationWorkflowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryMigrationV2.MigrationWorkflow {
       try await self._intercept(
         request: request,
         options: options,
         name: "createMigrationWorkflow",
         action: {
-          (r: CreateMigrationWorkflowRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateMigrationWorkflowRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryMigrationV2.MigrationWorkflow
           in
           return try await self.inner.createMigrationWorkflow(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func getMigrationWorkflow(
-      request: GetMigrationWorkflowRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMigrationWorkflowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryMigrationV2.MigrationWorkflow {
       try await self._intercept(
         request: request,
         options: options,
         name: "getMigrationWorkflow",
         action: {
-          (r: GetMigrationWorkflowRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetMigrationWorkflowRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryMigrationV2.MigrationWorkflow
           in
           return try await self.inner.getMigrationWorkflow(request: r, options: o)
@@ -87,14 +87,14 @@ extension Clients {
     }
 
     public func listMigrationWorkflows(
-      request: ListMigrationWorkflowsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMigrationWorkflowsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryMigrationV2.ListMigrationWorkflowsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listMigrationWorkflows",
         action: {
-          (r: ListMigrationWorkflowsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListMigrationWorkflowsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryMigrationV2.ListMigrationWorkflowsResponse
           in
           return try await self.inner.listMigrationWorkflows(request: r, options: o)
@@ -102,42 +102,40 @@ extension Clients {
     }
 
     public func deleteMigrationWorkflow(
-      request: DeleteMigrationWorkflowRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMigrationWorkflowRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteMigrationWorkflow",
         action: {
-          (r: DeleteMigrationWorkflowRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void
-          in
+          (r: DeleteMigrationWorkflowRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteMigrationWorkflow(request: r, options: o)
         })
     }
 
     public func startMigrationWorkflow(
-      request: StartMigrationWorkflowRequest, options: GoogleCloudGax.RequestOptions
+      request: StartMigrationWorkflowRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "startMigrationWorkflow",
         action: {
-          (r: StartMigrationWorkflowRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void
-          in
+          (r: StartMigrationWorkflowRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.startMigrationWorkflow(request: r, options: o)
         })
     }
 
     public func getMigrationSubtask(
-      request: GetMigrationSubtaskRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMigrationSubtaskRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryMigrationV2.MigrationSubtask {
       try await self._intercept(
         request: request,
         options: options,
         name: "getMigrationSubtask",
         action: {
-          (r: GetMigrationSubtaskRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetMigrationSubtaskRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryMigrationV2.MigrationSubtask
           in
           return try await self.inner.getMigrationSubtask(request: r, options: o)
@@ -145,14 +143,14 @@ extension Clients {
     }
 
     public func listMigrationSubtasks(
-      request: ListMigrationSubtasksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMigrationSubtasksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryMigrationV2.ListMigrationSubtasksResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listMigrationSubtasks",
         action: {
-          (r: ListMigrationSubtasksRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListMigrationSubtasksRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryMigrationV2.ListMigrationSubtasksResponse
           in
           return try await self.inner.listMigrationSubtasks(request: r, options: o)

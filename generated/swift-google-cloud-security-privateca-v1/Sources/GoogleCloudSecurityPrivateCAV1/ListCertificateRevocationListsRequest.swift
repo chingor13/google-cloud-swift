@@ -15,14 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [CertificateAuthorityService.ListCertificateRevocationLists][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateRevocationLists].
 ///
 /// [google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateRevocationLists]: <doc:CertificateAuthorityServiceClient/listCertificateRevocationLists(request:options:)>
-public struct ListCertificateRevocationListsRequest: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct ListCertificateRevocationListsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the location associated with the
@@ -57,7 +56,7 @@ public struct ListCertificateRevocationListsRequest: Codable, Equatable, GoogleC
   /// Optional. Specify how the results should be sorted.
   public var orderBy: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListCertificateRevocationListsRequest`.
   public init() {}
@@ -115,7 +114,7 @@ public struct ListCertificateRevocationListsRequest: Codable, Equatable, GoogleC
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -135,10 +134,10 @@ public struct ListCertificateRevocationListsRequest: Codable, Equatable, GoogleC
     return
       "type.googleapis.com/google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

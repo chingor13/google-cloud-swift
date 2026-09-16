@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A data product is a curated collection of data assets, packaged to address
 /// specific use cases. It's a way to manage and share data in a more organized,
 /// product-like manner.
-public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataProduct: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Resource name of the data product.
@@ -37,10 +37,10 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var displayName: Swift.String = Swift.String()
 
   /// Output only. The time at which the data product was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time at which the data product was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. This checksum is computed by the server based on the value of
   /// other fields, and may be sent on update and delete requests to ensure the
@@ -97,7 +97,7 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Configuration for access approval for the data product.
   public var accessApprovalConfig: DataProduct.AccessApprovalConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataProduct`.
   public init() {}
@@ -163,10 +163,8 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
       self.displayName = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
       self.etag = value
     }
@@ -195,7 +193,7 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       DataProduct.AccessApprovalConfig.self, forKey: .accessApprovalConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -221,7 +219,7 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Represents the principal entity associated with an access group, as per
   /// https://cloud.google.com/iam/docs/principals-overview.
-  public struct Principal: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Principal: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Specifies the email of the producer service account, as per
@@ -231,7 +229,7 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The type of the principal entity.
     public var type: OneOf_Type? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Principal`.
     public init() {}
@@ -285,7 +283,7 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.type = type
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -314,18 +312,18 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.DataProduct.Principal"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Custom user defined access groups at the data product level. These are used
   /// for granting different levels of access (IAM roles) on the individual data
   /// product's data assets.
-  public struct AccessGroup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AccessGroup: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Unique identifier of the access group within the data product.
@@ -342,7 +340,7 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Required. The principal entity associated with this access group.
     public var principal: DataProduct.Principal? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AccessGroup`.
     public init() {}
@@ -393,7 +391,7 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.principal = try container.decodeIfPresent(DataProduct.Principal.self, forKey: .principal)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -411,16 +409,16 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.DataProduct.AccessGroup"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for access approval for the data product.
-  public struct AccessApprovalConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AccessApprovalConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Specifies the email addresses of users who are potential
@@ -428,7 +426,7 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// product. The maximum number of emails allowed is 10.
     public var approverEmails: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AccessApprovalConfig`.
     public init() {}
@@ -466,7 +464,7 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -481,21 +479,21 @@ public struct DataProduct: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.DataProduct.AccessApprovalConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.DataProduct"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

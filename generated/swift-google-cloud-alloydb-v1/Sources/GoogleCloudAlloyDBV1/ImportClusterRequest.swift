@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Import cluster request.
-public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ImportClusterRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the cluster.
@@ -44,7 +44,7 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// oneof field to support various import formats like SQL and CSV.
   public var importOptions: OneOf_ImportOptions? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ImportClusterRequest`.
   public init() {}
@@ -123,7 +123,7 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     self.importOptions = importOptions
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -148,10 +148,10 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   }
 
   /// Options for importing data in SQL format.
-  public struct SqlImportOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SqlImportOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SqlImportOptions`.
     public init() {}
@@ -182,7 +182,7 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -196,16 +196,16 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.ImportClusterRequest.SqlImportOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Options for importing data in CSV format.
-  public struct CsvImportOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CsvImportOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The database table to import CSV file into.
@@ -231,7 +231,7 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Code.
     public var escapeCharacter: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CsvImportOptions`.
     public init() {}
@@ -289,7 +289,7 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -308,11 +308,11 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.ImportClusterRequest.CsvImportOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -327,10 +327,10 @@ public struct ImportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.ImportClusterRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

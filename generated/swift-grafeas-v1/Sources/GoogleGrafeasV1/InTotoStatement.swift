@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Spec defined at
 /// https://github.com/in-toto/attestation/tree/main/spec#statement The
 /// serialized InTotoStatement will be stored as Envelope.payload.
 /// Envelope.payloadType is always "application/vnd.in-toto+json".
-public struct InTotoStatement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct InTotoStatement: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Always `https://in-toto.io/Statement/v0.1`.
@@ -34,7 +34,7 @@ public struct InTotoStatement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public var predicate: OneOf_Predicate? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `InTotoStatement`.
   public init() {}
@@ -113,7 +113,7 @@ public struct InTotoStatement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.predicate = predicate
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -147,10 +147,10 @@ public struct InTotoStatement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.InTotoStatement"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

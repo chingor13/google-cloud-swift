@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Time windows constrain the time of an event, such as the arrival time at a
 /// visit, or the start and end time of a vehicle.
@@ -41,22 +41,22 @@ import Foundation
 ///
 /// [google.cloud.optimization.v1.ShipmentModel.global_end_time]: <doc:ShipmentModel/globalEndTime>
 /// [google.cloud.optimization.v1.ShipmentModel.global_start_time]: <doc:ShipmentModel/globalStartTime>
-public struct TimeWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TimeWindow: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The hard time window start time. If unspecified it will be set to
   /// `ShipmentModel.global_start_time`.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// The hard time window end time. If unspecified it will be set to
   /// `ShipmentModel.global_end_time`.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// The soft start time of the time window.
-  public var softStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var softStartTime: GoogleWKT.Timestamp? = nil
 
   /// The soft end time of the time window.
-  public var softEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var softEndTime: GoogleWKT.Timestamp? = nil
 
   /// A cost per hour added to other costs in the model if the event occurs
   /// before soft_start_time, computed as:
@@ -84,7 +84,7 @@ public struct TimeWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `soft_end_time` has been set.
   public var costPerHourAfterSoftEndTime: Swift.Double? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TimeWindow`.
   public init() {}
@@ -128,20 +128,18 @@ public struct TimeWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     self.softStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .softStartTime)
-    self.softEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .softEndTime)
+      GoogleWKT.Timestamp.self, forKey: .softStartTime)
+    self.softEndTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .softEndTime)
     self.costPerHourBeforeSoftStartTime = try container.decodeIfPresent(
       Swift.Double.self, forKey: .costPerHourBeforeSoftStartTime)
     self.costPerHourAfterSoftEndTime = try container.decodeIfPresent(
       Swift.Double.self, forKey: .costPerHourAfterSoftEndTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -163,10 +161,10 @@ public struct TimeWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.optimization.v1.TimeWindow"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

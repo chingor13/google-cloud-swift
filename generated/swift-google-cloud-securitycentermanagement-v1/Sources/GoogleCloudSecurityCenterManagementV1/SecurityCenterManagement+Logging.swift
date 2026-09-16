@@ -19,8 +19,8 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,7 +59,7 @@ extension Clients {
 
     public func listEffectiveSecurityHealthAnalyticsCustomModules(
       request: ListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1
       .ListEffectiveSecurityHealthAnalyticsCustomModulesResponse
@@ -69,10 +69,8 @@ extension Clients {
         options: options,
         name: "listEffectiveSecurityHealthAnalyticsCustomModules",
         action: {
-          (
-            r: ListEffectiveSecurityHealthAnalyticsCustomModulesRequest,
-            o: GoogleCloudGax.RequestOptions
-          ) async throws
+          (r: ListEffectiveSecurityHealthAnalyticsCustomModulesRequest, o: GoogleGax.RequestOptions)
+            async throws
             -> GoogleCloudSecurityCenterManagementV1
             .ListEffectiveSecurityHealthAnalyticsCustomModulesResponse
           in
@@ -83,7 +81,7 @@ extension Clients {
 
     public func getEffectiveSecurityHealthAnalyticsCustomModule(
       request: GetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1.EffectiveSecurityHealthAnalyticsCustomModule
     {
@@ -92,10 +90,8 @@ extension Clients {
         options: options,
         name: "getEffectiveSecurityHealthAnalyticsCustomModule",
         action: {
-          (
-            r: GetEffectiveSecurityHealthAnalyticsCustomModuleRequest,
-            o: GoogleCloudGax.RequestOptions
-          ) async throws
+          (r: GetEffectiveSecurityHealthAnalyticsCustomModuleRequest, o: GoogleGax.RequestOptions)
+            async throws
             -> GoogleCloudSecurityCenterManagementV1.EffectiveSecurityHealthAnalyticsCustomModule
           in
           return try await self.inner.getEffectiveSecurityHealthAnalyticsCustomModule(
@@ -104,8 +100,7 @@ extension Clients {
     }
 
     public func listSecurityHealthAnalyticsCustomModules(
-      request: ListSecurityHealthAnalyticsCustomModulesRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ListSecurityHealthAnalyticsCustomModulesRequest, options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1.ListSecurityHealthAnalyticsCustomModulesResponse
     {
@@ -114,7 +109,7 @@ extension Clients {
         options: options,
         name: "listSecurityHealthAnalyticsCustomModules",
         action: {
-          (r: ListSecurityHealthAnalyticsCustomModulesRequest, o: GoogleCloudGax.RequestOptions)
+          (r: ListSecurityHealthAnalyticsCustomModulesRequest, o: GoogleGax.RequestOptions)
             async throws
             -> GoogleCloudSecurityCenterManagementV1
             .ListSecurityHealthAnalyticsCustomModulesResponse
@@ -126,7 +121,7 @@ extension Clients {
 
     public func listDescendantSecurityHealthAnalyticsCustomModules(
       request: ListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1
       .ListDescendantSecurityHealthAnalyticsCustomModulesResponse
@@ -138,7 +133,7 @@ extension Clients {
         action: {
           (
             r: ListDescendantSecurityHealthAnalyticsCustomModulesRequest,
-            o: GoogleCloudGax.RequestOptions
+            o: GoogleGax.RequestOptions
           ) async throws
             -> GoogleCloudSecurityCenterManagementV1
             .ListDescendantSecurityHealthAnalyticsCustomModulesResponse
@@ -149,14 +144,14 @@ extension Clients {
     }
 
     public func getSecurityHealthAnalyticsCustomModule(
-      request: GetSecurityHealthAnalyticsCustomModuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSecurityHealthAnalyticsCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.SecurityHealthAnalyticsCustomModule {
       try await self._intercept(
         request: request,
         options: options,
         name: "getSecurityHealthAnalyticsCustomModule",
         action: {
-          (r: GetSecurityHealthAnalyticsCustomModuleRequest, o: GoogleCloudGax.RequestOptions)
+          (r: GetSecurityHealthAnalyticsCustomModuleRequest, o: GoogleGax.RequestOptions)
             async throws
             -> GoogleCloudSecurityCenterManagementV1.SecurityHealthAnalyticsCustomModule
           in
@@ -165,15 +160,14 @@ extension Clients {
     }
 
     public func createSecurityHealthAnalyticsCustomModule(
-      request: CreateSecurityHealthAnalyticsCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: CreateSecurityHealthAnalyticsCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.SecurityHealthAnalyticsCustomModule {
       try await self._intercept(
         request: request,
         options: options,
         name: "createSecurityHealthAnalyticsCustomModule",
         action: {
-          (r: CreateSecurityHealthAnalyticsCustomModuleRequest, o: GoogleCloudGax.RequestOptions)
+          (r: CreateSecurityHealthAnalyticsCustomModuleRequest, o: GoogleGax.RequestOptions)
             async throws
             -> GoogleCloudSecurityCenterManagementV1.SecurityHealthAnalyticsCustomModule
           in
@@ -183,15 +177,14 @@ extension Clients {
     }
 
     public func updateSecurityHealthAnalyticsCustomModule(
-      request: UpdateSecurityHealthAnalyticsCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: UpdateSecurityHealthAnalyticsCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.SecurityHealthAnalyticsCustomModule {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateSecurityHealthAnalyticsCustomModule",
         action: {
-          (r: UpdateSecurityHealthAnalyticsCustomModuleRequest, o: GoogleCloudGax.RequestOptions)
+          (r: UpdateSecurityHealthAnalyticsCustomModuleRequest, o: GoogleGax.RequestOptions)
             async throws
             -> GoogleCloudSecurityCenterManagementV1.SecurityHealthAnalyticsCustomModule
           in
@@ -201,15 +194,14 @@ extension Clients {
     }
 
     public func deleteSecurityHealthAnalyticsCustomModule(
-      request: DeleteSecurityHealthAnalyticsCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: DeleteSecurityHealthAnalyticsCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteSecurityHealthAnalyticsCustomModule",
         action: {
-          (r: DeleteSecurityHealthAnalyticsCustomModuleRequest, o: GoogleCloudGax.RequestOptions)
+          (r: DeleteSecurityHealthAnalyticsCustomModuleRequest, o: GoogleGax.RequestOptions)
             async throws -> Void in
           return try await self.inner.deleteSecurityHealthAnalyticsCustomModule(
             request: r, options: o)
@@ -217,8 +209,7 @@ extension Clients {
     }
 
     public func simulateSecurityHealthAnalyticsCustomModule(
-      request: SimulateSecurityHealthAnalyticsCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: SimulateSecurityHealthAnalyticsCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1.SimulateSecurityHealthAnalyticsCustomModuleResponse
     {
@@ -227,7 +218,7 @@ extension Clients {
         options: options,
         name: "simulateSecurityHealthAnalyticsCustomModule",
         action: {
-          (r: SimulateSecurityHealthAnalyticsCustomModuleRequest, o: GoogleCloudGax.RequestOptions)
+          (r: SimulateSecurityHealthAnalyticsCustomModuleRequest, o: GoogleGax.RequestOptions)
             async throws
             -> GoogleCloudSecurityCenterManagementV1
             .SimulateSecurityHealthAnalyticsCustomModuleResponse
@@ -239,7 +230,7 @@ extension Clients {
 
     public func listEffectiveEventThreatDetectionCustomModules(
       request: ListEffectiveEventThreatDetectionCustomModulesRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1
       .ListEffectiveEventThreatDetectionCustomModulesResponse
@@ -249,10 +240,8 @@ extension Clients {
         options: options,
         name: "listEffectiveEventThreatDetectionCustomModules",
         action: {
-          (
-            r: ListEffectiveEventThreatDetectionCustomModulesRequest,
-            o: GoogleCloudGax.RequestOptions
-          ) async throws
+          (r: ListEffectiveEventThreatDetectionCustomModulesRequest, o: GoogleGax.RequestOptions)
+            async throws
             -> GoogleCloudSecurityCenterManagementV1
             .ListEffectiveEventThreatDetectionCustomModulesResponse
           in
@@ -263,7 +252,7 @@ extension Clients {
 
     public func getEffectiveEventThreatDetectionCustomModule(
       request: GetEffectiveEventThreatDetectionCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1.EffectiveEventThreatDetectionCustomModule
     {
@@ -272,7 +261,7 @@ extension Clients {
         options: options,
         name: "getEffectiveEventThreatDetectionCustomModule",
         action: {
-          (r: GetEffectiveEventThreatDetectionCustomModuleRequest, o: GoogleCloudGax.RequestOptions)
+          (r: GetEffectiveEventThreatDetectionCustomModuleRequest, o: GoogleGax.RequestOptions)
             async throws
             -> GoogleCloudSecurityCenterManagementV1.EffectiveEventThreatDetectionCustomModule
           in
@@ -282,7 +271,7 @@ extension Clients {
     }
 
     public func listEventThreatDetectionCustomModules(
-      request: ListEventThreatDetectionCustomModulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEventThreatDetectionCustomModulesRequest, options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1.ListEventThreatDetectionCustomModulesResponse
     {
@@ -291,7 +280,7 @@ extension Clients {
         options: options,
         name: "listEventThreatDetectionCustomModules",
         action: {
-          (r: ListEventThreatDetectionCustomModulesRequest, o: GoogleCloudGax.RequestOptions)
+          (r: ListEventThreatDetectionCustomModulesRequest, o: GoogleGax.RequestOptions)
             async throws
             -> GoogleCloudSecurityCenterManagementV1.ListEventThreatDetectionCustomModulesResponse
           in
@@ -301,7 +290,7 @@ extension Clients {
 
     public func listDescendantEventThreatDetectionCustomModules(
       request: ListDescendantEventThreatDetectionCustomModulesRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1
       .ListDescendantEventThreatDetectionCustomModulesResponse
@@ -311,10 +300,8 @@ extension Clients {
         options: options,
         name: "listDescendantEventThreatDetectionCustomModules",
         action: {
-          (
-            r: ListDescendantEventThreatDetectionCustomModulesRequest,
-            o: GoogleCloudGax.RequestOptions
-          ) async throws
+          (r: ListDescendantEventThreatDetectionCustomModulesRequest, o: GoogleGax.RequestOptions)
+            async throws
             -> GoogleCloudSecurityCenterManagementV1
             .ListDescendantEventThreatDetectionCustomModulesResponse
           in
@@ -324,29 +311,29 @@ extension Clients {
     }
 
     public func getEventThreatDetectionCustomModule(
-      request: GetEventThreatDetectionCustomModuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEventThreatDetectionCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.EventThreatDetectionCustomModule {
       try await self._intercept(
         request: request,
         options: options,
         name: "getEventThreatDetectionCustomModule",
         action: {
-          (r: GetEventThreatDetectionCustomModuleRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudSecurityCenterManagementV1.EventThreatDetectionCustomModule
+          (r: GetEventThreatDetectionCustomModuleRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudSecurityCenterManagementV1.EventThreatDetectionCustomModule
           in
           return try await self.inner.getEventThreatDetectionCustomModule(request: r, options: o)
         })
     }
 
     public func createEventThreatDetectionCustomModule(
-      request: CreateEventThreatDetectionCustomModuleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEventThreatDetectionCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.EventThreatDetectionCustomModule {
       try await self._intercept(
         request: request,
         options: options,
         name: "createEventThreatDetectionCustomModule",
         action: {
-          (r: CreateEventThreatDetectionCustomModuleRequest, o: GoogleCloudGax.RequestOptions)
+          (r: CreateEventThreatDetectionCustomModuleRequest, o: GoogleGax.RequestOptions)
             async throws -> GoogleCloudSecurityCenterManagementV1.EventThreatDetectionCustomModule
           in
           return try await self.inner.createEventThreatDetectionCustomModule(request: r, options: o)
@@ -354,14 +341,14 @@ extension Clients {
     }
 
     public func updateEventThreatDetectionCustomModule(
-      request: UpdateEventThreatDetectionCustomModuleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEventThreatDetectionCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.EventThreatDetectionCustomModule {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateEventThreatDetectionCustomModule",
         action: {
-          (r: UpdateEventThreatDetectionCustomModuleRequest, o: GoogleCloudGax.RequestOptions)
+          (r: UpdateEventThreatDetectionCustomModuleRequest, o: GoogleGax.RequestOptions)
             async throws -> GoogleCloudSecurityCenterManagementV1.EventThreatDetectionCustomModule
           in
           return try await self.inner.updateEventThreatDetectionCustomModule(request: r, options: o)
@@ -369,22 +356,21 @@ extension Clients {
     }
 
     public func deleteEventThreatDetectionCustomModule(
-      request: DeleteEventThreatDetectionCustomModuleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEventThreatDetectionCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteEventThreatDetectionCustomModule",
         action: {
-          (r: DeleteEventThreatDetectionCustomModuleRequest, o: GoogleCloudGax.RequestOptions)
+          (r: DeleteEventThreatDetectionCustomModuleRequest, o: GoogleGax.RequestOptions)
             async throws -> Void in
           return try await self.inner.deleteEventThreatDetectionCustomModule(request: r, options: o)
         })
     }
 
     public func validateEventThreatDetectionCustomModule(
-      request: ValidateEventThreatDetectionCustomModuleRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ValidateEventThreatDetectionCustomModuleRequest, options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudSecurityCenterManagementV1.ValidateEventThreatDetectionCustomModuleResponse
     {
@@ -393,7 +379,7 @@ extension Clients {
         options: options,
         name: "validateEventThreatDetectionCustomModule",
         action: {
-          (r: ValidateEventThreatDetectionCustomModuleRequest, o: GoogleCloudGax.RequestOptions)
+          (r: ValidateEventThreatDetectionCustomModuleRequest, o: GoogleGax.RequestOptions)
             async throws
             -> GoogleCloudSecurityCenterManagementV1
             .ValidateEventThreatDetectionCustomModuleResponse
@@ -404,14 +390,14 @@ extension Clients {
     }
 
     public func getSecurityCenterService(
-      request: GetSecurityCenterServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSecurityCenterServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.SecurityCenterService {
       try await self._intercept(
         request: request,
         options: options,
         name: "getSecurityCenterService",
         action: {
-          (r: GetSecurityCenterServiceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetSecurityCenterServiceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterManagementV1.SecurityCenterService
           in
           return try await self.inner.getSecurityCenterService(request: r, options: o)
@@ -419,14 +405,14 @@ extension Clients {
     }
 
     public func listSecurityCenterServices(
-      request: ListSecurityCenterServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSecurityCenterServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.ListSecurityCenterServicesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listSecurityCenterServices",
         action: {
-          (r: ListSecurityCenterServicesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListSecurityCenterServicesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterManagementV1.ListSecurityCenterServicesResponse
           in
           return try await self.inner.listSecurityCenterServices(request: r, options: o)
@@ -434,14 +420,14 @@ extension Clients {
     }
 
     public func updateSecurityCenterService(
-      request: UpdateSecurityCenterServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSecurityCenterServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterManagementV1.SecurityCenterService {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateSecurityCenterService",
         action: {
-          (r: UpdateSecurityCenterServiceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateSecurityCenterServiceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterManagementV1.SecurityCenterService
           in
           return try await self.inner.updateSecurityCenterService(request: r, options: o)
@@ -449,29 +435,29 @@ extension Clients {
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLocations",
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLocation",
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)

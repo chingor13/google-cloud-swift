@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Provides text analysis operations such as sentiment analysis and entity
 /// recognition.
@@ -29,7 +29,7 @@ public final class LanguageServiceClient: Clients.LanguageServiceProtocol, Senda
   let inner: any Clients.LanguageServiceStub
 
   /// Creates a new `LanguageServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.LanguageServiceStub = try Clients.LanguageServiceTransport(options)
     inner = Clients.LanguageServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -42,7 +42,7 @@ public final class LanguageServiceClient: Clients.LanguageServiceProtocol, Senda
   ///
   /// @Snippet(path: "LanguageService_AnalyzeSentiment")
   public func analyzeSentiment(
-    request: AnalyzeSentimentRequest, options: GoogleCloudGax.RequestOptions
+    request: AnalyzeSentimentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLanguageV2.AnalyzeSentimentResponse {
     try await self.inner.analyzeSentiment(request: request, options: options)
   }
@@ -53,7 +53,7 @@ public final class LanguageServiceClient: Clients.LanguageServiceProtocol, Senda
   ///
   /// @Snippet(path: "LanguageService_AnalyzeEntities")
   public func analyzeEntities(
-    request: AnalyzeEntitiesRequest, options: GoogleCloudGax.RequestOptions
+    request: AnalyzeEntitiesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLanguageV2.AnalyzeEntitiesResponse {
     try await self.inner.analyzeEntities(request: request, options: options)
   }
@@ -62,7 +62,7 @@ public final class LanguageServiceClient: Clients.LanguageServiceProtocol, Senda
   ///
   /// @Snippet(path: "LanguageService_ClassifyText")
   public func classifyText(
-    request: ClassifyTextRequest, options: GoogleCloudGax.RequestOptions
+    request: ClassifyTextRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLanguageV2.ClassifyTextResponse {
     try await self.inner.classifyText(request: request, options: options)
   }
@@ -71,7 +71,7 @@ public final class LanguageServiceClient: Clients.LanguageServiceProtocol, Senda
   ///
   /// @Snippet(path: "LanguageService_ModerateText")
   public func moderateText(
-    request: ModerateTextRequest, options: GoogleCloudGax.RequestOptions
+    request: ModerateTextRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLanguageV2.ModerateTextResponse {
     try await self.inner.moderateText(request: request, options: options)
   }
@@ -80,7 +80,7 @@ public final class LanguageServiceClient: Clients.LanguageServiceProtocol, Senda
   ///
   /// @Snippet(path: "LanguageService_AnnotateText")
   public func annotateText(
-    request: AnnotateTextRequest, options: GoogleCloudGax.RequestOptions
+    request: AnnotateTextRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLanguageV2.AnnotateTextResponse {
     try await self.inner.annotateText(request: request, options: options)
   }
@@ -160,27 +160,27 @@ extension Clients {
 
     /// See `LanguageServiceClient.analyzeSentiment`.
     func analyzeSentiment(
-      request: AnalyzeSentimentRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeSentimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.AnalyzeSentimentResponse
 
     /// See `LanguageServiceClient.analyzeEntities`.
     func analyzeEntities(
-      request: AnalyzeEntitiesRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeEntitiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.AnalyzeEntitiesResponse
 
     /// See `LanguageServiceClient.classifyText`.
     func classifyText(
-      request: ClassifyTextRequest, options: GoogleCloudGax.RequestOptions
+      request: ClassifyTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.ClassifyTextResponse
 
     /// See `LanguageServiceClient.moderateText`.
     func moderateText(
-      request: ModerateTextRequest, options: GoogleCloudGax.RequestOptions
+      request: ModerateTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.ModerateTextResponse
 
     /// See `LanguageServiceClient.annotateText`.
     func annotateText(
-      request: AnnotateTextRequest, options: GoogleCloudGax.RequestOptions
+      request: AnnotateTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.AnnotateTextResponse
   }
 }
@@ -194,9 +194,9 @@ extension Clients.LanguageServiceProtocol {
   }
 
   public func analyzeSentiment(
-    request: AnalyzeSentimentRequest, options: GoogleCloudGax.RequestOptions
+    request: AnalyzeSentimentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLanguageV2.AnalyzeSentimentResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func analyzeSentiment(
@@ -226,9 +226,9 @@ extension Clients.LanguageServiceProtocol {
   }
 
   public func analyzeEntities(
-    request: AnalyzeEntitiesRequest, options: GoogleCloudGax.RequestOptions
+    request: AnalyzeEntitiesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLanguageV2.AnalyzeEntitiesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func analyzeEntities(
@@ -258,9 +258,9 @@ extension Clients.LanguageServiceProtocol {
   }
 
   public func classifyText(
-    request: ClassifyTextRequest, options: GoogleCloudGax.RequestOptions
+    request: ClassifyTextRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLanguageV2.ClassifyTextResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func classifyText(
@@ -279,9 +279,9 @@ extension Clients.LanguageServiceProtocol {
   }
 
   public func moderateText(
-    request: ModerateTextRequest, options: GoogleCloudGax.RequestOptions
+    request: ModerateTextRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLanguageV2.ModerateTextResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func moderateText(
@@ -300,9 +300,9 @@ extension Clients.LanguageServiceProtocol {
   }
 
   public func annotateText(
-    request: AnnotateTextRequest, options: GoogleCloudGax.RequestOptions
+    request: AnnotateTextRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLanguageV2.AnnotateTextResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func annotateText(

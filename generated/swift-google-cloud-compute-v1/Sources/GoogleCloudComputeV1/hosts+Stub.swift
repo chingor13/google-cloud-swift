@@ -16,25 +16,25 @@
 
 #if Hosts
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol HostsStub: Sendable {
       func `get`(
-        request: HostsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: HostsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Host
 
       func getVersion(
-        request: HostsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: HostsClient.GetVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: HostsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: HostsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.HostsListResponse
 
       func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@
       }
 
       public func aggregatedList(
-        request: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           name: "aggregatedList",
           action: {
-            (r: SslCertificatesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: SslCertificatesClient.AggregatedListRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
@@ -73,14 +73,14 @@
       }
 
       public func delete(
-        request: SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: SslCertificatesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SslCertificatesClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -88,14 +88,14 @@
       }
 
       public func `get`(
-        request: SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificate {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: SslCertificatesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SslCertificatesClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.SslCertificate
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -103,14 +103,14 @@
       }
 
       public func insert(
-        request: SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: SslCertificatesClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SslCertificatesClient.InsertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -118,14 +118,14 @@
       }
 
       public func list(
-        request: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificateList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: SslCertificatesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SslCertificatesClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.SslCertificateList
             in
             return try await self.inner.list(request: r, options: o)
@@ -133,14 +133,14 @@
       }
 
       public func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: GlobalOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GlobalOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

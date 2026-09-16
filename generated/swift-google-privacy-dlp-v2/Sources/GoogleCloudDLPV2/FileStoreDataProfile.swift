@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The profile for a file store.
 ///
 /// * Cloud Storage: maps 1:1 with a bucket.
 /// * Amazon S3: maps 1:1 with a bucket.
-public struct FileStoreDataProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FileStoreDataProfile: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the profile.
@@ -83,7 +83,7 @@ public struct FileStoreDataProfile: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public var state: FileStoreDataProfile.State = FileStoreDataProfile.State()
 
   /// The last time the profile was generated.
-  public var profileLastGenerated: GoogleCloudWKT.Timestamp? = nil
+  public var profileLastGenerated: GoogleWKT.Timestamp? = nil
 
   /// How broadly a resource has been shared.
   public var resourceVisibility: ResourceVisibility = ResourceVisibility()
@@ -95,10 +95,10 @@ public struct FileStoreDataProfile: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public var dataRiskLevel: DataRiskLevel? = nil
 
   /// The time the file store was first created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The time the file store was last modified.
-  public var lastModifiedTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastModifiedTime: GoogleWKT.Timestamp? = nil
 
   /// FileClusterSummary per each cluster.
   public var fileClusterSummaries: [FileClusterSummary] = []
@@ -134,7 +134,7 @@ public struct FileStoreDataProfile: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// Domains associated with the profile.
   public var domains: [Domain] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FileStoreDataProfile`.
   public init() {}
@@ -253,7 +253,7 @@ public struct FileStoreDataProfile: Codable, Equatable, GoogleCloudWKT._AnyPacka
       self.state = value
     }
     self.profileLastGenerated = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .profileLastGenerated)
+      GoogleWKT.Timestamp.self, forKey: .profileLastGenerated)
     if let value = try container.decodeIfPresent(
       ResourceVisibility.self, forKey: .resourceVisibility)
     {
@@ -262,10 +262,9 @@ public struct FileStoreDataProfile: Codable, Equatable, GoogleCloudWKT._AnyPacka
     self.sensitivityScore = try container.decodeIfPresent(
       SensitivityScore.self, forKey: .sensitivityScore)
     self.dataRiskLevel = try container.decodeIfPresent(DataRiskLevel.self, forKey: .dataRiskLevel)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.lastModifiedTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastModifiedTime)
+      GoogleWKT.Timestamp.self, forKey: .lastModifiedTime)
     if let value = try container.decodeIfPresent(
       [FileClusterSummary].self, forKey: .fileClusterSummaries)
     {
@@ -303,7 +302,7 @@ public struct FileStoreDataProfile: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -452,10 +451,10 @@ public struct FileStoreDataProfile: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.FileStoreDataProfile"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

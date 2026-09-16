@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Policy-Based Routing allows GCP customers to specify flexibile routing
 /// policies for Layer 4 traffic traversing through the connected service.
@@ -33,11 +33,11 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   Sendable
 {
   let inner: any Clients.PolicyBasedRoutingServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `PolicyBasedRoutingServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.PolicyBasedRoutingServiceStub =
       try Clients.PolicyBasedRoutingServiceTransport(options)
     inner = Clients.PolicyBasedRoutingServiceRetry(inner, options: options)
@@ -53,7 +53,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_ListPolicyBasedRoutes")
   public func listPolicyBasedRoutes(
-    request: ListPolicyBasedRoutesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPolicyBasedRoutesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkConnectivityV1.ListPolicyBasedRoutesResponse {
     try await self.inner.listPolicyBasedRoutes(request: request, options: options)
   }
@@ -62,7 +62,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_ListPolicyBasedRoutes")
   public func listPolicyBasedRoutes(
-    byItem: ListPolicyBasedRoutesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPolicyBasedRoutesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PolicyBasedRoute, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -71,14 +71,14 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
       request.pageToken = token
       return try await self.listPolicyBasedRoutes(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single policy-based route.
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_GetPolicyBasedRoute")
   public func getPolicyBasedRoute(
-    request: GetPolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPolicyBasedRouteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkConnectivityV1.PolicyBasedRoute {
     try await self.inner.getPolicyBasedRoute(request: request, options: options)
   }
@@ -87,7 +87,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_CreatePolicyBasedRoute")
   public func createPolicyBasedRoute(
-    request: CreatePolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePolicyBasedRouteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createPolicyBasedRoute(request: request, options: options)
   }
@@ -96,21 +96,21 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_CreatePolicyBasedRoute")
   public func createPolicyBasedRoute(
-    withPolling: CreatePolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PolicyBasedRoute> {
+    withPolling: CreatePolicyBasedRouteRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PolicyBasedRoute> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PolicyBasedRoute>.State in
+        -> GoogleGax._PollableOperationImpl<PolicyBasedRoute>.State in
       return try op._extractStatus(PolicyBasedRoute.self)
     }
     let rawOp = try await self.createPolicyBasedRoute(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PolicyBasedRoute>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PolicyBasedRoute>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -122,7 +122,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_DeletePolicyBasedRoute")
   public func deletePolicyBasedRoute(
-    request: DeletePolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePolicyBasedRouteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deletePolicyBasedRoute(request: request, options: options)
   }
@@ -131,21 +131,21 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_DeletePolicyBasedRoute")
   public func deletePolicyBasedRoute(
-    withPolling: DeletePolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeletePolicyBasedRouteRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deletePolicyBasedRoute(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -157,7 +157,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -166,7 +166,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -174,14 +174,14 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -194,7 +194,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -204,7 +204,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -219,7 +219,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -230,7 +230,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -241,7 +241,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -249,7 +249,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -258,7 +258,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -269,7 +269,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -280,7 +280,7 @@ public final class PolicyBasedRoutingServiceClient: Clients.PolicyBasedRoutingSe
   ///
   /// @Snippet(path: "PolicyBasedRoutingService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -322,14 +322,14 @@ extension Clients {
 
     /// See `PolicyBasedRoutingServiceClient.createPolicyBasedRoute`.
     func createPolicyBasedRoute(withPolling: CreatePolicyBasedRouteRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<PolicyBasedRoute>
+      -> any GoogleGax.PollableOperation<PolicyBasedRoute>
 
     /// See `PolicyBasedRoutingServiceClient.createPolicyBasedRoute`.
     func createPolicyBasedRoute(
       parent: Swift.String,
       policyBasedRoute: PolicyBasedRoute?,
       policyBasedRouteId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PolicyBasedRoute>
+    ) async throws -> any GoogleGax.PollableOperation<PolicyBasedRoute>
 
     /// See `PolicyBasedRoutingServiceClient.deletePolicyBasedRoute`.
     func deletePolicyBasedRoute(request: DeletePolicyBasedRouteRequest) async throws
@@ -337,12 +337,12 @@ extension Clients {
 
     /// See `PolicyBasedRoutingServiceClient.deletePolicyBasedRoute`.
     func deletePolicyBasedRoute(withPolling: DeletePolicyBasedRouteRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `PolicyBasedRoutingServiceClient.deletePolicyBasedRoute`.
     func deletePolicyBasedRoute(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `PolicyBasedRoutingServiceClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -400,87 +400,87 @@ extension Clients {
 
     /// See `PolicyBasedRoutingServiceClient.listPolicyBasedRoutes`.
     func listPolicyBasedRoutes(
-      request: ListPolicyBasedRoutesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPolicyBasedRoutesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.ListPolicyBasedRoutesResponse
 
     /// See `PolicyBasedRoutingServiceClient.listPolicyBasedRoutes`.
     func listPolicyBasedRoutes(
-      byItem: ListPolicyBasedRoutesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPolicyBasedRoutesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PolicyBasedRoute, Swift.Error>
 
     /// See `PolicyBasedRoutingServiceClient.getPolicyBasedRoute`.
     func getPolicyBasedRoute(
-      request: GetPolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPolicyBasedRouteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.PolicyBasedRoute
 
     /// See `PolicyBasedRoutingServiceClient.createPolicyBasedRoute`.
     func createPolicyBasedRoute(
-      request: CreatePolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePolicyBasedRouteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `PolicyBasedRoutingServiceClient.createPolicyBasedRoute`.
     func createPolicyBasedRoute(
-      withPolling: CreatePolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PolicyBasedRoute>
+      withPolling: CreatePolicyBasedRouteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PolicyBasedRoute>
 
     /// See `PolicyBasedRoutingServiceClient.deletePolicyBasedRoute`.
     func deletePolicyBasedRoute(
-      request: DeletePolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePolicyBasedRouteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `PolicyBasedRoutingServiceClient.deletePolicyBasedRoute`.
     func deletePolicyBasedRoute(
-      withPolling: DeletePolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeletePolicyBasedRouteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `PolicyBasedRoutingServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `PolicyBasedRoutingServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `PolicyBasedRoutingServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `PolicyBasedRoutingServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `PolicyBasedRoutingServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `PolicyBasedRoutingServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `PolicyBasedRoutingServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `PolicyBasedRoutingServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `PolicyBasedRoutingServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `PolicyBasedRoutingServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -494,9 +494,9 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func listPolicyBasedRoutes(
-    request: ListPolicyBasedRoutesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPolicyBasedRoutesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkConnectivityV1.ListPolicyBasedRoutesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPolicyBasedRoutes(
@@ -506,14 +506,14 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func listPolicyBasedRoutes(
-    byItem: ListPolicyBasedRoutesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPolicyBasedRoutesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PolicyBasedRoute, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudNetworkConnectivityV1.ListPolicyBasedRoutesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPolicyBasedRoutes(
@@ -532,9 +532,9 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func getPolicyBasedRoute(
-    request: GetPolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPolicyBasedRouteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkConnectivityV1.PolicyBasedRoute {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPolicyBasedRoute(
@@ -553,24 +553,24 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func createPolicyBasedRoute(
-    request: CreatePolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePolicyBasedRouteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createPolicyBasedRoute(withPolling: CreatePolicyBasedRouteRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PolicyBasedRoute>
+    -> any GoogleGax.PollableOperation<PolicyBasedRoute>
   {
     try await self.createPolicyBasedRoute(withPolling: withPolling, options: .init())
   }
 
   public func createPolicyBasedRoute(
-    withPolling: CreatePolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PolicyBasedRoute> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PolicyBasedRoute>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreatePolicyBasedRouteRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PolicyBasedRoute> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PolicyBasedRoute>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -578,7 +578,7 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
     parent: Swift.String,
     policyBasedRoute: PolicyBasedRoute?,
     policyBasedRouteId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PolicyBasedRoute> {
+  ) async throws -> any GoogleGax.PollableOperation<PolicyBasedRoute> {
     let request = CreatePolicyBasedRouteRequest().with {
       $0.parent = parent
       $0.policyBasedRoute = policyBasedRoute
@@ -594,30 +594,30 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func deletePolicyBasedRoute(
-    request: DeletePolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePolicyBasedRouteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deletePolicyBasedRoute(withPolling: DeletePolicyBasedRouteRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deletePolicyBasedRoute(withPolling: withPolling, options: .init())
   }
 
   public func deletePolicyBasedRoute(
-    withPolling: DeletePolicyBasedRouteRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeletePolicyBasedRouteRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deletePolicyBasedRoute(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeletePolicyBasedRouteRequest().with {
       $0.name = name
     }
@@ -631,9 +631,9 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -643,13 +643,13 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -659,9 +659,9 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -671,9 +671,9 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -683,9 +683,9 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -695,9 +695,9 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -707,9 +707,9 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -719,13 +719,13 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -746,9 +746,9 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -765,9 +765,9 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -784,9 +784,9 @@ extension Clients.PolicyBasedRoutingServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// One delta entry for Binding. Each individual change (only one member in each
 /// entry) to a binding will be a separate entry.
-public struct BindingDelta: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BindingDelta: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The action that was performed on a Binding.
@@ -40,7 +40,7 @@ public struct BindingDelta: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The condition that is associated with this binding.
   public var condition: GoogleType.Expr? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BindingDelta`.
   public init() {}
@@ -91,7 +91,7 @@ public struct BindingDelta: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.condition = try container.decodeIfPresent(GoogleType.Expr.self, forKey: .condition)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -214,10 +214,10 @@ public struct BindingDelta: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.v1.BindingDelta"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

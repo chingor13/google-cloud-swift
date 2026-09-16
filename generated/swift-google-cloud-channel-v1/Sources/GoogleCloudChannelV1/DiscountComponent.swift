@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a single component of the total discount applicable on a Price.
-public struct DiscountComponent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DiscountComponent: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Type of the discount.
@@ -29,7 +29,7 @@ public struct DiscountComponent: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// discount.
   public var discountValue: OneOf_DiscountValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DiscountComponent`.
   public init() {}
@@ -93,7 +93,7 @@ public struct DiscountComponent: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.discountValue = discountValue
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -127,10 +127,10 @@ public struct DiscountComponent: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.channel.v1.DiscountComponent"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CaseAttachmentServiceStub: Sendable {
     func listAttachments(
-      request: ListAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAttachmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.ListAttachmentsResponse
 
     func getAttachment(
-      request: GetAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Attachment
   }
 }

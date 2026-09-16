@@ -15,43 +15,43 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ExecutionsStub: Sendable {
     func getExecution(
-      request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRunV2.Execution
 
     func listExecutions(
-      request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExecutionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRunV2.ListExecutionsResponse
 
     func deleteExecution(
-      request: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func cancelExecution(
-      request: CancelExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

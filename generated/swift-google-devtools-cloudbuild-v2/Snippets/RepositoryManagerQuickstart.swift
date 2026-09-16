@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudBuildV2
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudBuildV2.RepositoryManagerClient()

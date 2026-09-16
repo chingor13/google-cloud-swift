@@ -16,33 +16,33 @@
 
 #if SslCertificates
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SslCertificatesStub: Sendable {
       func aggregatedList(
-        request: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList
 
       func delete(
-        request: SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificate
 
       func insert(
-        request: SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificateList
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

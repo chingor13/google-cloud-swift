@@ -33,7 +33,7 @@ let package = Package(
       name: "GoogleAppsScriptTypeGmail",
       dependencies: [
         .product(name: "GoogleAppsScriptType", package: "swift-google-apps-script-type"),
-        .product(name: "GoogleCloudWKT", package: "swift-google-wkt"),
+        .product(name: "GoogleWKT", package: "swift-google-wkt"),
       ],
     )
   ]

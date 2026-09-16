@@ -15,25 +15,25 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A test message for FieldMask.
-public struct MessageWithFieldMask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MessageWithFieldMask: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: GoogleCloudWKT.FieldMask? = nil
+  public var singular: GoogleWKT.FieldMask? = nil
 
   /// An optional field.
-  public var `optional`: GoogleCloudWKT.FieldMask? = nil
+  public var `optional`: GoogleWKT.FieldMask? = nil
 
   /// A repeated field.
-  public var repeated: [GoogleCloudWKT.FieldMask] = []
+  public var repeated: [GoogleWKT.FieldMask] = []
 
   /// A map field, messages cannot be keys.
-  public var map: [Swift.String: GoogleCloudWKT.FieldMask] = [:]
+  public var map: [Swift.String: GoogleWKT.FieldMask] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MessageWithFieldMask`.
   public init() {}
@@ -72,21 +72,19 @@ public struct MessageWithFieldMask: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.singular = try container.decodeIfPresent(GoogleCloudWKT.FieldMask.self, forKey: .singular)
-    self.`optional` = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .`optional`)
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.FieldMask].self, forKey: .repeated)
-    {
+    self.singular = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .singular)
+    self.`optional` = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .`optional`)
+    if let value = try container.decodeIfPresent([GoogleWKT.FieldMask].self, forKey: .repeated) {
       self.repeated = value
     }
     if let value = try container.decodeIfPresent(
-      [Swift.String: GoogleCloudWKT.FieldMask].self, forKey: .map)
+      [Swift.String: GoogleWKT.FieldMask].self, forKey: .map)
     {
       self.map = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -104,10 +102,10 @@ public struct MessageWithFieldMask: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.swift.sdk.test.MessageWithFieldMask"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

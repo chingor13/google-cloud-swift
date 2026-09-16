@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The ArtifactDeployment resource represents the deployment of the artifact
 /// within the InsightsConfig resource.
-public struct ArtifactDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ArtifactDeployment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Unique identifier of `ArtifactDeployment`.
@@ -37,18 +37,18 @@ public struct ArtifactDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public var sourceCommitUris: [Swift.String] = []
 
   /// Output only. The time at which the deployment was deployed.
-  public var deployTime: GoogleCloudWKT.Timestamp? = nil
+  public var deployTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time at which the deployment was undeployed, all artifacts
   /// are considered undeployed once this time is set.
-  public var undeployTime: GoogleCloudWKT.Timestamp? = nil
+  public var undeployTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The summary of container status of the artifact deployment.
   /// Format as `ContainerStatusState-Reason : restartCount`
   /// e.g. "Waiting-ImagePullBackOff : 3"
   public var containerStatusSummary: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ArtifactDeployment`.
   public init() {}
@@ -105,17 +105,16 @@ public struct ArtifactDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .sourceCommitUris) {
       self.sourceCommitUris = value
     }
-    self.deployTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deployTime)
+    self.deployTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deployTime)
     self.undeployTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .undeployTime)
+      GoogleWKT.Timestamp.self, forKey: .undeployTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .containerStatusSummary)
     {
       self.containerStatusSummary = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -136,10 +135,10 @@ public struct ArtifactDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.developerconnect.v1.ArtifactDeployment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

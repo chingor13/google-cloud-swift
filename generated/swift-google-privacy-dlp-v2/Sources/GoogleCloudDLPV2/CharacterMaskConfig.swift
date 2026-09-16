@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Partially mask a string by replacing a given number of characters with a
 /// fixed character. Masking can start from the beginning or end of the string.
@@ -23,7 +23,7 @@ import Foundation
 /// de-identifying structured data we'll attempt to preserve the original data's
 /// type. (This allows you to take a long like 123 and modify it to a string like
 /// **3.
-public struct CharacterMaskConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CharacterMaskConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Character to use to mask the sensitive values&mdash;for example, `*` for an
@@ -64,7 +64,7 @@ public struct CharacterMaskConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// returns `***-**5-5555`.
   public var charactersToIgnore: [CharsToIgnore] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CharacterMaskConfig`.
   public init() {}
@@ -118,7 +118,7 @@ public struct CharacterMaskConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -136,10 +136,10 @@ public struct CharacterMaskConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.CharacterMaskConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,21 +19,21 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for search tuning.
   ///
   /// @Snippet(path: "SearchTuningServiceQuickstart")
   public final class SearchTuningServiceClient: Clients.SearchTuningServiceProtocol, Sendable {
     let inner: any Clients.SearchTuningServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `SearchTuningServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SearchTuningServiceStub = try Clients.SearchTuningServiceTransport(
         options)
       inner = Clients.SearchTuningServiceRetry(inner, options: options)
@@ -49,7 +49,7 @@
     ///
     /// @Snippet(path: "SearchTuningService_TrainCustomModel")
     public func trainCustomModel(
-      request: TrainCustomModelRequest, options: GoogleCloudGax.RequestOptions
+      request: TrainCustomModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.trainCustomModel(request: request, options: options)
     }
@@ -58,22 +58,22 @@
     ///
     /// @Snippet(path: "SearchTuningService_TrainCustomModel")
     public func trainCustomModel(
-      withPolling: TrainCustomModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TrainCustomModelResponse> {
+      withPolling: TrainCustomModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<TrainCustomModelResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<TrainCustomModelResponse>.State in
+          -> GoogleGax._PollableOperationImpl<TrainCustomModelResponse>.State in
         return try op._extractStatus(TrainCustomModelResponse.self)
       }
       let rawOp = try await self.trainCustomModel(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<TrainCustomModelResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<TrainCustomModelResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -85,7 +85,7 @@
     ///
     /// @Snippet(path: "SearchTuningService_ListCustomModels")
     public func listCustomModels(
-      request: ListCustomModelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomModelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListCustomModelsResponse {
       try await self.inner.listCustomModels(request: request, options: options)
     }
@@ -96,7 +96,7 @@
     ///
     /// @Snippet(path: "SearchTuningService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -107,7 +107,7 @@
     ///
     /// @Snippet(path: "SearchTuningService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -115,7 +115,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -124,7 +124,7 @@
     ///
     /// @Snippet(path: "SearchTuningService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -135,7 +135,7 @@
     ///
     /// @Snippet(path: "SearchTuningService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -153,7 +153,7 @@
         -> GoogleLongRunning.Operation
 
       /// See `SearchTuningServiceClient.trainCustomModel`.
-      func trainCustomModel(withPolling: TrainCustomModelRequest) async throws -> any GoogleCloudGax
+      func trainCustomModel(withPolling: TrainCustomModelRequest) async throws -> any GoogleGax
         .PollableOperation<TrainCustomModelResponse>
 
       /// See `SearchTuningServiceClient.listCustomModels`.
@@ -185,32 +185,32 @@
 
       /// See `SearchTuningServiceClient.trainCustomModel`.
       func trainCustomModel(
-        request: TrainCustomModelRequest, options: GoogleCloudGax.RequestOptions
+        request: TrainCustomModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `SearchTuningServiceClient.trainCustomModel`.
       func trainCustomModel(
-        withPolling: TrainCustomModelRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<TrainCustomModelResponse>
+        withPolling: TrainCustomModelRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<TrainCustomModelResponse>
 
       /// See `SearchTuningServiceClient.listCustomModels`.
       func listCustomModels(
-        request: ListCustomModelsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListCustomModelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListCustomModelsResponse
 
       /// See `SearchTuningServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `SearchTuningServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `SearchTuningServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -224,25 +224,25 @@
     }
 
     public func trainCustomModel(
-      request: TrainCustomModelRequest, options: GoogleCloudGax.RequestOptions
+      request: TrainCustomModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func trainCustomModel(withPolling: TrainCustomModelRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<TrainCustomModelResponse>
+    public func trainCustomModel(withPolling: TrainCustomModelRequest) async throws -> any GoogleGax
+      .PollableOperation<TrainCustomModelResponse>
     {
       try await self.trainCustomModel(withPolling: withPolling, options: .init())
     }
 
     public func trainCustomModel(
-      withPolling: TrainCustomModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TrainCustomModelResponse> {
+      withPolling: TrainCustomModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<TrainCustomModelResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<TrainCustomModelResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<TrainCustomModelResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -253,9 +253,9 @@
     }
 
     public func listCustomModels(
-      request: ListCustomModelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomModelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListCustomModelsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -265,9 +265,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -277,13 +277,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -304,9 +304,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -323,9 +323,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

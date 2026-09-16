@@ -16,7 +16,7 @@
 
 #if InstanceTemplates || Instances || MachineImages || RegionInstanceTemplates || RegionInstances
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// [Input Only] Specifies the parameters for a new disk that will be created
   /// alongside the new instance. Use initialization parameters to create boot
@@ -27,7 +27,7 @@
   ///
   /// This property is mutually exclusive with the source property;
   /// you can only define one or the other, but not both.
-  public struct AttachedDiskInitializeParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AttachedDiskInitializeParams: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The architecture of the attached disk. Valid values are
@@ -213,7 +213,7 @@
     ///    - zones/zone/storagePools/storagePool
     public var storagePool: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AttachedDiskInitializeParams`.
     public init() {}
@@ -326,7 +326,7 @@
       self.storagePool = try container.decodeIfPresent(Swift.String.self, forKey: .storagePool)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -578,11 +578,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.AttachedDiskInitializeParams"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

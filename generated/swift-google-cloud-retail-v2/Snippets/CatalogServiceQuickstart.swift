@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudRetailV2
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(parent: String, ) async throws {
   let client = try GoogleCloudRetailV2.CatalogServiceClient()

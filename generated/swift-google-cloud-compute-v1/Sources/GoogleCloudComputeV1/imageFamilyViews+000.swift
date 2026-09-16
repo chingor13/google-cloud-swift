@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `imageFamilyViews` resource.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.ImageFamilyViewsStub
 
     /// Creates a new `ImageFamilyViewsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.ImageFamilyViewsStub = try Clients.ImageFamilyViewsTransport(options)
       inner = Clients.ImageFamilyViewsRetry(inner, options: options)
       if let logger = options.logger {
@@ -43,7 +43,7 @@
     ///
     /// @Snippet(path: "imageFamilyViews_get")
     public func `get`(
-      request: ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ImageFamilyViewsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ImageFamilyView {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -69,7 +69,7 @@
 
       /// See `ImageFamilyViewsClient.`get``.
       func `get`(
-        request: ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ImageFamilyViewsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ImageFamilyView
     }
   }
@@ -83,9 +83,9 @@
     }
 
     public func `get`(
-      request: ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ImageFamilyViewsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ImageFamilyView {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(

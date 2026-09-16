@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Data store related settings for the app.
-public struct DataStoreSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataStoreSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The engines for the app.
   public var engines: [DataStoreSettings.Engine] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataStoreSettings`.
   public init() {}
@@ -63,7 +63,7 @@ public struct DataStoreSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -78,7 +78,7 @@ public struct DataStoreSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// An engine to which the data stores are connected.
   /// See Vertex AI Search:
   /// https://cloud.google.com/generative-ai-app-builder/docs/enterprise-search-introduction.
-  public struct Engine: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Engine: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The resource name of the engine.
@@ -89,7 +89,7 @@ public struct DataStoreSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// Output only. The type of the engine.
     public var type: DataStoreSettings.Engine.Type_ = DataStoreSettings.Engine.Type_()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Engine`.
     public init() {}
@@ -134,7 +134,7 @@ public struct DataStoreSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -262,21 +262,21 @@ public struct DataStoreSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.DataStoreSettings.Engine"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.DataStoreSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

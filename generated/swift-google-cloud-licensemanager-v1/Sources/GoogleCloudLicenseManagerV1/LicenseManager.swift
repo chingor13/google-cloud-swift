@@ -19,21 +19,21 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service describing handlers for resources
 ///
 /// @Snippet(path: "LicenseManagerQuickstart")
 public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendable {
   let inner: any Clients.LicenseManagerStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `LicenseManagerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.LicenseManagerStub = try Clients.LicenseManagerTransport(options)
     inner = Clients.LicenseManagerRetry(inner, options: options)
     if let logger = options.logger {
@@ -48,7 +48,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_ListConfigurations")
   public func listConfigurations(
-    request: ListConfigurationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConfigurationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.ListConfigurationsResponse {
     try await self.inner.listConfigurations(request: request, options: options)
   }
@@ -57,7 +57,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_ListConfigurations")
   public func listConfigurations(
-    byItem: ListConfigurationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConfigurationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Configuration, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLicenseManagerV1.ListConfigurationsResponse
@@ -66,14 +66,14 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
       request.pageToken = token
       return try await self.listConfigurations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Configuration.
   ///
   /// @Snippet(path: "LicenseManager_GetConfiguration")
   public func getConfiguration(
-    request: GetConfigurationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConfigurationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.Configuration {
     try await self.inner.getConfiguration(request: request, options: options)
   }
@@ -82,7 +82,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_CreateConfiguration")
   public func createConfiguration(
-    request: CreateConfigurationRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateConfigurationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createConfiguration(request: request, options: options)
   }
@@ -91,21 +91,21 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_CreateConfiguration")
   public func createConfiguration(
-    withPolling: CreateConfigurationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Configuration> {
+    withPolling: CreateConfigurationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Configuration> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Configuration>.State in
+        -> GoogleGax._PollableOperationImpl<Configuration>.State in
       return try op._extractStatus(Configuration.self)
     }
     let rawOp = try await self.createConfiguration(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Configuration>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Configuration>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -117,7 +117,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_UpdateConfiguration")
   public func updateConfiguration(
-    request: UpdateConfigurationRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConfigurationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateConfiguration(request: request, options: options)
   }
@@ -126,21 +126,21 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_UpdateConfiguration")
   public func updateConfiguration(
-    withPolling: UpdateConfigurationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Configuration> {
+    withPolling: UpdateConfigurationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Configuration> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Configuration>.State in
+        -> GoogleGax._PollableOperationImpl<Configuration>.State in
       return try op._extractStatus(Configuration.self)
     }
     let rawOp = try await self.updateConfiguration(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Configuration>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Configuration>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -152,7 +152,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_DeleteConfiguration")
   public func deleteConfiguration(
-    request: DeleteConfigurationRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConfigurationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteConfiguration(request: request, options: options)
   }
@@ -161,21 +161,21 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_DeleteConfiguration")
   public func deleteConfiguration(
-    withPolling: DeleteConfigurationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteConfigurationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteConfiguration(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -187,7 +187,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_ListInstances")
   public func listInstances(
-    request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.ListInstancesResponse {
     try await self.inner.listInstances(request: request, options: options)
   }
@@ -196,7 +196,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_ListInstances")
   public func listInstances(
-    byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Instance, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLicenseManagerV1.ListInstancesResponse in
@@ -204,14 +204,14 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
       request.pageToken = token
       return try await self.listInstances(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Instance.
   ///
   /// @Snippet(path: "LicenseManager_GetInstance")
   public func getInstance(
-    request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.Instance {
     try await self.inner.getInstance(request: request, options: options)
   }
@@ -220,7 +220,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_DeactivateConfiguration")
   public func deactivateConfiguration(
-    request: DeactivateConfigurationRequest, options: GoogleCloudGax.RequestOptions
+    request: DeactivateConfigurationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deactivateConfiguration(request: request, options: options)
   }
@@ -229,21 +229,21 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_DeactivateConfiguration")
   public func deactivateConfiguration(
-    withPolling: DeactivateConfigurationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Configuration> {
+    withPolling: DeactivateConfigurationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Configuration> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Configuration>.State in
+        -> GoogleGax._PollableOperationImpl<Configuration>.State in
       return try op._extractStatus(Configuration.self)
     }
     let rawOp = try await self.deactivateConfiguration(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Configuration>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Configuration>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -255,7 +255,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_ReactivateConfiguration")
   public func reactivateConfiguration(
-    request: ReactivateConfigurationRequest, options: GoogleCloudGax.RequestOptions
+    request: ReactivateConfigurationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.reactivateConfiguration(request: request, options: options)
   }
@@ -264,21 +264,21 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_ReactivateConfiguration")
   public func reactivateConfiguration(
-    withPolling: ReactivateConfigurationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Configuration> {
+    withPolling: ReactivateConfigurationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Configuration> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Configuration>.State in
+        -> GoogleGax._PollableOperationImpl<Configuration>.State in
       return try op._extractStatus(Configuration.self)
     }
     let rawOp = try await self.reactivateConfiguration(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Configuration>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Configuration>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -290,7 +290,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_QueryConfigurationLicenseUsage")
   public func queryConfigurationLicenseUsage(
-    request: QueryConfigurationLicenseUsageRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryConfigurationLicenseUsageRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.QueryConfigurationLicenseUsageResponse {
     try await self.inner.queryConfigurationLicenseUsage(request: request, options: options)
   }
@@ -299,7 +299,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_AggregateUsage")
   public func aggregateUsage(
-    request: AggregateUsageRequest, options: GoogleCloudGax.RequestOptions
+    request: AggregateUsageRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.AggregateUsageResponse {
     try await self.inner.aggregateUsage(request: request, options: options)
   }
@@ -308,7 +308,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_AggregateUsage")
   public func aggregateUsage(
-    byItem: AggregateUsageRequest, options: GoogleCloudGax.RequestOptions
+    byItem: AggregateUsageRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Usage, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLicenseManagerV1.AggregateUsageResponse in
@@ -316,14 +316,14 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
       request.pageToken = token
       return try await self.aggregateUsage(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists Products in a given project and location.
   ///
   /// @Snippet(path: "LicenseManager_ListProducts")
   public func listProducts(
-    request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.ListProductsResponse {
     try await self.inner.listProducts(request: request, options: options)
   }
@@ -332,7 +332,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_ListProducts")
   public func listProducts(
-    byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProductsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLicenseManagerV1.ListProductsResponse in
@@ -340,14 +340,14 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
       request.pageToken = token
       return try await self.listProducts(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Product.
   ///
   /// @Snippet(path: "LicenseManager_GetProduct")
   public func getProduct(
-    request: GetProductRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.Product {
     try await self.inner.getProduct(request: request, options: options)
   }
@@ -356,7 +356,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -365,7 +365,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -373,14 +373,14 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "LicenseManager_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -391,7 +391,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -402,7 +402,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -410,7 +410,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -419,7 +419,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -430,7 +430,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -441,7 +441,7 @@ public final class LicenseManagerClient: Clients.LicenseManagerProtocol, Sendabl
   ///
   /// @Snippet(path: "LicenseManager_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -482,42 +482,42 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `LicenseManagerClient.createConfiguration`.
-    func createConfiguration(withPolling: CreateConfigurationRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Configuration>
+    func createConfiguration(withPolling: CreateConfigurationRequest) async throws -> any GoogleGax
+      .PollableOperation<Configuration>
 
     /// See `LicenseManagerClient.createConfiguration`.
     func createConfiguration(
       parent: Swift.String,
       configuration: Configuration?,
       configurationId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Configuration>
+    ) async throws -> any GoogleGax.PollableOperation<Configuration>
 
     /// See `LicenseManagerClient.updateConfiguration`.
     func updateConfiguration(request: UpdateConfigurationRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `LicenseManagerClient.updateConfiguration`.
-    func updateConfiguration(withPolling: UpdateConfigurationRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Configuration>
+    func updateConfiguration(withPolling: UpdateConfigurationRequest) async throws -> any GoogleGax
+      .PollableOperation<Configuration>
 
     /// See `LicenseManagerClient.updateConfiguration`.
     func updateConfiguration(
       configuration: Configuration?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Configuration>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Configuration>
 
     /// See `LicenseManagerClient.deleteConfiguration`.
     func deleteConfiguration(request: DeleteConfigurationRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `LicenseManagerClient.deleteConfiguration`.
-    func deleteConfiguration(withPolling: DeleteConfigurationRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    func deleteConfiguration(withPolling: DeleteConfigurationRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
 
     /// See `LicenseManagerClient.deleteConfiguration`.
     func deleteConfiguration(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `LicenseManagerClient.listInstances`.
     func listInstances(request: ListInstancesRequest) async throws
@@ -548,12 +548,12 @@ extension Clients {
 
     /// See `LicenseManagerClient.deactivateConfiguration`.
     func deactivateConfiguration(withPolling: DeactivateConfigurationRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Configuration>
+      -> any GoogleGax.PollableOperation<Configuration>
 
     /// See `LicenseManagerClient.deactivateConfiguration`.
     func deactivateConfiguration(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Configuration>
+    ) async throws -> any GoogleGax.PollableOperation<Configuration>
 
     /// See `LicenseManagerClient.reactivateConfiguration`.
     func reactivateConfiguration(request: ReactivateConfigurationRequest) async throws
@@ -561,12 +561,12 @@ extension Clients {
 
     /// See `LicenseManagerClient.reactivateConfiguration`.
     func reactivateConfiguration(withPolling: ReactivateConfigurationRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Configuration>
+      -> any GoogleGax.PollableOperation<Configuration>
 
     /// See `LicenseManagerClient.reactivateConfiguration`.
     func reactivateConfiguration(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Configuration>
+    ) async throws -> any GoogleGax.PollableOperation<Configuration>
 
     /// See `LicenseManagerClient.queryConfigurationLicenseUsage`.
     func queryConfigurationLicenseUsage(request: QueryConfigurationLicenseUsageRequest) async throws
@@ -575,8 +575,8 @@ extension Clients {
     /// See `LicenseManagerClient.queryConfigurationLicenseUsage`.
     func queryConfigurationLicenseUsage(
       name: Swift.String,
-      startTime: GoogleCloudWKT.Timestamp?,
-      endTime: GoogleCloudWKT.Timestamp?,
+      startTime: GoogleWKT.Timestamp?,
+      endTime: GoogleWKT.Timestamp?,
     ) async throws -> GoogleCloudLicenseManagerV1.QueryConfigurationLicenseUsageResponse
 
     /// See `LicenseManagerClient.aggregateUsage`.
@@ -591,8 +591,8 @@ extension Clients {
     /// See `LicenseManagerClient.aggregateUsage`.
     func aggregateUsage(
       name: Swift.String,
-      startTime: GoogleCloudWKT.Timestamp?,
-      endTime: GoogleCloudWKT.Timestamp?,
+      startTime: GoogleWKT.Timestamp?,
+      endTime: GoogleWKT.Timestamp?,
     ) throws -> any AsyncSequence<Usage, Swift.Error>
 
     /// See `LicenseManagerClient.listProducts`.
@@ -663,147 +663,147 @@ extension Clients {
 
     /// See `LicenseManagerClient.listConfigurations`.
     func listConfigurations(
-      request: ListConfigurationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConfigurationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLicenseManagerV1.ListConfigurationsResponse
 
     /// See `LicenseManagerClient.listConfigurations`.
     func listConfigurations(
-      byItem: ListConfigurationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConfigurationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Configuration, Swift.Error>
 
     /// See `LicenseManagerClient.getConfiguration`.
     func getConfiguration(
-      request: GetConfigurationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConfigurationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLicenseManagerV1.Configuration
 
     /// See `LicenseManagerClient.createConfiguration`.
     func createConfiguration(
-      request: CreateConfigurationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConfigurationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `LicenseManagerClient.createConfiguration`.
     func createConfiguration(
-      withPolling: CreateConfigurationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Configuration>
+      withPolling: CreateConfigurationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Configuration>
 
     /// See `LicenseManagerClient.updateConfiguration`.
     func updateConfiguration(
-      request: UpdateConfigurationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConfigurationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `LicenseManagerClient.updateConfiguration`.
     func updateConfiguration(
-      withPolling: UpdateConfigurationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Configuration>
+      withPolling: UpdateConfigurationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Configuration>
 
     /// See `LicenseManagerClient.deleteConfiguration`.
     func deleteConfiguration(
-      request: DeleteConfigurationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConfigurationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `LicenseManagerClient.deleteConfiguration`.
     func deleteConfiguration(
-      withPolling: DeleteConfigurationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteConfigurationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `LicenseManagerClient.listInstances`.
     func listInstances(
-      request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLicenseManagerV1.ListInstancesResponse
 
     /// See `LicenseManagerClient.listInstances`.
     func listInstances(
-      byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Instance, Swift.Error>
 
     /// See `LicenseManagerClient.getInstance`.
     func getInstance(
-      request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLicenseManagerV1.Instance
 
     /// See `LicenseManagerClient.deactivateConfiguration`.
     func deactivateConfiguration(
-      request: DeactivateConfigurationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeactivateConfigurationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `LicenseManagerClient.deactivateConfiguration`.
     func deactivateConfiguration(
-      withPolling: DeactivateConfigurationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Configuration>
+      withPolling: DeactivateConfigurationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Configuration>
 
     /// See `LicenseManagerClient.reactivateConfiguration`.
     func reactivateConfiguration(
-      request: ReactivateConfigurationRequest, options: GoogleCloudGax.RequestOptions
+      request: ReactivateConfigurationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `LicenseManagerClient.reactivateConfiguration`.
     func reactivateConfiguration(
-      withPolling: ReactivateConfigurationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Configuration>
+      withPolling: ReactivateConfigurationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Configuration>
 
     /// See `LicenseManagerClient.queryConfigurationLicenseUsage`.
     func queryConfigurationLicenseUsage(
-      request: QueryConfigurationLicenseUsageRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryConfigurationLicenseUsageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLicenseManagerV1.QueryConfigurationLicenseUsageResponse
 
     /// See `LicenseManagerClient.aggregateUsage`.
     func aggregateUsage(
-      request: AggregateUsageRequest, options: GoogleCloudGax.RequestOptions
+      request: AggregateUsageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLicenseManagerV1.AggregateUsageResponse
 
     /// See `LicenseManagerClient.aggregateUsage`.
     func aggregateUsage(
-      byItem: AggregateUsageRequest, options: GoogleCloudGax.RequestOptions
+      byItem: AggregateUsageRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Usage, Swift.Error>
 
     /// See `LicenseManagerClient.listProducts`.
     func listProducts(
-      request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLicenseManagerV1.ListProductsResponse
 
     /// See `LicenseManagerClient.listProducts`.
     func listProducts(
-      byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListProductsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Product, Swift.Error>
 
     /// See `LicenseManagerClient.getProduct`.
     func getProduct(
-      request: GetProductRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLicenseManagerV1.Product
 
     /// See `LicenseManagerClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `LicenseManagerClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `LicenseManagerClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `LicenseManagerClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `LicenseManagerClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `LicenseManagerClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `LicenseManagerClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -817,9 +817,9 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func listConfigurations(
-    request: ListConfigurationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConfigurationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.ListConfigurationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listConfigurations(
@@ -829,14 +829,14 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func listConfigurations(
-    byItem: ListConfigurationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConfigurationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Configuration, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLicenseManagerV1.ListConfigurationsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listConfigurations(
@@ -855,9 +855,9 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func getConfiguration(
-    request: GetConfigurationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConfigurationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.Configuration {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getConfiguration(
@@ -876,24 +876,24 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func createConfiguration(
-    request: CreateConfigurationRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateConfigurationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createConfiguration(withPolling: CreateConfigurationRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Configuration>
+    -> any GoogleGax.PollableOperation<Configuration>
   {
     try await self.createConfiguration(withPolling: withPolling, options: .init())
   }
 
   public func createConfiguration(
-    withPolling: CreateConfigurationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Configuration> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Configuration>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateConfigurationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Configuration> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Configuration>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -901,7 +901,7 @@ extension Clients.LicenseManagerProtocol {
     parent: Swift.String,
     configuration: Configuration?,
     configurationId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Configuration> {
+  ) async throws -> any GoogleGax.PollableOperation<Configuration> {
     let request = CreateConfigurationRequest().with {
       $0.parent = parent
       $0.configuration = configuration
@@ -917,31 +917,31 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func updateConfiguration(
-    request: UpdateConfigurationRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConfigurationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateConfiguration(withPolling: UpdateConfigurationRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Configuration>
+    -> any GoogleGax.PollableOperation<Configuration>
   {
     try await self.updateConfiguration(withPolling: withPolling, options: .init())
   }
 
   public func updateConfiguration(
-    withPolling: UpdateConfigurationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Configuration> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Configuration>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateConfigurationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Configuration> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Configuration>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateConfiguration(
     configuration: Configuration?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Configuration> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Configuration> {
     let request = UpdateConfigurationRequest().with {
       $0.configuration = configuration
       $0.updateMask = updateMask
@@ -956,30 +956,30 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func deleteConfiguration(
-    request: DeleteConfigurationRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConfigurationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteConfiguration(withPolling: DeleteConfigurationRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteConfiguration(withPolling: withPolling, options: .init())
   }
 
   public func deleteConfiguration(
-    withPolling: DeleteConfigurationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteConfigurationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteConfiguration(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteConfigurationRequest().with {
       $0.name = name
     }
@@ -993,9 +993,9 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func listInstances(
-    request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.ListInstancesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listInstances(
@@ -1005,13 +1005,13 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func listInstances(
-    byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Instance, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLicenseManagerV1.ListInstancesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listInstances(
@@ -1030,9 +1030,9 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func getInstance(
-    request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.Instance {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getInstance(
@@ -1051,30 +1051,30 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func deactivateConfiguration(
-    request: DeactivateConfigurationRequest, options: GoogleCloudGax.RequestOptions
+    request: DeactivateConfigurationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deactivateConfiguration(withPolling: DeactivateConfigurationRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Configuration>
+    -> any GoogleGax.PollableOperation<Configuration>
   {
     try await self.deactivateConfiguration(withPolling: withPolling, options: .init())
   }
 
   public func deactivateConfiguration(
-    withPolling: DeactivateConfigurationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Configuration> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Configuration>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeactivateConfigurationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Configuration> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Configuration>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deactivateConfiguration(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Configuration> {
+  ) async throws -> any GoogleGax.PollableOperation<Configuration> {
     let request = DeactivateConfigurationRequest().with {
       $0.name = name
     }
@@ -1088,30 +1088,30 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func reactivateConfiguration(
-    request: ReactivateConfigurationRequest, options: GoogleCloudGax.RequestOptions
+    request: ReactivateConfigurationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func reactivateConfiguration(withPolling: ReactivateConfigurationRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Configuration>
+    -> any GoogleGax.PollableOperation<Configuration>
   {
     try await self.reactivateConfiguration(withPolling: withPolling, options: .init())
   }
 
   public func reactivateConfiguration(
-    withPolling: ReactivateConfigurationRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Configuration> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Configuration>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ReactivateConfigurationRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Configuration> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Configuration>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func reactivateConfiguration(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Configuration> {
+  ) async throws -> any GoogleGax.PollableOperation<Configuration> {
     let request = ReactivateConfigurationRequest().with {
       $0.name = name
     }
@@ -1125,15 +1125,15 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func queryConfigurationLicenseUsage(
-    request: QueryConfigurationLicenseUsageRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryConfigurationLicenseUsageRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.QueryConfigurationLicenseUsageResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func queryConfigurationLicenseUsage(
     name: Swift.String,
-    startTime: GoogleCloudWKT.Timestamp?,
-    endTime: GoogleCloudWKT.Timestamp?,
+    startTime: GoogleWKT.Timestamp?,
+    endTime: GoogleWKT.Timestamp?,
   ) async throws -> GoogleCloudLicenseManagerV1.QueryConfigurationLicenseUsageResponse {
     let request = QueryConfigurationLicenseUsageRequest().with {
       $0.name = name
@@ -1150,9 +1150,9 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func aggregateUsage(
-    request: AggregateUsageRequest, options: GoogleCloudGax.RequestOptions
+    request: AggregateUsageRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.AggregateUsageResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func aggregateUsage(
@@ -1162,19 +1162,19 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func aggregateUsage(
-    byItem: AggregateUsageRequest, options: GoogleCloudGax.RequestOptions
+    byItem: AggregateUsageRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Usage, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLicenseManagerV1.AggregateUsageResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func aggregateUsage(
     name: Swift.String,
-    startTime: GoogleCloudWKT.Timestamp?,
-    endTime: GoogleCloudWKT.Timestamp?,
+    startTime: GoogleWKT.Timestamp?,
+    endTime: GoogleWKT.Timestamp?,
   ) throws -> any AsyncSequence<Usage, Swift.Error> {
     let request = AggregateUsageRequest().with {
       $0.name = name
@@ -1191,9 +1191,9 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func listProducts(
-    request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.ListProductsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listProducts(
@@ -1203,13 +1203,13 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func listProducts(
-    byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProductsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLicenseManagerV1.ListProductsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listProducts(
@@ -1228,9 +1228,9 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func getProduct(
-    request: GetProductRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLicenseManagerV1.Product {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getProduct(
@@ -1249,9 +1249,9 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -1261,13 +1261,13 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1277,9 +1277,9 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1289,9 +1289,9 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1301,13 +1301,13 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1328,9 +1328,9 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1347,9 +1347,9 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1366,9 +1366,9 @@ extension Clients.LicenseManagerProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Settings for Java client libraries.
-public struct JavaSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct JavaSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The package name to use in Java. Clobbers the java_package option
@@ -54,7 +54,7 @@ public struct JavaSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Some settings.
   public var common: CommonLanguageSettings? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `JavaSettings`.
   public init() {}
@@ -102,7 +102,7 @@ public struct JavaSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.common = try container.decodeIfPresent(CommonLanguageSettings.self, forKey: .common)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -119,10 +119,10 @@ public struct JavaSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.JavaSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

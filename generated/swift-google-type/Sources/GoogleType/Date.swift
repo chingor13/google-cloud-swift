@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a whole or partial calendar date, such as a birthday. The time of
 /// day and time zone are either specified elsewhere or are insignificant. The
@@ -34,10 +34,10 @@ import Foundation
 /// * [google.type.DateTime][google.type.DateTime]
 /// * [google.protobuf.Timestamp][google.protobuf.Timestamp]
 ///
-/// [google.protobuf.Timestamp]: https://www.google.com/search?q=Swift+google.protobuf+GoogleCloudWKT.Timestamp
+/// [google.protobuf.Timestamp]: https://www.google.com/search?q=Swift+google.protobuf+GoogleWKT.Timestamp
 /// [google.type.DateTime]: <doc:DateTime>
 /// [google.type.TimeOfDay]: <doc:TimeOfDay>
-public struct Date: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Date: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Year of the date. Must be from 1 to 9999, or 0 to specify a date without
@@ -53,7 +53,7 @@ public struct Date: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// significant.
   public var day: Swift.Int32 = Swift.Int32()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Date`.
   public init() {}
@@ -101,7 +101,7 @@ public struct Date: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -118,10 +118,10 @@ public struct Date: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.type.Date"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,16 +16,16 @@
 
 #if TargetTcpProxies
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct TargetTcpProxiesSetBackendServiceRequest: Codable, Equatable, GoogleCloudWKT
+  public struct TargetTcpProxiesSetBackendServiceRequest: Codable, Equatable, GoogleWKT
       ._AnyPackable,
     Sendable
   {
     /// The URL of the new BackendService resource for the targetTcpProxy.
     public var service: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TargetTcpProxiesSetBackendServiceRequest`.
     public init() {}
@@ -61,7 +61,7 @@
       self.service = try container.decodeIfPresent(Swift.String.self, forKey: .service)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -76,11 +76,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.TargetTcpProxiesSetBackendServiceRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

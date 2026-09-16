@@ -16,16 +16,16 @@
 
 import Foundation
 import GoogleApi
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes a Synthetic Monitor to be invoked by Uptime.
-public struct SyntheticMonitorTarget: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SyntheticMonitorTarget: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Specifies a Synthetic Monitor's execution stack.
   public var target: OneOf_Target? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SyntheticMonitorTarget`.
   public init() {}
@@ -77,7 +77,7 @@ public struct SyntheticMonitorTarget: Codable, Equatable, GoogleCloudWKT._AnyPac
     self.target = target
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,7 +96,7 @@ public struct SyntheticMonitorTarget: Codable, Equatable, GoogleCloudWKT._AnyPac
   }
 
   /// A Synthetic Monitor deployed to a Cloud Functions V2 instance.
-  public struct CloudFunctionV2Target: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CloudFunctionV2Target: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Fully qualified GCFv2 resource name
@@ -110,7 +110,7 @@ public struct SyntheticMonitorTarget: Codable, Equatable, GoogleCloudWKT._AnyPac
     /// only.
     public var cloudRunRevision: GoogleApi.MonitoredResource? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CloudFunctionV2Target`.
     public init() {}
@@ -152,7 +152,7 @@ public struct SyntheticMonitorTarget: Codable, Equatable, GoogleCloudWKT._AnyPac
         GoogleApi.MonitoredResource.self, forKey: .cloudRunRevision)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -168,11 +168,11 @@ public struct SyntheticMonitorTarget: Codable, Equatable, GoogleCloudWKT._AnyPac
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.SyntheticMonitorTarget.CloudFunctionV2Target"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -185,10 +185,10 @@ public struct SyntheticMonitorTarget: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.SyntheticMonitorTarget"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

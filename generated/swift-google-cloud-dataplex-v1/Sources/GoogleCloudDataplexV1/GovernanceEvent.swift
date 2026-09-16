@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Payload associated with Governance related log events.
-public struct GovernanceEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GovernanceEvent: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The log message.
@@ -31,7 +31,7 @@ public struct GovernanceEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// specific entity.
   public var entity: GovernanceEvent.Entity? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GovernanceEvent`.
   public init() {}
@@ -78,7 +78,7 @@ public struct GovernanceEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.entity = try container.decodeIfPresent(GovernanceEvent.Entity.self, forKey: .entity)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -93,7 +93,7 @@ public struct GovernanceEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Information about Entity resource that the log event is associated with.
-  public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Entity: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The Entity resource the log event is associated with.
@@ -104,7 +104,7 @@ public struct GovernanceEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Type of entity.
     public var entityType: GovernanceEvent.Entity.EntityType = GovernanceEvent.Entity.EntityType()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Entity`.
     public init() {}
@@ -149,7 +149,7 @@ public struct GovernanceEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -270,11 +270,11 @@ public struct GovernanceEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.GovernanceEvent.Entity"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -487,10 +487,10 @@ public struct GovernanceEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.GovernanceEvent"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

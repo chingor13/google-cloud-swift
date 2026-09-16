@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class ProjectsRetry: ProjectsStub {
     let inner: any ProjectsStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any ProjectsStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any ProjectsStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func `get`(
-      request: ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> Project {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ProjectsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws -> Project
+          (r: ProjectsClient.GetRequest, o: GoogleGax.RequestOptions) async throws -> Project
           in
           return try await self.inner.`get`(request: r, options: o)
         })

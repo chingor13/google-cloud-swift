@@ -18,11 +18,11 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The API interface for managing Workflow Templates in the
 /// Dataproc API.
@@ -31,11 +31,11 @@ import GoogleCloudGax
 public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServiceProtocol, Sendable
 {
   let inner: any Clients.WorkflowTemplateServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `WorkflowTemplateServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.WorkflowTemplateServiceStub =
       try Clients.WorkflowTemplateServiceTransport(options)
     inner = Clients.WorkflowTemplateServiceRetry(inner, options: options)
@@ -51,7 +51,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// @Snippet(path: "WorkflowTemplateService_CreateWorkflowTemplate")
   public func createWorkflowTemplate(
-    request: CreateWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateWorkflowTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.WorkflowTemplate {
     try await self.inner.createWorkflowTemplate(request: request, options: options)
   }
@@ -63,7 +63,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// @Snippet(path: "WorkflowTemplateService_GetWorkflowTemplate")
   public func getWorkflowTemplate(
-    request: GetWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetWorkflowTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.WorkflowTemplate {
     try await self.inner.getWorkflowTemplate(request: request, options: options)
   }
@@ -91,11 +91,11 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// [google.longrunning.Operation.metadata]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation/metadata
   /// [google.longrunning.Operation.response]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation/OneOf_Result/response(_:)
-  /// [google.protobuf.Empty]: https://www.google.com/search?q=Swift+google.protobuf+GoogleCloudWKT.Empty
+  /// [google.protobuf.Empty]: https://www.google.com/search?q=Swift+google.protobuf+GoogleWKT.Empty
   ///
   /// @Snippet(path: "WorkflowTemplateService_InstantiateWorkflowTemplate")
   public func instantiateWorkflowTemplate(
-    request: InstantiateWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: InstantiateWorkflowTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.instantiateWorkflowTemplate(request: request, options: options)
   }
@@ -123,25 +123,25 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// [google.longrunning.Operation.metadata]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation/metadata
   /// [google.longrunning.Operation.response]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation/OneOf_Result/response(_:)
-  /// [google.protobuf.Empty]: https://www.google.com/search?q=Swift+google.protobuf+GoogleCloudWKT.Empty
+  /// [google.protobuf.Empty]: https://www.google.com/search?q=Swift+google.protobuf+GoogleWKT.Empty
   ///
   /// @Snippet(path: "WorkflowTemplateService_InstantiateWorkflowTemplate")
   public func instantiateWorkflowTemplate(
-    withPolling: InstantiateWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: InstantiateWorkflowTemplateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.instantiateWorkflowTemplate(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -180,11 +180,11 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   /// [google.cloud.dataproc.v1.WorkflowTemplateService.InstantiateWorkflowTemplate]: <doc:WorkflowTemplateServiceClient/instantiateWorkflowTemplate(request:options:)>
   /// [google.longrunning.Operation.metadata]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation/metadata
   /// [google.longrunning.Operation.response]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation/OneOf_Result/response(_:)
-  /// [google.protobuf.Empty]: https://www.google.com/search?q=Swift+google.protobuf+GoogleCloudWKT.Empty
+  /// [google.protobuf.Empty]: https://www.google.com/search?q=Swift+google.protobuf+GoogleWKT.Empty
   ///
   /// @Snippet(path: "WorkflowTemplateService_InstantiateInlineWorkflowTemplate")
   public func instantiateInlineWorkflowTemplate(
-    request: InstantiateInlineWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: InstantiateInlineWorkflowTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.instantiateInlineWorkflowTemplate(request: request, options: options)
   }
@@ -220,26 +220,26 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   /// [google.cloud.dataproc.v1.WorkflowTemplateService.InstantiateWorkflowTemplate]: <doc:WorkflowTemplateServiceClient/instantiateWorkflowTemplate(request:options:)>
   /// [google.longrunning.Operation.metadata]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation/metadata
   /// [google.longrunning.Operation.response]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation/OneOf_Result/response(_:)
-  /// [google.protobuf.Empty]: https://www.google.com/search?q=Swift+google.protobuf+GoogleCloudWKT.Empty
+  /// [google.protobuf.Empty]: https://www.google.com/search?q=Swift+google.protobuf+GoogleWKT.Empty
   ///
   /// @Snippet(path: "WorkflowTemplateService_InstantiateInlineWorkflowTemplate")
   public func instantiateInlineWorkflowTemplate(
-    withPolling: InstantiateInlineWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: InstantiateInlineWorkflowTemplateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.instantiateInlineWorkflowTemplate(
       request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -252,7 +252,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// @Snippet(path: "WorkflowTemplateService_UpdateWorkflowTemplate")
   public func updateWorkflowTemplate(
-    request: UpdateWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateWorkflowTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.WorkflowTemplate {
     try await self.inner.updateWorkflowTemplate(request: request, options: options)
   }
@@ -261,7 +261,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// @Snippet(path: "WorkflowTemplateService_ListWorkflowTemplates")
   public func listWorkflowTemplates(
-    request: ListWorkflowTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListWorkflowTemplatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.ListWorkflowTemplatesResponse {
     try await self.inner.listWorkflowTemplates(request: request, options: options)
   }
@@ -270,7 +270,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// @Snippet(path: "WorkflowTemplateService_ListWorkflowTemplates")
   public func listWorkflowTemplates(
-    byItem: ListWorkflowTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListWorkflowTemplatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<WorkflowTemplate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataprocV1.ListWorkflowTemplatesResponse in
@@ -278,14 +278,14 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
       request.pageToken = token
       return try await self.listWorkflowTemplates(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes a workflow template. It does not cancel in-progress workflows.
   ///
   /// @Snippet(path: "WorkflowTemplateService_DeleteWorkflowTemplate")
   public func deleteWorkflowTemplate(
-    request: DeleteWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteWorkflowTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteWorkflowTemplate(request: request, options: options)
   }
@@ -298,7 +298,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// @Snippet(path: "WorkflowTemplateService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -308,7 +308,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// @Snippet(path: "WorkflowTemplateService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -323,7 +323,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// @Snippet(path: "WorkflowTemplateService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -334,7 +334,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// @Snippet(path: "WorkflowTemplateService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -345,7 +345,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// @Snippet(path: "WorkflowTemplateService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -353,7 +353,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -362,7 +362,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// @Snippet(path: "WorkflowTemplateService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -373,7 +373,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// @Snippet(path: "WorkflowTemplateService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -384,7 +384,7 @@ public final class WorkflowTemplateServiceClient: Clients.WorkflowTemplateServic
   ///
   /// @Snippet(path: "WorkflowTemplateService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -422,18 +422,18 @@ extension Clients {
 
     /// See `WorkflowTemplateServiceClient.instantiateWorkflowTemplate`.
     func instantiateWorkflowTemplate(withPolling: InstantiateWorkflowTemplateRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `WorkflowTemplateServiceClient.instantiateWorkflowTemplate`.
     func instantiateWorkflowTemplate(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `WorkflowTemplateServiceClient.instantiateWorkflowTemplate`.
     func instantiateWorkflowTemplate(
       name: Swift.String,
       parameters: [Swift.String: Swift.String],
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `WorkflowTemplateServiceClient.instantiateInlineWorkflowTemplate`.
     func instantiateInlineWorkflowTemplate(request: InstantiateInlineWorkflowTemplateRequest)
@@ -441,13 +441,13 @@ extension Clients {
 
     /// See `WorkflowTemplateServiceClient.instantiateInlineWorkflowTemplate`.
     func instantiateInlineWorkflowTemplate(withPolling: InstantiateInlineWorkflowTemplateRequest)
-      async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `WorkflowTemplateServiceClient.instantiateInlineWorkflowTemplate`.
     func instantiateInlineWorkflowTemplate(
       parent: Swift.String,
       template: WorkflowTemplate?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `WorkflowTemplateServiceClient.updateWorkflowTemplate`.
     func updateWorkflowTemplate(request: UpdateWorkflowTemplateRequest) async throws
@@ -523,87 +523,87 @@ extension Clients {
 
     /// See `WorkflowTemplateServiceClient.createWorkflowTemplate`.
     func createWorkflowTemplate(
-      request: CreateWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateWorkflowTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.WorkflowTemplate
 
     /// See `WorkflowTemplateServiceClient.getWorkflowTemplate`.
     func getWorkflowTemplate(
-      request: GetWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetWorkflowTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.WorkflowTemplate
 
     /// See `WorkflowTemplateServiceClient.instantiateWorkflowTemplate`.
     func instantiateWorkflowTemplate(
-      request: InstantiateWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: InstantiateWorkflowTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `WorkflowTemplateServiceClient.instantiateWorkflowTemplate`.
     func instantiateWorkflowTemplate(
-      withPolling: InstantiateWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: InstantiateWorkflowTemplateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `WorkflowTemplateServiceClient.instantiateInlineWorkflowTemplate`.
     func instantiateInlineWorkflowTemplate(
-      request: InstantiateInlineWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: InstantiateInlineWorkflowTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `WorkflowTemplateServiceClient.instantiateInlineWorkflowTemplate`.
     func instantiateInlineWorkflowTemplate(
-      withPolling: InstantiateInlineWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: InstantiateInlineWorkflowTemplateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `WorkflowTemplateServiceClient.updateWorkflowTemplate`.
     func updateWorkflowTemplate(
-      request: UpdateWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateWorkflowTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.WorkflowTemplate
 
     /// See `WorkflowTemplateServiceClient.listWorkflowTemplates`.
     func listWorkflowTemplates(
-      request: ListWorkflowTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWorkflowTemplatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.ListWorkflowTemplatesResponse
 
     /// See `WorkflowTemplateServiceClient.listWorkflowTemplates`.
     func listWorkflowTemplates(
-      byItem: ListWorkflowTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListWorkflowTemplatesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<WorkflowTemplate, Swift.Error>
 
     /// See `WorkflowTemplateServiceClient.deleteWorkflowTemplate`.
     func deleteWorkflowTemplate(
-      request: DeleteWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteWorkflowTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `WorkflowTemplateServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `WorkflowTemplateServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `WorkflowTemplateServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `WorkflowTemplateServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `WorkflowTemplateServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `WorkflowTemplateServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `WorkflowTemplateServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -617,9 +617,9 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func createWorkflowTemplate(
-    request: CreateWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateWorkflowTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.WorkflowTemplate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createWorkflowTemplate(
@@ -640,9 +640,9 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func getWorkflowTemplate(
-    request: GetWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetWorkflowTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.WorkflowTemplate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getWorkflowTemplate(
@@ -661,30 +661,30 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func instantiateWorkflowTemplate(
-    request: InstantiateWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: InstantiateWorkflowTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func instantiateWorkflowTemplate(withPolling: InstantiateWorkflowTemplateRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    async throws -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.instantiateWorkflowTemplate(withPolling: withPolling, options: .init())
   }
 
   public func instantiateWorkflowTemplate(
-    withPolling: InstantiateWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: InstantiateWorkflowTemplateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func instantiateWorkflowTemplate(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = InstantiateWorkflowTemplateRequest().with {
       $0.name = name
     }
@@ -694,7 +694,7 @@ extension Clients.WorkflowTemplateServiceProtocol {
   public func instantiateWorkflowTemplate(
     name: Swift.String,
     parameters: [Swift.String: Swift.String],
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = InstantiateWorkflowTemplateRequest().with {
       $0.name = name
       $0.parameters = parameters
@@ -709,31 +709,31 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func instantiateInlineWorkflowTemplate(
-    request: InstantiateInlineWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: InstantiateInlineWorkflowTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func instantiateInlineWorkflowTemplate(
     withPolling: InstantiateInlineWorkflowTemplateRequest
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     try await self.instantiateInlineWorkflowTemplate(withPolling: withPolling, options: .init())
   }
 
   public func instantiateInlineWorkflowTemplate(
-    withPolling: InstantiateInlineWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: InstantiateInlineWorkflowTemplateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func instantiateInlineWorkflowTemplate(
     parent: Swift.String,
     template: WorkflowTemplate?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = InstantiateInlineWorkflowTemplateRequest().with {
       $0.parent = parent
       $0.template = template
@@ -748,9 +748,9 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func updateWorkflowTemplate(
-    request: UpdateWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateWorkflowTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.WorkflowTemplate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateWorkflowTemplate(
@@ -769,9 +769,9 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func listWorkflowTemplates(
-    request: ListWorkflowTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListWorkflowTemplatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.ListWorkflowTemplatesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listWorkflowTemplates(
@@ -781,13 +781,13 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func listWorkflowTemplates(
-    byItem: ListWorkflowTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListWorkflowTemplatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<WorkflowTemplate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataprocV1.ListWorkflowTemplatesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listWorkflowTemplates(
@@ -804,9 +804,9 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func deleteWorkflowTemplate(
-    request: DeleteWorkflowTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteWorkflowTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteWorkflowTemplate(
@@ -825,9 +825,9 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -837,9 +837,9 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -849,9 +849,9 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -861,9 +861,9 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -873,13 +873,13 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -900,9 +900,9 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -919,9 +919,9 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -938,9 +938,9 @@ extension Clients.WorkflowTemplateServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

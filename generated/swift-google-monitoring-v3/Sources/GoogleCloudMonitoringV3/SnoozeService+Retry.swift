@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class SnoozeServiceRetry: SnoozeServiceStub {
     let inner: any SnoozeServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any SnoozeServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any SnoozeServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func createSnooze(
-      request: CreateSnoozeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSnoozeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Snooze {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateSnoozeRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateSnoozeRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.Snooze
           in
           return try await self.inner.createSnooze(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func listSnoozes(
-      request: ListSnoozesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSnoozesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListSnoozesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListSnoozesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListSnoozesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ListSnoozesResponse
           in
           return try await self.inner.listSnoozes(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func getSnooze(
-      request: GetSnoozeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSnoozeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Snooze {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetSnoozeRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetSnoozeRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.Snooze
           in
           return try await self.inner.getSnooze(request: r, options: o)
@@ -94,14 +94,14 @@ extension Clients {
     }
 
     public func updateSnooze(
-      request: UpdateSnoozeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSnoozeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Snooze {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateSnoozeRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateSnoozeRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.Snooze
           in
           return try await self.inner.updateSnooze(request: r, options: o)

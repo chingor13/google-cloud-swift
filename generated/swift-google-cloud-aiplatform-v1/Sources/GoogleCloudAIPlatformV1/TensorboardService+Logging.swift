@@ -20,11 +20,11 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -43,9 +43,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -62,14 +62,14 @@
       }
 
       public func createTensorboard(
-        request: CreateTensorboardRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateTensorboardRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "createTensorboard",
           action: {
-            (r: CreateTensorboardRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateTensorboardRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.createTensorboard(request: r, options: o)
@@ -77,14 +77,14 @@
       }
 
       public func getTensorboard(
-        request: GetTensorboardRequest, options: GoogleCloudGax.RequestOptions
+        request: GetTensorboardRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Tensorboard {
         try await self._intercept(
           request: request,
           options: options,
           name: "getTensorboard",
           action: {
-            (r: GetTensorboardRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetTensorboardRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.Tensorboard
             in
             return try await self.inner.getTensorboard(request: r, options: o)
@@ -92,14 +92,14 @@
       }
 
       public func updateTensorboard(
-        request: UpdateTensorboardRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateTensorboardRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "updateTensorboard",
           action: {
-            (r: UpdateTensorboardRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateTensorboardRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.updateTensorboard(request: r, options: o)
@@ -107,14 +107,14 @@
       }
 
       public func listTensorboards(
-        request: ListTensorboardsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListTensorboardsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListTensorboardsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listTensorboards",
           action: {
-            (r: ListTensorboardsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListTensorboardsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListTensorboardsResponse
             in
             return try await self.inner.listTensorboards(request: r, options: o)
@@ -122,14 +122,14 @@
       }
 
       public func deleteTensorboard(
-        request: DeleteTensorboardRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteTensorboardRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteTensorboard",
           action: {
-            (r: DeleteTensorboardRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteTensorboardRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteTensorboard(request: r, options: o)
@@ -137,14 +137,14 @@
       }
 
       public func readTensorboardUsage(
-        request: ReadTensorboardUsageRequest, options: GoogleCloudGax.RequestOptions
+        request: ReadTensorboardUsageRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ReadTensorboardUsageResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "readTensorboardUsage",
           action: {
-            (r: ReadTensorboardUsageRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ReadTensorboardUsageRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ReadTensorboardUsageResponse
             in
             return try await self.inner.readTensorboardUsage(request: r, options: o)
@@ -152,14 +152,14 @@
       }
 
       public func readTensorboardSize(
-        request: ReadTensorboardSizeRequest, options: GoogleCloudGax.RequestOptions
+        request: ReadTensorboardSizeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ReadTensorboardSizeResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "readTensorboardSize",
           action: {
-            (r: ReadTensorboardSizeRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ReadTensorboardSizeRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ReadTensorboardSizeResponse
             in
             return try await self.inner.readTensorboardSize(request: r, options: o)
@@ -167,14 +167,14 @@
       }
 
       public func createTensorboardExperiment(
-        request: CreateTensorboardExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateTensorboardExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.TensorboardExperiment {
         try await self._intercept(
           request: request,
           options: options,
           name: "createTensorboardExperiment",
           action: {
-            (r: CreateTensorboardExperimentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateTensorboardExperimentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.TensorboardExperiment
             in
             return try await self.inner.createTensorboardExperiment(request: r, options: o)
@@ -182,14 +182,14 @@
       }
 
       public func getTensorboardExperiment(
-        request: GetTensorboardExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: GetTensorboardExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.TensorboardExperiment {
         try await self._intercept(
           request: request,
           options: options,
           name: "getTensorboardExperiment",
           action: {
-            (r: GetTensorboardExperimentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetTensorboardExperimentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.TensorboardExperiment
             in
             return try await self.inner.getTensorboardExperiment(request: r, options: o)
@@ -197,14 +197,14 @@
       }
 
       public func updateTensorboardExperiment(
-        request: UpdateTensorboardExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateTensorboardExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.TensorboardExperiment {
         try await self._intercept(
           request: request,
           options: options,
           name: "updateTensorboardExperiment",
           action: {
-            (r: UpdateTensorboardExperimentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateTensorboardExperimentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.TensorboardExperiment
             in
             return try await self.inner.updateTensorboardExperiment(request: r, options: o)
@@ -212,14 +212,14 @@
       }
 
       public func listTensorboardExperiments(
-        request: ListTensorboardExperimentsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListTensorboardExperimentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListTensorboardExperimentsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listTensorboardExperiments",
           action: {
-            (r: ListTensorboardExperimentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListTensorboardExperimentsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListTensorboardExperimentsResponse
             in
             return try await self.inner.listTensorboardExperiments(request: r, options: o)
@@ -227,14 +227,14 @@
       }
 
       public func deleteTensorboardExperiment(
-        request: DeleteTensorboardExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteTensorboardExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteTensorboardExperiment",
           action: {
-            (r: DeleteTensorboardExperimentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteTensorboardExperimentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteTensorboardExperiment(request: r, options: o)
@@ -242,14 +242,14 @@
       }
 
       public func createTensorboardRun(
-        request: CreateTensorboardRunRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateTensorboardRunRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.TensorboardRun {
         try await self._intercept(
           request: request,
           options: options,
           name: "createTensorboardRun",
           action: {
-            (r: CreateTensorboardRunRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateTensorboardRunRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.TensorboardRun
             in
             return try await self.inner.createTensorboardRun(request: r, options: o)
@@ -257,14 +257,14 @@
       }
 
       public func batchCreateTensorboardRuns(
-        request: BatchCreateTensorboardRunsRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchCreateTensorboardRunsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.BatchCreateTensorboardRunsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "batchCreateTensorboardRuns",
           action: {
-            (r: BatchCreateTensorboardRunsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: BatchCreateTensorboardRunsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.BatchCreateTensorboardRunsResponse
             in
             return try await self.inner.batchCreateTensorboardRuns(request: r, options: o)
@@ -272,14 +272,14 @@
       }
 
       public func getTensorboardRun(
-        request: GetTensorboardRunRequest, options: GoogleCloudGax.RequestOptions
+        request: GetTensorboardRunRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.TensorboardRun {
         try await self._intercept(
           request: request,
           options: options,
           name: "getTensorboardRun",
           action: {
-            (r: GetTensorboardRunRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetTensorboardRunRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.TensorboardRun
             in
             return try await self.inner.getTensorboardRun(request: r, options: o)
@@ -287,14 +287,14 @@
       }
 
       public func updateTensorboardRun(
-        request: UpdateTensorboardRunRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateTensorboardRunRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.TensorboardRun {
         try await self._intercept(
           request: request,
           options: options,
           name: "updateTensorboardRun",
           action: {
-            (r: UpdateTensorboardRunRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateTensorboardRunRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.TensorboardRun
             in
             return try await self.inner.updateTensorboardRun(request: r, options: o)
@@ -302,14 +302,14 @@
       }
 
       public func listTensorboardRuns(
-        request: ListTensorboardRunsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListTensorboardRunsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListTensorboardRunsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listTensorboardRuns",
           action: {
-            (r: ListTensorboardRunsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListTensorboardRunsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListTensorboardRunsResponse
             in
             return try await self.inner.listTensorboardRuns(request: r, options: o)
@@ -317,14 +317,14 @@
       }
 
       public func deleteTensorboardRun(
-        request: DeleteTensorboardRunRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteTensorboardRunRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteTensorboardRun",
           action: {
-            (r: DeleteTensorboardRunRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteTensorboardRunRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteTensorboardRun(request: r, options: o)
@@ -332,29 +332,29 @@
       }
 
       public func batchCreateTensorboardTimeSeries(
-        request: BatchCreateTensorboardTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchCreateTensorboardTimeSeriesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.BatchCreateTensorboardTimeSeriesResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "batchCreateTensorboardTimeSeries",
           action: {
-            (r: BatchCreateTensorboardTimeSeriesRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudAIPlatformV1.BatchCreateTensorboardTimeSeriesResponse
+            (r: BatchCreateTensorboardTimeSeriesRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudAIPlatformV1.BatchCreateTensorboardTimeSeriesResponse
             in
             return try await self.inner.batchCreateTensorboardTimeSeries(request: r, options: o)
           })
       }
 
       public func createTensorboardTimeSeries(
-        request: CreateTensorboardTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateTensorboardTimeSeriesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.TensorboardTimeSeries {
         try await self._intercept(
           request: request,
           options: options,
           name: "createTensorboardTimeSeries",
           action: {
-            (r: CreateTensorboardTimeSeriesRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateTensorboardTimeSeriesRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.TensorboardTimeSeries
             in
             return try await self.inner.createTensorboardTimeSeries(request: r, options: o)
@@ -362,14 +362,14 @@
       }
 
       public func getTensorboardTimeSeries(
-        request: GetTensorboardTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+        request: GetTensorboardTimeSeriesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.TensorboardTimeSeries {
         try await self._intercept(
           request: request,
           options: options,
           name: "getTensorboardTimeSeries",
           action: {
-            (r: GetTensorboardTimeSeriesRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetTensorboardTimeSeriesRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.TensorboardTimeSeries
             in
             return try await self.inner.getTensorboardTimeSeries(request: r, options: o)
@@ -377,14 +377,14 @@
       }
 
       public func updateTensorboardTimeSeries(
-        request: UpdateTensorboardTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateTensorboardTimeSeriesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.TensorboardTimeSeries {
         try await self._intercept(
           request: request,
           options: options,
           name: "updateTensorboardTimeSeries",
           action: {
-            (r: UpdateTensorboardTimeSeriesRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateTensorboardTimeSeriesRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.TensorboardTimeSeries
             in
             return try await self.inner.updateTensorboardTimeSeries(request: r, options: o)
@@ -392,14 +392,14 @@
       }
 
       public func listTensorboardTimeSeries(
-        request: ListTensorboardTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListTensorboardTimeSeriesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListTensorboardTimeSeriesResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listTensorboardTimeSeries",
           action: {
-            (r: ListTensorboardTimeSeriesRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListTensorboardTimeSeriesRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListTensorboardTimeSeriesResponse
             in
             return try await self.inner.listTensorboardTimeSeries(request: r, options: o)
@@ -407,14 +407,14 @@
       }
 
       public func deleteTensorboardTimeSeries(
-        request: DeleteTensorboardTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteTensorboardTimeSeriesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteTensorboardTimeSeries",
           action: {
-            (r: DeleteTensorboardTimeSeriesRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteTensorboardTimeSeriesRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteTensorboardTimeSeries(request: r, options: o)
@@ -422,29 +422,29 @@
       }
 
       public func batchReadTensorboardTimeSeriesData(
-        request: BatchReadTensorboardTimeSeriesDataRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchReadTensorboardTimeSeriesDataRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.BatchReadTensorboardTimeSeriesDataResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "batchReadTensorboardTimeSeriesData",
           action: {
-            (r: BatchReadTensorboardTimeSeriesDataRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudAIPlatformV1.BatchReadTensorboardTimeSeriesDataResponse
+            (r: BatchReadTensorboardTimeSeriesDataRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudAIPlatformV1.BatchReadTensorboardTimeSeriesDataResponse
             in
             return try await self.inner.batchReadTensorboardTimeSeriesData(request: r, options: o)
           })
       }
 
       public func readTensorboardTimeSeriesData(
-        request: ReadTensorboardTimeSeriesDataRequest, options: GoogleCloudGax.RequestOptions
+        request: ReadTensorboardTimeSeriesDataRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ReadTensorboardTimeSeriesDataResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "readTensorboardTimeSeriesData",
           action: {
-            (r: ReadTensorboardTimeSeriesDataRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ReadTensorboardTimeSeriesDataRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ReadTensorboardTimeSeriesDataResponse
             in
             return try await self.inner.readTensorboardTimeSeriesData(request: r, options: o)
@@ -452,14 +452,14 @@
       }
 
       public func readTensorboardBlobData(
-        request: ReadTensorboardBlobDataRequest, options: GoogleCloudGax.RequestOptions
+        request: ReadTensorboardBlobDataRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ReadTensorboardBlobDataResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "readTensorboardBlobData",
           action: {
-            (r: ReadTensorboardBlobDataRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ReadTensorboardBlobDataRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ReadTensorboardBlobDataResponse
             in
             return try await self.inner.readTensorboardBlobData(request: r, options: o)
@@ -467,29 +467,29 @@
       }
 
       public func writeTensorboardExperimentData(
-        request: WriteTensorboardExperimentDataRequest, options: GoogleCloudGax.RequestOptions
+        request: WriteTensorboardExperimentDataRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.WriteTensorboardExperimentDataResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "writeTensorboardExperimentData",
           action: {
-            (r: WriteTensorboardExperimentDataRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudAIPlatformV1.WriteTensorboardExperimentDataResponse
+            (r: WriteTensorboardExperimentDataRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudAIPlatformV1.WriteTensorboardExperimentDataResponse
             in
             return try await self.inner.writeTensorboardExperimentData(request: r, options: o)
           })
       }
 
       public func writeTensorboardRunData(
-        request: WriteTensorboardRunDataRequest, options: GoogleCloudGax.RequestOptions
+        request: WriteTensorboardRunDataRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.WriteTensorboardRunDataResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "writeTensorboardRunData",
           action: {
-            (r: WriteTensorboardRunDataRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: WriteTensorboardRunDataRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.WriteTensorboardRunDataResponse
             in
             return try await self.inner.writeTensorboardRunData(request: r, options: o)
@@ -497,59 +497,59 @@
       }
 
       public func exportTensorboardTimeSeriesData(
-        request: ExportTensorboardTimeSeriesDataRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportTensorboardTimeSeriesDataRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ExportTensorboardTimeSeriesDataResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "exportTensorboardTimeSeriesData",
           action: {
-            (r: ExportTensorboardTimeSeriesDataRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudAIPlatformV1.ExportTensorboardTimeSeriesDataResponse
+            (r: ExportTensorboardTimeSeriesDataRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudAIPlatformV1.ExportTensorboardTimeSeriesDataResponse
             in
             return try await self.inner.exportTensorboardTimeSeriesData(request: r, options: o)
           })
       }
 
       public func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listLocations",
           action: {
-            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.ListLocationsResponse
+            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.ListLocationsResponse
             in
             return try await self.inner.listLocations(request: r, options: o)
           })
       }
 
       public func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location {
         try await self._intercept(
           request: request,
           options: options,
           name: "getLocation",
           action: {
-            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.Location
+            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.Location
             in
             return try await self.inner.getLocation(request: r, options: o)
           })
       }
 
       public func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "setIamPolicy",
           action: {
-            (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleIAMV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
@@ -557,14 +557,14 @@
       }
 
       public func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           name: "getIamPolicy",
           action: {
-            (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleIAMV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
@@ -572,88 +572,88 @@
       }
 
       public func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "testIamPermissions",
           action: {
-            (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleIAMV1.TestIamPermissionsResponse
+            (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleIAMV1.TestIamPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
           })
       }
 
       public func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listOperations",
           action: {
-            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.ListOperationsResponse
+            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.ListOperationsResponse
             in
             return try await self.inner.listOperations(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)
           })
       }
 
       public func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteOperation",
           action: {
-            (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.deleteOperation(request: r, options: o)
           })
       }
 
       public func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "cancelOperation",
           action: {
-            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.cancelOperation(request: r, options: o)
           })
       }
 
       public func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "waitOperation",
           action: {
-            (r: GoogleLongRunning.WaitOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.WaitOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.waitOperation(request: r, options: o)
           })

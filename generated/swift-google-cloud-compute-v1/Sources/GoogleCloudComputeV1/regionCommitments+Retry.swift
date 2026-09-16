@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class RegionCommitmentsRetry: RegionCommitmentsStub {
       let inner: any RegionCommitmentsStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any RegionCommitmentsStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any RegionCommitmentsStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,15 +50,14 @@
       }
 
       public func aggregatedList(
-        request: RegionCommitmentsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CommitmentAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RegionCommitmentsClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionCommitmentsClient.AggregatedListRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.CommitmentAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
@@ -66,14 +65,14 @@
       }
 
       public func `get`(
-        request: RegionCommitmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Commitment {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RegionCommitmentsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionCommitmentsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Commitment
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -81,29 +80,29 @@
       }
 
       public func insert(
-        request: RegionCommitmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: RegionCommitmentsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionCommitmentsClient.InsertRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: RegionCommitmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CommitmentList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RegionCommitmentsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionCommitmentsClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.CommitmentList
             in
             return try await self.inner.list(request: r, options: o)
@@ -111,29 +110,29 @@
       }
 
       public func update(
-        request: RegionCommitmentsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: RegionCommitmentsClient.UpdateRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionCommitmentsClient.UpdateRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RegionOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

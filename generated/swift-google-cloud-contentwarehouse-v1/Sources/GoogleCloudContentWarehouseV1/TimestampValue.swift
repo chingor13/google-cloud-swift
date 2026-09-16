@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Timestamp value type.
-public struct TimestampValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TimestampValue: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   public var value: OneOf_Value? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TimestampValue`.
   public init() {}
@@ -70,7 +70,7 @@ public struct TimestampValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       value = $0
     }
     if let timestampValue = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp?.self, forKey: .timestampValue)
+      GoogleWKT.Timestamp?.self, forKey: .timestampValue)
     {
       try valueCheckAndSet(.timestampValue(timestampValue))
     }
@@ -80,7 +80,7 @@ public struct TimestampValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.value = value
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,7 +102,7 @@ public struct TimestampValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public enum OneOf_Value: Codable, Equatable, Sendable {
     /// Timestamp value
-    indirect case timestampValue(GoogleCloudWKT.Timestamp?)
+    indirect case timestampValue(GoogleWKT.Timestamp?)
     /// The string must represent a valid instant in UTC and is parsed using
     /// java.time.format.DateTimeFormatter.ISO_INSTANT.
     /// e.g. "2013-09-29T18:46:19Z"
@@ -112,10 +112,10 @@ public struct TimestampValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contentwarehouse.v1.TimestampValue"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudEnterpriseKnowledgeGraphV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: EnterpriseKnowledgeGraphServiceClient, projectId: String, locationId: String)
   async throws

@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CloudCatalogStub: Sendable {
     func listServices(
-      request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ListServicesResponse
 
     func listSkus(
-      request: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ListSkusResponse
   }
 }

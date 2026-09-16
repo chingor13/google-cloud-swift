@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A collection of Bigtable [Tables][google.bigtable.admin.v2.Table] and
 /// the resources that serve them.
@@ -24,7 +24,7 @@ import Foundation
 ///
 /// [google.bigtable.admin.v2.Cluster]: <doc:Cluster>
 /// [google.bigtable.admin.v2.Table]: <doc:Table>
-public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The unique name of the instance. Values are of the form
@@ -64,7 +64,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. A commit timestamp representing when this Instance was
   /// created. For instances created before this field was added (August 2021),
   /// this value is `seconds: 0, nanos: 1`.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Reserved for future use.
   public var satisfiesPzs: Swift.Bool? = nil
@@ -83,7 +83,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// in-depth overview on the difference between tags and labels.
   public var tags: [Swift.String: Swift.String] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Instance`.
   public init() {}
@@ -153,8 +153,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.labels = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.satisfiesPzs = try container.decodeIfPresent(Swift.Bool.self, forKey: .satisfiesPzs)
     self.satisfiesPzi = try container.decodeIfPresent(Swift.Bool.self, forKey: .satisfiesPzi)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .tags) {
@@ -162,7 +161,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -518,10 +517,10 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.Instance"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

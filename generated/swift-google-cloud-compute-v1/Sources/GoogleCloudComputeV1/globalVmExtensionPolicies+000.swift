@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `globalVmExtensionPolicies` resource.
   ///
@@ -29,11 +29,11 @@
     Sendable
   {
     let inner: any Clients.GlobalVmExtensionPoliciesStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `GlobalVmExtensionPoliciesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.GlobalVmExtensionPoliciesStub =
         try Clients.GlobalVmExtensionPoliciesTransport(options)
       inner = Clients.GlobalVmExtensionPoliciesRetry(inner, options: options)
@@ -54,7 +54,7 @@
     /// @Snippet(path: "globalVmExtensionPolicies_aggregatedList")
     public func aggregatedList(
       request: GlobalVmExtensionPoliciesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.VmExtensionPolicyAggregatedListResponse {
       try await self.inner.aggregatedList(request: request, options: options)
     }
@@ -68,7 +68,7 @@
     /// @Snippet(path: "globalVmExtensionPolicies_aggregatedList")
     public func aggregatedList(
       byItem: GlobalVmExtensionPoliciesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, VmExtensionPoliciesScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -77,7 +77,7 @@
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Purge scoped resources (zonal policies) from a global VM extension
@@ -89,7 +89,7 @@
     ///
     /// @Snippet(path: "globalVmExtensionPolicies_delete")
     public func delete(
-      request: GlobalVmExtensionPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalVmExtensionPoliciesClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.delete(request: request, options: options)
     }
@@ -103,19 +103,18 @@
     ///
     /// @Snippet(path: "globalVmExtensionPolicies_delete")
     public func delete(
-      withPolling: GlobalVmExtensionPoliciesClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: GlobalVmExtensionPoliciesClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -123,8 +122,7 @@
       let rawOp = try await self.delete(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -132,7 +130,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -144,7 +142,7 @@
     ///
     /// @Snippet(path: "globalVmExtensionPolicies_get")
     public func `get`(
-      request: GlobalVmExtensionPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalVmExtensionPoliciesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicy {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -153,7 +151,7 @@
     ///
     /// @Snippet(path: "globalVmExtensionPolicies_insert")
     public func insert(
-      request: GlobalVmExtensionPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalVmExtensionPoliciesClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
     }
@@ -162,19 +160,18 @@
     ///
     /// @Snippet(path: "globalVmExtensionPolicies_insert")
     public func insert(
-      withPolling: GlobalVmExtensionPoliciesClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: GlobalVmExtensionPoliciesClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -182,8 +179,7 @@
       let rawOp = try await self.insert(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -191,7 +187,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -203,7 +199,7 @@
     ///
     /// @Snippet(path: "globalVmExtensionPolicies_list")
     public func list(
-      request: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicyList {
       try await self.inner.list(request: request, options: options)
     }
@@ -212,7 +208,7 @@
     ///
     /// @Snippet(path: "globalVmExtensionPolicies_list")
     public func list(
-      byItem: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GlobalVmExtensionPolicy, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicyList in
@@ -220,14 +216,14 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Updates a global VM extension policy.
     ///
     /// @Snippet(path: "globalVmExtensionPolicies_update")
     public func update(
-      request: GlobalVmExtensionPoliciesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalVmExtensionPoliciesClient.UpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.update(request: request, options: options)
     }
@@ -236,19 +232,18 @@
     ///
     /// @Snippet(path: "globalVmExtensionPolicies_update")
     public func update(
-      withPolling: GlobalVmExtensionPoliciesClient.UpdateRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: GlobalVmExtensionPoliciesClient.UpdateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -256,8 +251,7 @@
       let rawOp = try await self.update(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -265,7 +259,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -277,7 +271,7 @@
     ///
     /// @Snippet(path: "globalVmExtensionPolicies_getOperation")
     func getOperation(
-      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -343,46 +337,43 @@
       /// See `GlobalVmExtensionPoliciesClient.aggregatedList`.
       func aggregatedList(
         request: GlobalVmExtensionPoliciesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VmExtensionPolicyAggregatedListResponse
 
       /// See `GlobalVmExtensionPoliciesClient.aggregatedList`.
       func aggregatedList(
         byItem: GlobalVmExtensionPoliciesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<(Swift.String, VmExtensionPoliciesScopedList), Swift.Error>
 
       /// See `GlobalVmExtensionPoliciesClient.delete`.
       func delete(
-        request: GlobalVmExtensionPoliciesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalVmExtensionPoliciesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `GlobalVmExtensionPoliciesClient.`get``.
       func `get`(
-        request: GlobalVmExtensionPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalVmExtensionPoliciesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicy
 
       /// See `GlobalVmExtensionPoliciesClient.insert`.
       func insert(
-        request: GlobalVmExtensionPoliciesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalVmExtensionPoliciesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `GlobalVmExtensionPoliciesClient.list`.
       func list(
-        request: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicyList
 
       /// See `GlobalVmExtensionPoliciesClient.list`.
       func list(
-        byItem: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GlobalVmExtensionPolicy, Swift.Error>
 
       /// See `GlobalVmExtensionPoliciesClient.update`.
       func update(
-        request: GlobalVmExtensionPoliciesClient.UpdateRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalVmExtensionPoliciesClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
@@ -397,9 +388,9 @@
 
     public func aggregatedList(
       request: GlobalVmExtensionPoliciesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.VmExtensionPolicyAggregatedListResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
@@ -410,14 +401,14 @@
 
     public func aggregatedList(
       byItem: GlobalVmExtensionPoliciesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, VmExtensionPoliciesScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudComputeV1.VmExtensionPolicyAggregatedListResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func aggregatedList(
@@ -436,27 +427,25 @@
     }
 
     public func delete(
-      request: GlobalVmExtensionPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalVmExtensionPoliciesClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func delete(
       withPolling: GlobalVmExtensionPoliciesClient.DeleteRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
     }
 
     public func delete(
-      withPolling: GlobalVmExtensionPoliciesClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: GlobalVmExtensionPoliciesClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -464,7 +453,7 @@
       project: Swift.String,
       globalVmExtensionPolicy: Swift.String,
       body: GlobalVmExtensionPolicyRolloutOperationRolloutInput?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = GlobalVmExtensionPoliciesClient.DeleteRequest().with {
         $0.project = project
         $0.globalVmExtensionPolicy = globalVmExtensionPolicy
@@ -480,9 +469,9 @@
     }
 
     public func `get`(
-      request: GlobalVmExtensionPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalVmExtensionPoliciesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -503,34 +492,32 @@
     }
 
     public func insert(
-      request: GlobalVmExtensionPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalVmExtensionPoliciesClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func insert(
       withPolling: GlobalVmExtensionPoliciesClient.InsertRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
     }
 
     public func insert(
-      withPolling: GlobalVmExtensionPoliciesClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: GlobalVmExtensionPoliciesClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func insert(
       project: Swift.String,
       body: GlobalVmExtensionPolicy?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = GlobalVmExtensionPoliciesClient.InsertRequest().with {
         $0.project = project
         $0.body = body
@@ -545,9 +532,9 @@
     }
 
     public func list(
-      request: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicyList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -557,13 +544,13 @@
     }
 
     public func list(
-      byItem: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GlobalVmExtensionPoliciesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GlobalVmExtensionPolicy, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.GlobalVmExtensionPolicyList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(
@@ -582,27 +569,25 @@
     }
 
     public func update(
-      request: GlobalVmExtensionPoliciesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalVmExtensionPoliciesClient.UpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func update(
       withPolling: GlobalVmExtensionPoliciesClient.UpdateRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.update(withPolling: withPolling, options: .init())
     }
 
     public func update(
-      withPolling: GlobalVmExtensionPoliciesClient.UpdateRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: GlobalVmExtensionPoliciesClient.UpdateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -610,7 +595,7 @@
       project: Swift.String,
       globalVmExtensionPolicy: Swift.String,
       body: GlobalVmExtensionPolicy?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = GlobalVmExtensionPoliciesClient.UpdateRequest().with {
         $0.project = project
         $0.globalVmExtensionPolicy = globalVmExtensionPolicy
@@ -626,9 +611,9 @@
     }
 
     public func getOperation(
-      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

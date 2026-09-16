@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudBillingV1
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(client: CloudBillingClient, parent: String) async throws {
   let items = try client.listBillingAccounts(

@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudRunV2
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: TasksClient) async throws {
   let items = try client.listOperations(

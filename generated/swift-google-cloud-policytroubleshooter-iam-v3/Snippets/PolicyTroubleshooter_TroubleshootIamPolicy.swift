@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudPolicyTroubleshooterIAMV3
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: PolicyTroubleshooterClient) async throws {
   let response = try await client.troubleshootIamPolicy(

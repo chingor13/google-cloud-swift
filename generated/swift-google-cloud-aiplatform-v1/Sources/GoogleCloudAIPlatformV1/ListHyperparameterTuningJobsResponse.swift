@@ -16,16 +16,15 @@
 
 #if JobService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Response message for
   /// [JobService.ListHyperparameterTuningJobs][google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs]
   ///
   /// [google.cloud.aiplatform.v1.JobService.ListHyperparameterTuningJobs]: <doc:JobServiceClient/listHyperparameterTuningJobs(request:options:)>
-  public struct ListHyperparameterTuningJobsResponse: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
-    GoogleCloudGax._PaginatedResponse,
+  public struct ListHyperparameterTuningJobsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
+    GoogleGax._PaginatedResponse,
     Sendable
   {
     /// List of HyperparameterTuningJobs in the requested page.
@@ -43,7 +42,7 @@
     /// [google.cloud.aiplatform.v1.ListHyperparameterTuningJobsRequest.page_token]: <doc:ListHyperparameterTuningJobsRequest/pageToken>
     public var nextPageToken: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ListHyperparameterTuningJobsResponse`.
     public init() {}
@@ -88,7 +87,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -104,11 +103,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
 
     public func _getPaginatedItems() -> [HyperparameterTuningJob] {

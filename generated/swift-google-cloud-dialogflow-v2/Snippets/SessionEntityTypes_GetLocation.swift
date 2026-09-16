@@ -20,8 +20,8 @@
   import Foundation
   import GoogleCloudDialogflowV2
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
+  import GoogleWKT
 
   func sample(client: SessionEntityTypesClient) async throws {
     let response = try await client.getLocation(

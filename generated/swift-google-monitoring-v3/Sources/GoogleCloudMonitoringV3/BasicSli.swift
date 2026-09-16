@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An SLI measuring performance on a well-known service type. Performance will
 /// be computed on the basis of pre-defined metrics. The type of the
@@ -23,7 +23,7 @@ import Foundation
 /// `service_resource.labels` and `metric_labels` are used to construct a
 /// monitoring filter to filter that metric down to just the data relevant to
 /// this service.
-public struct BasicSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BasicSli: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// OPTIONAL: The set of RPCs to which this SLI is relevant. Telemetry from
@@ -50,7 +50,7 @@ public struct BasicSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// This SLI can be evaluated on the basis of availability or latency.
   public var sliCriteria: OneOf_SliCriteria? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BasicSli`.
   public init() {}
@@ -123,7 +123,7 @@ public struct BasicSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.sliCriteria = sliCriteria
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -147,10 +147,10 @@ public struct BasicSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Future parameters for the availability SLI.
-  public struct AvailabilityCriteria: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AvailabilityCriteria: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AvailabilityCriteria`.
     public init() {}
@@ -181,7 +181,7 @@ public struct BasicSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -195,23 +195,23 @@ public struct BasicSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.BasicSli.AvailabilityCriteria"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Parameters for a latency threshold SLI.
-  public struct LatencyCriteria: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LatencyCriteria: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Good service is defined to be the count of requests made to this service
     /// that return in no more than `threshold`.
-    public var threshold: GoogleCloudWKT.Duration? = nil
+    public var threshold: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LatencyCriteria`.
     public init() {}
@@ -244,11 +244,10 @@ public struct BasicSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.threshold = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .threshold)
+      self.threshold = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .threshold)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -263,11 +262,11 @@ public struct BasicSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.BasicSli.LatencyCriteria"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -284,10 +283,10 @@ public struct BasicSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.BasicSli"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

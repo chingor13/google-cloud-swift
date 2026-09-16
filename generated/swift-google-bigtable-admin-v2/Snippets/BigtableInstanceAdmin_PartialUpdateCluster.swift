@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudBigtableAdminV2
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: BigtableInstanceAdminClient) async throws {
   let poller = try await client.partialUpdateCluster(

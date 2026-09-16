@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines a collection of certificate configurations.
-public struct CertificateMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CertificateMap: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A user-defined name of the Certificate Map. Certificate Map names must be
@@ -30,10 +30,10 @@ public struct CertificateMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var description: Swift.String = Swift.String()
 
   /// Output only. The creation timestamp of a Certificate Map.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The update timestamp of a Certificate Map.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Set of labels associated with a Certificate Map.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -43,7 +43,7 @@ public struct CertificateMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Forwarding Rule.
   public var gclbTargets: [CertificateMap.GclbTarget] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CertificateMap`.
   public init() {}
@@ -92,10 +92,8 @@ public struct CertificateMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -107,7 +105,7 @@ public struct CertificateMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -125,7 +123,7 @@ public struct CertificateMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Describes a Target Proxy that uses this Certificate Map.
-  public struct GclbTarget: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GclbTarget: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. IP configurations for this Target Proxy where the
@@ -135,7 +133,7 @@ public struct CertificateMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// A Target Proxy to which this map is attached to.
     public var targetProxy: OneOf_TargetProxy? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GclbTarget`.
     public init() {}
@@ -201,7 +199,7 @@ public struct CertificateMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.targetProxy = targetProxy
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -223,7 +221,7 @@ public struct CertificateMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Defines IP configuration where this Certificate Map is serving.
-    public struct IpConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct IpConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. An external IP address.
@@ -232,7 +230,7 @@ public struct CertificateMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Output only. Ports.
       public var ports: [Swift.UInt32] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `IpConfig`.
       public init() {}
@@ -275,7 +273,7 @@ public struct CertificateMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -292,11 +290,11 @@ public struct CertificateMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.certificatemanager.v1.CertificateMap.GclbTarget.IpConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -315,21 +313,21 @@ public struct CertificateMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.certificatemanager.v1.CertificateMap.GclbTarget"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.certificatemanager.v1.CertificateMap"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

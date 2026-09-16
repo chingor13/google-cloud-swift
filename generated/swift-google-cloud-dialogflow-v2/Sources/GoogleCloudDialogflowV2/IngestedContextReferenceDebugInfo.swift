@@ -16,10 +16,10 @@
 
 #if Conversations || Participants
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Debug information related to ingested context reference.
-  public struct IngestedContextReferenceDebugInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IngestedContextReferenceDebugInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Indicates if the project is allowlisted to use ingested context
@@ -33,7 +33,7 @@
     public var ingestedParametersDebugInfo:
       [IngestedContextReferenceDebugInfo.IngestedParameterDebugInfo] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IngestedContextReferenceDebugInfo`.
     public init() {}
@@ -88,7 +88,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -103,7 +103,7 @@
     }
 
     /// Debug information related to ingested parameters from context reference.
-    public struct IngestedParameterDebugInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct IngestedParameterDebugInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the parameter in the context reference.
@@ -114,7 +114,7 @@
         IngestedContextReferenceDebugInfo.IngestedParameterDebugInfo.IngestionStatus =
           IngestedContextReferenceDebugInfo.IngestedParameterDebugInfo.IngestionStatus()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `IngestedParameterDebugInfo`.
       public init() {}
@@ -160,7 +160,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -314,22 +314,22 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.IngestedContextReferenceDebugInfo.IngestedParameterDebugInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.IngestedContextReferenceDebugInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

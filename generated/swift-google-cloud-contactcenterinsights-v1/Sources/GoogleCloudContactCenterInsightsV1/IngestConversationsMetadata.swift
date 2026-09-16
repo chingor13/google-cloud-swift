@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The metadata for an IngestConversations operation.
-public struct IngestConversationsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IngestConversationsMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The time the operation was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time the operation finished running.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The original request for ingest.
   public var request: IngestConversationsRequest? = nil
@@ -38,7 +38,7 @@ public struct IngestConversationsMetadata: Codable, Equatable, GoogleCloudWKT._A
   /// Output only. Statistics for IngestConversations operation.
   public var ingestConversationsStats: IngestConversationsMetadata.IngestConversationsStats? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IngestConversationsMetadata`.
   public init() {}
@@ -79,9 +79,8 @@ public struct IngestConversationsMetadata: Codable, Equatable, GoogleCloudWKT._A
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     self.request = try container.decodeIfPresent(IngestConversationsRequest.self, forKey: .request)
     if let value = try container.decodeIfPresent([GoogleRpc.Status].self, forKey: .partialErrors) {
       self.partialErrors = value
@@ -90,7 +89,7 @@ public struct IngestConversationsMetadata: Codable, Equatable, GoogleCloudWKT._A
       IngestConversationsMetadata.IngestConversationsStats.self, forKey: .ingestConversationsStats)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -107,7 +106,7 @@ public struct IngestConversationsMetadata: Codable, Equatable, GoogleCloudWKT._A
   }
 
   /// Statistics for IngestConversations operation.
-  public struct IngestConversationsStats: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IngestConversationsStats: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The number of objects processed during the ingest operation.
@@ -125,7 +124,7 @@ public struct IngestConversationsMetadata: Codable, Equatable, GoogleCloudWKT._A
     /// to errors. The errors are populated in the partial_errors field.
     public var failedIngestCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IngestConversationsStats`.
     public init() {}
@@ -182,7 +181,7 @@ public struct IngestConversationsMetadata: Codable, Equatable, GoogleCloudWKT._A
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -201,21 +200,21 @@ public struct IngestConversationsMetadata: Codable, Equatable, GoogleCloudWKT._A
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.IngestConversationsMetadata.IngestConversationsStats"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.IngestConversationsMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

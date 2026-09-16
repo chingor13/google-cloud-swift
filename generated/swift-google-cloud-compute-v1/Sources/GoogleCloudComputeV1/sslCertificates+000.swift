@@ -19,19 +19,19 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `sslCertificates` resource.
   ///
   /// @Snippet(path: "sslCertificatesQuickstart")
   public final class SslCertificatesClient: Clients.SslCertificatesProtocol, Sendable {
     let inner: any Clients.SslCertificatesStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `SslCertificatesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SslCertificatesStub = try Clients.SslCertificatesTransport(options)
       inner = Clients.SslCertificatesRetry(inner, options: options)
       if let logger = options.logger {
@@ -50,7 +50,7 @@
     ///
     /// @Snippet(path: "sslCertificates_aggregatedList")
     public func aggregatedList(
-      request: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList {
       try await self.inner.aggregatedList(request: request, options: options)
     }
@@ -63,7 +63,7 @@
     ///
     /// @Snippet(path: "sslCertificates_aggregatedList")
     public func aggregatedList(
-      byItem: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SslCertificatesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList in
@@ -71,14 +71,14 @@
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes the specified SslCertificate resource.
     ///
     /// @Snippet(path: "sslCertificates_delete")
     public func delete(
-      request: SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.delete(request: request, options: options)
     }
@@ -87,18 +87,18 @@
     ///
     /// @Snippet(path: "sslCertificates_delete")
     public func delete(
-      withPolling: SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: SslCertificatesClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -106,8 +106,7 @@
       let rawOp = try await self.delete(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -115,7 +114,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -127,7 +126,7 @@
     ///
     /// @Snippet(path: "sslCertificates_get")
     public func `get`(
-      request: SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SslCertificate {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -137,7 +136,7 @@
     ///
     /// @Snippet(path: "sslCertificates_insert")
     public func insert(
-      request: SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
     }
@@ -147,18 +146,18 @@
     ///
     /// @Snippet(path: "sslCertificates_insert")
     public func insert(
-      withPolling: SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: SslCertificatesClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -166,8 +165,7 @@
       let rawOp = try await self.insert(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -175,7 +173,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -188,7 +186,7 @@
     ///
     /// @Snippet(path: "sslCertificates_list")
     public func list(
-      request: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SslCertificateList {
       try await self.inner.list(request: request, options: options)
     }
@@ -198,7 +196,7 @@
     ///
     /// @Snippet(path: "sslCertificates_list")
     public func list(
-      byItem: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SslCertificatesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SslCertificate, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.SslCertificateList in
@@ -206,14 +204,14 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves the specified Operations resource.
     ///
     /// @Snippet(path: "sslCertificates_getOperation")
     func getOperation(
-      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -274,37 +272,37 @@
 
       /// See `SslCertificatesClient.aggregatedList`.
       func aggregatedList(
-        request: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList
 
       /// See `SslCertificatesClient.aggregatedList`.
       func aggregatedList(
-        byItem: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: SslCertificatesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error>
 
       /// See `SslCertificatesClient.delete`.
       func delete(
-        request: SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `SslCertificatesClient.`get``.
       func `get`(
-        request: SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificate
 
       /// See `SslCertificatesClient.insert`.
       func insert(
-        request: SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `SslCertificatesClient.list`.
       func list(
-        request: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SslCertificatesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificateList
 
       /// See `SslCertificatesClient.list`.
       func list(
-        byItem: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: SslCertificatesClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<SslCertificate, Swift.Error>
     }
   }
@@ -318,9 +316,9 @@
     }
 
     public func aggregatedList(
-      request: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
@@ -330,13 +328,13 @@
     }
 
     public func aggregatedList(
-      byItem: SslCertificatesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SslCertificatesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, SslCertificatesScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.SslCertificateAggregatedList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func aggregatedList(
@@ -355,33 +353,32 @@
     }
 
     public func delete(
-      request: SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func delete(
       withPolling: SslCertificatesClient.DeleteRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
     }
 
     public func delete(
-      withPolling: SslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: SslCertificatesClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func delete(
       project: Swift.String,
       sslCertificate: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = SslCertificatesClient.DeleteRequest().with {
         $0.project = project
         $0.sslCertificate = sslCertificate
@@ -396,9 +393,9 @@
     }
 
     public func `get`(
-      request: SslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SslCertificate {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -419,33 +416,32 @@
     }
 
     public func insert(
-      request: SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func insert(
       withPolling: SslCertificatesClient.InsertRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
     }
 
     public func insert(
-      withPolling: SslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: SslCertificatesClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func insert(
       project: Swift.String,
       body: SslCertificate?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = SslCertificatesClient.InsertRequest().with {
         $0.project = project
         $0.body = body
@@ -460,9 +456,9 @@
     }
 
     public func list(
-      request: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: SslCertificatesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.SslCertificateList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -472,13 +468,13 @@
     }
 
     public func list(
-      byItem: SslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SslCertificatesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SslCertificate, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.SslCertificateList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(
@@ -497,9 +493,9 @@
     }
 
     public func getOperation(
-      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

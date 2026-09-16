@@ -16,13 +16,13 @@
 
 #if VertexRagService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [VertexRagService.RetrieveContexts][google.cloud.aiplatform.v1.VertexRagService.RetrieveContexts].
   ///
   /// [google.cloud.aiplatform.v1.VertexRagService.RetrieveContexts]: <doc:VertexRagServiceClient/retrieveContexts(request:options:)>
-  public struct RetrieveContextsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RetrieveContextsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The resource name of the Location from which to retrieve
@@ -37,7 +37,7 @@
     /// Data Source to retrieve contexts.
     public var dataSource: OneOf_DataSource? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RetrieveContextsRequest`.
     public init() {}
@@ -97,7 +97,7 @@
       self.dataSource = dataSource
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -118,7 +118,7 @@
     }
 
     /// The data source for Vertex RagStore.
-    public struct VertexRagStore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct VertexRagStore: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The representation of the rag source. It can be used to specify
@@ -132,7 +132,7 @@
       @available(*, deprecated)
       public var vectorDistanceThreshold: Swift.Double? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `VertexRagStore`.
       public init() {}
@@ -176,7 +176,7 @@
           Swift.Double.self, forKey: .vectorDistanceThreshold)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -191,7 +191,7 @@
       }
 
       /// The definition of the Rag resource.
-      public struct RagResource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct RagResource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. RagCorpora resource name.
@@ -203,8 +203,7 @@
         /// in rag_corpus field.
         public var ragFileIds: [Swift.String] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `RagResource`.
         public init() {}
@@ -247,7 +246,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -264,11 +263,11 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.RetrieveContextsRequest.VertexRagStore.RagResource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -276,11 +275,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.RetrieveContextsRequest.VertexRagStore"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -293,11 +292,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.RetrieveContextsRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

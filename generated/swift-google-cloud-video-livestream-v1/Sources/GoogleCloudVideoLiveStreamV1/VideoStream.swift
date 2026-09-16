@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Video stream resource.
-public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VideoStream: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Codec settings.
   public var codecSettings: OneOf_CodecSettings? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VideoStream`.
   public init() {}
@@ -81,7 +81,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.codecSettings = codecSettings
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,7 +102,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// H264 codec settings.
-  public struct H264CodecSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct H264CodecSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The width of the video in pixels. Must be an even integer.
@@ -203,7 +203,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// GOP mode can be either by frame count or duration.
     public var gopMode: OneOf_GopMode? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `H264CodecSettings`.
     public init() {}
@@ -319,14 +319,14 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         try gopModeCheckAndSet(.gopFrameCount(gopFrameCount))
       }
       if let gopDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration?.self, forKey: .gopDuration)
+        GoogleWKT.Duration?.self, forKey: .gopDuration)
       {
         try gopModeCheckAndSet(.gopDuration(gopDuration))
       }
       self.gopMode = gopMode
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -377,22 +377,22 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// All video streams in the same channel must have the same GOP size.
       ///
       /// [google.cloud.video.livestream.v1.SegmentSettings.segment_duration]: <doc:SegmentSettings/segmentDuration>
-      indirect case gopDuration(GoogleCloudWKT.Duration?)
+      indirect case gopDuration(GoogleWKT.Duration?)
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.livestream.v1.VideoStream.H264CodecSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// H265 codec settings.
-  public struct H265CodecSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct H265CodecSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The width of the video in pixels. Must be an even integer.
@@ -458,7 +458,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// GOP mode can be either by frame count or duration.
     public var gopMode: OneOf_GopMode? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `H265CodecSettings`.
     public init() {}
@@ -554,14 +554,14 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         try gopModeCheckAndSet(.gopFrameCount(gopFrameCount))
       }
       if let gopDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration?.self, forKey: .gopDuration)
+        GoogleWKT.Duration?.self, forKey: .gopDuration)
       {
         try gopModeCheckAndSet(.gopDuration(gopDuration))
       }
       self.gopMode = gopMode
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -608,17 +608,17 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// All video streams in the same channel must have the same GOP size.
       ///
       /// [google.cloud.video.livestream.v1.SegmentSettings.segment_duration]: <doc:SegmentSettings/segmentDuration>
-      indirect case gopDuration(GoogleCloudWKT.Duration?)
+      indirect case gopDuration(GoogleWKT.Duration?)
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.livestream.v1.VideoStream.H265CodecSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -633,10 +633,10 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.livestream.v1.VideoStream"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

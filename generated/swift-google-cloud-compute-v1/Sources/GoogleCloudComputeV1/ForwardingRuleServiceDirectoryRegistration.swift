@@ -16,12 +16,12 @@
 
 #if ForwardingRules || GlobalForwardingRules
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Describes the auto-registration of the forwarding rule to Service Directory.
   /// The region and project of the Service Directory resource generated from
   /// this registration will be the same as this forwarding rule.
-  public struct ForwardingRuleServiceDirectoryRegistration: Codable, Equatable, GoogleCloudWKT
+  public struct ForwardingRuleServiceDirectoryRegistration: Codable, Equatable, GoogleWKT
       ._AnyPackable,
     Sendable
   {
@@ -37,7 +37,7 @@
     /// the same Service Directory region.
     public var serviceDirectoryRegion: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ForwardingRuleServiceDirectoryRegistration`.
     public init() {}
@@ -80,7 +80,7 @@
         Swift.String.self, forKey: .serviceDirectoryRegion)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -98,11 +98,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.ForwardingRuleServiceDirectoryRegistration"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

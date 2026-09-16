@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudGKEMultiCloudV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: AwsClustersClient) async throws {
   let response = try await client.getAwsJsonWebKeys(

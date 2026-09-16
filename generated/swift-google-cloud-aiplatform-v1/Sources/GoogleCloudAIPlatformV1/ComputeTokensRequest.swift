@@ -16,10 +16,10 @@
 
 #if LlmUtilityService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for ComputeTokens RPC call.
-  public struct ComputeTokensRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ComputeTokensRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The name of the Endpoint requested to get lists of tokens and
@@ -29,7 +29,7 @@
     /// Optional. The instances that are the input to token computing API call.
     /// Schema is identical to the prediction schema of the text model, even for
     /// the non-text models, like chat models, or Codey models.
-    public var instances: [GoogleCloudWKT.Value] = []
+    public var instances: [GoogleWKT.Value] = []
 
     /// Optional. The name of the publisher model requested to serve the
     /// prediction. Format:
@@ -39,7 +39,7 @@
     /// Optional. Input content.
     public var contents: [Content] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ComputeTokensRequest`.
     public init() {}
@@ -81,8 +81,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .endpoint) {
         self.endpoint = value
       }
-      if let value = try container.decodeIfPresent([GoogleCloudWKT.Value].self, forKey: .instances)
-      {
+      if let value = try container.decodeIfPresent([GoogleWKT.Value].self, forKey: .instances) {
         self.instances = value
       }
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .model) {
@@ -93,7 +92,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -111,11 +110,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ComputeTokensRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

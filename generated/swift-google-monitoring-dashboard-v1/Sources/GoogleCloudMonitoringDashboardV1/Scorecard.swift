@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A widget showing the latest value of a metric, and how this value relates to
 /// one or more thresholds.
-public struct Scorecard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Scorecard: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Fields for querying time series data from the
@@ -70,7 +70,7 @@ public struct Scorecard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// neither is included - then a default scorecard is shown.
   public var dataView: OneOf_DataView? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Scorecard`.
   public init() {}
@@ -136,14 +136,13 @@ public struct Scorecard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       try dataViewCheckAndSet(.sparkChartView(sparkChartView))
     }
-    if let blankView = try container.decodeIfPresent(GoogleCloudWKT.Empty?.self, forKey: .blankView)
-    {
+    if let blankView = try container.decodeIfPresent(GoogleWKT.Empty?.self, forKey: .blankView) {
       try dataViewCheckAndSet(.blankView(blankView))
     }
     self.dataView = dataView
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -170,7 +169,7 @@ public struct Scorecard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// A gauge chart shows where the current value sits within a pre-defined
   /// range. The upper and lower bounds should define the possible range of
   /// values for the scorecard's query (inclusive).
-  public struct GaugeView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GaugeView: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The lower bound for this gauge chart. The value of the chart should
@@ -181,7 +180,7 @@ public struct Scorecard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// always be less than or equal to this.
     public var upperBound: Swift.Double = Swift.Double()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GaugeView`.
     public init() {}
@@ -224,7 +223,7 @@ public struct Scorecard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -240,11 +239,11 @@ public struct Scorecard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.dashboard.v1.Scorecard.GaugeView"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -252,7 +251,7 @@ public struct Scorecard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// inline in text. This message contains the configuration for a sparkChart
   /// to show up on a Scorecard, showing recent trends of the scorecard's
   /// timeseries.
-  public struct SparkChartView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SparkChartView: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The type of sparkchart to show in this chartView.
@@ -263,9 +262,9 @@ public struct Scorecard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// For example, if the data is published once every 10 minutes it would not
     /// make sense to fetch and align data at one minute intervals. This field is
     /// optional and exists only as a hint.
-    public var minAlignmentPeriod: GoogleCloudWKT.Duration? = nil
+    public var minAlignmentPeriod: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SparkChartView`.
     public init() {}
@@ -304,10 +303,10 @@ public struct Scorecard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.sparkChartType = value
       }
       self.minAlignmentPeriod = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .minAlignmentPeriod)
+        GoogleWKT.Duration.self, forKey: .minAlignmentPeriod)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -323,11 +322,11 @@ public struct Scorecard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.dashboard.v1.Scorecard.SparkChartView"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -340,16 +339,16 @@ public struct Scorecard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     indirect case sparkChartView(Scorecard.SparkChartView?)
     /// Will cause the `Scorecard` to show only the value, with no indicator to
     /// its value relative to its thresholds.
-    indirect case blankView(GoogleCloudWKT.Empty?)
+    indirect case blankView(GoogleWKT.Empty?)
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.dashboard.v1.Scorecard"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

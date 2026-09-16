@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Kubernetes taint is composed of three fields: key, value, and effect. Effect
 /// can only be one of three types:  NoSchedule, PreferNoSchedule or NoExecute.
@@ -23,7 +23,7 @@ import Foundation
 /// See
 /// [here](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration)
 /// for more information, including usage and the valid values.
-public struct NodeTaint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NodeTaint: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Key for taint.
@@ -35,7 +35,7 @@ public struct NodeTaint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Effect for taint.
   public var effect: NodeTaint.Effect = NodeTaint.Effect()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NodeTaint`.
   public init() {}
@@ -83,7 +83,7 @@ public struct NodeTaint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -212,10 +212,10 @@ public struct NodeTaint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.NodeTaint"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

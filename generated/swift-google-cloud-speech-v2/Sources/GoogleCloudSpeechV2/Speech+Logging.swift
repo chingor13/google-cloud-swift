@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -41,9 +41,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -60,14 +60,14 @@ extension Clients {
     }
 
     public func createRecognizer(
-      request: CreateRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createRecognizer",
         action: {
-          (r: CreateRecognizerRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateRecognizerRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createRecognizer(request: r, options: o)
@@ -75,14 +75,14 @@ extension Clients {
     }
 
     public func listRecognizers(
-      request: ListRecognizersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRecognizersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.ListRecognizersResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listRecognizers",
         action: {
-          (r: ListRecognizersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListRecognizersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSpeechV2.ListRecognizersResponse
           in
           return try await self.inner.listRecognizers(request: r, options: o)
@@ -90,14 +90,14 @@ extension Clients {
     }
 
     public func getRecognizer(
-      request: GetRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.Recognizer {
       try await self._intercept(
         request: request,
         options: options,
         name: "getRecognizer",
         action: {
-          (r: GetRecognizerRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetRecognizerRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSpeechV2.Recognizer
           in
           return try await self.inner.getRecognizer(request: r, options: o)
@@ -105,14 +105,14 @@ extension Clients {
     }
 
     public func updateRecognizer(
-      request: UpdateRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateRecognizer",
         action: {
-          (r: UpdateRecognizerRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateRecognizerRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updateRecognizer(request: r, options: o)
@@ -120,14 +120,14 @@ extension Clients {
     }
 
     public func deleteRecognizer(
-      request: DeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteRecognizer",
         action: {
-          (r: DeleteRecognizerRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteRecognizerRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteRecognizer(request: r, options: o)
@@ -135,14 +135,14 @@ extension Clients {
     }
 
     public func undeleteRecognizer(
-      request: UndeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "undeleteRecognizer",
         action: {
-          (r: UndeleteRecognizerRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UndeleteRecognizerRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.undeleteRecognizer(request: r, options: o)
@@ -150,14 +150,14 @@ extension Clients {
     }
 
     public func recognize(
-      request: RecognizeRequest, options: GoogleCloudGax.RequestOptions
+      request: RecognizeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.RecognizeResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "recognize",
         action: {
-          (r: RecognizeRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RecognizeRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSpeechV2.RecognizeResponse
           in
           return try await self.inner.recognize(request: r, options: o)
@@ -165,14 +165,14 @@ extension Clients {
     }
 
     public func batchRecognize(
-      request: BatchRecognizeRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchRecognizeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "batchRecognize",
         action: {
-          (r: BatchRecognizeRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BatchRecognizeRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.batchRecognize(request: r, options: o)
@@ -180,14 +180,14 @@ extension Clients {
     }
 
     public func getConfig(
-      request: GetConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.Config {
       try await self._intercept(
         request: request,
         options: options,
         name: "getConfig",
         action: {
-          (r: GetConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSpeechV2.Config
           in
           return try await self.inner.getConfig(request: r, options: o)
@@ -195,14 +195,14 @@ extension Clients {
     }
 
     public func updateConfig(
-      request: UpdateConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.Config {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateConfig",
         action: {
-          (r: UpdateConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSpeechV2.Config
           in
           return try await self.inner.updateConfig(request: r, options: o)
@@ -210,14 +210,14 @@ extension Clients {
     }
 
     public func createCustomClass(
-      request: CreateCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createCustomClass",
         action: {
-          (r: CreateCustomClassRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateCustomClassRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createCustomClass(request: r, options: o)
@@ -225,14 +225,14 @@ extension Clients {
     }
 
     public func listCustomClasses(
-      request: ListCustomClassesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomClassesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.ListCustomClassesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listCustomClasses",
         action: {
-          (r: ListCustomClassesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCustomClassesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSpeechV2.ListCustomClassesResponse
           in
           return try await self.inner.listCustomClasses(request: r, options: o)
@@ -240,14 +240,14 @@ extension Clients {
     }
 
     public func getCustomClass(
-      request: GetCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.CustomClass {
       try await self._intercept(
         request: request,
         options: options,
         name: "getCustomClass",
         action: {
-          (r: GetCustomClassRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCustomClassRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSpeechV2.CustomClass
           in
           return try await self.inner.getCustomClass(request: r, options: o)
@@ -255,14 +255,14 @@ extension Clients {
     }
 
     public func updateCustomClass(
-      request: UpdateCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateCustomClass",
         action: {
-          (r: UpdateCustomClassRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateCustomClassRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updateCustomClass(request: r, options: o)
@@ -270,14 +270,14 @@ extension Clients {
     }
 
     public func deleteCustomClass(
-      request: DeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteCustomClass",
         action: {
-          (r: DeleteCustomClassRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteCustomClassRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteCustomClass(request: r, options: o)
@@ -285,14 +285,14 @@ extension Clients {
     }
 
     public func undeleteCustomClass(
-      request: UndeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "undeleteCustomClass",
         action: {
-          (r: UndeleteCustomClassRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UndeleteCustomClassRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.undeleteCustomClass(request: r, options: o)
@@ -300,14 +300,14 @@ extension Clients {
     }
 
     public func createPhraseSet(
-      request: CreatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createPhraseSet",
         action: {
-          (r: CreatePhraseSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreatePhraseSetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createPhraseSet(request: r, options: o)
@@ -315,14 +315,14 @@ extension Clients {
     }
 
     public func listPhraseSets(
-      request: ListPhraseSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPhraseSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.ListPhraseSetsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listPhraseSets",
         action: {
-          (r: ListPhraseSetsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListPhraseSetsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSpeechV2.ListPhraseSetsResponse
           in
           return try await self.inner.listPhraseSets(request: r, options: o)
@@ -330,14 +330,14 @@ extension Clients {
     }
 
     public func getPhraseSet(
-      request: GetPhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.PhraseSet {
       try await self._intercept(
         request: request,
         options: options,
         name: "getPhraseSet",
         action: {
-          (r: GetPhraseSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetPhraseSetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSpeechV2.PhraseSet
           in
           return try await self.inner.getPhraseSet(request: r, options: o)
@@ -345,14 +345,14 @@ extension Clients {
     }
 
     public func updatePhraseSet(
-      request: UpdatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "updatePhraseSet",
         action: {
-          (r: UpdatePhraseSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdatePhraseSetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updatePhraseSet(request: r, options: o)
@@ -360,14 +360,14 @@ extension Clients {
     }
 
     public func deletePhraseSet(
-      request: DeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deletePhraseSet",
         action: {
-          (r: DeletePhraseSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeletePhraseSetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deletePhraseSet(request: r, options: o)
@@ -375,14 +375,14 @@ extension Clients {
     }
 
     public func undeletePhraseSet(
-      request: UndeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeletePhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "undeletePhraseSet",
         action: {
-          (r: UndeletePhraseSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UndeletePhraseSetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.undeletePhraseSet(request: r, options: o)
@@ -390,29 +390,29 @@ extension Clients {
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLocations",
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLocation",
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)
@@ -420,29 +420,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -450,29 +450,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteOperation",
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "cancelOperation",
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

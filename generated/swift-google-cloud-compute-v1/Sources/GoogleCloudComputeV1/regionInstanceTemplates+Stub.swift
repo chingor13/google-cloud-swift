@@ -16,29 +16,29 @@
 
 #if RegionInstanceTemplates
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionInstanceTemplatesStub: Sendable {
       func delete(
-        request: RegionInstanceTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceTemplatesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RegionInstanceTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceTemplatesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceTemplate
 
       func insert(
-        request: RegionInstanceTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceTemplatesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RegionInstanceTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceTemplatesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceTemplateList
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

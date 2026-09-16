@@ -16,10 +16,10 @@
 
 #if DeploymentResourcePoolService || EndpointService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A deployment of a Model. Endpoints contain one or more DeployedModels.
-  public struct DeployedModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DeployedModel: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. The ID of the DeployedModel. If not provided upon deployment,
@@ -47,7 +47,7 @@
     public var displayName: Swift.String = Swift.String()
 
     /// Output only. Timestamp when the DeployedModel was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Explanation configuration for this DeployedModel.
     ///
@@ -144,7 +144,7 @@
     /// [google.cloud.aiplatform.v1.Model.supported_deployment_resources_types]: <doc:Model/supportedDeploymentResourcesTypes>
     public var predictionResources: OneOf_PredictionResources? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DeployedModel`.
     public init() {}
@@ -225,8 +225,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
         self.displayName = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
       self.explanationSpec = try container.decodeIfPresent(
         ExplanationSpec.self, forKey: .explanationSpec)
       if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .disableExplanations) {
@@ -287,7 +286,7 @@
       self.predictionResources = predictionResources
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -326,19 +325,19 @@
     }
 
     /// Runtime status of the deployed model.
-    public struct Status: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Status: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The latest deployed model's status message (if any).
       public var message: Swift.String = Swift.String()
 
       /// Output only. The time at which the status was last updated.
-      public var lastUpdateTime: GoogleCloudWKT.Timestamp? = nil
+      public var lastUpdateTime: GoogleWKT.Timestamp? = nil
 
       /// Output only. The number of available replicas of the deployed model.
       public var availableReplicaCount: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Status`.
       public init() {}
@@ -379,7 +378,7 @@
           self.message = value
         }
         self.lastUpdateTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .lastUpdateTime)
+          GoogleWKT.Timestamp.self, forKey: .lastUpdateTime)
         if let value = try container.decodeIfPresent(
           Swift.Int32.self, forKey: .availableReplicaCount)
         {
@@ -387,7 +386,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -404,11 +403,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.DeployedModel.Status"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -436,11 +435,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.DeployedModel"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

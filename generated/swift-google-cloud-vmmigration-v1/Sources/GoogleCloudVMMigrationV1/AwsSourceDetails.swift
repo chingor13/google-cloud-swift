@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// AwsSourceDetails message describes a specific source details for the
 /// AWS source type.
-public struct AwsSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AwsSourceDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Immutable. The AWS region that the source VMs will be migrated from.
@@ -52,7 +52,7 @@ public struct AwsSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public var credentialsType: OneOf_CredentialsType? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AwsSourceDetails`.
   public init() {}
@@ -143,7 +143,7 @@ public struct AwsSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.credentialsType = credentialsType
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -169,7 +169,7 @@ public struct AwsSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Message describing AWS Credentials using access key id and secret.
-  public struct AccessKeyCredentials: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AccessKeyCredentials: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// AWS access key ID.
@@ -183,7 +183,7 @@ public struct AwsSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// creating the temporary credentials.
     public var sessionToken: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AccessKeyCredentials`.
     public init() {}
@@ -231,7 +231,7 @@ public struct AwsSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -248,16 +248,16 @@ public struct AwsSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vmmigration.v1.AwsSourceDetails.AccessKeyCredentials"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Tag is an AWS tag representation.
-  public struct Tag: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Tag: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Key of tag.
@@ -266,7 +266,7 @@ public struct AwsSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Required. Value of tag.
     public var value: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Tag`.
     public init() {}
@@ -309,7 +309,7 @@ public struct AwsSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -325,11 +325,11 @@ public struct AwsSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vmmigration.v1.AwsSourceDetails.Tag"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -456,10 +456,10 @@ public struct AwsSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmmigration.v1.AwsSourceDetails"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

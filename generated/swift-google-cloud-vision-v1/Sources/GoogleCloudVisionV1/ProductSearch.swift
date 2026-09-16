@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Manages Products and ProductSets of reference images for use in product
 /// search. It uses the following resource model:
@@ -47,11 +47,11 @@ import GoogleCloudGax
 /// @Snippet(path: "ProductSearchQuickstart")
 public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable {
   let inner: any Clients.ProductSearchStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `ProductSearchClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ProductSearchStub = try Clients.ProductSearchTransport(options)
     inner = Clients.ProductSearchRetry(inner, options: options)
     if let logger = options.logger {
@@ -71,7 +71,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_CreateProductSet")
   public func createProductSet(
-    request: CreateProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ProductSet {
     try await self.inner.createProductSet(request: request, options: options)
   }
@@ -85,7 +85,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_ListProductSets")
   public func listProductSets(
-    request: ListProductSetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProductSetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ListProductSetsResponse {
     try await self.inner.listProductSets(request: request, options: options)
   }
@@ -99,7 +99,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_ListProductSets")
   public func listProductSets(
-    byItem: ListProductSetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProductSetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ProductSet, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVisionV1.ListProductSetsResponse in
@@ -107,7 +107,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
       request.pageToken = token
       return try await self.listProductSets(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information associated with a ProductSet.
@@ -118,7 +118,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_GetProductSet")
   public func getProductSet(
-    request: GetProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ProductSet {
     try await self.inner.getProductSet(request: request, options: options)
   }
@@ -134,7 +134,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_UpdateProductSet")
   public func updateProductSet(
-    request: UpdateProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ProductSet {
     try await self.inner.updateProductSet(request: request, options: options)
   }
@@ -146,7 +146,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_DeleteProductSet")
   public func deleteProductSet(
-    request: DeleteProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteProductSet(request: request, options: options)
   }
@@ -162,7 +162,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_CreateProduct")
   public func createProduct(
-    request: CreateProductRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.Product {
     try await self.inner.createProduct(request: request, options: options)
   }
@@ -175,7 +175,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_ListProducts")
   public func listProducts(
-    request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ListProductsResponse {
     try await self.inner.listProducts(request: request, options: options)
   }
@@ -188,7 +188,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_ListProducts")
   public func listProducts(
-    byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProductsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVisionV1.ListProductsResponse in
@@ -196,7 +196,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
       request.pageToken = token
       return try await self.listProducts(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information associated with a Product.
@@ -207,7 +207,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_GetProduct")
   public func getProduct(
-    request: GetProductRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.Product {
     try await self.inner.getProduct(request: request, options: options)
   }
@@ -230,7 +230,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_UpdateProduct")
   public func updateProduct(
-    request: UpdateProductRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.Product {
     try await self.inner.updateProduct(request: request, options: options)
   }
@@ -243,7 +243,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_DeleteProduct")
   public func deleteProduct(
-    request: DeleteProductRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteProductRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteProduct(request: request, options: options)
   }
@@ -270,7 +270,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_CreateReferenceImage")
   public func createReferenceImage(
-    request: CreateReferenceImageRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateReferenceImageRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ReferenceImage {
     try await self.inner.createReferenceImage(request: request, options: options)
   }
@@ -285,7 +285,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_DeleteReferenceImage")
   public func deleteReferenceImage(
-    request: DeleteReferenceImageRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteReferenceImageRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteReferenceImage(request: request, options: options)
   }
@@ -300,7 +300,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_ListReferenceImages")
   public func listReferenceImages(
-    request: ListReferenceImagesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReferenceImagesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ListReferenceImagesResponse {
     try await self.inner.listReferenceImages(request: request, options: options)
   }
@@ -315,7 +315,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_ListReferenceImages")
   public func listReferenceImages(
-    byItem: ListReferenceImagesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReferenceImagesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ReferenceImage, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVisionV1.ListReferenceImagesResponse in
@@ -323,7 +323,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
       request.pageToken = token
       return try await self.listReferenceImages(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information associated with a ReferenceImage.
@@ -334,7 +334,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_GetReferenceImage")
   public func getReferenceImage(
-    request: GetReferenceImageRequest, options: GoogleCloudGax.RequestOptions
+    request: GetReferenceImageRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ReferenceImage {
     try await self.inner.getReferenceImage(request: request, options: options)
   }
@@ -350,7 +350,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_AddProductToProductSet")
   public func addProductToProductSet(
-    request: AddProductToProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: AddProductToProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.addProductToProductSet(request: request, options: options)
   }
@@ -359,7 +359,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_RemoveProductFromProductSet")
   public func removeProductFromProductSet(
-    request: RemoveProductFromProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveProductFromProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.removeProductFromProductSet(request: request, options: options)
   }
@@ -374,7 +374,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_ListProductsInProductSet")
   public func listProductsInProductSet(
-    request: ListProductsInProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProductsInProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ListProductsInProductSetResponse {
     try await self.inner.listProductsInProductSet(request: request, options: options)
   }
@@ -389,7 +389,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_ListProductsInProductSet")
   public func listProductsInProductSet(
-    byItem: ListProductsInProductSetRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProductsInProductSetRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVisionV1.ListProductsInProductSetResponse in
@@ -397,7 +397,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
       request.pageToken = token
       return try await self.listProductsInProductSet(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Asynchronous API that imports a list of reference images to specified
@@ -417,7 +417,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_ImportProductSets")
   public func importProductSets(
-    request: ImportProductSetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportProductSetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.importProductSets(request: request, options: options)
   }
@@ -439,22 +439,22 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_ImportProductSets")
   public func importProductSets(
-    withPolling: ImportProductSetsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportProductSetsResponse> {
+    withPolling: ImportProductSetsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportProductSetsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ImportProductSetsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ImportProductSetsResponse>.State in
       return try op._extractStatus(ImportProductSetsResponse.self)
     }
     let rawOp = try await self.importProductSets(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ImportProductSetsResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<ImportProductSetsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -491,7 +491,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_PurgeProducts")
   public func purgeProducts(
-    request: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: PurgeProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.purgeProducts(request: request, options: options)
   }
@@ -525,21 +525,21 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_PurgeProducts")
   public func purgeProducts(
-    withPolling: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: PurgeProductsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.purgeProducts(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -553,7 +553,7 @@ public final class ProductSearchClient: Clients.ProductSearchProtocol, Sendable 
   ///
   /// @Snippet(path: "ProductSearch_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -606,7 +606,7 @@ extension Clients {
     /// See `ProductSearchClient.updateProductSet`.
     func updateProductSet(
       productSet: ProductSet?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudVisionV1.ProductSet
 
     /// See `ProductSearchClient.deleteProductSet`.
@@ -655,7 +655,7 @@ extension Clients {
     /// See `ProductSearchClient.updateProduct`.
     func updateProduct(
       product: Product?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudVisionV1.Product
 
     /// See `ProductSearchClient.deleteProduct`.
@@ -745,151 +745,151 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `ProductSearchClient.importProductSets`.
-    func importProductSets(withPolling: ImportProductSetsRequest) async throws -> any GoogleCloudGax
+    func importProductSets(withPolling: ImportProductSetsRequest) async throws -> any GoogleGax
       .PollableOperation<ImportProductSetsResponse>
 
     /// See `ProductSearchClient.importProductSets`.
     func importProductSets(
       parent: Swift.String,
       inputConfig: ImportProductSetsInputConfig?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportProductSetsResponse>
+    ) async throws -> any GoogleGax.PollableOperation<ImportProductSetsResponse>
 
     /// See `ProductSearchClient.purgeProducts`.
     func purgeProducts(request: PurgeProductsRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ProductSearchClient.purgeProducts`.
-    func purgeProducts(withPolling: PurgeProductsRequest) async throws -> any GoogleCloudGax
+    func purgeProducts(withPolling: PurgeProductsRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `ProductSearchClient.purgeProducts`.
     func purgeProducts(
       parent: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ProductSearchClient.createProductSet`.
     func createProductSet(
-      request: CreateProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ProductSet
 
     /// See `ProductSearchClient.listProductSets`.
     func listProductSets(
-      request: ListProductSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProductSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ListProductSetsResponse
 
     /// See `ProductSearchClient.listProductSets`.
     func listProductSets(
-      byItem: ListProductSetsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListProductSetsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ProductSet, Swift.Error>
 
     /// See `ProductSearchClient.getProductSet`.
     func getProductSet(
-      request: GetProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ProductSet
 
     /// See `ProductSearchClient.updateProductSet`.
     func updateProductSet(
-      request: UpdateProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ProductSet
 
     /// See `ProductSearchClient.deleteProductSet`.
     func deleteProductSet(
-      request: DeleteProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ProductSearchClient.createProduct`.
     func createProduct(
-      request: CreateProductRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.Product
 
     /// See `ProductSearchClient.listProducts`.
     func listProducts(
-      request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ListProductsResponse
 
     /// See `ProductSearchClient.listProducts`.
     func listProducts(
-      byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListProductsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Product, Swift.Error>
 
     /// See `ProductSearchClient.getProduct`.
     func getProduct(
-      request: GetProductRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.Product
 
     /// See `ProductSearchClient.updateProduct`.
     func updateProduct(
-      request: UpdateProductRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.Product
 
     /// See `ProductSearchClient.deleteProduct`.
     func deleteProduct(
-      request: DeleteProductRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProductRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ProductSearchClient.createReferenceImage`.
     func createReferenceImage(
-      request: CreateReferenceImageRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReferenceImageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ReferenceImage
 
     /// See `ProductSearchClient.deleteReferenceImage`.
     func deleteReferenceImage(
-      request: DeleteReferenceImageRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReferenceImageRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ProductSearchClient.listReferenceImages`.
     func listReferenceImages(
-      request: ListReferenceImagesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReferenceImagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ListReferenceImagesResponse
 
     /// See `ProductSearchClient.listReferenceImages`.
     func listReferenceImages(
-      byItem: ListReferenceImagesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListReferenceImagesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ReferenceImage, Swift.Error>
 
     /// See `ProductSearchClient.getReferenceImage`.
     func getReferenceImage(
-      request: GetReferenceImageRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReferenceImageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ReferenceImage
 
     /// See `ProductSearchClient.addProductToProductSet`.
     func addProductToProductSet(
-      request: AddProductToProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: AddProductToProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ProductSearchClient.removeProductFromProductSet`.
     func removeProductFromProductSet(
-      request: RemoveProductFromProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveProductFromProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ProductSearchClient.listProductsInProductSet`.
     func listProductsInProductSet(
-      request: ListProductsInProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProductsInProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ListProductsInProductSetResponse
 
     /// See `ProductSearchClient.listProductsInProductSet`.
     func listProductsInProductSet(
-      byItem: ListProductsInProductSetRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListProductsInProductSetRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Product, Swift.Error>
 
     /// See `ProductSearchClient.importProductSets`.
     func importProductSets(
-      request: ImportProductSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportProductSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ProductSearchClient.importProductSets`.
     func importProductSets(
-      withPolling: ImportProductSetsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportProductSetsResponse>
+      withPolling: ImportProductSetsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportProductSetsResponse>
 
     /// See `ProductSearchClient.purgeProducts`.
     func purgeProducts(
-      request: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ProductSearchClient.purgeProducts`.
     func purgeProducts(
-      withPolling: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: PurgeProductsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
   }
 }
 
@@ -902,9 +902,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func createProductSet(
-    request: CreateProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ProductSet {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createProductSet(
@@ -927,9 +927,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func listProductSets(
-    request: ListProductSetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProductSetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ListProductSetsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listProductSets(
@@ -939,13 +939,13 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func listProductSets(
-    byItem: ListProductSetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProductSetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ProductSet, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVisionV1.ListProductSetsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listProductSets(
@@ -964,9 +964,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func getProductSet(
-    request: GetProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ProductSet {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getProductSet(
@@ -985,14 +985,14 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func updateProductSet(
-    request: UpdateProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ProductSet {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateProductSet(
     productSet: ProductSet?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudVisionV1.ProductSet {
     let request = UpdateProductSetRequest().with {
       $0.productSet = productSet
@@ -1006,9 +1006,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func deleteProductSet(
-    request: DeleteProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteProductSet(
@@ -1027,9 +1027,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func createProduct(
-    request: CreateProductRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.Product {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createProduct(
@@ -1052,9 +1052,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func listProducts(
-    request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ListProductsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listProducts(
@@ -1064,13 +1064,13 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func listProducts(
-    byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProductsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVisionV1.ListProductsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listProducts(
@@ -1087,9 +1087,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func getProduct(
-    request: GetProductRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.Product {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getProduct(
@@ -1108,14 +1108,14 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func updateProduct(
-    request: UpdateProductRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.Product {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateProduct(
     product: Product?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudVisionV1.Product {
     let request = UpdateProductRequest().with {
       $0.product = product
@@ -1129,9 +1129,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func deleteProduct(
-    request: DeleteProductRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteProductRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteProduct(
@@ -1150,9 +1150,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func createReferenceImage(
-    request: CreateReferenceImageRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateReferenceImageRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ReferenceImage {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createReferenceImage(
@@ -1173,9 +1173,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func deleteReferenceImage(
-    request: DeleteReferenceImageRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteReferenceImageRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteReferenceImage(
@@ -1194,9 +1194,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func listReferenceImages(
-    request: ListReferenceImagesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReferenceImagesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ListReferenceImagesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listReferenceImages(
@@ -1206,13 +1206,13 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func listReferenceImages(
-    byItem: ListReferenceImagesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReferenceImagesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ReferenceImage, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVisionV1.ListReferenceImagesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listReferenceImages(
@@ -1231,9 +1231,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func getReferenceImage(
-    request: GetReferenceImageRequest, options: GoogleCloudGax.RequestOptions
+    request: GetReferenceImageRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ReferenceImage {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getReferenceImage(
@@ -1250,9 +1250,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func addProductToProductSet(
-    request: AddProductToProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: AddProductToProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func addProductToProductSet(
@@ -1272,9 +1272,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func removeProductFromProductSet(
-    request: RemoveProductFromProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveProductFromProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func removeProductFromProductSet(
@@ -1295,9 +1295,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func listProductsInProductSet(
-    request: ListProductsInProductSetRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProductsInProductSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVisionV1.ListProductsInProductSetResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listProductsInProductSet(
@@ -1307,13 +1307,13 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func listProductsInProductSet(
-    byItem: ListProductsInProductSetRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProductsInProductSetRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVisionV1.ListProductsInProductSetResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listProductsInProductSet(
@@ -1332,32 +1332,32 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func importProductSets(
-    request: ImportProductSetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportProductSetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func importProductSets(withPolling: ImportProductSetsRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ImportProductSetsResponse>
+  public func importProductSets(withPolling: ImportProductSetsRequest) async throws -> any GoogleGax
+    .PollableOperation<ImportProductSetsResponse>
   {
     try await self.importProductSets(withPolling: withPolling, options: .init())
   }
 
   public func importProductSets(
-    withPolling: ImportProductSetsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportProductSetsResponse> {
+    withPolling: ImportProductSetsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportProductSetsResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ImportProductSetsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<ImportProductSetsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func importProductSets(
     parent: Swift.String,
     inputConfig: ImportProductSetsInputConfig?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportProductSetsResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<ImportProductSetsResponse> {
     let request = ImportProductSetsRequest().with {
       $0.parent = parent
       $0.inputConfig = inputConfig
@@ -1372,30 +1372,30 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func purgeProducts(
-    request: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: PurgeProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func purgeProducts(withPolling: PurgeProductsRequest) async throws -> any GoogleCloudGax
+  public func purgeProducts(withPolling: PurgeProductsRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.purgeProducts(withPolling: withPolling, options: .init())
   }
 
   public func purgeProducts(
-    withPolling: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: PurgeProductsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func purgeProducts(
     parent: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = PurgeProductsRequest().with {
       $0.parent = parent
     }
@@ -1409,9 +1409,9 @@ extension Clients.ProductSearchProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

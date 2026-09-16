@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Notification configurations.
-public struct JobNotification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct JobNotification: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The Pub/Sub topic where notifications for the job, like state
@@ -40,7 +40,7 @@ public struct JobNotification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Without this field, no message will be sent.
   public var message: JobNotification.Message? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `JobNotification`.
   public init() {}
@@ -81,7 +81,7 @@ public struct JobNotification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.message = try container.decodeIfPresent(JobNotification.Message.self, forKey: .message)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,7 +101,7 @@ public struct JobNotification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// but not both. For example,
   /// job level: JOB_STATE_CHANGED and/or a specified new_job_state;
   /// task level: TASK_STATE_CHANGED and/or a specified new_task_state.
-  public struct Message: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Message: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The message type.
@@ -113,7 +113,7 @@ public struct JobNotification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The new task state.
     public var newTaskState: TaskStatus.State = TaskStatus.State()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Message`.
     public init() {}
@@ -161,7 +161,7 @@ public struct JobNotification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -178,11 +178,11 @@ public struct JobNotification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.JobNotification.Message"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -294,10 +294,10 @@ public struct JobNotification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.batch.v1.JobNotification"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Privileged access that this service can be used to gate.
-public struct PrivilegedAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PrivilegedAccess: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   public var accessType: OneOf_AccessType? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PrivilegedAccess`.
   public init() {}
@@ -75,7 +75,7 @@ public struct PrivilegedAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.accessType = accessType
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,7 +96,7 @@ public struct PrivilegedAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `GcpIamAccess` represents IAM based access control on a Google Cloud
   /// resource. Refer to https://cloud.google.com/iam/docs to understand more
   /// about IAM.
-  public struct GcpIamAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GcpIamAccess: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The type of this resource.
@@ -108,7 +108,7 @@ public struct PrivilegedAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Required. Role bindings that are created on successful grant.
     public var roleBindings: [PrivilegedAccess.GcpIamAccess.RoleBinding] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GcpIamAccess`.
     public init() {}
@@ -158,7 +158,7 @@ public struct PrivilegedAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -173,7 +173,7 @@ public struct PrivilegedAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// IAM role bindings that are created after a successful grant.
-    public struct RoleBinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RoleBinding: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. IAM role to be granted.
@@ -190,7 +190,7 @@ public struct PrivilegedAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// https://cloud.google.com/iam/docs/conditions-overview#attributes.
       public var conditionExpression: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RoleBinding`.
       public init() {}
@@ -235,7 +235,7 @@ public struct PrivilegedAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -252,11 +252,11 @@ public struct PrivilegedAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.privilegedaccessmanager.v1.PrivilegedAccess.GcpIamAccess.RoleBinding"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -264,11 +264,11 @@ public struct PrivilegedAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.privilegedaccessmanager.v1.PrivilegedAccess.GcpIamAccess"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -280,10 +280,10 @@ public struct PrivilegedAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.privilegedaccessmanager.v1.PrivilegedAccess"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

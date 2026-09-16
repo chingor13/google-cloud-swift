@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The output of a DataQualityScan.
-public struct DataQualityResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataQualityResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Overall data quality result -- `true` if all rules passed.
@@ -61,7 +61,7 @@ public struct DataQualityResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public var anomalyDetectionGeneratedAssets: DataQualityResult.AnomalyDetectionGeneratedAssets? =
     nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataQualityResult`.
   public init() {}
@@ -141,7 +141,7 @@ public struct DataQualityResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
       forKey: .anomalyDetectionGeneratedAssets)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -164,14 +164,14 @@ public struct DataQualityResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
   }
 
   /// The result of post scan actions of DataQualityScan job.
-  public struct PostScanActionsResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PostScanActionsResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The result of BigQuery export post scan action.
     public var bigqueryExportResult: DataQualityResult.PostScanActionsResult.BigQueryExportResult? =
       nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PostScanActionsResult`.
     public init() {}
@@ -209,7 +209,7 @@ public struct DataQualityResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
         forKey: .bigqueryExportResult)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -222,7 +222,7 @@ public struct DataQualityResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
 
     /// The result of BigQuery export post scan action.
-    public struct BigQueryExportResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BigQueryExportResult: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. Execution state for the BigQuery exporting.
@@ -232,7 +232,7 @@ public struct DataQualityResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
       /// Output only. Additional information about the BigQuery exporting.
       public var message: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BigQueryExportResult`.
       public init() {}
@@ -277,7 +277,7 @@ public struct DataQualityResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -407,27 +407,27 @@ public struct DataQualityResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
         return
           "type.googleapis.com/google.cloud.dataplex.v1.DataQualityResult.PostScanActionsResult.BigQueryExportResult"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.DataQualityResult.PostScanActionsResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The assets generated by Anomaly Detection Data Scan.
-  public struct AnomalyDetectionGeneratedAssets: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AnomalyDetectionGeneratedAssets: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The result table for anomaly detection.
@@ -453,7 +453,7 @@ public struct DataQualityResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// PROJECT_ID.DATASET_ID.TABLE_ID
     public var volumeIntermediateTable: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AnomalyDetectionGeneratedAssets`.
     public init() {}
@@ -512,7 +512,7 @@ public struct DataQualityResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -531,21 +531,21 @@ public struct DataQualityResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
       return
         "type.googleapis.com/google.cloud.dataplex.v1.DataQualityResult.AnomalyDetectionGeneratedAssets"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.DataQualityResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

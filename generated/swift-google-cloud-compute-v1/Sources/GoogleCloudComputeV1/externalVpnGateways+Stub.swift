@@ -16,38 +16,38 @@
 
 #if ExternalVpnGateways
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ExternalVpnGatewaysStub: Sendable {
       func delete(
-        request: ExternalVpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: ExternalVpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ExternalVpnGateway
 
       func insert(
-        request: ExternalVpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: ExternalVpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ExternalVpnGatewayList
 
       func setLabels(
-        request: ExternalVpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: ExternalVpnGatewaysClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
         request: ExternalVpnGatewaysClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

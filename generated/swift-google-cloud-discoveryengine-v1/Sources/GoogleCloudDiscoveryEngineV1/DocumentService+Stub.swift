@@ -16,55 +16,55 @@
 
 #if DocumentService
   import Foundation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol DocumentServiceStub: Sendable {
       func getDocument(
-        request: GetDocumentRequest, options: GoogleCloudGax.RequestOptions
+        request: GetDocumentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Document
 
       func listDocuments(
-        request: ListDocumentsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListDocumentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListDocumentsResponse
 
       func createDocument(
-        request: CreateDocumentRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateDocumentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Document
 
       func updateDocument(
-        request: UpdateDocumentRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateDocumentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Document
 
       func deleteDocument(
-        request: DeleteDocumentRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteDocumentRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func importDocuments(
-        request: ImportDocumentsRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportDocumentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func purgeDocuments(
-        request: PurgeDocumentsRequest, options: GoogleCloudGax.RequestOptions
+        request: PurgeDocumentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func batchGetDocumentsMetadata(
-        request: BatchGetDocumentsMetadataRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchGetDocumentsMetadataRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.BatchGetDocumentsMetadataResponse
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

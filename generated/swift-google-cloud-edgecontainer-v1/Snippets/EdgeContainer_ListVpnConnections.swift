@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudEdgeContainerV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: EdgeContainerClient, projectId: String, locationId: String) async throws {
   let items = try client.listVpnConnections(

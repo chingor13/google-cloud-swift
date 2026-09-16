@@ -16,39 +16,39 @@
 
 import Foundation
 import GoogleApi
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol UserEventServiceStub: Sendable {
     func writeUserEvent(
-      request: WriteUserEventRequest, options: GoogleCloudGax.RequestOptions
+      request: WriteUserEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.UserEvent
 
     func collectUserEvent(
-      request: CollectUserEventRequest, options: GoogleCloudGax.RequestOptions
+      request: CollectUserEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func purgeUserEvents(
-      request: PurgeUserEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeUserEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func importUserEvents(
-      request: ImportUserEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportUserEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func rejoinUserEvents(
-      request: RejoinUserEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: RejoinUserEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

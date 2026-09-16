@@ -20,11 +20,11 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// The service that handles CRUD and List for resources for
   /// FeatureOnlineStore.
@@ -34,11 +34,11 @@
       .FeatureOnlineStoreAdminServiceProtocol, Sendable
   {
     let inner: any Clients.FeatureOnlineStoreAdminServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `FeatureOnlineStoreAdminServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.FeatureOnlineStoreAdminServiceStub =
         try Clients.FeatureOnlineStoreAdminServiceTransport(options)
       inner = Clients.FeatureOnlineStoreAdminServiceRetry(inner, options: options)
@@ -54,7 +54,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_CreateFeatureOnlineStore")
     public func createFeatureOnlineStore(
-      request: CreateFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createFeatureOnlineStore(request: request, options: options)
     }
@@ -63,22 +63,21 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_CreateFeatureOnlineStore")
     public func createFeatureOnlineStore(
-      withPolling: CreateFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore> {
+      withPolling: CreateFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<FeatureOnlineStore> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<FeatureOnlineStore>.State in
+          -> GoogleGax._PollableOperationImpl<FeatureOnlineStore>.State in
         return try op._extractStatus(FeatureOnlineStore.self)
       }
       let rawOp = try await self.createFeatureOnlineStore(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<FeatureOnlineStore>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<FeatureOnlineStore>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -90,7 +89,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_GetFeatureOnlineStore")
     public func getFeatureOnlineStore(
-      request: GetFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.FeatureOnlineStore {
       try await self.inner.getFeatureOnlineStore(request: request, options: options)
     }
@@ -99,7 +98,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_ListFeatureOnlineStores")
     public func listFeatureOnlineStores(
-      request: ListFeatureOnlineStoresRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFeatureOnlineStoresRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListFeatureOnlineStoresResponse {
       try await self.inner.listFeatureOnlineStores(request: request, options: options)
     }
@@ -108,7 +107,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_ListFeatureOnlineStores")
     public func listFeatureOnlineStores(
-      byItem: ListFeatureOnlineStoresRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListFeatureOnlineStoresRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<FeatureOnlineStore, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -117,14 +116,14 @@
         request.pageToken = token
         return try await self.listFeatureOnlineStores(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Updates the parameters of a single FeatureOnlineStore.
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_UpdateFeatureOnlineStore")
     public func updateFeatureOnlineStore(
-      request: UpdateFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.updateFeatureOnlineStore(request: request, options: options)
     }
@@ -133,22 +132,21 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_UpdateFeatureOnlineStore")
     public func updateFeatureOnlineStore(
-      withPolling: UpdateFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore> {
+      withPolling: UpdateFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<FeatureOnlineStore> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<FeatureOnlineStore>.State in
+          -> GoogleGax._PollableOperationImpl<FeatureOnlineStore>.State in
         return try op._extractStatus(FeatureOnlineStore.self)
       }
       let rawOp = try await self.updateFeatureOnlineStore(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<FeatureOnlineStore>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<FeatureOnlineStore>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -161,7 +159,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_DeleteFeatureOnlineStore")
     public func deleteFeatureOnlineStore(
-      request: DeleteFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteFeatureOnlineStore(request: request, options: options)
     }
@@ -171,21 +169,21 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_DeleteFeatureOnlineStore")
     public func deleteFeatureOnlineStore(
-      withPolling: DeleteFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteFeatureOnlineStore(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -197,7 +195,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_CreateFeatureView")
     public func createFeatureView(
-      request: CreateFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFeatureViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createFeatureView(request: request, options: options)
     }
@@ -206,21 +204,21 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_CreateFeatureView")
     public func createFeatureView(
-      withPolling: CreateFeatureViewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<FeatureView> {
+      withPolling: CreateFeatureViewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<FeatureView> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<FeatureView>.State in
+          -> GoogleGax._PollableOperationImpl<FeatureView>.State in
         return try op._extractStatus(FeatureView.self)
       }
       let rawOp = try await self.createFeatureView(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<FeatureView>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<FeatureView>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -232,7 +230,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_GetFeatureView")
     public func getFeatureView(
-      request: GetFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFeatureViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.FeatureView {
       try await self.inner.getFeatureView(request: request, options: options)
     }
@@ -241,7 +239,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_ListFeatureViews")
     public func listFeatureViews(
-      request: ListFeatureViewsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFeatureViewsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListFeatureViewsResponse {
       try await self.inner.listFeatureViews(request: request, options: options)
     }
@@ -250,7 +248,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_ListFeatureViews")
     public func listFeatureViews(
-      byItem: ListFeatureViewsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListFeatureViewsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<FeatureView, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListFeatureViewsResponse in
@@ -258,14 +256,14 @@
         request.pageToken = token
         return try await self.listFeatureViews(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Updates the parameters of a single FeatureView.
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_UpdateFeatureView")
     public func updateFeatureView(
-      request: UpdateFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFeatureViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.updateFeatureView(request: request, options: options)
     }
@@ -274,21 +272,21 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_UpdateFeatureView")
     public func updateFeatureView(
-      withPolling: UpdateFeatureViewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<FeatureView> {
+      withPolling: UpdateFeatureViewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<FeatureView> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<FeatureView>.State in
+          -> GoogleGax._PollableOperationImpl<FeatureView>.State in
         return try op._extractStatus(FeatureView.self)
       }
       let rawOp = try await self.updateFeatureView(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<FeatureView>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<FeatureView>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -300,7 +298,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_DeleteFeatureView")
     public func deleteFeatureView(
-      request: DeleteFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFeatureViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteFeatureView(request: request, options: options)
     }
@@ -309,21 +307,21 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_DeleteFeatureView")
     public func deleteFeatureView(
-      withPolling: DeleteFeatureViewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteFeatureViewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteFeatureView(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -335,7 +333,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_SyncFeatureView")
     public func syncFeatureView(
-      request: SyncFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+      request: SyncFeatureViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.SyncFeatureViewResponse {
       try await self.inner.syncFeatureView(request: request, options: options)
     }
@@ -344,7 +342,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_GetFeatureViewSync")
     public func getFeatureViewSync(
-      request: GetFeatureViewSyncRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFeatureViewSyncRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.FeatureViewSync {
       try await self.inner.getFeatureViewSync(request: request, options: options)
     }
@@ -353,7 +351,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_ListFeatureViewSyncs")
     public func listFeatureViewSyncs(
-      request: ListFeatureViewSyncsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFeatureViewSyncsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListFeatureViewSyncsResponse {
       try await self.inner.listFeatureViewSyncs(request: request, options: options)
     }
@@ -362,7 +360,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_ListFeatureViewSyncs")
     public func listFeatureViewSyncs(
-      byItem: ListFeatureViewSyncsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListFeatureViewSyncsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<FeatureViewSync, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListFeatureViewSyncsResponse
@@ -371,14 +369,14 @@
         request.pageToken = token
         return try await self.listFeatureViewSyncs(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Lists information about the supported locations for this service.
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -387,7 +385,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -395,14 +393,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -415,7 +413,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_SetIamPolicy")
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -425,7 +423,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_GetIamPolicy")
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -440,7 +438,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_TestIamPermissions")
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -451,7 +449,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -462,7 +460,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -470,7 +468,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -479,7 +477,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -490,7 +488,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_DeleteOperation")
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteOperation(request: request, options: options)
     }
@@ -501,7 +499,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -512,7 +510,7 @@
     ///
     /// @Snippet(path: "FeatureOnlineStoreAdminService_WaitOperation")
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.waitOperation(request: request, options: options)
     }
@@ -531,14 +529,14 @@
 
       /// See `FeatureOnlineStoreAdminServiceClient.createFeatureOnlineStore`.
       func createFeatureOnlineStore(withPolling: CreateFeatureOnlineStoreRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore>
+        -> any GoogleGax.PollableOperation<FeatureOnlineStore>
 
       /// See `FeatureOnlineStoreAdminServiceClient.createFeatureOnlineStore`.
       func createFeatureOnlineStore(
         parent: Swift.String,
         featureOnlineStore: FeatureOnlineStore?,
         featureOnlineStoreId: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore>
+      ) async throws -> any GoogleGax.PollableOperation<FeatureOnlineStore>
 
       /// See `FeatureOnlineStoreAdminServiceClient.getFeatureOnlineStore`.
       func getFeatureOnlineStore(request: GetFeatureOnlineStoreRequest) async throws
@@ -569,13 +567,13 @@
 
       /// See `FeatureOnlineStoreAdminServiceClient.updateFeatureOnlineStore`.
       func updateFeatureOnlineStore(withPolling: UpdateFeatureOnlineStoreRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore>
+        -> any GoogleGax.PollableOperation<FeatureOnlineStore>
 
       /// See `FeatureOnlineStoreAdminServiceClient.updateFeatureOnlineStore`.
       func updateFeatureOnlineStore(
         featureOnlineStore: FeatureOnlineStore?,
-        updateMask: GoogleCloudWKT.FieldMask?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore>
+        updateMask: GoogleWKT.FieldMask?,
+      ) async throws -> any GoogleGax.PollableOperation<FeatureOnlineStore>
 
       /// See `FeatureOnlineStoreAdminServiceClient.deleteFeatureOnlineStore`.
       func deleteFeatureOnlineStore(request: DeleteFeatureOnlineStoreRequest) async throws
@@ -583,28 +581,28 @@
 
       /// See `FeatureOnlineStoreAdminServiceClient.deleteFeatureOnlineStore`.
       func deleteFeatureOnlineStore(withPolling: DeleteFeatureOnlineStoreRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `FeatureOnlineStoreAdminServiceClient.deleteFeatureOnlineStore`.
       func deleteFeatureOnlineStore(
         name: Swift.String,
         force: Swift.Bool,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `FeatureOnlineStoreAdminServiceClient.createFeatureView`.
       func createFeatureView(request: CreateFeatureViewRequest) async throws
         -> GoogleLongRunning.Operation
 
       /// See `FeatureOnlineStoreAdminServiceClient.createFeatureView`.
-      func createFeatureView(withPolling: CreateFeatureViewRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<FeatureView>
+      func createFeatureView(withPolling: CreateFeatureViewRequest) async throws -> any GoogleGax
+        .PollableOperation<FeatureView>
 
       /// See `FeatureOnlineStoreAdminServiceClient.createFeatureView`.
       func createFeatureView(
         parent: Swift.String,
         featureView: FeatureView?,
         featureViewId: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<FeatureView>
+      ) async throws -> any GoogleGax.PollableOperation<FeatureView>
 
       /// See `FeatureOnlineStoreAdminServiceClient.getFeatureView`.
       func getFeatureView(request: GetFeatureViewRequest) async throws
@@ -634,27 +632,27 @@
         -> GoogleLongRunning.Operation
 
       /// See `FeatureOnlineStoreAdminServiceClient.updateFeatureView`.
-      func updateFeatureView(withPolling: UpdateFeatureViewRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<FeatureView>
+      func updateFeatureView(withPolling: UpdateFeatureViewRequest) async throws -> any GoogleGax
+        .PollableOperation<FeatureView>
 
       /// See `FeatureOnlineStoreAdminServiceClient.updateFeatureView`.
       func updateFeatureView(
         featureView: FeatureView?,
-        updateMask: GoogleCloudWKT.FieldMask?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<FeatureView>
+        updateMask: GoogleWKT.FieldMask?,
+      ) async throws -> any GoogleGax.PollableOperation<FeatureView>
 
       /// See `FeatureOnlineStoreAdminServiceClient.deleteFeatureView`.
       func deleteFeatureView(request: DeleteFeatureViewRequest) async throws
         -> GoogleLongRunning.Operation
 
       /// See `FeatureOnlineStoreAdminServiceClient.deleteFeatureView`.
-      func deleteFeatureView(withPolling: DeleteFeatureViewRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      func deleteFeatureView(withPolling: DeleteFeatureViewRequest) async throws -> any GoogleGax
+        .PollableOperation<Swift.Void>
 
       /// See `FeatureOnlineStoreAdminServiceClient.deleteFeatureView`.
       func deleteFeatureView(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `FeatureOnlineStoreAdminServiceClient.syncFeatureView`.
       func syncFeatureView(request: SyncFeatureViewRequest) async throws
@@ -748,167 +746,167 @@
 
       /// See `FeatureOnlineStoreAdminServiceClient.createFeatureOnlineStore`.
       func createFeatureOnlineStore(
-        request: CreateFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `FeatureOnlineStoreAdminServiceClient.createFeatureOnlineStore`.
       func createFeatureOnlineStore(
-        withPolling: CreateFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore>
+        withPolling: CreateFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<FeatureOnlineStore>
 
       /// See `FeatureOnlineStoreAdminServiceClient.getFeatureOnlineStore`.
       func getFeatureOnlineStore(
-        request: GetFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: GetFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.FeatureOnlineStore
 
       /// See `FeatureOnlineStoreAdminServiceClient.listFeatureOnlineStores`.
       func listFeatureOnlineStores(
-        request: ListFeatureOnlineStoresRequest, options: GoogleCloudGax.RequestOptions
+        request: ListFeatureOnlineStoresRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListFeatureOnlineStoresResponse
 
       /// See `FeatureOnlineStoreAdminServiceClient.listFeatureOnlineStores`.
       func listFeatureOnlineStores(
-        byItem: ListFeatureOnlineStoresRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListFeatureOnlineStoresRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<FeatureOnlineStore, Swift.Error>
 
       /// See `FeatureOnlineStoreAdminServiceClient.updateFeatureOnlineStore`.
       func updateFeatureOnlineStore(
-        request: UpdateFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `FeatureOnlineStoreAdminServiceClient.updateFeatureOnlineStore`.
       func updateFeatureOnlineStore(
-        withPolling: UpdateFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore>
+        withPolling: UpdateFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<FeatureOnlineStore>
 
       /// See `FeatureOnlineStoreAdminServiceClient.deleteFeatureOnlineStore`.
       func deleteFeatureOnlineStore(
-        request: DeleteFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `FeatureOnlineStoreAdminServiceClient.deleteFeatureOnlineStore`.
       func deleteFeatureOnlineStore(
-        withPolling: DeleteFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `FeatureOnlineStoreAdminServiceClient.createFeatureView`.
       func createFeatureView(
-        request: CreateFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateFeatureViewRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `FeatureOnlineStoreAdminServiceClient.createFeatureView`.
       func createFeatureView(
-        withPolling: CreateFeatureViewRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<FeatureView>
+        withPolling: CreateFeatureViewRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<FeatureView>
 
       /// See `FeatureOnlineStoreAdminServiceClient.getFeatureView`.
       func getFeatureView(
-        request: GetFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+        request: GetFeatureViewRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.FeatureView
 
       /// See `FeatureOnlineStoreAdminServiceClient.listFeatureViews`.
       func listFeatureViews(
-        request: ListFeatureViewsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListFeatureViewsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListFeatureViewsResponse
 
       /// See `FeatureOnlineStoreAdminServiceClient.listFeatureViews`.
       func listFeatureViews(
-        byItem: ListFeatureViewsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListFeatureViewsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<FeatureView, Swift.Error>
 
       /// See `FeatureOnlineStoreAdminServiceClient.updateFeatureView`.
       func updateFeatureView(
-        request: UpdateFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateFeatureViewRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `FeatureOnlineStoreAdminServiceClient.updateFeatureView`.
       func updateFeatureView(
-        withPolling: UpdateFeatureViewRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<FeatureView>
+        withPolling: UpdateFeatureViewRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<FeatureView>
 
       /// See `FeatureOnlineStoreAdminServiceClient.deleteFeatureView`.
       func deleteFeatureView(
-        request: DeleteFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteFeatureViewRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `FeatureOnlineStoreAdminServiceClient.deleteFeatureView`.
       func deleteFeatureView(
-        withPolling: DeleteFeatureViewRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteFeatureViewRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `FeatureOnlineStoreAdminServiceClient.syncFeatureView`.
       func syncFeatureView(
-        request: SyncFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+        request: SyncFeatureViewRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.SyncFeatureViewResponse
 
       /// See `FeatureOnlineStoreAdminServiceClient.getFeatureViewSync`.
       func getFeatureViewSync(
-        request: GetFeatureViewSyncRequest, options: GoogleCloudGax.RequestOptions
+        request: GetFeatureViewSyncRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.FeatureViewSync
 
       /// See `FeatureOnlineStoreAdminServiceClient.listFeatureViewSyncs`.
       func listFeatureViewSyncs(
-        request: ListFeatureViewSyncsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListFeatureViewSyncsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListFeatureViewSyncsResponse
 
       /// See `FeatureOnlineStoreAdminServiceClient.listFeatureViewSyncs`.
       func listFeatureViewSyncs(
-        byItem: ListFeatureViewSyncsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListFeatureViewSyncsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<FeatureViewSync, Swift.Error>
 
       /// See `FeatureOnlineStoreAdminServiceClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `FeatureOnlineStoreAdminServiceClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `FeatureOnlineStoreAdminServiceClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `FeatureOnlineStoreAdminServiceClient.setIamPolicy`.
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `FeatureOnlineStoreAdminServiceClient.getIamPolicy`.
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `FeatureOnlineStoreAdminServiceClient.testIamPermissions`.
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       /// See `FeatureOnlineStoreAdminServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `FeatureOnlineStoreAdminServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `FeatureOnlineStoreAdminServiceClient.deleteOperation`.
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `FeatureOnlineStoreAdminServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `FeatureOnlineStoreAdminServiceClient.waitOperation`.
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }
@@ -922,25 +920,24 @@
     }
 
     public func createFeatureOnlineStore(
-      request: CreateFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createFeatureOnlineStore(withPolling: CreateFeatureOnlineStoreRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore>
+      -> any GoogleGax.PollableOperation<FeatureOnlineStore>
     {
       try await self.createFeatureOnlineStore(withPolling: withPolling, options: .init())
     }
 
     public func createFeatureOnlineStore(
-      withPolling: CreateFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore> {
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<FeatureOnlineStore>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<FeatureOnlineStore> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<FeatureOnlineStore>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -948,7 +945,7 @@
       parent: Swift.String,
       featureOnlineStore: FeatureOnlineStore?,
       featureOnlineStoreId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore> {
+    ) async throws -> any GoogleGax.PollableOperation<FeatureOnlineStore> {
       let request = CreateFeatureOnlineStoreRequest().with {
         $0.parent = parent
         $0.featureOnlineStore = featureOnlineStore
@@ -964,9 +961,9 @@
     }
 
     public func getFeatureOnlineStore(
-      request: GetFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.FeatureOnlineStore {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getFeatureOnlineStore(
@@ -985,9 +982,9 @@
     }
 
     public func listFeatureOnlineStores(
-      request: ListFeatureOnlineStoresRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFeatureOnlineStoresRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListFeatureOnlineStoresResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listFeatureOnlineStores(
@@ -997,14 +994,14 @@
     }
 
     public func listFeatureOnlineStores(
-      byItem: ListFeatureOnlineStoresRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListFeatureOnlineStoresRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<FeatureOnlineStore, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudAIPlatformV1.ListFeatureOnlineStoresResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listFeatureOnlineStores(
@@ -1023,32 +1020,31 @@
     }
 
     public func updateFeatureOnlineStore(
-      request: UpdateFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateFeatureOnlineStore(withPolling: UpdateFeatureOnlineStoreRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore>
+      -> any GoogleGax.PollableOperation<FeatureOnlineStore>
     {
       try await self.updateFeatureOnlineStore(withPolling: withPolling, options: .init())
     }
 
     public func updateFeatureOnlineStore(
-      withPolling: UpdateFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore> {
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<FeatureOnlineStore>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: UpdateFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<FeatureOnlineStore> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<FeatureOnlineStore>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func updateFeatureOnlineStore(
       featureOnlineStore: FeatureOnlineStore?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<FeatureOnlineStore> {
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<FeatureOnlineStore> {
       let request = UpdateFeatureOnlineStoreRequest().with {
         $0.featureOnlineStore = featureOnlineStore
         $0.updateMask = updateMask
@@ -1063,31 +1059,31 @@
     }
 
     public func deleteFeatureOnlineStore(
-      request: DeleteFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteFeatureOnlineStore(withPolling: DeleteFeatureOnlineStoreRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.deleteFeatureOnlineStore(withPolling: withPolling, options: .init())
     }
 
     public func deleteFeatureOnlineStore(
-      withPolling: DeleteFeatureOnlineStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteFeatureOnlineStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteFeatureOnlineStore(
       name: Swift.String,
       force: Swift.Bool,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteFeatureOnlineStoreRequest().with {
         $0.name = name
         $0.force = force
@@ -1102,24 +1098,24 @@
     }
 
     public func createFeatureView(
-      request: CreateFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFeatureViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createFeatureView(withPolling: CreateFeatureViewRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<FeatureView>
+      -> any GoogleGax.PollableOperation<FeatureView>
     {
       try await self.createFeatureView(withPolling: withPolling, options: .init())
     }
 
     public func createFeatureView(
-      withPolling: CreateFeatureViewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<FeatureView> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<FeatureView>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateFeatureViewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<FeatureView> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<FeatureView>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1127,7 +1123,7 @@
       parent: Swift.String,
       featureView: FeatureView?,
       featureViewId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<FeatureView> {
+    ) async throws -> any GoogleGax.PollableOperation<FeatureView> {
       let request = CreateFeatureViewRequest().with {
         $0.parent = parent
         $0.featureView = featureView
@@ -1143,9 +1139,9 @@
     }
 
     public func getFeatureView(
-      request: GetFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFeatureViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.FeatureView {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getFeatureView(
@@ -1164,9 +1160,9 @@
     }
 
     public func listFeatureViews(
-      request: ListFeatureViewsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFeatureViewsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListFeatureViewsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listFeatureViews(
@@ -1176,13 +1172,13 @@
     }
 
     public func listFeatureViews(
-      byItem: ListFeatureViewsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListFeatureViewsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<FeatureView, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListFeatureViewsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listFeatureViews(
@@ -1201,31 +1197,31 @@
     }
 
     public func updateFeatureView(
-      request: UpdateFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFeatureViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateFeatureView(withPolling: UpdateFeatureViewRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<FeatureView>
+      -> any GoogleGax.PollableOperation<FeatureView>
     {
       try await self.updateFeatureView(withPolling: withPolling, options: .init())
     }
 
     public func updateFeatureView(
-      withPolling: UpdateFeatureViewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<FeatureView> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<FeatureView>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: UpdateFeatureViewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<FeatureView> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<FeatureView>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func updateFeatureView(
       featureView: FeatureView?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<FeatureView> {
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<FeatureView> {
       let request = UpdateFeatureViewRequest().with {
         $0.featureView = featureView
         $0.updateMask = updateMask
@@ -1240,30 +1236,30 @@
     }
 
     public func deleteFeatureView(
-      request: DeleteFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFeatureViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteFeatureView(withPolling: DeleteFeatureViewRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.deleteFeatureView(withPolling: withPolling, options: .init())
     }
 
     public func deleteFeatureView(
-      withPolling: DeleteFeatureViewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteFeatureViewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteFeatureView(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteFeatureViewRequest().with {
         $0.name = name
       }
@@ -1277,9 +1273,9 @@
     }
 
     public func syncFeatureView(
-      request: SyncFeatureViewRequest, options: GoogleCloudGax.RequestOptions
+      request: SyncFeatureViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.SyncFeatureViewResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func syncFeatureView(
@@ -1298,9 +1294,9 @@
     }
 
     public func getFeatureViewSync(
-      request: GetFeatureViewSyncRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFeatureViewSyncRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.FeatureViewSync {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getFeatureViewSync(
@@ -1319,9 +1315,9 @@
     }
 
     public func listFeatureViewSyncs(
-      request: ListFeatureViewSyncsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFeatureViewSyncsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListFeatureViewSyncsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listFeatureViewSyncs(
@@ -1331,14 +1327,14 @@
     }
 
     public func listFeatureViewSyncs(
-      byItem: ListFeatureViewSyncsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListFeatureViewSyncsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<FeatureViewSync, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListFeatureViewSyncsResponse
         in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listFeatureViewSyncs(
@@ -1357,9 +1353,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -1369,13 +1365,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1385,9 +1381,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -1397,9 +1393,9 @@
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -1409,9 +1405,9 @@
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -1421,9 +1417,9 @@
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1433,9 +1429,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -1445,13 +1441,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -1472,9 +1468,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -1491,9 +1487,9 @@
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteOperation(
@@ -1510,9 +1506,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(
@@ -1531,9 +1527,9 @@
     }
 
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

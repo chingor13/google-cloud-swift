@@ -16,10 +16,10 @@
 
 #if VpnGateways
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Contains some information about a VPN tunnel.
-  public struct VpnGatewayStatusTunnel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct VpnGatewayStatusTunnel: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The VPN gateway interface this VPN tunnel is associated with.
@@ -33,7 +33,7 @@
     /// Output only. URL reference to the VPN tunnel.
     public var tunnelUrl: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `VpnGatewayStatusTunnel`.
     public init() {}
@@ -77,7 +77,7 @@
       self.tunnelUrl = try container.decodeIfPresent(Swift.String.self, forKey: .tunnelUrl)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -94,11 +94,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.VpnGatewayStatusTunnel"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

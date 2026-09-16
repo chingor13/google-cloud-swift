@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request for bulk uploading feedback labels.
-public struct BulkUploadFeedbackLabelsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BulkUploadFeedbackLabelsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The parent resource for new feedback labels.
@@ -33,7 +33,7 @@ public struct BulkUploadFeedbackLabelsRequest: Codable, Equatable, GoogleCloudWK
   /// be converted to FeedbackLabels.
   public var source: OneOf_Source? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BulkUploadFeedbackLabelsRequest`.
   public init() {}
@@ -95,7 +95,7 @@ public struct BulkUploadFeedbackLabelsRequest: Codable, Equatable, GoogleCloudWK
     self.source = source
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -116,7 +116,7 @@ public struct BulkUploadFeedbackLabelsRequest: Codable, Equatable, GoogleCloudWK
   }
 
   /// Google Cloud Storage Object details to get the feedback label file from.
-  public struct GcsSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GcsSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. File format which will be ingested.
@@ -127,7 +127,7 @@ public struct BulkUploadFeedbackLabelsRequest: Codable, Equatable, GoogleCloudWK
     /// Format: `gs://bucket_name/object_name`
     public var objectUri: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GcsSource`.
     public init() {}
@@ -172,7 +172,7 @@ public struct BulkUploadFeedbackLabelsRequest: Codable, Equatable, GoogleCloudWK
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -294,11 +294,11 @@ public struct BulkUploadFeedbackLabelsRequest: Codable, Equatable, GoogleCloudWK
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest.GcsSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -313,10 +313,10 @@ public struct BulkUploadFeedbackLabelsRequest: Codable, Equatable, GoogleCloudWK
     return
       "type.googleapis.com/google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

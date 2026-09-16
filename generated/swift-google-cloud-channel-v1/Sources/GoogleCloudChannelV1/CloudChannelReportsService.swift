@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// CloudChannelReportsService lets Google Cloud resellers and
 /// distributors retrieve and combine a variety of data in Cloud Channel for
@@ -38,11 +38,11 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
   Sendable
 {
   let inner: any Clients.CloudChannelReportsServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `CloudChannelReportsServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CloudChannelReportsServiceStub =
       try Clients.CloudChannelReportsServiceTransport(options)
     inner = Clients.CloudChannelReportsServiceRetry(inner, options: options)
@@ -91,7 +91,7 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
   /// @Snippet(path: "CloudChannelReportsService_RunReportJob")
   @available(*, deprecated)
   public func runReportJob(
-    request: RunReportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: RunReportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.runReportJob(request: request, options: options)
   }
@@ -133,22 +133,21 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
   /// @Snippet(path: "CloudChannelReportsService_RunReportJob")
   @available(*, deprecated)
   public func runReportJob(
-    withPolling: RunReportJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RunReportJobResponse> {
+    withPolling: RunReportJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RunReportJobResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<RunReportJobResponse>.State in
+        -> GoogleGax._PollableOperationImpl<RunReportJobResponse>.State in
       return try op._extractStatus(RunReportJobResponse.self)
     }
     let rawOp = try await self.runReportJob(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<RunReportJobResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<RunReportJobResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -168,7 +167,7 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
   /// @Snippet(path: "CloudChannelReportsService_FetchReportResults")
   @available(*, deprecated)
   public func fetchReportResults(
-    request: FetchReportResultsRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchReportResultsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.FetchReportResultsResponse {
     try await self.inner.fetchReportResults(request: request, options: options)
   }
@@ -185,7 +184,7 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
   /// @Snippet(path: "CloudChannelReportsService_FetchReportResults")
   @available(*, deprecated)
   public func fetchReportResults(
-    byItem: FetchReportResultsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: FetchReportResultsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Row, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.FetchReportResultsResponse in
@@ -193,7 +192,7 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
       request.pageToken = token
       return try await self.fetchReportResults(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists the reports that RunReportJob can run. These reports include an ID,
@@ -206,7 +205,7 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
   /// @Snippet(path: "CloudChannelReportsService_ListReports")
   @available(*, deprecated)
   public func listReports(
-    request: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReportsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListReportsResponse {
     try await self.inner.listReports(request: request, options: options)
   }
@@ -221,7 +220,7 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
   /// @Snippet(path: "CloudChannelReportsService_ListReports")
   @available(*, deprecated)
   public func listReports(
-    byItem: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReportsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Report, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListReportsResponse in
@@ -229,7 +228,7 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
       request.pageToken = token
       return try await self.listReports(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -238,7 +237,7 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
   ///
   /// @Snippet(path: "CloudChannelReportsService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -249,7 +248,7 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
   ///
   /// @Snippet(path: "CloudChannelReportsService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -257,7 +256,7 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -266,7 +265,7 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
   ///
   /// @Snippet(path: "CloudChannelReportsService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -277,7 +276,7 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
   ///
   /// @Snippet(path: "CloudChannelReportsService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -288,7 +287,7 @@ public final class CloudChannelReportsServiceClient: Clients.CloudChannelReports
   ///
   /// @Snippet(path: "CloudChannelReportsService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -308,7 +307,7 @@ extension Clients {
 
     /// See `CloudChannelReportsServiceClient.runReportJob`.
     @available(*, deprecated)
-    func runReportJob(withPolling: RunReportJobRequest) async throws -> any GoogleCloudGax
+    func runReportJob(withPolling: RunReportJobRequest) async throws -> any GoogleGax
       .PollableOperation<RunReportJobResponse>
 
     /// See `CloudChannelReportsServiceClient.fetchReportResults`.
@@ -379,57 +378,57 @@ extension Clients {
     /// See `CloudChannelReportsServiceClient.runReportJob`.
     @available(*, deprecated)
     func runReportJob(
-      request: RunReportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: RunReportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudChannelReportsServiceClient.runReportJob`.
     @available(*, deprecated)
     func runReportJob(
-      withPolling: RunReportJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<RunReportJobResponse>
+      withPolling: RunReportJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<RunReportJobResponse>
 
     /// See `CloudChannelReportsServiceClient.fetchReportResults`.
     @available(*, deprecated)
     func fetchReportResults(
-      request: FetchReportResultsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchReportResultsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.FetchReportResultsResponse
 
     /// See `CloudChannelReportsServiceClient.fetchReportResults`.
     @available(*, deprecated)
     func fetchReportResults(
-      byItem: FetchReportResultsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: FetchReportResultsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Row, Swift.Error>
 
     /// See `CloudChannelReportsServiceClient.listReports`.
     @available(*, deprecated)
     func listReports(
-      request: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReportsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListReportsResponse
 
     /// See `CloudChannelReportsServiceClient.listReports`.
     @available(*, deprecated)
     func listReports(
-      byItem: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListReportsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Report, Swift.Error>
 
     /// See `CloudChannelReportsServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `CloudChannelReportsServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `CloudChannelReportsServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `CloudChannelReportsServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -445,13 +444,13 @@ extension Clients.CloudChannelReportsServiceProtocol {
 
   @available(*, deprecated)
   public func runReportJob(
-    request: RunReportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: RunReportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
-  public func runReportJob(withPolling: RunReportJobRequest) async throws -> any GoogleCloudGax
+  public func runReportJob(withPolling: RunReportJobRequest) async throws -> any GoogleGax
     .PollableOperation<RunReportJobResponse>
   {
     try await self.runReportJob(withPolling: withPolling, options: .init())
@@ -459,13 +458,12 @@ extension Clients.CloudChannelReportsServiceProtocol {
 
   @available(*, deprecated)
   public func runReportJob(
-    withPolling: RunReportJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RunReportJobResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<RunReportJobResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: RunReportJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RunReportJobResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<RunReportJobResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -478,9 +476,9 @@ extension Clients.CloudChannelReportsServiceProtocol {
 
   @available(*, deprecated)
   public func fetchReportResults(
-    request: FetchReportResultsRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchReportResultsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.FetchReportResultsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -492,13 +490,13 @@ extension Clients.CloudChannelReportsServiceProtocol {
 
   @available(*, deprecated)
   public func fetchReportResults(
-    byItem: FetchReportResultsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: FetchReportResultsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Row, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.FetchReportResultsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   @available(*, deprecated)
@@ -520,9 +518,9 @@ extension Clients.CloudChannelReportsServiceProtocol {
 
   @available(*, deprecated)
   public func listReports(
-    request: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReportsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListReportsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -534,13 +532,13 @@ extension Clients.CloudChannelReportsServiceProtocol {
 
   @available(*, deprecated)
   public func listReports(
-    byItem: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReportsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Report, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListReportsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   @available(*, deprecated)
@@ -560,9 +558,9 @@ extension Clients.CloudChannelReportsServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -572,13 +570,13 @@ extension Clients.CloudChannelReportsServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -599,9 +597,9 @@ extension Clients.CloudChannelReportsServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -618,9 +616,9 @@ extension Clients.CloudChannelReportsServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -637,9 +635,9 @@ extension Clients.CloudChannelReportsServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

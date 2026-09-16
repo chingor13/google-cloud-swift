@@ -15,19 +15,19 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Specification that applies to a data source connection. Valid only for
 /// entries with the `DATA_SOURCE_CONNECTION` type.
 /// Only one of internal specs can be set at the time, and cannot
 /// be changed later.
-public struct DataSourceConnectionSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataSourceConnectionSpec: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Fields specific to BigQuery connections.
   public var bigqueryConnectionSpec: BigQueryConnectionSpec? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataSourceConnectionSpec`.
   public init() {}
@@ -64,7 +64,7 @@ public struct DataSourceConnectionSpec: Codable, Equatable, GoogleCloudWKT._AnyP
       BigQueryConnectionSpec.self, forKey: .bigqueryConnectionSpec)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -79,10 +79,10 @@ public struct DataSourceConnectionSpec: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.v1.DataSourceConnectionSpec"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

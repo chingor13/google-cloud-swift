@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A `Target` resource in the Cloud Deploy API.
 ///
 /// A `Target` defines a location to which a Skaffold configuration
 /// can be deployed.
-public struct Target: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Target: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Name of the `Target`. Format is
@@ -61,10 +61,10 @@ public struct Target: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var requireApproval: Swift.Bool = Swift.Bool()
 
   /// Output only. Time at which the `Target` was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Most recent time at which the `Target` was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Map of entity IDs to their associated entities. Associated
   /// entities allows specifying places other than the deployment target for
@@ -97,7 +97,7 @@ public struct Target: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// rollout.
   public var deploymentTarget: OneOf_DeploymentTarget? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Target`.
   public init() {}
@@ -188,10 +188,8 @@ public struct Target: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .requireApproval) {
       self.requireApproval = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(
       [Swift.String: AssociatedEntities].self, forKey: .associatedEntities)
     {
@@ -240,7 +238,7 @@ public struct Target: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.deploymentTarget = deploymentTarget
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -297,10 +295,10 @@ public struct Target: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.deploy.v1.Target"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,228 +16,228 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol NetworkSecurityStub: Sendable {
     func listAuthorizationPolicies(
-      request: ListAuthorizationPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAuthorizationPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListAuthorizationPoliciesResponse
 
     func getAuthorizationPolicy(
-      request: GetAuthorizationPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAuthorizationPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.AuthorizationPolicy
 
     func createAuthorizationPolicy(
-      request: CreateAuthorizationPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAuthorizationPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateAuthorizationPolicy(
-      request: UpdateAuthorizationPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAuthorizationPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteAuthorizationPolicy(
-      request: DeleteAuthorizationPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAuthorizationPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listBackendAuthenticationConfigs(
-      request: ListBackendAuthenticationConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBackendAuthenticationConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListBackendAuthenticationConfigsResponse
 
     func getBackendAuthenticationConfig(
-      request: GetBackendAuthenticationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBackendAuthenticationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.BackendAuthenticationConfig
 
     func createBackendAuthenticationConfig(
-      request: CreateBackendAuthenticationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBackendAuthenticationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateBackendAuthenticationConfig(
-      request: UpdateBackendAuthenticationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBackendAuthenticationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteBackendAuthenticationConfig(
-      request: DeleteBackendAuthenticationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBackendAuthenticationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listServerTlsPolicies(
-      request: ListServerTlsPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServerTlsPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListServerTlsPoliciesResponse
 
     func getServerTlsPolicy(
-      request: GetServerTlsPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServerTlsPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ServerTlsPolicy
 
     func createServerTlsPolicy(
-      request: CreateServerTlsPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServerTlsPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateServerTlsPolicy(
-      request: UpdateServerTlsPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServerTlsPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteServerTlsPolicy(
-      request: DeleteServerTlsPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServerTlsPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listClientTlsPolicies(
-      request: ListClientTlsPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListClientTlsPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListClientTlsPoliciesResponse
 
     func getClientTlsPolicy(
-      request: GetClientTlsPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClientTlsPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ClientTlsPolicy
 
     func createClientTlsPolicy(
-      request: CreateClientTlsPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClientTlsPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateClientTlsPolicy(
-      request: UpdateClientTlsPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateClientTlsPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteClientTlsPolicy(
-      request: DeleteClientTlsPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteClientTlsPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listGatewaySecurityPolicies(
-      request: ListGatewaySecurityPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGatewaySecurityPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListGatewaySecurityPoliciesResponse
 
     func getGatewaySecurityPolicy(
-      request: GetGatewaySecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGatewaySecurityPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.GatewaySecurityPolicy
 
     func createGatewaySecurityPolicy(
-      request: CreateGatewaySecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGatewaySecurityPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateGatewaySecurityPolicy(
-      request: UpdateGatewaySecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGatewaySecurityPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteGatewaySecurityPolicy(
-      request: DeleteGatewaySecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGatewaySecurityPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listGatewaySecurityPolicyRules(
-      request: ListGatewaySecurityPolicyRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGatewaySecurityPolicyRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListGatewaySecurityPolicyRulesResponse
 
     func getGatewaySecurityPolicyRule(
-      request: GetGatewaySecurityPolicyRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGatewaySecurityPolicyRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.GatewaySecurityPolicyRule
 
     func createGatewaySecurityPolicyRule(
-      request: CreateGatewaySecurityPolicyRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGatewaySecurityPolicyRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateGatewaySecurityPolicyRule(
-      request: UpdateGatewaySecurityPolicyRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGatewaySecurityPolicyRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteGatewaySecurityPolicyRule(
-      request: DeleteGatewaySecurityPolicyRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGatewaySecurityPolicyRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listUrlLists(
-      request: ListUrlListsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUrlListsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListUrlListsResponse
 
     func getUrlList(
-      request: GetUrlListRequest, options: GoogleCloudGax.RequestOptions
+      request: GetUrlListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.UrlList
 
     func createUrlList(
-      request: CreateUrlListRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateUrlListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateUrlList(
-      request: UpdateUrlListRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateUrlListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteUrlList(
-      request: DeleteUrlListRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteUrlListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listTlsInspectionPolicies(
-      request: ListTlsInspectionPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTlsInspectionPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListTlsInspectionPoliciesResponse
 
     func getTlsInspectionPolicy(
-      request: GetTlsInspectionPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTlsInspectionPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.TlsInspectionPolicy
 
     func createTlsInspectionPolicy(
-      request: CreateTlsInspectionPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTlsInspectionPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateTlsInspectionPolicy(
-      request: UpdateTlsInspectionPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTlsInspectionPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteTlsInspectionPolicy(
-      request: DeleteTlsInspectionPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTlsInspectionPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listAuthzPolicies(
-      request: ListAuthzPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAuthzPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListAuthzPoliciesResponse
 
     func getAuthzPolicy(
-      request: GetAuthzPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAuthzPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.AuthzPolicy
 
     func createAuthzPolicy(
-      request: CreateAuthzPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAuthzPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateAuthzPolicy(
-      request: UpdateAuthzPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAuthzPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteAuthzPolicy(
-      request: DeleteAuthzPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAuthzPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

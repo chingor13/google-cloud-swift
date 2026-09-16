@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource]
 /// object. [MonitoredResource][google.api.MonitoredResource] objects contain the
@@ -25,7 +25,7 @@ import Foundation
 /// all types, and store the metadata in this message.
 ///
 /// [google.api.MonitoredResource]: <doc:MonitoredResource>
-public struct MonitoredResourceMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MonitoredResourceMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Values for predefined system metadata labels.
@@ -38,12 +38,12 @@ public struct MonitoredResourceMetadata: Codable, Equatable, GoogleCloudWKT._Any
   ///     { "name": "my-test-instance",
   ///       "security_group": ["a", "b", "c"],
   ///       "spot_instance": false }
-  public var systemLabels: GoogleCloudWKT.Struct? = nil
+  public var systemLabels: GoogleWKT.Struct? = nil
 
   /// Output only. A map of user-defined metadata labels.
   public var userLabels: [Swift.String: Swift.String] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MonitoredResourceMetadata`.
   public init() {}
@@ -78,8 +78,7 @@ public struct MonitoredResourceMetadata: Codable, Equatable, GoogleCloudWKT._Any
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.systemLabels = try container.decodeIfPresent(
-      GoogleCloudWKT.Struct.self, forKey: .systemLabels)
+    self.systemLabels = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .systemLabels)
     if let value = try container.decodeIfPresent(
       [Swift.String: Swift.String].self, forKey: .userLabels)
     {
@@ -87,7 +86,7 @@ public struct MonitoredResourceMetadata: Codable, Equatable, GoogleCloudWKT._Any
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,10 +102,10 @@ public struct MonitoredResourceMetadata: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.MonitoredResourceMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

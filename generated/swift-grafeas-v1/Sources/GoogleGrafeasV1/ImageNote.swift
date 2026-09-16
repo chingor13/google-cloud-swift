@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Basis describes the base image portion (Note) of the DockerImage
 /// relationship. Linked occurrences are derived from this or an equivalent image
 /// via:
 ///   FROM <Basis.resource_url>
 /// Or an equivalent reference, e.g., a tag of the resource_url.
-public struct ImageNote: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ImageNote: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Immutable. The resource_url for the resource representing the
@@ -32,7 +32,7 @@ public struct ImageNote: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Required. Immutable. The fingerprint of the base image.
   public var fingerprint: Fingerprint? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ImageNote`.
   public init() {}
@@ -73,7 +73,7 @@ public struct ImageNote: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.fingerprint = try container.decodeIfPresent(Fingerprint.self, forKey: .fingerprint)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -89,10 +89,10 @@ public struct ImageNote: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.ImageNote"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

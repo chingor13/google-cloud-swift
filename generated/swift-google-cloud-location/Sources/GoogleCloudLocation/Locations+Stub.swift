@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol LocationsStub: Sendable {
     func listLocations(
-      request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }

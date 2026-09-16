@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// EdgeSlm represents an SLM instance which manages the lifecycle of edge
 /// components installed on Workload clusters managed by an Orchestration
 /// Cluster.
-public struct EdgeSlm: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EdgeSlm: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Name of the EdgeSlm resource.
@@ -32,10 +32,10 @@ public struct EdgeSlm: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var orchestrationCluster: Swift.String = Swift.String()
 
   /// Output only. [Output only] Create time stamp.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. [Output only] Update time stamp.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Labels as key value pairs. The key and value should contain
   /// characters which are UTF-8 compliant and less than 50 characters.
@@ -51,7 +51,7 @@ public struct EdgeSlm: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// created.
   public var workloadClusterType: EdgeSlm.WorkloadClusterType = EdgeSlm.WorkloadClusterType()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EdgeSlm`.
   public init() {}
@@ -104,10 +104,8 @@ public struct EdgeSlm: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .orchestrationCluster) {
       self.orchestrationCluster = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -125,7 +123,7 @@ public struct EdgeSlm: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -373,10 +371,10 @@ public struct EdgeSlm: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.telcoautomation.v1.EdgeSlm"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

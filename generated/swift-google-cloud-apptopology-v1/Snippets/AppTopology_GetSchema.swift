@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudAppTopologyV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: AppTopologyClient, projectId: String, locationId: String, domainId: String)
   async throws

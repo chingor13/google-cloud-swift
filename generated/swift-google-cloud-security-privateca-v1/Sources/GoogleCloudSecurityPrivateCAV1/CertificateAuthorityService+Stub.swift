@@ -16,164 +16,164 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CertificateAuthorityServiceStub: Sendable {
     func createCertificate(
-      request: CreateCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate
 
     func getCertificate(
-      request: GetCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate
 
     func listCertificates(
-      request: ListCertificatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCertificatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificatesResponse
 
     func revokeCertificate(
-      request: RevokeCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: RevokeCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate
 
     func updateCertificate(
-      request: UpdateCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate
 
     func activateCertificateAuthority(
-      request: ActivateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: ActivateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createCertificateAuthority(
-      request: CreateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func disableCertificateAuthority(
-      request: DisableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: DisableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func enableCertificateAuthority(
-      request: EnableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: EnableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func fetchCertificateAuthorityCsr(
-      request: FetchCertificateAuthorityCsrRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchCertificateAuthorityCsrRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.FetchCertificateAuthorityCsrResponse
 
     func getCertificateAuthority(
-      request: GetCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.CertificateAuthority
 
     func listCertificateAuthorities(
-      request: ListCertificateAuthoritiesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCertificateAuthoritiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificateAuthoritiesResponse
 
     func undeleteCertificateAuthority(
-      request: UndeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCertificateAuthority(
-      request: DeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateCertificateAuthority(
-      request: UpdateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createCaPool(
-      request: CreateCaPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCaPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateCaPool(
-      request: UpdateCaPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCaPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getCaPool(
-      request: GetCaPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCaPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.CaPool
 
     func listCaPools(
-      request: ListCaPoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCaPoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCaPoolsResponse
 
     func deleteCaPool(
-      request: DeleteCaPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCaPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func fetchCaCerts(
-      request: FetchCaCertsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchCaCertsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.FetchCaCertsResponse
 
     func getCertificateRevocationList(
-      request: GetCertificateRevocationListRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCertificateRevocationListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.CertificateRevocationList
 
     func listCertificateRevocationLists(
-      request: ListCertificateRevocationListsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCertificateRevocationListsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificateRevocationListsResponse
 
     func updateCertificateRevocationList(
-      request: UpdateCertificateRevocationListRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCertificateRevocationListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createCertificateTemplate(
-      request: CreateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCertificateTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCertificateTemplate(
-      request: DeleteCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCertificateTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getCertificateTemplate(
-      request: GetCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCertificateTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.CertificateTemplate
 
     func listCertificateTemplates(
-      request: ListCertificateTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCertificateTemplatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificateTemplatesResponse
 
     func updateCertificateTemplate(
-      request: UpdateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCertificateTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

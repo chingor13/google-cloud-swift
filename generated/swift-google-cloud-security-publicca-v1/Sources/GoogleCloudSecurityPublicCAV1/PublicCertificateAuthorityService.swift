@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Manages the resources required for ACME [external account
 /// binding](https://tools.ietf.org/html/rfc8555#section-7.3.4) for
@@ -32,7 +32,7 @@ public final class PublicCertificateAuthorityServiceClient: Clients
   let inner: any Clients.PublicCertificateAuthorityServiceStub
 
   /// Creates a new `PublicCertificateAuthorityServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.PublicCertificateAuthorityServiceStub =
       try Clients.PublicCertificateAuthorityServiceTransport(options)
     inner = Clients.PublicCertificateAuthorityServiceRetry(inner, options: options)
@@ -50,7 +50,7 @@ public final class PublicCertificateAuthorityServiceClient: Clients
   ///
   /// @Snippet(path: "PublicCertificateAuthorityService_CreateExternalAccountKey")
   public func createExternalAccountKey(
-    request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateExternalAccountKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPublicCAV1.ExternalAccountKey {
     try await self.inner.createExternalAccountKey(request: request, options: options)
   }
@@ -75,7 +75,7 @@ extension Clients {
 
     /// See `PublicCertificateAuthorityServiceClient.createExternalAccountKey`.
     func createExternalAccountKey(
-      request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExternalAccountKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPublicCAV1.ExternalAccountKey
   }
 }
@@ -89,9 +89,9 @@ extension Clients.PublicCertificateAuthorityServiceProtocol {
   }
 
   public func createExternalAccountKey(
-    request: CreateExternalAccountKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateExternalAccountKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPublicCAV1.ExternalAccountKey {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createExternalAccountKey(

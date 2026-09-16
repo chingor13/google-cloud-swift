@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [VectorSearchService.ImportDataObjects][google.cloud.vectorsearch.v1.VectorSearchService.ImportDataObjects].
 ///
 /// [google.cloud.vectorsearch.v1.VectorSearchService.ImportDataObjects]: <doc:VectorSearchServiceClient/importDataObjects(request:options:)>
-public struct ImportDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ImportDataObjectsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the Collection to import DataObjects into.
@@ -31,7 +31,7 @@ public struct ImportDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   /// The configuration for the import data and error results.
   public var config: OneOf_Config? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ImportDataObjectsRequest`.
   public init() {}
@@ -88,7 +88,7 @@ public struct ImportDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._AnyP
     self.config = config
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -108,7 +108,7 @@ public struct ImportDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   }
 
   /// Google Cloud Storage configuration for the import.
-  public struct GcsImportConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GcsImportConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. URI prefix of the Cloud Storage DataObjects to import.
@@ -124,7 +124,7 @@ public struct ImportDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._AnyP
     /// under this prefix. If this field is empty, no output will be written.
     public var outputUri: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GcsImportConfig`.
     public init() {}
@@ -172,7 +172,7 @@ public struct ImportDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._AnyP
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -190,11 +190,11 @@ public struct ImportDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._AnyP
       return
         "type.googleapis.com/google.cloud.vectorsearch.v1.ImportDataObjectsRequest.GcsImportConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -207,10 +207,10 @@ public struct ImportDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vectorsearch.v1.ImportDataObjectsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

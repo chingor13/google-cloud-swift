@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class PolicyTroubleshooterRetry: PolicyTroubleshooterStub {
     let inner: any PolicyTroubleshooterStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any PolicyTroubleshooterStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any PolicyTroubleshooterStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func troubleshootIamPolicy(
-      request: TroubleshootIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: TroubleshootIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPolicyTroubleshooterIAMV3.TroubleshootIamPolicyResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: TroubleshootIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: TroubleshootIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudPolicyTroubleshooterIAMV3.TroubleshootIamPolicyResponse
           in
           return try await self.inner.troubleshootIamPolicy(request: r, options: o)

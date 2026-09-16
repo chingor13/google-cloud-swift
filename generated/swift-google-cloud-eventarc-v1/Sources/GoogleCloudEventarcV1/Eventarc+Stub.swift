@@ -16,204 +16,204 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol EventarcStub: Sendable {
     func getTrigger(
-      request: GetTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.Trigger
 
     func listTriggers(
-      request: ListTriggersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTriggersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.ListTriggersResponse
 
     func createTrigger(
-      request: CreateTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateTrigger(
-      request: UpdateTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteTrigger(
-      request: DeleteTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getChannel(
-      request: GetChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.Channel
 
     func listChannels(
-      request: ListChannelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListChannelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.ListChannelsResponse
 
     func createChannel(
-      request: CreateChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateChannel(
-      request: UpdateChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteChannel(
-      request: DeleteChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getProvider(
-      request: GetProviderRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProviderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.Provider
 
     func listProviders(
-      request: ListProvidersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProvidersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.ListProvidersResponse
 
     func getChannelConnection(
-      request: GetChannelConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetChannelConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.ChannelConnection
 
     func listChannelConnections(
-      request: ListChannelConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListChannelConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.ListChannelConnectionsResponse
 
     func createChannelConnection(
-      request: CreateChannelConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateChannelConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteChannelConnection(
-      request: DeleteChannelConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteChannelConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getGoogleChannelConfig(
-      request: GetGoogleChannelConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGoogleChannelConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.GoogleChannelConfig
 
     func updateGoogleChannelConfig(
-      request: UpdateGoogleChannelConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGoogleChannelConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.GoogleChannelConfig
 
     func getMessageBus(
-      request: GetMessageBusRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMessageBusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.MessageBus
 
     func listMessageBuses(
-      request: ListMessageBusesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMessageBusesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.ListMessageBusesResponse
 
     func listMessageBusEnrollments(
-      request: ListMessageBusEnrollmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMessageBusEnrollmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.ListMessageBusEnrollmentsResponse
 
     func createMessageBus(
-      request: CreateMessageBusRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMessageBusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateMessageBus(
-      request: UpdateMessageBusRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMessageBusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteMessageBus(
-      request: DeleteMessageBusRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMessageBusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getEnrollment(
-      request: GetEnrollmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEnrollmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.Enrollment
 
     func listEnrollments(
-      request: ListEnrollmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEnrollmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.ListEnrollmentsResponse
 
     func createEnrollment(
-      request: CreateEnrollmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEnrollmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateEnrollment(
-      request: UpdateEnrollmentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEnrollmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteEnrollment(
-      request: DeleteEnrollmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEnrollmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getPipeline(
-      request: GetPipelineRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPipelineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.Pipeline
 
     func listPipelines(
-      request: ListPipelinesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPipelinesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.ListPipelinesResponse
 
     func createPipeline(
-      request: CreatePipelineRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePipelineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updatePipeline(
-      request: UpdatePipelineRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePipelineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deletePipeline(
-      request: DeletePipelineRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePipelineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getGoogleApiSource(
-      request: GetGoogleApiSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGoogleApiSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.GoogleApiSource
 
     func listGoogleApiSources(
-      request: ListGoogleApiSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoogleApiSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcV1.ListGoogleApiSourcesResponse
 
     func createGoogleApiSource(
-      request: CreateGoogleApiSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGoogleApiSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateGoogleApiSource(
-      request: UpdateGoogleApiSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGoogleApiSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteGoogleApiSource(
-      request: DeleteGoogleApiSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGoogleApiSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

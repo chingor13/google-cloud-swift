@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudServiceDirectoryV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(client: RegistrationServiceClient, parent: String) async throws {
   let response = try await client.createNamespace(

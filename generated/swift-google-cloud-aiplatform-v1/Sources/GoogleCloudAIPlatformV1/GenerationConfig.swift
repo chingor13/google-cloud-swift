@@ -16,10 +16,10 @@
 
 #if GenAiTuningService || LlmUtilityService || PredictionService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Generation config.
-  public struct GenerationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GenerationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Controls the randomness of predictions.
@@ -109,7 +109,7 @@
     /// be used within non-required properties. (Nullable properties are not
     /// sufficient.) If `$ref` is set on a sub-schema, no other properties, except
     /// for than those starting as a `$`, may be set.
-    public var responseJsonSchema: GoogleCloudWKT.Value? = nil
+    public var responseJsonSchema: GoogleWKT.Value? = nil
 
     /// Optional. Routing configuration.
     public var routingConfig: GenerationConfig.RoutingConfig? = nil
@@ -144,7 +144,7 @@
     /// Optional. Config for image generation features.
     public var imageConfig: ImageConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GenerationConfig`.
     public init() {}
@@ -239,7 +239,7 @@
       }
       self.responseSchema = try container.decodeIfPresent(Schema.self, forKey: .responseSchema)
       self.responseJsonSchema = try container.decodeIfPresent(
-        GoogleCloudWKT.Value.self, forKey: .responseJsonSchema)
+        GoogleWKT.Value.self, forKey: .responseJsonSchema)
       self.routingConfig = try container.decodeIfPresent(
         GenerationConfig.RoutingConfig.self, forKey: .routingConfig)
       self.audioTimestamp = try container.decodeIfPresent(Swift.Bool.self, forKey: .audioTimestamp)
@@ -256,7 +256,7 @@
       self.imageConfig = try container.decodeIfPresent(ImageConfig.self, forKey: .imageConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -289,13 +289,13 @@
     }
 
     /// The configuration for routing the request to a specific model.
-    public struct RoutingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RoutingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Routing mode.
       public var routingConfig: OneOf_RoutingConfig? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RoutingConfig`.
       public init() {}
@@ -354,7 +354,7 @@
         self.routingConfig = routingConfig
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -377,15 +377,14 @@
       /// When automated routing is specified, the routing will be determined by
       /// the pretrained routing model and customer provided model routing
       /// preference.
-      public struct AutoRoutingMode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct AutoRoutingMode: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// The model routing preference.
         public var modelRoutingPreference:
           GenerationConfig.RoutingConfig.AutoRoutingMode.ModelRoutingPreference? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `AutoRoutingMode`.
         public init() {}
@@ -423,7 +422,7 @@
             forKey: .modelRoutingPreference)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -552,24 +551,23 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.GenerationConfig.RoutingConfig.AutoRoutingMode"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// When manual routing is set, the specified model will be used directly.
-      public struct ManualRoutingMode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct ManualRoutingMode: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// The model name to use. Only the public LLM models are accepted. e.g.
         /// 'gemini-1.5-pro-001'.
         public var modelName: Swift.String? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `ManualRoutingMode`.
         public init() {}
@@ -605,7 +603,7 @@
           self.modelName = try container.decodeIfPresent(Swift.String.self, forKey: .modelName)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -621,11 +619,11 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.GenerationConfig.RoutingConfig.ManualRoutingMode"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -640,16 +638,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.GenerationConfig.RoutingConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Config for thinking features.
-    public struct ThinkingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ThinkingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Indicates whether to include thoughts in the response.
@@ -663,7 +661,7 @@
       /// Optional. The number of thoughts tokens that the model should generate.
       public var thinkingLevel: GenerationConfig.ThinkingConfig.ThinkingLevel? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ThinkingConfig`.
       public init() {}
@@ -708,7 +706,7 @@
           GenerationConfig.ThinkingConfig.ThinkingLevel.self, forKey: .thinkingLevel)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -844,11 +842,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.GenerationConfig.ThinkingConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1079,11 +1077,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.GenerationConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

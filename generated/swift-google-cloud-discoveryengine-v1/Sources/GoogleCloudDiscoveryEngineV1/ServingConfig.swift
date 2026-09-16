@@ -16,13 +16,13 @@
 
 #if ServingConfigService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Configures metadata that is used to generate serving time results (e.g.
   /// search results or recommendation predictions).
   /// The ServingConfig is passed in the search and predict request and generates
   /// results.
-  public struct ServingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ServingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. Fully qualified name
@@ -105,10 +105,10 @@
     public var rankingExpression: Swift.String = Swift.String()
 
     /// Output only. ServingConfig created timestamp.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. ServingConfig updated timestamp.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Filter controls to use in serving path.
     /// All triggered filter controls will be applied.
@@ -200,7 +200,7 @@
     /// Industry vertical specific config.
     public var verticalConfig: OneOf_VerticalConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ServingConfig`.
     public init() {}
@@ -287,10 +287,8 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .rankingExpression) {
         self.rankingExpression = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent([Swift.String].self, forKey: .filterControlIds) {
         self.filterControlIds = value
       }
@@ -351,7 +349,7 @@
       self.verticalConfig = verticalConfig
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -406,7 +404,7 @@
     ///
     /// [google.cloud.discoveryengine.v1.SolutionType]: <doc:SolutionType>
     /// [google.cloud.discoveryengine.v1.SolutionType.SOLUTION_TYPE_RECOMMENDATION]: <doc:SolutionType/recommendation>
-    public struct MediaConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MediaConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Specifies the event type used for demoting recommendation result.
@@ -435,7 +433,7 @@
       /// This must be set for `media-complete` event type.
       public var demoteContentWatched: OneOf_DemoteContentWatched? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MediaConfig`.
       public init() {}
@@ -520,7 +518,7 @@
         self.demoteContentWatched = demoteContentWatched
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -558,11 +556,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.discoveryengine.v1.ServingConfig.MediaConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -570,14 +568,14 @@
     /// support:
     ///
     /// * `content_search_spec`: configuration for generic content search.
-    public struct GenericConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GenericConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Specifies the expected behavior of content search.
       /// Only valid for content-search enabled data store.
       public var contentSearchSpec: SearchRequest.ContentSearchSpec? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GenericConfig`.
       public init() {}
@@ -614,7 +612,7 @@
           SearchRequest.ContentSearchSpec.self, forKey: .contentSearchSpec)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -629,11 +627,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.discoveryengine.v1.ServingConfig.GenericConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -648,11 +646,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.ServingConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

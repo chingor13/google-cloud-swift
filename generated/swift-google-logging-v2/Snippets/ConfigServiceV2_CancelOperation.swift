@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudLoggingV2
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ConfigServiceV2Client) async throws {
   try await client.cancelOperation(

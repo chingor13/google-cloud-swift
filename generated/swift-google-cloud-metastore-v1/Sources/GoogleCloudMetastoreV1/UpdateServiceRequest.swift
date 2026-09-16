@@ -15,20 +15,20 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [DataprocMetastore.UpdateService][google.cloud.metastore.v1.DataprocMetastore.UpdateService].
 ///
 /// [google.cloud.metastore.v1.DataprocMetastore.UpdateService]: <doc:DataprocMetastoreClient/updateService(request:options:)>
-public struct UpdateServiceRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateServiceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. A field mask used to specify the fields to be overwritten in the
   /// metastore service resource by the update.
   /// Fields specified in the `update_mask` are relative to the resource (not
   /// to the full request). A field is overwritten if it is in the mask.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Required. The metastore service to update. The server only merges fields
   /// in the service if they are specified in `update_mask`.
@@ -51,7 +51,7 @@ public struct UpdateServiceRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
   public var requestId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateServiceRequest`.
   public init() {}
@@ -88,15 +88,14 @@ public struct UpdateServiceRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.service = try container.decodeIfPresent(Service.self, forKey: .service)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .requestId) {
       self.requestId = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -113,10 +112,10 @@ public struct UpdateServiceRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.metastore.v1.UpdateServiceRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

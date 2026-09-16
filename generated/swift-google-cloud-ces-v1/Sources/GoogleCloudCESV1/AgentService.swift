@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The service that manages agent-related resources in Gemini Enterprise for
 /// Customer Engagement (CES).
@@ -30,11 +30,11 @@ import GoogleCloudGax
 /// @Snippet(path: "AgentServiceQuickstart")
 public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   let inner: any Clients.AgentServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `AgentServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.AgentServiceStub = try Clients.AgentServiceTransport(options)
     inner = Clients.AgentServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -49,7 +49,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListApps")
   public func listApps(
-    request: ListAppsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAppsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListAppsResponse {
     try await self.inner.listApps(request: request, options: options)
   }
@@ -58,21 +58,21 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListApps")
   public func listApps(
-    byItem: ListAppsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAppsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<App, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListAppsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listApps(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of the specified app.
   ///
   /// @Snippet(path: "AgentService_GetApp")
   public func getApp(
-    request: GetAppRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAppRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.App {
     try await self.inner.getApp(request: request, options: options)
   }
@@ -81,7 +81,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_CreateApp")
   public func createApp(
-    request: CreateAppRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAppRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createApp(request: request, options: options)
   }
@@ -90,21 +90,20 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_CreateApp")
   public func createApp(
-    withPolling: CreateAppRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<App> {
+    withPolling: CreateAppRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<App> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<App>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<App>.State in
       return try op._extractStatus(App.self)
     }
     let rawOp = try await self.createApp(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<App>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<App>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -116,7 +115,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_UpdateApp")
   public func updateApp(
-    request: UpdateAppRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAppRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.App {
     try await self.inner.updateApp(request: request, options: options)
   }
@@ -125,7 +124,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_DeleteApp")
   public func deleteApp(
-    request: DeleteAppRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAppRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteApp(request: request, options: options)
   }
@@ -134,21 +133,21 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_DeleteApp")
   public func deleteApp(
-    withPolling: DeleteAppRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteAppRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteApp(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -160,7 +159,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ExportApp")
   public func exportApp(
-    request: ExportAppRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportAppRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.exportApp(request: request, options: options)
   }
@@ -169,22 +168,21 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ExportApp")
   public func exportApp(
-    withPolling: ExportAppRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportAppResponse> {
+    withPolling: ExportAppRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ExportAppResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ExportAppResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ExportAppResponse>.State in
       return try op._extractStatus(ExportAppResponse.self)
     }
     let rawOp = try await self.exportApp(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ExportAppResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ExportAppResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -196,7 +194,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ImportApp")
   public func importApp(
-    request: ImportAppRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportAppRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.importApp(request: request, options: options)
   }
@@ -205,22 +203,21 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ImportApp")
   public func importApp(
-    withPolling: ImportAppRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportAppResponse> {
+    withPolling: ImportAppRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportAppResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ImportAppResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ImportAppResponse>.State in
       return try op._extractStatus(ImportAppResponse.self)
     }
     let rawOp = try await self.importApp(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ImportAppResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportAppResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -232,7 +229,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListAgents")
   public func listAgents(
-    request: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAgentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListAgentsResponse {
     try await self.inner.listAgents(request: request, options: options)
   }
@@ -241,21 +238,21 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListAgents")
   public func listAgents(
-    byItem: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAgentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Agent, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListAgentsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listAgents(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of the specified agent.
   ///
   /// @Snippet(path: "AgentService_GetAgent")
   public func getAgent(
-    request: GetAgentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAgentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Agent {
     try await self.inner.getAgent(request: request, options: options)
   }
@@ -264,7 +261,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_CreateAgent")
   public func createAgent(
-    request: CreateAgentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAgentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Agent {
     try await self.inner.createAgent(request: request, options: options)
   }
@@ -273,7 +270,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_UpdateAgent")
   public func updateAgent(
-    request: UpdateAgentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAgentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Agent {
     try await self.inner.updateAgent(request: request, options: options)
   }
@@ -282,7 +279,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_DeleteAgent")
   public func deleteAgent(
-    request: DeleteAgentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAgentRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteAgent(request: request, options: options)
   }
@@ -291,7 +288,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListExamples")
   public func listExamples(
-    request: ListExamplesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListExamplesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListExamplesResponse {
     try await self.inner.listExamples(request: request, options: options)
   }
@@ -300,21 +297,21 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListExamples")
   public func listExamples(
-    byItem: ListExamplesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListExamplesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Example, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListExamplesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listExamples(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of the specified example.
   ///
   /// @Snippet(path: "AgentService_GetExample")
   public func getExample(
-    request: GetExampleRequest, options: GoogleCloudGax.RequestOptions
+    request: GetExampleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Example {
     try await self.inner.getExample(request: request, options: options)
   }
@@ -323,7 +320,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_CreateExample")
   public func createExample(
-    request: CreateExampleRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateExampleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Example {
     try await self.inner.createExample(request: request, options: options)
   }
@@ -332,7 +329,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_UpdateExample")
   public func updateExample(
-    request: UpdateExampleRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateExampleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Example {
     try await self.inner.updateExample(request: request, options: options)
   }
@@ -341,7 +338,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_DeleteExample")
   public func deleteExample(
-    request: DeleteExampleRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteExampleRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteExample(request: request, options: options)
   }
@@ -350,7 +347,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListTools")
   public func listTools(
-    request: ListToolsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListToolsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListToolsResponse {
     try await self.inner.listTools(request: request, options: options)
   }
@@ -359,21 +356,21 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListTools")
   public func listTools(
-    byItem: ListToolsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListToolsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Tool, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListToolsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listTools(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of the specified tool.
   ///
   /// @Snippet(path: "AgentService_GetTool")
   public func getTool(
-    request: GetToolRequest, options: GoogleCloudGax.RequestOptions
+    request: GetToolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Tool {
     try await self.inner.getTool(request: request, options: options)
   }
@@ -382,7 +379,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListConversations")
   public func listConversations(
-    request: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConversationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListConversationsResponse {
     try await self.inner.listConversations(request: request, options: options)
   }
@@ -391,7 +388,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListConversations")
   public func listConversations(
-    byItem: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConversationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Conversation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudCESV1.ListConversationsResponse in
@@ -399,14 +396,14 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listConversations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of the specified conversation.
   ///
   /// @Snippet(path: "AgentService_GetConversation")
   public func getConversation(
-    request: GetConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConversationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Conversation {
     try await self.inner.getConversation(request: request, options: options)
   }
@@ -415,7 +412,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_DeleteConversation")
   public func deleteConversation(
-    request: DeleteConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConversationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteConversation(request: request, options: options)
   }
@@ -424,7 +421,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_BatchDeleteConversations")
   public func batchDeleteConversations(
-    request: BatchDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchDeleteConversationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.batchDeleteConversations(request: request, options: options)
   }
@@ -433,23 +430,22 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_BatchDeleteConversations")
   public func batchDeleteConversations(
-    withPolling: BatchDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchDeleteConversationsResponse> {
+    withPolling: BatchDeleteConversationsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BatchDeleteConversationsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<BatchDeleteConversationsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<BatchDeleteConversationsResponse>.State in
       return try op._extractStatus(BatchDeleteConversationsResponse.self)
     }
     let rawOp = try await self.batchDeleteConversations(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<BatchDeleteConversationsResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<BatchDeleteConversationsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -461,7 +457,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_CreateTool")
   public func createTool(
-    request: CreateToolRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateToolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Tool {
     try await self.inner.createTool(request: request, options: options)
   }
@@ -470,7 +466,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_UpdateTool")
   public func updateTool(
-    request: UpdateToolRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateToolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Tool {
     try await self.inner.updateTool(request: request, options: options)
   }
@@ -479,7 +475,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_DeleteTool")
   public func deleteTool(
-    request: DeleteToolRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteToolRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteTool(request: request, options: options)
   }
@@ -488,7 +484,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListGuardrails")
   public func listGuardrails(
-    request: ListGuardrailsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGuardrailsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListGuardrailsResponse {
     try await self.inner.listGuardrails(request: request, options: options)
   }
@@ -497,21 +493,21 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListGuardrails")
   public func listGuardrails(
-    byItem: ListGuardrailsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGuardrailsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Guardrail, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListGuardrailsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listGuardrails(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of the specified guardrail.
   ///
   /// @Snippet(path: "AgentService_GetGuardrail")
   public func getGuardrail(
-    request: GetGuardrailRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGuardrailRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Guardrail {
     try await self.inner.getGuardrail(request: request, options: options)
   }
@@ -520,7 +516,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_CreateGuardrail")
   public func createGuardrail(
-    request: CreateGuardrailRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGuardrailRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Guardrail {
     try await self.inner.createGuardrail(request: request, options: options)
   }
@@ -529,7 +525,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_UpdateGuardrail")
   public func updateGuardrail(
-    request: UpdateGuardrailRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGuardrailRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Guardrail {
     try await self.inner.updateGuardrail(request: request, options: options)
   }
@@ -538,7 +534,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_DeleteGuardrail")
   public func deleteGuardrail(
-    request: DeleteGuardrailRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGuardrailRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteGuardrail(request: request, options: options)
   }
@@ -547,7 +543,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListDeployments")
   public func listDeployments(
-    request: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeploymentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListDeploymentsResponse {
     try await self.inner.listDeployments(request: request, options: options)
   }
@@ -556,7 +552,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListDeployments")
   public func listDeployments(
-    byItem: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeploymentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Deployment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudCESV1.ListDeploymentsResponse in
@@ -564,14 +560,14 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listDeployments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of the specified deployment.
   ///
   /// @Snippet(path: "AgentService_GetDeployment")
   public func getDeployment(
-    request: GetDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Deployment {
     try await self.inner.getDeployment(request: request, options: options)
   }
@@ -580,7 +576,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_CreateDeployment")
   public func createDeployment(
-    request: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Deployment {
     try await self.inner.createDeployment(request: request, options: options)
   }
@@ -589,7 +585,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_UpdateDeployment")
   public func updateDeployment(
-    request: UpdateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Deployment {
     try await self.inner.updateDeployment(request: request, options: options)
   }
@@ -598,7 +594,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_DeleteDeployment")
   public func deleteDeployment(
-    request: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteDeployment(request: request, options: options)
   }
@@ -607,7 +603,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListToolsets")
   public func listToolsets(
-    request: ListToolsetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListToolsetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListToolsetsResponse {
     try await self.inner.listToolsets(request: request, options: options)
   }
@@ -616,21 +612,21 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListToolsets")
   public func listToolsets(
-    byItem: ListToolsetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListToolsetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Toolset, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListToolsetsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listToolsets(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of the specified toolset.
   ///
   /// @Snippet(path: "AgentService_GetToolset")
   public func getToolset(
-    request: GetToolsetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetToolsetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Toolset {
     try await self.inner.getToolset(request: request, options: options)
   }
@@ -639,7 +635,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_CreateToolset")
   public func createToolset(
-    request: CreateToolsetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateToolsetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Toolset {
     try await self.inner.createToolset(request: request, options: options)
   }
@@ -648,7 +644,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_UpdateToolset")
   public func updateToolset(
-    request: UpdateToolsetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateToolsetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Toolset {
     try await self.inner.updateToolset(request: request, options: options)
   }
@@ -657,7 +653,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_DeleteToolset")
   public func deleteToolset(
-    request: DeleteToolsetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteToolsetRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteToolset(request: request, options: options)
   }
@@ -666,7 +662,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListAppVersions")
   public func listAppVersions(
-    request: ListAppVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAppVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListAppVersionsResponse {
     try await self.inner.listAppVersions(request: request, options: options)
   }
@@ -675,7 +671,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListAppVersions")
   public func listAppVersions(
-    byItem: ListAppVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAppVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AppVersion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudCESV1.ListAppVersionsResponse in
@@ -683,14 +679,14 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listAppVersions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of the specified app version.
   ///
   /// @Snippet(path: "AgentService_GetAppVersion")
   public func getAppVersion(
-    request: GetAppVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAppVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.AppVersion {
     try await self.inner.getAppVersion(request: request, options: options)
   }
@@ -699,7 +695,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_CreateAppVersion")
   public func createAppVersion(
-    request: CreateAppVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAppVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.AppVersion {
     try await self.inner.createAppVersion(request: request, options: options)
   }
@@ -708,7 +704,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_DeleteAppVersion")
   public func deleteAppVersion(
-    request: DeleteAppVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAppVersionRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteAppVersion(request: request, options: options)
   }
@@ -719,7 +715,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_RestoreAppVersion")
   public func restoreAppVersion(
-    request: RestoreAppVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: RestoreAppVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.restoreAppVersion(request: request, options: options)
   }
@@ -730,22 +726,22 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_RestoreAppVersion")
   public func restoreAppVersion(
-    withPolling: RestoreAppVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RestoreAppVersionResponse> {
+    withPolling: RestoreAppVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RestoreAppVersionResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<RestoreAppVersionResponse>.State in
+        -> GoogleGax._PollableOperationImpl<RestoreAppVersionResponse>.State in
       return try op._extractStatus(RestoreAppVersionResponse.self)
     }
     let rawOp = try await self.restoreAppVersion(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<RestoreAppVersionResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<RestoreAppVersionResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -757,7 +753,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListChangelogs")
   public func listChangelogs(
-    request: ListChangelogsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListChangelogsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListChangelogsResponse {
     try await self.inner.listChangelogs(request: request, options: options)
   }
@@ -766,21 +762,21 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListChangelogs")
   public func listChangelogs(
-    byItem: ListChangelogsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListChangelogsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Changelog, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListChangelogsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listChangelogs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the specified changelog.
   ///
   /// @Snippet(path: "AgentService_GetChangelog")
   public func getChangelog(
-    request: GetChangelogRequest, options: GoogleCloudGax.RequestOptions
+    request: GetChangelogRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Changelog {
     try await self.inner.getChangelog(request: request, options: options)
   }
@@ -806,7 +802,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -832,7 +828,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -840,14 +836,14 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "AgentService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -858,7 +854,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -869,7 +865,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -877,7 +873,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -886,7 +882,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -897,7 +893,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -908,7 +904,7 @@ public final class AgentServiceClient: Clients.AgentServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "AgentService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -946,21 +942,22 @@ extension Clients {
     func createApp(request: CreateAppRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AgentServiceClient.createApp`.
-    func createApp(withPolling: CreateAppRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<App>
+    func createApp(withPolling: CreateAppRequest) async throws -> any GoogleGax.PollableOperation<
+      App
+    >
 
     /// See `AgentServiceClient.createApp`.
     func createApp(
       parent: Swift.String,
       app: App?,
       appId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<App>
+    ) async throws -> any GoogleGax.PollableOperation<App>
 
     /// See `AgentServiceClient.createApp`.
     func createApp(
       parent: Swift.String,
       app: App?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<App>
+    ) async throws -> any GoogleGax.PollableOperation<App>
 
     /// See `AgentServiceClient.updateApp`.
     func updateApp(request: UpdateAppRequest) async throws -> GoogleCloudCESV1.App
@@ -968,46 +965,49 @@ extension Clients {
     /// See `AgentServiceClient.updateApp`.
     func updateApp(
       app: App?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudCESV1.App
 
     /// See `AgentServiceClient.deleteApp`.
     func deleteApp(request: DeleteAppRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AgentServiceClient.deleteApp`.
-    func deleteApp(withPolling: DeleteAppRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Swift.Void>
+    func deleteApp(withPolling: DeleteAppRequest) async throws -> any GoogleGax.PollableOperation<
+      Swift.Void
+    >
 
     /// See `AgentServiceClient.deleteApp`.
     func deleteApp(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AgentServiceClient.exportApp`.
     func exportApp(request: ExportAppRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AgentServiceClient.exportApp`.
-    func exportApp(withPolling: ExportAppRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<ExportAppResponse>
+    func exportApp(withPolling: ExportAppRequest) async throws -> any GoogleGax.PollableOperation<
+      ExportAppResponse
+    >
 
     /// See `AgentServiceClient.exportApp`.
     func exportApp(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportAppResponse>
+    ) async throws -> any GoogleGax.PollableOperation<ExportAppResponse>
 
     /// See `AgentServiceClient.importApp`.
     func importApp(request: ImportAppRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AgentServiceClient.importApp`.
-    func importApp(withPolling: ImportAppRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<ImportAppResponse>
+    func importApp(withPolling: ImportAppRequest) async throws -> any GoogleGax.PollableOperation<
+      ImportAppResponse
+    >
 
     /// See `AgentServiceClient.importApp`.
     func importApp(
       parent: Swift.String,
       displayName: Swift.String,
       appId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportAppResponse>
+    ) async throws -> any GoogleGax.PollableOperation<ImportAppResponse>
 
     /// See `AgentServiceClient.listAgents`.
     func listAgents(request: ListAgentsRequest) async throws -> GoogleCloudCESV1.ListAgentsResponse
@@ -1052,7 +1052,7 @@ extension Clients {
     /// See `AgentServiceClient.updateAgent`.
     func updateAgent(
       agent: Agent?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudCESV1.Agent
 
     /// See `AgentServiceClient.deleteAgent`.
@@ -1107,7 +1107,7 @@ extension Clients {
     /// See `AgentServiceClient.updateExample`.
     func updateExample(
       example: Example?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudCESV1.Example
 
     /// See `AgentServiceClient.deleteExample`.
@@ -1176,12 +1176,12 @@ extension Clients {
 
     /// See `AgentServiceClient.batchDeleteConversations`.
     func batchDeleteConversations(withPolling: BatchDeleteConversationsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<BatchDeleteConversationsResponse>
+      -> any GoogleGax.PollableOperation<BatchDeleteConversationsResponse>
 
     /// See `AgentServiceClient.batchDeleteConversations`.
     func batchDeleteConversations(
       parent: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchDeleteConversationsResponse>
+    ) async throws -> any GoogleGax.PollableOperation<BatchDeleteConversationsResponse>
 
     /// See `AgentServiceClient.createTool`.
     func createTool(request: CreateToolRequest) async throws -> GoogleCloudCESV1.Tool
@@ -1205,7 +1205,7 @@ extension Clients {
     /// See `AgentServiceClient.updateTool`.
     func updateTool(
       tool: Tool?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudCESV1.Tool
 
     /// See `AgentServiceClient.deleteTool`.
@@ -1260,7 +1260,7 @@ extension Clients {
     /// See `AgentServiceClient.updateGuardrail`.
     func updateGuardrail(
       guardrail: Guardrail?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudCESV1.Guardrail
 
     /// See `AgentServiceClient.deleteGuardrail`.
@@ -1317,7 +1317,7 @@ extension Clients {
     /// See `AgentServiceClient.updateDeployment`.
     func updateDeployment(
       deployment: Deployment?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudCESV1.Deployment
 
     /// See `AgentServiceClient.deleteDeployment`.
@@ -1372,7 +1372,7 @@ extension Clients {
     /// See `AgentServiceClient.updateToolset`.
     func updateToolset(
       toolset: Toolset?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudCESV1.Toolset
 
     /// See `AgentServiceClient.deleteToolset`.
@@ -1435,13 +1435,13 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `AgentServiceClient.restoreAppVersion`.
-    func restoreAppVersion(withPolling: RestoreAppVersionRequest) async throws -> any GoogleCloudGax
+    func restoreAppVersion(withPolling: RestoreAppVersionRequest) async throws -> any GoogleGax
       .PollableOperation<RestoreAppVersionResponse>
 
     /// See `AgentServiceClient.restoreAppVersion`.
     func restoreAppVersion(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<RestoreAppVersionResponse>
+    ) async throws -> any GoogleGax.PollableOperation<RestoreAppVersionResponse>
 
     /// See `AgentServiceClient.listChangelogs`.
     func listChangelogs(request: ListChangelogsRequest) async throws
@@ -1511,357 +1511,357 @@ extension Clients {
 
     /// See `AgentServiceClient.listApps`.
     func listApps(
-      request: ListAppsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAppsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListAppsResponse
 
     /// See `AgentServiceClient.listApps`.
     func listApps(
-      byItem: ListAppsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAppsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<App, Swift.Error>
 
     /// See `AgentServiceClient.getApp`.
     func getApp(
-      request: GetAppRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAppRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.App
 
     /// See `AgentServiceClient.createApp`.
     func createApp(
-      request: CreateAppRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAppRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AgentServiceClient.createApp`.
     func createApp(
-      withPolling: CreateAppRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<App>
+      withPolling: CreateAppRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<App>
 
     /// See `AgentServiceClient.updateApp`.
     func updateApp(
-      request: UpdateAppRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAppRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.App
 
     /// See `AgentServiceClient.deleteApp`.
     func deleteApp(
-      request: DeleteAppRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAppRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AgentServiceClient.deleteApp`.
     func deleteApp(
-      withPolling: DeleteAppRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteAppRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AgentServiceClient.exportApp`.
     func exportApp(
-      request: ExportAppRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportAppRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AgentServiceClient.exportApp`.
     func exportApp(
-      withPolling: ExportAppRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportAppResponse>
+      withPolling: ExportAppRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportAppResponse>
 
     /// See `AgentServiceClient.importApp`.
     func importApp(
-      request: ImportAppRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportAppRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AgentServiceClient.importApp`.
     func importApp(
-      withPolling: ImportAppRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportAppResponse>
+      withPolling: ImportAppRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportAppResponse>
 
     /// See `AgentServiceClient.listAgents`.
     func listAgents(
-      request: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAgentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListAgentsResponse
 
     /// See `AgentServiceClient.listAgents`.
     func listAgents(
-      byItem: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAgentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Agent, Swift.Error>
 
     /// See `AgentServiceClient.getAgent`.
     func getAgent(
-      request: GetAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Agent
 
     /// See `AgentServiceClient.createAgent`.
     func createAgent(
-      request: CreateAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Agent
 
     /// See `AgentServiceClient.updateAgent`.
     func updateAgent(
-      request: UpdateAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Agent
 
     /// See `AgentServiceClient.deleteAgent`.
     func deleteAgent(
-      request: DeleteAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAgentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AgentServiceClient.listExamples`.
     func listExamples(
-      request: ListExamplesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExamplesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListExamplesResponse
 
     /// See `AgentServiceClient.listExamples`.
     func listExamples(
-      byItem: ListExamplesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListExamplesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Example, Swift.Error>
 
     /// See `AgentServiceClient.getExample`.
     func getExample(
-      request: GetExampleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExampleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Example
 
     /// See `AgentServiceClient.createExample`.
     func createExample(
-      request: CreateExampleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExampleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Example
 
     /// See `AgentServiceClient.updateExample`.
     func updateExample(
-      request: UpdateExampleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExampleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Example
 
     /// See `AgentServiceClient.deleteExample`.
     func deleteExample(
-      request: DeleteExampleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExampleRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AgentServiceClient.listTools`.
     func listTools(
-      request: ListToolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListToolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListToolsResponse
 
     /// See `AgentServiceClient.listTools`.
     func listTools(
-      byItem: ListToolsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListToolsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Tool, Swift.Error>
 
     /// See `AgentServiceClient.getTool`.
     func getTool(
-      request: GetToolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetToolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Tool
 
     /// See `AgentServiceClient.listConversations`.
     func listConversations(
-      request: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListConversationsResponse
 
     /// See `AgentServiceClient.listConversations`.
     func listConversations(
-      byItem: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConversationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Conversation, Swift.Error>
 
     /// See `AgentServiceClient.getConversation`.
     func getConversation(
-      request: GetConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Conversation
 
     /// See `AgentServiceClient.deleteConversation`.
     func deleteConversation(
-      request: DeleteConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConversationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AgentServiceClient.batchDeleteConversations`.
     func batchDeleteConversations(
-      request: BatchDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchDeleteConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AgentServiceClient.batchDeleteConversations`.
     func batchDeleteConversations(
-      withPolling: BatchDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchDeleteConversationsResponse>
+      withPolling: BatchDeleteConversationsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BatchDeleteConversationsResponse>
 
     /// See `AgentServiceClient.createTool`.
     func createTool(
-      request: CreateToolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateToolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Tool
 
     /// See `AgentServiceClient.updateTool`.
     func updateTool(
-      request: UpdateToolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateToolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Tool
 
     /// See `AgentServiceClient.deleteTool`.
     func deleteTool(
-      request: DeleteToolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteToolRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AgentServiceClient.listGuardrails`.
     func listGuardrails(
-      request: ListGuardrailsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGuardrailsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListGuardrailsResponse
 
     /// See `AgentServiceClient.listGuardrails`.
     func listGuardrails(
-      byItem: ListGuardrailsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListGuardrailsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Guardrail, Swift.Error>
 
     /// See `AgentServiceClient.getGuardrail`.
     func getGuardrail(
-      request: GetGuardrailRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGuardrailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Guardrail
 
     /// See `AgentServiceClient.createGuardrail`.
     func createGuardrail(
-      request: CreateGuardrailRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGuardrailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Guardrail
 
     /// See `AgentServiceClient.updateGuardrail`.
     func updateGuardrail(
-      request: UpdateGuardrailRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGuardrailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Guardrail
 
     /// See `AgentServiceClient.deleteGuardrail`.
     func deleteGuardrail(
-      request: DeleteGuardrailRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGuardrailRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AgentServiceClient.listDeployments`.
     func listDeployments(
-      request: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListDeploymentsResponse
 
     /// See `AgentServiceClient.listDeployments`.
     func listDeployments(
-      byItem: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDeploymentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Deployment, Swift.Error>
 
     /// See `AgentServiceClient.getDeployment`.
     func getDeployment(
-      request: GetDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Deployment
 
     /// See `AgentServiceClient.createDeployment`.
     func createDeployment(
-      request: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Deployment
 
     /// See `AgentServiceClient.updateDeployment`.
     func updateDeployment(
-      request: UpdateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Deployment
 
     /// See `AgentServiceClient.deleteDeployment`.
     func deleteDeployment(
-      request: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AgentServiceClient.listToolsets`.
     func listToolsets(
-      request: ListToolsetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListToolsetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListToolsetsResponse
 
     /// See `AgentServiceClient.listToolsets`.
     func listToolsets(
-      byItem: ListToolsetsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListToolsetsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Toolset, Swift.Error>
 
     /// See `AgentServiceClient.getToolset`.
     func getToolset(
-      request: GetToolsetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetToolsetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Toolset
 
     /// See `AgentServiceClient.createToolset`.
     func createToolset(
-      request: CreateToolsetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateToolsetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Toolset
 
     /// See `AgentServiceClient.updateToolset`.
     func updateToolset(
-      request: UpdateToolsetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateToolsetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Toolset
 
     /// See `AgentServiceClient.deleteToolset`.
     func deleteToolset(
-      request: DeleteToolsetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteToolsetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AgentServiceClient.listAppVersions`.
     func listAppVersions(
-      request: ListAppVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAppVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListAppVersionsResponse
 
     /// See `AgentServiceClient.listAppVersions`.
     func listAppVersions(
-      byItem: ListAppVersionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAppVersionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AppVersion, Swift.Error>
 
     /// See `AgentServiceClient.getAppVersion`.
     func getAppVersion(
-      request: GetAppVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAppVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.AppVersion
 
     /// See `AgentServiceClient.createAppVersion`.
     func createAppVersion(
-      request: CreateAppVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAppVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.AppVersion
 
     /// See `AgentServiceClient.deleteAppVersion`.
     func deleteAppVersion(
-      request: DeleteAppVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAppVersionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AgentServiceClient.restoreAppVersion`.
     func restoreAppVersion(
-      request: RestoreAppVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreAppVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AgentServiceClient.restoreAppVersion`.
     func restoreAppVersion(
-      withPolling: RestoreAppVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<RestoreAppVersionResponse>
+      withPolling: RestoreAppVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<RestoreAppVersionResponse>
 
     /// See `AgentServiceClient.listChangelogs`.
     func listChangelogs(
-      request: ListChangelogsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListChangelogsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListChangelogsResponse
 
     /// See `AgentServiceClient.listChangelogs`.
     func listChangelogs(
-      byItem: ListChangelogsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListChangelogsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Changelog, Swift.Error>
 
     /// See `AgentServiceClient.getChangelog`.
     func getChangelog(
-      request: GetChangelogRequest, options: GoogleCloudGax.RequestOptions
+      request: GetChangelogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Changelog
 
     /// See `AgentServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `AgentServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `AgentServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `AgentServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `AgentServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `AgentServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AgentServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1873,9 +1873,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listApps(
-    request: ListAppsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAppsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListAppsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listApps(
@@ -1885,12 +1885,12 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listApps(
-    byItem: ListAppsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAppsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<App, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListAppsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listApps(
@@ -1907,9 +1907,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func getApp(
-    request: GetAppRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAppRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.App {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getApp(
@@ -1926,24 +1926,24 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func createApp(
-    request: CreateAppRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAppRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createApp(withPolling: CreateAppRequest) async throws -> any GoogleCloudGax
+  public func createApp(withPolling: CreateAppRequest) async throws -> any GoogleGax
     .PollableOperation<App>
   {
     try await self.createApp(withPolling: withPolling, options: .init())
   }
 
   public func createApp(
-    withPolling: CreateAppRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<App> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<App>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateAppRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<App> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<App>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1951,7 +1951,7 @@ extension Clients.AgentServiceProtocol {
     parent: Swift.String,
     app: App?,
     appId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<App> {
+  ) async throws -> any GoogleGax.PollableOperation<App> {
     let request = CreateAppRequest().with {
       $0.parent = parent
       $0.app = app
@@ -1963,7 +1963,7 @@ extension Clients.AgentServiceProtocol {
   public func createApp(
     parent: Swift.String,
     app: App?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<App> {
+  ) async throws -> any GoogleGax.PollableOperation<App> {
     let request = CreateAppRequest().with {
       $0.parent = parent
       $0.app = app
@@ -1976,14 +1976,14 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func updateApp(
-    request: UpdateAppRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAppRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.App {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateApp(
     app: App?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudCESV1.App {
     let request = UpdateAppRequest().with {
       $0.app = app
@@ -1997,30 +1997,30 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func deleteApp(
-    request: DeleteAppRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAppRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteApp(withPolling: DeleteAppRequest) async throws -> any GoogleCloudGax
+  public func deleteApp(withPolling: DeleteAppRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteApp(withPolling: withPolling, options: .init())
   }
 
   public func deleteApp(
-    withPolling: DeleteAppRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteAppRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteApp(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteAppRequest().with {
       $0.name = name
     }
@@ -2032,31 +2032,30 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func exportApp(
-    request: ExportAppRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportAppRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func exportApp(withPolling: ExportAppRequest) async throws -> any GoogleCloudGax
+  public func exportApp(withPolling: ExportAppRequest) async throws -> any GoogleGax
     .PollableOperation<ExportAppResponse>
   {
     try await self.exportApp(withPolling: withPolling, options: .init())
   }
 
   public func exportApp(
-    withPolling: ExportAppRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportAppResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ExportAppResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ExportAppRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ExportAppResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ExportAppResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func exportApp(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportAppResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<ExportAppResponse> {
     let request = ExportAppRequest().with {
       $0.name = name
     }
@@ -2068,25 +2067,24 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func importApp(
-    request: ImportAppRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportAppRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func importApp(withPolling: ImportAppRequest) async throws -> any GoogleCloudGax
+  public func importApp(withPolling: ImportAppRequest) async throws -> any GoogleGax
     .PollableOperation<ImportAppResponse>
   {
     try await self.importApp(withPolling: withPolling, options: .init())
   }
 
   public func importApp(
-    withPolling: ImportAppRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportAppResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ImportAppResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ImportAppRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportAppResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportAppResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2094,7 +2092,7 @@ extension Clients.AgentServiceProtocol {
     parent: Swift.String,
     displayName: Swift.String,
     appId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportAppResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<ImportAppResponse> {
     let request = ImportAppRequest().with {
       $0.parent = parent
       $0.displayName = displayName
@@ -2110,9 +2108,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listAgents(
-    request: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAgentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListAgentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAgents(
@@ -2122,12 +2120,12 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listAgents(
-    byItem: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAgentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Agent, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListAgentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAgents(
@@ -2144,9 +2142,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func getAgent(
-    request: GetAgentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAgentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Agent {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAgent(
@@ -2163,9 +2161,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func createAgent(
-    request: CreateAgentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAgentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Agent {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createAgent(
@@ -2197,14 +2195,14 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func updateAgent(
-    request: UpdateAgentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAgentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Agent {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAgent(
     agent: Agent?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudCESV1.Agent {
     let request = UpdateAgentRequest().with {
       $0.agent = agent
@@ -2218,9 +2216,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func deleteAgent(
-    request: DeleteAgentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAgentRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAgent(
@@ -2239,9 +2237,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listExamples(
-    request: ListExamplesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListExamplesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListExamplesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listExamples(
@@ -2251,12 +2249,12 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listExamples(
-    byItem: ListExamplesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListExamplesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Example, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListExamplesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listExamples(
@@ -2273,9 +2271,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func getExample(
-    request: GetExampleRequest, options: GoogleCloudGax.RequestOptions
+    request: GetExampleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Example {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getExample(
@@ -2293,9 +2291,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func createExample(
-    request: CreateExampleRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateExampleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Example {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createExample(
@@ -2328,14 +2326,14 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func updateExample(
-    request: UpdateExampleRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateExampleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Example {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateExample(
     example: Example?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudCESV1.Example {
     let request = UpdateExampleRequest().with {
       $0.example = example
@@ -2349,9 +2347,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func deleteExample(
-    request: DeleteExampleRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteExampleRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteExample(
@@ -2370,9 +2368,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listTools(
-    request: ListToolsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListToolsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListToolsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTools(
@@ -2382,12 +2380,12 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listTools(
-    byItem: ListToolsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListToolsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Tool, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListToolsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listTools(
@@ -2404,9 +2402,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func getTool(
-    request: GetToolRequest, options: GoogleCloudGax.RequestOptions
+    request: GetToolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Tool {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getTool(
@@ -2425,9 +2423,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listConversations(
-    request: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConversationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListConversationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listConversations(
@@ -2437,13 +2435,13 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listConversations(
-    byItem: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConversationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Conversation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudCESV1.ListConversationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listConversations(
@@ -2462,9 +2460,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func getConversation(
-    request: GetConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConversationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Conversation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getConversation(
@@ -2481,9 +2479,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func deleteConversation(
-    request: DeleteConversationRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConversationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteConversation(
@@ -2502,32 +2500,31 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func batchDeleteConversations(
-    request: BatchDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchDeleteConversationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func batchDeleteConversations(withPolling: BatchDeleteConversationsRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<BatchDeleteConversationsResponse>
+    -> any GoogleGax.PollableOperation<BatchDeleteConversationsResponse>
   {
     try await self.batchDeleteConversations(withPolling: withPolling, options: .init())
   }
 
   public func batchDeleteConversations(
-    withPolling: BatchDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchDeleteConversationsResponse> {
+    withPolling: BatchDeleteConversationsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BatchDeleteConversationsResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<BatchDeleteConversationsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<BatchDeleteConversationsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func batchDeleteConversations(
     parent: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchDeleteConversationsResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<BatchDeleteConversationsResponse> {
     let request = BatchDeleteConversationsRequest().with {
       $0.parent = parent
     }
@@ -2539,9 +2536,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func createTool(
-    request: CreateToolRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateToolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Tool {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createTool(
@@ -2573,14 +2570,14 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func updateTool(
-    request: UpdateToolRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateToolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Tool {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateTool(
     tool: Tool?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudCESV1.Tool {
     let request = UpdateToolRequest().with {
       $0.tool = tool
@@ -2594,9 +2591,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func deleteTool(
-    request: DeleteToolRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteToolRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteTool(
@@ -2615,9 +2612,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listGuardrails(
-    request: ListGuardrailsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGuardrailsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListGuardrailsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listGuardrails(
@@ -2627,12 +2624,12 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listGuardrails(
-    byItem: ListGuardrailsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGuardrailsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Guardrail, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListGuardrailsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listGuardrails(
@@ -2650,9 +2647,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func getGuardrail(
-    request: GetGuardrailRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGuardrailRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Guardrail {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getGuardrail(
@@ -2671,9 +2668,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func createGuardrail(
-    request: CreateGuardrailRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGuardrailRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Guardrail {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createGuardrail(
@@ -2707,14 +2704,14 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func updateGuardrail(
-    request: UpdateGuardrailRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGuardrailRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Guardrail {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateGuardrail(
     guardrail: Guardrail?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudCESV1.Guardrail {
     let request = UpdateGuardrailRequest().with {
       $0.guardrail = guardrail
@@ -2728,9 +2725,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func deleteGuardrail(
-    request: DeleteGuardrailRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGuardrailRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteGuardrail(
@@ -2749,9 +2746,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listDeployments(
-    request: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeploymentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListDeploymentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDeployments(
@@ -2761,13 +2758,13 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listDeployments(
-    byItem: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeploymentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Deployment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudCESV1.ListDeploymentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDeployments(
@@ -2786,9 +2783,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func getDeployment(
-    request: GetDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Deployment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDeployment(
@@ -2807,9 +2804,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func createDeployment(
-    request: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Deployment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDeployment(
@@ -2843,14 +2840,14 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func updateDeployment(
-    request: UpdateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Deployment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateDeployment(
     deployment: Deployment?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudCESV1.Deployment {
     let request = UpdateDeploymentRequest().with {
       $0.deployment = deployment
@@ -2864,9 +2861,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func deleteDeployment(
-    request: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteDeployment(
@@ -2885,9 +2882,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listToolsets(
-    request: ListToolsetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListToolsetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListToolsetsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listToolsets(
@@ -2897,12 +2894,12 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listToolsets(
-    byItem: ListToolsetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListToolsetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Toolset, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListToolsetsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listToolsets(
@@ -2919,9 +2916,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func getToolset(
-    request: GetToolsetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetToolsetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Toolset {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getToolset(
@@ -2939,9 +2936,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func createToolset(
-    request: CreateToolsetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateToolsetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Toolset {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createToolset(
@@ -2974,14 +2971,14 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func updateToolset(
-    request: UpdateToolsetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateToolsetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Toolset {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateToolset(
     toolset: Toolset?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudCESV1.Toolset {
     let request = UpdateToolsetRequest().with {
       $0.toolset = toolset
@@ -2995,9 +2992,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func deleteToolset(
-    request: DeleteToolsetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteToolsetRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteToolset(
@@ -3016,9 +3013,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listAppVersions(
-    request: ListAppVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAppVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListAppVersionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAppVersions(
@@ -3028,13 +3025,13 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listAppVersions(
-    byItem: ListAppVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAppVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AppVersion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudCESV1.ListAppVersionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAppVersions(
@@ -3053,9 +3050,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func getAppVersion(
-    request: GetAppVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAppVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.AppVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAppVersion(
@@ -3074,9 +3071,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func createAppVersion(
-    request: CreateAppVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAppVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.AppVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createAppVersion(
@@ -3108,9 +3105,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func deleteAppVersion(
-    request: DeleteAppVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAppVersionRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAppVersion(
@@ -3129,31 +3126,31 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func restoreAppVersion(
-    request: RestoreAppVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: RestoreAppVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func restoreAppVersion(withPolling: RestoreAppVersionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<RestoreAppVersionResponse>
+  public func restoreAppVersion(withPolling: RestoreAppVersionRequest) async throws -> any GoogleGax
+    .PollableOperation<RestoreAppVersionResponse>
   {
     try await self.restoreAppVersion(withPolling: withPolling, options: .init())
   }
 
   public func restoreAppVersion(
-    withPolling: RestoreAppVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RestoreAppVersionResponse> {
+    withPolling: RestoreAppVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RestoreAppVersionResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<RestoreAppVersionResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<RestoreAppVersionResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func restoreAppVersion(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<RestoreAppVersionResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<RestoreAppVersionResponse> {
     let request = RestoreAppVersionRequest().with {
       $0.name = name
     }
@@ -3167,9 +3164,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listChangelogs(
-    request: ListChangelogsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListChangelogsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.ListChangelogsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listChangelogs(
@@ -3179,12 +3176,12 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listChangelogs(
-    byItem: ListChangelogsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListChangelogsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Changelog, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudCESV1.ListChangelogsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listChangelogs(
@@ -3202,9 +3199,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func getChangelog(
-    request: GetChangelogRequest, options: GoogleCloudGax.RequestOptions
+    request: GetChangelogRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudCESV1.Changelog {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getChangelog(
@@ -3223,9 +3220,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -3235,13 +3232,13 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -3251,9 +3248,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -3263,9 +3260,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -3275,13 +3272,13 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -3302,9 +3299,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -3321,9 +3318,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -3340,9 +3337,9 @@ extension Clients.AgentServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol GatewayControlStub: Sendable {
     func generateCredentials(
-      request: GenerateCredentialsRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateCredentialsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEConnectGatewayV1.GenerateCredentialsResponse
   }
 }

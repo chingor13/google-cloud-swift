@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudOracleDatabaseV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: OracleDatabaseClient) async throws {
   let response = try await client.getLocation(

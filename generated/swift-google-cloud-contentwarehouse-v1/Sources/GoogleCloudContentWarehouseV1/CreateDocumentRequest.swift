@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleIAMV1
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for DocumentService.CreateDocument.
-public struct CreateDocumentRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateDocumentRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The parent name.
@@ -50,9 +50,9 @@ public struct CreateDocumentRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// For the `FieldMask` definition,
   /// see
   /// https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
-  public var createMask: GoogleCloudWKT.FieldMask? = nil
+  public var createMask: GoogleWKT.FieldMask? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateDocumentRequest`.
   public init() {}
@@ -104,11 +104,10 @@ public struct CreateDocumentRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
     self.policy = try container.decodeIfPresent(GoogleIAMV1.Policy.self, forKey: .policy)
     self.cloudAiDocumentOption = try container.decodeIfPresent(
       CloudAIDocumentOption.self, forKey: .cloudAiDocumentOption)
-    self.createMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .createMask)
+    self.createMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .createMask)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -128,10 +127,10 @@ public struct CreateDocumentRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contentwarehouse.v1.CreateDocumentRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

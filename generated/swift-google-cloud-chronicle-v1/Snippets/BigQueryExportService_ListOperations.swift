@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudChronicleV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: BigQueryExportServiceClient) async throws {
   let items = try client.listOperations(

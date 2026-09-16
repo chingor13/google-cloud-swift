@@ -15,20 +15,20 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Video frame level annotations for object detection and tracking. This field
 /// stores per frame location, time offset, and confidence.
-public struct ObjectTrackingFrame: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ObjectTrackingFrame: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The normalized bounding box location of this object track for the frame.
   public var normalizedBoundingBox: NormalizedBoundingBox? = nil
 
   /// The timestamp of the frame in microseconds.
-  public var timeOffset: GoogleCloudWKT.Duration? = nil
+  public var timeOffset: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ObjectTrackingFrame`.
   public init() {}
@@ -65,11 +65,10 @@ public struct ObjectTrackingFrame: Codable, Equatable, GoogleCloudWKT._AnyPackab
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.normalizedBoundingBox = try container.decodeIfPresent(
       NormalizedBoundingBox.self, forKey: .normalizedBoundingBox)
-    self.timeOffset = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .timeOffset)
+    self.timeOffset = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeOffset)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -85,10 +84,10 @@ public struct ObjectTrackingFrame: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.videointelligence.v1.ObjectTrackingFrame"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,9 +19,9 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -40,9 +40,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,14 +59,14 @@
       }
 
       public func createSession(
-        request: CreateSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateSessionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Session {
         try await self._intercept(
           request: request,
           options: options,
           name: "createSession",
           action: {
-            (r: CreateSessionRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateSessionRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.Session
             in
             return try await self.inner.createSession(request: r, options: o)
@@ -74,27 +74,26 @@
       }
 
       public func deleteSession(
-        request: DeleteSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteSessionRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteSession",
-          action: {
-            (r: DeleteSessionRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          action: { (r: DeleteSessionRequest, o: GoogleGax.RequestOptions) async throws -> Void in
             return try await self.inner.deleteSession(request: r, options: o)
           })
       }
 
       public func updateSession(
-        request: UpdateSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateSessionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Session {
         try await self._intercept(
           request: request,
           options: options,
           name: "updateSession",
           action: {
-            (r: UpdateSessionRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateSessionRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.Session
             in
             return try await self.inner.updateSession(request: r, options: o)
@@ -102,14 +101,14 @@
       }
 
       public func getSession(
-        request: GetSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: GetSessionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Session {
         try await self._intercept(
           request: request,
           options: options,
           name: "getSession",
           action: {
-            (r: GetSessionRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetSessionRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.Session
             in
             return try await self.inner.getSession(request: r, options: o)
@@ -117,14 +116,14 @@
       }
 
       public func listSessions(
-        request: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListSessionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListSessionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listSessions",
           action: {
-            (r: ListSessionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListSessionsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.ListSessionsResponse
             in
             return try await self.inner.listSessions(request: r, options: o)
@@ -132,45 +131,45 @@
       }
 
       public func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listOperations",
           action: {
-            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.ListOperationsResponse
+            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.ListOperationsResponse
             in
             return try await self.inner.listOperations(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)
           })
       }
 
       public func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "cancelOperation",
           action: {
-            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.cancelOperation(request: r, options: o)
           })
       }

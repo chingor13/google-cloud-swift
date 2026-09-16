@@ -16,13 +16,13 @@
 
 #if PredictionService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [PredictionService.EmbedContent][google.cloud.aiplatform.v1.PredictionService.EmbedContent].
   ///
   /// [google.cloud.aiplatform.v1.PredictionService.EmbedContent]: <doc:PredictionServiceClient/embedContent(request:options:)>
-  public struct EmbedContentRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EmbedContentRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The name of the publisher model requested to serve the
@@ -58,7 +58,7 @@
     /// Optional. Configuration for the EmbedContent request.
     public var embedContentConfig: EmbedContentRequest.EmbedContentConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EmbedContentRequest`.
     public init() {}
@@ -115,7 +115,7 @@
         EmbedContentRequest.EmbedContentConfig.self, forKey: .embedContentConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -134,7 +134,7 @@
     }
 
     /// Configurations for the EmbedContent API.
-    public struct EmbedContentConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct EmbedContentConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The title for the text.
@@ -163,7 +163,7 @@
       /// Optional. Whether to extract audio from video content.
       public var audioTrackExtraction: Swift.Bool? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `EmbedContentConfig`.
       public init() {}
@@ -217,7 +217,7 @@
           Swift.Bool.self, forKey: .audioTrackExtraction)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -238,11 +238,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.EmbedContentRequest.EmbedContentConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -396,11 +396,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.EmbedContentRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

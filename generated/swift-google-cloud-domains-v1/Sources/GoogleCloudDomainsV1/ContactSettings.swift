@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines the contact information associated with a `Registration`.
 ///
 /// [ICANN](https://icann.org/) requires all domain names to have associated
 /// contact information. The `registrant_contact` is considered the
 /// domain's legal owner, and often the other contacts are identical.
-public struct ContactSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ContactSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Privacy setting for the contacts associated with the `Registration`.
@@ -45,7 +45,7 @@ public struct ContactSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Required. The technical contact for the `Registration`.
   public var technicalContact: ContactSettings.Contact? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ContactSettings`.
   public init() {}
@@ -95,7 +95,7 @@ public struct ContactSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       ContactSettings.Contact.self, forKey: .technicalContact)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -111,7 +111,7 @@ public struct ContactSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Details required for a contact associated with a `Registration`.
-  public struct Contact: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Contact: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Postal address of the contact.
@@ -128,7 +128,7 @@ public struct ContactSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// `"+1-800-555-0123"`.
     public var faxNumber: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Contact`.
     public init() {}
@@ -180,7 +180,7 @@ public struct ContactSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -198,21 +198,21 @@ public struct ContactSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.domains.v1.ContactSettings.Contact"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.domains.v1.ContactSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

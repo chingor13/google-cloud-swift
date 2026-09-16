@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Google Cloud Key Management Service
 ///
@@ -46,11 +46,11 @@ import GoogleCloudGax
 /// @Snippet(path: "KeyManagementServiceQuickstart")
 public final class KeyManagementServiceClient: Clients.KeyManagementServiceProtocol, Sendable {
   let inner: any Clients.KeyManagementServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `KeyManagementServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.KeyManagementServiceStub = try Clients.KeyManagementServiceTransport(
       options)
     inner = Clients.KeyManagementServiceRetry(inner, options: options)
@@ -68,7 +68,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ListKeyRings")
   public func listKeyRings(
-    request: ListKeyRingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListKeyRingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ListKeyRingsResponse {
     try await self.inner.listKeyRings(request: request, options: options)
   }
@@ -79,14 +79,14 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ListKeyRings")
   public func listKeyRings(
-    byItem: ListKeyRingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListKeyRingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<KeyRing, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudKMSV1.ListKeyRingsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listKeyRings(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists [CryptoKeys][google.cloud.kms.v1.CryptoKey].
@@ -95,7 +95,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ListCryptoKeys")
   public func listCryptoKeys(
-    request: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ListCryptoKeysResponse {
     try await self.inner.listCryptoKeys(request: request, options: options)
   }
@@ -106,14 +106,14 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ListCryptoKeys")
   public func listCryptoKeys(
-    byItem: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CryptoKey, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudKMSV1.ListCryptoKeysResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listCryptoKeys(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion].
@@ -122,7 +122,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ListCryptoKeyVersions")
   public func listCryptoKeyVersions(
-    request: ListCryptoKeyVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCryptoKeyVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ListCryptoKeyVersionsResponse {
     try await self.inner.listCryptoKeyVersions(request: request, options: options)
   }
@@ -133,7 +133,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ListCryptoKeyVersions")
   public func listCryptoKeyVersions(
-    byItem: ListCryptoKeyVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCryptoKeyVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CryptoKeyVersion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudKMSV1.ListCryptoKeyVersionsResponse in
@@ -141,7 +141,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
       request.pageToken = token
       return try await self.listCryptoKeyVersions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists [ImportJobs][google.cloud.kms.v1.ImportJob].
@@ -150,7 +150,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ListImportJobs")
   public func listImportJobs(
-    request: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListImportJobsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ListImportJobsResponse {
     try await self.inner.listImportJobs(request: request, options: options)
   }
@@ -161,14 +161,14 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ListImportJobs")
   public func listImportJobs(
-    byItem: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListImportJobsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ImportJob, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudKMSV1.ListImportJobsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listImportJobs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists the [RetiredResources][google.cloud.kms.v1.RetiredResource] which are
@@ -180,7 +180,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ListRetiredResources")
   public func listRetiredResources(
-    request: ListRetiredResourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRetiredResourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ListRetiredResourcesResponse {
     try await self.inner.listRetiredResources(request: request, options: options)
   }
@@ -194,7 +194,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ListRetiredResources")
   public func listRetiredResources(
-    byItem: ListRetiredResourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRetiredResourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RetiredResource, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudKMSV1.ListRetiredResourcesResponse in
@@ -202,7 +202,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
       request.pageToken = token
       return try await self.listRetiredResources(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns metadata for a given [KeyRing][google.cloud.kms.v1.KeyRing].
@@ -211,7 +211,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_GetKeyRing")
   public func getKeyRing(
-    request: GetKeyRingRequest, options: GoogleCloudGax.RequestOptions
+    request: GetKeyRingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.KeyRing {
     try await self.inner.getKeyRing(request: request, options: options)
   }
@@ -226,7 +226,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_GetCryptoKey")
   public func getCryptoKey(
-    request: GetCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCryptoKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKey {
     try await self.inner.getCryptoKey(request: request, options: options)
   }
@@ -238,7 +238,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_GetCryptoKeyVersion")
   public func getCryptoKeyVersion(
-    request: GetCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
     try await self.inner.getCryptoKeyVersion(request: request, options: options)
   }
@@ -257,7 +257,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_GetPublicKey")
   public func getPublicKey(
-    request: GetPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPublicKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.PublicKey {
     try await self.inner.getPublicKey(request: request, options: options)
   }
@@ -268,7 +268,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_GetImportJob")
   public func getImportJob(
-    request: GetImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: GetImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ImportJob {
     try await self.inner.getImportJob(request: request, options: options)
   }
@@ -282,7 +282,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_GetRetiredResource")
   public func getRetiredResource(
-    request: GetRetiredResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRetiredResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.RetiredResource {
     try await self.inner.getRetiredResource(request: request, options: options)
   }
@@ -294,7 +294,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_CreateKeyRing")
   public func createKeyRing(
-    request: CreateKeyRingRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateKeyRingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.KeyRing {
     try await self.inner.createKeyRing(request: request, options: options)
   }
@@ -313,7 +313,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_CreateCryptoKey")
   public func createCryptoKey(
-    request: CreateCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCryptoKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKey {
     try await self.inner.createCryptoKey(request: request, options: options)
   }
@@ -332,7 +332,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_CreateCryptoKeyVersion")
   public func createCryptoKeyVersion(
-    request: CreateCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
     try await self.inner.createCryptoKeyVersion(request: request, options: options)
   }
@@ -350,7 +350,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_DeleteCryptoKey")
   public func deleteCryptoKey(
-    request: DeleteCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCryptoKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteCryptoKey(request: request, options: options)
   }
@@ -368,21 +368,21 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_DeleteCryptoKey")
   public func deleteCryptoKey(
-    withPolling: DeleteCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteCryptoKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteCryptoKey(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -407,7 +407,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_DeleteCryptoKeyVersion")
   public func deleteCryptoKeyVersion(
-    request: DeleteCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteCryptoKeyVersion(request: request, options: options)
   }
@@ -429,21 +429,21 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_DeleteCryptoKeyVersion")
   public func deleteCryptoKeyVersion(
-    withPolling: DeleteCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteCryptoKeyVersion(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -465,7 +465,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ImportCryptoKeyVersion")
   public func importCryptoKeyVersion(
-    request: ImportCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
     try await self.inner.importCryptoKeyVersion(request: request, options: options)
   }
@@ -488,7 +488,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ImportTrustedKeyWrappedCryptoKeyVersion")
   public func importTrustedKeyWrappedCryptoKeyVersion(
-    request: ImportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
     try await self.inner.importTrustedKeyWrappedCryptoKeyVersion(request: request, options: options)
   }
@@ -511,7 +511,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ExportTrustedKeyWrappedCryptoKeyVersion")
   public func exportTrustedKeyWrappedCryptoKeyVersion(
-    request: ExportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse {
     try await self.inner.exportTrustedKeyWrappedCryptoKeyVersion(request: request, options: options)
   }
@@ -528,7 +528,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_CreateImportJob")
   public func createImportJob(
-    request: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ImportJob {
     try await self.inner.createImportJob(request: request, options: options)
   }
@@ -539,7 +539,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_UpdateCryptoKey")
   public func updateCryptoKey(
-    request: UpdateCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCryptoKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKey {
     try await self.inner.updateCryptoKey(request: request, options: options)
   }
@@ -566,7 +566,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_UpdateCryptoKeyVersion")
   public func updateCryptoKeyVersion(
-    request: UpdateCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
     try await self.inner.updateCryptoKeyVersion(request: request, options: options)
   }
@@ -584,7 +584,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_UpdateCryptoKeyPrimaryVersion")
   public func updateCryptoKeyPrimaryVersion(
-    request: UpdateCryptoKeyPrimaryVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCryptoKeyPrimaryVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKey {
     try await self.inner.updateCryptoKeyPrimaryVersion(request: request, options: options)
   }
@@ -621,7 +621,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_DestroyCryptoKeyVersion")
   public func destroyCryptoKeyVersion(
-    request: DestroyCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: DestroyCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
     try await self.inner.destroyCryptoKeyVersion(request: request, options: options)
   }
@@ -644,7 +644,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_RestoreCryptoKeyVersion")
   public func restoreCryptoKeyVersion(
-    request: RestoreCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: RestoreCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
     try await self.inner.restoreCryptoKeyVersion(request: request, options: options)
   }
@@ -660,7 +660,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_Encrypt")
   public func encrypt(
-    request: EncryptRequest, options: GoogleCloudGax.RequestOptions
+    request: EncryptRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.EncryptResponse {
     try await self.inner.encrypt(request: request, options: options)
   }
@@ -676,7 +676,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_Decrypt")
   public func decrypt(
-    request: DecryptRequest, options: GoogleCloudGax.RequestOptions
+    request: DecryptRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.DecryptResponse {
     try await self.inner.decrypt(request: request, options: options)
   }
@@ -695,7 +695,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_RawEncrypt")
   public func rawEncrypt(
-    request: RawEncryptRequest, options: GoogleCloudGax.RequestOptions
+    request: RawEncryptRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.RawEncryptResponse {
     try await self.inner.rawEncrypt(request: request, options: options)
   }
@@ -710,7 +710,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_RawDecrypt")
   public func rawDecrypt(
-    request: RawDecryptRequest, options: GoogleCloudGax.RequestOptions
+    request: RawDecryptRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.RawDecryptResponse {
     try await self.inner.rawDecrypt(request: request, options: options)
   }
@@ -727,7 +727,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_AsymmetricSign")
   public func asymmetricSign(
-    request: AsymmetricSignRequest, options: GoogleCloudGax.RequestOptions
+    request: AsymmetricSignRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.AsymmetricSignResponse {
     try await self.inner.asymmetricSign(request: request, options: options)
   }
@@ -744,7 +744,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_AsymmetricDecrypt")
   public func asymmetricDecrypt(
-    request: AsymmetricDecryptRequest, options: GoogleCloudGax.RequestOptions
+    request: AsymmetricDecryptRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.AsymmetricDecryptResponse {
     try await self.inner.asymmetricDecrypt(request: request, options: options)
   }
@@ -758,7 +758,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_MacSign")
   public func macSign(
-    request: MacSignRequest, options: GoogleCloudGax.RequestOptions
+    request: MacSignRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.MacSignResponse {
     try await self.inner.macSign(request: request, options: options)
   }
@@ -773,7 +773,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_MacVerify")
   public func macVerify(
-    request: MacVerifyRequest, options: GoogleCloudGax.RequestOptions
+    request: MacVerifyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.MacVerifyResponse {
     try await self.inner.macVerify(request: request, options: options)
   }
@@ -790,7 +790,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_Decapsulate")
   public func decapsulate(
-    request: DecapsulateRequest, options: GoogleCloudGax.RequestOptions
+    request: DecapsulateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.DecapsulateResponse {
     try await self.inner.decapsulate(request: request, options: options)
   }
@@ -800,7 +800,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_GenerateRandomBytes")
   public func generateRandomBytes(
-    request: GenerateRandomBytesRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateRandomBytesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.GenerateRandomBytesResponse {
     try await self.inner.generateRandomBytes(request: request, options: options)
   }
@@ -826,7 +826,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -852,7 +852,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -860,14 +860,14 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "KeyManagementService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -880,7 +880,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -890,7 +890,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -905,7 +905,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -916,7 +916,7 @@ public final class KeyManagementServiceClient: Clients.KeyManagementServiceProto
   ///
   /// @Snippet(path: "KeyManagementService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -1084,13 +1084,13 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `KeyManagementServiceClient.deleteCryptoKey`.
-    func deleteCryptoKey(withPolling: DeleteCryptoKeyRequest) async throws -> any GoogleCloudGax
+    func deleteCryptoKey(withPolling: DeleteCryptoKeyRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `KeyManagementServiceClient.deleteCryptoKey`.
     func deleteCryptoKey(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `KeyManagementServiceClient.deleteCryptoKeyVersion`.
     func deleteCryptoKeyVersion(request: DeleteCryptoKeyVersionRequest) async throws
@@ -1098,12 +1098,12 @@ extension Clients {
 
     /// See `KeyManagementServiceClient.deleteCryptoKeyVersion`.
     func deleteCryptoKeyVersion(withPolling: DeleteCryptoKeyVersionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `KeyManagementServiceClient.deleteCryptoKeyVersion`.
     func deleteCryptoKeyVersion(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `KeyManagementServiceClient.importCryptoKeyVersion`.
     func importCryptoKeyVersion(request: ImportCryptoKeyVersionRequest) async throws
@@ -1135,7 +1135,7 @@ extension Clients {
     /// See `KeyManagementServiceClient.updateCryptoKey`.
     func updateCryptoKey(
       cryptoKey: CryptoKey?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudKMSV1.CryptoKey
 
     /// See `KeyManagementServiceClient.updateCryptoKeyVersion`.
@@ -1145,7 +1145,7 @@ extension Clients {
     /// See `KeyManagementServiceClient.updateCryptoKeyVersion`.
     func updateCryptoKeyVersion(
       cryptoKeyVersion: CryptoKeyVersion?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     /// See `KeyManagementServiceClient.updateCryptoKeyPrimaryVersion`.
@@ -1279,244 +1279,242 @@ extension Clients {
 
     /// See `KeyManagementServiceClient.listKeyRings`.
     func listKeyRings(
-      request: ListKeyRingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListKeyRingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListKeyRingsResponse
 
     /// See `KeyManagementServiceClient.listKeyRings`.
     func listKeyRings(
-      byItem: ListKeyRingsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListKeyRingsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<KeyRing, Swift.Error>
 
     /// See `KeyManagementServiceClient.listCryptoKeys`.
     func listCryptoKeys(
-      request: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListCryptoKeysResponse
 
     /// See `KeyManagementServiceClient.listCryptoKeys`.
     func listCryptoKeys(
-      byItem: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<CryptoKey, Swift.Error>
 
     /// See `KeyManagementServiceClient.listCryptoKeyVersions`.
     func listCryptoKeyVersions(
-      request: ListCryptoKeyVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCryptoKeyVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListCryptoKeyVersionsResponse
 
     /// See `KeyManagementServiceClient.listCryptoKeyVersions`.
     func listCryptoKeyVersions(
-      byItem: ListCryptoKeyVersionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCryptoKeyVersionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<CryptoKeyVersion, Swift.Error>
 
     /// See `KeyManagementServiceClient.listImportJobs`.
     func listImportJobs(
-      request: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListImportJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListImportJobsResponse
 
     /// See `KeyManagementServiceClient.listImportJobs`.
     func listImportJobs(
-      byItem: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListImportJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ImportJob, Swift.Error>
 
     /// See `KeyManagementServiceClient.listRetiredResources`.
     func listRetiredResources(
-      request: ListRetiredResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRetiredResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListRetiredResourcesResponse
 
     /// See `KeyManagementServiceClient.listRetiredResources`.
     func listRetiredResources(
-      byItem: ListRetiredResourcesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListRetiredResourcesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<RetiredResource, Swift.Error>
 
     /// See `KeyManagementServiceClient.getKeyRing`.
     func getKeyRing(
-      request: GetKeyRingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetKeyRingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.KeyRing
 
     /// See `KeyManagementServiceClient.getCryptoKey`.
     func getCryptoKey(
-      request: GetCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCryptoKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKey
 
     /// See `KeyManagementServiceClient.getCryptoKeyVersion`.
     func getCryptoKeyVersion(
-      request: GetCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     /// See `KeyManagementServiceClient.getPublicKey`.
     func getPublicKey(
-      request: GetPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.PublicKey
 
     /// See `KeyManagementServiceClient.getImportJob`.
     func getImportJob(
-      request: GetImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ImportJob
 
     /// See `KeyManagementServiceClient.getRetiredResource`.
     func getRetiredResource(
-      request: GetRetiredResourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRetiredResourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.RetiredResource
 
     /// See `KeyManagementServiceClient.createKeyRing`.
     func createKeyRing(
-      request: CreateKeyRingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateKeyRingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.KeyRing
 
     /// See `KeyManagementServiceClient.createCryptoKey`.
     func createCryptoKey(
-      request: CreateCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCryptoKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKey
 
     /// See `KeyManagementServiceClient.createCryptoKeyVersion`.
     func createCryptoKeyVersion(
-      request: CreateCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     /// See `KeyManagementServiceClient.deleteCryptoKey`.
     func deleteCryptoKey(
-      request: DeleteCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCryptoKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `KeyManagementServiceClient.deleteCryptoKey`.
     func deleteCryptoKey(
-      withPolling: DeleteCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteCryptoKeyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `KeyManagementServiceClient.deleteCryptoKeyVersion`.
     func deleteCryptoKeyVersion(
-      request: DeleteCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `KeyManagementServiceClient.deleteCryptoKeyVersion`.
     func deleteCryptoKeyVersion(
-      withPolling: DeleteCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `KeyManagementServiceClient.importCryptoKeyVersion`.
     func importCryptoKeyVersion(
-      request: ImportCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     /// See `KeyManagementServiceClient.importTrustedKeyWrappedCryptoKeyVersion`.
     func importTrustedKeyWrappedCryptoKeyVersion(
-      request: ImportTrustedKeyWrappedCryptoKeyVersionRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ImportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     /// See `KeyManagementServiceClient.exportTrustedKeyWrappedCryptoKeyVersion`.
     func exportTrustedKeyWrappedCryptoKeyVersion(
-      request: ExportTrustedKeyWrappedCryptoKeyVersionRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ExportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse
 
     /// See `KeyManagementServiceClient.createImportJob`.
     func createImportJob(
-      request: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ImportJob
 
     /// See `KeyManagementServiceClient.updateCryptoKey`.
     func updateCryptoKey(
-      request: UpdateCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCryptoKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKey
 
     /// See `KeyManagementServiceClient.updateCryptoKeyVersion`.
     func updateCryptoKeyVersion(
-      request: UpdateCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     /// See `KeyManagementServiceClient.updateCryptoKeyPrimaryVersion`.
     func updateCryptoKeyPrimaryVersion(
-      request: UpdateCryptoKeyPrimaryVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCryptoKeyPrimaryVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKey
 
     /// See `KeyManagementServiceClient.destroyCryptoKeyVersion`.
     func destroyCryptoKeyVersion(
-      request: DestroyCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DestroyCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     /// See `KeyManagementServiceClient.restoreCryptoKeyVersion`.
     func restoreCryptoKeyVersion(
-      request: RestoreCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion
 
     /// See `KeyManagementServiceClient.encrypt`.
     func encrypt(
-      request: EncryptRequest, options: GoogleCloudGax.RequestOptions
+      request: EncryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.EncryptResponse
 
     /// See `KeyManagementServiceClient.decrypt`.
     func decrypt(
-      request: DecryptRequest, options: GoogleCloudGax.RequestOptions
+      request: DecryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.DecryptResponse
 
     /// See `KeyManagementServiceClient.rawEncrypt`.
     func rawEncrypt(
-      request: RawEncryptRequest, options: GoogleCloudGax.RequestOptions
+      request: RawEncryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.RawEncryptResponse
 
     /// See `KeyManagementServiceClient.rawDecrypt`.
     func rawDecrypt(
-      request: RawDecryptRequest, options: GoogleCloudGax.RequestOptions
+      request: RawDecryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.RawDecryptResponse
 
     /// See `KeyManagementServiceClient.asymmetricSign`.
     func asymmetricSign(
-      request: AsymmetricSignRequest, options: GoogleCloudGax.RequestOptions
+      request: AsymmetricSignRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.AsymmetricSignResponse
 
     /// See `KeyManagementServiceClient.asymmetricDecrypt`.
     func asymmetricDecrypt(
-      request: AsymmetricDecryptRequest, options: GoogleCloudGax.RequestOptions
+      request: AsymmetricDecryptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.AsymmetricDecryptResponse
 
     /// See `KeyManagementServiceClient.macSign`.
     func macSign(
-      request: MacSignRequest, options: GoogleCloudGax.RequestOptions
+      request: MacSignRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.MacSignResponse
 
     /// See `KeyManagementServiceClient.macVerify`.
     func macVerify(
-      request: MacVerifyRequest, options: GoogleCloudGax.RequestOptions
+      request: MacVerifyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.MacVerifyResponse
 
     /// See `KeyManagementServiceClient.decapsulate`.
     func decapsulate(
-      request: DecapsulateRequest, options: GoogleCloudGax.RequestOptions
+      request: DecapsulateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.DecapsulateResponse
 
     /// See `KeyManagementServiceClient.generateRandomBytes`.
     func generateRandomBytes(
-      request: GenerateRandomBytesRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateRandomBytesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.GenerateRandomBytesResponse
 
     /// See `KeyManagementServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `KeyManagementServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `KeyManagementServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `KeyManagementServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `KeyManagementServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `KeyManagementServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
   }
 }
@@ -1530,9 +1528,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func listKeyRings(
-    request: ListKeyRingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListKeyRingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ListKeyRingsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listKeyRings(
@@ -1542,12 +1540,12 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func listKeyRings(
-    byItem: ListKeyRingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListKeyRingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<KeyRing, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudKMSV1.ListKeyRingsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listKeyRings(
@@ -1566,9 +1564,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func listCryptoKeys(
-    request: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ListCryptoKeysResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCryptoKeys(
@@ -1578,12 +1576,12 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func listCryptoKeys(
-    byItem: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CryptoKey, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudKMSV1.ListCryptoKeysResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCryptoKeys(
@@ -1602,9 +1600,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func listCryptoKeyVersions(
-    request: ListCryptoKeyVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCryptoKeyVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ListCryptoKeyVersionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCryptoKeyVersions(
@@ -1614,13 +1612,13 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func listCryptoKeyVersions(
-    byItem: ListCryptoKeyVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCryptoKeyVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CryptoKeyVersion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudKMSV1.ListCryptoKeyVersionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCryptoKeyVersions(
@@ -1639,9 +1637,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func listImportJobs(
-    request: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListImportJobsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ListImportJobsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listImportJobs(
@@ -1651,12 +1649,12 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func listImportJobs(
-    byItem: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListImportJobsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ImportJob, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudKMSV1.ListImportJobsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listImportJobs(
@@ -1675,9 +1673,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func listRetiredResources(
-    request: ListRetiredResourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRetiredResourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ListRetiredResourcesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listRetiredResources(
@@ -1687,13 +1685,13 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func listRetiredResources(
-    byItem: ListRetiredResourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRetiredResourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RetiredResource, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudKMSV1.ListRetiredResourcesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listRetiredResources(
@@ -1710,9 +1708,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func getKeyRing(
-    request: GetKeyRingRequest, options: GoogleCloudGax.RequestOptions
+    request: GetKeyRingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.KeyRing {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getKeyRing(
@@ -1730,9 +1728,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func getCryptoKey(
-    request: GetCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCryptoKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKey {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCryptoKey(
@@ -1751,9 +1749,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func getCryptoKeyVersion(
-    request: GetCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCryptoKeyVersion(
@@ -1771,9 +1769,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func getPublicKey(
-    request: GetPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPublicKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.PublicKey {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPublicKey(
@@ -1791,9 +1789,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func getImportJob(
-    request: GetImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: GetImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ImportJob {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getImportJob(
@@ -1812,9 +1810,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func getRetiredResource(
-    request: GetRetiredResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRetiredResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.RetiredResource {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getRetiredResource(
@@ -1832,9 +1830,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func createKeyRing(
-    request: CreateKeyRingRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateKeyRingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.KeyRing {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createKeyRing(
@@ -1857,9 +1855,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func createCryptoKey(
-    request: CreateCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCryptoKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKey {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createCryptoKey(
@@ -1882,9 +1880,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func createCryptoKeyVersion(
-    request: CreateCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createCryptoKeyVersion(
@@ -1905,30 +1903,30 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func deleteCryptoKey(
-    request: DeleteCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCryptoKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteCryptoKey(withPolling: DeleteCryptoKeyRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteCryptoKey(withPolling: DeleteCryptoKeyRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteCryptoKey(withPolling: withPolling, options: .init())
   }
 
   public func deleteCryptoKey(
-    withPolling: DeleteCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteCryptoKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteCryptoKey(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteCryptoKeyRequest().with {
       $0.name = name
     }
@@ -1942,30 +1940,30 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func deleteCryptoKeyVersion(
-    request: DeleteCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteCryptoKeyVersion(withPolling: DeleteCryptoKeyVersionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteCryptoKeyVersion(withPolling: withPolling, options: .init())
   }
 
   public func deleteCryptoKeyVersion(
-    withPolling: DeleteCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteCryptoKeyVersion(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteCryptoKeyVersionRequest().with {
       $0.name = name
     }
@@ -1979,9 +1977,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func importCryptoKeyVersion(
-    request: ImportCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func importTrustedKeyWrappedCryptoKeyVersion(
@@ -1991,9 +1989,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func importTrustedKeyWrappedCryptoKeyVersion(
-    request: ImportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func exportTrustedKeyWrappedCryptoKeyVersion(
@@ -2003,9 +2001,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func exportTrustedKeyWrappedCryptoKeyVersion(
-    request: ExportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportTrustedKeyWrappedCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ExportTrustedKeyWrappedCryptoKeyVersionResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createImportJob(request: CreateImportJobRequest) async throws
@@ -2015,9 +2013,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func createImportJob(
-    request: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ImportJob {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createImportJob(
@@ -2040,14 +2038,14 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func updateCryptoKey(
-    request: UpdateCryptoKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCryptoKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKey {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCryptoKey(
     cryptoKey: CryptoKey?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudKMSV1.CryptoKey {
     let request = UpdateCryptoKeyRequest().with {
       $0.cryptoKey = cryptoKey
@@ -2063,14 +2061,14 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func updateCryptoKeyVersion(
-    request: UpdateCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCryptoKeyVersion(
     cryptoKeyVersion: CryptoKeyVersion?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
     let request = UpdateCryptoKeyVersionRequest().with {
       $0.cryptoKeyVersion = cryptoKeyVersion
@@ -2086,9 +2084,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func updateCryptoKeyPrimaryVersion(
-    request: UpdateCryptoKeyPrimaryVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCryptoKeyPrimaryVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKey {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCryptoKeyPrimaryVersion(
@@ -2109,9 +2107,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func destroyCryptoKeyVersion(
-    request: DestroyCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: DestroyCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func destroyCryptoKeyVersion(
@@ -2130,9 +2128,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func restoreCryptoKeyVersion(
-    request: RestoreCryptoKeyVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: RestoreCryptoKeyVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.CryptoKeyVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func restoreCryptoKeyVersion(
@@ -2149,9 +2147,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func encrypt(
-    request: EncryptRequest, options: GoogleCloudGax.RequestOptions
+    request: EncryptRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.EncryptResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func encrypt(
@@ -2170,9 +2168,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func decrypt(
-    request: DecryptRequest, options: GoogleCloudGax.RequestOptions
+    request: DecryptRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.DecryptResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func decrypt(
@@ -2193,9 +2191,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func rawEncrypt(
-    request: RawEncryptRequest, options: GoogleCloudGax.RequestOptions
+    request: RawEncryptRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.RawEncryptResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func rawDecrypt(request: RawDecryptRequest) async throws
@@ -2205,9 +2203,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func rawDecrypt(
-    request: RawDecryptRequest, options: GoogleCloudGax.RequestOptions
+    request: RawDecryptRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.RawDecryptResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func asymmetricSign(request: AsymmetricSignRequest) async throws
@@ -2217,9 +2215,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func asymmetricSign(
-    request: AsymmetricSignRequest, options: GoogleCloudGax.RequestOptions
+    request: AsymmetricSignRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.AsymmetricSignResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func asymmetricSign(
@@ -2240,9 +2238,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func asymmetricDecrypt(
-    request: AsymmetricDecryptRequest, options: GoogleCloudGax.RequestOptions
+    request: AsymmetricDecryptRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.AsymmetricDecryptResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func asymmetricDecrypt(
@@ -2261,9 +2259,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func macSign(
-    request: MacSignRequest, options: GoogleCloudGax.RequestOptions
+    request: MacSignRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.MacSignResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func macSign(
@@ -2284,9 +2282,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func macVerify(
-    request: MacVerifyRequest, options: GoogleCloudGax.RequestOptions
+    request: MacVerifyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.MacVerifyResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func macVerify(
@@ -2309,9 +2307,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func decapsulate(
-    request: DecapsulateRequest, options: GoogleCloudGax.RequestOptions
+    request: DecapsulateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.DecapsulateResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func generateRandomBytes(request: GenerateRandomBytesRequest) async throws
@@ -2321,9 +2319,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func generateRandomBytes(
-    request: GenerateRandomBytesRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateRandomBytesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.GenerateRandomBytesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func generateRandomBytes(
@@ -2346,9 +2344,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -2358,13 +2356,13 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -2374,9 +2372,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -2386,9 +2384,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -2398,9 +2396,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -2410,9 +2408,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(request: GoogleLongRunning.GetOperationRequest) async throws
@@ -2422,9 +2420,9 @@ extension Clients.KeyManagementServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

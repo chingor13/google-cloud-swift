@@ -16,139 +16,139 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DatastreamStub: Sendable {
     func listConnectionProfiles(
-      request: ListConnectionProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConnectionProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.ListConnectionProfilesResponse
 
     func getConnectionProfile(
-      request: GetConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.ConnectionProfile
 
     func createConnectionProfile(
-      request: CreateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateConnectionProfile(
-      request: UpdateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteConnectionProfile(
-      request: DeleteConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func discoverConnectionProfile(
-      request: DiscoverConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DiscoverConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.DiscoverConnectionProfileResponse
 
     func listStreams(
-      request: ListStreamsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListStreamsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.ListStreamsResponse
 
     func getStream(
-      request: GetStreamRequest, options: GoogleCloudGax.RequestOptions
+      request: GetStreamRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.Stream
 
     func createStream(
-      request: CreateStreamRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateStreamRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateStream(
-      request: UpdateStreamRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateStreamRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteStream(
-      request: DeleteStreamRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteStreamRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func runStream(
-      request: RunStreamRequest, options: GoogleCloudGax.RequestOptions
+      request: RunStreamRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getStreamObject(
-      request: GetStreamObjectRequest, options: GoogleCloudGax.RequestOptions
+      request: GetStreamObjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.StreamObject
 
     func lookupStreamObject(
-      request: LookupStreamObjectRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupStreamObjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.StreamObject
 
     func listStreamObjects(
-      request: ListStreamObjectsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListStreamObjectsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.ListStreamObjectsResponse
 
     func startBackfillJob(
-      request: StartBackfillJobRequest, options: GoogleCloudGax.RequestOptions
+      request: StartBackfillJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.StartBackfillJobResponse
 
     func stopBackfillJob(
-      request: StopBackfillJobRequest, options: GoogleCloudGax.RequestOptions
+      request: StopBackfillJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.StopBackfillJobResponse
 
     func fetchStaticIps(
-      request: FetchStaticIpsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchStaticIpsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.FetchStaticIpsResponse
 
     func createPrivateConnection(
-      request: CreatePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePrivateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getPrivateConnection(
-      request: GetPrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPrivateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.PrivateConnection
 
     func listPrivateConnections(
-      request: ListPrivateConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPrivateConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.ListPrivateConnectionsResponse
 
     func deletePrivateConnection(
-      request: DeletePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePrivateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createRoute(
-      request: CreateRouteRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRouteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getRoute(
-      request: GetRouteRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRouteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.Route
 
     func listRoutes(
-      request: ListRoutesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRoutesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.ListRoutesResponse
 
     func deleteRoute(
-      request: DeleteRouteRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRouteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

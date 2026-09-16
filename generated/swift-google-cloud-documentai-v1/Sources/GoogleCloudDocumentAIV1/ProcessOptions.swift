@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Options for Process API
-public struct ProcessOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ProcessOptions: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Only applicable to `OCR_PROCESSOR` and `FORM_PARSER_PROCESSOR`.
@@ -50,7 +50,7 @@ public struct ProcessOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.documentai.v1.DocumentProcessorService.ProcessDocument]: <doc:DocumentProcessorServiceClient/processDocument(request:options:)>
   public var pageRange: OneOf_PageRange? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ProcessOptions`.
   public init() {}
@@ -123,7 +123,7 @@ public struct ProcessOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.pageRange = pageRange
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -149,7 +149,7 @@ public struct ProcessOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Serving config for layout parser processor.
-  public struct LayoutConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LayoutConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Config for chunking in layout parser processor.
@@ -168,7 +168,7 @@ public struct ProcessOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. Whether to include table annotations in layout parser response.
     public var enableTableAnnotation: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LayoutConfig`.
     public init() {}
@@ -227,7 +227,7 @@ public struct ProcessOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -244,7 +244,7 @@ public struct ProcessOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Serving config for chunking.
-    public struct ChunkingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ChunkingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The chunk sizes to use when splitting documents, in order of
@@ -254,7 +254,7 @@ public struct ProcessOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Optional. Whether or not to include ancestor headings when splitting.
       public var includeAncestorHeadings: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ChunkingConfig`.
       public init() {}
@@ -299,7 +299,7 @@ public struct ProcessOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -316,33 +316,33 @@ public struct ProcessOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.documentai.v1.ProcessOptions.LayoutConfig.ChunkingConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.documentai.v1.ProcessOptions.LayoutConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A list of individual page numbers.
-  public struct IndividualPageSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IndividualPageSelector: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Indices of the pages (starting from 1).
     public var pages: [Swift.Int32] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IndividualPageSelector`.
     public init() {}
@@ -380,7 +380,7 @@ public struct ProcessOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -395,11 +395,11 @@ public struct ProcessOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.documentai.v1.ProcessOptions.IndividualPageSelector"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -426,10 +426,10 @@ public struct ProcessOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.documentai.v1.ProcessOptions"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

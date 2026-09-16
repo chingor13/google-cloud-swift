@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// APIs for enterprise knowledge graph product.
 ///
@@ -30,7 +30,7 @@ public final class EnterpriseKnowledgeGraphServiceClient: Clients
   let inner: any Clients.EnterpriseKnowledgeGraphServiceStub
 
   /// Creates a new `EnterpriseKnowledgeGraphServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.EnterpriseKnowledgeGraphServiceStub =
       try Clients.EnterpriseKnowledgeGraphServiceTransport(options)
     inner = Clients.EnterpriseKnowledgeGraphServiceRetry(inner, options: options)
@@ -45,7 +45,7 @@ public final class EnterpriseKnowledgeGraphServiceClient: Clients
   ///
   /// @Snippet(path: "EnterpriseKnowledgeGraphService_CreateEntityReconciliationJob")
   public func createEntityReconciliationJob(
-    request: CreateEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.EntityReconciliationJob {
     try await self.inner.createEntityReconciliationJob(request: request, options: options)
   }
@@ -54,7 +54,7 @@ public final class EnterpriseKnowledgeGraphServiceClient: Clients
   ///
   /// @Snippet(path: "EnterpriseKnowledgeGraphService_GetEntityReconciliationJob")
   public func getEntityReconciliationJob(
-    request: GetEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.EntityReconciliationJob {
     try await self.inner.getEntityReconciliationJob(request: request, options: options)
   }
@@ -63,7 +63,7 @@ public final class EnterpriseKnowledgeGraphServiceClient: Clients
   ///
   /// @Snippet(path: "EnterpriseKnowledgeGraphService_ListEntityReconciliationJobs")
   public func listEntityReconciliationJobs(
-    request: ListEntityReconciliationJobsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEntityReconciliationJobsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.ListEntityReconciliationJobsResponse {
     try await self.inner.listEntityReconciliationJobs(request: request, options: options)
   }
@@ -72,7 +72,7 @@ public final class EnterpriseKnowledgeGraphServiceClient: Clients
   ///
   /// @Snippet(path: "EnterpriseKnowledgeGraphService_ListEntityReconciliationJobs")
   public func listEntityReconciliationJobs(
-    byItem: ListEntityReconciliationJobsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEntityReconciliationJobsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<EntityReconciliationJob, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -81,7 +81,7 @@ public final class EnterpriseKnowledgeGraphServiceClient: Clients
       request.pageToken = token
       return try await self.listEntityReconciliationJobs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Cancels a EntityReconciliationJob. Success of cancellation is not
@@ -89,7 +89,7 @@ public final class EnterpriseKnowledgeGraphServiceClient: Clients
   ///
   /// @Snippet(path: "EnterpriseKnowledgeGraphService_CancelEntityReconciliationJob")
   public func cancelEntityReconciliationJob(
-    request: CancelEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelEntityReconciliationJob(request: request, options: options)
   }
@@ -100,7 +100,7 @@ public final class EnterpriseKnowledgeGraphServiceClient: Clients
   ///
   /// @Snippet(path: "EnterpriseKnowledgeGraphService_DeleteEntityReconciliationJob")
   public func deleteEntityReconciliationJob(
-    request: DeleteEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteEntityReconciliationJob(request: request, options: options)
   }
@@ -109,7 +109,7 @@ public final class EnterpriseKnowledgeGraphServiceClient: Clients
   ///
   /// @Snippet(path: "EnterpriseKnowledgeGraphService_Lookup")
   public func lookup(
-    request: LookupRequest, options: GoogleCloudGax.RequestOptions
+    request: LookupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.LookupResponse {
     try await self.inner.lookup(request: request, options: options)
   }
@@ -118,7 +118,7 @@ public final class EnterpriseKnowledgeGraphServiceClient: Clients
   ///
   /// @Snippet(path: "EnterpriseKnowledgeGraphService_Search")
   public func search(
-    request: SearchRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.SearchResponse {
     try await self.inner.search(request: request, options: options)
   }
@@ -127,7 +127,7 @@ public final class EnterpriseKnowledgeGraphServiceClient: Clients
   ///
   /// @Snippet(path: "EnterpriseKnowledgeGraphService_LookupPublicKg")
   public func lookupPublicKg(
-    request: LookupPublicKgRequest, options: GoogleCloudGax.RequestOptions
+    request: LookupPublicKgRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.LookupPublicKgResponse {
     try await self.inner.lookupPublicKg(request: request, options: options)
   }
@@ -136,7 +136,7 @@ public final class EnterpriseKnowledgeGraphServiceClient: Clients
   ///
   /// @Snippet(path: "EnterpriseKnowledgeGraphService_SearchPublicKg")
   public func searchPublicKg(
-    request: SearchPublicKgRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchPublicKgRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.SearchPublicKgResponse {
     try await self.inner.searchPublicKg(request: request, options: options)
   }
@@ -240,52 +240,52 @@ extension Clients {
 
     /// See `EnterpriseKnowledgeGraphServiceClient.createEntityReconciliationJob`.
     func createEntityReconciliationJob(
-      request: CreateEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.EntityReconciliationJob
 
     /// See `EnterpriseKnowledgeGraphServiceClient.getEntityReconciliationJob`.
     func getEntityReconciliationJob(
-      request: GetEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.EntityReconciliationJob
 
     /// See `EnterpriseKnowledgeGraphServiceClient.listEntityReconciliationJobs`.
     func listEntityReconciliationJobs(
-      request: ListEntityReconciliationJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntityReconciliationJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.ListEntityReconciliationJobsResponse
 
     /// See `EnterpriseKnowledgeGraphServiceClient.listEntityReconciliationJobs`.
     func listEntityReconciliationJobs(
-      byItem: ListEntityReconciliationJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEntityReconciliationJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<EntityReconciliationJob, Swift.Error>
 
     /// See `EnterpriseKnowledgeGraphServiceClient.cancelEntityReconciliationJob`.
     func cancelEntityReconciliationJob(
-      request: CancelEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `EnterpriseKnowledgeGraphServiceClient.deleteEntityReconciliationJob`.
     func deleteEntityReconciliationJob(
-      request: DeleteEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `EnterpriseKnowledgeGraphServiceClient.lookup`.
     func lookup(
-      request: LookupRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.LookupResponse
 
     /// See `EnterpriseKnowledgeGraphServiceClient.search`.
     func search(
-      request: SearchRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.SearchResponse
 
     /// See `EnterpriseKnowledgeGraphServiceClient.lookupPublicKg`.
     func lookupPublicKg(
-      request: LookupPublicKgRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupPublicKgRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.LookupPublicKgResponse
 
     /// See `EnterpriseKnowledgeGraphServiceClient.searchPublicKg`.
     func searchPublicKg(
-      request: SearchPublicKgRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchPublicKgRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.SearchPublicKgResponse
   }
 }
@@ -299,9 +299,9 @@ extension Clients.EnterpriseKnowledgeGraphServiceProtocol {
   }
 
   public func createEntityReconciliationJob(
-    request: CreateEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.EntityReconciliationJob {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createEntityReconciliationJob(
@@ -322,9 +322,9 @@ extension Clients.EnterpriseKnowledgeGraphServiceProtocol {
   }
 
   public func getEntityReconciliationJob(
-    request: GetEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.EntityReconciliationJob {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getEntityReconciliationJob(
@@ -343,9 +343,9 @@ extension Clients.EnterpriseKnowledgeGraphServiceProtocol {
   }
 
   public func listEntityReconciliationJobs(
-    request: ListEntityReconciliationJobsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEntityReconciliationJobsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.ListEntityReconciliationJobsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listEntityReconciliationJobs(
@@ -355,14 +355,14 @@ extension Clients.EnterpriseKnowledgeGraphServiceProtocol {
   }
 
   public func listEntityReconciliationJobs(
-    byItem: ListEntityReconciliationJobsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEntityReconciliationJobsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<EntityReconciliationJob, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudEnterpriseKnowledgeGraphV1.ListEntityReconciliationJobsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listEntityReconciliationJobs(
@@ -381,9 +381,9 @@ extension Clients.EnterpriseKnowledgeGraphServiceProtocol {
   }
 
   public func cancelEntityReconciliationJob(
-    request: CancelEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelEntityReconciliationJob(
@@ -402,9 +402,9 @@ extension Clients.EnterpriseKnowledgeGraphServiceProtocol {
   }
 
   public func deleteEntityReconciliationJob(
-    request: DeleteEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteEntityReconciliationJob(
@@ -423,9 +423,9 @@ extension Clients.EnterpriseKnowledgeGraphServiceProtocol {
   }
 
   public func lookup(
-    request: LookupRequest, options: GoogleCloudGax.RequestOptions
+    request: LookupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.LookupResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func lookup(
@@ -446,9 +446,9 @@ extension Clients.EnterpriseKnowledgeGraphServiceProtocol {
   }
 
   public func search(
-    request: SearchRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.SearchResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func search(
@@ -469,9 +469,9 @@ extension Clients.EnterpriseKnowledgeGraphServiceProtocol {
   }
 
   public func lookupPublicKg(
-    request: LookupPublicKgRequest, options: GoogleCloudGax.RequestOptions
+    request: LookupPublicKgRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.LookupPublicKgResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func lookupPublicKg(
@@ -492,9 +492,9 @@ extension Clients.EnterpriseKnowledgeGraphServiceProtocol {
   }
 
   public func searchPublicKg(
-    request: SearchPublicKgRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchPublicKgRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.SearchPublicKgResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func searchPublicKg(

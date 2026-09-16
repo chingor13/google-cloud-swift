@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudConfigDeliveryV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: ConfigDeliveryClient, projectId: String, locationId: String, fleetPackageId: String

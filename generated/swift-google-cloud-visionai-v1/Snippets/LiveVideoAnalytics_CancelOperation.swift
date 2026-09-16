@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudVideoAIV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: LiveVideoAnalyticsClient) async throws {
   try await client.cancelOperation(

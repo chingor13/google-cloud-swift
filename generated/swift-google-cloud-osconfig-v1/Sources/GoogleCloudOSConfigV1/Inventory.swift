@@ -15,8 +15,8 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// This API resource represents the available inventory data for a
 /// Compute Engine virtual machine (VM) instance at a given point in time.
@@ -25,7 +25,7 @@ import GoogleType
 ///
 /// For more information, see [Information provided by OS inventory
 /// management](https://cloud.google.com/compute/docs/instances/os-inventory-management#data-collected).
-public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Inventory: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The `Inventory` API resource name.
@@ -44,9 +44,9 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var items: [Swift.String: Inventory.Item] = [:]
 
   /// Output only. Timestamp of the last reported inventory for the VM.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Inventory`.
   public init() {}
@@ -94,11 +94,10 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.items = value
     }
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -114,7 +113,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Operating system information for the VM.
-  public struct OsInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct OsInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The VM hostname.
@@ -144,7 +143,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The current version of the OS Config agent running on the VM.
     public var osconfigAgentVersion: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `OsInfo`.
     public init() {}
@@ -218,7 +217,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -240,16 +239,16 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.osconfig.v1.Inventory.OsInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A single piece of inventory on a VM.
-  public struct Item: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Item: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Identifier for this item, unique across items for this VM.
@@ -259,10 +258,10 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var originType: Inventory.Item.OriginType = Inventory.Item.OriginType()
 
     /// When this inventory item was first detected.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// When this inventory item was last modified.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// The specific type of inventory, correlating to its specific details.
     public var type: Inventory.Item.Type_ = Inventory.Item.Type_()
@@ -270,7 +269,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Specific details of this inventory item based on its type.
     public var details: OneOf_Details? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Item`.
     public init() {}
@@ -323,10 +322,8 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       {
         self.originType = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(Inventory.Item.Type_.self, forKey: .type) {
         self.type = value
       }
@@ -354,7 +351,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.details = details
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -594,22 +591,22 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.osconfig.v1.Inventory.Item"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Software package information of the operating system.
-  public struct SoftwarePackage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SoftwarePackage: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Information about the different types of software packages.
     public var details: OneOf_Details? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SoftwarePackage`.
     public init() {}
@@ -717,7 +714,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.details = details
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -791,17 +788,17 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.osconfig.v1.Inventory.SoftwarePackage"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Information related to the a standard versioned package.  This includes
   /// package info for APT, Yum, Zypper, and Googet package managers.
-  public struct VersionedPackage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct VersionedPackage: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the package.
@@ -813,7 +810,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The version of the package.
     public var version: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `VersionedPackage`.
     public init() {}
@@ -861,7 +858,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -878,16 +875,16 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.osconfig.v1.Inventory.VersionedPackage"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Details related to a Zypper Patch.
-  public struct ZypperPatch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ZypperPatch: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the patch.
@@ -902,7 +899,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Any summary information provided about this patch.
     public var summary: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ZypperPatch`.
     public init() {}
@@ -955,7 +952,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -973,11 +970,11 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.osconfig.v1.Inventory.ZypperPatch"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -986,7 +983,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// https://docs.microsoft.com/en-us/windows/win32/api/_wua/
   /// Descriptive fields like title, and description are localized based on
   /// the locale of the VM being updated.
-  public struct WindowsUpdatePackage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct WindowsUpdatePackage: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The localized title of the update package.
@@ -1017,9 +1014,9 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var revisionNumber: Swift.Int32 = Swift.Int32()
 
     /// The last published date of the update, in (UTC) date and time.
-    public var lastDeploymentChangeTime: GoogleCloudWKT.Timestamp? = nil
+    public var lastDeploymentChangeTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `WindowsUpdatePackage`.
     public init() {}
@@ -1095,10 +1092,10 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.revisionNumber = value
       }
       self.lastDeploymentChangeTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .lastDeploymentChangeTime)
+        GoogleWKT.Timestamp.self, forKey: .lastDeploymentChangeTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1120,7 +1117,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Categories specified by the Windows Update.
-    public struct WindowsUpdateCategory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct WindowsUpdateCategory: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The identifier of the windows update category.
@@ -1129,7 +1126,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// The name of the windows update category.
       public var name: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `WindowsUpdateCategory`.
       public init() {}
@@ -1172,7 +1169,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1189,22 +1186,22 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage.WindowsUpdateCategory"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.osconfig.v1.Inventory.WindowsUpdatePackage"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1212,7 +1209,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Fields are taken from Windows QuickFixEngineering Interface and match
   /// the source names:
   /// https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-quickfixengineering
-  public struct WindowsQuickFixEngineeringPackage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct WindowsQuickFixEngineeringPackage: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A short textual description of the QFE update.
@@ -1225,9 +1222,9 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var hotFixId: Swift.String = Swift.String()
 
     /// Date that the QFE update was installed.  Mapped from installed_on field.
-    public var installTime: GoogleCloudWKT.Timestamp? = nil
+    public var installTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `WindowsQuickFixEngineeringPackage`.
     public init() {}
@@ -1276,10 +1273,10 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.hotFixId = value
       }
       self.installTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .installTime)
+        GoogleWKT.Timestamp.self, forKey: .installTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1298,18 +1295,18 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Contains information about a Windows application that is retrieved from the
   /// Windows Registry. For more information about these fields, see:
   /// https://docs.microsoft.com/en-us/windows/win32/msi/uninstall-registry-key
-  public struct WindowsApplication: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct WindowsApplication: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the application or product.
@@ -1329,7 +1326,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The internet address for technical support.
     public var helpLink: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `WindowsApplication`.
     public init() {}
@@ -1385,7 +1382,7 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1404,21 +1401,21 @@ public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.osconfig.v1.Inventory.WindowsApplication"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.osconfig.v1.Inventory"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

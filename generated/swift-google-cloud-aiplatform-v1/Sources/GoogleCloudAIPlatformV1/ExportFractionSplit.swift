@@ -16,7 +16,7 @@
 
 #if DatasetService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Assigns the input data to training, validation, and test sets as per the
   /// given fractions. Any of `training_fraction`, `validation_fraction` and
@@ -24,7 +24,7 @@
   /// provided ones sum to less than 1, the remainder is assigned to sets as
   /// decided by Vertex AI. If none of the fractions are set, by default roughly
   /// 80% of data is used for training, 10% for validation, and 10% for test.
-  public struct ExportFractionSplit: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExportFractionSplit: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The fraction of the input data that is to be used to train the Model.
@@ -36,7 +36,7 @@
     /// The fraction of the input data that is to be used to evaluate the Model.
     public var testFraction: Swift.Double = Swift.Double()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExportFractionSplit`.
     public init() {}
@@ -84,7 +84,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -101,11 +101,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ExportFractionSplit"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

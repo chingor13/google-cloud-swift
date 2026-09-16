@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [google.bigtable.admin.v2.BigtableTableAdmin.CreateTable][google.bigtable.admin.v2.BigtableTableAdmin.CreateTable]
 ///
 /// [google.bigtable.admin.v2.BigtableTableAdmin.CreateTable]: <doc:BigtableTableAdminClient/createTable(request:options:)>
-public struct CreateTableRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateTableRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The unique name of the instance in which to create the table.
@@ -54,7 +54,7 @@ public struct CreateTableRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   ///     - Tablet 5 `[other, )                => {"other", "zz"}.`
   public var initialSplits: [CreateTableRequest.Split] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateTableRequest`.
   public init() {}
@@ -107,7 +107,7 @@ public struct CreateTableRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -123,13 +123,13 @@ public struct CreateTableRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   }
 
   /// An initial split point for a newly created table.
-  public struct Split: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Split: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Row key to use as an initial tablet boundary.
     public var key: Foundation.Data = Foundation.Data()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Split`.
     public init() {}
@@ -167,7 +167,7 @@ public struct CreateTableRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -182,21 +182,21 @@ public struct CreateTableRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.CreateTableRequest.Split"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.CreateTableRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

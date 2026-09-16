@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message describing the dataset configuration properties. For more
 /// information, see [Dataset configuration
 /// properties](https://cloud.google.com/storage/docs/insights/datasets#dataset-config).
-public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DatasetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. name of resource
@@ -29,11 +29,11 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. The UTC time at which the dataset configuration was created.
   /// This is auto-populated.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The UTC time at which the dataset configuration was last
   /// updated. This is auto-populated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Labels as key value pairs
   public var labels: [Swift.String: Swift.String] = [:]
@@ -86,7 +86,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Cloud Storage buckets to include or exclude.
   public var cloudStorageBuckets: OneOf_CloudStorageBuckets? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DatasetConfig`.
   public init() {}
@@ -166,10 +166,8 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -284,7 +282,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.cloudStorageBuckets = cloudStorageBuckets
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -341,12 +339,12 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Collection of project numbers
-  public struct SourceProjects: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SourceProjects: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var projectNumbers: [Swift.Int64] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SourceProjects`.
     public init() {}
@@ -384,7 +382,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -399,22 +397,22 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.SourceProjects"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Specifies a set of folders to include in the dataset
-  public struct SourceFolders: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SourceFolders: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The list of folder numbers to include in the dataset.
     public var folderNumbers: [Swift.Int64] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SourceFolders`.
     public init() {}
@@ -452,7 +450,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -467,21 +465,21 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.SourceFolders"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Collection of Cloud Storage locations.
-  public struct CloudStorageLocations: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CloudStorageLocations: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var locations: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CloudStorageLocations`.
     public init() {}
@@ -519,7 +517,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -535,21 +533,21 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.CloudStorageLocations"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Collection of Cloud Storage buckets.
-  public struct CloudStorageBuckets: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CloudStorageBuckets: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var cloudStorageBuckets: [DatasetConfig.CloudStorageBuckets.CloudStorageBucket] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CloudStorageBuckets`.
     public init() {}
@@ -589,7 +587,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -602,12 +600,12 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Defines the bucket by its name or a regex pattern to match buckets.
-    public struct CloudStorageBucket: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct CloudStorageBucket: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       public var cloudStorageBucket: OneOf_CloudStorageBucket? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `CloudStorageBucket`.
       public init() {}
@@ -664,7 +662,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.cloudStorageBucket = cloudStorageBucket
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -696,27 +694,27 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets.CloudStorageBucket"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.CloudStorageBuckets"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Defines the details about the linked dataset.
-  public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Link: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Dataset name for linked dataset.
@@ -725,7 +723,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. State of the linked dataset.
     public var linked: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Link`.
     public init() {}
@@ -768,7 +766,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -784,16 +782,16 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.Link"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Provides a summary of the bucket level error statistics.
-  public struct BucketErrors: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BucketErrors: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Count of successfully validated buckets.
@@ -823,7 +821,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Intelligence.
     public var nonStorageIntelligenceEntitledBucketIds: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BucketErrors`.
     public init() {}
@@ -903,7 +901,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -928,16 +926,16 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.BucketErrors"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Provides a summary of the project level error statistics.
-  public struct ProjectErrors: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ProjectErrors: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Count of successfully validated projects.
@@ -977,7 +975,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// the check.
     public var destinationProjectCheckResult: OneOf_DestinationProjectCheckResult? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ProjectErrors`.
     public init() {}
@@ -1083,7 +1081,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.destinationProjectCheckResult = destinationProjectCheckResult
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1134,16 +1132,16 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.ProjectErrors"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Summary of validation errors that occurred during the verification phase.
-  public struct ValidationErrorsBeforeIngestion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ValidationErrorsBeforeIngestion: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Provides a summary of the bucket level error stats.
@@ -1152,7 +1150,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. Provides a summary of the project level error stats.
     public var projectErrors: DatasetConfig.ProjectErrors? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ValidationErrorsBeforeIngestion`.
     public init() {}
@@ -1193,7 +1191,7 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         DatasetConfig.ProjectErrors.self, forKey: .projectErrors)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1210,11 +1208,11 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig.ValidationErrorsBeforeIngestion"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1378,10 +1376,10 @@ public struct DatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.storageinsights.v1.DatasetConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

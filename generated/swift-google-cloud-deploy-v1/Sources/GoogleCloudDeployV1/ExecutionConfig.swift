@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration of the environment to use when calling Skaffold.
-public struct ExecutionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExecutionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Usages when this configuration should be applied.
@@ -44,7 +44,7 @@ public struct ExecutionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Execution timeout for a Cloud Build Execution. This must be
   /// between 10m and 24h in seconds format. If unspecified, a default timeout of
   /// 1h is used.
-  public var executionTimeout: GoogleCloudWKT.Duration? = nil
+  public var executionTimeout: GoogleWKT.Duration? = nil
 
   /// Optional. If true, additional logging will be enabled when running builds
   /// in this execution environment.
@@ -53,7 +53,7 @@ public struct ExecutionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Details of the environment.
   public var executionEnvironment: OneOf_ExecutionEnvironment? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExecutionConfig`.
   public init() {}
@@ -115,7 +115,7 @@ public struct ExecutionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.artifactStorage = value
     }
     self.executionTimeout = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .executionTimeout)
+      GoogleWKT.Duration.self, forKey: .executionTimeout)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .verbose) {
       self.verbose = value
     }
@@ -139,7 +139,7 @@ public struct ExecutionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.executionEnvironment = executionEnvironment
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -302,10 +302,10 @@ public struct ExecutionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.deploy.v1.ExecutionConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

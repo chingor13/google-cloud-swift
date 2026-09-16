@@ -16,11 +16,11 @@
 
 #if SqlBackupsService || SqlInstancesService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Insights configuration. This specifies when Cloud SQL Insights feature is
   /// enabled and optional configuration.
-  public struct InsightsConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InsightsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Whether Query Insights feature is enabled.
@@ -37,16 +37,16 @@
     /// Range: 256-4500 bytes. Query lengths greater than this field value will be
     /// truncated to this value. When unset, query length will be the default
     /// value. Changing query length will restart the database.
-    public var queryStringLength: GoogleCloudWKT.Int32Value? = nil
+    public var queryStringLength: GoogleWKT.Int32Value? = nil
 
     /// Number of query execution plans captured by Insights per minute
     /// for all queries combined. Default is 5.
-    public var queryPlansPerMinute: GoogleCloudWKT.Int32Value? = nil
+    public var queryPlansPerMinute: GoogleWKT.Int32Value? = nil
 
     /// Optional. Whether enhanced query insights feature is enabled.
-    public var enhancedQueryInsightsEnabled: GoogleCloudWKT.BoolValue? = nil
+    public var enhancedQueryInsightsEnabled: GoogleWKT.BoolValue? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InsightsConfig`.
     public init() {}
@@ -101,14 +101,14 @@
         self.recordApplicationTags = value
       }
       self.queryStringLength = try container.decodeIfPresent(
-        GoogleCloudWKT.Int32Value.self, forKey: .queryStringLength)
+        GoogleWKT.Int32Value.self, forKey: .queryStringLength)
       self.queryPlansPerMinute = try container.decodeIfPresent(
-        GoogleCloudWKT.Int32Value.self, forKey: .queryPlansPerMinute)
+        GoogleWKT.Int32Value.self, forKey: .queryPlansPerMinute)
       self.enhancedQueryInsightsEnabled = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .enhancedQueryInsightsEnabled)
+        GoogleWKT.BoolValue.self, forKey: .enhancedQueryInsightsEnabled)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -129,11 +129,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.InsightsConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

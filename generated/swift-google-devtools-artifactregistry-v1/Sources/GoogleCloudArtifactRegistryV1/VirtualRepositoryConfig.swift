@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Virtual repository configuration.
-public struct VirtualRepositoryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VirtualRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Policies that configure the upstream artifacts distributed by the Virtual
   /// Repository. Upstream policies cannot be set on a standard repository.
   public var upstreamPolicies: [UpstreamPolicy] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VirtualRepositoryConfig`.
   public init() {}
@@ -63,7 +63,7 @@ public struct VirtualRepositoryConfig: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -78,10 +78,10 @@ public struct VirtualRepositoryConfig: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.VirtualRepositoryConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

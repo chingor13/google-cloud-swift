@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudGKEMultiCloudV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: AttachedClustersClient, projectId: String, locationId: String, attachedClusterId: String
@@ -32,7 +32,7 @@ func sample(
           $0.name =
             "projects/\(projectId)/locations/\(locationId)/attachedClusters/\(attachedClusterId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

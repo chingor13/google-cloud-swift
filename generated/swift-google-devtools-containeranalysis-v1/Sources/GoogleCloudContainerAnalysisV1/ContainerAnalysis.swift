@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Retrieves analysis results of Cloud components such as Docker container
 /// images. The Container Analysis API is an implementation of the
@@ -41,7 +41,7 @@ public final class ContainerAnalysisClient: Clients.ContainerAnalysisProtocol, S
   let inner: any Clients.ContainerAnalysisStub
 
   /// Creates a new `ContainerAnalysisClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ContainerAnalysisStub = try Clients.ContainerAnalysisTransport(options)
     inner = Clients.ContainerAnalysisRetry(inner, options: options)
     if let logger = options.logger {
@@ -61,7 +61,7 @@ public final class ContainerAnalysisClient: Clients.ContainerAnalysisProtocol, S
   ///
   /// @Snippet(path: "ContainerAnalysis_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -77,7 +77,7 @@ public final class ContainerAnalysisClient: Clients.ContainerAnalysisProtocol, S
   ///
   /// @Snippet(path: "ContainerAnalysis_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -92,7 +92,7 @@ public final class ContainerAnalysisClient: Clients.ContainerAnalysisProtocol, S
   ///
   /// @Snippet(path: "ContainerAnalysis_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -101,7 +101,7 @@ public final class ContainerAnalysisClient: Clients.ContainerAnalysisProtocol, S
   ///
   /// @Snippet(path: "ContainerAnalysis_GetVulnerabilityOccurrencesSummary")
   public func getVulnerabilityOccurrencesSummary(
-    request: GetVulnerabilityOccurrencesSummaryRequest, options: GoogleCloudGax.RequestOptions
+    request: GetVulnerabilityOccurrencesSummaryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContainerAnalysisV1.VulnerabilityOccurrencesSummary {
     try await self.inner.getVulnerabilityOccurrencesSummary(request: request, options: options)
   }
@@ -110,7 +110,7 @@ public final class ContainerAnalysisClient: Clients.ContainerAnalysisProtocol, S
   ///
   /// @Snippet(path: "ContainerAnalysis_ExportSBOM")
   public func exportSbom(
-    request: ExportSBOMRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportSBOMRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContainerAnalysisV1.ExportSBOMResponse {
     try await self.inner.exportSbom(request: request, options: options)
   }
@@ -166,27 +166,27 @@ extension Clients {
 
     /// See `ContainerAnalysisClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `ContainerAnalysisClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `ContainerAnalysisClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `ContainerAnalysisClient.getVulnerabilityOccurrencesSummary`.
     func getVulnerabilityOccurrencesSummary(
-      request: GetVulnerabilityOccurrencesSummaryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVulnerabilityOccurrencesSummaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerAnalysisV1.VulnerabilityOccurrencesSummary
 
     /// See `ContainerAnalysisClient.exportSbom`.
     func exportSbom(
-      request: ExportSBOMRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportSBOMRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerAnalysisV1.ExportSBOMResponse
   }
 }
@@ -200,9 +200,9 @@ extension Clients.ContainerAnalysisProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(
@@ -223,9 +223,9 @@ extension Clients.ContainerAnalysisProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(
@@ -244,9 +244,9 @@ extension Clients.ContainerAnalysisProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(
@@ -267,9 +267,9 @@ extension Clients.ContainerAnalysisProtocol {
   }
 
   public func getVulnerabilityOccurrencesSummary(
-    request: GetVulnerabilityOccurrencesSummaryRequest, options: GoogleCloudGax.RequestOptions
+    request: GetVulnerabilityOccurrencesSummaryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContainerAnalysisV1.VulnerabilityOccurrencesSummary {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getVulnerabilityOccurrencesSummary(
@@ -290,8 +290,8 @@ extension Clients.ContainerAnalysisProtocol {
   }
 
   public func exportSbom(
-    request: ExportSBOMRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportSBOMRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContainerAnalysisV1.ExportSBOMResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

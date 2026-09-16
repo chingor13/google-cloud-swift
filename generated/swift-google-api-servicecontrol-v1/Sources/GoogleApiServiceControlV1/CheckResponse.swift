@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for the Check method.
-public struct CheckResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CheckResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The same operation_id value used in the
@@ -44,7 +44,7 @@ public struct CheckResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Feedback data returned from the server during processing a Check request.
   public var checkInfo: CheckResponse.CheckInfo? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CheckResponse`.
   public init() {}
@@ -100,7 +100,7 @@ public struct CheckResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.checkInfo = try container.decodeIfPresent(CheckResponse.CheckInfo.self, forKey: .checkInfo)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -117,7 +117,7 @@ public struct CheckResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Contains additional information about the check operation.
-  public struct CheckInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CheckInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A list of fields and label keys that are ignored by the server.
@@ -133,7 +133,7 @@ public struct CheckResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// is an API key and all the API key related validations are successful.
     public var apiKeyUid: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CheckInfo`.
     public init() {}
@@ -180,7 +180,7 @@ public struct CheckResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -197,16 +197,16 @@ public struct CheckResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.servicecontrol.v1.CheckResponse.CheckInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// `ConsumerInfo` provides information about the consumer.
-  public struct ConsumerInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConsumerInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The Google cloud project number, e.g. 1234567890. A value of 0 indicates
@@ -226,7 +226,7 @@ public struct CheckResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// consumer number is found.
     public var consumerNumber: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConsumerInfo`.
     public init() {}
@@ -276,7 +276,7 @@ public struct CheckResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -415,21 +415,21 @@ public struct CheckResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.servicecontrol.v1.CheckResponse.ConsumerInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.servicecontrol.v1.CheckResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

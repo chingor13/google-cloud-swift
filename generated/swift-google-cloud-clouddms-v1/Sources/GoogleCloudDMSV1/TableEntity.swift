@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Table's parent is a schema.
-public struct TableEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TableEntity: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Table columns.
@@ -34,12 +34,12 @@ public struct TableEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var triggers: [TriggerEntity] = []
 
   /// Custom engine specific features.
-  public var customFeatures: GoogleCloudWKT.Struct? = nil
+  public var customFeatures: GoogleWKT.Struct? = nil
 
   /// Comment associated with the table.
   public var comment: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TableEntity`.
   public init() {}
@@ -95,13 +95,13 @@ public struct TableEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.triggers = value
     }
     self.customFeatures = try container.decodeIfPresent(
-      GoogleCloudWKT.Struct.self, forKey: .customFeatures)
+      GoogleWKT.Struct.self, forKey: .customFeatures)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .comment) {
       self.comment = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -121,10 +121,10 @@ public struct TableEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.clouddms.v1.TableEntity"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

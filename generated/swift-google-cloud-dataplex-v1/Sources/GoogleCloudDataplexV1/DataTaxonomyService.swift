@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// DataTaxonomyService enables attribute-based governance. The resources
 /// currently offered include DataTaxonomy and DataAttribute.
@@ -32,11 +32,11 @@ import GoogleCloudGax
 @available(*, deprecated)
 public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtocol, Sendable {
   let inner: any Clients.DataTaxonomyServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `DataTaxonomyServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DataTaxonomyServiceStub = try Clients.DataTaxonomyServiceTransport(
       options)
     inner = Clients.DataTaxonomyServiceRetry(inner, options: options)
@@ -53,7 +53,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_CreateDataTaxonomy")
   @available(*, deprecated)
   public func createDataTaxonomy(
-    request: CreateDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDataTaxonomyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createDataTaxonomy(request: request, options: options)
   }
@@ -63,21 +63,21 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_CreateDataTaxonomy")
   @available(*, deprecated)
   public func createDataTaxonomy(
-    withPolling: CreateDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataTaxonomy> {
+    withPolling: CreateDataTaxonomyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataTaxonomy> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DataTaxonomy>.State in
+        -> GoogleGax._PollableOperationImpl<DataTaxonomy>.State in
       return try op._extractStatus(DataTaxonomy.self)
     }
     let rawOp = try await self.createDataTaxonomy(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataTaxonomy>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataTaxonomy>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -90,7 +90,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_UpdateDataTaxonomy")
   @available(*, deprecated)
   public func updateDataTaxonomy(
-    request: UpdateDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDataTaxonomyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateDataTaxonomy(request: request, options: options)
   }
@@ -100,21 +100,21 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_UpdateDataTaxonomy")
   @available(*, deprecated)
   public func updateDataTaxonomy(
-    withPolling: UpdateDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataTaxonomy> {
+    withPolling: UpdateDataTaxonomyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataTaxonomy> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DataTaxonomy>.State in
+        -> GoogleGax._PollableOperationImpl<DataTaxonomy>.State in
       return try op._extractStatus(DataTaxonomy.self)
     }
     let rawOp = try await self.updateDataTaxonomy(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataTaxonomy>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataTaxonomy>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -128,7 +128,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_DeleteDataTaxonomy")
   @available(*, deprecated)
   public func deleteDataTaxonomy(
-    request: DeleteDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDataTaxonomyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteDataTaxonomy(request: request, options: options)
   }
@@ -139,21 +139,21 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_DeleteDataTaxonomy")
   @available(*, deprecated)
   public func deleteDataTaxonomy(
-    withPolling: DeleteDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteDataTaxonomyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteDataTaxonomy(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -166,7 +166,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_ListDataTaxonomies")
   @available(*, deprecated)
   public func listDataTaxonomies(
-    request: ListDataTaxonomiesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataTaxonomiesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListDataTaxonomiesResponse {
     try await self.inner.listDataTaxonomies(request: request, options: options)
   }
@@ -176,7 +176,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_ListDataTaxonomies")
   @available(*, deprecated)
   public func listDataTaxonomies(
-    byItem: ListDataTaxonomiesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataTaxonomiesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataTaxonomy, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListDataTaxonomiesResponse in
@@ -184,7 +184,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
       request.pageToken = token
       return try await self.listDataTaxonomies(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Retrieves a DataTaxonomy resource.
@@ -192,7 +192,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_GetDataTaxonomy")
   @available(*, deprecated)
   public func getDataTaxonomy(
-    request: GetDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDataTaxonomyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.DataTaxonomy {
     try await self.inner.getDataTaxonomy(request: request, options: options)
   }
@@ -202,7 +202,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_CreateDataAttributeBinding")
   @available(*, deprecated)
   public func createDataAttributeBinding(
-    request: CreateDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDataAttributeBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createDataAttributeBinding(request: request, options: options)
   }
@@ -212,22 +212,21 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_CreateDataAttributeBinding")
   @available(*, deprecated)
   public func createDataAttributeBinding(
-    withPolling: CreateDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataAttributeBinding> {
+    withPolling: CreateDataAttributeBindingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataAttributeBinding> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DataAttributeBinding>.State in
+        -> GoogleGax._PollableOperationImpl<DataAttributeBinding>.State in
       return try op._extractStatus(DataAttributeBinding.self)
     }
     let rawOp = try await self.createDataAttributeBinding(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DataAttributeBinding>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataAttributeBinding>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -240,7 +239,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_UpdateDataAttributeBinding")
   @available(*, deprecated)
   public func updateDataAttributeBinding(
-    request: UpdateDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDataAttributeBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateDataAttributeBinding(request: request, options: options)
   }
@@ -250,22 +249,21 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_UpdateDataAttributeBinding")
   @available(*, deprecated)
   public func updateDataAttributeBinding(
-    withPolling: UpdateDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataAttributeBinding> {
+    withPolling: UpdateDataAttributeBindingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataAttributeBinding> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DataAttributeBinding>.State in
+        -> GoogleGax._PollableOperationImpl<DataAttributeBinding>.State in
       return try op._extractStatus(DataAttributeBinding.self)
     }
     let rawOp = try await self.updateDataAttributeBinding(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DataAttributeBinding>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataAttributeBinding>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -280,7 +278,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_DeleteDataAttributeBinding")
   @available(*, deprecated)
   public func deleteDataAttributeBinding(
-    request: DeleteDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDataAttributeBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteDataAttributeBinding(request: request, options: options)
   }
@@ -292,21 +290,21 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_DeleteDataAttributeBinding")
   @available(*, deprecated)
   public func deleteDataAttributeBinding(
-    withPolling: DeleteDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteDataAttributeBindingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteDataAttributeBinding(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -319,7 +317,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_ListDataAttributeBindings")
   @available(*, deprecated)
   public func listDataAttributeBindings(
-    request: ListDataAttributeBindingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataAttributeBindingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListDataAttributeBindingsResponse {
     try await self.inner.listDataAttributeBindings(request: request, options: options)
   }
@@ -329,7 +327,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_ListDataAttributeBindings")
   @available(*, deprecated)
   public func listDataAttributeBindings(
-    byItem: ListDataAttributeBindingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataAttributeBindingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataAttributeBinding, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListDataAttributeBindingsResponse
@@ -338,7 +336,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
       request.pageToken = token
       return try await self.listDataAttributeBindings(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Retrieves a DataAttributeBinding resource.
@@ -346,7 +344,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_GetDataAttributeBinding")
   @available(*, deprecated)
   public func getDataAttributeBinding(
-    request: GetDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDataAttributeBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.DataAttributeBinding {
     try await self.inner.getDataAttributeBinding(request: request, options: options)
   }
@@ -356,7 +354,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_CreateDataAttribute")
   @available(*, deprecated)
   public func createDataAttribute(
-    request: CreateDataAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDataAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createDataAttribute(request: request, options: options)
   }
@@ -366,21 +364,21 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_CreateDataAttribute")
   @available(*, deprecated)
   public func createDataAttribute(
-    withPolling: CreateDataAttributeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataAttribute> {
+    withPolling: CreateDataAttributeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataAttribute> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DataAttribute>.State in
+        -> GoogleGax._PollableOperationImpl<DataAttribute>.State in
       return try op._extractStatus(DataAttribute.self)
     }
     let rawOp = try await self.createDataAttribute(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataAttribute>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataAttribute>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -393,7 +391,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_UpdateDataAttribute")
   @available(*, deprecated)
   public func updateDataAttribute(
-    request: UpdateDataAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDataAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateDataAttribute(request: request, options: options)
   }
@@ -403,21 +401,21 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_UpdateDataAttribute")
   @available(*, deprecated)
   public func updateDataAttribute(
-    withPolling: UpdateDataAttributeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataAttribute> {
+    withPolling: UpdateDataAttributeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataAttribute> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DataAttribute>.State in
+        -> GoogleGax._PollableOperationImpl<DataAttribute>.State in
       return try op._extractStatus(DataAttribute.self)
     }
     let rawOp = try await self.updateDataAttribute(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataAttribute>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataAttribute>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -430,7 +428,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_DeleteDataAttribute")
   @available(*, deprecated)
   public func deleteDataAttribute(
-    request: DeleteDataAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDataAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteDataAttribute(request: request, options: options)
   }
@@ -440,21 +438,21 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_DeleteDataAttribute")
   @available(*, deprecated)
   public func deleteDataAttribute(
-    withPolling: DeleteDataAttributeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteDataAttributeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteDataAttribute(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -467,7 +465,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_ListDataAttributes")
   @available(*, deprecated)
   public func listDataAttributes(
-    request: ListDataAttributesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataAttributesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListDataAttributesResponse {
     try await self.inner.listDataAttributes(request: request, options: options)
   }
@@ -477,7 +475,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_ListDataAttributes")
   @available(*, deprecated)
   public func listDataAttributes(
-    byItem: ListDataAttributesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataAttributesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataAttribute, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListDataAttributesResponse in
@@ -485,7 +483,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
       request.pageToken = token
       return try await self.listDataAttributes(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Retrieves a Data Attribute resource.
@@ -493,7 +491,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   /// @Snippet(path: "DataTaxonomyService_GetDataAttribute")
   @available(*, deprecated)
   public func getDataAttribute(
-    request: GetDataAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDataAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.DataAttribute {
     try await self.inner.getDataAttribute(request: request, options: options)
   }
@@ -519,7 +517,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   ///
   /// @Snippet(path: "DataTaxonomyService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -545,7 +543,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   ///
   /// @Snippet(path: "DataTaxonomyService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -553,14 +551,14 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "DataTaxonomyService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -573,7 +571,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   ///
   /// @Snippet(path: "DataTaxonomyService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -583,7 +581,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   ///
   /// @Snippet(path: "DataTaxonomyService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -598,7 +596,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   ///
   /// @Snippet(path: "DataTaxonomyService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -609,7 +607,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   ///
   /// @Snippet(path: "DataTaxonomyService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -620,7 +618,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   ///
   /// @Snippet(path: "DataTaxonomyService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -628,7 +626,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -637,7 +635,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   ///
   /// @Snippet(path: "DataTaxonomyService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -648,7 +646,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   ///
   /// @Snippet(path: "DataTaxonomyService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -659,7 +657,7 @@ public final class DataTaxonomyServiceClient: Clients.DataTaxonomyServiceProtoco
   ///
   /// @Snippet(path: "DataTaxonomyService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -680,8 +678,8 @@ extension Clients {
 
     /// See `DataTaxonomyServiceClient.createDataTaxonomy`.
     @available(*, deprecated)
-    func createDataTaxonomy(withPolling: CreateDataTaxonomyRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DataTaxonomy>
+    func createDataTaxonomy(withPolling: CreateDataTaxonomyRequest) async throws -> any GoogleGax
+      .PollableOperation<DataTaxonomy>
 
     /// See `DataTaxonomyServiceClient.createDataTaxonomy`.
     @available(*, deprecated)
@@ -689,7 +687,7 @@ extension Clients {
       parent: Swift.String,
       dataTaxonomy: DataTaxonomy?,
       dataTaxonomyId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataTaxonomy>
+    ) async throws -> any GoogleGax.PollableOperation<DataTaxonomy>
 
     /// See `DataTaxonomyServiceClient.updateDataTaxonomy`.
     @available(*, deprecated)
@@ -698,15 +696,15 @@ extension Clients {
 
     /// See `DataTaxonomyServiceClient.updateDataTaxonomy`.
     @available(*, deprecated)
-    func updateDataTaxonomy(withPolling: UpdateDataTaxonomyRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DataTaxonomy>
+    func updateDataTaxonomy(withPolling: UpdateDataTaxonomyRequest) async throws -> any GoogleGax
+      .PollableOperation<DataTaxonomy>
 
     /// See `DataTaxonomyServiceClient.updateDataTaxonomy`.
     @available(*, deprecated)
     func updateDataTaxonomy(
       dataTaxonomy: DataTaxonomy?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataTaxonomy>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<DataTaxonomy>
 
     /// See `DataTaxonomyServiceClient.deleteDataTaxonomy`.
     @available(*, deprecated)
@@ -715,14 +713,14 @@ extension Clients {
 
     /// See `DataTaxonomyServiceClient.deleteDataTaxonomy`.
     @available(*, deprecated)
-    func deleteDataTaxonomy(withPolling: DeleteDataTaxonomyRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    func deleteDataTaxonomy(withPolling: DeleteDataTaxonomyRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
 
     /// See `DataTaxonomyServiceClient.deleteDataTaxonomy`.
     @available(*, deprecated)
     func deleteDataTaxonomy(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DataTaxonomyServiceClient.listDataTaxonomies`.
     @available(*, deprecated)
@@ -760,7 +758,7 @@ extension Clients {
     /// See `DataTaxonomyServiceClient.createDataAttributeBinding`.
     @available(*, deprecated)
     func createDataAttributeBinding(withPolling: CreateDataAttributeBindingRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DataAttributeBinding>
+      -> any GoogleGax.PollableOperation<DataAttributeBinding>
 
     /// See `DataTaxonomyServiceClient.createDataAttributeBinding`.
     @available(*, deprecated)
@@ -768,7 +766,7 @@ extension Clients {
       parent: Swift.String,
       dataAttributeBinding: DataAttributeBinding?,
       dataAttributeBindingId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataAttributeBinding>
+    ) async throws -> any GoogleGax.PollableOperation<DataAttributeBinding>
 
     /// See `DataTaxonomyServiceClient.updateDataAttributeBinding`.
     @available(*, deprecated)
@@ -778,14 +776,14 @@ extension Clients {
     /// See `DataTaxonomyServiceClient.updateDataAttributeBinding`.
     @available(*, deprecated)
     func updateDataAttributeBinding(withPolling: UpdateDataAttributeBindingRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DataAttributeBinding>
+      -> any GoogleGax.PollableOperation<DataAttributeBinding>
 
     /// See `DataTaxonomyServiceClient.updateDataAttributeBinding`.
     @available(*, deprecated)
     func updateDataAttributeBinding(
       dataAttributeBinding: DataAttributeBinding?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataAttributeBinding>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<DataAttributeBinding>
 
     /// See `DataTaxonomyServiceClient.deleteDataAttributeBinding`.
     @available(*, deprecated)
@@ -795,13 +793,13 @@ extension Clients {
     /// See `DataTaxonomyServiceClient.deleteDataAttributeBinding`.
     @available(*, deprecated)
     func deleteDataAttributeBinding(withPolling: DeleteDataAttributeBindingRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DataTaxonomyServiceClient.deleteDataAttributeBinding`.
     @available(*, deprecated)
     func deleteDataAttributeBinding(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DataTaxonomyServiceClient.listDataAttributeBindings`.
     @available(*, deprecated)
@@ -838,8 +836,8 @@ extension Clients {
 
     /// See `DataTaxonomyServiceClient.createDataAttribute`.
     @available(*, deprecated)
-    func createDataAttribute(withPolling: CreateDataAttributeRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DataAttribute>
+    func createDataAttribute(withPolling: CreateDataAttributeRequest) async throws -> any GoogleGax
+      .PollableOperation<DataAttribute>
 
     /// See `DataTaxonomyServiceClient.createDataAttribute`.
     @available(*, deprecated)
@@ -847,7 +845,7 @@ extension Clients {
       parent: Swift.String,
       dataAttribute: DataAttribute?,
       dataAttributeId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataAttribute>
+    ) async throws -> any GoogleGax.PollableOperation<DataAttribute>
 
     /// See `DataTaxonomyServiceClient.updateDataAttribute`.
     @available(*, deprecated)
@@ -856,15 +854,15 @@ extension Clients {
 
     /// See `DataTaxonomyServiceClient.updateDataAttribute`.
     @available(*, deprecated)
-    func updateDataAttribute(withPolling: UpdateDataAttributeRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DataAttribute>
+    func updateDataAttribute(withPolling: UpdateDataAttributeRequest) async throws -> any GoogleGax
+      .PollableOperation<DataAttribute>
 
     /// See `DataTaxonomyServiceClient.updateDataAttribute`.
     @available(*, deprecated)
     func updateDataAttribute(
       dataAttribute: DataAttribute?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataAttribute>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<DataAttribute>
 
     /// See `DataTaxonomyServiceClient.deleteDataAttribute`.
     @available(*, deprecated)
@@ -873,14 +871,14 @@ extension Clients {
 
     /// See `DataTaxonomyServiceClient.deleteDataAttribute`.
     @available(*, deprecated)
-    func deleteDataAttribute(withPolling: DeleteDataAttributeRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    func deleteDataAttribute(withPolling: DeleteDataAttributeRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
 
     /// See `DataTaxonomyServiceClient.deleteDataAttribute`.
     @available(*, deprecated)
     func deleteDataAttribute(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DataTaxonomyServiceClient.listDataAttributes`.
     @available(*, deprecated)
@@ -967,213 +965,213 @@ extension Clients {
     /// See `DataTaxonomyServiceClient.createDataTaxonomy`.
     @available(*, deprecated)
     func createDataTaxonomy(
-      request: CreateDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataTaxonomyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataTaxonomyServiceClient.createDataTaxonomy`.
     @available(*, deprecated)
     func createDataTaxonomy(
-      withPolling: CreateDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataTaxonomy>
+      withPolling: CreateDataTaxonomyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DataTaxonomy>
 
     /// See `DataTaxonomyServiceClient.updateDataTaxonomy`.
     @available(*, deprecated)
     func updateDataTaxonomy(
-      request: UpdateDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataTaxonomyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataTaxonomyServiceClient.updateDataTaxonomy`.
     @available(*, deprecated)
     func updateDataTaxonomy(
-      withPolling: UpdateDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataTaxonomy>
+      withPolling: UpdateDataTaxonomyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DataTaxonomy>
 
     /// See `DataTaxonomyServiceClient.deleteDataTaxonomy`.
     @available(*, deprecated)
     func deleteDataTaxonomy(
-      request: DeleteDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataTaxonomyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataTaxonomyServiceClient.deleteDataTaxonomy`.
     @available(*, deprecated)
     func deleteDataTaxonomy(
-      withPolling: DeleteDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteDataTaxonomyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DataTaxonomyServiceClient.listDataTaxonomies`.
     @available(*, deprecated)
     func listDataTaxonomies(
-      request: ListDataTaxonomiesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataTaxonomiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListDataTaxonomiesResponse
 
     /// See `DataTaxonomyServiceClient.listDataTaxonomies`.
     @available(*, deprecated)
     func listDataTaxonomies(
-      byItem: ListDataTaxonomiesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDataTaxonomiesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataTaxonomy, Swift.Error>
 
     /// See `DataTaxonomyServiceClient.getDataTaxonomy`.
     @available(*, deprecated)
     func getDataTaxonomy(
-      request: GetDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataTaxonomyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.DataTaxonomy
 
     /// See `DataTaxonomyServiceClient.createDataAttributeBinding`.
     @available(*, deprecated)
     func createDataAttributeBinding(
-      request: CreateDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataAttributeBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataTaxonomyServiceClient.createDataAttributeBinding`.
     @available(*, deprecated)
     func createDataAttributeBinding(
-      withPolling: CreateDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataAttributeBinding>
+      withPolling: CreateDataAttributeBindingRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DataAttributeBinding>
 
     /// See `DataTaxonomyServiceClient.updateDataAttributeBinding`.
     @available(*, deprecated)
     func updateDataAttributeBinding(
-      request: UpdateDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataAttributeBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataTaxonomyServiceClient.updateDataAttributeBinding`.
     @available(*, deprecated)
     func updateDataAttributeBinding(
-      withPolling: UpdateDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataAttributeBinding>
+      withPolling: UpdateDataAttributeBindingRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DataAttributeBinding>
 
     /// See `DataTaxonomyServiceClient.deleteDataAttributeBinding`.
     @available(*, deprecated)
     func deleteDataAttributeBinding(
-      request: DeleteDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataAttributeBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataTaxonomyServiceClient.deleteDataAttributeBinding`.
     @available(*, deprecated)
     func deleteDataAttributeBinding(
-      withPolling: DeleteDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteDataAttributeBindingRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DataTaxonomyServiceClient.listDataAttributeBindings`.
     @available(*, deprecated)
     func listDataAttributeBindings(
-      request: ListDataAttributeBindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataAttributeBindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListDataAttributeBindingsResponse
 
     /// See `DataTaxonomyServiceClient.listDataAttributeBindings`.
     @available(*, deprecated)
     func listDataAttributeBindings(
-      byItem: ListDataAttributeBindingsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDataAttributeBindingsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataAttributeBinding, Swift.Error>
 
     /// See `DataTaxonomyServiceClient.getDataAttributeBinding`.
     @available(*, deprecated)
     func getDataAttributeBinding(
-      request: GetDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataAttributeBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.DataAttributeBinding
 
     /// See `DataTaxonomyServiceClient.createDataAttribute`.
     @available(*, deprecated)
     func createDataAttribute(
-      request: CreateDataAttributeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataAttributeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataTaxonomyServiceClient.createDataAttribute`.
     @available(*, deprecated)
     func createDataAttribute(
-      withPolling: CreateDataAttributeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataAttribute>
+      withPolling: CreateDataAttributeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DataAttribute>
 
     /// See `DataTaxonomyServiceClient.updateDataAttribute`.
     @available(*, deprecated)
     func updateDataAttribute(
-      request: UpdateDataAttributeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataAttributeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataTaxonomyServiceClient.updateDataAttribute`.
     @available(*, deprecated)
     func updateDataAttribute(
-      withPolling: UpdateDataAttributeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataAttribute>
+      withPolling: UpdateDataAttributeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DataAttribute>
 
     /// See `DataTaxonomyServiceClient.deleteDataAttribute`.
     @available(*, deprecated)
     func deleteDataAttribute(
-      request: DeleteDataAttributeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataAttributeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataTaxonomyServiceClient.deleteDataAttribute`.
     @available(*, deprecated)
     func deleteDataAttribute(
-      withPolling: DeleteDataAttributeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteDataAttributeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DataTaxonomyServiceClient.listDataAttributes`.
     @available(*, deprecated)
     func listDataAttributes(
-      request: ListDataAttributesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataAttributesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListDataAttributesResponse
 
     /// See `DataTaxonomyServiceClient.listDataAttributes`.
     @available(*, deprecated)
     func listDataAttributes(
-      byItem: ListDataAttributesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDataAttributesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataAttribute, Swift.Error>
 
     /// See `DataTaxonomyServiceClient.getDataAttribute`.
     @available(*, deprecated)
     func getDataAttribute(
-      request: GetDataAttributeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataAttributeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.DataAttribute
 
     /// See `DataTaxonomyServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `DataTaxonomyServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `DataTaxonomyServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `DataTaxonomyServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `DataTaxonomyServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `DataTaxonomyServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `DataTaxonomyServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `DataTaxonomyServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `DataTaxonomyServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `DataTaxonomyServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1190,26 +1188,26 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func createDataTaxonomy(
-    request: CreateDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDataTaxonomyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
   public func createDataTaxonomy(withPolling: CreateDataTaxonomyRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DataTaxonomy>
+    -> any GoogleGax.PollableOperation<DataTaxonomy>
   {
     try await self.createDataTaxonomy(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func createDataTaxonomy(
-    withPolling: CreateDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataTaxonomy> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataTaxonomy>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateDataTaxonomyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataTaxonomy> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataTaxonomy>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1218,7 +1216,7 @@ extension Clients.DataTaxonomyServiceProtocol {
     parent: Swift.String,
     dataTaxonomy: DataTaxonomy?,
     dataTaxonomyId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataTaxonomy> {
+  ) async throws -> any GoogleGax.PollableOperation<DataTaxonomy> {
     let request = CreateDataTaxonomyRequest().with {
       $0.parent = parent
       $0.dataTaxonomy = dataTaxonomy
@@ -1236,34 +1234,34 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func updateDataTaxonomy(
-    request: UpdateDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDataTaxonomyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
   public func updateDataTaxonomy(withPolling: UpdateDataTaxonomyRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DataTaxonomy>
+    -> any GoogleGax.PollableOperation<DataTaxonomy>
   {
     try await self.updateDataTaxonomy(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func updateDataTaxonomy(
-    withPolling: UpdateDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataTaxonomy> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataTaxonomy>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateDataTaxonomyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataTaxonomy> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataTaxonomy>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   @available(*, deprecated)
   public func updateDataTaxonomy(
     dataTaxonomy: DataTaxonomy?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataTaxonomy> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<DataTaxonomy> {
     let request = UpdateDataTaxonomyRequest().with {
       $0.dataTaxonomy = dataTaxonomy
       $0.updateMask = updateMask
@@ -1280,33 +1278,33 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func deleteDataTaxonomy(
-    request: DeleteDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDataTaxonomyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
   public func deleteDataTaxonomy(withPolling: DeleteDataTaxonomyRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteDataTaxonomy(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func deleteDataTaxonomy(
-    withPolling: DeleteDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteDataTaxonomyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   @available(*, deprecated)
   public func deleteDataTaxonomy(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteDataTaxonomyRequest().with {
       $0.name = name
     }
@@ -1322,9 +1320,9 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func listDataTaxonomies(
-    request: ListDataTaxonomiesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataTaxonomiesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListDataTaxonomiesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1336,13 +1334,13 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func listDataTaxonomies(
-    byItem: ListDataTaxonomiesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataTaxonomiesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataTaxonomy, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListDataTaxonomiesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   @available(*, deprecated)
@@ -1364,9 +1362,9 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func getDataTaxonomy(
-    request: GetDataTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDataTaxonomyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.DataTaxonomy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1388,27 +1386,26 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func createDataAttributeBinding(
-    request: CreateDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDataAttributeBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
   public func createDataAttributeBinding(withPolling: CreateDataAttributeBindingRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<DataAttributeBinding>
+    async throws -> any GoogleGax.PollableOperation<DataAttributeBinding>
   {
     try await self.createDataAttributeBinding(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func createDataAttributeBinding(
-    withPolling: CreateDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataAttributeBinding> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DataAttributeBinding>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateDataAttributeBindingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataAttributeBinding> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataAttributeBinding>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1417,7 +1414,7 @@ extension Clients.DataTaxonomyServiceProtocol {
     parent: Swift.String,
     dataAttributeBinding: DataAttributeBinding?,
     dataAttributeBindingId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataAttributeBinding> {
+  ) async throws -> any GoogleGax.PollableOperation<DataAttributeBinding> {
     let request = CreateDataAttributeBindingRequest().with {
       $0.parent = parent
       $0.dataAttributeBinding = dataAttributeBinding
@@ -1435,35 +1432,34 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func updateDataAttributeBinding(
-    request: UpdateDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDataAttributeBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
   public func updateDataAttributeBinding(withPolling: UpdateDataAttributeBindingRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<DataAttributeBinding>
+    async throws -> any GoogleGax.PollableOperation<DataAttributeBinding>
   {
     try await self.updateDataAttributeBinding(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func updateDataAttributeBinding(
-    withPolling: UpdateDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataAttributeBinding> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DataAttributeBinding>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateDataAttributeBindingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataAttributeBinding> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataAttributeBinding>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   @available(*, deprecated)
   public func updateDataAttributeBinding(
     dataAttributeBinding: DataAttributeBinding?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataAttributeBinding> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<DataAttributeBinding> {
     let request = UpdateDataAttributeBindingRequest().with {
       $0.dataAttributeBinding = dataAttributeBinding
       $0.updateMask = updateMask
@@ -1480,33 +1476,33 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func deleteDataAttributeBinding(
-    request: DeleteDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDataAttributeBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
   public func deleteDataAttributeBinding(withPolling: DeleteDataAttributeBindingRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    async throws -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteDataAttributeBinding(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func deleteDataAttributeBinding(
-    withPolling: DeleteDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteDataAttributeBindingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   @available(*, deprecated)
   public func deleteDataAttributeBinding(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteDataAttributeBindingRequest().with {
       $0.name = name
     }
@@ -1522,9 +1518,9 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func listDataAttributeBindings(
-    request: ListDataAttributeBindingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataAttributeBindingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListDataAttributeBindingsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1536,14 +1532,14 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func listDataAttributeBindings(
-    byItem: ListDataAttributeBindingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataAttributeBindingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataAttributeBinding, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListDataAttributeBindingsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   @available(*, deprecated)
@@ -1565,9 +1561,9 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func getDataAttributeBinding(
-    request: GetDataAttributeBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDataAttributeBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.DataAttributeBinding {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1589,26 +1585,26 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func createDataAttribute(
-    request: CreateDataAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDataAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
   public func createDataAttribute(withPolling: CreateDataAttributeRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DataAttribute>
+    -> any GoogleGax.PollableOperation<DataAttribute>
   {
     try await self.createDataAttribute(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func createDataAttribute(
-    withPolling: CreateDataAttributeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataAttribute> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataAttribute>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateDataAttributeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataAttribute> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataAttribute>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1617,7 +1613,7 @@ extension Clients.DataTaxonomyServiceProtocol {
     parent: Swift.String,
     dataAttribute: DataAttribute?,
     dataAttributeId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataAttribute> {
+  ) async throws -> any GoogleGax.PollableOperation<DataAttribute> {
     let request = CreateDataAttributeRequest().with {
       $0.parent = parent
       $0.dataAttribute = dataAttribute
@@ -1635,34 +1631,34 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func updateDataAttribute(
-    request: UpdateDataAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDataAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
   public func updateDataAttribute(withPolling: UpdateDataAttributeRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DataAttribute>
+    -> any GoogleGax.PollableOperation<DataAttribute>
   {
     try await self.updateDataAttribute(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func updateDataAttribute(
-    withPolling: UpdateDataAttributeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataAttribute> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataAttribute>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateDataAttributeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataAttribute> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataAttribute>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   @available(*, deprecated)
   public func updateDataAttribute(
     dataAttribute: DataAttribute?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataAttribute> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<DataAttribute> {
     let request = UpdateDataAttributeRequest().with {
       $0.dataAttribute = dataAttribute
       $0.updateMask = updateMask
@@ -1679,33 +1675,33 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func deleteDataAttribute(
-    request: DeleteDataAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDataAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
   public func deleteDataAttribute(withPolling: DeleteDataAttributeRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteDataAttribute(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func deleteDataAttribute(
-    withPolling: DeleteDataAttributeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteDataAttributeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   @available(*, deprecated)
   public func deleteDataAttribute(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteDataAttributeRequest().with {
       $0.name = name
     }
@@ -1721,9 +1717,9 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func listDataAttributes(
-    request: ListDataAttributesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataAttributesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListDataAttributesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1735,13 +1731,13 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func listDataAttributes(
-    byItem: ListDataAttributesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataAttributesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataAttribute, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListDataAttributesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   @available(*, deprecated)
@@ -1763,9 +1759,9 @@ extension Clients.DataTaxonomyServiceProtocol {
 
   @available(*, deprecated)
   public func getDataAttribute(
-    request: GetDataAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDataAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.DataAttribute {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1785,9 +1781,9 @@ extension Clients.DataTaxonomyServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -1797,13 +1793,13 @@ extension Clients.DataTaxonomyServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1813,9 +1809,9 @@ extension Clients.DataTaxonomyServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -1825,9 +1821,9 @@ extension Clients.DataTaxonomyServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -1837,9 +1833,9 @@ extension Clients.DataTaxonomyServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -1849,9 +1845,9 @@ extension Clients.DataTaxonomyServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1861,9 +1857,9 @@ extension Clients.DataTaxonomyServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1873,13 +1869,13 @@ extension Clients.DataTaxonomyServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1900,9 +1896,9 @@ extension Clients.DataTaxonomyServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1919,9 +1915,9 @@ extension Clients.DataTaxonomyServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1938,9 +1934,9 @@ extension Clients.DataTaxonomyServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

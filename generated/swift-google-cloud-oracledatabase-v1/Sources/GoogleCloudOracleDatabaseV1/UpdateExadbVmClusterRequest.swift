@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request for `ExadbVmCluster.Update`. We only support adding the
 /// Virtual Machine to the ExadbVmCluster. Rest of the fields in ExadbVmCluster
 /// are immutable.
-public struct UpdateExadbVmClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateExadbVmClusterRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. A mask specifying which fields in th VM Cluster should be
   /// updated. A field specified in the mask is overwritten. If a mask isn't
   /// provided then all the fields in the VM Cluster are overwritten.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Required. The resource being updated.
   public var exadbVmCluster: ExadbVmCluster? = nil
@@ -41,7 +41,7 @@ public struct UpdateExadbVmClusterRequest: Codable, Equatable, GoogleCloudWKT._A
   /// not supported (00000000-0000-0000-0000-000000000000).
   public var requestId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateExadbVmClusterRequest`.
   public init() {}
@@ -78,8 +78,7 @@ public struct UpdateExadbVmClusterRequest: Codable, Equatable, GoogleCloudWKT._A
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.exadbVmCluster = try container.decodeIfPresent(
       ExadbVmCluster.self, forKey: .exadbVmCluster)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .requestId) {
@@ -87,7 +86,7 @@ public struct UpdateExadbVmClusterRequest: Codable, Equatable, GoogleCloudWKT._A
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -104,10 +103,10 @@ public struct UpdateExadbVmClusterRequest: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Files served directly to the user for a given URL, such as images, CSS
 /// stylesheets, or JavaScript source files. Static file handlers describe which
 /// files in the application directory are static files, and which URLs serve
 /// them.
-public struct StaticFilesHandler: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StaticFilesHandler: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Path to the static files matched by the URL pattern, from the
@@ -44,7 +44,7 @@ public struct StaticFilesHandler: Codable, Equatable, GoogleCloudWKT._AnyPackabl
 
   /// Time a static file served by this handler should be cached
   /// by web proxies and browsers.
-  public var expiration: GoogleCloudWKT.Duration? = nil
+  public var expiration: GoogleWKT.Duration? = nil
 
   /// Whether this handler should match the request if the file
   /// referenced by the handler does not exist.
@@ -57,7 +57,7 @@ public struct StaticFilesHandler: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// static data storage resource quotas.
   public var applicationReadable: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StaticFilesHandler`.
   public init() {}
@@ -116,8 +116,7 @@ public struct StaticFilesHandler: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .mimeType) {
       self.mimeType = value
     }
-    self.expiration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .expiration)
+    self.expiration = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .expiration)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .requireMatchingFile) {
       self.requireMatchingFile = value
     }
@@ -126,7 +125,7 @@ public struct StaticFilesHandler: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -147,10 +146,10 @@ public struct StaticFilesHandler: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.StaticFilesHandler"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A BeyondCorp AppGateway resource represents a BeyondCorp protected AppGateway
 /// to a remote application. It creates all the necessary GCP components needed
 /// for creating a BeyondCorp protected AppGateway. Multiple connectors can be
 /// authorised for a single AppGateway.
-public struct AppGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AppGateway: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Unique resource name of the AppGateway.
@@ -29,10 +29,10 @@ public struct AppGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. Timestamp when the resource was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Timestamp when the resource was last modified.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Resource labels to represent user provided metadata.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -60,7 +60,7 @@ public struct AppGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Required. The type of hosting used by the AppGateway.
   public var hostType: AppGateway.HostType = AppGateway.HostType()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AppGateway`.
   public init() {}
@@ -116,10 +116,8 @@ public struct AppGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -149,7 +147,7 @@ public struct AppGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -172,7 +170,7 @@ public struct AppGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Allocated connection of the AppGateway.
-  public struct AllocatedConnection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AllocatedConnection: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The PSC uri of an allocated connection
@@ -181,7 +179,7 @@ public struct AppGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Required. The ingress port of an allocated connection
     public var ingressPort: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AllocatedConnection`.
     public init() {}
@@ -224,7 +222,7 @@ public struct AppGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -241,11 +239,11 @@ public struct AppGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.beyondcorp.appgateways.v1.AppGateway.AllocatedConnection"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -577,10 +575,10 @@ public struct AppGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.beyondcorp.appgateways.v1.AppGateway"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

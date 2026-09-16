@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metadata for ImportEntities operations.
-public struct ImportEntitiesMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ImportEntitiesMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Metadata common to all Datastore Admin operations.
@@ -41,7 +41,7 @@ public struct ImportEntitiesMetadata: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// [google.datastore.admin.v1.ExportEntitiesResponse.output_url]: <doc:ExportEntitiesResponse/outputUrl>
   public var inputUrl: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ImportEntitiesMetadata`.
   public init() {}
@@ -91,7 +91,7 @@ public struct ImportEntitiesMetadata: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -110,10 +110,10 @@ public struct ImportEntitiesMetadata: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.datastore.admin.v1.ImportEntitiesMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

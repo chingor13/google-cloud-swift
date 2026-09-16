@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A condition for determining whether a transformation should be applied to
 /// a field.
-public struct RecordCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RecordCondition: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// An expression.
   public var expressions: RecordCondition.Expressions? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RecordCondition`.
   public init() {}
@@ -62,7 +62,7 @@ public struct RecordCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       RecordCondition.Expressions.self, forKey: .expressions)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -93,7 +93,7 @@ public struct RecordCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// If we fail to compare do to type mismatch, a warning will be given and
   /// the condition will evaluate to false.
-  public struct Condition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Condition: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Field within the record this condition is evaluated against.
@@ -105,7 +105,7 @@ public struct RecordCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Value to compare against. [Mandatory, except for `EXISTS` tests.]
     public var value: Value? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Condition`.
     public init() {}
@@ -149,7 +149,7 @@ public struct RecordCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.value = try container.decodeIfPresent(Value.self, forKey: .value)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -166,22 +166,22 @@ public struct RecordCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.RecordCondition.Condition"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A collection of conditions.
-  public struct Conditions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Conditions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A collection of conditions.
     public var conditions: [RecordCondition.Condition] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Conditions`.
     public init() {}
@@ -221,7 +221,7 @@ public struct RecordCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -236,16 +236,16 @@ public struct RecordCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.RecordCondition.Conditions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// An expression, consisting of an operator and conditions.
-  public struct Expressions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Expressions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The operator to apply to the result of conditions. Default and currently
@@ -256,7 +256,7 @@ public struct RecordCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Expression types.
     public var type: OneOf_Type? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Expressions`.
     public init() {}
@@ -315,7 +315,7 @@ public struct RecordCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.type = type
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -441,21 +441,21 @@ public struct RecordCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.RecordCondition.Expressions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.RecordCondition"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleBigQueryMigrationV2
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(
   client: MigrationServiceClient, projectId: String, locationId: String, workflowId: String

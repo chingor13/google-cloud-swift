@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudGax
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleGax
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The response for
 /// [google.datastore.admin.v1.DatastoreAdmin.ListIndexes][google.datastore.admin.v1.DatastoreAdmin.ListIndexes].
 ///
 /// [google.datastore.admin.v1.DatastoreAdmin.ListIndexes]: <doc:DatastoreAdminClient/listIndexes(request:options:)>
-public struct ListIndexesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
-  GoogleCloudGax._PaginatedResponse,
+public struct ListIndexesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
+  GoogleGax._PaginatedResponse,
   Sendable
 {
   /// The indexes.
@@ -32,7 +32,7 @@ public struct ListIndexesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// The standard List next-page token.
   public var nextPageToken: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListIndexesResponse`.
   public init() {}
@@ -75,7 +75,7 @@ public struct ListIndexesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -91,11 +91,11 @@ public struct ListIndexesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.datastore.admin.v1.ListIndexesResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 
   public func _getPaginatedItems() -> [Index] {

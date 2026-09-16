@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudGax
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleGax
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The response returned from the [ListConstraints]
 /// [google.cloud.orgpolicy.v2.OrgPolicy.ListConstraints] method.
-public struct ListConstraintsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
-  GoogleCloudGax._PaginatedResponse,
+public struct ListConstraintsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
+  GoogleGax._PaginatedResponse,
   Sendable
 {
   /// The collection of constraints that are available on the targeted resource.
@@ -30,7 +30,7 @@ public struct ListConstraintsResponse: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// Page token used to retrieve the next page. This is currently not used.
   public var nextPageToken: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListConstraintsResponse`.
   public init() {}
@@ -73,7 +73,7 @@ public struct ListConstraintsResponse: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -89,11 +89,11 @@ public struct ListConstraintsResponse: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.orgpolicy.v2.ListConstraintsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 
   public func _getPaginatedItems() -> [Constraint] {

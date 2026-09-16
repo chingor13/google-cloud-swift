@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudGax
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleGax
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for
 /// [AgentService.ListConversations][google.cloud.ces.v1.AgentService.ListConversations].
 ///
 /// [google.cloud.ces.v1.AgentService.ListConversations]: <doc:AgentServiceClient/listConversations(request:options:)>
-public struct ListConversationsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
-  GoogleCloudGax._PaginatedResponse,
+public struct ListConversationsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
+  GoogleGax._PaginatedResponse,
   Sendable
 {
   /// The list of conversations.
@@ -37,7 +37,7 @@ public struct ListConversationsResponse: Codable, Equatable, GoogleCloudWKT._Any
   /// [google.cloud.ces.v1.ListConversationsRequest.page_token]: <doc:ListConversationsRequest/pageToken>
   public var nextPageToken: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListConversationsResponse`.
   public init() {}
@@ -80,7 +80,7 @@ public struct ListConversationsResponse: Codable, Equatable, GoogleCloudWKT._Any
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,11 +96,11 @@ public struct ListConversationsResponse: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.ListConversationsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 
   public func _getPaginatedItems() -> [Conversation] {

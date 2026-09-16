@@ -15,176 +15,176 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DataCatalogStub: Sendable {
     func searchCatalog(
-      request: SearchCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.SearchCatalogResponse
 
     func createEntryGroup(
-      request: CreateEntryGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntryGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.EntryGroup
 
     func getEntryGroup(
-      request: GetEntryGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntryGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.EntryGroup
 
     func updateEntryGroup(
-      request: UpdateEntryGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEntryGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.EntryGroup
 
     func deleteEntryGroup(
-      request: DeleteEntryGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntryGroupRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listEntryGroups(
-      request: ListEntryGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntryGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.ListEntryGroupsResponse
 
     func createEntry(
-      request: CreateEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.Entry
 
     func updateEntry(
-      request: UpdateEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.Entry
 
     func deleteEntry(
-      request: DeleteEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntryRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getEntry(
-      request: GetEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.Entry
 
     func lookupEntry(
-      request: LookupEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.Entry
 
     func listEntries(
-      request: ListEntriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.ListEntriesResponse
 
     func modifyEntryOverview(
-      request: ModifyEntryOverviewRequest, options: GoogleCloudGax.RequestOptions
+      request: ModifyEntryOverviewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.EntryOverview
 
     func modifyEntryContacts(
-      request: ModifyEntryContactsRequest, options: GoogleCloudGax.RequestOptions
+      request: ModifyEntryContactsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.Contacts
 
     func createTagTemplate(
-      request: CreateTagTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTagTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.TagTemplate
 
     func getTagTemplate(
-      request: GetTagTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTagTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.TagTemplate
 
     func updateTagTemplate(
-      request: UpdateTagTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTagTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.TagTemplate
 
     func deleteTagTemplate(
-      request: DeleteTagTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTagTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createTagTemplateField(
-      request: CreateTagTemplateFieldRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTagTemplateFieldRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.TagTemplateField
 
     func updateTagTemplateField(
-      request: UpdateTagTemplateFieldRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTagTemplateFieldRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.TagTemplateField
 
     func renameTagTemplateField(
-      request: RenameTagTemplateFieldRequest, options: GoogleCloudGax.RequestOptions
+      request: RenameTagTemplateFieldRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.TagTemplateField
 
     func renameTagTemplateFieldEnumValue(
-      request: RenameTagTemplateFieldEnumValueRequest, options: GoogleCloudGax.RequestOptions
+      request: RenameTagTemplateFieldEnumValueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.TagTemplateField
 
     func deleteTagTemplateField(
-      request: DeleteTagTemplateFieldRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTagTemplateFieldRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createTag(
-      request: CreateTagRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTagRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.Tag
 
     func updateTag(
-      request: UpdateTagRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTagRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.Tag
 
     func deleteTag(
-      request: DeleteTagRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTagRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listTags(
-      request: ListTagsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTagsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.ListTagsResponse
 
     func reconcileTags(
-      request: ReconcileTagsRequest, options: GoogleCloudGax.RequestOptions
+      request: ReconcileTagsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func starEntry(
-      request: StarEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: StarEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.StarEntryResponse
 
     func unstarEntry(
-      request: UnstarEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: UnstarEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.UnstarEntryResponse
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func importEntries(
-      request: ImportEntriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportEntriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func setConfig(
-      request: SetConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: SetConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.MigrationConfig
 
     func retrieveConfig(
-      request: RetrieveConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: RetrieveConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.OrganizationConfig
 
     func retrieveEffectiveConfig(
-      request: RetrieveEffectiveConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: RetrieveEffectiveConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.MigrationConfig
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -16,17 +16,17 @@
 
 #if ReliabilityRisks
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ReliabilityRisksStub: Sendable {
       func `get`(
-        request: ReliabilityRisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReliabilityRisksClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReliabilityRisk
 
       func list(
-        request: ReliabilityRisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReliabilityRisksClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReliabilityRisksListResponse
     }
   }

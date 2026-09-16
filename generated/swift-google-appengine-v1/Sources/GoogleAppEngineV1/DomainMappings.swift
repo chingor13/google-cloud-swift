@@ -18,21 +18,21 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Manages domains serving an application.
 ///
 /// @Snippet(path: "DomainMappingsQuickstart")
 public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendable {
   let inner: any Clients.DomainMappingsStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `DomainMappingsClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DomainMappingsStub = try Clients.DomainMappingsTransport(options)
     inner = Clients.DomainMappingsRetry(inner, options: options)
     if let logger = options.logger {
@@ -47,7 +47,7 @@ public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendabl
   ///
   /// @Snippet(path: "DomainMappings_ListDomainMappings")
   public func listDomainMappings(
-    request: ListDomainMappingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDomainMappingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.ListDomainMappingsResponse {
     try await self.inner.listDomainMappings(request: request, options: options)
   }
@@ -56,7 +56,7 @@ public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendabl
   ///
   /// @Snippet(path: "DomainMappings_ListDomainMappings")
   public func listDomainMappings(
-    byItem: ListDomainMappingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDomainMappingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DomainMapping, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleAppEngineV1.ListDomainMappingsResponse in
@@ -64,14 +64,14 @@ public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendabl
       request.pageToken = token
       return try await self.listDomainMappings(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the specified domain mapping.
   ///
   /// @Snippet(path: "DomainMappings_GetDomainMapping")
   public func getDomainMapping(
-    request: GetDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDomainMappingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.DomainMapping {
     try await self.inner.getDomainMapping(request: request, options: options)
   }
@@ -82,7 +82,7 @@ public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendabl
   ///
   /// @Snippet(path: "DomainMappings_CreateDomainMapping")
   public func createDomainMapping(
-    request: CreateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDomainMappingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createDomainMapping(request: request, options: options)
   }
@@ -93,21 +93,21 @@ public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendabl
   ///
   /// @Snippet(path: "DomainMappings_CreateDomainMapping")
   public func createDomainMapping(
-    withPolling: CreateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DomainMapping> {
+    withPolling: CreateDomainMappingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DomainMapping> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DomainMapping>.State in
+        -> GoogleGax._PollableOperationImpl<DomainMapping>.State in
       return try op._extractStatus(DomainMapping.self)
     }
     let rawOp = try await self.createDomainMapping(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DomainMapping>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DomainMapping>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -122,7 +122,7 @@ public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendabl
   ///
   /// @Snippet(path: "DomainMappings_UpdateDomainMapping")
   public func updateDomainMapping(
-    request: UpdateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDomainMappingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateDomainMapping(request: request, options: options)
   }
@@ -134,21 +134,21 @@ public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendabl
   ///
   /// @Snippet(path: "DomainMappings_UpdateDomainMapping")
   public func updateDomainMapping(
-    withPolling: UpdateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DomainMapping> {
+    withPolling: UpdateDomainMappingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DomainMapping> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DomainMapping>.State in
+        -> GoogleGax._PollableOperationImpl<DomainMapping>.State in
       return try op._extractStatus(DomainMapping.self)
     }
     let rawOp = try await self.updateDomainMapping(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DomainMapping>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DomainMapping>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -162,7 +162,7 @@ public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendabl
   ///
   /// @Snippet(path: "DomainMappings_DeleteDomainMapping")
   public func deleteDomainMapping(
-    request: DeleteDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDomainMappingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteDomainMapping(request: request, options: options)
   }
@@ -173,21 +173,21 @@ public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendabl
   ///
   /// @Snippet(path: "DomainMappings_DeleteDomainMapping")
   public func deleteDomainMapping(
-    withPolling: DeleteDomainMappingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteDomainMappingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteDomainMapping(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -201,7 +201,7 @@ public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendabl
   ///
   /// @Snippet(path: "DomainMappings_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -212,7 +212,7 @@ public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendabl
   ///
   /// @Snippet(path: "DomainMappings_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -220,7 +220,7 @@ public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendabl
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -229,7 +229,7 @@ public final class DomainMappingsClient: Clients.DomainMappingsProtocol, Sendabl
   ///
   /// @Snippet(path: "DomainMappings_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -260,24 +260,24 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `DomainMappingsClient.createDomainMapping`.
-    func createDomainMapping(withPolling: CreateDomainMappingRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DomainMapping>
+    func createDomainMapping(withPolling: CreateDomainMappingRequest) async throws -> any GoogleGax
+      .PollableOperation<DomainMapping>
 
     /// See `DomainMappingsClient.updateDomainMapping`.
     func updateDomainMapping(request: UpdateDomainMappingRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `DomainMappingsClient.updateDomainMapping`.
-    func updateDomainMapping(withPolling: UpdateDomainMappingRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DomainMapping>
+    func updateDomainMapping(withPolling: UpdateDomainMappingRequest) async throws -> any GoogleGax
+      .PollableOperation<DomainMapping>
 
     /// See `DomainMappingsClient.deleteDomainMapping`.
     func deleteDomainMapping(request: DeleteDomainMappingRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `DomainMappingsClient.deleteDomainMapping`.
-    func deleteDomainMapping(withPolling: DeleteDomainMappingRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    func deleteDomainMapping(withPolling: DeleteDomainMappingRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
 
     /// See `DomainMappingsClient.listOperations`.
     func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -296,57 +296,57 @@ extension Clients {
 
     /// See `DomainMappingsClient.listDomainMappings`.
     func listDomainMappings(
-      request: ListDomainMappingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDomainMappingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.ListDomainMappingsResponse
 
     /// See `DomainMappingsClient.listDomainMappings`.
     func listDomainMappings(
-      byItem: ListDomainMappingsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDomainMappingsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DomainMapping, Swift.Error>
 
     /// See `DomainMappingsClient.getDomainMapping`.
     func getDomainMapping(
-      request: GetDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDomainMappingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.DomainMapping
 
     /// See `DomainMappingsClient.createDomainMapping`.
     func createDomainMapping(
-      request: CreateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDomainMappingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DomainMappingsClient.createDomainMapping`.
     func createDomainMapping(
-      withPolling: CreateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DomainMapping>
+      withPolling: CreateDomainMappingRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DomainMapping>
 
     /// See `DomainMappingsClient.updateDomainMapping`.
     func updateDomainMapping(
-      request: UpdateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDomainMappingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DomainMappingsClient.updateDomainMapping`.
     func updateDomainMapping(
-      withPolling: UpdateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DomainMapping>
+      withPolling: UpdateDomainMappingRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DomainMapping>
 
     /// See `DomainMappingsClient.deleteDomainMapping`.
     func deleteDomainMapping(
-      request: DeleteDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDomainMappingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DomainMappingsClient.deleteDomainMapping`.
     func deleteDomainMapping(
-      withPolling: DeleteDomainMappingRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteDomainMappingRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DomainMappingsClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `DomainMappingsClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
   }
 }
@@ -360,9 +360,9 @@ extension Clients.DomainMappingsProtocol {
   }
 
   public func listDomainMappings(
-    request: ListDomainMappingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDomainMappingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.ListDomainMappingsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDomainMappings(
@@ -372,13 +372,13 @@ extension Clients.DomainMappingsProtocol {
   }
 
   public func listDomainMappings(
-    byItem: ListDomainMappingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDomainMappingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DomainMapping, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleAppEngineV1.ListDomainMappingsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getDomainMapping(request: GetDomainMappingRequest) async throws
@@ -388,9 +388,9 @@ extension Clients.DomainMappingsProtocol {
   }
 
   public func getDomainMapping(
-    request: GetDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDomainMappingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.DomainMapping {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDomainMapping(request: CreateDomainMappingRequest) async throws
@@ -400,24 +400,24 @@ extension Clients.DomainMappingsProtocol {
   }
 
   public func createDomainMapping(
-    request: CreateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDomainMappingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDomainMapping(withPolling: CreateDomainMappingRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DomainMapping>
+    -> any GoogleGax.PollableOperation<DomainMapping>
   {
     try await self.createDomainMapping(withPolling: withPolling, options: .init())
   }
 
   public func createDomainMapping(
-    withPolling: CreateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DomainMapping> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DomainMapping>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateDomainMappingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DomainMapping> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DomainMapping>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -428,24 +428,24 @@ extension Clients.DomainMappingsProtocol {
   }
 
   public func updateDomainMapping(
-    request: UpdateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDomainMappingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateDomainMapping(withPolling: UpdateDomainMappingRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DomainMapping>
+    -> any GoogleGax.PollableOperation<DomainMapping>
   {
     try await self.updateDomainMapping(withPolling: withPolling, options: .init())
   }
 
   public func updateDomainMapping(
-    withPolling: UpdateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DomainMapping> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DomainMapping>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateDomainMappingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DomainMapping> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DomainMapping>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -456,24 +456,24 @@ extension Clients.DomainMappingsProtocol {
   }
 
   public func deleteDomainMapping(
-    request: DeleteDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDomainMappingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteDomainMapping(withPolling: DeleteDomainMappingRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteDomainMapping(withPolling: withPolling, options: .init())
   }
 
   public func deleteDomainMapping(
-    withPolling: DeleteDomainMappingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteDomainMappingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -484,9 +484,9 @@ extension Clients.DomainMappingsProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -496,13 +496,13 @@ extension Clients.DomainMappingsProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -523,9 +523,9 @@ extension Clients.DomainMappingsProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

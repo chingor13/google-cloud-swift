@@ -16,21 +16,21 @@
 
 #if SqlOperationsService
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SqlOperationsServiceStub: Sendable {
       func `get`(
-        request: SqlOperationsGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlOperationsGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func list(
-        request: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlOperationsListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.OperationsListResponse
 
       func cancel(
-        request: SqlOperationsCancelRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlOperationsCancelRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

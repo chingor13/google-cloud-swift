@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a Workload Manager Evaluation configuration.
 /// An Evaluation defines a set of rules to be validated against a scope
 /// of Cloud resources.
-public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Evaluation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Name of resource that has the form
@@ -42,10 +42,10 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var resourceStatus: ResourceStatus? = nil
 
   /// Output only. [Output only] Create time stamp.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. [Output only] Update time stamp.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Labels as key value pairs.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -77,7 +77,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The key will be used for CMEK encryption of the evaluation resource.
   public var kmsKey: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Evaluation`.
   public init() {}
@@ -147,10 +147,8 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     self.resourceStatus = try container.decodeIfPresent(
       ResourceStatus.self, forKey: .resourceStatus)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -171,7 +169,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -310,10 +308,10 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.workloadmanager.v1.Evaluation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

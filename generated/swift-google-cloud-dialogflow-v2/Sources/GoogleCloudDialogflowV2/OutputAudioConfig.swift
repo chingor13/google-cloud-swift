@@ -16,12 +16,12 @@
 
 #if Participants || Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Instructs the speech synthesizer on how to generate the output audio content.
   /// If this audio config is supplied in a request, it overrides all existing
   /// text-to-speech settings applied to the agent.
-  public struct OutputAudioConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct OutputAudioConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Audio encoding of the synthesized audio content.
@@ -37,7 +37,7 @@
     /// Configuration of how speech should be synthesized.
     public var synthesizeSpeechConfig: SynthesizeSpeechConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `OutputAudioConfig`.
     public init() {}
@@ -85,7 +85,7 @@
         SynthesizeSpeechConfig.self, forKey: .synthesizeSpeechConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -102,11 +102,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.OutputAudioConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

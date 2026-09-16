@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudRecommenderV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: RecommenderClient, parent: String) async throws {
   let items = try client.listRecommendations(

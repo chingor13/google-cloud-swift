@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleGrafeasV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: GrafeasClient, projectId: String, occurrenceId: String) async throws {
   try await client.deleteOccurrence(

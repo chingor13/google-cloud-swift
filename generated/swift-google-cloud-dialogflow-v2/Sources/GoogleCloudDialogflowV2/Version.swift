@@ -16,7 +16,7 @@
 
 #if Versions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// You can create multiple versions of your agent and publish them to separate
   /// environments.
@@ -36,7 +36,7 @@
   ///
   /// For more information, see the [versions and environments
   /// guide](https://cloud.google.com/dialogflow/docs/agents-versions).
-  public struct Version: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Version: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The unique identifier of this agent version.
@@ -56,13 +56,13 @@
 
     /// Output only. The creation time of this version. This field is read-only,
     /// i.e., it cannot be set by create and update methods.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. The status of this version. This field is read-only and cannot
     /// be set by create and update methods.
     public var status: Version.VersionStatus = Version.VersionStatus()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Version`.
     public init() {}
@@ -112,14 +112,13 @@
       if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .versionNumber) {
         self.versionNumber = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
       if let value = try container.decodeIfPresent(Version.VersionStatus.self, forKey: .status) {
         self.status = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -250,11 +249,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Version"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

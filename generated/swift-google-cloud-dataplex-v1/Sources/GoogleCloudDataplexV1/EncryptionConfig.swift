@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Resource designed to manage encryption configurations for customers to
 /// support Customer Managed Encryption Keys (CMEK).
-public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EncryptionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the EncryptionConfig.
@@ -34,10 +34,10 @@ public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var key: Swift.String = Swift.String()
 
   /// Output only. The time when the Encryption configuration was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the Encryption configuration was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The state of encryption of the databases.
   public var encryptionState: EncryptionConfig.EncryptionState = EncryptionConfig.EncryptionState()
@@ -51,7 +51,7 @@ public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Represent the state of CMEK opt-in for metastore.
   public var enableMetastoreEncryption: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EncryptionConfig`.
   public init() {}
@@ -104,10 +104,8 @@ public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .key) {
       self.key = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(
       EncryptionConfig.EncryptionState.self, forKey: .encryptionState)
     {
@@ -125,7 +123,7 @@ public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -145,7 +143,7 @@ public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Details of the failure if anything related to Cmek db fails.
-  public struct FailureDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FailureDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The error code for the failure.
@@ -156,7 +154,7 @@ public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// error code is REQUIRE_USER_ACTION.
     public var errorMessage: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FailureDetails`.
     public init() {}
@@ -201,7 +199,7 @@ public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -322,11 +320,11 @@ public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.EncryptionConfig.FailureDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -450,10 +448,10 @@ public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.EncryptionConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

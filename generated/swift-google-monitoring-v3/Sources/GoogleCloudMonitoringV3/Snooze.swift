@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A `Snooze` will prevent any alerts from being opened, and close any that
 /// are already open. The `Snooze` will work on alerts that match the
 /// criteria defined in the `Snooze`. The `Snooze` will be active from
 /// `interval.start_time` through `interval.end_time`.
-public struct Snooze: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Snooze: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Identifier. The name of the `Snooze`. The format is:
@@ -46,7 +46,7 @@ public struct Snooze: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// unicode characters.
   public var displayName: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Snooze`.
   public init() {}
@@ -95,7 +95,7 @@ public struct Snooze: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -113,7 +113,7 @@ public struct Snooze: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Criteria specific to the `AlertPolicy`s that this `Snooze` applies to. The
   /// `Snooze` will suppress alerts that come from one of the `AlertPolicy`s
   /// whose names are supplied.
-  public struct Criteria: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Criteria: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The specific `AlertPolicy` names for the alert that should be snoozed.
@@ -143,7 +143,7 @@ public struct Snooze: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     ///     resource.labels.zone="us-central1-a"
     public var filter: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Criteria`.
     public init() {}
@@ -186,7 +186,7 @@ public struct Snooze: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -202,21 +202,21 @@ public struct Snooze: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.Snooze.Criteria"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.Snooze"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

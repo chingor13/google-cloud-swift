@@ -16,12 +16,12 @@
 
 #if VpnGateways
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A VPN connection contains all VPN tunnels connected from this VpnGateway
   /// to the same peer gateway. The peer gateway could either be an external VPN
   /// gateway or a Google Cloud VPN gateway.
-  public struct VpnGatewayStatusVpnConnection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct VpnGatewayStatusVpnConnection: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. URL reference to the peer external VPN gateways to which the VPN tunnels
@@ -40,7 +40,7 @@
     /// List of VPN tunnels that are in this VPN connection.
     public var tunnels: [VpnGatewayStatusTunnel] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `VpnGatewayStatusVpnConnection`.
     public init() {}
@@ -91,7 +91,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -109,11 +109,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.VpnGatewayStatusVpnConnection"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The CCAI Insights project wide settings.
 /// Use these settings to configure the behavior of Insights.
@@ -23,7 +23,7 @@ import Foundation
 /// [`getsettings`](https://cloud.google.com/contact-center/insights/docs/reference/rest/v1/projects.locations/getSettings)
 /// and change the settings with
 /// [`updateSettings`](https://cloud.google.com/contact-center/insights/docs/reference/rest/v1/projects.locations/updateSettings).
-public struct Settings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Settings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Immutable. The resource name of the settings resource.
@@ -32,10 +32,10 @@ public struct Settings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The time at which the settings was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time at which the settings were last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// A language code to be applied to each transcript segment unless the segment
   /// already specifies a language code. Language code defaults to "en-US" if it
@@ -46,7 +46,7 @@ public struct Settings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// specified expiration, that value will be used instead. Changing this
   /// value will not change the expiration of existing conversations.
   /// Conversations with no expire time persist until they are deleted.
-  public var conversationTtl: GoogleCloudWKT.Duration? = nil
+  public var conversationTtl: GoogleWKT.Duration? = nil
 
   /// A map that maps a notification trigger to a Pub/Sub topic. Each time a
   /// specified trigger occurs, Insights will notify the corresponding Pub/Sub
@@ -84,7 +84,7 @@ public struct Settings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Platform.
   public var speechConfig: SpeechConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Settings`.
   public init() {}
@@ -136,15 +136,13 @@ public struct Settings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .languageCode) {
       self.languageCode = value
     }
     self.conversationTtl = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .conversationTtl)
+      GoogleWKT.Duration.self, forKey: .conversationTtl)
     if let value = try container.decodeIfPresent(
       [Swift.String: Swift.String].self, forKey: .pubsubNotificationSettings)
     {
@@ -157,7 +155,7 @@ public struct Settings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.speechConfig = try container.decodeIfPresent(SpeechConfig.self, forKey: .speechConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -178,7 +176,7 @@ public struct Settings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Default configuration when creating Analyses in Insights.
-  public struct AnalysisConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AnalysisConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Percentage of conversations created using Dialogflow runtime integration
@@ -193,7 +191,7 @@ public struct Settings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// (if any). If not specified, all annotators will be run.
     public var annotatorSelector: AnnotatorSelector? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AnalysisConfig`.
     public init() {}
@@ -246,7 +244,7 @@ public struct Settings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         AnnotatorSelector.self, forKey: .annotatorSelector)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -265,21 +263,21 @@ public struct Settings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.contactcenterinsights.v1.Settings.AnalysisConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.Settings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

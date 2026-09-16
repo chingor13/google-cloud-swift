@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// PullRequestComment represents a comment on a pull request.
-public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PullRequestComment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Unique identifier for the pull request comment. The comment id
@@ -27,16 +27,16 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public var name: Swift.String = Swift.String()
 
   /// Output only. Creation timestamp.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Last updated timestamp.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// The comment detail. A comment can be a review, a general comment, or a
   /// code comment.
   public var commentDetail: OneOf_CommentDetail? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PullRequestComment`.
   public init() {}
@@ -82,10 +82,8 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
 
     var commentDetail: OneOf_CommentDetail? = nil
     let commentDetailCheckAndSet = {
@@ -112,7 +110,7 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     self.commentDetail = commentDetail
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -138,7 +136,7 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   }
 
   /// The review summary comment.
-  public struct Review: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Review: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The review action type.
@@ -151,7 +149,7 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// Output only. The effective commit sha this review is pointing to.
     public var effectiveCommitSha: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Review`.
     public init() {}
@@ -201,7 +199,7 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -330,22 +328,22 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securesourcemanager.v1.PullRequestComment.Review"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The general pull request comment.
-  public struct Comment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Comment: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The comment body.
     public var body: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Comment`.
     public init() {}
@@ -383,7 +381,7 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -398,16 +396,16 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securesourcemanager.v1.PullRequestComment.Comment"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The comment on a code line.
-  public struct Code: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Code: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The comment body.
@@ -430,7 +428,7 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// Output only. The effective commit sha this code comment is pointing to.
     public var effectiveCommitSha: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Code`.
     public init() {}
@@ -493,7 +491,7 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -513,16 +511,16 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securesourcemanager.v1.PullRequestComment.Code"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The position of the code comment.
-  public struct Position: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Position: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The path of the file.
@@ -532,7 +530,7 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// the new side of the diff, negative value means it's on the old side.
     public var line: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Position`.
     public init() {}
@@ -575,7 +573,7 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -591,11 +589,11 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securesourcemanager.v1.PullRequestComment.Position"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -613,10 +611,10 @@ public struct PullRequestComment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securesourcemanager.v1.PullRequestComment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

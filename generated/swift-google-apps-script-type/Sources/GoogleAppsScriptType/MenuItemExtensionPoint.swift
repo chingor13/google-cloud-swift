@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Common format for declaring a  menu item, or button, that appears within a
 /// host app.
-public struct MenuItemExtensionPoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MenuItemExtensionPoint: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The endpoint to execute when this extension point is
@@ -35,7 +35,7 @@ public struct MenuItemExtensionPoint: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// If not set, defaults to the add-on's primary logo URL.
   public var logoUrl: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MenuItemExtensionPoint`.
   public init() {}
@@ -83,7 +83,7 @@ public struct MenuItemExtensionPoint: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -100,10 +100,10 @@ public struct MenuItemExtensionPoint: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.apps.script.type.MenuItemExtensionPoint"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

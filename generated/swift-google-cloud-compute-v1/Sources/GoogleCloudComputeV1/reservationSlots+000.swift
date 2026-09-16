@@ -19,19 +19,19 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `reservationSlots` resource.
   ///
   /// @Snippet(path: "reservationSlotsQuickstart")
   public final class ReservationSlotsClient: Clients.ReservationSlotsProtocol, Sendable {
     let inner: any Clients.ReservationSlotsStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `ReservationSlotsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.ReservationSlotsStub = try Clients.ReservationSlotsTransport(options)
       inner = Clients.ReservationSlotsRetry(inner, options: options)
       if let logger = options.logger {
@@ -46,7 +46,7 @@
     ///
     /// @Snippet(path: "reservationSlots_get")
     public func `get`(
-      request: ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -55,7 +55,7 @@
     ///
     /// @Snippet(path: "reservationSlots_getHealth")
     public func getHealth(
-      request: ReservationSlotsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.GetHealthRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.getHealth(request: request, options: options)
     }
@@ -64,18 +64,18 @@
     ///
     /// @Snippet(path: "reservationSlots_getHealth")
     public func getHealth(
-      withPolling: ReservationSlotsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: ReservationSlotsClient.GetHealthRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -83,8 +83,7 @@
       let rawOp = try await self.getHealth(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -93,7 +92,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -105,7 +104,7 @@
     ///
     /// @Snippet(path: "reservationSlots_getVersion")
     public func getVersion(
-      request: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.GetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.getVersion(request: request, options: options)
     }
@@ -114,18 +113,18 @@
     ///
     /// @Snippet(path: "reservationSlots_getVersion")
     public func getVersion(
-      withPolling: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: ReservationSlotsClient.GetVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -133,8 +132,7 @@
       let rawOp = try await self.getVersion(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -143,7 +141,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -155,7 +153,7 @@
     ///
     /// @Snippet(path: "reservationSlots_list")
     public func list(
-      request: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse {
       try await self.inner.list(request: request, options: options)
     }
@@ -164,7 +162,7 @@
     ///
     /// @Snippet(path: "reservationSlots_list")
     public func list(
-      byItem: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ReservationSlotsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ReservationSlot, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse in
@@ -172,14 +170,14 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Update a reservation slot in the specified sub-block.
     ///
     /// @Snippet(path: "reservationSlots_update")
     public func update(
-      request: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.UpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.update(request: request, options: options)
     }
@@ -188,18 +186,18 @@
     ///
     /// @Snippet(path: "reservationSlots_update")
     public func update(
-      withPolling: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: ReservationSlotsClient.UpdateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -207,8 +205,7 @@
       let rawOp = try await self.update(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -217,7 +214,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -229,7 +226,7 @@
     ///
     /// @Snippet(path: "reservationSlots_getOperation")
     func getOperation(
-      request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -284,32 +281,32 @@
 
       /// See `ReservationSlotsClient.`get``.
       func `get`(
-        request: ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse
 
       /// See `ReservationSlotsClient.getHealth`.
       func getHealth(
-        request: ReservationSlotsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetHealthRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `ReservationSlotsClient.getVersion`.
       func getVersion(
-        request: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `ReservationSlotsClient.list`.
       func list(
-        request: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse
 
       /// See `ReservationSlotsClient.list`.
       func list(
-        byItem: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ReservationSlotsClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<ReservationSlot, Swift.Error>
 
       /// See `ReservationSlotsClient.update`.
       func update(
-        request: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
@@ -323,9 +320,9 @@
     }
 
     public func `get`(
-      request: ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -350,26 +347,25 @@
     }
 
     public func getHealth(
-      request: ReservationSlotsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.GetHealthRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getHealth(
       withPolling: ReservationSlotsClient.GetHealthRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.getHealth(withPolling: withPolling, options: .init())
     }
 
     public func getHealth(
-      withPolling: ReservationSlotsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: ReservationSlotsClient.GetHealthRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -378,7 +374,7 @@
       zone: Swift.String,
       parentName: Swift.String,
       reservationSlot: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = ReservationSlotsClient.GetHealthRequest().with {
         $0.project = project
         $0.zone = zone
@@ -395,26 +391,25 @@
     }
 
     public func getVersion(
-      request: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.GetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getVersion(
       withPolling: ReservationSlotsClient.GetVersionRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.getVersion(withPolling: withPolling, options: .init())
     }
 
     public func getVersion(
-      withPolling: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: ReservationSlotsClient.GetVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -424,7 +419,7 @@
       parentName: Swift.String,
       reservationSlot: Swift.String,
       body: ReservationSlotsGetVersionRequest?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = ReservationSlotsClient.GetVersionRequest().with {
         $0.project = project
         $0.zone = zone
@@ -442,9 +437,9 @@
     }
 
     public func list(
-      request: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -454,13 +449,13 @@
     }
 
     public func list(
-      byItem: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ReservationSlotsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ReservationSlot, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(
@@ -483,26 +478,25 @@
     }
 
     public func update(
-      request: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: ReservationSlotsClient.UpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func update(
       withPolling: ReservationSlotsClient.UpdateRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.update(withPolling: withPolling, options: .init())
     }
 
     public func update(
-      withPolling: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: ReservationSlotsClient.UpdateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -512,7 +506,7 @@
       parentName: Swift.String,
       reservationSlot: Swift.String,
       body: ReservationSlot?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = ReservationSlotsClient.UpdateRequest().with {
         $0.project = project
         $0.zone = zone
@@ -530,9 +524,9 @@
     }
 
     public func getOperation(
-      request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

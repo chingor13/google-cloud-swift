@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for `ListSkus`.
-public struct ListSkusRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ListSkusRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the service.
@@ -31,7 +31,7 @@ public struct ListSkusRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// America/Los_Angeles timezone. Time range as a whole is optional. If not
   /// specified, the latest pricing will be returned (up to 12 hours old at
   /// most).
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Optional exclusive end time of the time range for which the pricing
   /// versions will be returned. Timestamps in the future are not allowed.
@@ -39,7 +39,7 @@ public struct ListSkusRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// America/Los_Angeles timezone. Time range as a whole is optional. If not
   /// specified, the latest pricing will be returned (up to 12 hours old at
   /// most).
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// The ISO 4217 currency code for the pricing info in the response proto.
   /// Will use the conversion rate as of start_time.
@@ -54,7 +54,7 @@ public struct ListSkusRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// call. If unspecified, the first page of results is returned.
   public var pageToken: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListSkusRequest`.
   public init() {}
@@ -100,9 +100,8 @@ public struct ListSkusRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .parent) {
       self.parent = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .currencyCode) {
       self.currencyCode = value
     }
@@ -114,7 +113,7 @@ public struct ListSkusRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -134,10 +133,10 @@ public struct ListSkusRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.billing.v1.ListSkusRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

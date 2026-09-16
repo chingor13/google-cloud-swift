@@ -15,31 +15,31 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Reference to an Execution. Use /Executions.GetExecution with the given name
 /// to get full execution including the latest status.
-public struct ExecutionReference: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExecutionReference: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Name of the execution.
   public var name: Swift.String = Swift.String()
 
   /// Creation timestamp of the execution.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Creation timestamp of the execution.
-  public var completionTime: GoogleCloudWKT.Timestamp? = nil
+  public var completionTime: GoogleWKT.Timestamp? = nil
 
   /// The deletion time of the execution. It is only
   /// populated as a response to a Delete request.
-  public var deleteTime: GoogleCloudWKT.Timestamp? = nil
+  public var deleteTime: GoogleWKT.Timestamp? = nil
 
   /// Status for the execution completion.
   public var completionStatus: ExecutionReference.CompletionStatus =
     ExecutionReference.CompletionStatus()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExecutionReference`.
   public init() {}
@@ -83,12 +83,10 @@ public struct ExecutionReference: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.completionTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .completionTime)
-    self.deleteTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deleteTime)
+      GoogleWKT.Timestamp.self, forKey: .completionTime)
+    self.deleteTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deleteTime)
     if let value = try container.decodeIfPresent(
       ExecutionReference.CompletionStatus.self, forKey: .completionStatus)
     {
@@ -96,7 +94,7 @@ public struct ExecutionReference: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -241,10 +239,10 @@ public struct ExecutionReference: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.ExecutionReference"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

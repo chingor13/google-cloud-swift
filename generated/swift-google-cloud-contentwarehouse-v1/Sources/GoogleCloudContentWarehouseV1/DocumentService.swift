@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// This service lets you manage document.
 ///
@@ -30,7 +30,7 @@ public final class DocumentServiceClient: Clients.DocumentServiceProtocol, Senda
   let inner: any Clients.DocumentServiceStub
 
   /// Creates a new `DocumentServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DocumentServiceStub = try Clients.DocumentServiceTransport(options)
     inner = Clients.DocumentServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -43,7 +43,7 @@ public final class DocumentServiceClient: Clients.DocumentServiceProtocol, Senda
   ///
   /// @Snippet(path: "DocumentService_CreateDocument")
   public func createDocument(
-    request: CreateDocumentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDocumentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.CreateDocumentResponse {
     try await self.inner.createDocument(request: request, options: options)
   }
@@ -52,7 +52,7 @@ public final class DocumentServiceClient: Clients.DocumentServiceProtocol, Senda
   ///
   /// @Snippet(path: "DocumentService_GetDocument")
   public func getDocument(
-    request: GetDocumentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDocumentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.Document {
     try await self.inner.getDocument(request: request, options: options)
   }
@@ -62,7 +62,7 @@ public final class DocumentServiceClient: Clients.DocumentServiceProtocol, Senda
   ///
   /// @Snippet(path: "DocumentService_UpdateDocument")
   public func updateDocument(
-    request: UpdateDocumentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDocumentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.UpdateDocumentResponse {
     try await self.inner.updateDocument(request: request, options: options)
   }
@@ -71,7 +71,7 @@ public final class DocumentServiceClient: Clients.DocumentServiceProtocol, Senda
   ///
   /// @Snippet(path: "DocumentService_DeleteDocument")
   public func deleteDocument(
-    request: DeleteDocumentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDocumentRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteDocument(request: request, options: options)
   }
@@ -85,7 +85,7 @@ public final class DocumentServiceClient: Clients.DocumentServiceProtocol, Senda
   ///
   /// @Snippet(path: "DocumentService_SearchDocuments")
   public func searchDocuments(
-    request: SearchDocumentsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchDocumentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.SearchDocumentsResponse {
     try await self.inner.searchDocuments(request: request, options: options)
   }
@@ -99,7 +99,7 @@ public final class DocumentServiceClient: Clients.DocumentServiceProtocol, Senda
   ///
   /// @Snippet(path: "DocumentService_SearchDocuments")
   public func searchDocuments(
-    byItem: SearchDocumentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: SearchDocumentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SearchDocumentsResponse.MatchingDocument, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudContentWarehouseV1.SearchDocumentsResponse in
@@ -107,14 +107,14 @@ public final class DocumentServiceClient: Clients.DocumentServiceProtocol, Senda
       request.pageToken = token
       return try await self.searchDocuments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lock the document so the document cannot be updated by other users.
   ///
   /// @Snippet(path: "DocumentService_LockDocument")
   public func lockDocument(
-    request: LockDocumentRequest, options: GoogleCloudGax.RequestOptions
+    request: LockDocumentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.Document {
     try await self.inner.lockDocument(request: request, options: options)
   }
@@ -125,7 +125,7 @@ public final class DocumentServiceClient: Clients.DocumentServiceProtocol, Senda
   ///
   /// @Snippet(path: "DocumentService_FetchAcl")
   public func fetchAcl(
-    request: FetchAclRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchAclRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.FetchAclResponse {
     try await self.inner.fetchAcl(request: request, options: options)
   }
@@ -135,7 +135,7 @@ public final class DocumentServiceClient: Clients.DocumentServiceProtocol, Senda
   ///
   /// @Snippet(path: "DocumentService_SetAcl")
   public func setAcl(
-    request: SetAclRequest, options: GoogleCloudGax.RequestOptions
+    request: SetAclRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.SetAclResponse {
     try await self.inner.setAcl(request: request, options: options)
   }
@@ -146,7 +146,7 @@ public final class DocumentServiceClient: Clients.DocumentServiceProtocol, Senda
   ///
   /// @Snippet(path: "DocumentService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -239,47 +239,47 @@ extension Clients {
 
     /// See `DocumentServiceClient.createDocument`.
     func createDocument(
-      request: CreateDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.CreateDocumentResponse
 
     /// See `DocumentServiceClient.getDocument`.
     func getDocument(
-      request: GetDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.Document
 
     /// See `DocumentServiceClient.updateDocument`.
     func updateDocument(
-      request: UpdateDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.UpdateDocumentResponse
 
     /// See `DocumentServiceClient.deleteDocument`.
     func deleteDocument(
-      request: DeleteDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `DocumentServiceClient.searchDocuments`.
     func searchDocuments(
-      request: SearchDocumentsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchDocumentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SearchDocumentsResponse
 
     /// See `DocumentServiceClient.searchDocuments`.
     func searchDocuments(
-      byItem: SearchDocumentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchDocumentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SearchDocumentsResponse.MatchingDocument, Swift.Error>
 
     /// See `DocumentServiceClient.lockDocument`.
     func lockDocument(
-      request: LockDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: LockDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.Document
 
     /// See `DocumentServiceClient.fetchAcl`.
     func fetchAcl(
-      request: FetchAclRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchAclRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.FetchAclResponse
 
     /// See `DocumentServiceClient.setAcl`.
     func setAcl(
-      request: SetAclRequest, options: GoogleCloudGax.RequestOptions
+      request: SetAclRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SetAclResponse
   }
 }
@@ -293,9 +293,9 @@ extension Clients.DocumentServiceProtocol {
   }
 
   public func createDocument(
-    request: CreateDocumentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDocumentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.CreateDocumentResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDocument(
@@ -316,9 +316,9 @@ extension Clients.DocumentServiceProtocol {
   }
 
   public func getDocument(
-    request: GetDocumentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDocumentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.Document {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDocument(
@@ -337,9 +337,9 @@ extension Clients.DocumentServiceProtocol {
   }
 
   public func updateDocument(
-    request: UpdateDocumentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDocumentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.UpdateDocumentResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateDocument(
@@ -358,9 +358,9 @@ extension Clients.DocumentServiceProtocol {
   }
 
   public func deleteDocument(
-    request: DeleteDocumentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDocumentRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteDocument(
@@ -379,9 +379,9 @@ extension Clients.DocumentServiceProtocol {
   }
 
   public func searchDocuments(
-    request: SearchDocumentsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchDocumentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.SearchDocumentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func searchDocuments(
@@ -391,13 +391,13 @@ extension Clients.DocumentServiceProtocol {
   }
 
   public func searchDocuments(
-    byItem: SearchDocumentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: SearchDocumentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SearchDocumentsResponse.MatchingDocument, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudContentWarehouseV1.SearchDocumentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func searchDocuments(
@@ -416,9 +416,9 @@ extension Clients.DocumentServiceProtocol {
   }
 
   public func lockDocument(
-    request: LockDocumentRequest, options: GoogleCloudGax.RequestOptions
+    request: LockDocumentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.Document {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func lockDocument(
@@ -437,9 +437,9 @@ extension Clients.DocumentServiceProtocol {
   }
 
   public func fetchAcl(
-    request: FetchAclRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchAclRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.FetchAclResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func fetchAcl(
@@ -458,9 +458,9 @@ extension Clients.DocumentServiceProtocol {
   }
 
   public func setAcl(
-    request: SetAclRequest, options: GoogleCloudGax.RequestOptions
+    request: SetAclRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudContentWarehouseV1.SetAclResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setAcl(
@@ -481,9 +481,9 @@ extension Clients.DocumentServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

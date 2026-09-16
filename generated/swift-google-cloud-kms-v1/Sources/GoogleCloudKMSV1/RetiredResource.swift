@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A RetiredResource resource represents the record of a deleted
 /// [CryptoKey][google.cloud.kms.v1.CryptoKey]. Its purpose is to provide
@@ -23,7 +23,7 @@ import Foundation
 /// new [CryptoKeys][google.cloud.kms.v1.CryptoKey].
 ///
 /// [google.cloud.kms.v1.CryptoKey]: <doc:CryptoKey>
-public struct RetiredResource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RetiredResource: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Identifier. The resource name for this
@@ -45,9 +45,9 @@ public struct RetiredResource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. The time at which the original resource was deleted and this
   /// RetiredResource record was created.
-  public var deleteTime: GoogleCloudWKT.Timestamp? = nil
+  public var deleteTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RetiredResource`.
   public init() {}
@@ -95,11 +95,10 @@ public struct RetiredResource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .resourceType) {
       self.resourceType = value
     }
-    self.deleteTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deleteTime)
+    self.deleteTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deleteTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -117,10 +116,10 @@ public struct RetiredResource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.RetiredResource"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

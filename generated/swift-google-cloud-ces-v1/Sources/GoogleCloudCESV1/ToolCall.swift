@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request for the client or the agent to execute the specified tool.
-public struct ToolCall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ToolCall: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The unique identifier of the tool call. If populated, the client
@@ -33,13 +33,13 @@ public struct ToolCall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Optional. The input parameters and values for the tool in JSON object
   /// format.
-  public var args: GoogleCloudWKT.Struct? = nil
+  public var args: GoogleWKT.Struct? = nil
 
   /// The identifier of the tool to execute. It could be either a persisted tool
   /// or a tool from a toolset.
   public var toolIdentifier: OneOf_ToolIdentifier? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ToolCall`.
   public init() {}
@@ -86,7 +86,7 @@ public struct ToolCall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
       self.displayName = value
     }
-    self.args = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .args)
+    self.args = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .args)
 
     var toolIdentifier: OneOf_ToolIdentifier? = nil
     let toolIdentifierCheckAndSet = {
@@ -107,7 +107,7 @@ public struct ToolCall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.toolIdentifier = toolIdentifier
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -143,10 +143,10 @@ public struct ToolCall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.ToolCall"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudKMSInventoryV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, keyRingId: String, cryptoKeyId: String, )
   async throws

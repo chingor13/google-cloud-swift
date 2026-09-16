@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudFTPV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CloudFtpClient) async throws {
   try await client.deleteOperation(

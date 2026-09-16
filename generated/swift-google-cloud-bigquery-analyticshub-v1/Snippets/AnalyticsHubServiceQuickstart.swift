@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleBigQueryAnalyticsHubV1
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleBigQueryAnalyticsHubV1.AnalyticsHubServiceClient()

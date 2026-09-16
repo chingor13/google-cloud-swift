@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// In memory (tmpfs) ephemeral storage.
 /// It is ephemeral in the sense that when the sandbox is taken down, the data is
 /// destroyed with it (it does not persist across sandbox runs).
-public struct EmptyDirVolumeSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EmptyDirVolumeSource: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The medium on which the data is stored. Acceptable values today is only
@@ -39,7 +39,7 @@ public struct EmptyDirVolumeSource: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
   public var sizeLimit: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EmptyDirVolumeSource`.
   public init() {}
@@ -83,7 +83,7 @@ public struct EmptyDirVolumeSource: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -198,10 +198,10 @@ public struct EmptyDirVolumeSource: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.EmptyDirVolumeSource"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,22 +16,22 @@
 
 #if FeatureOnlineStoreService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Response message for
   /// [FeatureOnlineStoreService.GenerateFetchAccessToken][google.cloud.aiplatform.v1.FeatureOnlineStoreService.GenerateFetchAccessToken].
   ///
   /// [google.cloud.aiplatform.v1.FeatureOnlineStoreService.GenerateFetchAccessToken]: <doc:FeatureOnlineStoreServiceClient/generateFetchAccessToken(request:options:)>
-  public struct GenerateFetchAccessTokenResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GenerateFetchAccessTokenResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The OAuth 2.0 access token.
     public var accessToken: Swift.String = Swift.String()
 
     /// Token expiration time. This is always set
-    public var expireTime: GoogleCloudWKT.Timestamp? = nil
+    public var expireTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GenerateFetchAccessTokenResponse`.
     public init() {}
@@ -69,11 +69,10 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .accessToken) {
         self.accessToken = value
       }
-      self.expireTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .expireTime)
+      self.expireTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .expireTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -89,11 +88,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `diskTypes` resource.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.DiskTypesStub
 
     /// Creates a new `DiskTypesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.DiskTypesStub = try Clients.DiskTypesTransport(options)
       inner = Clients.DiskTypesRetry(inner, options: options)
       if let logger = options.logger {
@@ -45,7 +45,7 @@
     ///
     /// @Snippet(path: "diskTypes_aggregatedList")
     public func aggregatedList(
-      request: DiskTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: DiskTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.DiskTypeAggregatedList {
       try await self.inner.aggregatedList(request: request, options: options)
     }
@@ -57,7 +57,7 @@
     ///
     /// @Snippet(path: "diskTypes_aggregatedList")
     public func aggregatedList(
-      byItem: DiskTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: DiskTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, DiskTypesScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.DiskTypeAggregatedList in
@@ -65,14 +65,14 @@
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Returns the specified disk type.
     ///
     /// @Snippet(path: "diskTypes_get")
     public func `get`(
-      request: DiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: DiskTypesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.DiskType {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -82,7 +82,7 @@
     ///
     /// @Snippet(path: "diskTypes_list")
     public func list(
-      request: DiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: DiskTypesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.DiskTypeList {
       try await self.inner.list(request: request, options: options)
     }
@@ -92,14 +92,14 @@
     ///
     /// @Snippet(path: "diskTypes_list")
     public func list(
-      byItem: DiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: DiskTypesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DiskType, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.DiskTypeList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
   }
 
@@ -151,27 +151,27 @@
 
       /// See `DiskTypesClient.aggregatedList`.
       func aggregatedList(
-        request: DiskTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskTypeAggregatedList
 
       /// See `DiskTypesClient.aggregatedList`.
       func aggregatedList(
-        byItem: DiskTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: DiskTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<(Swift.String, DiskTypesScopedList), Swift.Error>
 
       /// See `DiskTypesClient.`get``.
       func `get`(
-        request: DiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskType
 
       /// See `DiskTypesClient.list`.
       func list(
-        request: DiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskTypeList
 
       /// See `DiskTypesClient.list`.
       func list(
-        byItem: DiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: DiskTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<DiskType, Swift.Error>
     }
   }
@@ -185,9 +185,9 @@
     }
 
     public func aggregatedList(
-      request: DiskTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: DiskTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.DiskTypeAggregatedList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
@@ -197,13 +197,13 @@
     }
 
     public func aggregatedList(
-      byItem: DiskTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: DiskTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, DiskTypesScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.DiskTypeAggregatedList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func aggregatedList(
@@ -222,9 +222,9 @@
     }
 
     public func `get`(
-      request: DiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: DiskTypesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.DiskType {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -247,9 +247,9 @@
     }
 
     public func list(
-      request: DiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: DiskTypesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.DiskTypeList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -259,12 +259,12 @@
     }
 
     public func list(
-      byItem: DiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: DiskTypesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DiskType, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.DiskTypeList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(

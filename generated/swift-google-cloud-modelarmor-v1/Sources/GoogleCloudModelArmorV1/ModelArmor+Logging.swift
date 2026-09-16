@@ -19,8 +19,8 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func listTemplates(
-      request: ListTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTemplatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.ListTemplatesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listTemplates",
         action: {
-          (r: ListTemplatesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListTemplatesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudModelArmorV1.ListTemplatesResponse
           in
           return try await self.inner.listTemplates(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func getTemplate(
-      request: GetTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.Template {
       try await self._intercept(
         request: request,
         options: options,
         name: "getTemplate",
         action: {
-          (r: GetTemplateRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetTemplateRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudModelArmorV1.Template
           in
           return try await self.inner.getTemplate(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func createTemplate(
-      request: CreateTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.Template {
       try await self._intercept(
         request: request,
         options: options,
         name: "createTemplate",
         action: {
-          (r: CreateTemplateRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateTemplateRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudModelArmorV1.Template
           in
           return try await self.inner.createTemplate(request: r, options: o)
@@ -103,14 +103,14 @@ extension Clients {
     }
 
     public func updateTemplate(
-      request: UpdateTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.Template {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateTemplate",
         action: {
-          (r: UpdateTemplateRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateTemplateRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudModelArmorV1.Template
           in
           return try await self.inner.updateTemplate(request: r, options: o)
@@ -118,27 +118,26 @@ extension Clients {
     }
 
     public func deleteTemplate(
-      request: DeleteTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteTemplate",
-        action: {
-          (r: DeleteTemplateRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteTemplateRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteTemplate(request: r, options: o)
         })
     }
 
     public func getFloorSetting(
-      request: GetFloorSettingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFloorSettingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.FloorSetting {
       try await self._intercept(
         request: request,
         options: options,
         name: "getFloorSetting",
         action: {
-          (r: GetFloorSettingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetFloorSettingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudModelArmorV1.FloorSetting
           in
           return try await self.inner.getFloorSetting(request: r, options: o)
@@ -146,14 +145,14 @@ extension Clients {
     }
 
     public func updateFloorSetting(
-      request: UpdateFloorSettingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFloorSettingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.FloorSetting {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateFloorSetting",
         action: {
-          (r: UpdateFloorSettingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateFloorSettingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudModelArmorV1.FloorSetting
           in
           return try await self.inner.updateFloorSetting(request: r, options: o)
@@ -161,14 +160,14 @@ extension Clients {
     }
 
     public func sanitizeUserPrompt(
-      request: SanitizeUserPromptRequest, options: GoogleCloudGax.RequestOptions
+      request: SanitizeUserPromptRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.SanitizeUserPromptResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "sanitizeUserPrompt",
         action: {
-          (r: SanitizeUserPromptRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SanitizeUserPromptRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudModelArmorV1.SanitizeUserPromptResponse
           in
           return try await self.inner.sanitizeUserPrompt(request: r, options: o)
@@ -176,14 +175,14 @@ extension Clients {
     }
 
     public func sanitizeModelResponse(
-      request: SanitizeModelResponseRequest, options: GoogleCloudGax.RequestOptions
+      request: SanitizeModelResponseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudModelArmorV1.SanitizeModelResponseResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "sanitizeModelResponse",
         action: {
-          (r: SanitizeModelResponseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SanitizeModelResponseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudModelArmorV1.SanitizeModelResponseResponse
           in
           return try await self.inner.sanitizeModelResponse(request: r, options: o)
@@ -191,29 +190,29 @@ extension Clients {
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLocations",
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLocation",
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)

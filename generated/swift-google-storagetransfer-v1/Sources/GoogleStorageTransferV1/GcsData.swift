@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// In a GcsData resource, an object's name is the Cloud Storage object's
 /// name and its "last modification time" refers to the object's `updated`
 /// property of Cloud Storage objects, which changes when the content or the
 /// metadata of the object is updated.
-public struct GcsData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GcsData: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Cloud Storage bucket name. Must meet
@@ -53,7 +53,7 @@ public struct GcsData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// folders](/storage-transfer/docs/managed-folders).
   public var managedFolderTransferEnabled: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GcsData`.
   public init() {}
@@ -104,7 +104,7 @@ public struct GcsData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -121,10 +121,10 @@ public struct GcsData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.GcsData"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

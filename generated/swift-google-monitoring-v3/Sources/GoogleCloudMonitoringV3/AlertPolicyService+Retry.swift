@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class AlertPolicyServiceRetry: AlertPolicyServiceStub {
     let inner: any AlertPolicyServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any AlertPolicyServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any AlertPolicyServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func listAlertPolicies(
-      request: ListAlertPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAlertPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListAlertPoliciesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListAlertPoliciesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListAlertPoliciesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ListAlertPoliciesResponse
           in
           return try await self.inner.listAlertPolicies(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func getAlertPolicy(
-      request: GetAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAlertPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.AlertPolicy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetAlertPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetAlertPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.AlertPolicy
           in
           return try await self.inner.getAlertPolicy(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func createAlertPolicy(
-      request: CreateAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAlertPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.AlertPolicy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateAlertPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateAlertPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.AlertPolicy
           in
           return try await self.inner.createAlertPolicy(request: r, options: o)
@@ -94,27 +94,26 @@ extension Clients {
     }
 
     public func deleteAlertPolicy(
-      request: DeleteAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAlertPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: {
-          (r: DeleteAlertPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteAlertPolicyRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteAlertPolicy(request: r, options: o)
         })
     }
 
     public func updateAlertPolicy(
-      request: UpdateAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAlertPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.AlertPolicy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateAlertPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateAlertPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.AlertPolicy
           in
           return try await self.inner.updateAlertPolicy(request: r, options: o)

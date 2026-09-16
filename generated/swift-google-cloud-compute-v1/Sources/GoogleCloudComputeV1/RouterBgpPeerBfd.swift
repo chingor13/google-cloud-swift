@@ -16,9 +16,9 @@
 
 #if Routers
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct RouterBgpPeerBfd: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RouterBgpPeerBfd: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The minimum interval, in milliseconds, between BFD control packets
@@ -64,7 +64,7 @@
     /// DISABLED, BFD is disabled for this BGP peer. The default is DISABLED.
     public var sessionInitializationMode: RouterBgpPeerBfd.SessionInitializationMode? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RouterBgpPeerBfd`.
     public init() {}
@@ -112,7 +112,7 @@
         RouterBgpPeerBfd.SessionInitializationMode.self, forKey: .sessionInitializationMode)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -235,11 +235,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.RouterBgpPeerBfd"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

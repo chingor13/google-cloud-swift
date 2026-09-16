@@ -15,88 +15,88 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol RepositoryManagerStub: Sendable {
     func createConnection(
-      request: CreateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getConnection(
-      request: GetConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV2.Connection
 
     func listConnections(
-      request: ListConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV2.ListConnectionsResponse
 
     func updateConnection(
-      request: UpdateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteConnection(
-      request: DeleteConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createRepository(
-      request: CreateRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func batchCreateRepositories(
-      request: BatchCreateRepositoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreateRepositoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getRepository(
-      request: GetRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV2.Repository
 
     func listRepositories(
-      request: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRepositoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV2.ListRepositoriesResponse
 
     func deleteRepository(
-      request: DeleteRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func fetchReadWriteToken(
-      request: FetchReadWriteTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchReadWriteTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV2.FetchReadWriteTokenResponse
 
     func fetchReadToken(
-      request: FetchReadTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchReadTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV2.FetchReadTokenResponse
 
     func fetchLinkableRepositories(
-      request: FetchLinkableRepositoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchLinkableRepositoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV2.FetchLinkableRepositoriesResponse
 
     func fetchGitRefs(
-      request: FetchGitRefsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchGitRefsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBuildV2.FetchGitRefsResponse
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

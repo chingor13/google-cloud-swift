@@ -16,10 +16,10 @@
 
 #if SqlBackupRunsService || SqlBackupsService || SqlDatabasesService || SqlInstancesService || SqlOperationsService || SqlSslCertsService || SqlUsersService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Database instance import context.
-  public struct ImportContext: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ImportContext: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Path to the import file in Cloud Storage, in the form
@@ -58,7 +58,7 @@
     /// Optional. Import parameters specific to SQL Server TDE certificates
     public var tdeImportOptions: ImportContext.SqlTdeImportOptions? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ImportContext`.
     public init() {}
@@ -132,7 +132,7 @@
         ImportContext.SqlTdeImportOptions.self, forKey: .tdeImportOptions)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -152,19 +152,19 @@
       }
     }
 
-    public struct SqlImportOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SqlImportOptions: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The number of threads to use for parallel import.
-      public var threads: GoogleCloudWKT.Int32Value? = nil
+      public var threads: GoogleWKT.Int32Value? = nil
 
       /// Optional. Whether or not the import should be parallel.
-      public var parallel: GoogleCloudWKT.BoolValue? = nil
+      public var parallel: GoogleWKT.BoolValue? = nil
 
       /// Optional. Options for importing from a Cloud SQL for PostgreSQL instance.
       public var postgresImportOptions: ImportContext.SqlImportOptions.PostgresImportOptions? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SqlImportOptions`.
       public init() {}
@@ -201,15 +201,13 @@
 
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.threads = try container.decodeIfPresent(
-          GoogleCloudWKT.Int32Value.self, forKey: .threads)
-        self.parallel = try container.decodeIfPresent(
-          GoogleCloudWKT.BoolValue.self, forKey: .parallel)
+        self.threads = try container.decodeIfPresent(GoogleWKT.Int32Value.self, forKey: .threads)
+        self.parallel = try container.decodeIfPresent(GoogleWKT.BoolValue.self, forKey: .parallel)
         self.postgresImportOptions = try container.decodeIfPresent(
           ImportContext.SqlImportOptions.PostgresImportOptions.self, forKey: .postgresImportOptions)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -223,19 +221,18 @@
         }
       }
 
-      public struct PostgresImportOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct PostgresImportOptions: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. The --clean flag for the pg_restore utility. This flag
         /// applies only if you enabled Cloud SQL to import files in parallel.
-        public var clean: GoogleCloudWKT.BoolValue? = nil
+        public var clean: GoogleWKT.BoolValue? = nil
 
         /// Optional. The --if-exists flag for the pg_restore utility. This flag
         /// applies only if you enabled Cloud SQL to import files in parallel.
-        public var ifExists: GoogleCloudWKT.BoolValue? = nil
+        public var ifExists: GoogleWKT.BoolValue? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `PostgresImportOptions`.
         public init() {}
@@ -270,12 +267,11 @@
 
         public init(from decoder: Decoder) throws {
           let container = try decoder.container(keyedBy: CodingKeys.self)
-          self.clean = try container.decodeIfPresent(GoogleCloudWKT.BoolValue.self, forKey: .clean)
-          self.ifExists = try container.decodeIfPresent(
-            GoogleCloudWKT.BoolValue.self, forKey: .ifExists)
+          self.clean = try container.decodeIfPresent(GoogleWKT.BoolValue.self, forKey: .clean)
+          self.ifExists = try container.decodeIfPresent(GoogleWKT.BoolValue.self, forKey: .ifExists)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -292,26 +288,26 @@
           return
             "type.googleapis.com/google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.ImportContext.SqlImportOptions"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
-    public struct SqlCsvImportOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SqlCsvImportOptions: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The table to which CSV data is imported.
@@ -336,7 +332,7 @@
       /// the rest of the columns are set to their default values.
       public var linesTerminatedBy: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SqlCsvImportOptions`.
       public init() {}
@@ -401,7 +397,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -421,33 +417,33 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.ImportContext.SqlCsvImportOptions"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
-    public struct SqlBakImportOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SqlBakImportOptions: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       public var encryptionOptions: ImportContext.SqlBakImportOptions.EncryptionOptions? = nil
 
       /// Whether or not the backup set being restored is striped.
       /// Applies only to Cloud SQL for SQL Server.
-      public var striped: GoogleCloudWKT.BoolValue? = nil
+      public var striped: GoogleWKT.BoolValue? = nil
 
       /// Whether or not the backup importing will restore database
       /// with NORECOVERY option.
       /// Applies only to Cloud SQL for SQL Server.
-      public var noRecovery: GoogleCloudWKT.BoolValue? = nil
+      public var noRecovery: GoogleWKT.BoolValue? = nil
 
       /// Whether or not the backup importing request will just bring database
       /// online without downloading Bak content only one of "no_recovery" and
       /// "recovery_only" can be true otherwise error will return. Applies only to
       /// Cloud SQL for SQL Server.
-      public var recoveryOnly: GoogleCloudWKT.BoolValue? = nil
+      public var recoveryOnly: GoogleWKT.BoolValue? = nil
 
       /// Type of the bak content, FULL or DIFF
       public var bakType: BakType = BakType()
@@ -456,14 +452,14 @@
       /// the [RFC 3339](https://tools.ietf.org/html/rfc3339) format (for example,
       /// `2023-10-01T16:19:00.094`). This field is equivalent to the STOPAT
       /// keyword and applies to Cloud SQL for SQL Server only.
-      public var stopAt: GoogleCloudWKT.Timestamp? = nil
+      public var stopAt: GoogleWKT.Timestamp? = nil
 
       /// Optional. The marked transaction where the import should stop. This field
       /// is equivalent to the STOPATMARK keyword and applies to Cloud SQL for SQL
       /// Server only.
       public var stopAtMark: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SqlBakImportOptions`.
       public init() {}
@@ -510,22 +506,21 @@
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.encryptionOptions = try container.decodeIfPresent(
           ImportContext.SqlBakImportOptions.EncryptionOptions.self, forKey: .encryptionOptions)
-        self.striped = try container.decodeIfPresent(
-          GoogleCloudWKT.BoolValue.self, forKey: .striped)
+        self.striped = try container.decodeIfPresent(GoogleWKT.BoolValue.self, forKey: .striped)
         self.noRecovery = try container.decodeIfPresent(
-          GoogleCloudWKT.BoolValue.self, forKey: .noRecovery)
+          GoogleWKT.BoolValue.self, forKey: .noRecovery)
         self.recoveryOnly = try container.decodeIfPresent(
-          GoogleCloudWKT.BoolValue.self, forKey: .recoveryOnly)
+          GoogleWKT.BoolValue.self, forKey: .recoveryOnly)
         if let value = try container.decodeIfPresent(BakType.self, forKey: .bakType) {
           self.bakType = value
         }
-        self.stopAt = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .stopAt)
+        self.stopAt = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .stopAt)
         if let value = try container.decodeIfPresent(Swift.String.self, forKey: .stopAtMark) {
           self.stopAtMark = value
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -543,7 +538,7 @@
         }
       }
 
-      public struct EncryptionOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct EncryptionOptions: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Path to the Certificate (.cer) in Cloud Storage, in the form
@@ -560,10 +555,9 @@
         public var pvkPassword: Swift.String = Swift.String()
 
         /// Optional. Whether the imported file remains encrypted.
-        public var keepEncrypted: GoogleCloudWKT.BoolValue? = nil
+        public var keepEncrypted: GoogleWKT.BoolValue? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `EncryptionOptions`.
         public init() {}
@@ -612,10 +606,10 @@
             self.pvkPassword = value
           }
           self.keepEncrypted = try container.decodeIfPresent(
-            GoogleCloudWKT.BoolValue.self, forKey: .keepEncrypted)
+            GoogleWKT.BoolValue.self, forKey: .keepEncrypted)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -634,26 +628,26 @@
           return
             "type.googleapis.com/google.cloud.sql.v1.ImportContext.SqlBakImportOptions.EncryptionOptions"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.ImportContext.SqlBakImportOptions"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
-    public struct SqlTdeImportOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SqlTdeImportOptions: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Path to the TDE certificate public key
@@ -675,7 +669,7 @@
       /// Applicable only for SQL Server instances.
       public var name: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SqlTdeImportOptions`.
       public init() {}
@@ -729,7 +723,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -747,22 +741,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.sql.v1.ImportContext.SqlTdeImportOptions"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.ImportContext"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

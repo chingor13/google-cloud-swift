@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudOrgPolicyV2
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: OrgPolicyClient, projectId: String, policyId: String) async throws {
   let response = try await client.getPolicy(

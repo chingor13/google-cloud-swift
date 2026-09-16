@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Input configuration for datasets.
-public struct DatasetInputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DatasetInputConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Files containing the sentence pairs to be imported to the dataset.
   public var inputFiles: [DatasetInputConfig.InputFile] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DatasetInputConfig`.
   public init() {}
@@ -64,7 +64,7 @@ public struct DatasetInputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -77,7 +77,7 @@ public struct DatasetInputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   }
 
   /// An input file.
-  public struct InputFile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InputFile: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Usage of the file contents. Options are TRAIN|VALIDATION|TEST,
@@ -89,7 +89,7 @@ public struct DatasetInputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// eXchange (.tmx) .
     public var source: OneOf_Source? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InputFile`.
     public init() {}
@@ -144,7 +144,7 @@ public struct DatasetInputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       self.source = source
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -174,21 +174,21 @@ public struct DatasetInputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.translation.v3.DatasetInputConfig.InputFile"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.translation.v3.DatasetInputConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudWebRiskV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: WebRiskServiceClient) async throws {
   let poller = try await client.submitUri(

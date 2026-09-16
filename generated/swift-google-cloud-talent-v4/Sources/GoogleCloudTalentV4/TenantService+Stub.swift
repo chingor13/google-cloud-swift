@@ -15,34 +15,34 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol TenantServiceStub: Sendable {
     func createTenant(
-      request: CreateTenantRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTenantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Tenant
 
     func getTenant(
-      request: GetTenantRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTenantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Tenant
 
     func updateTenant(
-      request: UpdateTenantRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTenantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Tenant
 
     func deleteTenant(
-      request: DeleteTenantRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTenantRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listTenants(
-      request: ListTenantsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTenantsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.ListTenantsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

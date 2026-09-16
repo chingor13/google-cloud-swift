@@ -16,25 +16,25 @@
 
 #if ZoneOperations
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ZoneOperationsStub: Sendable {
       func delete(
-        request: ZoneOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func `get`(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationList
 
       func wait(
-        request: ZoneOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.WaitRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

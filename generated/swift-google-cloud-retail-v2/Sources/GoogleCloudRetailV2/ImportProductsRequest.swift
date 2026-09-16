@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for Import methods.
-public struct ImportProductsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ImportProductsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required.
@@ -41,7 +41,7 @@ public struct ImportProductsRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// Indicates which fields in the provided imported `products` to update. If
   /// not set, all fields are updated. If provided, only the existing product
   /// fields are updated. Missing products will not be created.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// The mode of reconciliation between existing products and the products to be
   /// imported. Defaults to
@@ -73,7 +73,7 @@ public struct ImportProductsRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// [google.longrunning.Operation]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation
   public var notificationPubsubTopic: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ImportProductsRequest`.
   public init() {}
@@ -127,8 +127,7 @@ public struct ImportProductsRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
     self.inputConfig = try container.decodeIfPresent(ProductInputConfig.self, forKey: .inputConfig)
     self.errorsConfig = try container.decodeIfPresent(
       ImportErrorsConfig.self, forKey: .errorsConfig)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     if let value = try container.decodeIfPresent(
       ImportProductsRequest.ReconciliationMode.self, forKey: .reconciliationMode)
     {
@@ -141,7 +140,7 @@ public struct ImportProductsRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -269,10 +268,10 @@ public struct ImportProductsRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.ImportProductsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

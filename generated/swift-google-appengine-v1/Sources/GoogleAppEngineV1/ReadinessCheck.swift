@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Readiness checking configuration for VM instances. Unhealthy instances
 /// are removed from traffic rotation.
-public struct ReadinessCheck: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ReadinessCheck: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The request path.
@@ -38,17 +38,17 @@ public struct ReadinessCheck: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var successThreshold: Swift.UInt32 = Swift.UInt32()
 
   /// Interval between health checks.
-  public var checkInterval: GoogleCloudWKT.Duration? = nil
+  public var checkInterval: GoogleWKT.Duration? = nil
 
   /// Time before the check is considered failed.
-  public var timeout: GoogleCloudWKT.Duration? = nil
+  public var timeout: GoogleWKT.Duration? = nil
 
   /// A maximum time limit on application initialization, measured from moment
   /// the application successfully replies to a healthcheck until it is ready to
   /// serve traffic.
-  public var appStartTimeout: GoogleCloudWKT.Duration? = nil
+  public var appStartTimeout: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ReadinessCheck`.
   public init() {}
@@ -106,13 +106,13 @@ public struct ReadinessCheck: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.successThreshold = value
     }
     self.checkInterval = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .checkInterval)
-    self.timeout = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .timeout)
+      GoogleWKT.Duration.self, forKey: .checkInterval)
+    self.timeout = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeout)
     self.appStartTimeout = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .appStartTimeout)
+      GoogleWKT.Duration.self, forKey: .appStartTimeout)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -133,10 +133,10 @@ public struct ReadinessCheck: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.ReadinessCheck"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

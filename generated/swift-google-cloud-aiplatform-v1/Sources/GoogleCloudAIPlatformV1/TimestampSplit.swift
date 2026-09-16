@@ -16,14 +16,14 @@
 
 #if PipelineService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Assigns input data to training, validation, and test sets based on a
   /// provided timestamps. The youngest data pieces are assigned to training set,
   /// next to validation set, and the oldest to the test set.
   ///
   /// Supported only for tabular Datasets.
-  public struct TimestampSplit: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TimestampSplit: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The fraction of the input data that is to be used to train the Model.
@@ -42,7 +42,7 @@
     /// present or has an invalid value, that piece is ignored by the pipeline.
     public var key: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TimestampSplit`.
     public init() {}
@@ -95,7 +95,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -113,11 +113,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.TimestampSplit"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -16,11 +16,11 @@
 
 #if Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleRpc
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents the result of a conversational query.
-  public struct QueryResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QueryResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The language that was triggered during intent detection.
@@ -46,7 +46,7 @@
     /// use parameter value.
     ///
     /// [google.cloud.dialogflow.cx.v3.SessionInfo.parameters]: <doc:SessionInfo/parameters>
-    public var parameters: GoogleCloudWKT.Struct? = nil
+    public var parameters: GoogleWKT.Struct? = nil
 
     /// The list of rich messages returned to the client. Responses vary from
     /// simple text messages to more sophisticated, structured payloads used
@@ -62,7 +62,7 @@
     /// any payload, an empty `Struct` would be used instead.
     ///
     /// [google.cloud.dialogflow.cx.v3.WebhookResponse.payload]: <doc:WebhookResponse/payload>
-    public var webhookPayloads: [GoogleCloudWKT.Struct] = []
+    public var webhookPayloads: [GoogleWKT.Struct] = []
 
     /// The current [Page][google.cloud.dialogflow.cx.v3.Page]. Some, not all
     /// fields are filled in this message, including but not limited to `name` and
@@ -124,7 +124,7 @@
     ///   are included.
     /// - Other intents referenced by intent routes in scope that matched end-user
     ///   input, but had a lower confidence score.
-    public var diagnosticInfo: GoogleCloudWKT.Struct? = nil
+    public var diagnosticInfo: GoogleWKT.Struct? = nil
 
     /// The sentiment analyss result, which depends on
     /// [`analyze_query_text_sentiment`]
@@ -156,7 +156,7 @@
     /// The original conversational query.
     public var query: OneOf_Query? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QueryResult`.
     public init() {}
@@ -232,8 +232,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .languageCode) {
         self.languageCode = value
       }
-      self.parameters = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .parameters)
+      self.parameters = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .parameters)
       if let value = try container.decodeIfPresent(
         [ResponseMessage].self, forKey: .responseMessages)
       {
@@ -245,7 +244,7 @@
         self.webhookStatuses = value
       }
       if let value = try container.decodeIfPresent(
-        [GoogleCloudWKT.Struct].self, forKey: .webhookPayloads)
+        [GoogleWKT.Struct].self, forKey: .webhookPayloads)
       {
         self.webhookPayloads = value
       }
@@ -259,7 +258,7 @@
       }
       self.match = try container.decodeIfPresent(Match.self, forKey: .match)
       self.diagnosticInfo = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .diagnosticInfo)
+        GoogleWKT.Struct.self, forKey: .diagnosticInfo)
       self.sentimentAnalysisResult = try container.decodeIfPresent(
         SentimentAnalysisResult.self, forKey: .sentimentAnalysisResult)
       self.advancedSettings = try container.decodeIfPresent(
@@ -304,7 +303,7 @@
       self.query = query
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -382,11 +381,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.QueryResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -18,27 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class RecaptchaEnterpriseServiceRetry: RecaptchaEnterpriseServiceStub {
     let inner: any RecaptchaEnterpriseServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any RecaptchaEnterpriseServiceStub, options: GoogleCloudGax.ClientOptions)
-    {
+    public init(_ inner: any RecaptchaEnterpriseServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +49,14 @@ extension Clients {
     }
 
     public func createAssessment(
-      request: CreateAssessmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAssessmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Assessment {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateAssessmentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateAssessmentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.Assessment
           in
           return try await self.inner.createAssessment(request: r, options: o)
@@ -65,14 +64,14 @@ extension Clients {
     }
 
     public func annotateAssessment(
-      request: AnnotateAssessmentRequest, options: GoogleCloudGax.RequestOptions
+      request: AnnotateAssessmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.AnnotateAssessmentResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: AnnotateAssessmentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AnnotateAssessmentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.AnnotateAssessmentResponse
           in
           return try await self.inner.annotateAssessment(request: r, options: o)
@@ -80,14 +79,14 @@ extension Clients {
     }
 
     public func createKey(
-      request: CreateKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.Key
           in
           return try await self.inner.createKey(request: r, options: o)
@@ -95,14 +94,14 @@ extension Clients {
     }
 
     public func listKeys(
-      request: ListKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListKeysResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListKeysRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListKeysRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.ListKeysResponse
           in
           return try await self.inner.listKeys(request: r, options: o)
@@ -110,14 +109,14 @@ extension Clients {
     }
 
     public func retrieveLegacySecretKey(
-      request: RetrieveLegacySecretKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: RetrieveLegacySecretKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.RetrieveLegacySecretKeyResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: RetrieveLegacySecretKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RetrieveLegacySecretKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.RetrieveLegacySecretKeyResponse
           in
           return try await self.inner.retrieveLegacySecretKey(request: r, options: o)
@@ -125,14 +124,14 @@ extension Clients {
     }
 
     public func getKey(
-      request: GetKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.Key
           in
           return try await self.inner.getKey(request: r, options: o)
@@ -140,14 +139,14 @@ extension Clients {
     }
 
     public func updateKey(
-      request: UpdateKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.Key
           in
           return try await self.inner.updateKey(request: r, options: o)
@@ -155,26 +154,26 @@ extension Clients {
     }
 
     public func deleteKey(
-      request: DeleteKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteKeyRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: { (r: DeleteKeyRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteKeyRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteKey(request: r, options: o)
         })
     }
 
     public func migrateKey(
-      request: MigrateKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: MigrateKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: MigrateKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: MigrateKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.Key
           in
           return try await self.inner.migrateKey(request: r, options: o)
@@ -182,14 +181,14 @@ extension Clients {
     }
 
     public func addIpOverride(
-      request: AddIpOverrideRequest, options: GoogleCloudGax.RequestOptions
+      request: AddIpOverrideRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.AddIpOverrideResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: AddIpOverrideRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AddIpOverrideRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.AddIpOverrideResponse
           in
           return try await self.inner.addIpOverride(request: r, options: o)
@@ -197,14 +196,14 @@ extension Clients {
     }
 
     public func removeIpOverride(
-      request: RemoveIpOverrideRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveIpOverrideRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.RemoveIpOverrideResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: RemoveIpOverrideRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RemoveIpOverrideRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.RemoveIpOverrideResponse
           in
           return try await self.inner.removeIpOverride(request: r, options: o)
@@ -212,14 +211,14 @@ extension Clients {
     }
 
     public func listIpOverrides(
-      request: ListIpOverridesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIpOverridesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListIpOverridesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListIpOverridesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListIpOverridesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.ListIpOverridesResponse
           in
           return try await self.inner.listIpOverrides(request: r, options: o)
@@ -227,14 +226,14 @@ extension Clients {
     }
 
     public func getMetrics(
-      request: GetMetricsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetricsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Metrics {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetMetricsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetMetricsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.Metrics
           in
           return try await self.inner.getMetrics(request: r, options: o)
@@ -242,14 +241,14 @@ extension Clients {
     }
 
     public func getPolicy(
-      request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.Policy
           in
           return try await self.inner.getPolicy(request: r, options: o)
@@ -257,14 +256,14 @@ extension Clients {
     }
 
     public func updatePolicy(
-      request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdatePolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdatePolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.Policy
           in
           return try await self.inner.updatePolicy(request: r, options: o)
@@ -272,14 +271,14 @@ extension Clients {
     }
 
     public func createFirewallPolicy(
-      request: CreateFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFirewallPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateFirewallPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateFirewallPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy
           in
           return try await self.inner.createFirewallPolicy(request: r, options: o)
@@ -287,14 +286,14 @@ extension Clients {
     }
 
     public func listFirewallPolicies(
-      request: ListFirewallPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFirewallPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListFirewallPoliciesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListFirewallPoliciesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListFirewallPoliciesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.ListFirewallPoliciesResponse
           in
           return try await self.inner.listFirewallPolicies(request: r, options: o)
@@ -302,14 +301,14 @@ extension Clients {
     }
 
     public func getFirewallPolicy(
-      request: GetFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFirewallPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetFirewallPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetFirewallPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy
           in
           return try await self.inner.getFirewallPolicy(request: r, options: o)
@@ -317,14 +316,14 @@ extension Clients {
     }
 
     public func updateFirewallPolicy(
-      request: UpdateFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFirewallPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateFirewallPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateFirewallPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy
           in
           return try await self.inner.updateFirewallPolicy(request: r, options: o)
@@ -332,27 +331,27 @@ extension Clients {
     }
 
     public func deleteFirewallPolicy(
-      request: DeleteFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFirewallPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteFirewallPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          (r: DeleteFirewallPolicyRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteFirewallPolicy(request: r, options: o)
         })
     }
 
     public func reorderFirewallPolicies(
-      request: ReorderFirewallPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ReorderFirewallPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ReorderFirewallPoliciesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: ReorderFirewallPoliciesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ReorderFirewallPoliciesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.ReorderFirewallPoliciesResponse
           in
           return try await self.inner.reorderFirewallPolicies(request: r, options: o)
@@ -360,14 +359,14 @@ extension Clients {
     }
 
     public func listRelatedAccountGroups(
-      request: ListRelatedAccountGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRelatedAccountGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListRelatedAccountGroupsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListRelatedAccountGroupsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupsResponse
           in
           return try await self.inner.listRelatedAccountGroups(request: r, options: o)
@@ -375,15 +374,14 @@ extension Clients {
     }
 
     public func listRelatedAccountGroupMemberships(
-      request: ListRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupMembershipsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListRelatedAccountGroupMembershipsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws
+          (r: ListRelatedAccountGroupMembershipsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupMembershipsResponse
           in
           return try await self.inner.listRelatedAccountGroupMemberships(request: r, options: o)
@@ -391,7 +389,7 @@ extension Clients {
     }
 
     public func searchRelatedAccountGroupMemberships(
-      request: SearchRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.SearchRelatedAccountGroupMembershipsResponse
     {
       try await self._intercept(
@@ -399,8 +397,7 @@ extension Clients {
         options: options,
         idempotent: false,
         action: {
-          (r: SearchRelatedAccountGroupMembershipsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws
+          (r: SearchRelatedAccountGroupMembershipsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRecaptchaEnterpriseV1.SearchRelatedAccountGroupMembershipsResponse
           in
           return try await self.inner.searchRelatedAccountGroupMemberships(request: r, options: o)

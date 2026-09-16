@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Central configuration for custom search criteria.
-public struct SearchCriteriaProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SearchCriteriaProperty: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Each mapped_field corresponds to a UGA key. To understand how this property
@@ -45,7 +45,7 @@ public struct SearchCriteriaProperty: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// coach=Tom Brady || player=Bill Belichick || coach=Bill Belichick).
   public var mappedFields: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SearchCriteriaProperty`.
   public init() {}
@@ -83,7 +83,7 @@ public struct SearchCriteriaProperty: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,10 +98,10 @@ public struct SearchCriteriaProperty: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.SearchCriteriaProperty"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

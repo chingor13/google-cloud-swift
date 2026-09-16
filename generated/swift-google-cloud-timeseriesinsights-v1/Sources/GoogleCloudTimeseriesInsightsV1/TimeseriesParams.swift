@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Parameters that control how we construct the time series for each slice.
-public struct TimeseriesParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TimeseriesParams: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. How long should we go in the past when fetching the timeline used for
@@ -39,7 +39,7 @@ public struct TimeseriesParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// [google.cloud.timeseriesinsights.v1.EvaluatedSlice.status]: <doc:EvaluatedSlice/status>
   /// [google.cloud.timeseriesinsights.v1.QueryDataSetRequest.detection_time]: <doc:QueryDataSetRequest/detectionTime>
-  public var forecastHistory: GoogleCloudWKT.Duration? = nil
+  public var forecastHistory: GoogleWKT.Duration? = nil
 
   /// Required. The time granularity of the time series (on the x-axis). Each time series
   /// point starting at time T will aggregate all events for a particular slice
@@ -56,7 +56,7 @@ public struct TimeseriesParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Currently, the minimal supported granularity is 10 seconds.
   ///
   /// [google.cloud.timeseriesinsights.v1.TimeseriesParams.metric]: <doc:TimeseriesParams/metric>
-  public var granularity: GoogleCloudWKT.Duration? = nil
+  public var granularity: GoogleWKT.Duration? = nil
 
   /// Optional. Denotes the [name][google.cloud.timeseriesinsights.v1.EventDimension.name] of a numerical
   /// dimension that will have its values aggregated to compute the y-axis of the
@@ -149,7 +149,7 @@ public struct TimeseriesParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var metricAggregationMethod: TimeseriesParams.AggregationMethod =
     TimeseriesParams.AggregationMethod()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TimeseriesParams`.
   public init() {}
@@ -189,9 +189,8 @@ public struct TimeseriesParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.forecastHistory = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .forecastHistory)
-    self.granularity = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .granularity)
+      GoogleWKT.Duration.self, forKey: .forecastHistory)
+    self.granularity = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .granularity)
     self.metric = try container.decodeIfPresent(Swift.String.self, forKey: .metric)
     if let value = try container.decodeIfPresent(
       TimeseriesParams.AggregationMethod.self, forKey: .metricAggregationMethod)
@@ -200,7 +199,7 @@ public struct TimeseriesParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -332,10 +331,10 @@ public struct TimeseriesParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.timeseriesinsights.v1.TimeseriesParams"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

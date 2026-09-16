@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// CleanupPolicyCondition is a set of conditions attached to a CleanupPolicy.
 /// If multiple entries are set, all must be satisfied for the condition to be
 /// satisfied.
-public struct CleanupPolicyCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CleanupPolicyCondition: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Match versions by tag status.
@@ -36,12 +36,12 @@ public struct CleanupPolicyCondition: Codable, Equatable, GoogleCloudWKT._AnyPac
   public var packageNamePrefixes: [Swift.String] = []
 
   /// Match versions older than a duration.
-  public var olderThan: GoogleCloudWKT.Duration? = nil
+  public var olderThan: GoogleWKT.Duration? = nil
 
   /// Match versions newer than a duration.
-  public var newerThan: GoogleCloudWKT.Duration? = nil
+  public var newerThan: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CleanupPolicyCondition`.
   public init() {}
@@ -97,11 +97,11 @@ public struct CleanupPolicyCondition: Codable, Equatable, GoogleCloudWKT._AnyPac
     {
       self.packageNamePrefixes = value
     }
-    self.olderThan = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .olderThan)
-    self.newerThan = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .newerThan)
+    self.olderThan = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .olderThan)
+    self.newerThan = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .newerThan)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -233,10 +233,10 @@ public struct CleanupPolicyCondition: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.CleanupPolicyCondition"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

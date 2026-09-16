@@ -19,21 +19,21 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service describing handlers for resources
 ///
 /// @Snippet(path: "AuditManagerQuickstart")
 public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   let inner: any Clients.AuditManagerStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `AuditManagerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.AuditManagerStub = try Clients.AuditManagerTransport(options)
     inner = Clients.AuditManagerRetry(inner, options: options)
     if let logger = options.logger {
@@ -52,7 +52,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_EnrollResource")
   public func enrollResource(
-    request: EnrollResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: EnrollResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.Enrollment {
     try await self.inner.enrollResource(request: request, options: options)
   }
@@ -68,7 +68,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_GenerateAuditScopeReport")
   public func generateAuditScopeReport(
-    request: GenerateAuditScopeReportRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateAuditScopeReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.AuditScopeReport {
     try await self.inner.generateAuditScopeReport(request: request, options: options)
   }
@@ -79,7 +79,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_GenerateAuditReport")
   public func generateAuditReport(
-    request: GenerateAuditReportRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateAuditReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.generateAuditReport(request: request, options: options)
   }
@@ -90,21 +90,21 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_GenerateAuditReport")
   public func generateAuditReport(
-    withPolling: GenerateAuditReportRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuditReport> {
+    withPolling: GenerateAuditReportRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AuditReport> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AuditReport>.State in
+        -> GoogleGax._PollableOperationImpl<AuditReport>.State in
       return try op._extractStatus(AuditReport.self)
     }
     let rawOp = try await self.generateAuditReport(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AuditReport>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AuditReport>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -117,7 +117,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_ListAuditReports")
   public func listAuditReports(
-    request: ListAuditReportsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAuditReportsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.ListAuditReportsResponse {
     try await self.inner.listAuditReports(request: request, options: options)
   }
@@ -127,7 +127,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_ListAuditReports")
   public func listAuditReports(
-    byItem: ListAuditReportsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAuditReportsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AuditReport, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAuditManagerV1.ListAuditReportsResponse in
@@ -135,14 +135,14 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
       request.pageToken = token
       return try await self.listAuditReports(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the full metadata and findings for an audit report.
   ///
   /// @Snippet(path: "AuditManager_GetAuditReport")
   public func getAuditReport(
-    request: GetAuditReportRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAuditReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.AuditReport {
     try await self.inner.getAuditReport(request: request, options: options)
   }
@@ -151,7 +151,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_GetResourceEnrollmentStatus")
   public func getResourceEnrollmentStatus(
-    request: GetResourceEnrollmentStatusRequest, options: GoogleCloudGax.RequestOptions
+    request: GetResourceEnrollmentStatusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.ResourceEnrollmentStatus {
     try await self.inner.getResourceEnrollmentStatus(request: request, options: options)
   }
@@ -161,7 +161,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_ListResourceEnrollmentStatuses")
   public func listResourceEnrollmentStatuses(
-    request: ListResourceEnrollmentStatusesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListResourceEnrollmentStatusesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.ListResourceEnrollmentStatusesResponse {
     try await self.inner.listResourceEnrollmentStatuses(request: request, options: options)
   }
@@ -171,7 +171,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_ListResourceEnrollmentStatuses")
   public func listResourceEnrollmentStatuses(
-    byItem: ListResourceEnrollmentStatusesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListResourceEnrollmentStatusesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ResourceEnrollmentStatus, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -180,7 +180,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
       request.pageToken = token
       return try await self.listResourceEnrollmentStatuses(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists the controls that you must implement to become compliant to a
@@ -188,7 +188,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_ListControls")
   public func listControls(
-    request: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListControlsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.ListControlsResponse {
     try await self.inner.listControls(request: request, options: options)
   }
@@ -198,7 +198,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_ListControls")
   public func listControls(
-    byItem: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListControlsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Control, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAuditManagerV1.ListControlsResponse in
@@ -206,7 +206,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
       request.pageToken = token
       return try await self.listControls(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists information about the supported locations for this service.
@@ -230,7 +230,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -256,7 +256,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -264,14 +264,14 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "AuditManager_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -282,7 +282,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -293,7 +293,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -301,7 +301,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -310,7 +310,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -321,7 +321,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -332,7 +332,7 @@ public final class AuditManagerClient: Clients.AuditManagerProtocol, Sendable {
   ///
   /// @Snippet(path: "AuditManager_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -371,8 +371,8 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `AuditManagerClient.generateAuditReport`.
-    func generateAuditReport(withPolling: GenerateAuditReportRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<AuditReport>
+    func generateAuditReport(withPolling: GenerateAuditReportRequest) async throws -> any GoogleGax
+      .PollableOperation<AuditReport>
 
     /// See `AuditManagerClient.generateAuditReport`.
     func generateAuditReport(
@@ -380,7 +380,7 @@ extension Clients {
       gcsUri: Swift.String,
       complianceStandard: Swift.String,
       reportFormat: GenerateAuditReportRequest.AuditReportFormat,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AuditReport>
+    ) async throws -> any GoogleGax.PollableOperation<AuditReport>
 
     /// See `AuditManagerClient.listAuditReports`.
     func listAuditReports(request: ListAuditReportsRequest) async throws
@@ -488,97 +488,97 @@ extension Clients {
 
     /// See `AuditManagerClient.enrollResource`.
     func enrollResource(
-      request: EnrollResourceRequest, options: GoogleCloudGax.RequestOptions
+      request: EnrollResourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.Enrollment
 
     /// See `AuditManagerClient.generateAuditScopeReport`.
     func generateAuditScopeReport(
-      request: GenerateAuditScopeReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAuditScopeReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.AuditScopeReport
 
     /// See `AuditManagerClient.generateAuditReport`.
     func generateAuditReport(
-      request: GenerateAuditReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAuditReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AuditManagerClient.generateAuditReport`.
     func generateAuditReport(
-      withPolling: GenerateAuditReportRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AuditReport>
+      withPolling: GenerateAuditReportRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AuditReport>
 
     /// See `AuditManagerClient.listAuditReports`.
     func listAuditReports(
-      request: ListAuditReportsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAuditReportsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.ListAuditReportsResponse
 
     /// See `AuditManagerClient.listAuditReports`.
     func listAuditReports(
-      byItem: ListAuditReportsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAuditReportsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AuditReport, Swift.Error>
 
     /// See `AuditManagerClient.getAuditReport`.
     func getAuditReport(
-      request: GetAuditReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAuditReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.AuditReport
 
     /// See `AuditManagerClient.getResourceEnrollmentStatus`.
     func getResourceEnrollmentStatus(
-      request: GetResourceEnrollmentStatusRequest, options: GoogleCloudGax.RequestOptions
+      request: GetResourceEnrollmentStatusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.ResourceEnrollmentStatus
 
     /// See `AuditManagerClient.listResourceEnrollmentStatuses`.
     func listResourceEnrollmentStatuses(
-      request: ListResourceEnrollmentStatusesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListResourceEnrollmentStatusesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.ListResourceEnrollmentStatusesResponse
 
     /// See `AuditManagerClient.listResourceEnrollmentStatuses`.
     func listResourceEnrollmentStatuses(
-      byItem: ListResourceEnrollmentStatusesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListResourceEnrollmentStatusesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ResourceEnrollmentStatus, Swift.Error>
 
     /// See `AuditManagerClient.listControls`.
     func listControls(
-      request: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListControlsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.ListControlsResponse
 
     /// See `AuditManagerClient.listControls`.
     func listControls(
-      byItem: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListControlsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Control, Swift.Error>
 
     /// See `AuditManagerClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `AuditManagerClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `AuditManagerClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `AuditManagerClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `AuditManagerClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `AuditManagerClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AuditManagerClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -592,9 +592,9 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func enrollResource(
-    request: EnrollResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: EnrollResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.Enrollment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func enrollResource(
@@ -615,9 +615,9 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func generateAuditScopeReport(
-    request: GenerateAuditScopeReportRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateAuditScopeReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.AuditScopeReport {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func generateAuditScopeReport(
@@ -640,24 +640,24 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func generateAuditReport(
-    request: GenerateAuditReportRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateAuditReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func generateAuditReport(withPolling: GenerateAuditReportRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AuditReport>
+    -> any GoogleGax.PollableOperation<AuditReport>
   {
     try await self.generateAuditReport(withPolling: withPolling, options: .init())
   }
 
   public func generateAuditReport(
-    withPolling: GenerateAuditReportRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuditReport> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AuditReport>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: GenerateAuditReportRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AuditReport> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AuditReport>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -666,7 +666,7 @@ extension Clients.AuditManagerProtocol {
     gcsUri: Swift.String,
     complianceStandard: Swift.String,
     reportFormat: GenerateAuditReportRequest.AuditReportFormat,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuditReport> {
+  ) async throws -> any GoogleGax.PollableOperation<AuditReport> {
     let request = GenerateAuditReportRequest().with {
       $0.scope = scope
       $0.destination = .gcsUri(gcsUri)
@@ -683,9 +683,9 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func listAuditReports(
-    request: ListAuditReportsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAuditReportsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.ListAuditReportsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAuditReports(
@@ -695,13 +695,13 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func listAuditReports(
-    byItem: ListAuditReportsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAuditReportsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AuditReport, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAuditManagerV1.ListAuditReportsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAuditReports(
@@ -720,9 +720,9 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func getAuditReport(
-    request: GetAuditReportRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAuditReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.AuditReport {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAuditReport(
@@ -741,9 +741,9 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func getResourceEnrollmentStatus(
-    request: GetResourceEnrollmentStatusRequest, options: GoogleCloudGax.RequestOptions
+    request: GetResourceEnrollmentStatusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.ResourceEnrollmentStatus {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getResourceEnrollmentStatus(
@@ -762,9 +762,9 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func listResourceEnrollmentStatuses(
-    request: ListResourceEnrollmentStatusesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListResourceEnrollmentStatusesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.ListResourceEnrollmentStatusesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listResourceEnrollmentStatuses(
@@ -774,14 +774,14 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func listResourceEnrollmentStatuses(
-    byItem: ListResourceEnrollmentStatusesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListResourceEnrollmentStatusesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ResourceEnrollmentStatus, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudAuditManagerV1.ListResourceEnrollmentStatusesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listResourceEnrollmentStatuses(
@@ -800,9 +800,9 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func listControls(
-    request: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListControlsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAuditManagerV1.ListControlsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listControls(
@@ -812,13 +812,13 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func listControls(
-    byItem: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListControlsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Control, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAuditManagerV1.ListControlsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listControls(
@@ -837,9 +837,9 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -849,13 +849,13 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -865,9 +865,9 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -877,9 +877,9 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -889,13 +889,13 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -916,9 +916,9 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -935,9 +935,9 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -954,9 +954,9 @@ extension Clients.AuditManagerProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

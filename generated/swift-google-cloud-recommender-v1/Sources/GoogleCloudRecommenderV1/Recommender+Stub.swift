@@ -15,61 +15,61 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol RecommenderStub: Sendable {
     func listInsights(
-      request: ListInsightsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInsightsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.ListInsightsResponse
 
     func getInsight(
-      request: GetInsightRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInsightRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Insight
 
     func markInsightAccepted(
-      request: MarkInsightAcceptedRequest, options: GoogleCloudGax.RequestOptions
+      request: MarkInsightAcceptedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Insight
 
     func listRecommendations(
-      request: ListRecommendationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRecommendationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.ListRecommendationsResponse
 
     func getRecommendation(
-      request: GetRecommendationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRecommendationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Recommendation
 
     func markRecommendationDismissed(
-      request: MarkRecommendationDismissedRequest, options: GoogleCloudGax.RequestOptions
+      request: MarkRecommendationDismissedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Recommendation
 
     func markRecommendationClaimed(
-      request: MarkRecommendationClaimedRequest, options: GoogleCloudGax.RequestOptions
+      request: MarkRecommendationClaimedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Recommendation
 
     func markRecommendationSucceeded(
-      request: MarkRecommendationSucceededRequest, options: GoogleCloudGax.RequestOptions
+      request: MarkRecommendationSucceededRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Recommendation
 
     func markRecommendationFailed(
-      request: MarkRecommendationFailedRequest, options: GoogleCloudGax.RequestOptions
+      request: MarkRecommendationFailedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.Recommendation
 
     func getRecommenderConfig(
-      request: GetRecommenderConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRecommenderConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.RecommenderConfig
 
     func updateRecommenderConfig(
-      request: UpdateRecommenderConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRecommenderConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.RecommenderConfig
 
     func getInsightTypeConfig(
-      request: GetInsightTypeConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInsightTypeConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.InsightTypeConfig
 
     func updateInsightTypeConfig(
-      request: UpdateInsightTypeConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateInsightTypeConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecommenderV1.InsightTypeConfig
   }
 }

@@ -16,139 +16,139 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AppPlatformStub: Sendable {
     func listApplications(
-      request: ListApplicationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListApplicationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListApplicationsResponse
 
     func getApplication(
-      request: GetApplicationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetApplicationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Application
 
     func createApplication(
-      request: CreateApplicationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateApplicationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateApplication(
-      request: UpdateApplicationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateApplicationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteApplication(
-      request: DeleteApplicationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteApplicationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deployApplication(
-      request: DeployApplicationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeployApplicationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func undeployApplication(
-      request: UndeployApplicationRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeployApplicationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func addApplicationStreamInput(
-      request: AddApplicationStreamInputRequest, options: GoogleCloudGax.RequestOptions
+      request: AddApplicationStreamInputRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func removeApplicationStreamInput(
-      request: RemoveApplicationStreamInputRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveApplicationStreamInputRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateApplicationStreamInput(
-      request: UpdateApplicationStreamInputRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateApplicationStreamInputRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listInstances(
-      request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListInstancesResponse
 
     func getInstance(
-      request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Instance
 
     func createApplicationInstances(
-      request: CreateApplicationInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateApplicationInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteApplicationInstances(
-      request: DeleteApplicationInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteApplicationInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateApplicationInstances(
-      request: UpdateApplicationInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateApplicationInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listDrafts(
-      request: ListDraftsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDraftsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListDraftsResponse
 
     func getDraft(
-      request: GetDraftRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDraftRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Draft
 
     func createDraft(
-      request: CreateDraftRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDraftRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateDraft(
-      request: UpdateDraftRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDraftRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteDraft(
-      request: DeleteDraftRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDraftRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listProcessors(
-      request: ListProcessorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProcessorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListProcessorsResponse
 
     func listPrebuiltProcessors(
-      request: ListPrebuiltProcessorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPrebuiltProcessorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ListPrebuiltProcessorsResponse
 
     func getProcessor(
-      request: GetProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Processor
 
     func createProcessor(
-      request: CreateProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateProcessor(
-      request: UpdateProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteProcessor(
-      request: DeleteProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

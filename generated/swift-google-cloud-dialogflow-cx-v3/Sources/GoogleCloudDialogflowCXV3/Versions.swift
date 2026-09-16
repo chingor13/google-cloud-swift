@@ -20,10 +20,10 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing [Versions][google.cloud.dialogflow.cx.v3.Version].
   ///
@@ -32,11 +32,11 @@
   /// @Snippet(path: "VersionsQuickstart")
   public final class VersionsClient: Clients.VersionsProtocol, Sendable {
     let inner: any Clients.VersionsStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `VersionsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.VersionsStub = try Clients.VersionsTransport(options)
       inner = Clients.VersionsRetry(inner, options: options)
       if let logger = options.logger {
@@ -54,7 +54,7 @@
     ///
     /// @Snippet(path: "Versions_ListVersions")
     public func listVersions(
-      request: ListVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListVersionsResponse {
       try await self.inner.listVersions(request: request, options: options)
     }
@@ -66,7 +66,7 @@
     ///
     /// @Snippet(path: "Versions_ListVersions")
     public func listVersions(
-      byItem: ListVersionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListVersionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Version, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListVersionsResponse in
@@ -74,7 +74,7 @@
         request.pageToken = token
         return try await self.listVersions(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves the specified [Version][google.cloud.dialogflow.cx.v3.Version].
@@ -83,7 +83,7 @@
     ///
     /// @Snippet(path: "Versions_GetVersion")
     public func getVersion(
-      request: GetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Version {
       try await self.inner.getVersion(request: request, options: options)
     }
@@ -105,7 +105,7 @@
     ///
     /// @Snippet(path: "Versions_CreateVersion")
     public func createVersion(
-      request: CreateVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createVersion(request: request, options: options)
     }
@@ -127,21 +127,21 @@
     ///
     /// @Snippet(path: "Versions_CreateVersion")
     public func createVersion(
-      withPolling: CreateVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Version> {
+      withPolling: CreateVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Version> {
       let extractStatus = {
-        (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Version>.State in
+        (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Version>.State
+        in
         return try op._extractStatus(Version.self)
       }
       let rawOp = try await self.createVersion(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Version>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Version>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -155,7 +155,7 @@
     ///
     /// @Snippet(path: "Versions_UpdateVersion")
     public func updateVersion(
-      request: UpdateVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Version {
       try await self.inner.updateVersion(request: request, options: options)
     }
@@ -166,7 +166,7 @@
     ///
     /// @Snippet(path: "Versions_DeleteVersion")
     public func deleteVersion(
-      request: DeleteVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteVersionRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteVersion(request: request, options: options)
     }
@@ -184,7 +184,7 @@
     ///
     /// @Snippet(path: "Versions_LoadVersion")
     public func loadVersion(
-      request: LoadVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: LoadVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.loadVersion(request: request, options: options)
     }
@@ -202,21 +202,21 @@
     ///
     /// @Snippet(path: "Versions_LoadVersion")
     public func loadVersion(
-      withPolling: LoadVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: LoadVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.loadVersion(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -228,7 +228,7 @@
     ///
     /// @Snippet(path: "Versions_CompareVersions")
     public func compareVersions(
-      request: CompareVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: CompareVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.CompareVersionsResponse {
       try await self.inner.compareVersions(request: request, options: options)
     }
@@ -254,7 +254,7 @@
     ///
     /// @Snippet(path: "Versions_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -280,7 +280,7 @@
     ///
     /// @Snippet(path: "Versions_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -288,14 +288,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "Versions_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -306,7 +306,7 @@
     ///
     /// @Snippet(path: "Versions_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -317,7 +317,7 @@
     ///
     /// @Snippet(path: "Versions_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -325,7 +325,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -334,7 +334,7 @@
     ///
     /// @Snippet(path: "Versions_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -345,7 +345,7 @@
     ///
     /// @Snippet(path: "Versions_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -384,14 +384,14 @@
       func createVersion(request: CreateVersionRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `VersionsClient.createVersion`.
-      func createVersion(withPolling: CreateVersionRequest) async throws -> any GoogleCloudGax
+      func createVersion(withPolling: CreateVersionRequest) async throws -> any GoogleGax
         .PollableOperation<Version>
 
       /// See `VersionsClient.createVersion`.
       func createVersion(
         parent: Swift.String,
         version: Version?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Version>
+      ) async throws -> any GoogleGax.PollableOperation<Version>
 
       /// See `VersionsClient.updateVersion`.
       func updateVersion(request: UpdateVersionRequest) async throws
@@ -400,7 +400,7 @@
       /// See `VersionsClient.updateVersion`.
       func updateVersion(
         version: Version?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDialogflowCXV3.Version
 
       /// See `VersionsClient.deleteVersion`.
@@ -415,13 +415,13 @@
       func loadVersion(request: LoadVersionRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `VersionsClient.loadVersion`.
-      func loadVersion(withPolling: LoadVersionRequest) async throws -> any GoogleCloudGax
+      func loadVersion(withPolling: LoadVersionRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `VersionsClient.loadVersion`.
       func loadVersion(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `VersionsClient.compareVersions`.
       func compareVersions(request: CompareVersionsRequest) async throws
@@ -470,82 +470,82 @@
 
       /// See `VersionsClient.listVersions`.
       func listVersions(
-        request: ListVersionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListVersionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListVersionsResponse
 
       /// See `VersionsClient.listVersions`.
       func listVersions(
-        byItem: ListVersionsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListVersionsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Version, Swift.Error>
 
       /// See `VersionsClient.getVersion`.
       func getVersion(
-        request: GetVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: GetVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Version
 
       /// See `VersionsClient.createVersion`.
       func createVersion(
-        request: CreateVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `VersionsClient.createVersion`.
       func createVersion(
-        withPolling: CreateVersionRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Version>
+        withPolling: CreateVersionRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Version>
 
       /// See `VersionsClient.updateVersion`.
       func updateVersion(
-        request: UpdateVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Version
 
       /// See `VersionsClient.deleteVersion`.
       func deleteVersion(
-        request: DeleteVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteVersionRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `VersionsClient.loadVersion`.
       func loadVersion(
-        request: LoadVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: LoadVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `VersionsClient.loadVersion`.
       func loadVersion(
-        withPolling: LoadVersionRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: LoadVersionRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `VersionsClient.compareVersions`.
       func compareVersions(
-        request: CompareVersionsRequest, options: GoogleCloudGax.RequestOptions
+        request: CompareVersionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.CompareVersionsResponse
 
       /// See `VersionsClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `VersionsClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `VersionsClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `VersionsClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `VersionsClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `VersionsClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -559,9 +559,9 @@
     }
 
     public func listVersions(
-      request: ListVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListVersionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listVersions(
@@ -571,13 +571,13 @@
     }
 
     public func listVersions(
-      byItem: ListVersionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListVersionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Version, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListVersionsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listVersions(
@@ -596,9 +596,9 @@
     }
 
     public func getVersion(
-      request: GetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Version {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getVersion(
@@ -617,31 +617,31 @@
     }
 
     public func createVersion(
-      request: CreateVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func createVersion(withPolling: CreateVersionRequest) async throws -> any GoogleCloudGax
+    public func createVersion(withPolling: CreateVersionRequest) async throws -> any GoogleGax
       .PollableOperation<Version>
     {
       try await self.createVersion(withPolling: withPolling, options: .init())
     }
 
     public func createVersion(
-      withPolling: CreateVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Version> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Version>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Version> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Version>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func createVersion(
       parent: Swift.String,
       version: Version?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Version> {
+    ) async throws -> any GoogleGax.PollableOperation<Version> {
       let request = CreateVersionRequest().with {
         $0.parent = parent
         $0.version = version
@@ -656,14 +656,14 @@
     }
 
     public func updateVersion(
-      request: UpdateVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Version {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateVersion(
       version: Version?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDialogflowCXV3.Version {
       let request = UpdateVersionRequest().with {
         $0.version = version
@@ -677,9 +677,9 @@
     }
 
     public func deleteVersion(
-      request: DeleteVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteVersionRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteVersion(
@@ -697,30 +697,30 @@
     }
 
     public func loadVersion(
-      request: LoadVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: LoadVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func loadVersion(withPolling: LoadVersionRequest) async throws -> any GoogleCloudGax
+    public func loadVersion(withPolling: LoadVersionRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
     {
       try await self.loadVersion(withPolling: withPolling, options: .init())
     }
 
     public func loadVersion(
-      withPolling: LoadVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: LoadVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func loadVersion(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = LoadVersionRequest().with {
         $0.name = name
       }
@@ -734,9 +734,9 @@
     }
 
     public func compareVersions(
-      request: CompareVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: CompareVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.CompareVersionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func compareVersions(
@@ -755,9 +755,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -767,13 +767,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -783,9 +783,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -795,9 +795,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -807,13 +807,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -834,9 +834,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -853,9 +853,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

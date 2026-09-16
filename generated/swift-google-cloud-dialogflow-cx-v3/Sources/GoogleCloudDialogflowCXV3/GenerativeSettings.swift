@@ -16,10 +16,10 @@
 
 #if Agents
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Settings for Generative AI.
-  public struct GenerativeSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GenerativeSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Format:
@@ -41,7 +41,7 @@
     /// LLM model settings.
     public var llmModelSettings: LlmModelSettings? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GenerativeSettings`.
     public init() {}
@@ -100,7 +100,7 @@
         LlmModelSettings.self, forKey: .llmModelSettings)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -120,7 +120,7 @@
     }
 
     /// Settings for Generative Fallback.
-    public struct FallbackSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct FallbackSettings: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Display name of the selected prompt.
@@ -130,7 +130,7 @@
       /// "conservative" or "chatty", or user defined ones.
       public var promptTemplates: [GenerativeSettings.FallbackSettings.PromptTemplate] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `FallbackSettings`.
       public init() {}
@@ -175,7 +175,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -189,7 +189,7 @@
       }
 
       /// Prompt template.
-      public struct PromptTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct PromptTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Prompt name.
@@ -204,8 +204,7 @@
         /// users.
         public var frozen: Swift.Bool = Swift.Bool()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `PromptTemplate`.
         public init() {}
@@ -253,7 +252,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -271,11 +270,11 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.GenerativeSettings.FallbackSettings.PromptTemplate"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -283,11 +282,11 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.GenerativeSettings.FallbackSettings"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -295,7 +294,7 @@
     /// like "You are <agent>. You are a helpful and verbose <agent_identity> at
     /// <business>, <business_description>. Your task is to help humans on
     /// <agent_scope>".
-    public struct KnowledgeConnectorSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct KnowledgeConnectorSettings: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the company, organization or other entity that the agent
@@ -321,7 +320,7 @@
       /// couldn't pick a proper answer). Per default the feature is enabled.
       public var disableDataStoreFallback: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `KnowledgeConnectorSettings`.
       public init() {}
@@ -388,7 +387,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -409,22 +408,22 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.GenerativeSettings.KnowledgeConnectorSettings"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.GenerativeSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

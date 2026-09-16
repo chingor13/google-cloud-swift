@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A reservation group is a container for reservations.
-public struct ReservationGroup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ReservationGroup: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the reservation group, e.g.,
@@ -35,15 +35,15 @@ public struct ReservationGroup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var parentGroup: Swift.String = Swift.String()
 
   /// Output only. Creation time of the reservation group.
-  public var creationTime: GoogleCloudWKT.Timestamp? = nil
+  public var creationTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Last update time of the reservation group via a user
   /// operation. This timestamp is updated only when an update operation
   /// explicitly targets this reservation group directly. It is not updated when
   /// parent or child groups are created, updated, or deleted.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ReservationGroup`.
   public init() {}
@@ -89,12 +89,11 @@ public struct ReservationGroup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.parentGroup = value
     }
     self.creationTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .creationTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      GoogleWKT.Timestamp.self, forKey: .creationTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -112,10 +111,10 @@ public struct ReservationGroup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.reservation.v1.ReservationGroup"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for UpdateRestorePlan.
-public struct UpdateRestorePlanRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateRestorePlanRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. A new version of the RestorePlan resource that contains updated
@@ -33,9 +33,9 @@ public struct UpdateRestorePlanRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   /// written to the target RestorePlan resource.
   /// Note that OUTPUT_ONLY and IMMUTABLE fields in `restore_plan` are ignored
   /// and are not used to update the target RestorePlan.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateRestorePlanRequest`.
   public init() {}
@@ -71,11 +71,10 @@ public struct UpdateRestorePlanRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.restorePlan = try container.decodeIfPresent(RestorePlan.self, forKey: .restorePlan)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -91,10 +90,10 @@ public struct UpdateRestorePlanRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkebackup.v1.UpdateRestorePlanRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

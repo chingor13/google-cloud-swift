@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metrics for a single Key.
-public struct Metrics: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Metrics: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Identifier. The name of the metrics, in the format
@@ -27,7 +27,7 @@ public struct Metrics: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Inclusive start time aligned to a day in the America/Los_Angeles (Pacific)
   /// timezone.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Metrics are continuous and in order by dates, and in the granularity
   /// of day. All Key types should have score-based data.
@@ -38,7 +38,7 @@ public struct Metrics: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// challenge-based data.
   public var challengeMetrics: [ChallengeMetrics] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Metrics`.
   public init() {}
@@ -80,8 +80,7 @@ public struct Metrics: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
     if let value = try container.decodeIfPresent([ScoreMetrics].self, forKey: .scoreMetrics) {
       self.scoreMetrics = value
     }
@@ -91,7 +90,7 @@ public struct Metrics: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -109,10 +108,10 @@ public struct Metrics: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.Metrics"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,42 +15,42 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ConnectionServiceStub: Sendable {
     func createConnection(
-      request: CreateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryConnectionV1.Connection
 
     func getConnection(
-      request: GetConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryConnectionV1.Connection
 
     func listConnections(
-      request: ListConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryConnectionV1.ListConnectionsResponse
 
     func updateConnection(
-      request: UpdateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryConnectionV1.Connection
 
     func deleteConnection(
-      request: DeleteConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
   }
 }

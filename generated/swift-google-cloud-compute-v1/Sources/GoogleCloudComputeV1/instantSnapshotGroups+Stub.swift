@@ -16,44 +16,42 @@
 
 #if InstantSnapshotGroups
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol InstantSnapshotGroupsStub: Sendable {
       func delete(
-        request: InstantSnapshotGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: InstantSnapshotGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: InstantSnapshotGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstantSnapshotGroupsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstantSnapshotGroup
 
       func getIamPolicy(
-        request: InstantSnapshotGroupsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstantSnapshotGroupsClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: InstantSnapshotGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InstantSnapshotGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: InstantSnapshotGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InstantSnapshotGroupsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ListInstantSnapshotGroups
 
       func setIamPolicy(
-        request: InstantSnapshotGroupsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstantSnapshotGroupsClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
         request: InstantSnapshotGroupsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

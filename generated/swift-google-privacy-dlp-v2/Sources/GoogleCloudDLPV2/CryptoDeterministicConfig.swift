@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Pseudonymization method that generates deterministic encryption for the given
 /// input. Outputs a base64 encoded representation of the encrypted output.
 /// Uses AES-SIV based on the RFC https://tools.ietf.org/html/rfc5297.
-public struct CryptoDeterministicConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CryptoDeterministicConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The key used by the encryption function. For deterministic encryption
@@ -82,7 +82,7 @@ public struct CryptoDeterministicConfig: Codable, Equatable, GoogleCloudWKT._Any
   /// applied to both structured and unstructured `ContentItem`s.
   public var context: FieldId? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CryptoDeterministicConfig`.
   public init() {}
@@ -125,7 +125,7 @@ public struct CryptoDeterministicConfig: Codable, Equatable, GoogleCloudWKT._Any
     self.context = try container.decodeIfPresent(FieldId.self, forKey: .context)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -142,10 +142,10 @@ public struct CryptoDeterministicConfig: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.CryptoDeterministicConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,14 +16,14 @@
 
 #if InstanceTemplates || Instances || MachineImages || RegionInstanceTemplates || RegionInstances
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Specifies options for controlling advanced machine features.
   /// Options that would traditionally be configured in a BIOS belong
   /// here. Features that require operating system support may have
   /// corresponding entries in the GuestOsFeatures of anImage (e.g., whether or not the OS in theImage supports nested virtualization being enabled or
   /// disabled).
-  public struct AdvancedMachineFeatures: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AdvancedMachineFeatures: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Whether to enable nested virtualization or not (default is false).
@@ -56,7 +56,7 @@
     /// platform's SMT width.
     public var visibleCoreCount: Swift.Int32? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AdvancedMachineFeatures`.
     public init() {}
@@ -111,7 +111,7 @@
         Swift.Int32.self, forKey: .visibleCoreCount)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -246,11 +246,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.AdvancedMachineFeatures"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

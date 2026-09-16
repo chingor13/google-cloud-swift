@@ -16,21 +16,21 @@
 
 #if SqlConnectService
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SqlConnectServiceStub: Sendable {
       func getConnectSettings(
-        request: GetConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: GetConnectSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.ConnectSettings
 
       func resolveConnectSettings(
-        request: ResolveConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: ResolveConnectSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.ConnectSettings
 
       func generateEphemeralCert(
-        request: GenerateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
+        request: GenerateEphemeralCertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.GenerateEphemeralCertResponse
     }
   }

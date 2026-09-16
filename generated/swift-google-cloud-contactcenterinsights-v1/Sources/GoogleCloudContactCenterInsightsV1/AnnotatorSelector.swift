@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Selector of all available annotators and phrase matchers to run.
-public struct AnnotatorSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AnnotatorSelector: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Whether to run the interruption annotator.
@@ -69,7 +69,7 @@ public struct AnnotatorSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// Configuration for the QA annotator.
   public var qaConfig: AnnotatorSelector.QaConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AnnotatorSelector`.
   public init() {}
@@ -170,7 +170,7 @@ public struct AnnotatorSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable
       AnnotatorSelector.QaConfig.self, forKey: .qaConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -195,14 +195,14 @@ public struct AnnotatorSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable
   }
 
   /// Configuration for summarization.
-  public struct SummarizationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SummarizationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Summarization must use either a preexisting conversation profile or one
     /// of the supported default models.
     public var modelSource: OneOf_ModelSource? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SummarizationConfig`.
     public init() {}
@@ -261,7 +261,7 @@ public struct AnnotatorSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable
       self.modelSource = modelSource
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -401,22 +401,22 @@ public struct AnnotatorSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for the QA feature.
-  public struct QaConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QaConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Which scorecards should be scored.
     public var scorecardSource: OneOf_ScorecardSource? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QaConfig`.
     public init() {}
@@ -468,7 +468,7 @@ public struct AnnotatorSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable
       self.scorecardSource = scorecardSource
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -487,13 +487,13 @@ public struct AnnotatorSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
 
     /// Container for a list of scorecards.
-    public struct ScorecardList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ScorecardList: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// List of QaScorecardRevisions.
       public var qaScorecardRevisions: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ScorecardList`.
       public init() {}
@@ -533,7 +533,7 @@ public struct AnnotatorSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -549,11 +549,11 @@ public struct AnnotatorSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable
         return
           "type.googleapis.com/google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig.ScorecardList"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -566,21 +566,21 @@ public struct AnnotatorSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.contactcenterinsights.v1.AnnotatorSelector.QaConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.AnnotatorSelector"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

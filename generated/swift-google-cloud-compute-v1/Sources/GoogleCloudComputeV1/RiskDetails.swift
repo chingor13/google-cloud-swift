@@ -16,20 +16,20 @@
 
 #if ReliabilityRisks
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Detailed insights and metrics about a detected reliability risk.
-  public struct RiskDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RiskDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The duration of the risk since it was detected.
-    public var duration: GoogleCloudWKT.Duration? = nil
+    public var duration: GoogleWKT.Duration? = nil
 
     /// Insight details for global DNS risk.
     public var globalDnsInsight: RiskDetailsGlobalDnsInsight? = nil
 
     /// The last time the risk was updated.
-    public var lastUpdateTimestamp: GoogleCloudWKT.Timestamp? = nil
+    public var lastUpdateTimestamp: GoogleWKT.Timestamp? = nil
 
     /// The severity of the risk.
     public var severity: RiskDetails.Severity? = nil
@@ -37,7 +37,7 @@
     /// The type of risk.
     public var type: RiskDetails.Type_? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RiskDetails`.
     public init() {}
@@ -78,16 +78,16 @@
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.duration = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .duration)
+      self.duration = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .duration)
       self.globalDnsInsight = try container.decodeIfPresent(
         RiskDetailsGlobalDnsInsight.self, forKey: .globalDnsInsight)
       self.lastUpdateTimestamp = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .lastUpdateTimestamp)
+        GoogleWKT.Timestamp.self, forKey: .lastUpdateTimestamp)
       self.severity = try container.decodeIfPresent(RiskDetails.Severity.self, forKey: .severity)
       self.type = try container.decodeIfPresent(RiskDetails.Type_.self, forKey: .type)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -327,11 +327,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.RiskDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

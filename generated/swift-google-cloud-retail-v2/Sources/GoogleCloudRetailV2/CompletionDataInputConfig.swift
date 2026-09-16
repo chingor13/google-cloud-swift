@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The input config source for completion data.
-public struct CompletionDataInputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CompletionDataInputConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The source of the input.
@@ -34,7 +34,7 @@ public struct CompletionDataInputConfig: Codable, Equatable, GoogleCloudWKT._Any
   /// [google.cloud.retail.v2.BigQuerySource.data_schema]: <doc:BigQuerySource/dataSchema>
   public var source: OneOf_Source? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CompletionDataInputConfig`.
   public init() {}
@@ -86,7 +86,7 @@ public struct CompletionDataInputConfig: Codable, Equatable, GoogleCloudWKT._Any
     self.source = source
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -127,10 +127,10 @@ public struct CompletionDataInputConfig: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.CompletionDataInputConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

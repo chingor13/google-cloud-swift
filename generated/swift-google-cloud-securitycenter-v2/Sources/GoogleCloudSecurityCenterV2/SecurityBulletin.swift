@@ -15,23 +15,23 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// SecurityBulletin are notifications of vulnerabilities of Google products.
-public struct SecurityBulletin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SecurityBulletin: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// ID of the bulletin corresponding to the vulnerability.
   public var bulletinId: Swift.String = Swift.String()
 
   /// Submission time of this Security Bulletin.
-  public var submissionTime: GoogleCloudWKT.Timestamp? = nil
+  public var submissionTime: GoogleWKT.Timestamp? = nil
 
   /// This represents a version that the cluster receiving this notification
   /// should be upgraded to, based on its current version. For example, 1.15.0
   public var suggestedUpgradeVersion: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SecurityBulletin`.
   public init() {}
@@ -72,7 +72,7 @@ public struct SecurityBulletin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.bulletinId = value
     }
     self.submissionTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .submissionTime)
+      GoogleWKT.Timestamp.self, forKey: .submissionTime)
     if let value = try container.decodeIfPresent(
       Swift.String.self, forKey: .suggestedUpgradeVersion)
     {
@@ -80,7 +80,7 @@ public struct SecurityBulletin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -97,10 +97,10 @@ public struct SecurityBulletin: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.SecurityBulletin"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

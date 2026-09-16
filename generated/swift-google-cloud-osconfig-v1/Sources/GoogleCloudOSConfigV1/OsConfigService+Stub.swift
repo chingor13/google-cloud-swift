@@ -15,66 +15,66 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol OsConfigServiceStub: Sendable {
     func executePatchJob(
-      request: ExecutePatchJobRequest, options: GoogleCloudGax.RequestOptions
+      request: ExecutePatchJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.PatchJob
 
     func getPatchJob(
-      request: GetPatchJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPatchJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.PatchJob
 
     func cancelPatchJob(
-      request: CancelPatchJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelPatchJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.PatchJob
 
     func listPatchJobs(
-      request: ListPatchJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPatchJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.ListPatchJobsResponse
 
     func listPatchJobInstanceDetails(
-      request: ListPatchJobInstanceDetailsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPatchJobInstanceDetailsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.ListPatchJobInstanceDetailsResponse
 
     func createPatchDeployment(
-      request: CreatePatchDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePatchDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.PatchDeployment
 
     func getPatchDeployment(
-      request: GetPatchDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPatchDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.PatchDeployment
 
     func listPatchDeployments(
-      request: ListPatchDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPatchDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.ListPatchDeploymentsResponse
 
     func deletePatchDeployment(
-      request: DeletePatchDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePatchDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updatePatchDeployment(
-      request: UpdatePatchDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePatchDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.PatchDeployment
 
     func pausePatchDeployment(
-      request: PausePatchDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: PausePatchDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.PatchDeployment
 
     func resumePatchDeployment(
-      request: ResumePatchDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: ResumePatchDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.PatchDeployment
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

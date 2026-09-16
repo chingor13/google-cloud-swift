@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message for current status of the Major Version Upgrade operation.
-public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpgradeClusterStatus: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Cluster Major Version Upgrade state.
@@ -36,7 +36,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// Status of all upgrade stages.
   public var stages: [UpgradeClusterStatus.StageStatus] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpgradeClusterStatus`.
   public init() {}
@@ -97,7 +97,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -114,7 +114,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
   }
 
   /// Status of an upgrade stage.
-  public struct StageStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StageStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Upgrade stage.
@@ -129,7 +129,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Stage specific status information, if any.
     public var stageSpecificStatus: OneOf_StageSpecificStatus? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StageStatus`.
     public init() {}
@@ -200,7 +200,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
       self.stageSpecificStatus = stageSpecificStatus
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -222,24 +222,24 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
 
     /// Timing information for the stage execution.
-    public struct StageSchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct StageSchedule: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// When the stage is expected to start. Set only if the stage has not
       /// started yet.
-      public var estimatedStartTime: GoogleCloudWKT.Timestamp? = nil
+      public var estimatedStartTime: GoogleWKT.Timestamp? = nil
 
       /// Actual start time of the stage. Set only if the stage has started.
-      public var actualStartTime: GoogleCloudWKT.Timestamp? = nil
+      public var actualStartTime: GoogleWKT.Timestamp? = nil
 
       /// When the stage is expected to end. Set only if the stage has not
       /// completed yet.
-      public var estimatedEndTime: GoogleCloudWKT.Timestamp? = nil
+      public var estimatedEndTime: GoogleWKT.Timestamp? = nil
 
       /// Actual end time of the stage. Set only if the stage has completed.
-      public var actualEndTime: GoogleCloudWKT.Timestamp? = nil
+      public var actualEndTime: GoogleWKT.Timestamp? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `StageSchedule`.
       public init() {}
@@ -279,16 +279,16 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.estimatedStartTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .estimatedStartTime)
+          GoogleWKT.Timestamp.self, forKey: .estimatedStartTime)
         self.actualStartTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .actualStartTime)
+          GoogleWKT.Timestamp.self, forKey: .actualStartTime)
         self.estimatedEndTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .estimatedEndTime)
+          GoogleWKT.Timestamp.self, forKey: .estimatedEndTime)
         self.actualEndTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .actualEndTime)
+          GoogleWKT.Timestamp.self, forKey: .actualEndTime)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -307,11 +307,11 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
         return
           "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus.StageSchedule"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -325,23 +325,22 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterStatus.StageStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Read pool instances upgrade specific status.
-  public struct ReadPoolInstancesUpgradeStageStatus: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
+  public struct ReadPoolInstancesUpgradeStageStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Read pool instances upgrade statistics.
     public var upgradeStats: UpgradeClusterStatus.ReadPoolInstancesUpgradeStageStatus.Stats? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ReadPoolInstancesUpgradeStageStatus`.
     public init() {}
@@ -378,7 +377,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
         UpgradeClusterStatus.ReadPoolInstancesUpgradeStageStatus.Stats.self, forKey: .upgradeStats)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -391,7 +390,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
 
     /// Upgrade stats for read pool instances.
-    public struct Stats: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Stats: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Number of read pool instances for which upgrade has not started.
@@ -406,7 +405,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
       /// Number of read pool instances which failed to upgrade.
       public var failed: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Stats`.
       public init() {}
@@ -459,7 +458,7 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -478,11 +477,11 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
         return
           "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterStatus.ReadPoolInstancesUpgradeStageStatus.Stats"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -490,21 +489,21 @@ public struct UpgradeClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPacka
       return
         "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterStatus.ReadPoolInstancesUpgradeStageStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterStatus"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

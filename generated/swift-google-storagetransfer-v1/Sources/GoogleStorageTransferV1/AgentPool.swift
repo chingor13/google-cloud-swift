@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents an agent pool.
-public struct AgentPool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AgentPool: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Specifies a unique string that identifies the agent pool.
@@ -36,7 +36,7 @@ public struct AgentPool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// default value is set as 'No Limit'.
   public var bandwidthLimit: AgentPool.BandwidthLimit? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AgentPool`.
   public init() {}
@@ -88,7 +88,7 @@ public struct AgentPool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       AgentPool.BandwidthLimit.self, forKey: .bandwidthLimit)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -104,14 +104,14 @@ public struct AgentPool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Specifies a bandwidth limit for an agent pool.
-  public struct BandwidthLimit: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BandwidthLimit: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Bandwidth rate in megabytes per second, distributed across all the agents
     /// in the pool.
     public var limitMbps: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BandwidthLimit`.
     public init() {}
@@ -149,7 +149,7 @@ public struct AgentPool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -164,11 +164,11 @@ public struct AgentPool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.storagetransfer.v1.AgentPool.BandwidthLimit"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -290,10 +290,10 @@ public struct AgentPool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.AgentPool"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

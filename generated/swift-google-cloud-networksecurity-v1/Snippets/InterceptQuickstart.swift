@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudNetworkSecurityV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudNetworkSecurityV1.InterceptClient()

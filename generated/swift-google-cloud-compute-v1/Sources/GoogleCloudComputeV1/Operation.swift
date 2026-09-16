@@ -16,7 +16,7 @@
 
 #if Addresses || Autoscalers || BackendBuckets || BackendServices || CrossSiteNetworks || Disks || ExternalVpnGateways || FirewallPolicies || Firewalls || ForwardingRules || FutureReservations || GlobalAddresses || GlobalForwardingRules || GlobalNetworkEndpointGroups || GlobalOperations || GlobalOrganizationOperations || GlobalPublicDelegatedPrefixes || GlobalVmExtensionPolicies || HealthChecks || Hosts || HttpHealthChecks || HttpsHealthChecks || Images || InstanceGroupManagerResizeRequests || InstanceGroupManagers || InstanceGroups || InstanceSettings || InstanceTemplates || Instances || InstantSnapshotGroups || InstantSnapshots || InterconnectAttachmentGroups || InterconnectAttachments || InterconnectGroups || Interconnects || Licenses || MachineImages || NetworkAttachments || NetworkEdgeSecurityServices || NetworkEndpointGroups || NetworkFirewallPolicies || Networks || NodeGroups || NodeTemplates || OrganizationSecurityPolicies || PacketMirrorings || PreviewFeatures || Projects || PublicAdvertisedPrefixes || PublicDelegatedPrefixes || RegionAutoscalers || RegionBackendBuckets || RegionBackendServices || RegionCommitments || RegionCompositeHealthChecks || RegionDisks || RegionHealthAggregationPolicies || RegionHealthCheckServices || RegionHealthChecks || RegionHealthSources || RegionInstanceGroupManagerResizeRequests || RegionInstanceGroupManagers || RegionInstanceGroups || RegionInstanceTemplates || RegionInstances || RegionInstantSnapshotGroups || RegionInstantSnapshots || RegionNetworkEndpointGroups || RegionNetworkFirewallPolicies || RegionNotificationEndpoints || RegionOperations || RegionSecurityPolicies || RegionSnapshotSettings || RegionSnapshots || RegionSslCertificates || RegionSslPolicies || RegionTargetHttpProxies || RegionTargetHttpsProxies || RegionTargetTcpProxies || RegionUrlMaps || ReservationBlocks || ReservationSlots || ReservationSubBlocks || Reservations || ResourcePolicies || RolloutPlans || Rollouts || Routers || Routes || SecurityPolicies || ServiceAttachments || SnapshotSettings || Snapshots || SslCertificates || SslPolicies || StoragePools || Subnetworks || TargetGrpcProxies || TargetHttpProxies || TargetHttpsProxies || TargetInstances || TargetPools || TargetSslProxies || TargetTcpProxies || TargetVpnGateways || UrlMaps || VpnGateways || VpnTunnels || WireGroups || ZoneOperations || ZoneVmExtensionPolicies
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents an Operation resource.
   ///
@@ -46,7 +46,7 @@
   ///
   /// Note that completed Operation resources have a limited
   /// retention period.
-  public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Operation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// [Output Only] The value of `requestId` if you provided it in the request.
@@ -164,7 +164,7 @@
     /// applicable when performing per-zone operations.
     public var zone: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Operation`.
     public init() {}
@@ -296,7 +296,7 @@
       self.zone = try container.decodeIfPresent(Swift.String.self, forKey: .zone)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -343,14 +343,14 @@
     /// The message type for the [error][google.cloud.compute.v1.Operation.error] field.
     ///
     /// [google.cloud.compute.v1.Operation.error]: <doc:Operation/Error>
-    public struct Error: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Error: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// [Output Only] The array of errors encountered while processing this
       /// operation.
       public var errors: [Operation.Error.Errors] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Error`.
       public init() {}
@@ -389,7 +389,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -404,7 +404,7 @@
       /// The message type for the [errors][google.cloud.compute.v1.Operation.error.errors] field.
       ///
       /// [google.cloud.compute.v1.Operation.error.errors]: <doc:Operation/Error/Errors>
-      public struct Errors: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Errors: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// [Output Only] The error type identifier for this error.
@@ -424,8 +424,7 @@
         /// [Output Only] An optional, human-readable error message.
         public var message: Swift.String? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Errors`.
         public init() {}
@@ -474,7 +473,7 @@
           self.message = try container.decodeIfPresent(Swift.String.self, forKey: .message)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -492,7 +491,7 @@
         /// The message type for the [errorDetails][google.cloud.compute.v1.Operation.error.errors.errorDetails] field.
         ///
         /// [google.cloud.compute.v1.Operation.error.errors.errorDetails]: <doc:Operation/Error/Errors/ErrorDetails>
-        public struct ErrorDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct ErrorDetails: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Error information containing structured domain, reason, and metadata.
@@ -507,8 +506,7 @@
           /// Details about quota limits and metrics when a quota is exceeded.
           public var quotaInfo: QuotaExceededInfo? = nil
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `ErrorDetails`.
           public init() {}
@@ -555,7 +553,7 @@
               QuotaExceededInfo.self, forKey: .quotaInfo)
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -573,40 +571,40 @@
           public static var _anyTypeUrl: Swift.String {
             return "type.googleapis.com/google.cloud.compute.v1.Operation.error.errors.errorDetails"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.compute.v1.Operation.error.errors"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.Operation.error"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The message type for the [warnings][google.cloud.compute.v1.Operation.warnings] field.
     ///
     /// [google.cloud.compute.v1.Operation.warnings]: <doc:Operation/Warnings>
-    public struct Warnings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Warnings: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// [Output Only] A warning code, if applicable. For example, Compute
@@ -627,7 +625,7 @@
       /// [Output Only] A human-readable description of the warning code.
       public var message: Swift.String? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Warnings`.
       public init() {}
@@ -672,7 +670,7 @@
         self.message = try container.decodeIfPresent(Swift.String.self, forKey: .message)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -689,7 +687,7 @@
       /// The message type for the [data][google.cloud.compute.v1.Operation.warnings.data] field.
       ///
       /// [google.cloud.compute.v1.Operation.warnings.data]: <doc:Operation/Warnings/Data>
-      public struct Data: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Data: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// [Output Only] A key that provides more detail on the warning being
@@ -704,8 +702,7 @@
         /// [Output Only] A warning data value corresponding to the key.
         public var value: Swift.String? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Data`.
         public init() {}
@@ -744,7 +741,7 @@
           self.value = try container.decodeIfPresent(Swift.String.self, forKey: .value)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -760,11 +757,11 @@
         public static var _anyTypeUrl: Swift.String {
           return "type.googleapis.com/google.cloud.compute.v1.Operation.warnings.data"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -1089,11 +1086,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.Operation.warnings"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1207,11 +1204,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Operation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request for querying metrics.
-public struct QueryMetricsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct QueryMetricsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The location of the data.
@@ -51,9 +51,9 @@ public struct QueryMetricsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// A valid mask should traverse from the `measure` field from the response.
   /// For example, a path from a measure mask to get the conversation count is
   /// "conversation_measure.count".
-  public var measureMask: GoogleCloudWKT.FieldMask? = nil
+  public var measureMask: GoogleWKT.FieldMask? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `QueryMetricsRequest`.
   public init() {}
@@ -108,11 +108,10 @@ public struct QueryMetricsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
     if let value = try container.decodeIfPresent([Dimension].self, forKey: .dimensions) {
       self.dimensions = value
     }
-    self.measureMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .measureMask)
+    self.measureMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .measureMask)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -272,10 +271,10 @@ public struct QueryMetricsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.QueryMetricsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudRunV2
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: RevisionsClient, projectId: String, locationId: String, serviceId: String,

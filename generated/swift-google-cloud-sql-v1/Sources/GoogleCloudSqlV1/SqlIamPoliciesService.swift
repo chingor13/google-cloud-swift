@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for providing IAM Meta APIs for Cloud SQL.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.SqlIamPoliciesServiceStub
 
     /// Creates a new `SqlIamPoliciesServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlIamPoliciesServiceStub = try Clients.SqlIamPoliciesServiceTransport(
         options)
       inner = Clients.SqlIamPoliciesServiceRetry(inner, options: options)

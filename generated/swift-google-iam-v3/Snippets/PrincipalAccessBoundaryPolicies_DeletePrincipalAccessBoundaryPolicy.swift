@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleIAMV3
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: PrincipalAccessBoundaryPoliciesClient, organizationId: String, locationId: String,

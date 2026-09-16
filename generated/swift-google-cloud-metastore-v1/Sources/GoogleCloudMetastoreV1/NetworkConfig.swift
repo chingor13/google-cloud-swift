@@ -15,19 +15,19 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Network configuration for the Dataproc Metastore service.
 ///
 /// Next available ID: 4
-public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Immutable. The consumer-side network configuration for the Dataproc
   /// Metastore instance.
   public var consumers: [NetworkConfig.Consumer] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NetworkConfig`.
   public init() {}
@@ -66,7 +66,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -81,7 +81,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Contains information of the customer's network configurations.
   ///
   /// Next available ID: 5
-  public struct Consumer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Consumer: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The URI of the endpoint used to access the metastore
@@ -94,7 +94,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public var vpcResource: OneOf_VpcResource? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Consumer`.
     public init() {}
@@ -154,7 +154,7 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.vpcResource = vpcResource
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -189,21 +189,21 @@ public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.metastore.v1.NetworkConfig.Consumer"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.metastore.v1.NetworkConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,45 +16,45 @@
 
 #if ForwardingRules
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ForwardingRulesStub: Sendable {
       func aggregatedList(
-        request: ForwardingRulesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ForwardingRuleAggregatedList
 
       func delete(
-        request: ForwardingRulesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: ForwardingRulesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ForwardingRule
 
       func insert(
-        request: ForwardingRulesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: ForwardingRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ForwardingRuleList
 
       func patch(
-        request: ForwardingRulesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setLabels(
-        request: ForwardingRulesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setTarget(
-        request: ForwardingRulesClient.SetTargetRequest, options: GoogleCloudGax.RequestOptions
+        request: ForwardingRulesClient.SetTargetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

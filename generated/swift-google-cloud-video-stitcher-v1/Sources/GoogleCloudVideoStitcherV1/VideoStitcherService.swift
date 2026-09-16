@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Video-On-Demand content stitching API allows you to insert ads
 /// into (VoD) video on demand files. You will be able to render custom
@@ -32,11 +32,11 @@ import GoogleCloudGax
 /// @Snippet(path: "VideoStitcherServiceQuickstart")
 public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProtocol, Sendable {
   let inner: any Clients.VideoStitcherServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `VideoStitcherServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.VideoStitcherServiceStub = try Clients.VideoStitcherServiceTransport(
       options)
     inner = Clients.VideoStitcherServiceRetry(inner, options: options)
@@ -52,7 +52,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_CreateCdnKey")
   public func createCdnKey(
-    request: CreateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCdnKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createCdnKey(request: request, options: options)
   }
@@ -61,21 +61,20 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_CreateCdnKey")
   public func createCdnKey(
-    withPolling: CreateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CdnKey> {
+    withPolling: CreateCdnKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CdnKey> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CdnKey>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<CdnKey>.State in
       return try op._extractStatus(CdnKey.self)
     }
     let rawOp = try await self.createCdnKey(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CdnKey>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CdnKey>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -87,7 +86,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListCdnKeys")
   public func listCdnKeys(
-    request: ListCdnKeysRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCdnKeysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListCdnKeysResponse {
     try await self.inner.listCdnKeys(request: request, options: options)
   }
@@ -96,7 +95,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListCdnKeys")
   public func listCdnKeys(
-    byItem: ListCdnKeysRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCdnKeysRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CdnKey, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListCdnKeysResponse in
@@ -104,14 +103,14 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
       request.pageToken = token
       return try await self.listCdnKeys(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the specified CDN key.
   ///
   /// @Snippet(path: "VideoStitcherService_GetCdnKey")
   public func getCdnKey(
-    request: GetCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCdnKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.CdnKey {
     try await self.inner.getCdnKey(request: request, options: options)
   }
@@ -120,7 +119,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_DeleteCdnKey")
   public func deleteCdnKey(
-    request: DeleteCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCdnKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteCdnKey(request: request, options: options)
   }
@@ -129,21 +128,21 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_DeleteCdnKey")
   public func deleteCdnKey(
-    withPolling: DeleteCdnKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteCdnKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteCdnKey(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -156,7 +155,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_UpdateCdnKey")
   public func updateCdnKey(
-    request: UpdateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCdnKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateCdnKey(request: request, options: options)
   }
@@ -166,21 +165,20 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_UpdateCdnKey")
   public func updateCdnKey(
-    withPolling: UpdateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CdnKey> {
+    withPolling: UpdateCdnKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CdnKey> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CdnKey>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<CdnKey>.State in
       return try op._extractStatus(CdnKey.self)
     }
     let rawOp = try await self.updateCdnKey(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CdnKey>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CdnKey>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -193,7 +191,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_CreateVodSession")
   public func createVodSession(
-    request: CreateVodSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateVodSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.VodSession {
     try await self.inner.createVodSession(request: request, options: options)
   }
@@ -203,7 +201,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_GetVodSession")
   public func getVodSession(
-    request: GetVodSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetVodSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.VodSession {
     try await self.inner.getVodSession(request: request, options: options)
   }
@@ -213,7 +211,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListVodStitchDetails")
   public func listVodStitchDetails(
-    request: ListVodStitchDetailsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListVodStitchDetailsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListVodStitchDetailsResponse {
     try await self.inner.listVodStitchDetails(request: request, options: options)
   }
@@ -223,7 +221,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListVodStitchDetails")
   public func listVodStitchDetails(
-    byItem: ListVodStitchDetailsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListVodStitchDetailsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<VodStitchDetail, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListVodStitchDetailsResponse
@@ -232,14 +230,14 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
       request.pageToken = token
       return try await self.listVodStitchDetails(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the specified stitching information for the specified VOD session.
   ///
   /// @Snippet(path: "VideoStitcherService_GetVodStitchDetail")
   public func getVodStitchDetail(
-    request: GetVodStitchDetailRequest, options: GoogleCloudGax.RequestOptions
+    request: GetVodStitchDetailRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.VodStitchDetail {
     try await self.inner.getVodStitchDetail(request: request, options: options)
   }
@@ -248,7 +246,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListVodAdTagDetails")
   public func listVodAdTagDetails(
-    request: ListVodAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListVodAdTagDetailsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListVodAdTagDetailsResponse {
     try await self.inner.listVodAdTagDetails(request: request, options: options)
   }
@@ -257,7 +255,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListVodAdTagDetails")
   public func listVodAdTagDetails(
-    byItem: ListVodAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListVodAdTagDetailsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<VodAdTagDetail, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListVodAdTagDetailsResponse
@@ -266,14 +264,14 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
       request.pageToken = token
       return try await self.listVodAdTagDetails(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the specified ad tag detail for the specified VOD session.
   ///
   /// @Snippet(path: "VideoStitcherService_GetVodAdTagDetail")
   public func getVodAdTagDetail(
-    request: GetVodAdTagDetailRequest, options: GoogleCloudGax.RequestOptions
+    request: GetVodAdTagDetailRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.VodAdTagDetail {
     try await self.inner.getVodAdTagDetail(request: request, options: options)
   }
@@ -282,7 +280,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListLiveAdTagDetails")
   public func listLiveAdTagDetails(
-    request: ListLiveAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLiveAdTagDetailsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListLiveAdTagDetailsResponse {
     try await self.inner.listLiveAdTagDetails(request: request, options: options)
   }
@@ -291,7 +289,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListLiveAdTagDetails")
   public func listLiveAdTagDetails(
-    byItem: ListLiveAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLiveAdTagDetailsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<LiveAdTagDetail, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListLiveAdTagDetailsResponse
@@ -300,14 +298,14 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
       request.pageToken = token
       return try await self.listLiveAdTagDetails(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the specified ad tag detail for the specified live session.
   ///
   /// @Snippet(path: "VideoStitcherService_GetLiveAdTagDetail")
   public func getLiveAdTagDetail(
-    request: GetLiveAdTagDetailRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLiveAdTagDetailRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.LiveAdTagDetail {
     try await self.inner.getLiveAdTagDetail(request: request, options: options)
   }
@@ -316,7 +314,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_CreateSlate")
   public func createSlate(
-    request: CreateSlateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSlateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createSlate(request: request, options: options)
   }
@@ -325,21 +323,20 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_CreateSlate")
   public func createSlate(
-    withPolling: CreateSlateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Slate> {
+    withPolling: CreateSlateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Slate> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Slate>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Slate>.State in
       return try op._extractStatus(Slate.self)
     }
     let rawOp = try await self.createSlate(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Slate>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Slate>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -351,7 +348,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListSlates")
   public func listSlates(
-    request: ListSlatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSlatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListSlatesResponse {
     try await self.inner.listSlates(request: request, options: options)
   }
@@ -360,7 +357,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListSlates")
   public func listSlates(
-    byItem: ListSlatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSlatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Slate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListSlatesResponse in
@@ -368,14 +365,14 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
       request.pageToken = token
       return try await self.listSlates(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the specified slate.
   ///
   /// @Snippet(path: "VideoStitcherService_GetSlate")
   public func getSlate(
-    request: GetSlateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSlateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.Slate {
     try await self.inner.getSlate(request: request, options: options)
   }
@@ -384,7 +381,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_UpdateSlate")
   public func updateSlate(
-    request: UpdateSlateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSlateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateSlate(request: request, options: options)
   }
@@ -393,21 +390,20 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_UpdateSlate")
   public func updateSlate(
-    withPolling: UpdateSlateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Slate> {
+    withPolling: UpdateSlateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Slate> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Slate>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Slate>.State in
       return try op._extractStatus(Slate.self)
     }
     let rawOp = try await self.updateSlate(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Slate>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Slate>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -419,7 +415,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_DeleteSlate")
   public func deleteSlate(
-    request: DeleteSlateRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSlateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteSlate(request: request, options: options)
   }
@@ -428,21 +424,21 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_DeleteSlate")
   public func deleteSlate(
-    withPolling: DeleteSlateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteSlateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteSlate(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -454,7 +450,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_CreateLiveSession")
   public func createLiveSession(
-    request: CreateLiveSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateLiveSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.LiveSession {
     try await self.inner.createLiveSession(request: request, options: options)
   }
@@ -463,7 +459,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_GetLiveSession")
   public func getLiveSession(
-    request: GetLiveSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLiveSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.LiveSession {
     try await self.inner.getLiveSession(request: request, options: options)
   }
@@ -473,7 +469,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_CreateLiveConfig")
   public func createLiveConfig(
-    request: CreateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateLiveConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createLiveConfig(request: request, options: options)
   }
@@ -483,21 +479,21 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_CreateLiveConfig")
   public func createLiveConfig(
-    withPolling: CreateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LiveConfig> {
+    withPolling: CreateLiveConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LiveConfig> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<LiveConfig>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<LiveConfig>.State
+      in
       return try op._extractStatus(LiveConfig.self)
     }
     let rawOp = try await self.createLiveConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LiveConfig>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LiveConfig>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -510,7 +506,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListLiveConfigs")
   public func listLiveConfigs(
-    request: ListLiveConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLiveConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListLiveConfigsResponse {
     try await self.inner.listLiveConfigs(request: request, options: options)
   }
@@ -520,7 +516,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListLiveConfigs")
   public func listLiveConfigs(
-    byItem: ListLiveConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLiveConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<LiveConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListLiveConfigsResponse in
@@ -528,7 +524,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
       request.pageToken = token
       return try await self.listLiveConfigs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the specified live config managed by the Video
@@ -536,7 +532,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_GetLiveConfig")
   public func getLiveConfig(
-    request: GetLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLiveConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.LiveConfig {
     try await self.inner.getLiveConfig(request: request, options: options)
   }
@@ -545,7 +541,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_DeleteLiveConfig")
   public func deleteLiveConfig(
-    request: DeleteLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteLiveConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteLiveConfig(request: request, options: options)
   }
@@ -554,21 +550,21 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_DeleteLiveConfig")
   public func deleteLiveConfig(
-    withPolling: DeleteLiveConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteLiveConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteLiveConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -581,7 +577,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_UpdateLiveConfig")
   public func updateLiveConfig(
-    request: UpdateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateLiveConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateLiveConfig(request: request, options: options)
   }
@@ -591,21 +587,21 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_UpdateLiveConfig")
   public func updateLiveConfig(
-    withPolling: UpdateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LiveConfig> {
+    withPolling: UpdateLiveConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LiveConfig> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<LiveConfig>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<LiveConfig>.State
+      in
       return try op._extractStatus(LiveConfig.self)
     }
     let rawOp = try await self.updateLiveConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LiveConfig>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LiveConfig>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -618,7 +614,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_CreateVodConfig")
   public func createVodConfig(
-    request: CreateVodConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateVodConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createVodConfig(request: request, options: options)
   }
@@ -628,21 +624,21 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_CreateVodConfig")
   public func createVodConfig(
-    withPolling: CreateVodConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<VodConfig> {
+    withPolling: CreateVodConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<VodConfig> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<VodConfig>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<VodConfig>.State
+      in
       return try op._extractStatus(VodConfig.self)
     }
     let rawOp = try await self.createVodConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<VodConfig>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<VodConfig>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -655,7 +651,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListVodConfigs")
   public func listVodConfigs(
-    request: ListVodConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListVodConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListVodConfigsResponse {
     try await self.inner.listVodConfigs(request: request, options: options)
   }
@@ -665,7 +661,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListVodConfigs")
   public func listVodConfigs(
-    byItem: ListVodConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListVodConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<VodConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListVodConfigsResponse in
@@ -673,7 +669,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
       request.pageToken = token
       return try await self.listVodConfigs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the specified VOD config managed by the Video
@@ -681,7 +677,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_GetVodConfig")
   public func getVodConfig(
-    request: GetVodConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetVodConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.VodConfig {
     try await self.inner.getVodConfig(request: request, options: options)
   }
@@ -690,7 +686,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_DeleteVodConfig")
   public func deleteVodConfig(
-    request: DeleteVodConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteVodConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteVodConfig(request: request, options: options)
   }
@@ -699,21 +695,21 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_DeleteVodConfig")
   public func deleteVodConfig(
-    withPolling: DeleteVodConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteVodConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteVodConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -726,7 +722,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_UpdateVodConfig")
   public func updateVodConfig(
-    request: UpdateVodConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateVodConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateVodConfig(request: request, options: options)
   }
@@ -736,21 +732,21 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_UpdateVodConfig")
   public func updateVodConfig(
-    withPolling: UpdateVodConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<VodConfig> {
+    withPolling: UpdateVodConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<VodConfig> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<VodConfig>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<VodConfig>.State
+      in
       return try op._extractStatus(VodConfig.self)
     }
     let rawOp = try await self.updateVodConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<VodConfig>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<VodConfig>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -764,7 +760,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -775,7 +771,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -783,7 +779,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -792,7 +788,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -803,7 +799,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -814,7 +810,7 @@ public final class VideoStitcherServiceClient: Clients.VideoStitcherServiceProto
   ///
   /// @Snippet(path: "VideoStitcherService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -831,7 +827,7 @@ extension Clients {
     func createCdnKey(request: CreateCdnKeyRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.createCdnKey`.
-    func createCdnKey(withPolling: CreateCdnKeyRequest) async throws -> any GoogleCloudGax
+    func createCdnKey(withPolling: CreateCdnKeyRequest) async throws -> any GoogleGax
       .PollableOperation<CdnKey>
 
     /// See `VideoStitcherServiceClient.createCdnKey`.
@@ -839,7 +835,7 @@ extension Clients {
       parent: Swift.String,
       cdnKey: CdnKey?,
       cdnKeyId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CdnKey>
+    ) async throws -> any GoogleGax.PollableOperation<CdnKey>
 
     /// See `VideoStitcherServiceClient.listCdnKeys`.
     func listCdnKeys(request: ListCdnKeysRequest) async throws
@@ -867,26 +863,26 @@ extension Clients {
     func deleteCdnKey(request: DeleteCdnKeyRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.deleteCdnKey`.
-    func deleteCdnKey(withPolling: DeleteCdnKeyRequest) async throws -> any GoogleCloudGax
+    func deleteCdnKey(withPolling: DeleteCdnKeyRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `VideoStitcherServiceClient.deleteCdnKey`.
     func deleteCdnKey(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `VideoStitcherServiceClient.updateCdnKey`.
     func updateCdnKey(request: UpdateCdnKeyRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.updateCdnKey`.
-    func updateCdnKey(withPolling: UpdateCdnKeyRequest) async throws -> any GoogleCloudGax
+    func updateCdnKey(withPolling: UpdateCdnKeyRequest) async throws -> any GoogleGax
       .PollableOperation<CdnKey>
 
     /// See `VideoStitcherServiceClient.updateCdnKey`.
     func updateCdnKey(
       cdnKey: CdnKey?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CdnKey>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<CdnKey>
 
     /// See `VideoStitcherServiceClient.createVodSession`.
     func createVodSession(request: CreateVodSessionRequest) async throws
@@ -980,7 +976,7 @@ extension Clients {
     func createSlate(request: CreateSlateRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.createSlate`.
-    func createSlate(withPolling: CreateSlateRequest) async throws -> any GoogleCloudGax
+    func createSlate(withPolling: CreateSlateRequest) async throws -> any GoogleGax
       .PollableOperation<Slate>
 
     /// See `VideoStitcherServiceClient.createSlate`.
@@ -988,7 +984,7 @@ extension Clients {
       parent: Swift.String,
       slate: Slate?,
       slateId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Slate>
+    ) async throws -> any GoogleGax.PollableOperation<Slate>
 
     /// See `VideoStitcherServiceClient.listSlates`.
     func listSlates(request: ListSlatesRequest) async throws
@@ -1016,26 +1012,26 @@ extension Clients {
     func updateSlate(request: UpdateSlateRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.updateSlate`.
-    func updateSlate(withPolling: UpdateSlateRequest) async throws -> any GoogleCloudGax
+    func updateSlate(withPolling: UpdateSlateRequest) async throws -> any GoogleGax
       .PollableOperation<Slate>
 
     /// See `VideoStitcherServiceClient.updateSlate`.
     func updateSlate(
       slate: Slate?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Slate>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Slate>
 
     /// See `VideoStitcherServiceClient.deleteSlate`.
     func deleteSlate(request: DeleteSlateRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.deleteSlate`.
-    func deleteSlate(withPolling: DeleteSlateRequest) async throws -> any GoogleCloudGax
+    func deleteSlate(withPolling: DeleteSlateRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `VideoStitcherServiceClient.deleteSlate`.
     func deleteSlate(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `VideoStitcherServiceClient.createLiveSession`.
     func createLiveSession(request: CreateLiveSessionRequest) async throws
@@ -1061,7 +1057,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.createLiveConfig`.
-    func createLiveConfig(withPolling: CreateLiveConfigRequest) async throws -> any GoogleCloudGax
+    func createLiveConfig(withPolling: CreateLiveConfigRequest) async throws -> any GoogleGax
       .PollableOperation<LiveConfig>
 
     /// See `VideoStitcherServiceClient.createLiveConfig`.
@@ -1069,7 +1065,7 @@ extension Clients {
       parent: Swift.String,
       liveConfig: LiveConfig?,
       liveConfigId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<LiveConfig>
+    ) async throws -> any GoogleGax.PollableOperation<LiveConfig>
 
     /// See `VideoStitcherServiceClient.listLiveConfigs`.
     func listLiveConfigs(request: ListLiveConfigsRequest) async throws
@@ -1099,34 +1095,34 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.deleteLiveConfig`.
-    func deleteLiveConfig(withPolling: DeleteLiveConfigRequest) async throws -> any GoogleCloudGax
+    func deleteLiveConfig(withPolling: DeleteLiveConfigRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `VideoStitcherServiceClient.deleteLiveConfig`.
     func deleteLiveConfig(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `VideoStitcherServiceClient.updateLiveConfig`.
     func updateLiveConfig(request: UpdateLiveConfigRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.updateLiveConfig`.
-    func updateLiveConfig(withPolling: UpdateLiveConfigRequest) async throws -> any GoogleCloudGax
+    func updateLiveConfig(withPolling: UpdateLiveConfigRequest) async throws -> any GoogleGax
       .PollableOperation<LiveConfig>
 
     /// See `VideoStitcherServiceClient.updateLiveConfig`.
     func updateLiveConfig(
       liveConfig: LiveConfig?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<LiveConfig>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<LiveConfig>
 
     /// See `VideoStitcherServiceClient.createVodConfig`.
     func createVodConfig(request: CreateVodConfigRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.createVodConfig`.
-    func createVodConfig(withPolling: CreateVodConfigRequest) async throws -> any GoogleCloudGax
+    func createVodConfig(withPolling: CreateVodConfigRequest) async throws -> any GoogleGax
       .PollableOperation<VodConfig>
 
     /// See `VideoStitcherServiceClient.createVodConfig`.
@@ -1134,7 +1130,7 @@ extension Clients {
       parent: Swift.String,
       vodConfig: VodConfig?,
       vodConfigId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<VodConfig>
+    ) async throws -> any GoogleGax.PollableOperation<VodConfig>
 
     /// See `VideoStitcherServiceClient.listVodConfigs`.
     func listVodConfigs(request: ListVodConfigsRequest) async throws
@@ -1164,27 +1160,27 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.deleteVodConfig`.
-    func deleteVodConfig(withPolling: DeleteVodConfigRequest) async throws -> any GoogleCloudGax
+    func deleteVodConfig(withPolling: DeleteVodConfigRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `VideoStitcherServiceClient.deleteVodConfig`.
     func deleteVodConfig(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `VideoStitcherServiceClient.updateVodConfig`.
     func updateVodConfig(request: UpdateVodConfigRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.updateVodConfig`.
-    func updateVodConfig(withPolling: UpdateVodConfigRequest) async throws -> any GoogleCloudGax
+    func updateVodConfig(withPolling: UpdateVodConfigRequest) async throws -> any GoogleGax
       .PollableOperation<VodConfig>
 
     /// See `VideoStitcherServiceClient.updateVodConfig`.
     func updateVodConfig(
       vodConfig: VodConfig?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<VodConfig>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<VodConfig>
 
     /// See `VideoStitcherServiceClient.listOperations`.
     func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1219,267 +1215,267 @@ extension Clients {
 
     /// See `VideoStitcherServiceClient.createCdnKey`.
     func createCdnKey(
-      request: CreateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCdnKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.createCdnKey`.
     func createCdnKey(
-      withPolling: CreateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CdnKey>
+      withPolling: CreateCdnKeyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CdnKey>
 
     /// See `VideoStitcherServiceClient.listCdnKeys`.
     func listCdnKeys(
-      request: ListCdnKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCdnKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListCdnKeysResponse
 
     /// See `VideoStitcherServiceClient.listCdnKeys`.
     func listCdnKeys(
-      byItem: ListCdnKeysRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCdnKeysRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<CdnKey, Swift.Error>
 
     /// See `VideoStitcherServiceClient.getCdnKey`.
     func getCdnKey(
-      request: GetCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCdnKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.CdnKey
 
     /// See `VideoStitcherServiceClient.deleteCdnKey`.
     func deleteCdnKey(
-      request: DeleteCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCdnKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.deleteCdnKey`.
     func deleteCdnKey(
-      withPolling: DeleteCdnKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteCdnKeyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `VideoStitcherServiceClient.updateCdnKey`.
     func updateCdnKey(
-      request: UpdateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCdnKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.updateCdnKey`.
     func updateCdnKey(
-      withPolling: UpdateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CdnKey>
+      withPolling: UpdateCdnKeyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CdnKey>
 
     /// See `VideoStitcherServiceClient.createVodSession`.
     func createVodSession(
-      request: CreateVodSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateVodSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.VodSession
 
     /// See `VideoStitcherServiceClient.getVodSession`.
     func getVodSession(
-      request: GetVodSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVodSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.VodSession
 
     /// See `VideoStitcherServiceClient.listVodStitchDetails`.
     func listVodStitchDetails(
-      request: ListVodStitchDetailsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVodStitchDetailsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListVodStitchDetailsResponse
 
     /// See `VideoStitcherServiceClient.listVodStitchDetails`.
     func listVodStitchDetails(
-      byItem: ListVodStitchDetailsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListVodStitchDetailsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<VodStitchDetail, Swift.Error>
 
     /// See `VideoStitcherServiceClient.getVodStitchDetail`.
     func getVodStitchDetail(
-      request: GetVodStitchDetailRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVodStitchDetailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.VodStitchDetail
 
     /// See `VideoStitcherServiceClient.listVodAdTagDetails`.
     func listVodAdTagDetails(
-      request: ListVodAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVodAdTagDetailsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListVodAdTagDetailsResponse
 
     /// See `VideoStitcherServiceClient.listVodAdTagDetails`.
     func listVodAdTagDetails(
-      byItem: ListVodAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListVodAdTagDetailsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<VodAdTagDetail, Swift.Error>
 
     /// See `VideoStitcherServiceClient.getVodAdTagDetail`.
     func getVodAdTagDetail(
-      request: GetVodAdTagDetailRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVodAdTagDetailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.VodAdTagDetail
 
     /// See `VideoStitcherServiceClient.listLiveAdTagDetails`.
     func listLiveAdTagDetails(
-      request: ListLiveAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLiveAdTagDetailsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListLiveAdTagDetailsResponse
 
     /// See `VideoStitcherServiceClient.listLiveAdTagDetails`.
     func listLiveAdTagDetails(
-      byItem: ListLiveAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListLiveAdTagDetailsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<LiveAdTagDetail, Swift.Error>
 
     /// See `VideoStitcherServiceClient.getLiveAdTagDetail`.
     func getLiveAdTagDetail(
-      request: GetLiveAdTagDetailRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLiveAdTagDetailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.LiveAdTagDetail
 
     /// See `VideoStitcherServiceClient.createSlate`.
     func createSlate(
-      request: CreateSlateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSlateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.createSlate`.
     func createSlate(
-      withPolling: CreateSlateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Slate>
+      withPolling: CreateSlateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Slate>
 
     /// See `VideoStitcherServiceClient.listSlates`.
     func listSlates(
-      request: ListSlatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSlatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListSlatesResponse
 
     /// See `VideoStitcherServiceClient.listSlates`.
     func listSlates(
-      byItem: ListSlatesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSlatesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Slate, Swift.Error>
 
     /// See `VideoStitcherServiceClient.getSlate`.
     func getSlate(
-      request: GetSlateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSlateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.Slate
 
     /// See `VideoStitcherServiceClient.updateSlate`.
     func updateSlate(
-      request: UpdateSlateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSlateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.updateSlate`.
     func updateSlate(
-      withPolling: UpdateSlateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Slate>
+      withPolling: UpdateSlateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Slate>
 
     /// See `VideoStitcherServiceClient.deleteSlate`.
     func deleteSlate(
-      request: DeleteSlateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSlateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.deleteSlate`.
     func deleteSlate(
-      withPolling: DeleteSlateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteSlateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `VideoStitcherServiceClient.createLiveSession`.
     func createLiveSession(
-      request: CreateLiveSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLiveSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.LiveSession
 
     /// See `VideoStitcherServiceClient.getLiveSession`.
     func getLiveSession(
-      request: GetLiveSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLiveSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.LiveSession
 
     /// See `VideoStitcherServiceClient.createLiveConfig`.
     func createLiveConfig(
-      request: CreateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLiveConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.createLiveConfig`.
     func createLiveConfig(
-      withPolling: CreateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<LiveConfig>
+      withPolling: CreateLiveConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<LiveConfig>
 
     /// See `VideoStitcherServiceClient.listLiveConfigs`.
     func listLiveConfigs(
-      request: ListLiveConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLiveConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListLiveConfigsResponse
 
     /// See `VideoStitcherServiceClient.listLiveConfigs`.
     func listLiveConfigs(
-      byItem: ListLiveConfigsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListLiveConfigsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<LiveConfig, Swift.Error>
 
     /// See `VideoStitcherServiceClient.getLiveConfig`.
     func getLiveConfig(
-      request: GetLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLiveConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.LiveConfig
 
     /// See `VideoStitcherServiceClient.deleteLiveConfig`.
     func deleteLiveConfig(
-      request: DeleteLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLiveConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.deleteLiveConfig`.
     func deleteLiveConfig(
-      withPolling: DeleteLiveConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteLiveConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `VideoStitcherServiceClient.updateLiveConfig`.
     func updateLiveConfig(
-      request: UpdateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLiveConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.updateLiveConfig`.
     func updateLiveConfig(
-      withPolling: UpdateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<LiveConfig>
+      withPolling: UpdateLiveConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<LiveConfig>
 
     /// See `VideoStitcherServiceClient.createVodConfig`.
     func createVodConfig(
-      request: CreateVodConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateVodConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.createVodConfig`.
     func createVodConfig(
-      withPolling: CreateVodConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<VodConfig>
+      withPolling: CreateVodConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<VodConfig>
 
     /// See `VideoStitcherServiceClient.listVodConfigs`.
     func listVodConfigs(
-      request: ListVodConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVodConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.ListVodConfigsResponse
 
     /// See `VideoStitcherServiceClient.listVodConfigs`.
     func listVodConfigs(
-      byItem: ListVodConfigsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListVodConfigsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<VodConfig, Swift.Error>
 
     /// See `VideoStitcherServiceClient.getVodConfig`.
     func getVodConfig(
-      request: GetVodConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVodConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoStitcherV1.VodConfig
 
     /// See `VideoStitcherServiceClient.deleteVodConfig`.
     func deleteVodConfig(
-      request: DeleteVodConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteVodConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.deleteVodConfig`.
     func deleteVodConfig(
-      withPolling: DeleteVodConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteVodConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `VideoStitcherServiceClient.updateVodConfig`.
     func updateVodConfig(
-      request: UpdateVodConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateVodConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoStitcherServiceClient.updateVodConfig`.
     func updateVodConfig(
-      withPolling: UpdateVodConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<VodConfig>
+      withPolling: UpdateVodConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<VodConfig>
 
     /// See `VideoStitcherServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `VideoStitcherServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `VideoStitcherServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `VideoStitcherServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1492,24 +1488,24 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func createCdnKey(
-    request: CreateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCdnKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createCdnKey(withPolling: CreateCdnKeyRequest) async throws -> any GoogleCloudGax
+  public func createCdnKey(withPolling: CreateCdnKeyRequest) async throws -> any GoogleGax
     .PollableOperation<CdnKey>
   {
     try await self.createCdnKey(withPolling: withPolling, options: .init())
   }
 
   public func createCdnKey(
-    withPolling: CreateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CdnKey> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CdnKey>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateCdnKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CdnKey> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CdnKey>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1517,7 +1513,7 @@ extension Clients.VideoStitcherServiceProtocol {
     parent: Swift.String,
     cdnKey: CdnKey?,
     cdnKeyId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CdnKey> {
+  ) async throws -> any GoogleGax.PollableOperation<CdnKey> {
     let request = CreateCdnKeyRequest().with {
       $0.parent = parent
       $0.cdnKey = cdnKey
@@ -1533,9 +1529,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listCdnKeys(
-    request: ListCdnKeysRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCdnKeysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListCdnKeysResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCdnKeys(
@@ -1545,13 +1541,13 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listCdnKeys(
-    byItem: ListCdnKeysRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCdnKeysRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CdnKey, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListCdnKeysResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCdnKeys(
@@ -1569,9 +1565,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func getCdnKey(
-    request: GetCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCdnKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.CdnKey {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCdnKey(
@@ -1589,30 +1585,30 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func deleteCdnKey(
-    request: DeleteCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCdnKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteCdnKey(withPolling: DeleteCdnKeyRequest) async throws -> any GoogleCloudGax
+  public func deleteCdnKey(withPolling: DeleteCdnKeyRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteCdnKey(withPolling: withPolling, options: .init())
   }
 
   public func deleteCdnKey(
-    withPolling: DeleteCdnKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteCdnKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteCdnKey(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteCdnKeyRequest().with {
       $0.name = name
     }
@@ -1625,31 +1621,31 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func updateCdnKey(
-    request: UpdateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCdnKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateCdnKey(withPolling: UpdateCdnKeyRequest) async throws -> any GoogleCloudGax
+  public func updateCdnKey(withPolling: UpdateCdnKeyRequest) async throws -> any GoogleGax
     .PollableOperation<CdnKey>
   {
     try await self.updateCdnKey(withPolling: withPolling, options: .init())
   }
 
   public func updateCdnKey(
-    withPolling: UpdateCdnKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CdnKey> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CdnKey>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateCdnKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CdnKey> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CdnKey>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateCdnKey(
     cdnKey: CdnKey?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CdnKey> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<CdnKey> {
     let request = UpdateCdnKeyRequest().with {
       $0.cdnKey = cdnKey
       $0.updateMask = updateMask
@@ -1664,9 +1660,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func createVodSession(
-    request: CreateVodSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateVodSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.VodSession {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createVodSession(
@@ -1687,9 +1683,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func getVodSession(
-    request: GetVodSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetVodSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.VodSession {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getVodSession(
@@ -1708,9 +1704,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listVodStitchDetails(
-    request: ListVodStitchDetailsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListVodStitchDetailsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListVodStitchDetailsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listVodStitchDetails(
@@ -1720,14 +1716,14 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listVodStitchDetails(
-    byItem: ListVodStitchDetailsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListVodStitchDetailsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<VodStitchDetail, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListVodStitchDetailsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listVodStitchDetails(
@@ -1746,9 +1742,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func getVodStitchDetail(
-    request: GetVodStitchDetailRequest, options: GoogleCloudGax.RequestOptions
+    request: GetVodStitchDetailRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.VodStitchDetail {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getVodStitchDetail(
@@ -1767,9 +1763,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listVodAdTagDetails(
-    request: ListVodAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListVodAdTagDetailsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListVodAdTagDetailsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listVodAdTagDetails(
@@ -1779,14 +1775,14 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listVodAdTagDetails(
-    byItem: ListVodAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListVodAdTagDetailsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<VodAdTagDetail, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListVodAdTagDetailsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listVodAdTagDetails(
@@ -1805,9 +1801,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func getVodAdTagDetail(
-    request: GetVodAdTagDetailRequest, options: GoogleCloudGax.RequestOptions
+    request: GetVodAdTagDetailRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.VodAdTagDetail {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getVodAdTagDetail(
@@ -1826,9 +1822,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listLiveAdTagDetails(
-    request: ListLiveAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLiveAdTagDetailsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListLiveAdTagDetailsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLiveAdTagDetails(
@@ -1838,14 +1834,14 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listLiveAdTagDetails(
-    byItem: ListLiveAdTagDetailsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLiveAdTagDetailsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<LiveAdTagDetail, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListLiveAdTagDetailsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listLiveAdTagDetails(
@@ -1864,9 +1860,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func getLiveAdTagDetail(
-    request: GetLiveAdTagDetailRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLiveAdTagDetailRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.LiveAdTagDetail {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getLiveAdTagDetail(
@@ -1883,24 +1879,24 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func createSlate(
-    request: CreateSlateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSlateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createSlate(withPolling: CreateSlateRequest) async throws -> any GoogleCloudGax
+  public func createSlate(withPolling: CreateSlateRequest) async throws -> any GoogleGax
     .PollableOperation<Slate>
   {
     try await self.createSlate(withPolling: withPolling, options: .init())
   }
 
   public func createSlate(
-    withPolling: CreateSlateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Slate> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Slate>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateSlateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Slate> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Slate>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1908,7 +1904,7 @@ extension Clients.VideoStitcherServiceProtocol {
     parent: Swift.String,
     slate: Slate?,
     slateId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Slate> {
+  ) async throws -> any GoogleGax.PollableOperation<Slate> {
     let request = CreateSlateRequest().with {
       $0.parent = parent
       $0.slate = slate
@@ -1924,9 +1920,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listSlates(
-    request: ListSlatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSlatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListSlatesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSlates(
@@ -1936,13 +1932,13 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listSlates(
-    byItem: ListSlatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSlatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Slate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListSlatesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSlates(
@@ -1959,9 +1955,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func getSlate(
-    request: GetSlateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSlateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.Slate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSlate(
@@ -1978,31 +1974,31 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func updateSlate(
-    request: UpdateSlateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSlateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateSlate(withPolling: UpdateSlateRequest) async throws -> any GoogleCloudGax
+  public func updateSlate(withPolling: UpdateSlateRequest) async throws -> any GoogleGax
     .PollableOperation<Slate>
   {
     try await self.updateSlate(withPolling: withPolling, options: .init())
   }
 
   public func updateSlate(
-    withPolling: UpdateSlateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Slate> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Slate>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateSlateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Slate> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Slate>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateSlate(
     slate: Slate?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Slate> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Slate> {
     let request = UpdateSlateRequest().with {
       $0.slate = slate
       $0.updateMask = updateMask
@@ -2015,30 +2011,30 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func deleteSlate(
-    request: DeleteSlateRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSlateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteSlate(withPolling: DeleteSlateRequest) async throws -> any GoogleCloudGax
+  public func deleteSlate(withPolling: DeleteSlateRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteSlate(withPolling: withPolling, options: .init())
   }
 
   public func deleteSlate(
-    withPolling: DeleteSlateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteSlateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteSlate(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteSlateRequest().with {
       $0.name = name
     }
@@ -2052,9 +2048,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func createLiveSession(
-    request: CreateLiveSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateLiveSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.LiveSession {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createLiveSession(
@@ -2075,9 +2071,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func getLiveSession(
-    request: GetLiveSessionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLiveSessionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.LiveSession {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getLiveSession(
@@ -2096,24 +2092,24 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func createLiveConfig(
-    request: CreateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateLiveConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createLiveConfig(withPolling: CreateLiveConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<LiveConfig>
+  public func createLiveConfig(withPolling: CreateLiveConfigRequest) async throws -> any GoogleGax
+    .PollableOperation<LiveConfig>
   {
     try await self.createLiveConfig(withPolling: withPolling, options: .init())
   }
 
   public func createLiveConfig(
-    withPolling: CreateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LiveConfig> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LiveConfig>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateLiveConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LiveConfig> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LiveConfig>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2121,7 +2117,7 @@ extension Clients.VideoStitcherServiceProtocol {
     parent: Swift.String,
     liveConfig: LiveConfig?,
     liveConfigId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<LiveConfig> {
+  ) async throws -> any GoogleGax.PollableOperation<LiveConfig> {
     let request = CreateLiveConfigRequest().with {
       $0.parent = parent
       $0.liveConfig = liveConfig
@@ -2137,9 +2133,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listLiveConfigs(
-    request: ListLiveConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLiveConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListLiveConfigsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLiveConfigs(
@@ -2149,13 +2145,13 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listLiveConfigs(
-    byItem: ListLiveConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLiveConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<LiveConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListLiveConfigsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listLiveConfigs(
@@ -2174,9 +2170,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func getLiveConfig(
-    request: GetLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLiveConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.LiveConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getLiveConfig(
@@ -2195,30 +2191,30 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func deleteLiveConfig(
-    request: DeleteLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteLiveConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteLiveConfig(withPolling: DeleteLiveConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteLiveConfig(withPolling: DeleteLiveConfigRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteLiveConfig(withPolling: withPolling, options: .init())
   }
 
   public func deleteLiveConfig(
-    withPolling: DeleteLiveConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteLiveConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteLiveConfig(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteLiveConfigRequest().with {
       $0.name = name
     }
@@ -2232,31 +2228,31 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func updateLiveConfig(
-    request: UpdateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateLiveConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateLiveConfig(withPolling: UpdateLiveConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<LiveConfig>
+  public func updateLiveConfig(withPolling: UpdateLiveConfigRequest) async throws -> any GoogleGax
+    .PollableOperation<LiveConfig>
   {
     try await self.updateLiveConfig(withPolling: withPolling, options: .init())
   }
 
   public func updateLiveConfig(
-    withPolling: UpdateLiveConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LiveConfig> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LiveConfig>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateLiveConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LiveConfig> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LiveConfig>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateLiveConfig(
     liveConfig: LiveConfig?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<LiveConfig> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<LiveConfig> {
     let request = UpdateLiveConfigRequest().with {
       $0.liveConfig = liveConfig
       $0.updateMask = updateMask
@@ -2271,24 +2267,24 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func createVodConfig(
-    request: CreateVodConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateVodConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createVodConfig(withPolling: CreateVodConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<VodConfig>
+  public func createVodConfig(withPolling: CreateVodConfigRequest) async throws -> any GoogleGax
+    .PollableOperation<VodConfig>
   {
     try await self.createVodConfig(withPolling: withPolling, options: .init())
   }
 
   public func createVodConfig(
-    withPolling: CreateVodConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<VodConfig> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<VodConfig>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateVodConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<VodConfig> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<VodConfig>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2296,7 +2292,7 @@ extension Clients.VideoStitcherServiceProtocol {
     parent: Swift.String,
     vodConfig: VodConfig?,
     vodConfigId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<VodConfig> {
+  ) async throws -> any GoogleGax.PollableOperation<VodConfig> {
     let request = CreateVodConfigRequest().with {
       $0.parent = parent
       $0.vodConfig = vodConfig
@@ -2312,9 +2308,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listVodConfigs(
-    request: ListVodConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListVodConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.ListVodConfigsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listVodConfigs(
@@ -2324,13 +2320,13 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listVodConfigs(
-    byItem: ListVodConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListVodConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<VodConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVideoStitcherV1.ListVodConfigsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listVodConfigs(
@@ -2349,9 +2345,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func getVodConfig(
-    request: GetVodConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetVodConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoStitcherV1.VodConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getVodConfig(
@@ -2370,30 +2366,30 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func deleteVodConfig(
-    request: DeleteVodConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteVodConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteVodConfig(withPolling: DeleteVodConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteVodConfig(withPolling: DeleteVodConfigRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteVodConfig(withPolling: withPolling, options: .init())
   }
 
   public func deleteVodConfig(
-    withPolling: DeleteVodConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteVodConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteVodConfig(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteVodConfigRequest().with {
       $0.name = name
     }
@@ -2407,31 +2403,31 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func updateVodConfig(
-    request: UpdateVodConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateVodConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateVodConfig(withPolling: UpdateVodConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<VodConfig>
+  public func updateVodConfig(withPolling: UpdateVodConfigRequest) async throws -> any GoogleGax
+    .PollableOperation<VodConfig>
   {
     try await self.updateVodConfig(withPolling: withPolling, options: .init())
   }
 
   public func updateVodConfig(
-    withPolling: UpdateVodConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<VodConfig> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<VodConfig>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateVodConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<VodConfig> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<VodConfig>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateVodConfig(
     vodConfig: VodConfig?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<VodConfig> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<VodConfig> {
     let request = UpdateVodConfigRequest().with {
       $0.vodConfig = vodConfig
       $0.updateMask = updateMask
@@ -2446,9 +2442,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -2458,13 +2454,13 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -2485,9 +2481,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -2504,9 +2500,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -2523,9 +2519,9 @@ extension Clients.VideoStitcherServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

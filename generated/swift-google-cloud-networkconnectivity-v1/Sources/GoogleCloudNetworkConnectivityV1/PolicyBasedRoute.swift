@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Policy-based routes route L4 network traffic based on not just destination IP
 /// address, but also source IP address, protocol, and more. If a policy-based
 /// route conflicts with other types of routes, the policy-based route always
 /// takes precedence.
-public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PolicyBasedRoute: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Immutable. A unique name of the resource in the form of
@@ -29,10 +29,10 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. Time when the policy-based route was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time when the policy-based route was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// User-defined labels.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -73,7 +73,7 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public var nextHop: OneOf_NextHop? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PolicyBasedRoute`.
   public init() {}
@@ -137,10 +137,8 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -210,7 +208,7 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.nextHop = nextHop
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -251,14 +249,14 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// VM instances that this policy-based route applies to.
-  public struct VirtualMachine: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct VirtualMachine: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. A list of VM instance tags that this policy-based route applies
     /// to. VM instances that have ANY of tags specified here installs this PBR.
     public var tags: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `VirtualMachine`.
     public init() {}
@@ -296,7 +294,7 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -312,23 +310,23 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.networkconnectivity.v1.PolicyBasedRoute.VirtualMachine"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// InterconnectAttachment that this route applies to.
-  public struct InterconnectAttachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InterconnectAttachment: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Cloud region to install this policy-based route on interconnect
     /// attachment. Use `all` to install it on all interconnect attachments.
     public var region: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InterconnectAttachment`.
     public init() {}
@@ -366,7 +364,7 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -382,16 +380,16 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.networkconnectivity.v1.PolicyBasedRoute.InterconnectAttachment"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Filter matches L4 traffic.
-  public struct Filter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Filter: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The IP protocol that this policy-based route applies to. Valid
@@ -412,7 +410,7 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var protocolVersion: PolicyBasedRoute.Filter.ProtocolVersion = PolicyBasedRoute.Filter
       .ProtocolVersion()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Filter`.
     public init() {}
@@ -467,7 +465,7 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -583,16 +581,16 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkconnectivity.v1.PolicyBasedRoute.Filter"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Informational warning message.
-  public struct Warnings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Warnings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. A warning code, if applicable.
@@ -609,7 +607,7 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. A human-readable description of the warning code.
     public var warningMessage: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Warnings`.
     public init() {}
@@ -660,7 +658,7 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -786,11 +784,11 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkconnectivity.v1.PolicyBasedRoute.Warnings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -919,10 +917,10 @@ public struct PolicyBasedRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkconnectivity.v1.PolicyBasedRoute"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

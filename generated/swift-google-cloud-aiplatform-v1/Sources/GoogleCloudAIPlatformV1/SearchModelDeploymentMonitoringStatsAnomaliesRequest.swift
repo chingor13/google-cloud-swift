@@ -16,14 +16,14 @@
 
 #if JobService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [JobService.SearchModelDeploymentMonitoringStatsAnomalies][google.cloud.aiplatform.v1.JobService.SearchModelDeploymentMonitoringStatsAnomalies].
   ///
   /// [google.cloud.aiplatform.v1.JobService.SearchModelDeploymentMonitoringStatsAnomalies]: <doc:JobServiceClient/searchModelDeploymentMonitoringStatsAnomalies(request:options:)>
-  public struct SearchModelDeploymentMonitoringStatsAnomaliesRequest: Codable, Equatable,
-    GoogleCloudWKT._AnyPackable,
+  public struct SearchModelDeploymentMonitoringStatsAnomaliesRequest: Codable, Equatable, GoogleWKT
+      ._AnyPackable,
     Sendable
   {
     /// Required. ModelDeploymentMonitoring Job resource name.
@@ -59,13 +59,13 @@
 
     /// The earliest timestamp of stats being generated.
     /// If not set, indicates fetching stats till the earliest possible one.
-    public var startTime: GoogleCloudWKT.Timestamp? = nil
+    public var startTime: GoogleWKT.Timestamp? = nil
 
     /// The latest timestamp of stats being generated.
     /// If not set, indicates feching stats till the latest possible one.
-    public var endTime: GoogleCloudWKT.Timestamp? = nil
+    public var endTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SearchModelDeploymentMonitoringStatsAnomaliesRequest`.
     public init() {}
@@ -136,12 +136,11 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .pageToken) {
         self.pageToken = value
       }
-      self.startTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-      self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+      self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+      self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -161,7 +160,7 @@
     }
 
     /// Stats requested for specific objective.
-    public struct StatsAnomaliesObjective: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct StatsAnomaliesObjective: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       public var type: ModelDeploymentMonitoringObjectiveType =
@@ -179,7 +178,7 @@
       /// [google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest.start_time]: <doc:SearchModelDeploymentMonitoringStatsAnomaliesRequest/startTime>
       public var topFeatureCount: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `StatsAnomaliesObjective`.
       public init() {}
@@ -224,7 +223,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -241,11 +240,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest.StatsAnomaliesObjective"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -253,11 +252,11 @@
       return
         "type.googleapis.com/google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

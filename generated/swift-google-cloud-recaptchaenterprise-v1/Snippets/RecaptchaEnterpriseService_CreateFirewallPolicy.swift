@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudRecaptchaEnterpriseV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: RecaptchaEnterpriseServiceClient, parent: String) async throws {
   let response = try await client.createFirewallPolicy(

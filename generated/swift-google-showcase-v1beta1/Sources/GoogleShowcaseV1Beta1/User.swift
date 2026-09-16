@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A user.
-public struct User: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct User: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the user.
@@ -31,10 +31,10 @@ public struct User: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var email: Swift.String = Swift.String()
 
   /// The timestamp at which the user was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The latest timestamp at which the user was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// The age of the user in years.
   public var age: Swift.Int32? = nil
@@ -54,7 +54,7 @@ public struct User: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///     Ordinarily, the default for a `bool` field should be false. --)
   public var enableNotifications: Swift.Bool? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `User`.
   public init() {}
@@ -112,10 +112,8 @@ public struct User: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .email) {
       self.email = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     self.age = try container.decodeIfPresent(Swift.Int32.self, forKey: .age)
     self.heightFeet = try container.decodeIfPresent(Swift.Double.self, forKey: .heightFeet)
     self.nickname = try container.decodeIfPresent(Swift.String.self, forKey: .nickname)
@@ -123,7 +121,7 @@ public struct User: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       Swift.Bool.self, forKey: .enableNotifications)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -146,10 +144,10 @@ public struct User: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.showcase.v1beta1.User"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

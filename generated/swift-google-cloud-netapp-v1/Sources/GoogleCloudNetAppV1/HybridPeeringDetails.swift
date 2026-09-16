@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// HybridPeeringDetails contains details about the hybrid peering.
-public struct HybridPeeringDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct HybridPeeringDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. IP address of the subnet.
@@ -30,7 +30,7 @@ public struct HybridPeeringDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   /// Output only. Expiration time for the peering command to be executed on
   /// user's ONTAP.
-  public var commandExpiryTime: GoogleCloudWKT.Timestamp? = nil
+  public var commandExpiryTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Temporary passphrase generated to accept cluster peering
   /// command.
@@ -48,7 +48,7 @@ public struct HybridPeeringDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// the destination vserver svm.
   public var peerSvmName: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `HybridPeeringDetails`.
   public init() {}
@@ -100,7 +100,7 @@ public struct HybridPeeringDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
       self.command = value
     }
     self.commandExpiryTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .commandExpiryTime)
+      GoogleWKT.Timestamp.self, forKey: .commandExpiryTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .passphrase) {
       self.passphrase = value
     }
@@ -115,7 +115,7 @@ public struct HybridPeeringDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -136,10 +136,10 @@ public struct HybridPeeringDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.netapp.v1.HybridPeeringDetails"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

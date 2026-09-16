@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for the ambient sound to be played with the synthesized agent
 /// response, to enhance the naturalness of the conversation.
-public struct AmbientSoundConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AmbientSoundConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Volume gain (in dB) of the normal native volume supported by
@@ -36,7 +36,7 @@ public struct AmbientSoundConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// enhance the naturalness of the conversation.
   public var source: OneOf_Source? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AmbientSoundConfig`.
   public init() {}
@@ -105,7 +105,7 @@ public struct AmbientSoundConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     self.source = source
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -275,10 +275,10 @@ public struct AmbientSoundConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.AmbientSoundConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

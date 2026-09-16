@@ -20,9 +20,9 @@
   import Foundation
   import GoogleCloudDialogflowCXV3
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
+  import GoogleWKT
 
   func sample(client: VersionsClient) async throws {
     let response = try await client.compareVersions(

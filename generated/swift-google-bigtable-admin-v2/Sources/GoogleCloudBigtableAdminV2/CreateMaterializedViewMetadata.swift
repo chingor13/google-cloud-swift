@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The metadata for the Operation returned by CreateMaterializedView.
-public struct CreateMaterializedViewMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateMaterializedViewMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The request that prompted the initiation of this CreateMaterializedView
@@ -26,12 +26,12 @@ public struct CreateMaterializedViewMetadata: Codable, Equatable, GoogleCloudWKT
   public var originalRequest: CreateMaterializedViewRequest? = nil
 
   /// The time at which this operation started.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// If set, the time at which this operation finished or was canceled.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateMaterializedViewMetadata`.
   public init() {}
@@ -70,12 +70,11 @@ public struct CreateMaterializedViewMetadata: Codable, Equatable, GoogleCloudWKT
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.originalRequest = try container.decodeIfPresent(
       CreateMaterializedViewRequest.self, forKey: .originalRequest)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -92,10 +91,10 @@ public struct CreateMaterializedViewMetadata: Codable, Equatable, GoogleCloudWKT
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.CreateMaterializedViewMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

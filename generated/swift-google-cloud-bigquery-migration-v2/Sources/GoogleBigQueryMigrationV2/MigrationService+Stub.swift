@@ -15,37 +15,37 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol MigrationServiceStub: Sendable {
     func createMigrationWorkflow(
-      request: CreateMigrationWorkflowRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMigrationWorkflowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryMigrationV2.MigrationWorkflow
 
     func getMigrationWorkflow(
-      request: GetMigrationWorkflowRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMigrationWorkflowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryMigrationV2.MigrationWorkflow
 
     func listMigrationWorkflows(
-      request: ListMigrationWorkflowsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMigrationWorkflowsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryMigrationV2.ListMigrationWorkflowsResponse
 
     func deleteMigrationWorkflow(
-      request: DeleteMigrationWorkflowRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMigrationWorkflowRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func startMigrationWorkflow(
-      request: StartMigrationWorkflowRequest, options: GoogleCloudGax.RequestOptions
+      request: StartMigrationWorkflowRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getMigrationSubtask(
-      request: GetMigrationSubtaskRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMigrationSubtaskRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryMigrationV2.MigrationSubtask
 
     func listMigrationSubtasks(
-      request: ListMigrationSubtasksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMigrationSubtasksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryMigrationV2.ListMigrationSubtasksResponse
   }
 }

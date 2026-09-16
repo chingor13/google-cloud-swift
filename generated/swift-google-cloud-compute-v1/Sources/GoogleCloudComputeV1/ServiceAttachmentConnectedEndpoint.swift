@@ -16,10 +16,10 @@
 
 #if ServiceAttachments
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// [Output Only] A connection connected to this service attachment.
-  public struct ServiceAttachmentConnectedEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ServiceAttachmentConnectedEndpoint: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The url of the consumer network.
@@ -45,7 +45,7 @@
     /// The status of a connected endpoint to this service attachment.
     public var status: ServiceAttachmentConnectedEndpoint.Status? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ServiceAttachmentConnectedEndpoint`.
     public init() {}
@@ -106,7 +106,7 @@
         ServiceAttachmentConnectedEndpoint.Status.self, forKey: .status)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -257,11 +257,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.ServiceAttachmentConnectedEndpoint"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

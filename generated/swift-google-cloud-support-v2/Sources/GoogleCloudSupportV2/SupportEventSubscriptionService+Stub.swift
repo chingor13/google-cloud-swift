@@ -15,37 +15,37 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol SupportEventSubscriptionServiceStub: Sendable {
     func createSupportEventSubscription(
-      request: CreateSupportEventSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSupportEventSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SupportEventSubscription
 
     func getSupportEventSubscription(
-      request: GetSupportEventSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSupportEventSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SupportEventSubscription
 
     func listSupportEventSubscriptions(
-      request: ListSupportEventSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSupportEventSubscriptionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.ListSupportEventSubscriptionsResponse
 
     func updateSupportEventSubscription(
-      request: UpdateSupportEventSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSupportEventSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SupportEventSubscription
 
     func deleteSupportEventSubscription(
-      request: DeleteSupportEventSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSupportEventSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SupportEventSubscription
 
     func undeleteSupportEventSubscription(
-      request: UndeleteSupportEventSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteSupportEventSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SupportEventSubscription
 
     func expungeSupportEventSubscription(
-      request: ExpungeSupportEventSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: ExpungeSupportEventSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

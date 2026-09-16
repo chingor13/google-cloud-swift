@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Notifies the network that the target account wishes to withdraw reserve funds
 /// and decreases its token issuance limit. The sender must be a clearinghouse
@@ -25,7 +25,7 @@ import Foundation
 /// reserve funds can be withdrawn. This is necessary because it is possible for
 /// the transaction to fail (for example, if the minted amount is already above
 /// the requested reduced limit).
-public struct DecreaseTokenIssuanceLimit: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DecreaseTokenIssuanceLimit: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Deprecated: Use
@@ -49,7 +49,7 @@ public struct DecreaseTokenIssuanceLimit: Codable, Equatable, GoogleCloudWKT._An
   /// the currently issued tokens.
   public var amount: CurrencyValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DecreaseTokenIssuanceLimit`.
   public init() {}
@@ -93,7 +93,7 @@ public struct DecreaseTokenIssuanceLimit: Codable, Equatable, GoogleCloudWKT._An
     self.amount = try container.decodeIfPresent(CurrencyValue.self, forKey: .amount)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -110,10 +110,10 @@ public struct DecreaseTokenIssuanceLimit: Codable, Equatable, GoogleCloudWKT._An
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.universalledger.v1.DecreaseTokenIssuanceLimit"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

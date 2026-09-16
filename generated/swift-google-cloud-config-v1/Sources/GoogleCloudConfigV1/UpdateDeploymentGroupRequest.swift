@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A request message for updating a deployment group
-public struct UpdateDeploymentGroupRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateDeploymentGroupRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Field mask used to specify the fields to be overwritten in the
@@ -27,7 +27,7 @@ public struct UpdateDeploymentGroupRequest: Codable, Equatable, GoogleCloudWKT._
   /// The fields specified in the update_mask are relative to the resource, not
   /// the full request. A field will be overwritten if it is in the mask. If the
   /// user does not provide a mask then all fields will be overwritten.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Required. [DeploymentGroup][google.cloud.config.v1.DeploymentGroup] to
   /// update.
@@ -54,7 +54,7 @@ public struct UpdateDeploymentGroupRequest: Codable, Equatable, GoogleCloudWKT._
   /// not supported (00000000-0000-0000-0000-000000000000).
   public var requestId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateDeploymentGroupRequest`.
   public init() {}
@@ -91,8 +91,7 @@ public struct UpdateDeploymentGroupRequest: Codable, Equatable, GoogleCloudWKT._
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.deploymentGroup = try container.decodeIfPresent(
       DeploymentGroup.self, forKey: .deploymentGroup)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .requestId) {
@@ -100,7 +99,7 @@ public struct UpdateDeploymentGroupRequest: Codable, Equatable, GoogleCloudWKT._
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -117,10 +116,10 @@ public struct UpdateDeploymentGroupRequest: Codable, Equatable, GoogleCloudWKT._
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.config.v1.UpdateDeploymentGroupRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

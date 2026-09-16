@@ -16,119 +16,119 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DocumentProcessorServiceStub: Sendable {
     func processDocument(
-      request: ProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: ProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ProcessResponse
 
     func batchProcessDocuments(
-      request: BatchProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func fetchProcessorTypes(
-      request: FetchProcessorTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchProcessorTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.FetchProcessorTypesResponse
 
     func listProcessorTypes(
-      request: ListProcessorTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProcessorTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ListProcessorTypesResponse
 
     func getProcessorType(
-      request: GetProcessorTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProcessorTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ProcessorType
 
     func listProcessors(
-      request: ListProcessorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProcessorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ListProcessorsResponse
 
     func getProcessor(
-      request: GetProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.Processor
 
     func trainProcessorVersion(
-      request: TrainProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: TrainProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getProcessorVersion(
-      request: GetProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ProcessorVersion
 
     func listProcessorVersions(
-      request: ListProcessorVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProcessorVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ListProcessorVersionsResponse
 
     func deleteProcessorVersion(
-      request: DeleteProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deployProcessorVersion(
-      request: DeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeployProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func undeployProcessorVersion(
-      request: UndeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeployProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createProcessor(
-      request: CreateProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.Processor
 
     func deleteProcessor(
-      request: DeleteProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func enableProcessor(
-      request: EnableProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: EnableProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func disableProcessor(
-      request: DisableProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: DisableProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func setDefaultProcessorVersion(
-      request: SetDefaultProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: SetDefaultProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func reviewDocument(
-      request: ReviewDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: ReviewDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func evaluateProcessorVersion(
-      request: EvaluateProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: EvaluateProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getEvaluation(
-      request: GetEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.Evaluation
 
     func listEvaluations(
-      request: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEvaluationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ListEvaluationsResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

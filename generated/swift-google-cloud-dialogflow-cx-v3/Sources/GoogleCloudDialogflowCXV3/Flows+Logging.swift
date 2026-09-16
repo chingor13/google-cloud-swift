@@ -20,10 +20,10 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -42,9 +42,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -61,14 +61,14 @@
       }
 
       public func createFlow(
-        request: CreateFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Flow {
         try await self._intercept(
           request: request,
           options: options,
           name: "createFlow",
           action: {
-            (r: CreateFlowRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateFlowRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Flow
             in
             return try await self.inner.createFlow(request: r, options: o)
@@ -76,26 +76,26 @@
       }
 
       public func deleteFlow(
-        request: DeleteFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteFlowRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteFlow",
-          action: { (r: DeleteFlowRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          action: { (r: DeleteFlowRequest, o: GoogleGax.RequestOptions) async throws -> Void in
             return try await self.inner.deleteFlow(request: r, options: o)
           })
       }
 
       public func listFlows(
-        request: ListFlowsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListFlowsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListFlowsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listFlows",
           action: {
-            (r: ListFlowsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListFlowsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.ListFlowsResponse
             in
             return try await self.inner.listFlows(request: r, options: o)
@@ -103,14 +103,14 @@
       }
 
       public func getFlow(
-        request: GetFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: GetFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Flow {
         try await self._intercept(
           request: request,
           options: options,
           name: "getFlow",
           action: {
-            (r: GetFlowRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetFlowRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Flow
             in
             return try await self.inner.getFlow(request: r, options: o)
@@ -118,14 +118,14 @@
       }
 
       public func updateFlow(
-        request: UpdateFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Flow {
         try await self._intercept(
           request: request,
           options: options,
           name: "updateFlow",
           action: {
-            (r: UpdateFlowRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateFlowRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Flow
             in
             return try await self.inner.updateFlow(request: r, options: o)
@@ -133,14 +133,14 @@
       }
 
       public func trainFlow(
-        request: TrainFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: TrainFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "trainFlow",
           action: {
-            (r: TrainFlowRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: TrainFlowRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.trainFlow(request: r, options: o)
@@ -148,14 +148,14 @@
       }
 
       public func validateFlow(
-        request: ValidateFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: ValidateFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.FlowValidationResult {
         try await self._intercept(
           request: request,
           options: options,
           name: "validateFlow",
           action: {
-            (r: ValidateFlowRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ValidateFlowRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.FlowValidationResult
             in
             return try await self.inner.validateFlow(request: r, options: o)
@@ -163,14 +163,14 @@
       }
 
       public func getFlowValidationResult(
-        request: GetFlowValidationResultRequest, options: GoogleCloudGax.RequestOptions
+        request: GetFlowValidationResultRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.FlowValidationResult {
         try await self._intercept(
           request: request,
           options: options,
           name: "getFlowValidationResult",
           action: {
-            (r: GetFlowValidationResultRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetFlowValidationResultRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.FlowValidationResult
             in
             return try await self.inner.getFlowValidationResult(request: r, options: o)
@@ -178,14 +178,14 @@
       }
 
       public func importFlow(
-        request: ImportFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "importFlow",
           action: {
-            (r: ImportFlowRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ImportFlowRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.importFlow(request: r, options: o)
@@ -193,14 +193,14 @@
       }
 
       public func exportFlow(
-        request: ExportFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "exportFlow",
           action: {
-            (r: ExportFlowRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ExportFlowRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.exportFlow(request: r, options: o)
@@ -208,75 +208,75 @@
       }
 
       public func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listLocations",
           action: {
-            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.ListLocationsResponse
+            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.ListLocationsResponse
             in
             return try await self.inner.listLocations(request: r, options: o)
           })
       }
 
       public func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location {
         try await self._intercept(
           request: request,
           options: options,
           name: "getLocation",
           action: {
-            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.Location
+            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.Location
             in
             return try await self.inner.getLocation(request: r, options: o)
           })
       }
 
       public func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listOperations",
           action: {
-            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.ListOperationsResponse
+            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.ListOperationsResponse
             in
             return try await self.inner.listOperations(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)
           })
       }
 
       public func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "cancelOperation",
           action: {
-            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.cancelOperation(request: r, options: o)
           })
       }

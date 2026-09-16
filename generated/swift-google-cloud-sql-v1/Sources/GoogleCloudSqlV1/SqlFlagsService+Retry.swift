@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class SqlFlagsServiceRetry: SqlFlagsServiceStub {
       let inner: any SqlFlagsServiceStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any SqlFlagsServiceStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any SqlFlagsServiceStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@
       }
 
       public func list(
-        request: SqlFlagsListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlFlagsListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.FlagsListResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlFlagsListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlFlagsListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.FlagsListResponse
             in
             return try await self.inner.list(request: r, options: o)

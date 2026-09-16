@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service to call Document AI to process documents according to the
 /// processor's definition. Processors are built using state-of-the-art Google
@@ -34,11 +34,11 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   Sendable
 {
   let inner: any Clients.DocumentProcessorServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `DocumentProcessorServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DocumentProcessorServiceStub =
       try Clients.DocumentProcessorServiceTransport(options)
     inner = Clients.DocumentProcessorServiceRetry(inner, options: options)
@@ -54,7 +54,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ProcessDocument")
   public func processDocument(
-    request: ProcessRequest, options: GoogleCloudGax.RequestOptions
+    request: ProcessRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ProcessResponse {
     try await self.inner.processDocument(request: request, options: options)
   }
@@ -64,7 +64,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_BatchProcessDocuments")
   public func batchProcessDocuments(
-    request: BatchProcessRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchProcessRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.batchProcessDocuments(request: request, options: options)
   }
@@ -74,22 +74,21 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_BatchProcessDocuments")
   public func batchProcessDocuments(
-    withPolling: BatchProcessRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchProcessResponse> {
+    withPolling: BatchProcessRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BatchProcessResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<BatchProcessResponse>.State in
+        -> GoogleGax._PollableOperationImpl<BatchProcessResponse>.State in
       return try op._extractStatus(BatchProcessResponse.self)
     }
     let rawOp = try await self.batchProcessDocuments(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<BatchProcessResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<BatchProcessResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -105,7 +104,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_FetchProcessorTypes")
   public func fetchProcessorTypes(
-    request: FetchProcessorTypesRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchProcessorTypesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.FetchProcessorTypesResponse {
     try await self.inner.fetchProcessorTypes(request: request, options: options)
   }
@@ -114,7 +113,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ListProcessorTypes")
   public func listProcessorTypes(
-    request: ListProcessorTypesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProcessorTypesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ListProcessorTypesResponse {
     try await self.inner.listProcessorTypes(request: request, options: options)
   }
@@ -123,7 +122,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ListProcessorTypes")
   public func listProcessorTypes(
-    byItem: ListProcessorTypesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProcessorTypesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ProcessorType, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDocumentAIV1.ListProcessorTypesResponse in
@@ -131,14 +130,14 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
       request.pageToken = token
       return try await self.listProcessorTypes(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a processor type detail.
   ///
   /// @Snippet(path: "DocumentProcessorService_GetProcessorType")
   public func getProcessorType(
-    request: GetProcessorTypeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProcessorTypeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ProcessorType {
     try await self.inner.getProcessorType(request: request, options: options)
   }
@@ -147,7 +146,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ListProcessors")
   public func listProcessors(
-    request: ListProcessorsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProcessorsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ListProcessorsResponse {
     try await self.inner.listProcessors(request: request, options: options)
   }
@@ -156,7 +155,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ListProcessors")
   public func listProcessors(
-    byItem: ListProcessorsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProcessorsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Processor, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDocumentAIV1.ListProcessorsResponse in
@@ -164,14 +163,14 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
       request.pageToken = token
       return try await self.listProcessors(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a processor detail.
   ///
   /// @Snippet(path: "DocumentProcessorService_GetProcessor")
   public func getProcessor(
-    request: GetProcessorRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProcessorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.Processor {
     try await self.inner.getProcessor(request: request, options: options)
   }
@@ -184,7 +183,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_TrainProcessorVersion")
   public func trainProcessorVersion(
-    request: TrainProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: TrainProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.trainProcessorVersion(request: request, options: options)
   }
@@ -197,23 +196,22 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_TrainProcessorVersion")
   public func trainProcessorVersion(
-    withPolling: TrainProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TrainProcessorVersionResponse> {
+    withPolling: TrainProcessorVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<TrainProcessorVersionResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<TrainProcessorVersionResponse>.State in
+        -> GoogleGax._PollableOperationImpl<TrainProcessorVersionResponse>.State in
       return try op._extractStatus(TrainProcessorVersionResponse.self)
     }
     let rawOp = try await self.trainProcessorVersion(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<TrainProcessorVersionResponse>.State
-      in
+      () async throws -> GoogleGax._PollableOperationImpl<TrainProcessorVersionResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -225,7 +223,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_GetProcessorVersion")
   public func getProcessorVersion(
-    request: GetProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ProcessorVersion {
     try await self.inner.getProcessorVersion(request: request, options: options)
   }
@@ -234,7 +232,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ListProcessorVersions")
   public func listProcessorVersions(
-    request: ListProcessorVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProcessorVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ListProcessorVersionsResponse {
     try await self.inner.listProcessorVersions(request: request, options: options)
   }
@@ -243,7 +241,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ListProcessorVersions")
   public func listProcessorVersions(
-    byItem: ListProcessorVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProcessorVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ProcessorVersion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDocumentAIV1.ListProcessorVersionsResponse in
@@ -251,7 +249,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
       request.pageToken = token
       return try await self.listProcessorVersions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes the processor version, all artifacts under the processor version
@@ -259,7 +257,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_DeleteProcessorVersion")
   public func deleteProcessorVersion(
-    request: DeleteProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteProcessorVersion(request: request, options: options)
   }
@@ -269,21 +267,21 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_DeleteProcessorVersion")
   public func deleteProcessorVersion(
-    withPolling: DeleteProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteProcessorVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteProcessorVersion(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -295,7 +293,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_DeployProcessorVersion")
   public func deployProcessorVersion(
-    request: DeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeployProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deployProcessorVersion(request: request, options: options)
   }
@@ -304,23 +302,22 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_DeployProcessorVersion")
   public func deployProcessorVersion(
-    withPolling: DeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeployProcessorVersionResponse> {
+    withPolling: DeployProcessorVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeployProcessorVersionResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DeployProcessorVersionResponse>.State in
+        -> GoogleGax._PollableOperationImpl<DeployProcessorVersionResponse>.State in
       return try op._extractStatus(DeployProcessorVersionResponse.self)
     }
     let rawOp = try await self.deployProcessorVersion(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DeployProcessorVersionResponse>.State
-      in
+      () async throws -> GoogleGax._PollableOperationImpl<DeployProcessorVersionResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -332,7 +329,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_UndeployProcessorVersion")
   public func undeployProcessorVersion(
-    request: UndeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeployProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.undeployProcessorVersion(request: request, options: options)
   }
@@ -341,23 +338,22 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_UndeployProcessorVersion")
   public func undeployProcessorVersion(
-    withPolling: UndeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<UndeployProcessorVersionResponse> {
+    withPolling: UndeployProcessorVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<UndeployProcessorVersionResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<UndeployProcessorVersionResponse>.State in
+        -> GoogleGax._PollableOperationImpl<UndeployProcessorVersionResponse>.State in
       return try op._extractStatus(UndeployProcessorVersionResponse.self)
     }
     let rawOp = try await self.undeployProcessorVersion(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<UndeployProcessorVersionResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<UndeployProcessorVersionResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -377,7 +373,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_CreateProcessor")
   public func createProcessor(
-    request: CreateProcessorRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateProcessorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.Processor {
     try await self.inner.createProcessor(request: request, options: options)
   }
@@ -387,7 +383,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_DeleteProcessor")
   public func deleteProcessor(
-    request: DeleteProcessorRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteProcessorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteProcessor(request: request, options: options)
   }
@@ -397,21 +393,21 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_DeleteProcessor")
   public func deleteProcessor(
-    withPolling: DeleteProcessorRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteProcessorRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteProcessor(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -423,7 +419,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_EnableProcessor")
   public func enableProcessor(
-    request: EnableProcessorRequest, options: GoogleCloudGax.RequestOptions
+    request: EnableProcessorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.enableProcessor(request: request, options: options)
   }
@@ -432,22 +428,22 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_EnableProcessor")
   public func enableProcessor(
-    withPolling: EnableProcessorRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<EnableProcessorResponse> {
+    withPolling: EnableProcessorRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<EnableProcessorResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<EnableProcessorResponse>.State in
+        -> GoogleGax._PollableOperationImpl<EnableProcessorResponse>.State in
       return try op._extractStatus(EnableProcessorResponse.self)
     }
     let rawOp = try await self.enableProcessor(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<EnableProcessorResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<EnableProcessorResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -459,7 +455,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_DisableProcessor")
   public func disableProcessor(
-    request: DisableProcessorRequest, options: GoogleCloudGax.RequestOptions
+    request: DisableProcessorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.disableProcessor(request: request, options: options)
   }
@@ -468,22 +464,22 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_DisableProcessor")
   public func disableProcessor(
-    withPolling: DisableProcessorRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DisableProcessorResponse> {
+    withPolling: DisableProcessorRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DisableProcessorResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DisableProcessorResponse>.State in
+        -> GoogleGax._PollableOperationImpl<DisableProcessorResponse>.State in
       return try op._extractStatus(DisableProcessorResponse.self)
     }
     let rawOp = try await self.disableProcessor(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DisableProcessorResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<DisableProcessorResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -503,7 +499,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_SetDefaultProcessorVersion")
   public func setDefaultProcessorVersion(
-    request: SetDefaultProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: SetDefaultProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.setDefaultProcessorVersion(request: request, options: options)
   }
@@ -520,23 +516,23 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_SetDefaultProcessorVersion")
   public func setDefaultProcessorVersion(
-    withPolling: SetDefaultProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SetDefaultProcessorVersionResponse> {
+    withPolling: SetDefaultProcessorVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SetDefaultProcessorVersionResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<SetDefaultProcessorVersionResponse>.State in
+        -> GoogleGax._PollableOperationImpl<SetDefaultProcessorVersionResponse>.State in
       return try op._extractStatus(SetDefaultProcessorVersionResponse.self)
     }
     let rawOp = try await self.setDefaultProcessorVersion(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<SetDefaultProcessorVersionResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<SetDefaultProcessorVersionResponse>.State
+      in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -549,7 +545,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ReviewDocument")
   public func reviewDocument(
-    request: ReviewDocumentRequest, options: GoogleCloudGax.RequestOptions
+    request: ReviewDocumentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.reviewDocument(request: request, options: options)
   }
@@ -559,22 +555,22 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ReviewDocument")
   public func reviewDocument(
-    withPolling: ReviewDocumentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ReviewDocumentResponse> {
+    withPolling: ReviewDocumentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ReviewDocumentResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ReviewDocumentResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ReviewDocumentResponse>.State in
       return try op._extractStatus(ReviewDocumentResponse.self)
     }
     let rawOp = try await self.reviewDocument(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ReviewDocumentResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<ReviewDocumentResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -587,7 +583,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_EvaluateProcessorVersion")
   public func evaluateProcessorVersion(
-    request: EvaluateProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: EvaluateProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.evaluateProcessorVersion(request: request, options: options)
   }
@@ -597,23 +593,22 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_EvaluateProcessorVersion")
   public func evaluateProcessorVersion(
-    withPolling: EvaluateProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<EvaluateProcessorVersionResponse> {
+    withPolling: EvaluateProcessorVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<EvaluateProcessorVersionResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<EvaluateProcessorVersionResponse>.State in
+        -> GoogleGax._PollableOperationImpl<EvaluateProcessorVersionResponse>.State in
       return try op._extractStatus(EvaluateProcessorVersionResponse.self)
     }
     let rawOp = try await self.evaluateProcessorVersion(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<EvaluateProcessorVersionResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<EvaluateProcessorVersionResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -625,7 +620,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_GetEvaluation")
   public func getEvaluation(
-    request: GetEvaluationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEvaluationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.Evaluation {
     try await self.inner.getEvaluation(request: request, options: options)
   }
@@ -634,7 +629,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ListEvaluations")
   public func listEvaluations(
-    request: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEvaluationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ListEvaluationsResponse {
     try await self.inner.listEvaluations(request: request, options: options)
   }
@@ -643,7 +638,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ListEvaluations")
   public func listEvaluations(
-    byItem: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEvaluationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Evaluation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDocumentAIV1.ListEvaluationsResponse in
@@ -651,14 +646,14 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
       request.pageToken = token
       return try await self.listEvaluations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "DocumentProcessorService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -667,7 +662,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -675,14 +670,14 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "DocumentProcessorService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -693,7 +688,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -704,7 +699,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -712,7 +707,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -721,7 +716,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -732,7 +727,7 @@ public final class DocumentProcessorServiceClient: Clients.DocumentProcessorServ
   ///
   /// @Snippet(path: "DocumentProcessorService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -759,13 +754,13 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.batchProcessDocuments`.
-    func batchProcessDocuments(withPolling: BatchProcessRequest) async throws -> any GoogleCloudGax
+    func batchProcessDocuments(withPolling: BatchProcessRequest) async throws -> any GoogleGax
       .PollableOperation<BatchProcessResponse>
 
     /// See `DocumentProcessorServiceClient.batchProcessDocuments`.
     func batchProcessDocuments(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchProcessResponse>
+    ) async throws -> any GoogleGax.PollableOperation<BatchProcessResponse>
 
     /// See `DocumentProcessorServiceClient.fetchProcessorTypes`.
     func fetchProcessorTypes(request: FetchProcessorTypesRequest) async throws
@@ -828,13 +823,13 @@ extension Clients {
 
     /// See `DocumentProcessorServiceClient.trainProcessorVersion`.
     func trainProcessorVersion(withPolling: TrainProcessorVersionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<TrainProcessorVersionResponse>
+      -> any GoogleGax.PollableOperation<TrainProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.trainProcessorVersion`.
     func trainProcessorVersion(
       parent: Swift.String,
       processorVersion: ProcessorVersion?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<TrainProcessorVersionResponse>
+    ) async throws -> any GoogleGax.PollableOperation<TrainProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.getProcessorVersion`.
     func getProcessorVersion(request: GetProcessorVersionRequest) async throws
@@ -865,12 +860,12 @@ extension Clients {
 
     /// See `DocumentProcessorServiceClient.deleteProcessorVersion`.
     func deleteProcessorVersion(withPolling: DeleteProcessorVersionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DocumentProcessorServiceClient.deleteProcessorVersion`.
     func deleteProcessorVersion(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DocumentProcessorServiceClient.deployProcessorVersion`.
     func deployProcessorVersion(request: DeployProcessorVersionRequest) async throws
@@ -878,12 +873,12 @@ extension Clients {
 
     /// See `DocumentProcessorServiceClient.deployProcessorVersion`.
     func deployProcessorVersion(withPolling: DeployProcessorVersionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DeployProcessorVersionResponse>
+      -> any GoogleGax.PollableOperation<DeployProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.deployProcessorVersion`.
     func deployProcessorVersion(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeployProcessorVersionResponse>
+    ) async throws -> any GoogleGax.PollableOperation<DeployProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.undeployProcessorVersion`.
     func undeployProcessorVersion(request: UndeployProcessorVersionRequest) async throws
@@ -891,12 +886,12 @@ extension Clients {
 
     /// See `DocumentProcessorServiceClient.undeployProcessorVersion`.
     func undeployProcessorVersion(withPolling: UndeployProcessorVersionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<UndeployProcessorVersionResponse>
+      -> any GoogleGax.PollableOperation<UndeployProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.undeployProcessorVersion`.
     func undeployProcessorVersion(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<UndeployProcessorVersionResponse>
+    ) async throws -> any GoogleGax.PollableOperation<UndeployProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.createProcessor`.
     func createProcessor(request: CreateProcessorRequest) async throws
@@ -913,20 +908,20 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.deleteProcessor`.
-    func deleteProcessor(withPolling: DeleteProcessorRequest) async throws -> any GoogleCloudGax
+    func deleteProcessor(withPolling: DeleteProcessorRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `DocumentProcessorServiceClient.deleteProcessor`.
     func deleteProcessor(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DocumentProcessorServiceClient.enableProcessor`.
     func enableProcessor(request: EnableProcessorRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.enableProcessor`.
-    func enableProcessor(withPolling: EnableProcessorRequest) async throws -> any GoogleCloudGax
+    func enableProcessor(withPolling: EnableProcessorRequest) async throws -> any GoogleGax
       .PollableOperation<EnableProcessorResponse>
 
     /// See `DocumentProcessorServiceClient.disableProcessor`.
@@ -934,7 +929,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.disableProcessor`.
-    func disableProcessor(withPolling: DisableProcessorRequest) async throws -> any GoogleCloudGax
+    func disableProcessor(withPolling: DisableProcessorRequest) async throws -> any GoogleGax
       .PollableOperation<DisableProcessorResponse>
 
     /// See `DocumentProcessorServiceClient.setDefaultProcessorVersion`.
@@ -943,19 +938,19 @@ extension Clients {
 
     /// See `DocumentProcessorServiceClient.setDefaultProcessorVersion`.
     func setDefaultProcessorVersion(withPolling: SetDefaultProcessorVersionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<SetDefaultProcessorVersionResponse>
+      -> any GoogleGax.PollableOperation<SetDefaultProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.reviewDocument`.
     func reviewDocument(request: ReviewDocumentRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.reviewDocument`.
-    func reviewDocument(withPolling: ReviewDocumentRequest) async throws -> any GoogleCloudGax
+    func reviewDocument(withPolling: ReviewDocumentRequest) async throws -> any GoogleGax
       .PollableOperation<ReviewDocumentResponse>
 
     /// See `DocumentProcessorServiceClient.reviewDocument`.
     func reviewDocument(
       humanReviewConfig: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ReviewDocumentResponse>
+    ) async throws -> any GoogleGax.PollableOperation<ReviewDocumentResponse>
 
     /// See `DocumentProcessorServiceClient.evaluateProcessorVersion`.
     func evaluateProcessorVersion(request: EvaluateProcessorVersionRequest) async throws
@@ -963,12 +958,12 @@ extension Clients {
 
     /// See `DocumentProcessorServiceClient.evaluateProcessorVersion`.
     func evaluateProcessorVersion(withPolling: EvaluateProcessorVersionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<EvaluateProcessorVersionResponse>
+      -> any GoogleGax.PollableOperation<EvaluateProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.evaluateProcessorVersion`.
     func evaluateProcessorVersion(
       processorVersion: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<EvaluateProcessorVersionResponse>
+    ) async throws -> any GoogleGax.PollableOperation<EvaluateProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.getEvaluation`.
     func getEvaluation(request: GetEvaluationRequest) async throws
@@ -1031,217 +1026,217 @@ extension Clients {
 
     /// See `DocumentProcessorServiceClient.processDocument`.
     func processDocument(
-      request: ProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: ProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ProcessResponse
 
     /// See `DocumentProcessorServiceClient.batchProcessDocuments`.
     func batchProcessDocuments(
-      request: BatchProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.batchProcessDocuments`.
     func batchProcessDocuments(
-      withPolling: BatchProcessRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchProcessResponse>
+      withPolling: BatchProcessRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BatchProcessResponse>
 
     /// See `DocumentProcessorServiceClient.fetchProcessorTypes`.
     func fetchProcessorTypes(
-      request: FetchProcessorTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchProcessorTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.FetchProcessorTypesResponse
 
     /// See `DocumentProcessorServiceClient.listProcessorTypes`.
     func listProcessorTypes(
-      request: ListProcessorTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProcessorTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ListProcessorTypesResponse
 
     /// See `DocumentProcessorServiceClient.listProcessorTypes`.
     func listProcessorTypes(
-      byItem: ListProcessorTypesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListProcessorTypesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ProcessorType, Swift.Error>
 
     /// See `DocumentProcessorServiceClient.getProcessorType`.
     func getProcessorType(
-      request: GetProcessorTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProcessorTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ProcessorType
 
     /// See `DocumentProcessorServiceClient.listProcessors`.
     func listProcessors(
-      request: ListProcessorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProcessorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ListProcessorsResponse
 
     /// See `DocumentProcessorServiceClient.listProcessors`.
     func listProcessors(
-      byItem: ListProcessorsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListProcessorsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Processor, Swift.Error>
 
     /// See `DocumentProcessorServiceClient.getProcessor`.
     func getProcessor(
-      request: GetProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.Processor
 
     /// See `DocumentProcessorServiceClient.trainProcessorVersion`.
     func trainProcessorVersion(
-      request: TrainProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: TrainProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.trainProcessorVersion`.
     func trainProcessorVersion(
-      withPolling: TrainProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TrainProcessorVersionResponse>
+      withPolling: TrainProcessorVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<TrainProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.getProcessorVersion`.
     func getProcessorVersion(
-      request: GetProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ProcessorVersion
 
     /// See `DocumentProcessorServiceClient.listProcessorVersions`.
     func listProcessorVersions(
-      request: ListProcessorVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProcessorVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ListProcessorVersionsResponse
 
     /// See `DocumentProcessorServiceClient.listProcessorVersions`.
     func listProcessorVersions(
-      byItem: ListProcessorVersionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListProcessorVersionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ProcessorVersion, Swift.Error>
 
     /// See `DocumentProcessorServiceClient.deleteProcessorVersion`.
     func deleteProcessorVersion(
-      request: DeleteProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.deleteProcessorVersion`.
     func deleteProcessorVersion(
-      withPolling: DeleteProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteProcessorVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DocumentProcessorServiceClient.deployProcessorVersion`.
     func deployProcessorVersion(
-      request: DeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeployProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.deployProcessorVersion`.
     func deployProcessorVersion(
-      withPolling: DeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeployProcessorVersionResponse>
+      withPolling: DeployProcessorVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DeployProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.undeployProcessorVersion`.
     func undeployProcessorVersion(
-      request: UndeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeployProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.undeployProcessorVersion`.
     func undeployProcessorVersion(
-      withPolling: UndeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<UndeployProcessorVersionResponse>
+      withPolling: UndeployProcessorVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<UndeployProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.createProcessor`.
     func createProcessor(
-      request: CreateProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.Processor
 
     /// See `DocumentProcessorServiceClient.deleteProcessor`.
     func deleteProcessor(
-      request: DeleteProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.deleteProcessor`.
     func deleteProcessor(
-      withPolling: DeleteProcessorRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteProcessorRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DocumentProcessorServiceClient.enableProcessor`.
     func enableProcessor(
-      request: EnableProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: EnableProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.enableProcessor`.
     func enableProcessor(
-      withPolling: EnableProcessorRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<EnableProcessorResponse>
+      withPolling: EnableProcessorRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<EnableProcessorResponse>
 
     /// See `DocumentProcessorServiceClient.disableProcessor`.
     func disableProcessor(
-      request: DisableProcessorRequest, options: GoogleCloudGax.RequestOptions
+      request: DisableProcessorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.disableProcessor`.
     func disableProcessor(
-      withPolling: DisableProcessorRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DisableProcessorResponse>
+      withPolling: DisableProcessorRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DisableProcessorResponse>
 
     /// See `DocumentProcessorServiceClient.setDefaultProcessorVersion`.
     func setDefaultProcessorVersion(
-      request: SetDefaultProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: SetDefaultProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.setDefaultProcessorVersion`.
     func setDefaultProcessorVersion(
-      withPolling: SetDefaultProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SetDefaultProcessorVersionResponse>
+      withPolling: SetDefaultProcessorVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SetDefaultProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.reviewDocument`.
     func reviewDocument(
-      request: ReviewDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: ReviewDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.reviewDocument`.
     func reviewDocument(
-      withPolling: ReviewDocumentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ReviewDocumentResponse>
+      withPolling: ReviewDocumentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ReviewDocumentResponse>
 
     /// See `DocumentProcessorServiceClient.evaluateProcessorVersion`.
     func evaluateProcessorVersion(
-      request: EvaluateProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: EvaluateProcessorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DocumentProcessorServiceClient.evaluateProcessorVersion`.
     func evaluateProcessorVersion(
-      withPolling: EvaluateProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<EvaluateProcessorVersionResponse>
+      withPolling: EvaluateProcessorVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<EvaluateProcessorVersionResponse>
 
     /// See `DocumentProcessorServiceClient.getEvaluation`.
     func getEvaluation(
-      request: GetEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.Evaluation
 
     /// See `DocumentProcessorServiceClient.listEvaluations`.
     func listEvaluations(
-      request: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEvaluationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDocumentAIV1.ListEvaluationsResponse
 
     /// See `DocumentProcessorServiceClient.listEvaluations`.
     func listEvaluations(
-      byItem: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEvaluationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Evaluation, Swift.Error>
 
     /// See `DocumentProcessorServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `DocumentProcessorServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `DocumentProcessorServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `DocumentProcessorServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `DocumentProcessorServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `DocumentProcessorServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1255,9 +1250,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func processDocument(
-    request: ProcessRequest, options: GoogleCloudGax.RequestOptions
+    request: ProcessRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ProcessResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func processDocument(
@@ -1276,31 +1271,30 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func batchProcessDocuments(
-    request: BatchProcessRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchProcessRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func batchProcessDocuments(withPolling: BatchProcessRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<BatchProcessResponse>
+  public func batchProcessDocuments(withPolling: BatchProcessRequest) async throws -> any GoogleGax
+    .PollableOperation<BatchProcessResponse>
   {
     try await self.batchProcessDocuments(withPolling: withPolling, options: .init())
   }
 
   public func batchProcessDocuments(
-    withPolling: BatchProcessRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchProcessResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<BatchProcessResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: BatchProcessRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BatchProcessResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<BatchProcessResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func batchProcessDocuments(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchProcessResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<BatchProcessResponse> {
     let request = BatchProcessRequest().with {
       $0.name = name
     }
@@ -1314,9 +1308,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func fetchProcessorTypes(
-    request: FetchProcessorTypesRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchProcessorTypesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.FetchProcessorTypesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func fetchProcessorTypes(
@@ -1335,9 +1329,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func listProcessorTypes(
-    request: ListProcessorTypesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProcessorTypesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ListProcessorTypesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listProcessorTypes(
@@ -1347,13 +1341,13 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func listProcessorTypes(
-    byItem: ListProcessorTypesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProcessorTypesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ProcessorType, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDocumentAIV1.ListProcessorTypesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listProcessorTypes(
@@ -1372,9 +1366,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func getProcessorType(
-    request: GetProcessorTypeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProcessorTypeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ProcessorType {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getProcessorType(
@@ -1393,9 +1387,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func listProcessors(
-    request: ListProcessorsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProcessorsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ListProcessorsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listProcessors(
@@ -1405,13 +1399,13 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func listProcessors(
-    byItem: ListProcessorsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProcessorsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Processor, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDocumentAIV1.ListProcessorsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listProcessors(
@@ -1430,9 +1424,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func getProcessor(
-    request: GetProcessorRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProcessorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.Processor {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getProcessor(
@@ -1451,33 +1445,32 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func trainProcessorVersion(
-    request: TrainProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: TrainProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func trainProcessorVersion(withPolling: TrainProcessorVersionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<TrainProcessorVersionResponse>
+    -> any GoogleGax.PollableOperation<TrainProcessorVersionResponse>
   {
     try await self.trainProcessorVersion(withPolling: withPolling, options: .init())
   }
 
   public func trainProcessorVersion(
-    withPolling: TrainProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TrainProcessorVersionResponse> {
+    withPolling: TrainProcessorVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<TrainProcessorVersionResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<TrainProcessorVersionResponse>.State
-      in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<TrainProcessorVersionResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func trainProcessorVersion(
     parent: Swift.String,
     processorVersion: ProcessorVersion?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<TrainProcessorVersionResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<TrainProcessorVersionResponse> {
     let request = TrainProcessorVersionRequest().with {
       $0.parent = parent
       $0.processorVersion = processorVersion
@@ -1492,9 +1485,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func getProcessorVersion(
-    request: GetProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ProcessorVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getProcessorVersion(
@@ -1513,9 +1506,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func listProcessorVersions(
-    request: ListProcessorVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProcessorVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ListProcessorVersionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listProcessorVersions(
@@ -1525,13 +1518,13 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func listProcessorVersions(
-    byItem: ListProcessorVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProcessorVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ProcessorVersion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDocumentAIV1.ListProcessorVersionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listProcessorVersions(
@@ -1550,30 +1543,30 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func deleteProcessorVersion(
-    request: DeleteProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteProcessorVersion(withPolling: DeleteProcessorVersionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteProcessorVersion(withPolling: withPolling, options: .init())
   }
 
   public func deleteProcessorVersion(
-    withPolling: DeleteProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteProcessorVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteProcessorVersion(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteProcessorVersionRequest().with {
       $0.name = name
     }
@@ -1587,32 +1580,31 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func deployProcessorVersion(
-    request: DeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeployProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deployProcessorVersion(withPolling: DeployProcessorVersionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DeployProcessorVersionResponse>
+    -> any GoogleGax.PollableOperation<DeployProcessorVersionResponse>
   {
     try await self.deployProcessorVersion(withPolling: withPolling, options: .init())
   }
 
   public func deployProcessorVersion(
-    withPolling: DeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeployProcessorVersionResponse> {
+    withPolling: DeployProcessorVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeployProcessorVersionResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DeployProcessorVersionResponse>.State
-      in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<DeployProcessorVersionResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deployProcessorVersion(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeployProcessorVersionResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<DeployProcessorVersionResponse> {
     let request = DeployProcessorVersionRequest().with {
       $0.name = name
     }
@@ -1626,32 +1618,31 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func undeployProcessorVersion(
-    request: UndeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeployProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func undeployProcessorVersion(withPolling: UndeployProcessorVersionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<UndeployProcessorVersionResponse>
+    -> any GoogleGax.PollableOperation<UndeployProcessorVersionResponse>
   {
     try await self.undeployProcessorVersion(withPolling: withPolling, options: .init())
   }
 
   public func undeployProcessorVersion(
-    withPolling: UndeployProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<UndeployProcessorVersionResponse> {
+    withPolling: UndeployProcessorVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<UndeployProcessorVersionResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<UndeployProcessorVersionResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<UndeployProcessorVersionResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func undeployProcessorVersion(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<UndeployProcessorVersionResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<UndeployProcessorVersionResponse> {
     let request = UndeployProcessorVersionRequest().with {
       $0.name = name
     }
@@ -1665,9 +1656,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func createProcessor(
-    request: CreateProcessorRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateProcessorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.Processor {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createProcessor(
@@ -1688,30 +1679,30 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func deleteProcessor(
-    request: DeleteProcessorRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteProcessorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteProcessor(withPolling: DeleteProcessorRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteProcessor(withPolling: DeleteProcessorRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteProcessor(withPolling: withPolling, options: .init())
   }
 
   public func deleteProcessor(
-    withPolling: DeleteProcessorRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteProcessorRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteProcessor(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteProcessorRequest().with {
       $0.name = name
     }
@@ -1725,25 +1716,25 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func enableProcessor(
-    request: EnableProcessorRequest, options: GoogleCloudGax.RequestOptions
+    request: EnableProcessorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func enableProcessor(withPolling: EnableProcessorRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<EnableProcessorResponse>
+  public func enableProcessor(withPolling: EnableProcessorRequest) async throws -> any GoogleGax
+    .PollableOperation<EnableProcessorResponse>
   {
     try await self.enableProcessor(withPolling: withPolling, options: .init())
   }
 
   public func enableProcessor(
-    withPolling: EnableProcessorRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<EnableProcessorResponse> {
+    withPolling: EnableProcessorRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<EnableProcessorResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<EnableProcessorResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<EnableProcessorResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1754,25 +1745,25 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func disableProcessor(
-    request: DisableProcessorRequest, options: GoogleCloudGax.RequestOptions
+    request: DisableProcessorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func disableProcessor(withPolling: DisableProcessorRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DisableProcessorResponse>
+  public func disableProcessor(withPolling: DisableProcessorRequest) async throws -> any GoogleGax
+    .PollableOperation<DisableProcessorResponse>
   {
     try await self.disableProcessor(withPolling: withPolling, options: .init())
   }
 
   public func disableProcessor(
-    withPolling: DisableProcessorRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DisableProcessorResponse> {
+    withPolling: DisableProcessorRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DisableProcessorResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DisableProcessorResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<DisableProcessorResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1783,26 +1774,26 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func setDefaultProcessorVersion(
-    request: SetDefaultProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: SetDefaultProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setDefaultProcessorVersion(withPolling: SetDefaultProcessorVersionRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<SetDefaultProcessorVersionResponse>
+    async throws -> any GoogleGax.PollableOperation<SetDefaultProcessorVersionResponse>
   {
     try await self.setDefaultProcessorVersion(withPolling: withPolling, options: .init())
   }
 
   public func setDefaultProcessorVersion(
-    withPolling: SetDefaultProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SetDefaultProcessorVersionResponse> {
+    withPolling: SetDefaultProcessorVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SetDefaultProcessorVersionResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<SetDefaultProcessorVersionResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<SetDefaultProcessorVersionResponse>.State
+      in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1813,31 +1804,31 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func reviewDocument(
-    request: ReviewDocumentRequest, options: GoogleCloudGax.RequestOptions
+    request: ReviewDocumentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func reviewDocument(withPolling: ReviewDocumentRequest) async throws -> any GoogleCloudGax
+  public func reviewDocument(withPolling: ReviewDocumentRequest) async throws -> any GoogleGax
     .PollableOperation<ReviewDocumentResponse>
   {
     try await self.reviewDocument(withPolling: withPolling, options: .init())
   }
 
   public func reviewDocument(
-    withPolling: ReviewDocumentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ReviewDocumentResponse> {
+    withPolling: ReviewDocumentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ReviewDocumentResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ReviewDocumentResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<ReviewDocumentResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func reviewDocument(
     humanReviewConfig: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ReviewDocumentResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<ReviewDocumentResponse> {
     let request = ReviewDocumentRequest().with {
       $0.humanReviewConfig = humanReviewConfig
     }
@@ -1851,32 +1842,31 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func evaluateProcessorVersion(
-    request: EvaluateProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: EvaluateProcessorVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func evaluateProcessorVersion(withPolling: EvaluateProcessorVersionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<EvaluateProcessorVersionResponse>
+    -> any GoogleGax.PollableOperation<EvaluateProcessorVersionResponse>
   {
     try await self.evaluateProcessorVersion(withPolling: withPolling, options: .init())
   }
 
   public func evaluateProcessorVersion(
-    withPolling: EvaluateProcessorVersionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<EvaluateProcessorVersionResponse> {
+    withPolling: EvaluateProcessorVersionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<EvaluateProcessorVersionResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<EvaluateProcessorVersionResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<EvaluateProcessorVersionResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func evaluateProcessorVersion(
     processorVersion: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<EvaluateProcessorVersionResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<EvaluateProcessorVersionResponse> {
     let request = EvaluateProcessorVersionRequest().with {
       $0.processorVersion = processorVersion
     }
@@ -1890,9 +1880,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func getEvaluation(
-    request: GetEvaluationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEvaluationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.Evaluation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getEvaluation(
@@ -1911,9 +1901,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func listEvaluations(
-    request: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEvaluationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDocumentAIV1.ListEvaluationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listEvaluations(
@@ -1923,13 +1913,13 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func listEvaluations(
-    byItem: ListEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEvaluationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Evaluation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDocumentAIV1.ListEvaluationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listEvaluations(
@@ -1948,9 +1938,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -1960,13 +1950,13 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1976,9 +1966,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1988,9 +1978,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -2000,13 +1990,13 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -2027,9 +2017,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -2046,9 +2036,9 @@ extension Clients.DocumentProcessorServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

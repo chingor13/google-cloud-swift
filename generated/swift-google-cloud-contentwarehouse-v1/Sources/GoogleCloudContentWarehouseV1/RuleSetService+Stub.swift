@@ -15,34 +15,34 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol RuleSetServiceStub: Sendable {
     func createRuleSet(
-      request: CreateRuleSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRuleSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.RuleSet
 
     func getRuleSet(
-      request: GetRuleSetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRuleSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.RuleSet
 
     func updateRuleSet(
-      request: UpdateRuleSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRuleSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.RuleSet
 
     func deleteRuleSet(
-      request: DeleteRuleSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRuleSetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listRuleSets(
-      request: ListRuleSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRuleSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.ListRuleSetsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

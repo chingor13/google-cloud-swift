@@ -15,53 +15,53 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CloudControlsPartnerCoreStub: Sendable {
     func getWorkload(
-      request: GetWorkloadRequest, options: GoogleCloudGax.RequestOptions
+      request: GetWorkloadRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.Workload
 
     func listWorkloads(
-      request: ListWorkloadsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWorkloadsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.ListWorkloadsResponse
 
     func getCustomer(
-      request: GetCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.Customer
 
     func listCustomers(
-      request: ListCustomersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.ListCustomersResponse
 
     func getEkmConnections(
-      request: GetEkmConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEkmConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.EkmConnections
 
     func getPartnerPermissions(
-      request: GetPartnerPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPartnerPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.PartnerPermissions
 
     func listAccessApprovalRequests(
-      request: ListAccessApprovalRequestsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAccessApprovalRequestsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.ListAccessApprovalRequestsResponse
 
     func getPartner(
-      request: GetPartnerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPartnerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.Partner
 
     func createCustomer(
-      request: CreateCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.Customer
 
     func updateCustomer(
-      request: UpdateCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.Customer
 
     func deleteCustomer(
-      request: DeleteCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A listing is what gets published into a data exchange that a subscriber can
 /// subscribe to. It contains a reference to the data source along with
 /// descriptive information that will help subscribers find and subscribe the
 /// data.
-public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Listing: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the listing.
@@ -101,7 +101,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Listing source.
   public var source: OneOf_Source? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Listing`.
   public init() {}
@@ -240,7 +240,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.source = source
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -286,7 +286,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// dataset in
   /// the subscriber's project. A Linked dataset is an opaque, read-only BigQuery
   /// dataset that serves as a _symbolic link_ to a shared dataset.
-  public struct BigQueryDatasetSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BigQueryDatasetSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Resource name of the dataset source for this listing.
@@ -311,7 +311,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// designation.
     public var effectiveReplicas: [Listing.BigQueryDatasetSource.Replica] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BigQueryDatasetSource`.
     public init() {}
@@ -372,7 +372,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -389,12 +389,12 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Resource in this dataset that is selectively shared.
-    public struct SelectedResource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SelectedResource: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       public var resource: OneOf_Resource? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SelectedResource`.
       public init() {}
@@ -449,7 +449,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.resource = resource
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -486,31 +486,31 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.SelectedResource"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Restricted export policy used to configure restricted export on linked
     /// dataset.
-    public struct RestrictedExportPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RestrictedExportPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. If true, enable restricted export.
-      public var enabled: GoogleCloudWKT.BoolValue? = nil
+      public var enabled: GoogleWKT.BoolValue? = nil
 
       /// Optional. If true, restrict direct table access (read
       /// api/tabledata.list) on linked table.
-      public var restrictDirectTableAccess: GoogleCloudWKT.BoolValue? = nil
+      public var restrictDirectTableAccess: GoogleWKT.BoolValue? = nil
 
       /// Optional. If true, restrict export of query result derived from
       /// restricted linked dataset table.
-      public var restrictQueryResult: GoogleCloudWKT.BoolValue? = nil
+      public var restrictQueryResult: GoogleWKT.BoolValue? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RestrictedExportPolicy`.
       public init() {}
@@ -547,15 +547,14 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.enabled = try container.decodeIfPresent(
-          GoogleCloudWKT.BoolValue.self, forKey: .enabled)
+        self.enabled = try container.decodeIfPresent(GoogleWKT.BoolValue.self, forKey: .enabled)
         self.restrictDirectTableAccess = try container.decodeIfPresent(
-          GoogleCloudWKT.BoolValue.self, forKey: .restrictDirectTableAccess)
+          GoogleWKT.BoolValue.self, forKey: .restrictDirectTableAccess)
         self.restrictQueryResult = try container.decodeIfPresent(
-          GoogleCloudWKT.BoolValue.self, forKey: .restrictQueryResult)
+          GoogleWKT.BoolValue.self, forKey: .restrictQueryResult)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -574,11 +573,11 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -586,7 +585,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// It includes the geographic location of the replica and
     /// system-computed, output-only fields indicating its replication state and
     /// whether it is the primary replica.
-    public struct Replica: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Replica: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The geographic location where the replica resides. See
@@ -602,7 +601,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Output only. Indicates that this replica is the primary replica.
       public var primaryState: Listing.BigQueryDatasetSource.Replica.PrimaryState? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Replica`.
       public init() {}
@@ -651,7 +650,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           Listing.BigQueryDatasetSource.Replica.PrimaryState.self, forKey: .primaryState)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -873,11 +872,11 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.Replica"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -885,16 +884,16 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Pub/Sub topic source.
-  public struct PubSubTopicSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PubSubTopicSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Resource name of the Pub/Sub topic source for this listing.
@@ -906,7 +905,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// full listing of possible Cloud regions.
     public var dataAffinityRegions: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PubSubTopicSource`.
     public init() {}
@@ -951,7 +950,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -967,17 +966,17 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.PubSubTopicSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Restricted export config, used to configure restricted export on linked
   /// dataset.
-  public struct RestrictedExportConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RestrictedExportConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. If true, enable restricted export.
@@ -991,7 +990,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// restricted linked dataset table.
     public var restrictQueryResult: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RestrictedExportConfig`.
     public init() {}
@@ -1041,7 +1040,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1059,24 +1058,24 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Commercial info contains the information about the commercial data products
   /// associated with the listing.
-  public struct CommercialInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CommercialInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Details of the Marketplace Data Product associated with the
     /// Listing.
     public var cloudMarketplace: Listing.CommercialInfo.GoogleCloudMarketplaceInfo? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CommercialInfo`.
     public init() {}
@@ -1113,7 +1112,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         Listing.CommercialInfo.GoogleCloudMarketplaceInfo.self, forKey: .cloudMarketplace)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1127,7 +1126,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     /// Specifies the details of the Marketplace Data Product associated with the
     /// Listing.
-    public struct GoogleCloudMarketplaceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GoogleCloudMarketplaceInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. Resource name of the commercial service associated with
@@ -1138,7 +1137,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public var commercialState:
         Listing.CommercialInfo.GoogleCloudMarketplaceInfo.CommercialState? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GoogleCloudMarketplaceInfo`.
       public init() {}
@@ -1179,7 +1178,7 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           forKey: .commercialState)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1301,22 +1300,22 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo.GoogleCloudMarketplaceInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing.CommercialInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1643,10 +1642,10 @@ public struct Listing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Listing"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -20,21 +20,21 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Manages a collection of models for human agent assistant.
   ///
   /// @Snippet(path: "ConversationModelsQuickstart")
   public final class ConversationModelsClient: Clients.ConversationModelsProtocol, Sendable {
     let inner: any Clients.ConversationModelsStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `ConversationModelsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.ConversationModelsStub = try Clients.ConversationModelsTransport(
         options)
       inner = Clients.ConversationModelsRetry(inner, options: options)
@@ -62,7 +62,7 @@
     ///
     /// @Snippet(path: "ConversationModels_CreateConversationModel")
     public func createConversationModel(
-      request: CreateConversationModelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConversationModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createConversationModel(request: request, options: options)
     }
@@ -83,22 +83,21 @@
     ///
     /// @Snippet(path: "ConversationModels_CreateConversationModel")
     public func createConversationModel(
-      withPolling: CreateConversationModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationModel> {
+      withPolling: CreateConversationModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ConversationModel> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ConversationModel>.State in
+          -> GoogleGax._PollableOperationImpl<ConversationModel>.State in
         return try op._extractStatus(ConversationModel.self)
       }
       let rawOp = try await self.createConversationModel(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ConversationModel>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConversationModel>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -110,7 +109,7 @@
     ///
     /// @Snippet(path: "ConversationModels_GetConversationModel")
     public func getConversationModel(
-      request: GetConversationModelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConversationModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ConversationModel {
       try await self.inner.getConversationModel(request: request, options: options)
     }
@@ -119,7 +118,7 @@
     ///
     /// @Snippet(path: "ConversationModels_ListConversationModels")
     public func listConversationModels(
-      request: ListConversationModelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConversationModelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ListConversationModelsResponse {
       try await self.inner.listConversationModels(request: request, options: options)
     }
@@ -128,7 +127,7 @@
     ///
     /// @Snippet(path: "ConversationModels_ListConversationModels")
     public func listConversationModels(
-      byItem: ListConversationModelsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConversationModelsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ConversationModel, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowV2.ListConversationModelsResponse
@@ -137,7 +136,7 @@
         request.pageToken = token
         return try await self.listConversationModels(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes a model.
@@ -155,7 +154,7 @@
     ///
     /// @Snippet(path: "ConversationModels_DeleteConversationModel")
     public func deleteConversationModel(
-      request: DeleteConversationModelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConversationModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteConversationModel(request: request, options: options)
     }
@@ -175,21 +174,21 @@
     ///
     /// @Snippet(path: "ConversationModels_DeleteConversationModel")
     public func deleteConversationModel(
-      withPolling: DeleteConversationModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteConversationModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteConversationModel(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -215,7 +214,7 @@
     ///
     /// @Snippet(path: "ConversationModels_DeployConversationModel")
     public func deployConversationModel(
-      request: DeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeployConversationModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deployConversationModel(request: request, options: options)
     }
@@ -238,21 +237,21 @@
     ///
     /// @Snippet(path: "ConversationModels_DeployConversationModel")
     public func deployConversationModel(
-      withPolling: DeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeployConversationModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deployConversationModel(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -278,7 +277,7 @@
     ///
     /// @Snippet(path: "ConversationModels_UndeployConversationModel")
     public func undeployConversationModel(
-      request: UndeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeployConversationModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.undeployConversationModel(request: request, options: options)
     }
@@ -301,21 +300,21 @@
     ///
     /// @Snippet(path: "ConversationModels_UndeployConversationModel")
     public func undeployConversationModel(
-      withPolling: UndeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: UndeployConversationModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.undeployConversationModel(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -327,7 +326,7 @@
     ///
     /// @Snippet(path: "ConversationModels_GetConversationModelEvaluation")
     public func getConversationModelEvaluation(
-      request: GetConversationModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConversationModelEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ConversationModelEvaluation {
       try await self.inner.getConversationModelEvaluation(request: request, options: options)
     }
@@ -336,7 +335,7 @@
     ///
     /// @Snippet(path: "ConversationModels_ListConversationModelEvaluations")
     public func listConversationModelEvaluations(
-      request: ListConversationModelEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConversationModelEvaluationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ListConversationModelEvaluationsResponse {
       try await self.inner.listConversationModelEvaluations(request: request, options: options)
     }
@@ -345,7 +344,7 @@
     ///
     /// @Snippet(path: "ConversationModels_ListConversationModelEvaluations")
     public func listConversationModelEvaluations(
-      byItem: ListConversationModelEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConversationModelEvaluationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ConversationModelEvaluation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -354,14 +353,14 @@
         request.pageToken = token
         return try await self.listConversationModelEvaluations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Creates evaluation of a conversation model.
     ///
     /// @Snippet(path: "ConversationModels_CreateConversationModelEvaluation")
     public func createConversationModelEvaluation(
-      request: CreateConversationModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConversationModelEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createConversationModelEvaluation(request: request, options: options)
     }
@@ -370,24 +369,23 @@
     ///
     /// @Snippet(path: "ConversationModels_CreateConversationModelEvaluation")
     public func createConversationModelEvaluation(
-      withPolling: CreateConversationModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationModelEvaluation> {
+      withPolling: CreateConversationModelEvaluationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ConversationModelEvaluation> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ConversationModelEvaluation>.State in
+          -> GoogleGax._PollableOperationImpl<ConversationModelEvaluation>.State in
         return try op._extractStatus(ConversationModelEvaluation.self)
       }
       let rawOp = try await self.createConversationModelEvaluation(
         request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ConversationModelEvaluation>.State
-        in
+        () async throws -> GoogleGax._PollableOperationImpl<ConversationModelEvaluation>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -416,7 +414,7 @@
     ///
     /// @Snippet(path: "ConversationModels_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -442,7 +440,7 @@
     ///
     /// @Snippet(path: "ConversationModels_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -450,14 +448,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "ConversationModels_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -468,7 +466,7 @@
     ///
     /// @Snippet(path: "ConversationModels_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -479,7 +477,7 @@
     ///
     /// @Snippet(path: "ConversationModels_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -487,7 +485,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -496,7 +494,7 @@
     ///
     /// @Snippet(path: "ConversationModels_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -507,7 +505,7 @@
     ///
     /// @Snippet(path: "ConversationModels_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -526,13 +524,13 @@
 
       /// See `ConversationModelsClient.createConversationModel`.
       func createConversationModel(withPolling: CreateConversationModelRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<ConversationModel>
+        -> any GoogleGax.PollableOperation<ConversationModel>
 
       /// See `ConversationModelsClient.createConversationModel`.
       func createConversationModel(
         parent: Swift.String,
         conversationModel: ConversationModel?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<ConversationModel>
+      ) async throws -> any GoogleGax.PollableOperation<ConversationModel>
 
       /// See `ConversationModelsClient.getConversationModel`.
       func getConversationModel(request: GetConversationModelRequest) async throws
@@ -563,12 +561,12 @@
 
       /// See `ConversationModelsClient.deleteConversationModel`.
       func deleteConversationModel(withPolling: DeleteConversationModelRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `ConversationModelsClient.deleteConversationModel`.
       func deleteConversationModel(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `ConversationModelsClient.deployConversationModel`.
       func deployConversationModel(request: DeployConversationModelRequest) async throws
@@ -576,7 +574,7 @@
 
       /// See `ConversationModelsClient.deployConversationModel`.
       func deployConversationModel(withPolling: DeployConversationModelRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `ConversationModelsClient.undeployConversationModel`.
       func undeployConversationModel(request: UndeployConversationModelRequest) async throws
@@ -584,7 +582,7 @@
 
       /// See `ConversationModelsClient.undeployConversationModel`.
       func undeployConversationModel(withPolling: UndeployConversationModelRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `ConversationModelsClient.getConversationModelEvaluation`.
       func getConversationModelEvaluation(request: GetConversationModelEvaluationRequest)
@@ -615,13 +613,13 @@
 
       /// See `ConversationModelsClient.createConversationModelEvaluation`.
       func createConversationModelEvaluation(withPolling: CreateConversationModelEvaluationRequest)
-        async throws -> any GoogleCloudGax.PollableOperation<ConversationModelEvaluation>
+        async throws -> any GoogleGax.PollableOperation<ConversationModelEvaluation>
 
       /// See `ConversationModelsClient.createConversationModelEvaluation`.
       func createConversationModelEvaluation(
         parent: Swift.String,
         conversationModelEvaluation: ConversationModelEvaluation?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<ConversationModelEvaluation>
+      ) async throws -> any GoogleGax.PollableOperation<ConversationModelEvaluation>
 
       /// See `ConversationModelsClient.listLocations`.
       func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -661,113 +659,112 @@
 
       /// See `ConversationModelsClient.createConversationModel`.
       func createConversationModel(
-        request: CreateConversationModelRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateConversationModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `ConversationModelsClient.createConversationModel`.
       func createConversationModel(
-        withPolling: CreateConversationModelRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ConversationModel>
+        withPolling: CreateConversationModelRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ConversationModel>
 
       /// See `ConversationModelsClient.getConversationModel`.
       func getConversationModel(
-        request: GetConversationModelRequest, options: GoogleCloudGax.RequestOptions
+        request: GetConversationModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ConversationModel
 
       /// See `ConversationModelsClient.listConversationModels`.
       func listConversationModels(
-        request: ListConversationModelsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListConversationModelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListConversationModelsResponse
 
       /// See `ConversationModelsClient.listConversationModels`.
       func listConversationModels(
-        byItem: ListConversationModelsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListConversationModelsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<ConversationModel, Swift.Error>
 
       /// See `ConversationModelsClient.deleteConversationModel`.
       func deleteConversationModel(
-        request: DeleteConversationModelRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteConversationModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `ConversationModelsClient.deleteConversationModel`.
       func deleteConversationModel(
-        withPolling: DeleteConversationModelRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteConversationModelRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `ConversationModelsClient.deployConversationModel`.
       func deployConversationModel(
-        request: DeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
+        request: DeployConversationModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `ConversationModelsClient.deployConversationModel`.
       func deployConversationModel(
-        withPolling: DeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeployConversationModelRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `ConversationModelsClient.undeployConversationModel`.
       func undeployConversationModel(
-        request: UndeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
+        request: UndeployConversationModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `ConversationModelsClient.undeployConversationModel`.
       func undeployConversationModel(
-        withPolling: UndeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: UndeployConversationModelRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `ConversationModelsClient.getConversationModelEvaluation`.
       func getConversationModelEvaluation(
-        request: GetConversationModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
+        request: GetConversationModelEvaluationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ConversationModelEvaluation
 
       /// See `ConversationModelsClient.listConversationModelEvaluations`.
       func listConversationModelEvaluations(
-        request: ListConversationModelEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListConversationModelEvaluationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListConversationModelEvaluationsResponse
 
       /// See `ConversationModelsClient.listConversationModelEvaluations`.
       func listConversationModelEvaluations(
-        byItem: ListConversationModelEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListConversationModelEvaluationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<ConversationModelEvaluation, Swift.Error>
 
       /// See `ConversationModelsClient.createConversationModelEvaluation`.
       func createConversationModelEvaluation(
-        request: CreateConversationModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateConversationModelEvaluationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `ConversationModelsClient.createConversationModelEvaluation`.
       func createConversationModelEvaluation(
-        withPolling: CreateConversationModelEvaluationRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ConversationModelEvaluation>
+        withPolling: CreateConversationModelEvaluationRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ConversationModelEvaluation>
 
       /// See `ConversationModelsClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `ConversationModelsClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `ConversationModelsClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `ConversationModelsClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `ConversationModelsClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `ConversationModelsClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -781,32 +778,31 @@
     }
 
     public func createConversationModel(
-      request: CreateConversationModelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConversationModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createConversationModel(withPolling: CreateConversationModelRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ConversationModel>
+      -> any GoogleGax.PollableOperation<ConversationModel>
     {
       try await self.createConversationModel(withPolling: withPolling, options: .init())
     }
 
     public func createConversationModel(
-      withPolling: CreateConversationModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationModel> {
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ConversationModel>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateConversationModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ConversationModel> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConversationModel>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func createConversationModel(
       parent: Swift.String,
       conversationModel: ConversationModel?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationModel> {
+    ) async throws -> any GoogleGax.PollableOperation<ConversationModel> {
       let request = CreateConversationModelRequest().with {
         $0.parent = parent
         $0.conversationModel = conversationModel
@@ -821,9 +817,9 @@
     }
 
     public func getConversationModel(
-      request: GetConversationModelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConversationModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ConversationModel {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getConversationModel(
@@ -842,9 +838,9 @@
     }
 
     public func listConversationModels(
-      request: ListConversationModelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConversationModelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ListConversationModelsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listConversationModels(
@@ -854,14 +850,14 @@
     }
 
     public func listConversationModels(
-      byItem: ListConversationModelsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConversationModelsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ConversationModel, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowV2.ListConversationModelsResponse
         in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listConversationModels(
@@ -880,30 +876,30 @@
     }
 
     public func deleteConversationModel(
-      request: DeleteConversationModelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConversationModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteConversationModel(withPolling: DeleteConversationModelRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.deleteConversationModel(withPolling: withPolling, options: .init())
     }
 
     public func deleteConversationModel(
-      withPolling: DeleteConversationModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteConversationModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteConversationModel(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteConversationModelRequest().with {
         $0.name = name
       }
@@ -917,24 +913,24 @@
     }
 
     public func deployConversationModel(
-      request: DeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeployConversationModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deployConversationModel(withPolling: DeployConversationModelRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.deployConversationModel(withPolling: withPolling, options: .init())
     }
 
     public func deployConversationModel(
-      withPolling: DeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeployConversationModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -945,24 +941,24 @@
     }
 
     public func undeployConversationModel(
-      request: UndeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeployConversationModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func undeployConversationModel(withPolling: UndeployConversationModelRequest)
-      async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      async throws -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.undeployConversationModel(withPolling: withPolling, options: .init())
     }
 
     public func undeployConversationModel(
-      withPolling: UndeployConversationModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: UndeployConversationModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -973,9 +969,9 @@
     }
 
     public func getConversationModelEvaluation(
-      request: GetConversationModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConversationModelEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ConversationModelEvaluation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getConversationModelEvaluation(
@@ -994,9 +990,9 @@
     }
 
     public func listConversationModelEvaluations(
-      request: ListConversationModelEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConversationModelEvaluationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ListConversationModelEvaluationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listConversationModelEvaluations(
@@ -1006,14 +1002,14 @@
     }
 
     public func listConversationModelEvaluations(
-      byItem: ListConversationModelEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConversationModelEvaluationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ConversationModelEvaluation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudDialogflowV2.ListConversationModelEvaluationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listConversationModelEvaluations(
@@ -1032,33 +1028,32 @@
     }
 
     public func createConversationModelEvaluation(
-      request: CreateConversationModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConversationModelEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createConversationModelEvaluation(
       withPolling: CreateConversationModelEvaluationRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationModelEvaluation> {
+    ) async throws -> any GoogleGax.PollableOperation<ConversationModelEvaluation> {
       try await self.createConversationModelEvaluation(withPolling: withPolling, options: .init())
     }
 
     public func createConversationModelEvaluation(
-      withPolling: CreateConversationModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationModelEvaluation> {
+      withPolling: CreateConversationModelEvaluationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ConversationModelEvaluation> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ConversationModelEvaluation>.State
-        in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<ConversationModelEvaluation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func createConversationModelEvaluation(
       parent: Swift.String,
       conversationModelEvaluation: ConversationModelEvaluation?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConversationModelEvaluation> {
+    ) async throws -> any GoogleGax.PollableOperation<ConversationModelEvaluation> {
       let request = CreateConversationModelEvaluationRequest().with {
         $0.parent = parent
         $0.conversationModelEvaluation = conversationModelEvaluation
@@ -1073,9 +1068,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -1085,13 +1080,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1101,9 +1096,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1113,9 +1108,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -1125,13 +1120,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -1152,9 +1147,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -1171,9 +1166,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

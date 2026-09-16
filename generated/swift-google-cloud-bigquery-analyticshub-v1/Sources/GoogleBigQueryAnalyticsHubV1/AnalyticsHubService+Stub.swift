@@ -15,132 +15,132 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AnalyticsHubServiceStub: Sendable {
     func listDataExchanges(
-      request: ListDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataExchangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.ListDataExchangesResponse
 
     func listOrgDataExchanges(
-      request: ListOrgDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOrgDataExchangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.ListOrgDataExchangesResponse
 
     func getDataExchange(
-      request: GetDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataExchangeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange
 
     func createDataExchange(
-      request: CreateDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataExchangeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange
 
     func updateDataExchange(
-      request: UpdateDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataExchangeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange
 
     func deleteDataExchange(
-      request: DeleteDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataExchangeRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listListings(
-      request: ListListingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListListingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.ListListingsResponse
 
     func getListing(
-      request: GetListingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetListingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing
 
     func createListing(
-      request: CreateListingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateListingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing
 
     func updateListing(
-      request: UpdateListingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateListingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing
 
     func deleteListing(
-      request: DeleteListingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteListingRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func subscribeListing(
-      request: SubscribeListingRequest, options: GoogleCloudGax.RequestOptions
+      request: SubscribeListingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.SubscribeListingResponse
 
     func subscribeDataExchange(
-      request: SubscribeDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+      request: SubscribeDataExchangeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func refreshSubscription(
-      request: RefreshSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: RefreshSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getSubscription(
-      request: GetSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.Subscription
 
     func listSubscriptions(
-      request: ListSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSubscriptionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.ListSubscriptionsResponse
 
     func listSharedResourceSubscriptions(
-      request: ListSharedResourceSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSharedResourceSubscriptionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.ListSharedResourceSubscriptionsResponse
 
     func revokeSubscription(
-      request: RevokeSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: RevokeSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.RevokeSubscriptionResponse
 
     func deleteSubscription(
-      request: DeleteSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func createQueryTemplate(
-      request: CreateQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateQueryTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate
 
     func getQueryTemplate(
-      request: GetQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQueryTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate
 
     func listQueryTemplates(
-      request: ListQueryTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQueryTemplatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.ListQueryTemplatesResponse
 
     func updateQueryTemplate(
-      request: UpdateQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateQueryTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate
 
     func deleteQueryTemplate(
-      request: DeleteQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteQueryTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func submitQueryTemplate(
-      request: SubmitQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: SubmitQueryTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate
 
     func approveQueryTemplate(
-      request: ApproveQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: ApproveQueryTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

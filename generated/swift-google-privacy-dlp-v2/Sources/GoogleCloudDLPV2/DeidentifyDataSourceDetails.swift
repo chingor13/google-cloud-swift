@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The results of a [Deidentify][google.privacy.dlp.v2.Action.Deidentify] action
 /// from an inspect job.
 ///
 /// [google.privacy.dlp.v2.Action.Deidentify]: <doc:Action/Deidentify>
-public struct DeidentifyDataSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DeidentifyDataSourceDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// De-identification config used for the request.
@@ -30,7 +30,7 @@ public struct DeidentifyDataSourceDetails: Codable, Equatable, GoogleCloudWKT._A
   /// Stats about the de-identification operation.
   public var deidentifyStats: DeidentifyDataSourceStats? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DeidentifyDataSourceDetails`.
   public init() {}
@@ -71,7 +71,7 @@ public struct DeidentifyDataSourceDetails: Codable, Equatable, GoogleCloudWKT._A
       DeidentifyDataSourceStats.self, forKey: .deidentifyStats)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -85,7 +85,7 @@ public struct DeidentifyDataSourceDetails: Codable, Equatable, GoogleCloudWKT._A
   }
 
   /// De-identification options.
-  public struct RequestedDeidentifyOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RequestedDeidentifyOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Snapshot of the state of the `DeidentifyTemplate` from the
@@ -103,7 +103,7 @@ public struct DeidentifyDataSourceDetails: Codable, Equatable, GoogleCloudWKT._A
     /// from the `Deidentify` action at the time this job was run.
     public var snapshotImageRedactTemplate: DeidentifyTemplate? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RequestedDeidentifyOptions`.
     public init() {}
@@ -150,7 +150,7 @@ public struct DeidentifyDataSourceDetails: Codable, Equatable, GoogleCloudWKT._A
         DeidentifyTemplate.self, forKey: .snapshotImageRedactTemplate)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -171,21 +171,21 @@ public struct DeidentifyDataSourceDetails: Codable, Equatable, GoogleCloudWKT._A
       return
         "type.googleapis.com/google.privacy.dlp.v2.DeidentifyDataSourceDetails.RequestedDeidentifyOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DeidentifyDataSourceDetails"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,10 +16,10 @@
 
 #if GeneratorEvaluations
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Evaluation metrics for summarization generator.
-  public struct SummarizationEvaluationMetrics: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SummarizationEvaluationMetrics: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. A list of evaluation results per conversation(&summary),
@@ -42,7 +42,7 @@
     /// Output only. List of conversation details.
     public var conversationDetails: [SummarizationEvaluationMetrics.ConversationDetail] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SummarizationEvaluationMetrics`.
     public init() {}
@@ -113,7 +113,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -133,7 +133,7 @@
     }
 
     /// Decomposition details for accuracy.
-    public struct AccuracyDecomposition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AccuracyDecomposition: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The breakdown point of the summary.
@@ -145,7 +145,7 @@
       /// Output only. Whether the breakdown point is accurate or not.
       public var isAccurate: Swift.Bool? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AccuracyDecomposition`.
       public init() {}
@@ -192,7 +192,7 @@
         self.isAccurate = try container.decodeIfPresent(Swift.Bool.self, forKey: .isAccurate)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -210,17 +210,17 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.AccuracyDecomposition"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Decomposition details for adherence.
     @available(*, deprecated)
-    public struct AdherenceDecomposition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AdherenceDecomposition: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The breakdown point of the given instructions.
@@ -232,7 +232,7 @@
       /// Output only. Whether the breakdown point is adherent or not.
       public var isAdherent: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AdherenceDecomposition`.
       public init() {}
@@ -281,7 +281,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -299,17 +299,17 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.AdherenceDecomposition"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Rubric result of the adherence evaluation. A rubric is ued to determine
     /// if the summary adheres to all aspects of the given instructions.
-    public struct AdherenceRubric: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AdherenceRubric: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The question generated from instruction that used to
@@ -323,7 +323,7 @@
       /// addressed or not.
       public var isAddressed: Swift.Bool? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AdherenceRubric`.
       public init() {}
@@ -369,7 +369,7 @@
         self.isAddressed = try container.decodeIfPresent(Swift.Bool.self, forKey: .isAddressed)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -387,16 +387,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.AdherenceRubric"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Rubric details of the completeness evaluation result.
-    public struct CompletenessRubric: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct CompletenessRubric: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The question generated from instruction that used to
@@ -407,7 +407,7 @@
       /// addressed or not.
       public var isAddressed: Swift.Bool? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `CompletenessRubric`.
       public init() {}
@@ -448,7 +448,7 @@
         self.isAddressed = try container.decodeIfPresent(Swift.Bool.self, forKey: .isAddressed)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -465,23 +465,23 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.CompletenessRubric"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Decomposition details
     @available(*, deprecated)
-    public struct Decomposition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Decomposition: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// One of decomposition details.
       public var decomposition: OneOf_Decomposition? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Decomposition`.
       public init() {}
@@ -541,7 +541,7 @@
         self.decomposition = decomposition
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -573,23 +573,23 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.Decomposition"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Evaluation result that contains one of accuracy, adherence or completeness
     /// evaluation result.
-    public struct EvaluationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct EvaluationResult: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// One of evaluation result details.
       public var result: OneOf_Result? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `EvaluationResult`.
       public init() {}
@@ -655,7 +655,7 @@
         self.result = result
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -691,16 +691,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.EvaluationResult"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Evaluation result per conversation(&summary), metric and section.
-    public struct SummarizationEvaluationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SummarizationEvaluationResult: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. conversation session id
@@ -726,7 +726,7 @@
       /// Output only. List of evaluation results.
       public var evaluationResults: [SummarizationEvaluationMetrics.EvaluationResult] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SummarizationEvaluationResult`.
       public init() {}
@@ -798,7 +798,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -820,24 +820,24 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.SummarizationEvaluationResult"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Overall performance per metric. This is the aggregated score for each
     /// metric across all conversations that are selected for summarization
     /// evaluation.
-    public struct OverallScoresByMetric: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct OverallScoresByMetric: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. Metric name. e.g. accuracy, adherence, completeness.
       public var metric: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `OverallScoresByMetric`.
       public init() {}
@@ -875,7 +875,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -891,16 +891,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.OverallScoresByMetric"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// A pair of section name and input token count of the input summary section.
-    public struct SectionToken: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SectionToken: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The name of the summary instruction.
@@ -909,7 +909,7 @@
       /// Output only. Token count.
       public var tokenCount: Swift.Int64? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SectionToken`.
       public init() {}
@@ -950,7 +950,7 @@
         self.tokenCount = try container.decodeIfPresent(Swift.Int64.self, forKey: .tokenCount)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -967,17 +967,17 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.SectionToken"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Aggregated evaluation result on conversation level. This conatins
     /// evaluation results of all the metrics and sections.
-    public struct ConversationDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ConversationDetail: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. Conversation transcript that used for summarization
@@ -997,7 +997,7 @@
       /// single conversation.
       public var sectionTokens: [SummarizationEvaluationMetrics.SectionToken] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ConversationDetail`.
       public init() {}
@@ -1057,7 +1057,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1074,7 +1074,7 @@
 
       /// Aggregated result on metric level. This conatins the evaluation results
       /// of all the sections.
-      public struct MetricDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct MetricDetail: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Output only. Metrics name. e.g. accuracy, adherence, completeness.
@@ -1088,8 +1088,7 @@
         public var sectionDetails:
           [SummarizationEvaluationMetrics.ConversationDetail.MetricDetail.SectionDetail] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `MetricDetail`.
         public init() {}
@@ -1138,7 +1137,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1153,7 +1152,7 @@
         }
 
         /// Section level result.
-        public struct SectionDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct SectionDetail: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Output only. The name of the summary instruction.
@@ -1170,8 +1169,7 @@
           /// kind of the evaluation result.
           public var evaluationResults: [SummarizationEvaluationMetrics.EvaluationResult] = []
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `SectionDetail`.
           public init() {}
@@ -1225,7 +1223,7 @@
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -1244,11 +1242,11 @@
             return
               "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.ConversationDetail.MetricDetail.SectionDetail"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -1256,11 +1254,11 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.ConversationDetail.MetricDetail"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -1268,22 +1266,22 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics.ConversationDetail"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.SummarizationEvaluationMetrics"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

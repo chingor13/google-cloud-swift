@@ -19,21 +19,21 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Enables speech transcription and resource management.
 ///
 /// @Snippet(path: "SpeechQuickstart")
 public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   let inner: any Clients.SpeechStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `SpeechClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.SpeechStub = try Clients.SpeechTransport(options)
     inner = Clients.SpeechRetry(inner, options: options)
     if let logger = options.logger {
@@ -50,7 +50,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_CreateRecognizer")
   public func createRecognizer(
-    request: CreateRecognizerRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateRecognizerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createRecognizer(request: request, options: options)
   }
@@ -61,21 +61,21 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_CreateRecognizer")
   public func createRecognizer(
-    withPolling: CreateRecognizerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer> {
+    withPolling: CreateRecognizerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Recognizer> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Recognizer>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Recognizer>.State
+      in
       return try op._extractStatus(Recognizer.self)
     }
     let rawOp = try await self.createRecognizer(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Recognizer>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Recognizer>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -87,7 +87,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_ListRecognizers")
   public func listRecognizers(
-    request: ListRecognizersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRecognizersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.ListRecognizersResponse {
     try await self.inner.listRecognizers(request: request, options: options)
   }
@@ -96,7 +96,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_ListRecognizers")
   public func listRecognizers(
-    byItem: ListRecognizersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRecognizersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Recognizer, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSpeechV2.ListRecognizersResponse in
@@ -104,7 +104,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
       request.pageToken = token
       return try await self.listRecognizers(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the requested
@@ -116,7 +116,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_GetRecognizer")
   public func getRecognizer(
-    request: GetRecognizerRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRecognizerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.Recognizer {
     try await self.inner.getRecognizer(request: request, options: options)
   }
@@ -127,7 +127,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_UpdateRecognizer")
   public func updateRecognizer(
-    request: UpdateRecognizerRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateRecognizerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateRecognizer(request: request, options: options)
   }
@@ -138,21 +138,21 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_UpdateRecognizer")
   public func updateRecognizer(
-    withPolling: UpdateRecognizerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer> {
+    withPolling: UpdateRecognizerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Recognizer> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Recognizer>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Recognizer>.State
+      in
       return try op._extractStatus(Recognizer.self)
     }
     let rawOp = try await self.updateRecognizer(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Recognizer>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Recognizer>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -166,7 +166,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_DeleteRecognizer")
   public func deleteRecognizer(
-    request: DeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteRecognizerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteRecognizer(request: request, options: options)
   }
@@ -177,21 +177,21 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_DeleteRecognizer")
   public func deleteRecognizer(
-    withPolling: DeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer> {
+    withPolling: DeleteRecognizerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Recognizer> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Recognizer>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Recognizer>.State
+      in
       return try op._extractStatus(Recognizer.self)
     }
     let rawOp = try await self.deleteRecognizer(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Recognizer>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Recognizer>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -205,7 +205,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_UndeleteRecognizer")
   public func undeleteRecognizer(
-    request: UndeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeleteRecognizerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.undeleteRecognizer(request: request, options: options)
   }
@@ -216,21 +216,21 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_UndeleteRecognizer")
   public func undeleteRecognizer(
-    withPolling: UndeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer> {
+    withPolling: UndeleteRecognizerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Recognizer> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Recognizer>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Recognizer>.State
+      in
       return try op._extractStatus(Recognizer.self)
     }
     let rawOp = try await self.undeleteRecognizer(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Recognizer>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Recognizer>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -243,7 +243,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_Recognize")
   public func recognize(
-    request: RecognizeRequest, options: GoogleCloudGax.RequestOptions
+    request: RecognizeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.RecognizeResponse {
     try await self.inner.recognize(request: request, options: options)
   }
@@ -254,7 +254,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_BatchRecognize")
   public func batchRecognize(
-    request: BatchRecognizeRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchRecognizeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.batchRecognize(request: request, options: options)
   }
@@ -265,22 +265,22 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_BatchRecognize")
   public func batchRecognize(
-    withPolling: BatchRecognizeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchRecognizeResponse> {
+    withPolling: BatchRecognizeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BatchRecognizeResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<BatchRecognizeResponse>.State in
+        -> GoogleGax._PollableOperationImpl<BatchRecognizeResponse>.State in
       return try op._extractStatus(BatchRecognizeResponse.self)
     }
     let rawOp = try await self.batchRecognize(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<BatchRecognizeResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<BatchRecognizeResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -294,7 +294,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_GetConfig")
   public func getConfig(
-    request: GetConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.Config {
     try await self.inner.getConfig(request: request, options: options)
   }
@@ -305,7 +305,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_UpdateConfig")
   public func updateConfig(
-    request: UpdateConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.Config {
     try await self.inner.updateConfig(request: request, options: options)
   }
@@ -316,7 +316,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_CreateCustomClass")
   public func createCustomClass(
-    request: CreateCustomClassRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCustomClassRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createCustomClass(request: request, options: options)
   }
@@ -327,21 +327,21 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_CreateCustomClass")
   public func createCustomClass(
-    withPolling: CreateCustomClassRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass> {
+    withPolling: CreateCustomClassRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CustomClass> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CustomClass>.State in
+        -> GoogleGax._PollableOperationImpl<CustomClass>.State in
       return try op._extractStatus(CustomClass.self)
     }
     let rawOp = try await self.createCustomClass(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CustomClass>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CustomClass>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -353,7 +353,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_ListCustomClasses")
   public func listCustomClasses(
-    request: ListCustomClassesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCustomClassesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.ListCustomClassesResponse {
     try await self.inner.listCustomClasses(request: request, options: options)
   }
@@ -362,7 +362,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_ListCustomClasses")
   public func listCustomClasses(
-    byItem: ListCustomClassesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCustomClassesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CustomClass, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSpeechV2.ListCustomClassesResponse in
@@ -370,7 +370,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
       request.pageToken = token
       return try await self.listCustomClasses(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the requested
@@ -380,7 +380,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_GetCustomClass")
   public func getCustomClass(
-    request: GetCustomClassRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCustomClassRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.CustomClass {
     try await self.inner.getCustomClass(request: request, options: options)
   }
@@ -391,7 +391,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_UpdateCustomClass")
   public func updateCustomClass(
-    request: UpdateCustomClassRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCustomClassRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateCustomClass(request: request, options: options)
   }
@@ -402,21 +402,21 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_UpdateCustomClass")
   public func updateCustomClass(
-    withPolling: UpdateCustomClassRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass> {
+    withPolling: UpdateCustomClassRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CustomClass> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CustomClass>.State in
+        -> GoogleGax._PollableOperationImpl<CustomClass>.State in
       return try op._extractStatus(CustomClass.self)
     }
     let rawOp = try await self.updateCustomClass(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CustomClass>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CustomClass>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -430,7 +430,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_DeleteCustomClass")
   public func deleteCustomClass(
-    request: DeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCustomClassRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteCustomClass(request: request, options: options)
   }
@@ -441,21 +441,21 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_DeleteCustomClass")
   public func deleteCustomClass(
-    withPolling: DeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass> {
+    withPolling: DeleteCustomClassRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CustomClass> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CustomClass>.State in
+        -> GoogleGax._PollableOperationImpl<CustomClass>.State in
       return try op._extractStatus(CustomClass.self)
     }
     let rawOp = try await self.deleteCustomClass(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CustomClass>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CustomClass>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -469,7 +469,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_UndeleteCustomClass")
   public func undeleteCustomClass(
-    request: UndeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeleteCustomClassRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.undeleteCustomClass(request: request, options: options)
   }
@@ -480,21 +480,21 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_UndeleteCustomClass")
   public func undeleteCustomClass(
-    withPolling: UndeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass> {
+    withPolling: UndeleteCustomClassRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CustomClass> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CustomClass>.State in
+        -> GoogleGax._PollableOperationImpl<CustomClass>.State in
       return try op._extractStatus(CustomClass.self)
     }
     let rawOp = try await self.undeleteCustomClass(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CustomClass>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CustomClass>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -508,7 +508,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_CreatePhraseSet")
   public func createPhraseSet(
-    request: CreatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePhraseSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createPhraseSet(request: request, options: options)
   }
@@ -519,21 +519,21 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_CreatePhraseSet")
   public func createPhraseSet(
-    withPolling: CreatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet> {
+    withPolling: CreatePhraseSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PhraseSet> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PhraseSet>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<PhraseSet>.State
+      in
       return try op._extractStatus(PhraseSet.self)
     }
     let rawOp = try await self.createPhraseSet(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PhraseSet>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PhraseSet>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -545,7 +545,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_ListPhraseSets")
   public func listPhraseSets(
-    request: ListPhraseSetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPhraseSetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.ListPhraseSetsResponse {
     try await self.inner.listPhraseSets(request: request, options: options)
   }
@@ -554,7 +554,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_ListPhraseSets")
   public func listPhraseSets(
-    byItem: ListPhraseSetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPhraseSetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PhraseSet, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSpeechV2.ListPhraseSetsResponse in
@@ -562,7 +562,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
       request.pageToken = token
       return try await self.listPhraseSets(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the requested
@@ -572,7 +572,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_GetPhraseSet")
   public func getPhraseSet(
-    request: GetPhraseSetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPhraseSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.PhraseSet {
     try await self.inner.getPhraseSet(request: request, options: options)
   }
@@ -583,7 +583,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_UpdatePhraseSet")
   public func updatePhraseSet(
-    request: UpdatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePhraseSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updatePhraseSet(request: request, options: options)
   }
@@ -594,21 +594,21 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_UpdatePhraseSet")
   public func updatePhraseSet(
-    withPolling: UpdatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet> {
+    withPolling: UpdatePhraseSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PhraseSet> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PhraseSet>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<PhraseSet>.State
+      in
       return try op._extractStatus(PhraseSet.self)
     }
     let rawOp = try await self.updatePhraseSet(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PhraseSet>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PhraseSet>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -622,7 +622,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_DeletePhraseSet")
   public func deletePhraseSet(
-    request: DeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePhraseSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deletePhraseSet(request: request, options: options)
   }
@@ -633,21 +633,21 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_DeletePhraseSet")
   public func deletePhraseSet(
-    withPolling: DeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet> {
+    withPolling: DeletePhraseSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PhraseSet> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PhraseSet>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<PhraseSet>.State
+      in
       return try op._extractStatus(PhraseSet.self)
     }
     let rawOp = try await self.deletePhraseSet(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PhraseSet>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PhraseSet>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -661,7 +661,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_UndeletePhraseSet")
   public func undeletePhraseSet(
-    request: UndeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeletePhraseSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.undeletePhraseSet(request: request, options: options)
   }
@@ -672,21 +672,21 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_UndeletePhraseSet")
   public func undeletePhraseSet(
-    withPolling: UndeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet> {
+    withPolling: UndeletePhraseSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PhraseSet> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PhraseSet>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<PhraseSet>.State
+      in
       return try op._extractStatus(PhraseSet.self)
     }
     let rawOp = try await self.undeletePhraseSet(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PhraseSet>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PhraseSet>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -705,7 +705,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -721,7 +721,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -729,14 +729,14 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "Speech_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -747,7 +747,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -758,7 +758,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -766,7 +766,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -775,7 +775,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -786,7 +786,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -797,7 +797,7 @@ public final class SpeechClient: Clients.SpeechProtocol, Sendable {
   ///
   /// @Snippet(path: "Speech_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -815,7 +815,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.createRecognizer`.
-    func createRecognizer(withPolling: CreateRecognizerRequest) async throws -> any GoogleCloudGax
+    func createRecognizer(withPolling: CreateRecognizerRequest) async throws -> any GoogleGax
       .PollableOperation<Recognizer>
 
     /// See `SpeechClient.createRecognizer`.
@@ -823,7 +823,7 @@ extension Clients {
       parent: Swift.String,
       recognizer: Recognizer?,
       recognizerId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer>
+    ) async throws -> any GoogleGax.PollableOperation<Recognizer>
 
     /// See `SpeechClient.listRecognizers`.
     func listRecognizers(request: ListRecognizersRequest) async throws
@@ -852,40 +852,40 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.updateRecognizer`.
-    func updateRecognizer(withPolling: UpdateRecognizerRequest) async throws -> any GoogleCloudGax
+    func updateRecognizer(withPolling: UpdateRecognizerRequest) async throws -> any GoogleGax
       .PollableOperation<Recognizer>
 
     /// See `SpeechClient.updateRecognizer`.
     func updateRecognizer(
       recognizer: Recognizer?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Recognizer>
 
     /// See `SpeechClient.deleteRecognizer`.
     func deleteRecognizer(request: DeleteRecognizerRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.deleteRecognizer`.
-    func deleteRecognizer(withPolling: DeleteRecognizerRequest) async throws -> any GoogleCloudGax
+    func deleteRecognizer(withPolling: DeleteRecognizerRequest) async throws -> any GoogleGax
       .PollableOperation<Recognizer>
 
     /// See `SpeechClient.deleteRecognizer`.
     func deleteRecognizer(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer>
+    ) async throws -> any GoogleGax.PollableOperation<Recognizer>
 
     /// See `SpeechClient.undeleteRecognizer`.
     func undeleteRecognizer(request: UndeleteRecognizerRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.undeleteRecognizer`.
-    func undeleteRecognizer(withPolling: UndeleteRecognizerRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Recognizer>
+    func undeleteRecognizer(withPolling: UndeleteRecognizerRequest) async throws -> any GoogleGax
+      .PollableOperation<Recognizer>
 
     /// See `SpeechClient.undeleteRecognizer`.
     func undeleteRecognizer(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer>
+    ) async throws -> any GoogleGax.PollableOperation<Recognizer>
 
     /// See `SpeechClient.recognize`.
     func recognize(request: RecognizeRequest) async throws -> GoogleCloudSpeechV2.RecognizeResponse
@@ -894,7 +894,7 @@ extension Clients {
     func recognize(
       recognizer: Swift.String,
       config: RecognitionConfig?,
-      configMask: GoogleCloudWKT.FieldMask?,
+      configMask: GoogleWKT.FieldMask?,
       content: Foundation.Data,
     ) async throws -> GoogleCloudSpeechV2.RecognizeResponse
 
@@ -902,7 +902,7 @@ extension Clients {
     func recognize(
       recognizer: Swift.String,
       config: RecognitionConfig?,
-      configMask: GoogleCloudWKT.FieldMask?,
+      configMask: GoogleWKT.FieldMask?,
       uri: Swift.String,
     ) async throws -> GoogleCloudSpeechV2.RecognizeResponse
 
@@ -910,16 +910,16 @@ extension Clients {
     func batchRecognize(request: BatchRecognizeRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.batchRecognize`.
-    func batchRecognize(withPolling: BatchRecognizeRequest) async throws -> any GoogleCloudGax
+    func batchRecognize(withPolling: BatchRecognizeRequest) async throws -> any GoogleGax
       .PollableOperation<BatchRecognizeResponse>
 
     /// See `SpeechClient.batchRecognize`.
     func batchRecognize(
       recognizer: Swift.String,
       config: RecognitionConfig?,
-      configMask: GoogleCloudWKT.FieldMask?,
+      configMask: GoogleWKT.FieldMask?,
       files: [BatchRecognizeFileMetadata],
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchRecognizeResponse>
+    ) async throws -> any GoogleGax.PollableOperation<BatchRecognizeResponse>
 
     /// See `SpeechClient.getConfig`.
     func getConfig(request: GetConfigRequest) async throws -> GoogleCloudSpeechV2.Config
@@ -935,7 +935,7 @@ extension Clients {
     /// See `SpeechClient.updateConfig`.
     func updateConfig(
       config: Config?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudSpeechV2.Config
 
     /// See `SpeechClient.createCustomClass`.
@@ -943,7 +943,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.createCustomClass`.
-    func createCustomClass(withPolling: CreateCustomClassRequest) async throws -> any GoogleCloudGax
+    func createCustomClass(withPolling: CreateCustomClassRequest) async throws -> any GoogleGax
       .PollableOperation<CustomClass>
 
     /// See `SpeechClient.createCustomClass`.
@@ -951,7 +951,7 @@ extension Clients {
       parent: Swift.String,
       customClass: CustomClass?,
       customClassId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass>
+    ) async throws -> any GoogleGax.PollableOperation<CustomClass>
 
     /// See `SpeechClient.listCustomClasses`.
     func listCustomClasses(request: ListCustomClassesRequest) async throws
@@ -981,47 +981,47 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.updateCustomClass`.
-    func updateCustomClass(withPolling: UpdateCustomClassRequest) async throws -> any GoogleCloudGax
+    func updateCustomClass(withPolling: UpdateCustomClassRequest) async throws -> any GoogleGax
       .PollableOperation<CustomClass>
 
     /// See `SpeechClient.updateCustomClass`.
     func updateCustomClass(
       customClass: CustomClass?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<CustomClass>
 
     /// See `SpeechClient.deleteCustomClass`.
     func deleteCustomClass(request: DeleteCustomClassRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.deleteCustomClass`.
-    func deleteCustomClass(withPolling: DeleteCustomClassRequest) async throws -> any GoogleCloudGax
+    func deleteCustomClass(withPolling: DeleteCustomClassRequest) async throws -> any GoogleGax
       .PollableOperation<CustomClass>
 
     /// See `SpeechClient.deleteCustomClass`.
     func deleteCustomClass(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass>
+    ) async throws -> any GoogleGax.PollableOperation<CustomClass>
 
     /// See `SpeechClient.undeleteCustomClass`.
     func undeleteCustomClass(request: UndeleteCustomClassRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.undeleteCustomClass`.
-    func undeleteCustomClass(withPolling: UndeleteCustomClassRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<CustomClass>
+    func undeleteCustomClass(withPolling: UndeleteCustomClassRequest) async throws -> any GoogleGax
+      .PollableOperation<CustomClass>
 
     /// See `SpeechClient.undeleteCustomClass`.
     func undeleteCustomClass(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass>
+    ) async throws -> any GoogleGax.PollableOperation<CustomClass>
 
     /// See `SpeechClient.createPhraseSet`.
     func createPhraseSet(request: CreatePhraseSetRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.createPhraseSet`.
-    func createPhraseSet(withPolling: CreatePhraseSetRequest) async throws -> any GoogleCloudGax
+    func createPhraseSet(withPolling: CreatePhraseSetRequest) async throws -> any GoogleGax
       .PollableOperation<PhraseSet>
 
     /// See `SpeechClient.createPhraseSet`.
@@ -1029,7 +1029,7 @@ extension Clients {
       parent: Swift.String,
       phraseSet: PhraseSet?,
       phraseSetId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet>
+    ) async throws -> any GoogleGax.PollableOperation<PhraseSet>
 
     /// See `SpeechClient.listPhraseSets`.
     func listPhraseSets(request: ListPhraseSetsRequest) async throws
@@ -1058,40 +1058,40 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.updatePhraseSet`.
-    func updatePhraseSet(withPolling: UpdatePhraseSetRequest) async throws -> any GoogleCloudGax
+    func updatePhraseSet(withPolling: UpdatePhraseSetRequest) async throws -> any GoogleGax
       .PollableOperation<PhraseSet>
 
     /// See `SpeechClient.updatePhraseSet`.
     func updatePhraseSet(
       phraseSet: PhraseSet?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<PhraseSet>
 
     /// See `SpeechClient.deletePhraseSet`.
     func deletePhraseSet(request: DeletePhraseSetRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.deletePhraseSet`.
-    func deletePhraseSet(withPolling: DeletePhraseSetRequest) async throws -> any GoogleCloudGax
+    func deletePhraseSet(withPolling: DeletePhraseSetRequest) async throws -> any GoogleGax
       .PollableOperation<PhraseSet>
 
     /// See `SpeechClient.deletePhraseSet`.
     func deletePhraseSet(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet>
+    ) async throws -> any GoogleGax.PollableOperation<PhraseSet>
 
     /// See `SpeechClient.undeletePhraseSet`.
     func undeletePhraseSet(request: UndeletePhraseSetRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.undeletePhraseSet`.
-    func undeletePhraseSet(withPolling: UndeletePhraseSetRequest) async throws -> any GoogleCloudGax
+    func undeletePhraseSet(withPolling: UndeletePhraseSetRequest) async throws -> any GoogleGax
       .PollableOperation<PhraseSet>
 
     /// See `SpeechClient.undeletePhraseSet`.
     func undeletePhraseSet(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet>
+    ) async throws -> any GoogleGax.PollableOperation<PhraseSet>
 
     /// See `SpeechClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -1139,227 +1139,227 @@ extension Clients {
 
     /// See `SpeechClient.createRecognizer`.
     func createRecognizer(
-      request: CreateRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.createRecognizer`.
     func createRecognizer(
-      withPolling: CreateRecognizerRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer>
+      withPolling: CreateRecognizerRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Recognizer>
 
     /// See `SpeechClient.listRecognizers`.
     func listRecognizers(
-      request: ListRecognizersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRecognizersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.ListRecognizersResponse
 
     /// See `SpeechClient.listRecognizers`.
     func listRecognizers(
-      byItem: ListRecognizersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListRecognizersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Recognizer, Swift.Error>
 
     /// See `SpeechClient.getRecognizer`.
     func getRecognizer(
-      request: GetRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.Recognizer
 
     /// See `SpeechClient.updateRecognizer`.
     func updateRecognizer(
-      request: UpdateRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.updateRecognizer`.
     func updateRecognizer(
-      withPolling: UpdateRecognizerRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer>
+      withPolling: UpdateRecognizerRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Recognizer>
 
     /// See `SpeechClient.deleteRecognizer`.
     func deleteRecognizer(
-      request: DeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.deleteRecognizer`.
     func deleteRecognizer(
-      withPolling: DeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer>
+      withPolling: DeleteRecognizerRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Recognizer>
 
     /// See `SpeechClient.undeleteRecognizer`.
     func undeleteRecognizer(
-      request: UndeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteRecognizerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.undeleteRecognizer`.
     func undeleteRecognizer(
-      withPolling: UndeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer>
+      withPolling: UndeleteRecognizerRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Recognizer>
 
     /// See `SpeechClient.recognize`.
     func recognize(
-      request: RecognizeRequest, options: GoogleCloudGax.RequestOptions
+      request: RecognizeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.RecognizeResponse
 
     /// See `SpeechClient.batchRecognize`.
     func batchRecognize(
-      request: BatchRecognizeRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchRecognizeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.batchRecognize`.
     func batchRecognize(
-      withPolling: BatchRecognizeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchRecognizeResponse>
+      withPolling: BatchRecognizeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BatchRecognizeResponse>
 
     /// See `SpeechClient.getConfig`.
     func getConfig(
-      request: GetConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.Config
 
     /// See `SpeechClient.updateConfig`.
     func updateConfig(
-      request: UpdateConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.Config
 
     /// See `SpeechClient.createCustomClass`.
     func createCustomClass(
-      request: CreateCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.createCustomClass`.
     func createCustomClass(
-      withPolling: CreateCustomClassRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass>
+      withPolling: CreateCustomClassRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CustomClass>
 
     /// See `SpeechClient.listCustomClasses`.
     func listCustomClasses(
-      request: ListCustomClassesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomClassesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.ListCustomClassesResponse
 
     /// See `SpeechClient.listCustomClasses`.
     func listCustomClasses(
-      byItem: ListCustomClassesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCustomClassesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<CustomClass, Swift.Error>
 
     /// See `SpeechClient.getCustomClass`.
     func getCustomClass(
-      request: GetCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.CustomClass
 
     /// See `SpeechClient.updateCustomClass`.
     func updateCustomClass(
-      request: UpdateCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.updateCustomClass`.
     func updateCustomClass(
-      withPolling: UpdateCustomClassRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass>
+      withPolling: UpdateCustomClassRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CustomClass>
 
     /// See `SpeechClient.deleteCustomClass`.
     func deleteCustomClass(
-      request: DeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.deleteCustomClass`.
     func deleteCustomClass(
-      withPolling: DeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass>
+      withPolling: DeleteCustomClassRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CustomClass>
 
     /// See `SpeechClient.undeleteCustomClass`.
     func undeleteCustomClass(
-      request: UndeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteCustomClassRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.undeleteCustomClass`.
     func undeleteCustomClass(
-      withPolling: UndeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass>
+      withPolling: UndeleteCustomClassRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CustomClass>
 
     /// See `SpeechClient.createPhraseSet`.
     func createPhraseSet(
-      request: CreatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.createPhraseSet`.
     func createPhraseSet(
-      withPolling: CreatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet>
+      withPolling: CreatePhraseSetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PhraseSet>
 
     /// See `SpeechClient.listPhraseSets`.
     func listPhraseSets(
-      request: ListPhraseSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPhraseSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.ListPhraseSetsResponse
 
     /// See `SpeechClient.listPhraseSets`.
     func listPhraseSets(
-      byItem: ListPhraseSetsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPhraseSetsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PhraseSet, Swift.Error>
 
     /// See `SpeechClient.getPhraseSet`.
     func getPhraseSet(
-      request: GetPhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSpeechV2.PhraseSet
 
     /// See `SpeechClient.updatePhraseSet`.
     func updatePhraseSet(
-      request: UpdatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.updatePhraseSet`.
     func updatePhraseSet(
-      withPolling: UpdatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet>
+      withPolling: UpdatePhraseSetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PhraseSet>
 
     /// See `SpeechClient.deletePhraseSet`.
     func deletePhraseSet(
-      request: DeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.deletePhraseSet`.
     func deletePhraseSet(
-      withPolling: DeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet>
+      withPolling: DeletePhraseSetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PhraseSet>
 
     /// See `SpeechClient.undeletePhraseSet`.
     func undeletePhraseSet(
-      request: UndeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeletePhraseSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SpeechClient.undeletePhraseSet`.
     func undeletePhraseSet(
-      withPolling: UndeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet>
+      withPolling: UndeletePhraseSetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PhraseSet>
 
     /// See `SpeechClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `SpeechClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `SpeechClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `SpeechClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `SpeechClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `SpeechClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `SpeechClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1373,24 +1373,24 @@ extension Clients.SpeechProtocol {
   }
 
   public func createRecognizer(
-    request: CreateRecognizerRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateRecognizerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createRecognizer(withPolling: CreateRecognizerRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Recognizer>
+  public func createRecognizer(withPolling: CreateRecognizerRequest) async throws -> any GoogleGax
+    .PollableOperation<Recognizer>
   {
     try await self.createRecognizer(withPolling: withPolling, options: .init())
   }
 
   public func createRecognizer(
-    withPolling: CreateRecognizerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Recognizer>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateRecognizerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Recognizer> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Recognizer>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1398,7 +1398,7 @@ extension Clients.SpeechProtocol {
     parent: Swift.String,
     recognizer: Recognizer?,
     recognizerId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer> {
+  ) async throws -> any GoogleGax.PollableOperation<Recognizer> {
     let request = CreateRecognizerRequest().with {
       $0.parent = parent
       $0.recognizer = recognizer
@@ -1414,9 +1414,9 @@ extension Clients.SpeechProtocol {
   }
 
   public func listRecognizers(
-    request: ListRecognizersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRecognizersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.ListRecognizersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listRecognizers(
@@ -1426,13 +1426,13 @@ extension Clients.SpeechProtocol {
   }
 
   public func listRecognizers(
-    byItem: ListRecognizersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRecognizersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Recognizer, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSpeechV2.ListRecognizersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listRecognizers(
@@ -1451,9 +1451,9 @@ extension Clients.SpeechProtocol {
   }
 
   public func getRecognizer(
-    request: GetRecognizerRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRecognizerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.Recognizer {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getRecognizer(
@@ -1472,31 +1472,31 @@ extension Clients.SpeechProtocol {
   }
 
   public func updateRecognizer(
-    request: UpdateRecognizerRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateRecognizerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateRecognizer(withPolling: UpdateRecognizerRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Recognizer>
+  public func updateRecognizer(withPolling: UpdateRecognizerRequest) async throws -> any GoogleGax
+    .PollableOperation<Recognizer>
   {
     try await self.updateRecognizer(withPolling: withPolling, options: .init())
   }
 
   public func updateRecognizer(
-    withPolling: UpdateRecognizerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Recognizer>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateRecognizerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Recognizer> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Recognizer>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateRecognizer(
     recognizer: Recognizer?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Recognizer> {
     let request = UpdateRecognizerRequest().with {
       $0.recognizer = recognizer
       $0.updateMask = updateMask
@@ -1511,30 +1511,30 @@ extension Clients.SpeechProtocol {
   }
 
   public func deleteRecognizer(
-    request: DeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteRecognizerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteRecognizer(withPolling: DeleteRecognizerRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Recognizer>
+  public func deleteRecognizer(withPolling: DeleteRecognizerRequest) async throws -> any GoogleGax
+    .PollableOperation<Recognizer>
   {
     try await self.deleteRecognizer(withPolling: withPolling, options: .init())
   }
 
   public func deleteRecognizer(
-    withPolling: DeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Recognizer>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteRecognizerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Recognizer> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Recognizer>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteRecognizer(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer> {
+  ) async throws -> any GoogleGax.PollableOperation<Recognizer> {
     let request = DeleteRecognizerRequest().with {
       $0.name = name
     }
@@ -1548,30 +1548,30 @@ extension Clients.SpeechProtocol {
   }
 
   public func undeleteRecognizer(
-    request: UndeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeleteRecognizerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func undeleteRecognizer(withPolling: UndeleteRecognizerRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Recognizer>
+    -> any GoogleGax.PollableOperation<Recognizer>
   {
     try await self.undeleteRecognizer(withPolling: withPolling, options: .init())
   }
 
   public func undeleteRecognizer(
-    withPolling: UndeleteRecognizerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Recognizer>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UndeleteRecognizerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Recognizer> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Recognizer>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func undeleteRecognizer(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Recognizer> {
+  ) async throws -> any GoogleGax.PollableOperation<Recognizer> {
     let request = UndeleteRecognizerRequest().with {
       $0.name = name
     }
@@ -1585,15 +1585,15 @@ extension Clients.SpeechProtocol {
   }
 
   public func recognize(
-    request: RecognizeRequest, options: GoogleCloudGax.RequestOptions
+    request: RecognizeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.RecognizeResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func recognize(
     recognizer: Swift.String,
     config: RecognitionConfig?,
-    configMask: GoogleCloudWKT.FieldMask?,
+    configMask: GoogleWKT.FieldMask?,
     content: Foundation.Data,
   ) async throws -> GoogleCloudSpeechV2.RecognizeResponse {
     let request = RecognizeRequest().with {
@@ -1608,7 +1608,7 @@ extension Clients.SpeechProtocol {
   public func recognize(
     recognizer: Swift.String,
     config: RecognitionConfig?,
-    configMask: GoogleCloudWKT.FieldMask?,
+    configMask: GoogleWKT.FieldMask?,
     uri: Swift.String,
   ) async throws -> GoogleCloudSpeechV2.RecognizeResponse {
     let request = RecognizeRequest().with {
@@ -1627,34 +1627,34 @@ extension Clients.SpeechProtocol {
   }
 
   public func batchRecognize(
-    request: BatchRecognizeRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchRecognizeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func batchRecognize(withPolling: BatchRecognizeRequest) async throws -> any GoogleCloudGax
+  public func batchRecognize(withPolling: BatchRecognizeRequest) async throws -> any GoogleGax
     .PollableOperation<BatchRecognizeResponse>
   {
     try await self.batchRecognize(withPolling: withPolling, options: .init())
   }
 
   public func batchRecognize(
-    withPolling: BatchRecognizeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchRecognizeResponse> {
+    withPolling: BatchRecognizeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BatchRecognizeResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<BatchRecognizeResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<BatchRecognizeResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func batchRecognize(
     recognizer: Swift.String,
     config: RecognitionConfig?,
-    configMask: GoogleCloudWKT.FieldMask?,
+    configMask: GoogleWKT.FieldMask?,
     files: [BatchRecognizeFileMetadata],
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchRecognizeResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<BatchRecognizeResponse> {
     let request = BatchRecognizeRequest().with {
       $0.recognizer = recognizer
       $0.config = config
@@ -1669,9 +1669,9 @@ extension Clients.SpeechProtocol {
   }
 
   public func getConfig(
-    request: GetConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.Config {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getConfig(
@@ -1689,14 +1689,14 @@ extension Clients.SpeechProtocol {
   }
 
   public func updateConfig(
-    request: UpdateConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.Config {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateConfig(
     config: Config?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudSpeechV2.Config {
     let request = UpdateConfigRequest().with {
       $0.config = config
@@ -1712,24 +1712,24 @@ extension Clients.SpeechProtocol {
   }
 
   public func createCustomClass(
-    request: CreateCustomClassRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCustomClassRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createCustomClass(withPolling: CreateCustomClassRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<CustomClass>
+  public func createCustomClass(withPolling: CreateCustomClassRequest) async throws -> any GoogleGax
+    .PollableOperation<CustomClass>
   {
     try await self.createCustomClass(withPolling: withPolling, options: .init())
   }
 
   public func createCustomClass(
-    withPolling: CreateCustomClassRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CustomClass>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateCustomClassRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CustomClass> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CustomClass>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1737,7 +1737,7 @@ extension Clients.SpeechProtocol {
     parent: Swift.String,
     customClass: CustomClass?,
     customClassId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass> {
+  ) async throws -> any GoogleGax.PollableOperation<CustomClass> {
     let request = CreateCustomClassRequest().with {
       $0.parent = parent
       $0.customClass = customClass
@@ -1753,9 +1753,9 @@ extension Clients.SpeechProtocol {
   }
 
   public func listCustomClasses(
-    request: ListCustomClassesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCustomClassesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.ListCustomClassesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCustomClasses(
@@ -1765,13 +1765,13 @@ extension Clients.SpeechProtocol {
   }
 
   public func listCustomClasses(
-    byItem: ListCustomClassesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCustomClassesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CustomClass, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSpeechV2.ListCustomClassesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCustomClasses(
@@ -1790,9 +1790,9 @@ extension Clients.SpeechProtocol {
   }
 
   public func getCustomClass(
-    request: GetCustomClassRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCustomClassRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.CustomClass {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCustomClass(
@@ -1811,31 +1811,31 @@ extension Clients.SpeechProtocol {
   }
 
   public func updateCustomClass(
-    request: UpdateCustomClassRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCustomClassRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateCustomClass(withPolling: UpdateCustomClassRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<CustomClass>
+  public func updateCustomClass(withPolling: UpdateCustomClassRequest) async throws -> any GoogleGax
+    .PollableOperation<CustomClass>
   {
     try await self.updateCustomClass(withPolling: withPolling, options: .init())
   }
 
   public func updateCustomClass(
-    withPolling: UpdateCustomClassRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CustomClass>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateCustomClassRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CustomClass> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CustomClass>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateCustomClass(
     customClass: CustomClass?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<CustomClass> {
     let request = UpdateCustomClassRequest().with {
       $0.customClass = customClass
       $0.updateMask = updateMask
@@ -1850,30 +1850,30 @@ extension Clients.SpeechProtocol {
   }
 
   public func deleteCustomClass(
-    request: DeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCustomClassRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteCustomClass(withPolling: DeleteCustomClassRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<CustomClass>
+  public func deleteCustomClass(withPolling: DeleteCustomClassRequest) async throws -> any GoogleGax
+    .PollableOperation<CustomClass>
   {
     try await self.deleteCustomClass(withPolling: withPolling, options: .init())
   }
 
   public func deleteCustomClass(
-    withPolling: DeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CustomClass>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteCustomClassRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CustomClass> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CustomClass>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteCustomClass(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass> {
+  ) async throws -> any GoogleGax.PollableOperation<CustomClass> {
     let request = DeleteCustomClassRequest().with {
       $0.name = name
     }
@@ -1887,30 +1887,30 @@ extension Clients.SpeechProtocol {
   }
 
   public func undeleteCustomClass(
-    request: UndeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeleteCustomClassRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func undeleteCustomClass(withPolling: UndeleteCustomClassRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<CustomClass>
+    -> any GoogleGax.PollableOperation<CustomClass>
   {
     try await self.undeleteCustomClass(withPolling: withPolling, options: .init())
   }
 
   public func undeleteCustomClass(
-    withPolling: UndeleteCustomClassRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CustomClass>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UndeleteCustomClassRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CustomClass> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CustomClass>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func undeleteCustomClass(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CustomClass> {
+  ) async throws -> any GoogleGax.PollableOperation<CustomClass> {
     let request = UndeleteCustomClassRequest().with {
       $0.name = name
     }
@@ -1924,24 +1924,24 @@ extension Clients.SpeechProtocol {
   }
 
   public func createPhraseSet(
-    request: CreatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePhraseSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createPhraseSet(withPolling: CreatePhraseSetRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PhraseSet>
+  public func createPhraseSet(withPolling: CreatePhraseSetRequest) async throws -> any GoogleGax
+    .PollableOperation<PhraseSet>
   {
     try await self.createPhraseSet(withPolling: withPolling, options: .init())
   }
 
   public func createPhraseSet(
-    withPolling: CreatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PhraseSet>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreatePhraseSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PhraseSet> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PhraseSet>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1949,7 +1949,7 @@ extension Clients.SpeechProtocol {
     parent: Swift.String,
     phraseSet: PhraseSet?,
     phraseSetId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet> {
+  ) async throws -> any GoogleGax.PollableOperation<PhraseSet> {
     let request = CreatePhraseSetRequest().with {
       $0.parent = parent
       $0.phraseSet = phraseSet
@@ -1965,9 +1965,9 @@ extension Clients.SpeechProtocol {
   }
 
   public func listPhraseSets(
-    request: ListPhraseSetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPhraseSetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.ListPhraseSetsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPhraseSets(
@@ -1977,13 +1977,13 @@ extension Clients.SpeechProtocol {
   }
 
   public func listPhraseSets(
-    byItem: ListPhraseSetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPhraseSetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PhraseSet, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSpeechV2.ListPhraseSetsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPhraseSets(
@@ -2002,9 +2002,9 @@ extension Clients.SpeechProtocol {
   }
 
   public func getPhraseSet(
-    request: GetPhraseSetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPhraseSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSpeechV2.PhraseSet {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPhraseSet(
@@ -2023,31 +2023,31 @@ extension Clients.SpeechProtocol {
   }
 
   public func updatePhraseSet(
-    request: UpdatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePhraseSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updatePhraseSet(withPolling: UpdatePhraseSetRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PhraseSet>
+  public func updatePhraseSet(withPolling: UpdatePhraseSetRequest) async throws -> any GoogleGax
+    .PollableOperation<PhraseSet>
   {
     try await self.updatePhraseSet(withPolling: withPolling, options: .init())
   }
 
   public func updatePhraseSet(
-    withPolling: UpdatePhraseSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PhraseSet>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdatePhraseSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PhraseSet> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PhraseSet>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updatePhraseSet(
     phraseSet: PhraseSet?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<PhraseSet> {
     let request = UpdatePhraseSetRequest().with {
       $0.phraseSet = phraseSet
       $0.updateMask = updateMask
@@ -2062,30 +2062,30 @@ extension Clients.SpeechProtocol {
   }
 
   public func deletePhraseSet(
-    request: DeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePhraseSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deletePhraseSet(withPolling: DeletePhraseSetRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PhraseSet>
+  public func deletePhraseSet(withPolling: DeletePhraseSetRequest) async throws -> any GoogleGax
+    .PollableOperation<PhraseSet>
   {
     try await self.deletePhraseSet(withPolling: withPolling, options: .init())
   }
 
   public func deletePhraseSet(
-    withPolling: DeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PhraseSet>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeletePhraseSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PhraseSet> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PhraseSet>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deletePhraseSet(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet> {
+  ) async throws -> any GoogleGax.PollableOperation<PhraseSet> {
     let request = DeletePhraseSetRequest().with {
       $0.name = name
     }
@@ -2099,30 +2099,30 @@ extension Clients.SpeechProtocol {
   }
 
   public func undeletePhraseSet(
-    request: UndeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeletePhraseSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func undeletePhraseSet(withPolling: UndeletePhraseSetRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PhraseSet>
+  public func undeletePhraseSet(withPolling: UndeletePhraseSetRequest) async throws -> any GoogleGax
+    .PollableOperation<PhraseSet>
   {
     try await self.undeletePhraseSet(withPolling: withPolling, options: .init())
   }
 
   public func undeletePhraseSet(
-    withPolling: UndeletePhraseSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PhraseSet>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UndeletePhraseSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PhraseSet> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PhraseSet>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func undeletePhraseSet(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PhraseSet> {
+  ) async throws -> any GoogleGax.PollableOperation<PhraseSet> {
     let request = UndeletePhraseSetRequest().with {
       $0.name = name
     }
@@ -2136,9 +2136,9 @@ extension Clients.SpeechProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -2148,13 +2148,13 @@ extension Clients.SpeechProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -2164,9 +2164,9 @@ extension Clients.SpeechProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -2176,9 +2176,9 @@ extension Clients.SpeechProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -2188,13 +2188,13 @@ extension Clients.SpeechProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -2215,9 +2215,9 @@ extension Clients.SpeechProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -2234,9 +2234,9 @@ extension Clients.SpeechProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -2253,9 +2253,9 @@ extension Clients.SpeechProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

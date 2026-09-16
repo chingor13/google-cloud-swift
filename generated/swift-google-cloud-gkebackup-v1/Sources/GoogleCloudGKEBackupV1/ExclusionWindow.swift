@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines a time window during which no backup should
 /// happen. All time and date are in UTC.
-public struct ExclusionWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExclusionWindow: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Specifies the start time of the window using time of the day in
@@ -37,13 +37,13 @@ public struct ExclusionWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// - weekly window:
   ///   - days of week includes all seven days of a week: duration < 24 hours
   ///   - all other weekly window: duration < 168 hours (i.e., 24 * 7 hours)
-  public var duration: GoogleCloudWKT.Duration? = nil
+  public var duration: GoogleWKT.Duration? = nil
 
   /// Required. Specifies the day(s) on which the exclusion window takes
   /// effect. Exactly one of the fields MUST be specified.
   public var recurrence: OneOf_Recurrence? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExclusionWindow`.
   public init() {}
@@ -85,7 +85,7 @@ public struct ExclusionWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.startTime = try container.decodeIfPresent(GoogleType.TimeOfDay.self, forKey: .startTime)
-    self.duration = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .duration)
+    self.duration = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .duration)
 
     var recurrence: OneOf_Recurrence? = nil
     let recurrenceCheckAndSet = {
@@ -113,7 +113,7 @@ public struct ExclusionWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.recurrence = recurrence
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -138,13 +138,13 @@ public struct ExclusionWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Holds repeated DaysOfWeek values as a container.
-  public struct DayOfWeekList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DayOfWeekList: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. A list of days of week.
     public var daysOfWeek: [GoogleType.DayOfWeek] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DayOfWeekList`.
     public init() {}
@@ -183,7 +183,7 @@ public struct ExclusionWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -198,11 +198,11 @@ public struct ExclusionWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.gkebackup.v1.ExclusionWindow.DayOfWeekList"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -222,10 +222,10 @@ public struct ExclusionWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkebackup.v1.ExclusionWindow"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

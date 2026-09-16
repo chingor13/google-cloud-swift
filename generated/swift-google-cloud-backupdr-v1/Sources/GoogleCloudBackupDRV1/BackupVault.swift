@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message describing a BackupVault object.
-public struct BackupVault: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BackupVault: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Identifier. Name of the backup vault to create. It must have
@@ -37,14 +37,14 @@ public struct BackupVault: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var labels: [Swift.String: Swift.String] = [:]
 
   /// Output only. The time when the instance was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the instance was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Required. The default and minimum enforced retention for each backup within
   /// the backup vault.  The enforced retention for each backup can be extended.
-  public var backupMinimumEnforcedRetentionDuration: GoogleCloudWKT.Duration? = nil
+  public var backupMinimumEnforcedRetentionDuration: GoogleWKT.Duration? = nil
 
   /// Optional. Setting for how a backup's enforced retention end time is
   /// inherited.
@@ -62,7 +62,7 @@ public struct BackupVault: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var state: BackupVault.State = BackupVault.State()
 
   /// Optional. Time after which the BackupVault resource is locked.
-  public var effectiveTime: GoogleCloudWKT.Timestamp? = nil
+  public var effectiveTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The number of backups in this backup vault.
   public var backupCount: Swift.Int64 = Swift.Int64()
@@ -90,7 +90,7 @@ public struct BackupVault: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. The encryption config of the backup vault.
   public var encryptionConfig: BackupVault.EncryptionConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BackupVault`.
   public init() {}
@@ -166,12 +166,10 @@ public struct BackupVault: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.labels = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     self.backupMinimumEnforcedRetentionDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .backupMinimumEnforcedRetentionDuration)
+      GoogleWKT.Duration.self, forKey: .backupMinimumEnforcedRetentionDuration)
     self.backupRetentionInheritance = try container.decodeIfPresent(
       BackupVault.BackupRetentionInheritance.self, forKey: .backupRetentionInheritance)
     self.deletable = try container.decodeIfPresent(Swift.Bool.self, forKey: .deletable)
@@ -180,7 +178,7 @@ public struct BackupVault: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.state = value
     }
     self.effectiveTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .effectiveTime)
+      GoogleWKT.Timestamp.self, forKey: .effectiveTime)
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .backupCount) {
       self.backupCount = value
     }
@@ -207,7 +205,7 @@ public struct BackupVault: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       BackupVault.EncryptionConfig.self, forKey: .encryptionConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -240,7 +238,7 @@ public struct BackupVault: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Message describing the EncryptionConfig of backup vault.
   /// This determines how data within the vault is encrypted at rest.
-  public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EncryptionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The Cloud KMS key name to encrypt backups in this backup vault.
@@ -249,7 +247,7 @@ public struct BackupVault: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// projects/{project}/locations/{location}/keyRings/{ring}/cryptoKeys/{key}
     public var kmsKeyName: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EncryptionConfig`.
     public init() {}
@@ -285,7 +283,7 @@ public struct BackupVault: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.kmsKeyName = try container.decodeIfPresent(Swift.String.self, forKey: .kmsKeyName)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -300,11 +298,11 @@ public struct BackupVault: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.backupdr.v1.BackupVault.EncryptionConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -675,10 +673,10 @@ public struct BackupVault: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.v1.BackupVault"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

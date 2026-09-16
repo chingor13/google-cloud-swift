@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudGax
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleGax
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for ListAllFindingsRefinementDeployments method.
-public struct ListAllFindingsRefinementDeploymentsResponse: Codable, Equatable, GoogleCloudWKT
+public struct ListAllFindingsRefinementDeploymentsResponse: Codable, Equatable, GoogleWKT
     ._AnyPackable,
-  GoogleCloudGax._PaginatedResponse,
+  GoogleGax._PaginatedResponse,
   Sendable
 {
   /// List of all findings refinement deployments.
@@ -31,7 +31,7 @@ public struct ListAllFindingsRefinementDeploymentsResponse: Codable, Equatable, 
   /// this field is omitted, there are no subsequent pages.
   public var nextPageToken: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListAllFindingsRefinementDeploymentsResponse`.
   public init() {}
@@ -77,7 +77,7 @@ public struct ListAllFindingsRefinementDeploymentsResponse: Codable, Equatable, 
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,11 +95,11 @@ public struct ListAllFindingsRefinementDeploymentsResponse: Codable, Equatable, 
     return
       "type.googleapis.com/google.cloud.chronicle.v1.ListAllFindingsRefinementDeploymentsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 
   public func _getPaginatedItems() -> [FindingsRefinementDeployment] {

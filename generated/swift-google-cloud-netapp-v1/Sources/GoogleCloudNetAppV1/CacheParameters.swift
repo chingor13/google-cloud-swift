@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Cache Parameters for the volume.
-public struct CacheParameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CacheParameters: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Name of the origin volume for the cache volume.
@@ -48,7 +48,7 @@ public struct CacheParameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Optional. Expiration time for the peering command to be executed on user's
   /// ONTAP.
-  public var peeringCommandExpiryTime: GoogleCloudWKT.Timestamp? = nil
+  public var peeringCommandExpiryTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Temporary passphrase generated to accept cluster peering
   /// command.
@@ -57,7 +57,7 @@ public struct CacheParameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. Detailed description of the current cache state.
   public var stateDetails: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CacheParameters`.
   public init() {}
@@ -134,7 +134,7 @@ public struct CacheParameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.command = value
     }
     self.peeringCommandExpiryTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .peeringCommandExpiryTime)
+      GoogleWKT.Timestamp.self, forKey: .peeringCommandExpiryTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .passphrase) {
       self.passphrase = value
     }
@@ -143,7 +143,7 @@ public struct CacheParameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -289,10 +289,10 @@ public struct CacheParameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.netapp.v1.CacheParameters"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request for
 /// [ReservationService.MergeCapacityCommitments][google.cloud.bigquery.reservation.v1.ReservationService.MergeCapacityCommitments].
 ///
 /// [google.cloud.bigquery.reservation.v1.ReservationService.MergeCapacityCommitments]: <doc:ReservationServiceClient/mergeCapacityCommitments(request:options:)>
-public struct MergeCapacityCommitmentsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MergeCapacityCommitmentsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Parent resource that identifies admin project and location e.g.,
@@ -41,7 +41,7 @@ public struct MergeCapacityCommitmentsRequest: Codable, Equatable, GoogleCloudWK
   /// The first and last character cannot be a dash. Max length is 64 characters.
   public var capacityCommitmentId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MergeCapacityCommitmentsRequest`.
   public init() {}
@@ -91,7 +91,7 @@ public struct MergeCapacityCommitmentsRequest: Codable, Equatable, GoogleCloudWK
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -109,10 +109,10 @@ public struct MergeCapacityCommitmentsRequest: Codable, Equatable, GoogleCloudWK
     return
       "type.googleapis.com/google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

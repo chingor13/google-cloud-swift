@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Manages SSL certificates a user is authorized to administer. A user can
 /// administer any SSL certificates applicable to their authorized domains.
@@ -30,7 +30,7 @@ public final class AuthorizedCertificatesClient: Clients.AuthorizedCertificatesP
   let inner: any Clients.AuthorizedCertificatesStub
 
   /// Creates a new `AuthorizedCertificatesClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.AuthorizedCertificatesStub = try Clients.AuthorizedCertificatesTransport(
       options)
     inner = Clients.AuthorizedCertificatesRetry(inner, options: options)
@@ -44,7 +44,7 @@ public final class AuthorizedCertificatesClient: Clients.AuthorizedCertificatesP
   ///
   /// @Snippet(path: "AuthorizedCertificates_ListAuthorizedCertificates")
   public func listAuthorizedCertificates(
-    request: ListAuthorizedCertificatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAuthorizedCertificatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.ListAuthorizedCertificatesResponse {
     try await self.inner.listAuthorizedCertificates(request: request, options: options)
   }
@@ -53,7 +53,7 @@ public final class AuthorizedCertificatesClient: Clients.AuthorizedCertificatesP
   ///
   /// @Snippet(path: "AuthorizedCertificates_ListAuthorizedCertificates")
   public func listAuthorizedCertificates(
-    byItem: ListAuthorizedCertificatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAuthorizedCertificatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AuthorizedCertificate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleAppEngineV1.ListAuthorizedCertificatesResponse in
@@ -61,14 +61,14 @@ public final class AuthorizedCertificatesClient: Clients.AuthorizedCertificatesP
       request.pageToken = token
       return try await self.listAuthorizedCertificates(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the specified SSL certificate.
   ///
   /// @Snippet(path: "AuthorizedCertificates_GetAuthorizedCertificate")
   public func getAuthorizedCertificate(
-    request: GetAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.AuthorizedCertificate {
     try await self.inner.getAuthorizedCertificate(request: request, options: options)
   }
@@ -77,7 +77,7 @@ public final class AuthorizedCertificatesClient: Clients.AuthorizedCertificatesP
   ///
   /// @Snippet(path: "AuthorizedCertificates_CreateAuthorizedCertificate")
   public func createAuthorizedCertificate(
-    request: CreateAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.AuthorizedCertificate {
     try await self.inner.createAuthorizedCertificate(request: request, options: options)
   }
@@ -90,7 +90,7 @@ public final class AuthorizedCertificatesClient: Clients.AuthorizedCertificatesP
   ///
   /// @Snippet(path: "AuthorizedCertificates_UpdateAuthorizedCertificate")
   public func updateAuthorizedCertificate(
-    request: UpdateAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.AuthorizedCertificate {
     try await self.inner.updateAuthorizedCertificate(request: request, options: options)
   }
@@ -99,7 +99,7 @@ public final class AuthorizedCertificatesClient: Clients.AuthorizedCertificatesP
   ///
   /// @Snippet(path: "AuthorizedCertificates_DeleteAuthorizedCertificate")
   public func deleteAuthorizedCertificate(
-    request: DeleteAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteAuthorizedCertificate(request: request, options: options)
   }
@@ -110,7 +110,7 @@ public final class AuthorizedCertificatesClient: Clients.AuthorizedCertificatesP
   ///
   /// @Snippet(path: "AuthorizedCertificates_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -121,7 +121,7 @@ public final class AuthorizedCertificatesClient: Clients.AuthorizedCertificatesP
   ///
   /// @Snippet(path: "AuthorizedCertificates_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -129,7 +129,7 @@ public final class AuthorizedCertificatesClient: Clients.AuthorizedCertificatesP
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -138,7 +138,7 @@ public final class AuthorizedCertificatesClient: Clients.AuthorizedCertificatesP
   ///
   /// @Snippet(path: "AuthorizedCertificates_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -192,42 +192,42 @@ extension Clients {
 
     /// See `AuthorizedCertificatesClient.listAuthorizedCertificates`.
     func listAuthorizedCertificates(
-      request: ListAuthorizedCertificatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAuthorizedCertificatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.ListAuthorizedCertificatesResponse
 
     /// See `AuthorizedCertificatesClient.listAuthorizedCertificates`.
     func listAuthorizedCertificates(
-      byItem: ListAuthorizedCertificatesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAuthorizedCertificatesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AuthorizedCertificate, Swift.Error>
 
     /// See `AuthorizedCertificatesClient.getAuthorizedCertificate`.
     func getAuthorizedCertificate(
-      request: GetAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.AuthorizedCertificate
 
     /// See `AuthorizedCertificatesClient.createAuthorizedCertificate`.
     func createAuthorizedCertificate(
-      request: CreateAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.AuthorizedCertificate
 
     /// See `AuthorizedCertificatesClient.updateAuthorizedCertificate`.
     func updateAuthorizedCertificate(
-      request: UpdateAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.AuthorizedCertificate
 
     /// See `AuthorizedCertificatesClient.deleteAuthorizedCertificate`.
     func deleteAuthorizedCertificate(
-      request: DeleteAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AuthorizedCertificatesClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `AuthorizedCertificatesClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
   }
 }
@@ -241,9 +241,9 @@ extension Clients.AuthorizedCertificatesProtocol {
   }
 
   public func listAuthorizedCertificates(
-    request: ListAuthorizedCertificatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAuthorizedCertificatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.ListAuthorizedCertificatesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAuthorizedCertificates(
@@ -253,13 +253,13 @@ extension Clients.AuthorizedCertificatesProtocol {
   }
 
   public func listAuthorizedCertificates(
-    byItem: ListAuthorizedCertificatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAuthorizedCertificatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AuthorizedCertificate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleAppEngineV1.ListAuthorizedCertificatesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getAuthorizedCertificate(request: GetAuthorizedCertificateRequest) async throws
@@ -269,9 +269,9 @@ extension Clients.AuthorizedCertificatesProtocol {
   }
 
   public func getAuthorizedCertificate(
-    request: GetAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.AuthorizedCertificate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createAuthorizedCertificate(request: CreateAuthorizedCertificateRequest) async throws
@@ -281,9 +281,9 @@ extension Clients.AuthorizedCertificatesProtocol {
   }
 
   public func createAuthorizedCertificate(
-    request: CreateAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.AuthorizedCertificate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAuthorizedCertificate(request: UpdateAuthorizedCertificateRequest) async throws
@@ -293,9 +293,9 @@ extension Clients.AuthorizedCertificatesProtocol {
   }
 
   public func updateAuthorizedCertificate(
-    request: UpdateAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.AuthorizedCertificate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAuthorizedCertificate(request: DeleteAuthorizedCertificateRequest) async throws
@@ -304,9 +304,9 @@ extension Clients.AuthorizedCertificatesProtocol {
   }
 
   public func deleteAuthorizedCertificate(
-    request: DeleteAuthorizedCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAuthorizedCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -316,9 +316,9 @@ extension Clients.AuthorizedCertificatesProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -328,13 +328,13 @@ extension Clients.AuthorizedCertificatesProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -355,9 +355,9 @@ extension Clients.AuthorizedCertificatesProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

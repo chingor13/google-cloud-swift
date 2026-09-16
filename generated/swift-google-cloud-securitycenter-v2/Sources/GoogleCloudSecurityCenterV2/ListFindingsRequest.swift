@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for listing findings.
-public struct ListFindingsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ListFindingsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Name of the source the findings belong to. If no location is
@@ -115,7 +115,7 @@ public struct ListFindingsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
 
   /// A field mask to specify the Finding fields to be listed in the response.
   /// An empty field mask will list all fields.
-  public var fieldMask: GoogleCloudWKT.FieldMask? = nil
+  public var fieldMask: GoogleWKT.FieldMask? = nil
 
   /// The value returned by the last `ListFindingsResponse`; indicates
   /// that this is a continuation of a prior `ListFindings` call, and
@@ -126,7 +126,7 @@ public struct ListFindingsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// 10, minimum is 1, maximum is 1000.
   public var pageSize: Swift.Int32 = Swift.Int32()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListFindingsRequest`.
   public init() {}
@@ -178,8 +178,7 @@ public struct ListFindingsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .orderBy) {
       self.orderBy = value
     }
-    self.fieldMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .fieldMask)
+    self.fieldMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .fieldMask)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .pageToken) {
       self.pageToken = value
     }
@@ -188,7 +187,7 @@ public struct ListFindingsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -208,10 +207,10 @@ public struct ListFindingsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.ListFindingsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

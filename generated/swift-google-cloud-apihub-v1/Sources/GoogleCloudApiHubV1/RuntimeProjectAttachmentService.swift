@@ -19,9 +19,9 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// This service is used for managing the runtime project attachments.
 ///
@@ -32,7 +32,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   let inner: any Clients.RuntimeProjectAttachmentServiceStub
 
   /// Creates a new `RuntimeProjectAttachmentServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.RuntimeProjectAttachmentServiceStub =
       try Clients.RuntimeProjectAttachmentServiceTransport(options)
     inner = Clients.RuntimeProjectAttachmentServiceRetry(inner, options: options)
@@ -46,7 +46,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_CreateRuntimeProjectAttachment")
   public func createRuntimeProjectAttachment(
-    request: CreateRuntimeProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateRuntimeProjectAttachmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.RuntimeProjectAttachment {
     try await self.inner.createRuntimeProjectAttachment(request: request, options: options)
   }
@@ -55,7 +55,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_GetRuntimeProjectAttachment")
   public func getRuntimeProjectAttachment(
-    request: GetRuntimeProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRuntimeProjectAttachmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.RuntimeProjectAttachment {
     try await self.inner.getRuntimeProjectAttachment(request: request, options: options)
   }
@@ -64,7 +64,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_ListRuntimeProjectAttachments")
   public func listRuntimeProjectAttachments(
-    request: ListRuntimeProjectAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRuntimeProjectAttachmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.ListRuntimeProjectAttachmentsResponse {
     try await self.inner.listRuntimeProjectAttachments(request: request, options: options)
   }
@@ -73,7 +73,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_ListRuntimeProjectAttachments")
   public func listRuntimeProjectAttachments(
-    byItem: ListRuntimeProjectAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRuntimeProjectAttachmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RuntimeProjectAttachment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -82,7 +82,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
       request.pageToken = token
       return try await self.listRuntimeProjectAttachments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Delete a runtime project attachment in the API Hub. This call will detach
@@ -90,7 +90,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_DeleteRuntimeProjectAttachment")
   public func deleteRuntimeProjectAttachment(
-    request: DeleteRuntimeProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteRuntimeProjectAttachmentRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteRuntimeProjectAttachment(request: request, options: options)
   }
@@ -100,7 +100,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_LookupRuntimeProjectAttachment")
   public func lookupRuntimeProjectAttachment(
-    request: LookupRuntimeProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+    request: LookupRuntimeProjectAttachmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.LookupRuntimeProjectAttachmentResponse {
     try await self.inner.lookupRuntimeProjectAttachment(request: request, options: options)
   }
@@ -109,7 +109,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -118,7 +118,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -126,14 +126,14 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -144,7 +144,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -155,7 +155,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -163,7 +163,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -172,7 +172,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -183,7 +183,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -194,7 +194,7 @@ public final class RuntimeProjectAttachmentServiceClient: Clients
   ///
   /// @Snippet(path: "RuntimeProjectAttachmentService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -304,67 +304,67 @@ extension Clients {
 
     /// See `RuntimeProjectAttachmentServiceClient.createRuntimeProjectAttachment`.
     func createRuntimeProjectAttachment(
-      request: CreateRuntimeProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRuntimeProjectAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.RuntimeProjectAttachment
 
     /// See `RuntimeProjectAttachmentServiceClient.getRuntimeProjectAttachment`.
     func getRuntimeProjectAttachment(
-      request: GetRuntimeProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRuntimeProjectAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.RuntimeProjectAttachment
 
     /// See `RuntimeProjectAttachmentServiceClient.listRuntimeProjectAttachments`.
     func listRuntimeProjectAttachments(
-      request: ListRuntimeProjectAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRuntimeProjectAttachmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.ListRuntimeProjectAttachmentsResponse
 
     /// See `RuntimeProjectAttachmentServiceClient.listRuntimeProjectAttachments`.
     func listRuntimeProjectAttachments(
-      byItem: ListRuntimeProjectAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListRuntimeProjectAttachmentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<RuntimeProjectAttachment, Swift.Error>
 
     /// See `RuntimeProjectAttachmentServiceClient.deleteRuntimeProjectAttachment`.
     func deleteRuntimeProjectAttachment(
-      request: DeleteRuntimeProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRuntimeProjectAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `RuntimeProjectAttachmentServiceClient.lookupRuntimeProjectAttachment`.
     func lookupRuntimeProjectAttachment(
-      request: LookupRuntimeProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupRuntimeProjectAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.LookupRuntimeProjectAttachmentResponse
 
     /// See `RuntimeProjectAttachmentServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `RuntimeProjectAttachmentServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `RuntimeProjectAttachmentServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `RuntimeProjectAttachmentServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `RuntimeProjectAttachmentServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `RuntimeProjectAttachmentServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `RuntimeProjectAttachmentServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -378,9 +378,9 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func createRuntimeProjectAttachment(
-    request: CreateRuntimeProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateRuntimeProjectAttachmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.RuntimeProjectAttachment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createRuntimeProjectAttachment(
@@ -403,9 +403,9 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func getRuntimeProjectAttachment(
-    request: GetRuntimeProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRuntimeProjectAttachmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.RuntimeProjectAttachment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getRuntimeProjectAttachment(
@@ -424,9 +424,9 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func listRuntimeProjectAttachments(
-    request: ListRuntimeProjectAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRuntimeProjectAttachmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.ListRuntimeProjectAttachmentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listRuntimeProjectAttachments(
@@ -436,14 +436,14 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func listRuntimeProjectAttachments(
-    byItem: ListRuntimeProjectAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRuntimeProjectAttachmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RuntimeProjectAttachment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudApiHubV1.ListRuntimeProjectAttachmentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listRuntimeProjectAttachments(
@@ -462,9 +462,9 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func deleteRuntimeProjectAttachment(
-    request: DeleteRuntimeProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteRuntimeProjectAttachmentRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteRuntimeProjectAttachment(
@@ -483,9 +483,9 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func lookupRuntimeProjectAttachment(
-    request: LookupRuntimeProjectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+    request: LookupRuntimeProjectAttachmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.LookupRuntimeProjectAttachmentResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func lookupRuntimeProjectAttachment(
@@ -504,9 +504,9 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -516,13 +516,13 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -532,9 +532,9 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -544,9 +544,9 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -556,13 +556,13 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -583,9 +583,9 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -602,9 +602,9 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -621,9 +621,9 @@ extension Clients.RuntimeProjectAttachmentServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

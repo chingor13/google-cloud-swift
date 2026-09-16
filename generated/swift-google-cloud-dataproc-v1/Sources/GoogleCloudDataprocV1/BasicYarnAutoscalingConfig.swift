@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Basic autoscaling configurations for YARN.
-public struct BasicYarnAutoscalingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BasicYarnAutoscalingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Timeout for YARN graceful decommissioning of Node Managers.
@@ -27,7 +27,7 @@ public struct BasicYarnAutoscalingConfig: Codable, Equatable, GoogleCloudWKT._An
   /// downscaling operations.
   ///
   /// Bounds: [0s, 1d].
-  public var gracefulDecommissionTimeout: GoogleCloudWKT.Duration? = nil
+  public var gracefulDecommissionTimeout: GoogleWKT.Duration? = nil
 
   /// Required. Fraction of average YARN pending memory in the last cooldown
   /// period for which to add workers. A scale-up factor of 1.0 will result in
@@ -71,7 +71,7 @@ public struct BasicYarnAutoscalingConfig: Codable, Equatable, GoogleCloudWKT._An
   /// Bounds: [0.0, 1.0]. Default: 0.0.
   public var scaleDownMinWorkerFraction: Swift.Double = Swift.Double()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BasicYarnAutoscalingConfig`.
   public init() {}
@@ -113,7 +113,7 @@ public struct BasicYarnAutoscalingConfig: Codable, Equatable, GoogleCloudWKT._An
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.gracefulDecommissionTimeout = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .gracefulDecommissionTimeout)
+      GoogleWKT.Duration.self, forKey: .gracefulDecommissionTimeout)
     if let value = try container.decodeIfPresent(Swift.Double.self, forKey: .scaleUpFactor) {
       self.scaleUpFactor = value
     }
@@ -132,7 +132,7 @@ public struct BasicYarnAutoscalingConfig: Codable, Equatable, GoogleCloudWKT._An
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -152,10 +152,10 @@ public struct BasicYarnAutoscalingConfig: Codable, Equatable, GoogleCloudWKT._An
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.v1.BasicYarnAutoscalingConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

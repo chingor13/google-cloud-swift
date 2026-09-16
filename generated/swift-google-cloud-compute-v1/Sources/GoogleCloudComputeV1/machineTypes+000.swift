@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `machineTypes` resource.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.MachineTypesStub
 
     /// Creates a new `MachineTypesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.MachineTypesStub = try Clients.MachineTypesTransport(options)
       inner = Clients.MachineTypesRetry(inner, options: options)
       if let logger = options.logger {
@@ -45,7 +45,7 @@
     ///
     /// @Snippet(path: "machineTypes_aggregatedList")
     public func aggregatedList(
-      request: MachineTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: MachineTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.MachineTypeAggregatedList {
       try await self.inner.aggregatedList(request: request, options: options)
     }
@@ -57,7 +57,7 @@
     ///
     /// @Snippet(path: "machineTypes_aggregatedList")
     public func aggregatedList(
-      byItem: MachineTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: MachineTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, MachineTypesScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.MachineTypeAggregatedList in
@@ -65,14 +65,14 @@
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Returns the specified machine type.
     ///
     /// @Snippet(path: "machineTypes_get")
     public func `get`(
-      request: MachineTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: MachineTypesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.MachineType {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -82,7 +82,7 @@
     ///
     /// @Snippet(path: "machineTypes_list")
     public func list(
-      request: MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: MachineTypesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.MachineTypeList {
       try await self.inner.list(request: request, options: options)
     }
@@ -92,14 +92,14 @@
     ///
     /// @Snippet(path: "machineTypes_list")
     public func list(
-      byItem: MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: MachineTypesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<MachineType, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.MachineTypeList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
   }
 
@@ -152,27 +152,27 @@
 
       /// See `MachineTypesClient.aggregatedList`.
       func aggregatedList(
-        request: MachineTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineTypeAggregatedList
 
       /// See `MachineTypesClient.aggregatedList`.
       func aggregatedList(
-        byItem: MachineTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: MachineTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<(Swift.String, MachineTypesScopedList), Swift.Error>
 
       /// See `MachineTypesClient.`get``.
       func `get`(
-        request: MachineTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineType
 
       /// See `MachineTypesClient.list`.
       func list(
-        request: MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineTypeList
 
       /// See `MachineTypesClient.list`.
       func list(
-        byItem: MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: MachineTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<MachineType, Swift.Error>
     }
   }
@@ -186,9 +186,9 @@
     }
 
     public func aggregatedList(
-      request: MachineTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: MachineTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.MachineTypeAggregatedList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
@@ -198,13 +198,13 @@
     }
 
     public func aggregatedList(
-      byItem: MachineTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: MachineTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, MachineTypesScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.MachineTypeAggregatedList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func aggregatedList(
@@ -223,9 +223,9 @@
     }
 
     public func `get`(
-      request: MachineTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: MachineTypesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.MachineType {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -248,9 +248,9 @@
     }
 
     public func list(
-      request: MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: MachineTypesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.MachineTypeList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -260,12 +260,12 @@
     }
 
     public func list(
-      byItem: MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: MachineTypesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<MachineType, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.MachineTypeList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// VPC Access settings. For more information on sending traffic to a VPC
 /// network, visit https://cloud.google.com/run/docs/configuring/connecting-vpc.
-public struct VpcAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VpcAccess: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// VPC Access connector name.
@@ -37,7 +37,7 @@ public struct VpcAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// interface is supported.
   public var networkInterfaces: [VpcAccess.NetworkInterface] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VpcAccess`.
   public init() {}
@@ -87,7 +87,7 @@ public struct VpcAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,7 +102,7 @@ public struct VpcAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Direct VPC egress settings.
-  public struct NetworkInterface: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NetworkInterface: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The VPC network that the Cloud Run resource will be able to
@@ -122,7 +122,7 @@ public struct VpcAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. Network tags applied to this Cloud Run resource.
     public var tags: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NetworkInterface`.
     public init() {}
@@ -170,7 +170,7 @@ public struct VpcAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -187,11 +187,11 @@ public struct VpcAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.run.v2.VpcAccess.NetworkInterface"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -303,10 +303,10 @@ public struct VpcAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.VpcAccess"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

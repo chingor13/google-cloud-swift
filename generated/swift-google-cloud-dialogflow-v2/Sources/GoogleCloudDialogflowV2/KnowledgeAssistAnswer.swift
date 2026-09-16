@@ -16,10 +16,10 @@
 
 #if Participants
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a Knowledge Assist answer.
-  public struct KnowledgeAssistAnswer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct KnowledgeAssistAnswer: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The query suggested based on the context. Suggestion is made only if it
@@ -38,7 +38,7 @@
     /// Debug information related to Knowledge Assist feature.
     public var knowledgeAssistDebugInfo: KnowledgeAssistDebugInfo? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `KnowledgeAssistAnswer`.
     public init() {}
@@ -88,7 +88,7 @@
         KnowledgeAssistDebugInfo.self, forKey: .knowledgeAssistDebugInfo)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -105,7 +105,7 @@
     }
 
     /// Represents a suggested query.
-    public struct SuggestedQuery: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SuggestedQuery: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Suggested query text.
@@ -114,7 +114,7 @@
       /// Optional. The search contexts for the query.
       public var searchContexts: [KnowledgeAssistAnswer.SuggestedQuery.SearchContext] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SuggestedQuery`.
       public init() {}
@@ -159,7 +159,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -179,7 +179,7 @@
       ///   key: "application name"
       ///   value: "DesignApp"
       /// }
-      public struct SearchContext: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct SearchContext: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. The key of the search context, e.g. "application name".
@@ -188,8 +188,7 @@
         /// Optional. The value of the search context, e.g. "DesignApp".
         public var value: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `SearchContext`.
         public init() {}
@@ -232,7 +231,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -249,27 +248,27 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery.SearchContext"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.SuggestedQuery"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Represents a single suggested query result.
-    public struct AdditionalSuggestedQueryResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AdditionalSuggestedQueryResult: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The suggested query based on the context.
@@ -280,7 +279,7 @@
       /// ID>/answerRecords/<Answer Record ID>`
       public var answerRecord: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AdditionalSuggestedQueryResult`.
       public init() {}
@@ -322,7 +321,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -339,17 +338,17 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.AdditionalSuggestedQueryResult"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Represents an answer from Knowledge. Currently supports FAQ and Generative
     /// answers.
-    public struct KnowledgeAnswer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct KnowledgeAnswer: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The piece of text from the `source` that answers this suggested query.
@@ -358,7 +357,7 @@
       /// Source of result.
       public var source: OneOf_Source? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `KnowledgeAnswer`.
       public init() {}
@@ -436,7 +435,7 @@
         self.source = source
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -462,14 +461,13 @@
       }
 
       /// Details about source of FAQ answer.
-      public struct FaqSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct FaqSource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// The corresponding FAQ question.
         public var question: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `FaqSource`.
         public init() {}
@@ -507,7 +505,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -523,24 +521,23 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.FaqSource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Details about source of Generative answer.
-      public struct GenerativeSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct GenerativeSource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// All snippets used for this Generative Prediction, with their source URI
         /// and data.
         public var snippets: [KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.Snippet] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `GenerativeSource`.
         public init() {}
@@ -580,7 +577,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -593,7 +590,7 @@
         }
 
         /// Snippet Source for a Generative Prediction.
-        public struct Snippet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct Snippet: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// URI the data is sourced from.
@@ -606,10 +603,9 @@
           public var title: Swift.String = Swift.String()
 
           /// Metadata of the document.
-          public var metadata: GoogleCloudWKT.Struct? = nil
+          public var metadata: GoogleWKT.Struct? = nil
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `Snippet`.
           public init() {}
@@ -657,11 +653,10 @@
             if let value = try container.decodeIfPresent(Swift.String.self, forKey: .title) {
               self.title = value
             }
-            self.metadata = try container.decodeIfPresent(
-              GoogleCloudWKT.Struct.self, forKey: .metadata)
+            self.metadata = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .metadata)
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -680,11 +675,11 @@
             return
               "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.Snippet"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -692,16 +687,16 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Details about source of Event answer.
-      public struct EventSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct EventSource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Name of the triggered event.
@@ -710,8 +705,7 @@
         /// Sources used in event fulfillment.
         public var snippets: KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `EventSource`.
         public init() {}
@@ -753,7 +747,7 @@
             KnowledgeAssistAnswer.KnowledgeAnswer.GenerativeSource.self, forKey: .snippets)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -770,11 +764,11 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer.EventSource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -794,22 +788,22 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer.KnowledgeAnswer"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistAnswer"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

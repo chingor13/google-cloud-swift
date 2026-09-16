@@ -16,38 +16,38 @@
 
 #if RegionInstanceGroupManagerResizeRequests
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionInstanceGroupManagerResizeRequestsStub: Sendable {
       func cancel(
         request: RegionInstanceGroupManagerResizeRequestsClient.CancelRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
         request: RegionInstanceGroupManagerResizeRequestsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
         request: RegionInstanceGroupManagerResizeRequestsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupManagerResizeRequest
 
       func insert(
         request: RegionInstanceGroupManagerResizeRequestsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
         request: RegionInstanceGroupManagerResizeRequestsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupManagerResizeRequestsListResponse
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

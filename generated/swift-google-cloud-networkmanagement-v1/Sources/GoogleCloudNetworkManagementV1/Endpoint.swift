@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Source or destination of the Connectivity Test.
-public struct Endpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Endpoint: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The IP address of the endpoint, which can be an external or internal IP.
@@ -116,7 +116,7 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `network_type`. Not relevant for destination endpoints.
   public var projectId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Endpoint`.
   public init() {}
@@ -247,7 +247,7 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -280,13 +280,13 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Wrapper for Cloud Function attributes.
-  public struct CloudFunctionEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CloudFunctionEndpoint: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A [Cloud Function](https://cloud.google.com/functions) name.
     public var uri: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CloudFunctionEndpoint`.
     public init() {}
@@ -324,7 +324,7 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -339,16 +339,16 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkmanagement.v1.Endpoint.CloudFunctionEndpoint"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Wrapper for the App Engine service version attributes.
-  public struct AppEngineVersionEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AppEngineVersionEndpoint: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// An [App Engine](https://cloud.google.com/appengine) [service
@@ -356,7 +356,7 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// name.
     public var uri: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AppEngineVersionEndpoint`.
     public init() {}
@@ -394,7 +394,7 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -410,16 +410,16 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.networkmanagement.v1.Endpoint.AppEngineVersionEndpoint"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Wrapper for Cloud Run revision attributes.
-  public struct CloudRunRevisionEndpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CloudRunRevisionEndpoint: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A [Cloud Run](https://cloud.google.com/run)
@@ -433,7 +433,7 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// projects/{project}/locations/{location}/services/{service}
     public var serviceUri: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CloudRunRevisionEndpoint`.
     public init() {}
@@ -476,7 +476,7 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -493,11 +493,11 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.networkmanagement.v1.Endpoint.CloudRunRevisionEndpoint"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -754,10 +754,10 @@ public struct Endpoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkmanagement.v1.Endpoint"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

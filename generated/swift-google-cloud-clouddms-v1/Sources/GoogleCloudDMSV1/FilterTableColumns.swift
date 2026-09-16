@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Options to configure rule type FilterTableColumns.
 /// The rule is used to filter the list of columns to include or exclude from a
@@ -26,7 +26,7 @@ import Foundation
 /// The rule scope can be: Table
 ///
 /// Only one of the two lists can be specified for the rule.
-public struct FilterTableColumns: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FilterTableColumns: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. List of columns to be included for a particular table.
@@ -35,7 +35,7 @@ public struct FilterTableColumns: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// Optional. List of columns to be excluded for a particular table.
   public var excludeColumns: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FilterTableColumns`.
   public init() {}
@@ -78,7 +78,7 @@ public struct FilterTableColumns: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -94,10 +94,10 @@ public struct FilterTableColumns: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.clouddms.v1.FilterTableColumns"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

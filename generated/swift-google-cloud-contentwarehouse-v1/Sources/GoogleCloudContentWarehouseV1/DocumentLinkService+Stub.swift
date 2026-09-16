@@ -15,30 +15,30 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DocumentLinkServiceStub: Sendable {
     func listLinkedTargets(
-      request: ListLinkedTargetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLinkedTargetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.ListLinkedTargetsResponse
 
     func listLinkedSources(
-      request: ListLinkedSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLinkedSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.ListLinkedSourcesResponse
 
     func createDocumentLink(
-      request: CreateDocumentLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDocumentLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.DocumentLink
 
     func deleteDocumentLink(
-      request: DeleteDocumentLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDocumentLinkRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

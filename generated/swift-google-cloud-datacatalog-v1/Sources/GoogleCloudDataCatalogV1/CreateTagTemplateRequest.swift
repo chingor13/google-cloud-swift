@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [CreateTagTemplate][google.cloud.datacatalog.v1.DataCatalog.CreateTagTemplate].
 ///
 /// [google.cloud.datacatalog.v1.DataCatalog.CreateTagTemplate]: <doc:DataCatalogClient/createTagTemplate(request:options:)>
-public struct CreateTagTemplateRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateTagTemplateRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the project and the template location
@@ -38,7 +38,7 @@ public struct CreateTagTemplateRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   /// Required. The tag template to create.
   public var tagTemplate: TagTemplate? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateTagTemplateRequest`.
   public init() {}
@@ -84,7 +84,7 @@ public struct CreateTagTemplateRequest: Codable, Equatable, GoogleCloudWKT._AnyP
     self.tagTemplate = try container.decodeIfPresent(TagTemplate.self, forKey: .tagTemplate)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,10 +101,10 @@ public struct CreateTagTemplateRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.v1.CreateTagTemplateRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A ProductSet contains Products. A ProductSet can contain a maximum of 1
 /// million reference images. If the limit is exceeded, periodic indexing will
 /// fail.
-public struct ProductSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ProductSet: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the ProductSet.
@@ -42,7 +42,7 @@ public struct ProductSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// "1970-01-01T00:00:00Z".
   ///
   /// This field is ignored when creating a ProductSet.
-  public var indexTime: GoogleCloudWKT.Timestamp? = nil
+  public var indexTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. If there was an error with indexing the product set, the field
   /// is populated.
@@ -50,7 +50,7 @@ public struct ProductSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// This field is ignored when creating a ProductSet.
   public var indexError: GoogleRpc.Status? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ProductSet`.
   public init() {}
@@ -95,12 +95,11 @@ public struct ProductSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
       self.displayName = value
     }
-    self.indexTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .indexTime)
+    self.indexTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .indexTime)
     self.indexError = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .indexError)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -118,10 +117,10 @@ public struct ProductSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vision.v1.ProductSet"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Normalized bounding box.
 /// The normalized vertex coordinates are relative to the original image.
 /// Range: [0, 1].
-public struct NormalizedBoundingBox: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NormalizedBoundingBox: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Left X coordinate.
@@ -35,7 +35,7 @@ public struct NormalizedBoundingBox: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// Bottom Y coordinate.
   public var bottom: Swift.Float = Swift.Float()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NormalizedBoundingBox`.
   public init() {}
@@ -88,7 +88,7 @@ public struct NormalizedBoundingBox: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -106,10 +106,10 @@ public struct NormalizedBoundingBox: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.videointelligence.v1.NormalizedBoundingBox"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

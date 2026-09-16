@@ -19,7 +19,7 @@
 import Foundation
 import GoogleCloudParameterManagerV1
 import GoogleCloudLocation
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: ParameterManagerClient, projectId: String, locationId: String) async throws {
   let response = try await client.createParameter(

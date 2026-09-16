@@ -15,46 +15,46 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ServingConfigServiceStub: Sendable {
     func createServingConfig(
-      request: CreateServingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ServingConfig
 
     func deleteServingConfig(
-      request: DeleteServingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updateServingConfig(
-      request: UpdateServingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ServingConfig
 
     func getServingConfig(
-      request: GetServingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ServingConfig
 
     func listServingConfigs(
-      request: ListServingConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServingConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ListServingConfigsResponse
 
     func addControl(
-      request: AddControlRequest, options: GoogleCloudGax.RequestOptions
+      request: AddControlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ServingConfig
 
     func removeControl(
-      request: RemoveControlRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveControlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ServingConfig
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

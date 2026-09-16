@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// `BackupRule` binds the backup schedule to a retention policy.
-public struct BackupRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BackupRule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Immutable. The unique id of this `BackupRule`. The `rule_id` is
@@ -40,7 +40,7 @@ public struct BackupRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `BackupRule`.
   public var backupScheduleOneof: OneOf_BackupScheduleOneof? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BackupRule`.
   public init() {}
@@ -102,7 +102,7 @@ public struct BackupRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.backupScheduleOneof = backupScheduleOneof
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -133,10 +133,10 @@ public struct BackupRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.v1.BackupRule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

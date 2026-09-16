@@ -16,10 +16,10 @@
 
 #if SessionService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// An event represents a message from either the user or agent.
-  public struct SessionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SessionEvent: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Identifier. The resource name of the event.
@@ -40,7 +40,7 @@
     public var actions: EventActions? = nil
 
     /// Required. Timestamp when the event was created on client side.
-    public var timestamp: GoogleCloudWKT.Timestamp? = nil
+    public var timestamp: GoogleWKT.Timestamp? = nil
 
     /// Optional. Error code if the response is an error. Code varies by model.
     public var errorCode: Swift.String = Swift.String()
@@ -52,9 +52,9 @@
     public var eventMetadata: EventMetadata? = nil
 
     /// Optional. Weakly typed raw event data in proto struct format.
-    public var rawEvent: GoogleCloudWKT.Struct? = nil
+    public var rawEvent: GoogleWKT.Struct? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SessionEvent`.
     public init() {}
@@ -116,8 +116,7 @@
         self.invocationId = value
       }
       self.actions = try container.decodeIfPresent(EventActions.self, forKey: .actions)
-      self.timestamp = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .timestamp)
+      self.timestamp = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .timestamp)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .errorCode) {
         self.errorCode = value
       }
@@ -125,10 +124,10 @@
         self.errorMessage = value
       }
       self.eventMetadata = try container.decodeIfPresent(EventMetadata.self, forKey: .eventMetadata)
-      self.rawEvent = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .rawEvent)
+      self.rawEvent = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .rawEvent)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -152,11 +151,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SessionEvent"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

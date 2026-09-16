@@ -16,12 +16,12 @@
 
 #if RegionInstanceGroupManagers
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct RegionInstanceGroupManagersListErrorsResponse: Codable, Equatable, GoogleCloudWKT
+  public struct RegionInstanceGroupManagersListErrorsResponse: Codable, Equatable, GoogleWKT
       ._AnyPackable,
-    GoogleCloudGax._PaginatedResponse,
+    GoogleGax._PaginatedResponse,
     Sendable
   {
     /// [Output Only] The list of errors of the managed instance group.
@@ -34,7 +34,7 @@
     /// continue paging through the results.
     public var nextPageToken: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RegionInstanceGroupManagersListErrorsResponse`.
     public init() {}
@@ -76,7 +76,7 @@
       self.nextPageToken = try container.decodeIfPresent(Swift.String.self, forKey: .nextPageToken)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -93,11 +93,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.RegionInstanceGroupManagersListErrorsResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
 
     public func _getPaginatedItems() -> [InstanceManagedByIgmError] {

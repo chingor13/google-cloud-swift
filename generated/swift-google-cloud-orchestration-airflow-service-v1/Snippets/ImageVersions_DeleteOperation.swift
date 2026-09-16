@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudOrchestrationAirflowServiceV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: ImageVersionsClient) async throws {
   try await client.deleteOperation(

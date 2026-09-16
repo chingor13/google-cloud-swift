@@ -16,91 +16,91 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ApiHubPluginStub: Sendable {
     func getPlugin(
-      request: GetPluginRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPluginRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.Plugin
 
     func enablePlugin(
-      request: EnablePluginRequest, options: GoogleCloudGax.RequestOptions
+      request: EnablePluginRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.Plugin
 
     func disablePlugin(
-      request: DisablePluginRequest, options: GoogleCloudGax.RequestOptions
+      request: DisablePluginRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.Plugin
 
     func createPlugin(
-      request: CreatePluginRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePluginRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.Plugin
 
     func listPlugins(
-      request: ListPluginsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPluginsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.ListPluginsResponse
 
     func deletePlugin(
-      request: DeletePluginRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePluginRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createPluginInstance(
-      request: CreatePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePluginInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func executePluginInstanceAction(
-      request: ExecutePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
+      request: ExecutePluginInstanceActionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getPluginInstance(
-      request: GetPluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPluginInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.PluginInstance
 
     func listPluginInstances(
-      request: ListPluginInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPluginInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.ListPluginInstancesResponse
 
     func enablePluginInstanceAction(
-      request: EnablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
+      request: EnablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func disablePluginInstanceAction(
-      request: DisablePluginInstanceActionRequest, options: GoogleCloudGax.RequestOptions
+      request: DisablePluginInstanceActionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updatePluginInstance(
-      request: UpdatePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePluginInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.PluginInstance
 
     func deletePluginInstance(
-      request: DeletePluginInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePluginInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// StatusCondition describes why a cluster or a node pool has a certain status
 /// (e.g., ERROR or DEGRADED).
-public struct StatusCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StatusCondition: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Machine-friendly representation of the condition
@@ -34,7 +34,7 @@ public struct StatusCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Canonical code of the condition.
   public var canonicalCode: GoogleRpc.Code = GoogleRpc.Code()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StatusCondition`.
   public init() {}
@@ -82,7 +82,7 @@ public struct StatusCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -251,10 +251,10 @@ public struct StatusCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.StatusCondition"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

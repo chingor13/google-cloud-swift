@@ -16,13 +16,13 @@
 
 #if Participants || Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Cloud conversation info for easier debugging.
   /// It will get populated in `StreamingDetectIntentResponse` or
   /// `StreamingAnalyzeContentResponse` when the flag `enable_debugging_info` is
   /// set to true in corresponding requests.
-  public struct CloudConversationDebuggingInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CloudConversationDebuggingInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Number of input audio data chunks in streaming requests.
@@ -30,21 +30,21 @@
 
     /// Time offset of the end of speech utterance relative to the
     /// beginning of the first audio chunk.
-    public var resultEndTimeOffset: GoogleCloudWKT.Duration? = nil
+    public var resultEndTimeOffset: GoogleWKT.Duration? = nil
 
     /// Duration of first audio chunk.
-    public var firstAudioDuration: GoogleCloudWKT.Duration? = nil
+    public var firstAudioDuration: GoogleWKT.Duration? = nil
 
     /// Whether client used single utterance mode.
     public var singleUtterance: Swift.Bool = Swift.Bool()
 
     /// Time offsets of the speech partial results relative to the beginning of
     /// the stream.
-    public var speechPartialResultsEndTimes: [GoogleCloudWKT.Duration] = []
+    public var speechPartialResultsEndTimes: [GoogleWKT.Duration] = []
 
     /// Time offsets of the speech final results (is_final=true) relative to the
     /// beginning of the stream.
-    public var speechFinalResultsEndTimes: [GoogleCloudWKT.Duration] = []
+    public var speechFinalResultsEndTimes: [GoogleWKT.Duration] = []
 
     /// Total number of partial responses.
     public var partialResponses: Swift.Int32 = Swift.Int32()
@@ -62,32 +62,32 @@
 
     /// Time offsets of the DTMF partial results relative to the beginning of
     /// the stream.
-    public var dtmfPartialResultsTimes: [GoogleCloudWKT.Duration] = []
+    public var dtmfPartialResultsTimes: [GoogleWKT.Duration] = []
 
     /// Time offsets of the DTMF final results relative to the beginning of
     /// the stream.
-    public var dtmfFinalResultsTimes: [GoogleCloudWKT.Duration] = []
+    public var dtmfFinalResultsTimes: [GoogleWKT.Duration] = []
 
     /// Time offset of the end-of-single-utterance signal relative to the
     /// beginning of the stream.
-    public var singleUtteranceEndTimeOffset: GoogleCloudWKT.Duration? = nil
+    public var singleUtteranceEndTimeOffset: GoogleWKT.Duration? = nil
 
     /// No speech timeout settings for the stream.
-    public var noSpeechTimeout: GoogleCloudWKT.Duration? = nil
+    public var noSpeechTimeout: GoogleWKT.Duration? = nil
 
     /// Speech endpointing timeout settings for the stream.
-    public var endpointingTimeout: GoogleCloudWKT.Duration? = nil
+    public var endpointingTimeout: GoogleWKT.Duration? = nil
 
     /// Whether the streaming terminates with an injected text query.
     public var isInputText: Swift.Bool = Swift.Bool()
 
     /// Client half close time in terms of input audio duration.
-    public var clientHalfCloseTimeOffset: GoogleCloudWKT.Duration? = nil
+    public var clientHalfCloseTimeOffset: GoogleWKT.Duration? = nil
 
     /// Client half close time in terms of API streaming duration.
-    public var clientHalfCloseStreamingTimeOffset: GoogleCloudWKT.Duration? = nil
+    public var clientHalfCloseStreamingTimeOffset: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CloudConversationDebuggingInfo`.
     public init() {}
@@ -162,19 +162,19 @@
         self.audioDataChunks = value
       }
       self.resultEndTimeOffset = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .resultEndTimeOffset)
+        GoogleWKT.Duration.self, forKey: .resultEndTimeOffset)
       self.firstAudioDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .firstAudioDuration)
+        GoogleWKT.Duration.self, forKey: .firstAudioDuration)
       if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .singleUtterance) {
         self.singleUtterance = value
       }
       if let value = try container.decodeIfPresent(
-        [GoogleCloudWKT.Duration].self, forKey: .speechPartialResultsEndTimes)
+        [GoogleWKT.Duration].self, forKey: .speechPartialResultsEndTimes)
       {
         self.speechPartialResultsEndTimes = value
       }
       if let value = try container.decodeIfPresent(
-        [GoogleCloudWKT.Duration].self, forKey: .speechFinalResultsEndTimes)
+        [GoogleWKT.Duration].self, forKey: .speechFinalResultsEndTimes)
       {
         self.speechFinalResultsEndTimes = value
       }
@@ -195,31 +195,31 @@
         self.speechSingleUtterance = value
       }
       if let value = try container.decodeIfPresent(
-        [GoogleCloudWKT.Duration].self, forKey: .dtmfPartialResultsTimes)
+        [GoogleWKT.Duration].self, forKey: .dtmfPartialResultsTimes)
       {
         self.dtmfPartialResultsTimes = value
       }
       if let value = try container.decodeIfPresent(
-        [GoogleCloudWKT.Duration].self, forKey: .dtmfFinalResultsTimes)
+        [GoogleWKT.Duration].self, forKey: .dtmfFinalResultsTimes)
       {
         self.dtmfFinalResultsTimes = value
       }
       self.singleUtteranceEndTimeOffset = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .singleUtteranceEndTimeOffset)
+        GoogleWKT.Duration.self, forKey: .singleUtteranceEndTimeOffset)
       self.noSpeechTimeout = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .noSpeechTimeout)
+        GoogleWKT.Duration.self, forKey: .noSpeechTimeout)
       self.endpointingTimeout = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .endpointingTimeout)
+        GoogleWKT.Duration.self, forKey: .endpointingTimeout)
       if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .isInputText) {
         self.isInputText = value
       }
       self.clientHalfCloseTimeOffset = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .clientHalfCloseTimeOffset)
+        GoogleWKT.Duration.self, forKey: .clientHalfCloseTimeOffset)
       self.clientHalfCloseStreamingTimeOffset = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .clientHalfCloseStreamingTimeOffset)
+        GoogleWKT.Duration.self, forKey: .clientHalfCloseStreamingTimeOffset)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -255,11 +255,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.CloudConversationDebuggingInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

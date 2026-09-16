@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Encoding of an input element such as an audio, video, or text track.
 /// Elementary streams must be packaged before mapping and sharing between
 /// different output formats.
-public struct ElementaryStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ElementaryStream: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A unique key for this elementary stream. The key must be 1-63
@@ -31,7 +31,7 @@ public struct ElementaryStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Required. Encoding of an audio, video, or text track.
   public var elementaryStream: OneOf_ElementaryStream? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ElementaryStream`.
   public init() {}
@@ -96,7 +96,7 @@ public struct ElementaryStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.elementaryStream = elementaryStream
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -132,10 +132,10 @@ public struct ElementaryStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.livestream.v1.ElementaryStream"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

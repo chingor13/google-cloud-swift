@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for a `WorkerPool`.
 ///
@@ -30,7 +30,7 @@ import Foundation
 /// network. For an overview of private pools, see
 /// [Private pools
 /// overview](https://cloud.google.com/build/docs/private-pools/private-pools-overview).
-public struct WorkerPool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct WorkerPool: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the `WorkerPool`, with format
@@ -53,15 +53,15 @@ public struct WorkerPool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. Time at which the request to create the `WorkerPool` was
   /// received.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time at which the request to update the `WorkerPool` was
   /// received.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time at which the request to delete the `WorkerPool` was
   /// received.
-  public var deleteTime: GoogleCloudWKT.Timestamp? = nil
+  public var deleteTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. `WorkerPool` state.
   public var state: WorkerPool.State = WorkerPool.State()
@@ -74,7 +74,7 @@ public struct WorkerPool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Configuration for the `WorkerPool`.
   public var config: OneOf_Config? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `WorkerPool`.
   public init() {}
@@ -139,12 +139,9 @@ public struct WorkerPool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.annotations = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
-    self.deleteTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deleteTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
+    self.deleteTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deleteTime)
     if let value = try container.decodeIfPresent(WorkerPool.State.self, forKey: .state) {
       self.state = value
     }
@@ -170,7 +167,7 @@ public struct WorkerPool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.config = config
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -332,10 +329,10 @@ public struct WorkerPool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudbuild.v1.WorkerPool"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

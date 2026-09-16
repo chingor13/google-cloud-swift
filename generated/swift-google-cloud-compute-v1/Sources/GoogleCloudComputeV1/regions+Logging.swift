@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@
       }
 
       public func `get`(
-        request: RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Region {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: RegionsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Region
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -73,14 +73,14 @@
       }
 
       public func list(
-        request: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: RegionsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionsClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.RegionList
             in
             return try await self.inner.list(request: r, options: o)

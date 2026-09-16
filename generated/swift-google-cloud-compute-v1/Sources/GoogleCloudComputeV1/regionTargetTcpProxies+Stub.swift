@@ -16,29 +16,29 @@
 
 #if RegionTargetTcpProxies
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionTargetTcpProxiesStub: Sendable {
       func delete(
-        request: RegionTargetTcpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionTargetTcpProxiesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RegionTargetTcpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionTargetTcpProxiesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetTcpProxy
 
       func insert(
-        request: RegionTargetTcpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionTargetTcpProxiesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RegionTargetTcpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionTargetTcpProxiesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetTcpProxyList
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

@@ -15,21 +15,21 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CommentServiceStub: Sendable {
     func listComments(
-      request: ListCommentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCommentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.ListCommentsResponse
 
     func createComment(
-      request: CreateCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Comment
 
     func getComment(
-      request: GetCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Comment
   }
 }

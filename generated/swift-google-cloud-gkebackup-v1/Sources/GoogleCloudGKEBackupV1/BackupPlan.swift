@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines the configuration and scheduling for a "line" of Backups.
-public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BackupPlan: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The full name of the BackupPlan resource.
@@ -30,11 +30,11 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var uid: Swift.String = Swift.String()
 
   /// Output only. The timestamp when this BackupPlan resource was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when this BackupPlan resource was last
   /// updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. User specified descriptive string for this BackupPlan.
   public var description: Swift.String = Swift.String()
@@ -113,9 +113,9 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// from a successful Backup's complete_time field. This field is added to
   /// maintain consistency with BackupPlanBinding to display last successful
   /// backup time.
-  public var lastSuccessfulBackupTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastSuccessfulBackupTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BackupPlan`.
   public init() {}
@@ -190,10 +190,8 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .uid) {
       self.uid = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
@@ -235,10 +233,10 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.backupChannel = value
     }
     self.lastSuccessfulBackupTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastSuccessfulBackupTime)
+      GoogleWKT.Timestamp.self, forKey: .lastSuccessfulBackupTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -269,7 +267,7 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// RetentionPolicy defines a Backup retention policy for a BackupPlan.
-  public struct RetentionPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RetentionPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Minimum age for Backups created via this BackupPlan (in days).
@@ -315,7 +313,7 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Default: False
     public var locked: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RetentionPolicy`.
     public init() {}
@@ -364,7 +362,7 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -381,17 +379,17 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.gkebackup.v1.BackupPlan.RetentionPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Defines scheduling parameters for automatically creating Backups
   /// via this BackupPlan.
-  public struct Schedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Schedule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. A standard [cron](https://wikipedia.com/wiki/cron) string that
@@ -431,9 +429,9 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     /// Output only. Start time of next scheduled backup under this BackupPlan by
     /// either cron_schedule or rpo config.
-    public var nextScheduledBackupTime: GoogleCloudWKT.Timestamp? = nil
+    public var nextScheduledBackupTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Schedule`.
     public init() {}
@@ -480,10 +478,10 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       self.rpoConfig = try container.decodeIfPresent(RpoConfig.self, forKey: .rpoConfig)
       self.nextScheduledBackupTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .nextScheduledBackupTime)
+        GoogleWKT.Timestamp.self, forKey: .nextScheduledBackupTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -501,17 +499,17 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.gkebackup.v1.BackupPlan.Schedule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// BackupConfig defines the configuration of Backups created via this
   /// BackupPlan.
-  public struct BackupConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BackupConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. This flag specifies whether volume data should be backed up
@@ -545,7 +543,7 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Exactly one of the fields of backup_scope MUST be specified.
     public var backupScope: OneOf_BackupScope? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BackupConfig`.
     public init() {}
@@ -628,7 +626,7 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.backupScope = backupScope
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -670,11 +668,11 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.gkebackup.v1.BackupPlan.BackupConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -814,10 +812,10 @@ public struct BackupPlan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkebackup.v1.BackupPlan"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

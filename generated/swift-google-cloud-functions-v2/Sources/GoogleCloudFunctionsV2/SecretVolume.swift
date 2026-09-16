@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for a secret volume. It has the information necessary to fetch
 /// the secret value from secret manager and make it available as files mounted
 /// at the requested paths within the application container.
-public struct SecretVolume: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SecretVolume: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The path within the container to mount the secret volume. For example,
@@ -43,7 +43,7 @@ public struct SecretVolume: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// secret under the mount point.
   public var versions: [SecretVolume.SecretVersion] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SecretVolume`.
   public init() {}
@@ -98,7 +98,7 @@ public struct SecretVolume: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -114,7 +114,7 @@ public struct SecretVolume: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Configuration for a single version.
-  public struct SecretVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SecretVersion: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Version of the secret (version number or the string 'latest'). It is
@@ -128,7 +128,7 @@ public struct SecretVolume: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// secret value file at `/etc/secrets/secret_foo`.
     public var path: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SecretVersion`.
     public init() {}
@@ -171,7 +171,7 @@ public struct SecretVolume: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -187,21 +187,21 @@ public struct SecretVolume: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.functions.v2.SecretVolume.SecretVersion"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.functions.v2.SecretVolume"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

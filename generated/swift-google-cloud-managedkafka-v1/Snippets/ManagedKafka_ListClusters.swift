@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudManagedKafkaV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ManagedKafkaClient, projectId: String, locationId: String) async throws {
   let items = try client.listClusters(

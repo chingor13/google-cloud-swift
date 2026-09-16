@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class ManagedZoneOperationsRetry: ManagedZoneOperationsStub {
     let inner: any ManagedZoneOperationsStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any ManagedZoneOperationsStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any ManagedZoneOperationsStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func `get`(
-      request: ManagedZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ManagedZoneOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ManagedZoneOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
             -> Operation
           in
           return try await self.inner.`get`(request: r, options: o)
@@ -64,15 +64,15 @@ extension Clients {
     }
 
     public func list(
-      request: ManagedZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZoneOperationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> ManagedZoneOperationsListResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ManagedZoneOperationsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> ManagedZoneOperationsListResponse
+          (r: ManagedZoneOperationsClient.ListRequest, o: GoogleGax.RequestOptions) async throws
+            -> ManagedZoneOperationsListResponse
           in
           return try await self.inner.list(request: r, options: o)
         })

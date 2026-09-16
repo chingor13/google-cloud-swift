@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Sharing environment is a behavior model for sharing data within a
 /// data exchange. This option is configurable for a data exchange.
-public struct SharingEnvironmentConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SharingEnvironmentConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   public var environment: OneOf_Environment? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SharingEnvironmentConfig`.
   public init() {}
@@ -83,7 +83,7 @@ public struct SharingEnvironmentConfig: Codable, Equatable, GoogleCloudWKT._AnyP
     self.environment = environment
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -104,10 +104,10 @@ public struct SharingEnvironmentConfig: Codable, Equatable, GoogleCloudWKT._AnyP
   }
 
   /// Default Analytics Hub data exchange, used for secured data sharing.
-  public struct DefaultExchangeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DefaultExchangeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DefaultExchangeConfig`.
     public init() {}
@@ -138,7 +138,7 @@ public struct SharingEnvironmentConfig: Codable, Equatable, GoogleCloudWKT._AnyP
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -153,16 +153,16 @@ public struct SharingEnvironmentConfig: Codable, Equatable, GoogleCloudWKT._AnyP
       return
         "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DefaultExchangeConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Data Clean Room (DCR), used for privacy-safe and secured data sharing.
-  public struct DcrExchangeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DcrExchangeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. If True, this DCR restricts the contributors to sharing
@@ -180,7 +180,7 @@ public struct SharingEnvironmentConfig: Codable, Equatable, GoogleCloudWKT._AnyP
     /// default, all new DCRs will have the restriction set to True.
     public var singleLinkedDatasetPerCleanroom: Swift.Bool? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DcrExchangeConfig`.
     public init() {}
@@ -223,7 +223,7 @@ public struct SharingEnvironmentConfig: Codable, Equatable, GoogleCloudWKT._AnyP
         Swift.Bool.self, forKey: .singleLinkedDatasetPerCleanroom)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -243,11 +243,11 @@ public struct SharingEnvironmentConfig: Codable, Equatable, GoogleCloudWKT._AnyP
       return
         "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.DcrExchangeConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -261,10 +261,10 @@ public struct SharingEnvironmentConfig: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

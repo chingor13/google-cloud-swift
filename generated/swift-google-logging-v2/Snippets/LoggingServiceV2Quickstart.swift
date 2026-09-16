@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudLoggingV2
 import GoogleApi
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(projectId: String, ) async throws {
   let client = try GoogleCloudLoggingV2.LoggingServiceV2Client()

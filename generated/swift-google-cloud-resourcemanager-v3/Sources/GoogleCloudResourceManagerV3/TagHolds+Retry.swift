@@ -18,28 +18,28 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class TagHoldsRetry: TagHoldsStub {
     let inner: any TagHoldsStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any TagHoldsStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any TagHoldsStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -51,14 +51,14 @@ extension Clients {
     }
 
     public func createTagHold(
-      request: CreateTagHoldRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTagHoldRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateTagHoldRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateTagHoldRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createTagHold(request: r, options: o)
@@ -66,14 +66,14 @@ extension Clients {
     }
 
     public func deleteTagHold(
-      request: DeleteTagHoldRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTagHoldRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteTagHoldRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteTagHoldRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteTagHold(request: r, options: o)
@@ -81,14 +81,14 @@ extension Clients {
     }
 
     public func listTagHolds(
-      request: ListTagHoldsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTagHoldsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudResourceManagerV3.ListTagHoldsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListTagHoldsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListTagHoldsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudResourceManagerV3.ListTagHoldsResponse
           in
           return try await self.inner.listTagHolds(request: r, options: o)
@@ -96,14 +96,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

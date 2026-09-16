@@ -15,20 +15,20 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for RCToken generated for service mesh workloads protected by
 /// IAP. RCToken are IAP generated JWTs that can be verified at the application.
 /// The RCToken is primarily used for service mesh deployments, and can be scoped
 /// to a single mesh by configuring the audience field accordingly.
-public struct CsmSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CsmSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Audience claim set in the generated RCToken. This value is not validated by
   /// IAP.
-  public var rctokenAud: GoogleCloudWKT.StringValue? = nil
+  public var rctokenAud: GoogleWKT.StringValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CsmSettings`.
   public init() {}
@@ -61,11 +61,10 @@ public struct CsmSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.rctokenAud = try container.decodeIfPresent(
-      GoogleCloudWKT.StringValue.self, forKey: .rctokenAud)
+    self.rctokenAud = try container.decodeIfPresent(GoogleWKT.StringValue.self, forKey: .rctokenAud)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -80,10 +79,10 @@ public struct CsmSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.iap.v1.CsmSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

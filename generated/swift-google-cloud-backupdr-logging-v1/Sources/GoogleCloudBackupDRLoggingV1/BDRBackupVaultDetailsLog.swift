@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Log entry for BDRBackupVaultDetails Log for resources using BackupPlan based
 /// protection.
-public struct BDRBackupVaultDetailsLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BDRBackupVaultDetailsLog: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Relative resource name of Backup Vault
@@ -35,10 +35,10 @@ public struct BDRBackupVaultDetailsLog: Codable, Equatable, GoogleCloudWKT._AnyP
   public var currentBackupPlanName: Swift.String? = nil
 
   /// Timestamp when the first (oldest) backup was taken.
-  public var firstAvailableRestorePoint: GoogleCloudWKT.Timestamp? = nil
+  public var firstAvailableRestorePoint: GoogleWKT.Timestamp? = nil
 
   /// Timestamp when the latest backup was taken.
-  public var lastAvailableRestorePoint: GoogleCloudWKT.Timestamp? = nil
+  public var lastAvailableRestorePoint: GoogleWKT.Timestamp? = nil
 
   /// Amount of storage space consumed by backups in GiB.
   public var storedBytesGib: Swift.Double? = nil
@@ -50,7 +50,7 @@ public struct BDRBackupVaultDetailsLog: Codable, Equatable, GoogleCloudWKT._AnyP
   /// Source resource_location
   public var sourceResourceLocation: Swift.String? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BDRBackupVaultDetailsLog`.
   public init() {}
@@ -108,9 +108,9 @@ public struct BDRBackupVaultDetailsLog: Codable, Equatable, GoogleCloudWKT._AnyP
     self.currentBackupPlanName = try container.decodeIfPresent(
       Swift.String.self, forKey: .currentBackupPlanName)
     self.firstAvailableRestorePoint = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .firstAvailableRestorePoint)
+      GoogleWKT.Timestamp.self, forKey: .firstAvailableRestorePoint)
     self.lastAvailableRestorePoint = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastAvailableRestorePoint)
+      GoogleWKT.Timestamp.self, forKey: .lastAvailableRestorePoint)
     self.storedBytesGib = try container.decodeIfPresent(Swift.Double.self, forKey: .storedBytesGib)
     self.minimumEnforcedRetentionDays = try container.decodeIfPresent(
       Swift.Int32.self, forKey: .minimumEnforcedRetentionDays)
@@ -118,7 +118,7 @@ public struct BDRBackupVaultDetailsLog: Codable, Equatable, GoogleCloudWKT._AnyP
       Swift.String.self, forKey: .sourceResourceLocation)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -144,10 +144,10 @@ public struct BDRBackupVaultDetailsLog: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.logging.v1.BDRBackupVaultDetailsLog"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

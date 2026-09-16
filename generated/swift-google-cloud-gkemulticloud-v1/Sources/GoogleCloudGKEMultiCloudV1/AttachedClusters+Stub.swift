@@ -15,63 +15,63 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AttachedClustersStub: Sendable {
     func createAttachedCluster(
-      request: CreateAttachedClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAttachedClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateAttachedCluster(
-      request: UpdateAttachedClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAttachedClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func importAttachedCluster(
-      request: ImportAttachedClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportAttachedClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getAttachedCluster(
-      request: GetAttachedClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAttachedClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AttachedCluster
 
     func listAttachedClusters(
-      request: ListAttachedClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAttachedClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.ListAttachedClustersResponse
 
     func deleteAttachedCluster(
-      request: DeleteAttachedClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAttachedClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getAttachedServerConfig(
-      request: GetAttachedServerConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAttachedServerConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AttachedServerConfig
 
     func generateAttachedClusterInstallManifest(
-      request: GenerateAttachedClusterInstallManifestRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAttachedClusterInstallManifestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.GenerateAttachedClusterInstallManifestResponse
 
     func generateAttachedClusterAgentToken(
-      request: GenerateAttachedClusterAgentTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAttachedClusterAgentTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.GenerateAttachedClusterAgentTokenResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

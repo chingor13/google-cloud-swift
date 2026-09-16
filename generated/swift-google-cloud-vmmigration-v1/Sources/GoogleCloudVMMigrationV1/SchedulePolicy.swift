@@ -15,21 +15,21 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A policy for scheduling replications.
-public struct SchedulePolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SchedulePolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The idle duration between replication stages.
-  public var idleDuration: GoogleCloudWKT.Duration? = nil
+  public var idleDuration: GoogleWKT.Duration? = nil
 
   /// A flag to indicate whether to skip OS adaptation during the replication
   /// sync. OS adaptation is a process where the VM's operating system undergoes
   /// changes and adaptations to fully function on Compute Engine.
   public var skipOsAdaptation: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SchedulePolicy`.
   public init() {}
@@ -65,13 +65,13 @@ public struct SchedulePolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.idleDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .idleDuration)
+      GoogleWKT.Duration.self, forKey: .idleDuration)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .skipOsAdaptation) {
       self.skipOsAdaptation = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -87,10 +87,10 @@ public struct SchedulePolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmmigration.v1.SchedulePolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

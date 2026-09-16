@@ -16,11 +16,11 @@
 
 #if NotebookService || ScheduleService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleRpc
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// NotebookExecutionJob represents an instance of a notebook execution.
-  public struct NotebookExecutionJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NotebookExecutionJob: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The resource name of this NotebookExecutionJob. Format:
@@ -32,7 +32,7 @@
     public var displayName: Swift.String = Swift.String()
 
     /// Max running time of the execution job in seconds (default 86400s / 24 hrs).
-    public var executionTimeout: GoogleCloudWKT.Duration? = nil
+    public var executionTimeout: GoogleWKT.Duration? = nil
 
     /// The Schedule resource name if this job is triggered by one. Format:
     /// `projects/{project_id}/locations/{location}/schedules/{schedule_id}`
@@ -47,11 +47,11 @@
     public var status: GoogleRpc.Status? = nil
 
     /// Output only. Timestamp when this NotebookExecutionJob was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when this NotebookExecutionJob was most recently
     /// updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// The labels with user-defined metadata to organize NotebookExecutionJobs.
     ///
@@ -92,7 +92,7 @@
     /// default runtime of Colab is used.
     public var runtimeEnvironment: OneOf_RuntimeEnvironment? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NotebookExecutionJob`.
     public init() {}
@@ -171,7 +171,7 @@
         self.displayName = value
       }
       self.executionTimeout = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .executionTimeout)
+        GoogleWKT.Duration.self, forKey: .executionTimeout)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .scheduleResourceName)
       {
         self.scheduleResourceName = value
@@ -180,10 +180,8 @@
         self.jobState = value
       }
       self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(
         [Swift.String: Swift.String].self, forKey: .labels)
       {
@@ -301,7 +299,7 @@
       self.runtimeEnvironment = runtimeEnvironment
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -367,7 +365,7 @@
     }
 
     /// The Dataform Repository containing the input notebook.
-    public struct DataformRepositorySource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DataformRepositorySource: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The resource name of the Dataform Repository. Format:
@@ -378,7 +376,7 @@
       /// at HEAD.
       public var commitSha: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DataformRepositorySource`.
       public init() {}
@@ -424,7 +422,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -442,16 +440,16 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NotebookExecutionJob.DataformRepositorySource"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The Cloud Storage uri for the input notebook.
-    public struct GcsNotebookSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GcsNotebookSource: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The Cloud Storage uri pointing to the ipynb file. Format:
@@ -463,7 +461,7 @@
       /// https://cloud.google.com/storage/docs/metadata#generation-number.
       public var generation: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GcsNotebookSource`.
       public init() {}
@@ -506,7 +504,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -523,22 +521,22 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NotebookExecutionJob.GcsNotebookSource"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The content of the input notebook in ipynb format.
-    public struct DirectNotebookSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DirectNotebookSource: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The base64-encoded contents of the input notebook file.
       public var content: Foundation.Data = Foundation.Data()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DirectNotebookSource`.
       public init() {}
@@ -576,7 +574,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -592,16 +590,16 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NotebookExecutionJob.DirectNotebookSource"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Compute configuration to use for an execution job.
-    public struct CustomEnvironmentSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct CustomEnvironmentSpec: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The specification of a single machine for the execution job.
@@ -613,7 +611,7 @@
       /// The network configuration to use for the execution job.
       public var networkSpec: NetworkSpec? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `CustomEnvironmentSpec`.
       public init() {}
@@ -656,7 +654,7 @@
         self.networkSpec = try container.decodeIfPresent(NetworkSpec.self, forKey: .networkSpec)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -674,19 +672,19 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NotebookExecutionJob.CustomEnvironmentSpec"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Configuration for a Workbench Instances-based environment.
-    public struct WorkbenchRuntime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct WorkbenchRuntime: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `WorkbenchRuntime`.
       public init() {}
@@ -717,7 +715,7 @@
         let container = try decoder.container(keyedBy: CodingKeys.self)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -732,11 +730,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NotebookExecutionJob.WorkbenchRuntime"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -784,11 +782,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.NotebookExecutionJob"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `publicDelegatedPrefixes` resource.
   ///
@@ -29,11 +29,11 @@
     Sendable
   {
     let inner: any Clients.PublicDelegatedPrefixesStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `PublicDelegatedPrefixesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.PublicDelegatedPrefixesStub =
         try Clients.PublicDelegatedPrefixesTransport(options)
       inner = Clients.PublicDelegatedPrefixesRetry(inner, options: options)
@@ -54,7 +54,7 @@
     /// @Snippet(path: "publicDelegatedPrefixes_aggregatedList")
     public func aggregatedList(
       request: PublicDelegatedPrefixesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList {
       try await self.inner.aggregatedList(request: request, options: options)
     }
@@ -67,8 +67,7 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_aggregatedList")
     public func aggregatedList(
-      byItem: PublicDelegatedPrefixesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: PublicDelegatedPrefixesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -77,14 +76,14 @@
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Announces the specified PublicDelegatedPrefix in the given region.
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_announce")
     public func announce(
-      request: PublicDelegatedPrefixesClient.AnnounceRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.AnnounceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.announce(request: request, options: options)
     }
@@ -93,19 +92,18 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_announce")
     public func announce(
-      withPolling: PublicDelegatedPrefixesClient.AnnounceRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PublicDelegatedPrefixesClient.AnnounceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -113,8 +111,7 @@
       let rawOp = try await self.announce(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -123,7 +120,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -135,7 +132,7 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_delete")
     public func delete(
-      request: PublicDelegatedPrefixesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.delete(request: request, options: options)
     }
@@ -144,19 +141,18 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_delete")
     public func delete(
-      withPolling: PublicDelegatedPrefixesClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PublicDelegatedPrefixesClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -164,8 +160,7 @@
       let rawOp = try await self.delete(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -174,7 +169,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -186,7 +181,7 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_get")
     public func `get`(
-      request: PublicDelegatedPrefixesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -196,7 +191,7 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_insert")
     public func insert(
-      request: PublicDelegatedPrefixesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
     }
@@ -206,19 +201,18 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_insert")
     public func insert(
-      withPolling: PublicDelegatedPrefixesClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PublicDelegatedPrefixesClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -226,8 +220,7 @@
       let rawOp = try await self.insert(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -236,7 +229,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -248,7 +241,7 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_list")
     public func list(
-      request: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList {
       try await self.inner.list(request: request, options: options)
     }
@@ -257,7 +250,7 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_list")
     public func list(
-      byItem: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: PublicDelegatedPrefixesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList in
@@ -265,7 +258,7 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Patches the specified PublicDelegatedPrefix resource with the data included
@@ -275,7 +268,7 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_patch")
     public func patch(
-      request: PublicDelegatedPrefixesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.patch(request: request, options: options)
     }
@@ -287,19 +280,18 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_patch")
     public func patch(
-      withPolling: PublicDelegatedPrefixesClient.PatchRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PublicDelegatedPrefixesClient.PatchRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -307,8 +299,7 @@
       let rawOp = try await self.patch(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -317,7 +308,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -329,7 +320,7 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_withdraw")
     public func withdraw(
-      request: PublicDelegatedPrefixesClient.WithdrawRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.WithdrawRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.withdraw(request: request, options: options)
     }
@@ -338,19 +329,18 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_withdraw")
     public func withdraw(
-      withPolling: PublicDelegatedPrefixesClient.WithdrawRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PublicDelegatedPrefixesClient.WithdrawRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -358,8 +348,7 @@
       let rawOp = try await self.withdraw(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -368,7 +357,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -380,7 +369,7 @@
     ///
     /// @Snippet(path: "publicDelegatedPrefixes_getOperation")
     func getOperation(
-      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -456,55 +445,53 @@
       /// See `PublicDelegatedPrefixesClient.aggregatedList`.
       func aggregatedList(
         request: PublicDelegatedPrefixesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList
 
       /// See `PublicDelegatedPrefixesClient.aggregatedList`.
       func aggregatedList(
         byItem: PublicDelegatedPrefixesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error>
 
       /// See `PublicDelegatedPrefixesClient.announce`.
       func announce(
-        request: PublicDelegatedPrefixesClient.AnnounceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PublicDelegatedPrefixesClient.AnnounceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `PublicDelegatedPrefixesClient.delete`.
       func delete(
-        request: PublicDelegatedPrefixesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: PublicDelegatedPrefixesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `PublicDelegatedPrefixesClient.`get``.
       func `get`(
-        request: PublicDelegatedPrefixesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: PublicDelegatedPrefixesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix
 
       /// See `PublicDelegatedPrefixesClient.insert`.
       func insert(
-        request: PublicDelegatedPrefixesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: PublicDelegatedPrefixesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `PublicDelegatedPrefixesClient.list`.
       func list(
-        request: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: PublicDelegatedPrefixesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList
 
       /// See `PublicDelegatedPrefixesClient.list`.
       func list(
-        byItem: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: PublicDelegatedPrefixesClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error>
 
       /// See `PublicDelegatedPrefixesClient.patch`.
       func patch(
-        request: PublicDelegatedPrefixesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: PublicDelegatedPrefixesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `PublicDelegatedPrefixesClient.withdraw`.
       func withdraw(
-        request: PublicDelegatedPrefixesClient.WithdrawRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: PublicDelegatedPrefixesClient.WithdrawRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
@@ -519,9 +506,9 @@
 
     public func aggregatedList(
       request: PublicDelegatedPrefixesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
@@ -531,15 +518,14 @@
     }
 
     public func aggregatedList(
-      byItem: PublicDelegatedPrefixesClient.AggregatedListRequest,
-      options: GoogleCloudGax.RequestOptions
+      byItem: PublicDelegatedPrefixesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, PublicDelegatedPrefixesScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudComputeV1.PublicDelegatedPrefixAggregatedList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func aggregatedList(
@@ -558,27 +544,25 @@
     }
 
     public func announce(
-      request: PublicDelegatedPrefixesClient.AnnounceRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.AnnounceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func announce(
       withPolling: PublicDelegatedPrefixesClient.AnnounceRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.announce(withPolling: withPolling, options: .init())
     }
 
     public func announce(
-      withPolling: PublicDelegatedPrefixesClient.AnnounceRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PublicDelegatedPrefixesClient.AnnounceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -586,7 +570,7 @@
       project: Swift.String,
       region: Swift.String,
       publicDelegatedPrefix: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = PublicDelegatedPrefixesClient.AnnounceRequest().with {
         $0.project = project
         $0.region = region
@@ -602,27 +586,25 @@
     }
 
     public func delete(
-      request: PublicDelegatedPrefixesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func delete(
       withPolling: PublicDelegatedPrefixesClient.DeleteRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
     }
 
     public func delete(
-      withPolling: PublicDelegatedPrefixesClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PublicDelegatedPrefixesClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -630,7 +612,7 @@
       project: Swift.String,
       region: Swift.String,
       publicDelegatedPrefix: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = PublicDelegatedPrefixesClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
@@ -646,9 +628,9 @@
     }
 
     public func `get`(
-      request: PublicDelegatedPrefixesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -671,27 +653,25 @@
     }
 
     public func insert(
-      request: PublicDelegatedPrefixesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func insert(
       withPolling: PublicDelegatedPrefixesClient.InsertRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
     }
 
     public func insert(
-      withPolling: PublicDelegatedPrefixesClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PublicDelegatedPrefixesClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -699,7 +679,7 @@
       project: Swift.String,
       region: Swift.String,
       body: PublicDelegatedPrefix?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = PublicDelegatedPrefixesClient.InsertRequest().with {
         $0.project = project
         $0.region = region
@@ -715,9 +695,9 @@
     }
 
     public func list(
-      request: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -727,13 +707,13 @@
     }
 
     public func list(
-      byItem: PublicDelegatedPrefixesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: PublicDelegatedPrefixesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PublicDelegatedPrefix, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(
@@ -754,27 +734,25 @@
     }
 
     public func patch(
-      request: PublicDelegatedPrefixesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func patch(
       withPolling: PublicDelegatedPrefixesClient.PatchRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.patch(withPolling: withPolling, options: .init())
     }
 
     public func patch(
-      withPolling: PublicDelegatedPrefixesClient.PatchRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PublicDelegatedPrefixesClient.PatchRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -783,7 +761,7 @@
       region: Swift.String,
       publicDelegatedPrefix: Swift.String,
       body: PublicDelegatedPrefix?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = PublicDelegatedPrefixesClient.PatchRequest().with {
         $0.project = project
         $0.region = region
@@ -800,27 +778,25 @@
     }
 
     public func withdraw(
-      request: PublicDelegatedPrefixesClient.WithdrawRequest, options: GoogleCloudGax.RequestOptions
+      request: PublicDelegatedPrefixesClient.WithdrawRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func withdraw(
       withPolling: PublicDelegatedPrefixesClient.WithdrawRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.withdraw(withPolling: withPolling, options: .init())
     }
 
     public func withdraw(
-      withPolling: PublicDelegatedPrefixesClient.WithdrawRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: PublicDelegatedPrefixesClient.WithdrawRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -828,7 +804,7 @@
       project: Swift.String,
       region: Swift.String,
       publicDelegatedPrefix: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = PublicDelegatedPrefixesClient.WithdrawRequest().with {
         $0.project = project
         $0.region = region
@@ -844,9 +820,9 @@
     }
 
     public func getOperation(
-      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

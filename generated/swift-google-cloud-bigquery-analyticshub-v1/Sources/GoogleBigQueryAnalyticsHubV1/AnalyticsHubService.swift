@@ -18,11 +18,11 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The `AnalyticsHubService` API facilitates data sharing within and across
 /// organizations. It allows data providers to publish listings that reference
@@ -34,11 +34,11 @@ import GoogleCloudGax
 /// @Snippet(path: "AnalyticsHubServiceQuickstart")
 public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtocol, Sendable {
   let inner: any Clients.AnalyticsHubServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `AnalyticsHubServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.AnalyticsHubServiceStub = try Clients.AnalyticsHubServiceTransport(
       options)
     inner = Clients.AnalyticsHubServiceRetry(inner, options: options)
@@ -54,7 +54,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_ListDataExchanges")
   public func listDataExchanges(
-    request: ListDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataExchangesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.ListDataExchangesResponse {
     try await self.inner.listDataExchanges(request: request, options: options)
   }
@@ -63,7 +63,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_ListDataExchanges")
   public func listDataExchanges(
-    byItem: ListDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataExchangesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataExchange, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryAnalyticsHubV1.ListDataExchangesResponse
@@ -72,7 +72,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
       request.pageToken = token
       return try await self.listDataExchanges(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists all data exchanges from projects in a given organization and
@@ -80,7 +80,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_ListOrgDataExchanges")
   public func listOrgDataExchanges(
-    request: ListOrgDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListOrgDataExchangesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.ListOrgDataExchangesResponse {
     try await self.inner.listOrgDataExchanges(request: request, options: options)
   }
@@ -90,7 +90,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_ListOrgDataExchanges")
   public func listOrgDataExchanges(
-    byItem: ListOrgDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListOrgDataExchangesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataExchange, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -99,14 +99,14 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
       request.pageToken = token
       return try await self.listOrgDataExchanges(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the details of a data exchange.
   ///
   /// @Snippet(path: "AnalyticsHubService_GetDataExchange")
   public func getDataExchange(
-    request: GetDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDataExchangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange {
     try await self.inner.getDataExchange(request: request, options: options)
   }
@@ -115,7 +115,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_CreateDataExchange")
   public func createDataExchange(
-    request: CreateDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDataExchangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange {
     try await self.inner.createDataExchange(request: request, options: options)
   }
@@ -124,7 +124,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_UpdateDataExchange")
   public func updateDataExchange(
-    request: UpdateDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDataExchangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange {
     try await self.inner.updateDataExchange(request: request, options: options)
   }
@@ -133,7 +133,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_DeleteDataExchange")
   public func deleteDataExchange(
-    request: DeleteDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDataExchangeRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteDataExchange(request: request, options: options)
   }
@@ -142,7 +142,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_ListListings")
   public func listListings(
-    request: ListListingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListListingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.ListListingsResponse {
     try await self.inner.listListings(request: request, options: options)
   }
@@ -151,7 +151,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_ListListings")
   public func listListings(
-    byItem: ListListingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListListingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Listing, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryAnalyticsHubV1.ListListingsResponse in
@@ -159,14 +159,14 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
       request.pageToken = token
       return try await self.listListings(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the details of a listing.
   ///
   /// @Snippet(path: "AnalyticsHubService_GetListing")
   public func getListing(
-    request: GetListingRequest, options: GoogleCloudGax.RequestOptions
+    request: GetListingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing {
     try await self.inner.getListing(request: request, options: options)
   }
@@ -175,7 +175,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_CreateListing")
   public func createListing(
-    request: CreateListingRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateListingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing {
     try await self.inner.createListing(request: request, options: options)
   }
@@ -184,7 +184,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_UpdateListing")
   public func updateListing(
-    request: UpdateListingRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateListingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing {
     try await self.inner.updateListing(request: request, options: options)
   }
@@ -193,7 +193,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_DeleteListing")
   public func deleteListing(
-    request: DeleteListingRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteListingRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteListing(request: request, options: options)
   }
@@ -207,7 +207,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_SubscribeListing")
   public func subscribeListing(
-    request: SubscribeListingRequest, options: GoogleCloudGax.RequestOptions
+    request: SubscribeListingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.SubscribeListingResponse {
     try await self.inner.subscribeListing(request: request, options: options)
   }
@@ -219,7 +219,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_SubscribeDataExchange")
   public func subscribeDataExchange(
-    request: SubscribeDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+    request: SubscribeDataExchangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.subscribeDataExchange(request: request, options: options)
   }
@@ -231,23 +231,22 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_SubscribeDataExchange")
   public func subscribeDataExchange(
-    withPolling: SubscribeDataExchangeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SubscribeDataExchangeResponse> {
+    withPolling: SubscribeDataExchangeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SubscribeDataExchangeResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<SubscribeDataExchangeResponse>.State in
+        -> GoogleGax._PollableOperationImpl<SubscribeDataExchangeResponse>.State in
       return try op._extractStatus(SubscribeDataExchangeResponse.self)
     }
     let rawOp = try await self.subscribeDataExchange(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<SubscribeDataExchangeResponse>.State
-      in
+      () async throws -> GoogleGax._PollableOperationImpl<SubscribeDataExchangeResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -261,7 +260,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_RefreshSubscription")
   public func refreshSubscription(
-    request: RefreshSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+    request: RefreshSubscriptionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.refreshSubscription(request: request, options: options)
   }
@@ -272,22 +271,22 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_RefreshSubscription")
   public func refreshSubscription(
-    withPolling: RefreshSubscriptionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RefreshSubscriptionResponse> {
+    withPolling: RefreshSubscriptionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RefreshSubscriptionResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<RefreshSubscriptionResponse>.State in
+        -> GoogleGax._PollableOperationImpl<RefreshSubscriptionResponse>.State in
       return try op._extractStatus(RefreshSubscriptionResponse.self)
     }
     let rawOp = try await self.refreshSubscription(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<RefreshSubscriptionResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<RefreshSubscriptionResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -299,7 +298,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_GetSubscription")
   public func getSubscription(
-    request: GetSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSubscriptionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.Subscription {
     try await self.inner.getSubscription(request: request, options: options)
   }
@@ -308,7 +307,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_ListSubscriptions")
   public func listSubscriptions(
-    request: ListSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSubscriptionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.ListSubscriptionsResponse {
     try await self.inner.listSubscriptions(request: request, options: options)
   }
@@ -317,7 +316,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_ListSubscriptions")
   public func listSubscriptions(
-    byItem: ListSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSubscriptionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Subscription, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryAnalyticsHubV1.ListSubscriptionsResponse
@@ -326,14 +325,14 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
       request.pageToken = token
       return try await self.listSubscriptions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists all subscriptions on a given Data Exchange or Listing.
   ///
   /// @Snippet(path: "AnalyticsHubService_ListSharedResourceSubscriptions")
   public func listSharedResourceSubscriptions(
-    request: ListSharedResourceSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSharedResourceSubscriptionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.ListSharedResourceSubscriptionsResponse {
     try await self.inner.listSharedResourceSubscriptions(request: request, options: options)
   }
@@ -342,7 +341,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_ListSharedResourceSubscriptions")
   public func listSharedResourceSubscriptions(
-    byItem: ListSharedResourceSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSharedResourceSubscriptionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Subscription, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -351,14 +350,14 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
       request.pageToken = token
       return try await self.listSharedResourceSubscriptions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Revokes a given subscription.
   ///
   /// @Snippet(path: "AnalyticsHubService_RevokeSubscription")
   public func revokeSubscription(
-    request: RevokeSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+    request: RevokeSubscriptionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.RevokeSubscriptionResponse {
     try await self.inner.revokeSubscription(request: request, options: options)
   }
@@ -367,7 +366,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_DeleteSubscription")
   public func deleteSubscription(
-    request: DeleteSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSubscriptionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteSubscription(request: request, options: options)
   }
@@ -376,21 +375,21 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_DeleteSubscription")
   public func deleteSubscription(
-    withPolling: DeleteSubscriptionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteSubscriptionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteSubscription(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -402,7 +401,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -411,7 +410,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -420,7 +419,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -429,7 +428,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_CreateQueryTemplate")
   public func createQueryTemplate(
-    request: CreateQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateQueryTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate {
     try await self.inner.createQueryTemplate(request: request, options: options)
   }
@@ -438,7 +437,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_GetQueryTemplate")
   public func getQueryTemplate(
-    request: GetQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetQueryTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate {
     try await self.inner.getQueryTemplate(request: request, options: options)
   }
@@ -447,7 +446,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_ListQueryTemplates")
   public func listQueryTemplates(
-    request: ListQueryTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListQueryTemplatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.ListQueryTemplatesResponse {
     try await self.inner.listQueryTemplates(request: request, options: options)
   }
@@ -456,7 +455,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_ListQueryTemplates")
   public func listQueryTemplates(
-    byItem: ListQueryTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListQueryTemplatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<QueryTemplate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryAnalyticsHubV1.ListQueryTemplatesResponse
@@ -465,14 +464,14 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
       request.pageToken = token
       return try await self.listQueryTemplates(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates an existing QueryTemplate
   ///
   /// @Snippet(path: "AnalyticsHubService_UpdateQueryTemplate")
   public func updateQueryTemplate(
-    request: UpdateQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateQueryTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate {
     try await self.inner.updateQueryTemplate(request: request, options: options)
   }
@@ -481,7 +480,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_DeleteQueryTemplate")
   public func deleteQueryTemplate(
-    request: DeleteQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteQueryTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteQueryTemplate(request: request, options: options)
   }
@@ -490,7 +489,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_SubmitQueryTemplate")
   public func submitQueryTemplate(
-    request: SubmitQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: SubmitQueryTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate {
     try await self.inner.submitQueryTemplate(request: request, options: options)
   }
@@ -499,7 +498,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_ApproveQueryTemplate")
   public func approveQueryTemplate(
-    request: ApproveQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: ApproveQueryTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate {
     try await self.inner.approveQueryTemplate(request: request, options: options)
   }
@@ -510,7 +509,7 @@ public final class AnalyticsHubServiceClient: Clients.AnalyticsHubServiceProtoco
   ///
   /// @Snippet(path: "AnalyticsHubService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -577,7 +576,7 @@ extension Clients {
     /// See `AnalyticsHubServiceClient.updateDataExchange`.
     func updateDataExchange(
       dataExchange: DataExchange?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange
 
     /// See `AnalyticsHubServiceClient.deleteDataExchange`.
@@ -627,7 +626,7 @@ extension Clients {
     /// See `AnalyticsHubServiceClient.updateListing`.
     func updateListing(
       listing: Listing?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing
 
     /// See `AnalyticsHubServiceClient.deleteListing`.
@@ -653,25 +652,25 @@ extension Clients {
 
     /// See `AnalyticsHubServiceClient.subscribeDataExchange`.
     func subscribeDataExchange(withPolling: SubscribeDataExchangeRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<SubscribeDataExchangeResponse>
+      -> any GoogleGax.PollableOperation<SubscribeDataExchangeResponse>
 
     /// See `AnalyticsHubServiceClient.subscribeDataExchange`.
     func subscribeDataExchange(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<SubscribeDataExchangeResponse>
+    ) async throws -> any GoogleGax.PollableOperation<SubscribeDataExchangeResponse>
 
     /// See `AnalyticsHubServiceClient.refreshSubscription`.
     func refreshSubscription(request: RefreshSubscriptionRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `AnalyticsHubServiceClient.refreshSubscription`.
-    func refreshSubscription(withPolling: RefreshSubscriptionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<RefreshSubscriptionResponse>
+    func refreshSubscription(withPolling: RefreshSubscriptionRequest) async throws -> any GoogleGax
+      .PollableOperation<RefreshSubscriptionResponse>
 
     /// See `AnalyticsHubServiceClient.refreshSubscription`.
     func refreshSubscription(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<RefreshSubscriptionResponse>
+    ) async throws -> any GoogleGax.PollableOperation<RefreshSubscriptionResponse>
 
     /// See `AnalyticsHubServiceClient.getSubscription`.
     func getSubscription(request: GetSubscriptionRequest) async throws
@@ -724,13 +723,13 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `AnalyticsHubServiceClient.deleteSubscription`.
-    func deleteSubscription(withPolling: DeleteSubscriptionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    func deleteSubscription(withPolling: DeleteSubscriptionRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
 
     /// See `AnalyticsHubServiceClient.deleteSubscription`.
     func deleteSubscription(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AnalyticsHubServiceClient.getIamPolicy`.
     func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws -> GoogleIAMV1.Policy
@@ -783,7 +782,7 @@ extension Clients {
     /// See `AnalyticsHubServiceClient.updateQueryTemplate`.
     func updateQueryTemplate(
       queryTemplate: QueryTemplate?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate
 
     /// See `AnalyticsHubServiceClient.deleteQueryTemplate`.
@@ -814,192 +813,192 @@ extension Clients {
 
     /// See `AnalyticsHubServiceClient.listDataExchanges`.
     func listDataExchanges(
-      request: ListDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataExchangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.ListDataExchangesResponse
 
     /// See `AnalyticsHubServiceClient.listDataExchanges`.
     func listDataExchanges(
-      byItem: ListDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDataExchangesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataExchange, Swift.Error>
 
     /// See `AnalyticsHubServiceClient.listOrgDataExchanges`.
     func listOrgDataExchanges(
-      request: ListOrgDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOrgDataExchangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.ListOrgDataExchangesResponse
 
     /// See `AnalyticsHubServiceClient.listOrgDataExchanges`.
     func listOrgDataExchanges(
-      byItem: ListOrgDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListOrgDataExchangesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataExchange, Swift.Error>
 
     /// See `AnalyticsHubServiceClient.getDataExchange`.
     func getDataExchange(
-      request: GetDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataExchangeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange
 
     /// See `AnalyticsHubServiceClient.createDataExchange`.
     func createDataExchange(
-      request: CreateDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataExchangeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange
 
     /// See `AnalyticsHubServiceClient.updateDataExchange`.
     func updateDataExchange(
-      request: UpdateDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataExchangeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange
 
     /// See `AnalyticsHubServiceClient.deleteDataExchange`.
     func deleteDataExchange(
-      request: DeleteDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataExchangeRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AnalyticsHubServiceClient.listListings`.
     func listListings(
-      request: ListListingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListListingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.ListListingsResponse
 
     /// See `AnalyticsHubServiceClient.listListings`.
     func listListings(
-      byItem: ListListingsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListListingsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Listing, Swift.Error>
 
     /// See `AnalyticsHubServiceClient.getListing`.
     func getListing(
-      request: GetListingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetListingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing
 
     /// See `AnalyticsHubServiceClient.createListing`.
     func createListing(
-      request: CreateListingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateListingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing
 
     /// See `AnalyticsHubServiceClient.updateListing`.
     func updateListing(
-      request: UpdateListingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateListingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing
 
     /// See `AnalyticsHubServiceClient.deleteListing`.
     func deleteListing(
-      request: DeleteListingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteListingRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AnalyticsHubServiceClient.subscribeListing`.
     func subscribeListing(
-      request: SubscribeListingRequest, options: GoogleCloudGax.RequestOptions
+      request: SubscribeListingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.SubscribeListingResponse
 
     /// See `AnalyticsHubServiceClient.subscribeDataExchange`.
     func subscribeDataExchange(
-      request: SubscribeDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+      request: SubscribeDataExchangeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AnalyticsHubServiceClient.subscribeDataExchange`.
     func subscribeDataExchange(
-      withPolling: SubscribeDataExchangeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SubscribeDataExchangeResponse>
+      withPolling: SubscribeDataExchangeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SubscribeDataExchangeResponse>
 
     /// See `AnalyticsHubServiceClient.refreshSubscription`.
     func refreshSubscription(
-      request: RefreshSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: RefreshSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AnalyticsHubServiceClient.refreshSubscription`.
     func refreshSubscription(
-      withPolling: RefreshSubscriptionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<RefreshSubscriptionResponse>
+      withPolling: RefreshSubscriptionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<RefreshSubscriptionResponse>
 
     /// See `AnalyticsHubServiceClient.getSubscription`.
     func getSubscription(
-      request: GetSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.Subscription
 
     /// See `AnalyticsHubServiceClient.listSubscriptions`.
     func listSubscriptions(
-      request: ListSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSubscriptionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.ListSubscriptionsResponse
 
     /// See `AnalyticsHubServiceClient.listSubscriptions`.
     func listSubscriptions(
-      byItem: ListSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSubscriptionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Subscription, Swift.Error>
 
     /// See `AnalyticsHubServiceClient.listSharedResourceSubscriptions`.
     func listSharedResourceSubscriptions(
-      request: ListSharedResourceSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSharedResourceSubscriptionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.ListSharedResourceSubscriptionsResponse
 
     /// See `AnalyticsHubServiceClient.listSharedResourceSubscriptions`.
     func listSharedResourceSubscriptions(
-      byItem: ListSharedResourceSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSharedResourceSubscriptionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Subscription, Swift.Error>
 
     /// See `AnalyticsHubServiceClient.revokeSubscription`.
     func revokeSubscription(
-      request: RevokeSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: RevokeSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.RevokeSubscriptionResponse
 
     /// See `AnalyticsHubServiceClient.deleteSubscription`.
     func deleteSubscription(
-      request: DeleteSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AnalyticsHubServiceClient.deleteSubscription`.
     func deleteSubscription(
-      withPolling: DeleteSubscriptionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteSubscriptionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AnalyticsHubServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `AnalyticsHubServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `AnalyticsHubServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `AnalyticsHubServiceClient.createQueryTemplate`.
     func createQueryTemplate(
-      request: CreateQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateQueryTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate
 
     /// See `AnalyticsHubServiceClient.getQueryTemplate`.
     func getQueryTemplate(
-      request: GetQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQueryTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate
 
     /// See `AnalyticsHubServiceClient.listQueryTemplates`.
     func listQueryTemplates(
-      request: ListQueryTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQueryTemplatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.ListQueryTemplatesResponse
 
     /// See `AnalyticsHubServiceClient.listQueryTemplates`.
     func listQueryTemplates(
-      byItem: ListQueryTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListQueryTemplatesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<QueryTemplate, Swift.Error>
 
     /// See `AnalyticsHubServiceClient.updateQueryTemplate`.
     func updateQueryTemplate(
-      request: UpdateQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateQueryTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate
 
     /// See `AnalyticsHubServiceClient.deleteQueryTemplate`.
     func deleteQueryTemplate(
-      request: DeleteQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteQueryTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AnalyticsHubServiceClient.submitQueryTemplate`.
     func submitQueryTemplate(
-      request: SubmitQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: SubmitQueryTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate
 
     /// See `AnalyticsHubServiceClient.approveQueryTemplate`.
     func approveQueryTemplate(
-      request: ApproveQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: ApproveQueryTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate
   }
 }
@@ -1013,9 +1012,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func listDataExchanges(
-    request: ListDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataExchangesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.ListDataExchangesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDataExchanges(
@@ -1025,14 +1024,14 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func listDataExchanges(
-    byItem: ListDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataExchangesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataExchange, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryAnalyticsHubV1.ListDataExchangesResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDataExchanges(
@@ -1051,9 +1050,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func listOrgDataExchanges(
-    request: ListOrgDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListOrgDataExchangesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.ListOrgDataExchangesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOrgDataExchanges(
@@ -1063,14 +1062,14 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func listOrgDataExchanges(
-    byItem: ListOrgDataExchangesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListOrgDataExchangesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataExchange, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleBigQueryAnalyticsHubV1.ListOrgDataExchangesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOrgDataExchanges(
@@ -1089,9 +1088,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func getDataExchange(
-    request: GetDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDataExchangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDataExchange(
@@ -1110,9 +1109,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func createDataExchange(
-    request: CreateDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDataExchangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDataExchange(
@@ -1133,14 +1132,14 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func updateDataExchange(
-    request: UpdateDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDataExchangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateDataExchange(
     dataExchange: DataExchange?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleBigQueryAnalyticsHubV1.DataExchange {
     let request = UpdateDataExchangeRequest().with {
       $0.dataExchange = dataExchange
@@ -1154,9 +1153,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func deleteDataExchange(
-    request: DeleteDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDataExchangeRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteDataExchange(
@@ -1175,9 +1174,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func listListings(
-    request: ListListingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListListingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.ListListingsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listListings(
@@ -1187,13 +1186,13 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func listListings(
-    byItem: ListListingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListListingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Listing, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryAnalyticsHubV1.ListListingsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listListings(
@@ -1212,9 +1211,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func getListing(
-    request: GetListingRequest, options: GoogleCloudGax.RequestOptions
+    request: GetListingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getListing(
@@ -1233,9 +1232,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func createListing(
-    request: CreateListingRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateListingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createListing(
@@ -1256,14 +1255,14 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func updateListing(
-    request: UpdateListingRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateListingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateListing(
     listing: Listing?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleBigQueryAnalyticsHubV1.Listing {
     let request = UpdateListingRequest().with {
       $0.listing = listing
@@ -1277,9 +1276,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func deleteListing(
-    request: DeleteListingRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteListingRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteListing(
@@ -1298,9 +1297,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func subscribeListing(
-    request: SubscribeListingRequest, options: GoogleCloudGax.RequestOptions
+    request: SubscribeListingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.SubscribeListingResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func subscribeListing(
@@ -1319,32 +1318,31 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func subscribeDataExchange(
-    request: SubscribeDataExchangeRequest, options: GoogleCloudGax.RequestOptions
+    request: SubscribeDataExchangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func subscribeDataExchange(withPolling: SubscribeDataExchangeRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<SubscribeDataExchangeResponse>
+    -> any GoogleGax.PollableOperation<SubscribeDataExchangeResponse>
   {
     try await self.subscribeDataExchange(withPolling: withPolling, options: .init())
   }
 
   public func subscribeDataExchange(
-    withPolling: SubscribeDataExchangeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SubscribeDataExchangeResponse> {
+    withPolling: SubscribeDataExchangeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SubscribeDataExchangeResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<SubscribeDataExchangeResponse>.State
-      in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<SubscribeDataExchangeResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func subscribeDataExchange(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<SubscribeDataExchangeResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<SubscribeDataExchangeResponse> {
     let request = SubscribeDataExchangeRequest().with {
       $0.name = name
     }
@@ -1358,31 +1356,31 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func refreshSubscription(
-    request: RefreshSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+    request: RefreshSubscriptionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func refreshSubscription(withPolling: RefreshSubscriptionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<RefreshSubscriptionResponse>
+    -> any GoogleGax.PollableOperation<RefreshSubscriptionResponse>
   {
     try await self.refreshSubscription(withPolling: withPolling, options: .init())
   }
 
   public func refreshSubscription(
-    withPolling: RefreshSubscriptionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RefreshSubscriptionResponse> {
+    withPolling: RefreshSubscriptionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RefreshSubscriptionResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<RefreshSubscriptionResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<RefreshSubscriptionResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func refreshSubscription(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<RefreshSubscriptionResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<RefreshSubscriptionResponse> {
     let request = RefreshSubscriptionRequest().with {
       $0.name = name
     }
@@ -1396,9 +1394,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func getSubscription(
-    request: GetSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSubscriptionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.Subscription {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSubscription(
@@ -1417,9 +1415,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func listSubscriptions(
-    request: ListSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSubscriptionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.ListSubscriptionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSubscriptions(
@@ -1429,14 +1427,14 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func listSubscriptions(
-    byItem: ListSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSubscriptionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Subscription, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryAnalyticsHubV1.ListSubscriptionsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSubscriptions(
@@ -1455,9 +1453,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func listSharedResourceSubscriptions(
-    request: ListSharedResourceSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSharedResourceSubscriptionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.ListSharedResourceSubscriptionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSharedResourceSubscriptions(
@@ -1467,14 +1465,14 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func listSharedResourceSubscriptions(
-    byItem: ListSharedResourceSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSharedResourceSubscriptionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Subscription, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleBigQueryAnalyticsHubV1.ListSharedResourceSubscriptionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSharedResourceSubscriptions(
@@ -1493,9 +1491,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func revokeSubscription(
-    request: RevokeSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+    request: RevokeSubscriptionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.RevokeSubscriptionResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func revokeSubscription(
@@ -1514,30 +1512,30 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func deleteSubscription(
-    request: DeleteSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSubscriptionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteSubscription(withPolling: DeleteSubscriptionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteSubscription(withPolling: withPolling, options: .init())
   }
 
   public func deleteSubscription(
-    withPolling: DeleteSubscriptionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteSubscriptionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteSubscription(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteSubscriptionRequest().with {
       $0.name = name
     }
@@ -1551,9 +1549,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -1563,9 +1561,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -1575,9 +1573,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createQueryTemplate(request: CreateQueryTemplateRequest) async throws
@@ -1587,9 +1585,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func createQueryTemplate(
-    request: CreateQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateQueryTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createQueryTemplate(
@@ -1612,9 +1610,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func getQueryTemplate(
-    request: GetQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetQueryTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getQueryTemplate(
@@ -1633,9 +1631,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func listQueryTemplates(
-    request: ListQueryTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListQueryTemplatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.ListQueryTemplatesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listQueryTemplates(
@@ -1645,14 +1643,14 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func listQueryTemplates(
-    byItem: ListQueryTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListQueryTemplatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<QueryTemplate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryAnalyticsHubV1.ListQueryTemplatesResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listQueryTemplates(
@@ -1671,14 +1669,14 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func updateQueryTemplate(
-    request: UpdateQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateQueryTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateQueryTemplate(
     queryTemplate: QueryTemplate?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate {
     let request = UpdateQueryTemplateRequest().with {
       $0.queryTemplate = queryTemplate
@@ -1692,9 +1690,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func deleteQueryTemplate(
-    request: DeleteQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteQueryTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteQueryTemplate(
@@ -1713,9 +1711,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func submitQueryTemplate(
-    request: SubmitQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: SubmitQueryTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func submitQueryTemplate(
@@ -1734,9 +1732,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func approveQueryTemplate(
-    request: ApproveQueryTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: ApproveQueryTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryAnalyticsHubV1.QueryTemplate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func approveQueryTemplate(
@@ -1755,9 +1753,9 @@ extension Clients.AnalyticsHubServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

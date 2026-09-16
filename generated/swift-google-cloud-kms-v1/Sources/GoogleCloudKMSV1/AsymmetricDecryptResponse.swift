@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for
 /// [KeyManagementService.AsymmetricDecrypt][google.cloud.kms.v1.KeyManagementService.AsymmetricDecrypt].
 ///
 /// [google.cloud.kms.v1.KeyManagementService.AsymmetricDecrypt]: <doc:KeyManagementServiceClient/asymmetricDecrypt(request:options:)>
-public struct AsymmetricDecryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AsymmetricDecryptResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The decrypted data originally encrypted with the matching public key.
@@ -42,7 +42,7 @@ public struct AsymmetricDecryptResponse: Codable, Equatable, GoogleCloudWKT._Any
   /// languages that support this type.
   ///
   /// [google.cloud.kms.v1.AsymmetricDecryptResponse.plaintext]: <doc:AsymmetricDecryptResponse/plaintext>
-  public var plaintextCrc32C: GoogleCloudWKT.Int64Value? = nil
+  public var plaintextCrc32C: GoogleWKT.Int64Value? = nil
 
   /// Integrity verification field. A flag indicating whether
   /// [AsymmetricDecryptRequest.ciphertext_crc32c][google.cloud.kms.v1.AsymmetricDecryptRequest.ciphertext_crc32c]
@@ -72,7 +72,7 @@ public struct AsymmetricDecryptResponse: Codable, Equatable, GoogleCloudWKT._Any
   /// [google.cloud.kms.v1.ProtectionLevel]: <doc:ProtectionLevel>
   public var protectionLevel: ProtectionLevel = ProtectionLevel()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AsymmetricDecryptResponse`.
   public init() {}
@@ -115,7 +115,7 @@ public struct AsymmetricDecryptResponse: Codable, Equatable, GoogleCloudWKT._Any
       self.plaintext = value
     }
     self.plaintextCrc32C = try container.decodeIfPresent(
-      GoogleCloudWKT.Int64Value.self, forKey: .plaintextCrc32C)
+      GoogleWKT.Int64Value.self, forKey: .plaintextCrc32C)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .verifiedCiphertextCrc32C)
     {
       self.verifiedCiphertextCrc32C = value
@@ -125,7 +125,7 @@ public struct AsymmetricDecryptResponse: Codable, Equatable, GoogleCloudWKT._Any
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -143,10 +143,10 @@ public struct AsymmetricDecryptResponse: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.AsymmetricDecryptResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

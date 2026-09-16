@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Additional result info for the question-answering feature.
-public struct QAResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct QAResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Highlighted sections in the snippet.
@@ -29,7 +29,7 @@ public struct QAResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// document and snippet answers the user's query.
   public var confidenceScore: Swift.Float = Swift.Float()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `QAResult`.
   public init() {}
@@ -72,7 +72,7 @@ public struct QAResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -87,7 +87,7 @@ public struct QAResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// A text span in the search text snippet that represents a highlighted
   /// section (answer context, highly relevant sentence, etc.).
-  public struct Highlight: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Highlight: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Start index of the highlight.
@@ -96,7 +96,7 @@ public struct QAResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// End index of the highlight, exclusive.
     public var endIndex: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Highlight`.
     public init() {}
@@ -139,7 +139,7 @@ public struct QAResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -155,21 +155,21 @@ public struct QAResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.contentwarehouse.v1.QAResult.Highlight"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contentwarehouse.v1.QAResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

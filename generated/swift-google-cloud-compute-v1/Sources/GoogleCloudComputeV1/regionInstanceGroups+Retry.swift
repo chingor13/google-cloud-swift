@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class RegionInstanceGroupsRetry: RegionInstanceGroupsStub {
       let inner: any RegionInstanceGroupsStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any RegionInstanceGroupsStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any RegionInstanceGroupsStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,45 +50,44 @@
       }
 
       public func `get`(
-        request: RegionInstanceGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroup {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RegionInstanceGroupsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.InstanceGroup
+            (r: RegionInstanceGroupsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.InstanceGroup
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func list(
-        request: RegionInstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RegionInstanceGroupsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.RegionInstanceGroupList
+            (r: RegionInstanceGroupsClient.ListRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.RegionInstanceGroupList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func listInstances(
-        request: RegionInstanceGroupsClient.ListInstancesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.ListInstancesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupsListInstances {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: RegionInstanceGroupsClient.ListInstancesRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionInstanceGroupsClient.ListInstancesRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.RegionInstanceGroupsListInstances
             in
             return try await self.inner.listInstances(request: r, options: o)
@@ -96,15 +95,14 @@
       }
 
       public func setNamedPorts(
-        request: RegionInstanceGroupsClient.SetNamedPortsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.SetNamedPortsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: RegionInstanceGroupsClient.SetNamedPortsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionInstanceGroupsClient.SetNamedPortsRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setNamedPorts(request: r, options: o)
@@ -113,31 +111,29 @@
 
       public func testIamPermissions(
         request: RegionInstanceGroupsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (
-              r: RegionInstanceGroupsClient.TestIamPermissionsRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
+            (r: RegionInstanceGroupsClient.TestIamPermissionsRequest, o: GoogleGax.RequestOptions)
+              async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RegionOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

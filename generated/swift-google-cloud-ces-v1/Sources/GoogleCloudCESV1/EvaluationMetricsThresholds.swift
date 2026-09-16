@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Threshold settings for metrics in an Evaluation.
-public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The golden evaluation metrics thresholds.
@@ -41,7 +41,7 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
     EvaluationMetricsThresholds.HallucinationMetricBehavior =
       EvaluationMetricsThresholds.HallucinationMetricBehavior()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EvaluationMetricsThresholds`.
   public init() {}
@@ -106,7 +106,7 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -125,7 +125,7 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
   }
 
   /// Settings for golden evaluations.
-  public struct GoldenEvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GoldenEvaluationMetricsThresholds: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The turn level metrics thresholds.
@@ -143,7 +143,7 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
     /// not match any tool call in the golden expectation.
     public var toolMatchingSettings: EvaluationMetricsThresholds.ToolMatchingSettings? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GoldenEvaluationMetricsThresholds`.
     public init() {}
@@ -191,7 +191,7 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
         EvaluationMetricsThresholds.ToolMatchingSettings.self, forKey: .toolMatchingSettings)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -208,7 +208,7 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
     }
 
     /// Turn level metrics thresholds.
-    public struct TurnLevelMetricsThresholds: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct TurnLevelMetricsThresholds: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The success threshold for semantic similarity. Must be an
@@ -225,7 +225,7 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
           .SemanticSimilarityChannel = EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds
           .TurnLevelMetricsThresholds.SemanticSimilarityChannel()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `TurnLevelMetricsThresholds`.
       public init() {}
@@ -276,7 +276,7 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -402,24 +402,23 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
         return
           "type.googleapis.com/google.cloud.ces.v1.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.TurnLevelMetricsThresholds"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Expectation level metrics thresholds.
-    public struct ExpectationLevelMetricsThresholds: Codable, Equatable, GoogleCloudWKT
-        ._AnyPackable,
+    public struct ExpectationLevelMetricsThresholds: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The success threshold for individual tool invocation
       /// parameter correctness. Must be a float between 0 and 1. Default is 1.0.
       public var toolInvocationParameterCorrectnessThreshold: Swift.Float? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ExpectationLevelMetricsThresholds`.
       public init() {}
@@ -457,7 +456,7 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
           Swift.Float.self, forKey: .toolInvocationParameterCorrectnessThreshold)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -475,11 +474,11 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
         return
           "type.googleapis.com/google.cloud.ces.v1.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds.ExpectationLevelMetricsThresholds"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -487,16 +486,16 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
       return
         "type.googleapis.com/google.cloud.ces.v1.EvaluationMetricsThresholds.GoldenEvaluationMetricsThresholds"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Settings for matching tool calls.
-  public struct ToolMatchingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ToolMatchingSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Behavior for extra tool calls.
@@ -505,7 +504,7 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
       EvaluationMetricsThresholds.ToolMatchingSettings.ExtraToolCallBehavior =
         EvaluationMetricsThresholds.ToolMatchingSettings.ExtraToolCallBehavior()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ToolMatchingSettings`.
     public init() {}
@@ -546,7 +545,7 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -669,11 +668,11 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
       return
         "type.googleapis.com/google.cloud.ces.v1.EvaluationMetricsThresholds.ToolMatchingSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -787,10 +786,10 @@ public struct EvaluationMetricsThresholds: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.EvaluationMetricsThresholds"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

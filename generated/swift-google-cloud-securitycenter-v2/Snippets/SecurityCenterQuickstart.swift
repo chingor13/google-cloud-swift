@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudSecurityCenterV2
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(organizationId: String, simulationId: String, valuedResourceId: String, ) async throws {
   let client = try GoogleCloudSecurityCenterV2.SecurityCenterClient()

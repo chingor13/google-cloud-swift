@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// An interface for managing organization policies.
 ///
@@ -47,7 +47,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   let inner: any Clients.OrgPolicyStub
 
   /// Creates a new `OrgPolicyClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.OrgPolicyStub = try Clients.OrgPolicyTransport(options)
     inner = Clients.OrgPolicyRetry(inner, options: options)
     if let logger = options.logger {
@@ -60,7 +60,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_ListConstraints")
   public func listConstraints(
-    request: ListConstraintsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConstraintsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.ListConstraintsResponse {
     try await self.inner.listConstraints(request: request, options: options)
   }
@@ -69,7 +69,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_ListConstraints")
   public func listConstraints(
-    byItem: ListConstraintsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConstraintsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Constraint, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudOrgPolicyV2.ListConstraintsResponse in
@@ -77,14 +77,14 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
       request.pageToken = token
       return try await self.listConstraints(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Retrieves all of the policies that exist on a particular resource.
   ///
   /// @Snippet(path: "OrgPolicy_ListPolicies")
   public func listPolicies(
-    request: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.ListPoliciesResponse {
     try await self.inner.listPolicies(request: request, options: options)
   }
@@ -93,7 +93,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_ListPolicies")
   public func listPolicies(
-    byItem: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPoliciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Policy, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudOrgPolicyV2.ListPoliciesResponse in
@@ -101,7 +101,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
       request.pageToken = token
       return try await self.listPolicies(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a policy on a resource.
@@ -112,7 +112,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_GetPolicy")
   public func getPolicy(
-    request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.Policy {
     try await self.inner.getPolicy(request: request, options: options)
   }
@@ -126,7 +126,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_GetEffectivePolicy")
   public func getEffectivePolicy(
-    request: GetEffectivePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEffectivePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.Policy {
     try await self.inner.getEffectivePolicy(request: request, options: options)
   }
@@ -140,7 +140,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_CreatePolicy")
   public func createPolicy(
-    request: CreatePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.Policy {
     try await self.inner.createPolicy(request: request, options: options)
   }
@@ -157,7 +157,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_UpdatePolicy")
   public func updatePolicy(
-    request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.Policy {
     try await self.inner.updatePolicy(request: request, options: options)
   }
@@ -169,7 +169,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_DeletePolicy")
   public func deletePolicy(
-    request: DeletePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deletePolicy(request: request, options: options)
   }
@@ -183,7 +183,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_CreateCustomConstraint")
   public func createCustomConstraint(
-    request: CreateCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCustomConstraintRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint {
     try await self.inner.createCustomConstraint(request: request, options: options)
   }
@@ -198,7 +198,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_UpdateCustomConstraint")
   public func updateCustomConstraint(
-    request: UpdateCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCustomConstraintRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint {
     try await self.inner.updateCustomConstraint(request: request, options: options)
   }
@@ -210,7 +210,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_GetCustomConstraint")
   public func getCustomConstraint(
-    request: GetCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCustomConstraintRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint {
     try await self.inner.getCustomConstraint(request: request, options: options)
   }
@@ -220,7 +220,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_ListCustomConstraints")
   public func listCustomConstraints(
-    request: ListCustomConstraintsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCustomConstraintsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.ListCustomConstraintsResponse {
     try await self.inner.listCustomConstraints(request: request, options: options)
   }
@@ -230,7 +230,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_ListCustomConstraints")
   public func listCustomConstraints(
-    byItem: ListCustomConstraintsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCustomConstraintsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CustomConstraint, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudOrgPolicyV2.ListCustomConstraintsResponse in
@@ -238,7 +238,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
       request.pageToken = token
       return try await self.listCustomConstraints(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes a custom constraint.
@@ -248,7 +248,7 @@ public final class OrgPolicyClient: Clients.OrgPolicyProtocol, Sendable {
   ///
   /// @Snippet(path: "OrgPolicy_DeleteCustomConstraint")
   public func deleteCustomConstraint(
-    request: DeleteCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCustomConstraintRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteCustomConstraint(request: request, options: options)
   }
@@ -383,77 +383,77 @@ extension Clients {
 
     /// See `OrgPolicyClient.listConstraints`.
     func listConstraints(
-      request: ListConstraintsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConstraintsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.ListConstraintsResponse
 
     /// See `OrgPolicyClient.listConstraints`.
     func listConstraints(
-      byItem: ListConstraintsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConstraintsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Constraint, Swift.Error>
 
     /// See `OrgPolicyClient.listPolicies`.
     func listPolicies(
-      request: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.ListPoliciesResponse
 
     /// See `OrgPolicyClient.listPolicies`.
     func listPolicies(
-      byItem: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPoliciesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Policy, Swift.Error>
 
     /// See `OrgPolicyClient.getPolicy`.
     func getPolicy(
-      request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.Policy
 
     /// See `OrgPolicyClient.getEffectivePolicy`.
     func getEffectivePolicy(
-      request: GetEffectivePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEffectivePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.Policy
 
     /// See `OrgPolicyClient.createPolicy`.
     func createPolicy(
-      request: CreatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.Policy
 
     /// See `OrgPolicyClient.updatePolicy`.
     func updatePolicy(
-      request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.Policy
 
     /// See `OrgPolicyClient.deletePolicy`.
     func deletePolicy(
-      request: DeletePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `OrgPolicyClient.createCustomConstraint`.
     func createCustomConstraint(
-      request: CreateCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomConstraintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint
 
     /// See `OrgPolicyClient.updateCustomConstraint`.
     func updateCustomConstraint(
-      request: UpdateCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomConstraintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint
 
     /// See `OrgPolicyClient.getCustomConstraint`.
     func getCustomConstraint(
-      request: GetCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomConstraintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint
 
     /// See `OrgPolicyClient.listCustomConstraints`.
     func listCustomConstraints(
-      request: ListCustomConstraintsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomConstraintsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.ListCustomConstraintsResponse
 
     /// See `OrgPolicyClient.listCustomConstraints`.
     func listCustomConstraints(
-      byItem: ListCustomConstraintsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCustomConstraintsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<CustomConstraint, Swift.Error>
 
     /// See `OrgPolicyClient.deleteCustomConstraint`.
     func deleteCustomConstraint(
-      request: DeleteCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomConstraintRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -467,9 +467,9 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func listConstraints(
-    request: ListConstraintsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConstraintsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.ListConstraintsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listConstraints(
@@ -479,13 +479,13 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func listConstraints(
-    byItem: ListConstraintsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConstraintsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Constraint, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudOrgPolicyV2.ListConstraintsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listConstraints(
@@ -504,9 +504,9 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func listPolicies(
-    request: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.ListPoliciesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPolicies(
@@ -516,13 +516,13 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func listPolicies(
-    byItem: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPoliciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Policy, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudOrgPolicyV2.ListPoliciesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPolicies(
@@ -539,9 +539,9 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func getPolicy(
-    request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPolicy(
@@ -560,9 +560,9 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func getEffectivePolicy(
-    request: GetEffectivePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEffectivePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getEffectivePolicy(
@@ -581,9 +581,9 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func createPolicy(
-    request: CreatePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createPolicy(
@@ -604,9 +604,9 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func updatePolicy(
-    request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updatePolicy(
@@ -623,9 +623,9 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func deletePolicy(
-    request: DeletePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deletePolicy(
@@ -644,9 +644,9 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func createCustomConstraint(
-    request: CreateCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCustomConstraintRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createCustomConstraint(
@@ -667,9 +667,9 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func updateCustomConstraint(
-    request: UpdateCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCustomConstraintRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCustomConstraint(
@@ -688,9 +688,9 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func getCustomConstraint(
-    request: GetCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCustomConstraintRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCustomConstraint(
@@ -709,9 +709,9 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func listCustomConstraints(
-    request: ListCustomConstraintsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCustomConstraintsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudOrgPolicyV2.ListCustomConstraintsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCustomConstraints(
@@ -721,13 +721,13 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func listCustomConstraints(
-    byItem: ListCustomConstraintsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCustomConstraintsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CustomConstraint, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudOrgPolicyV2.ListCustomConstraintsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCustomConstraints(
@@ -744,9 +744,9 @@ extension Clients.OrgPolicyProtocol {
   }
 
   public func deleteCustomConstraint(
-    request: DeleteCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCustomConstraintRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteCustomConstraint(

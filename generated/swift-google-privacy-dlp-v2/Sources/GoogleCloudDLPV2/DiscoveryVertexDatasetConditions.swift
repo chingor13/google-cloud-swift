@@ -15,22 +15,22 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Requirements that must be true before a dataset is profiled for the
 /// first time.
-public struct DiscoveryVertexDatasetConditions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DiscoveryVertexDatasetConditions: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Vertex AI dataset must have been created after this date. Used to avoid
   /// backfilling.
-  public var createdAfter: GoogleCloudWKT.Timestamp? = nil
+  public var createdAfter: GoogleWKT.Timestamp? = nil
 
   /// Minimum age a Vertex AI dataset must have. If set, the value must be 1 hour
   /// or greater.
-  public var minAge: GoogleCloudWKT.Duration? = nil
+  public var minAge: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DiscoveryVertexDatasetConditions`.
   public init() {}
@@ -66,11 +66,11 @@ public struct DiscoveryVertexDatasetConditions: Codable, Equatable, GoogleCloudW
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.createdAfter = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createdAfter)
-    self.minAge = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .minAge)
+      GoogleWKT.Timestamp.self, forKey: .createdAfter)
+    self.minAge = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .minAge)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -86,10 +86,10 @@ public struct DiscoveryVertexDatasetConditions: Codable, Equatable, GoogleCloudW
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryVertexDatasetConditions"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

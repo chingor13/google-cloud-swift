@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class CloudControlsPartnerCoreRetry: CloudControlsPartnerCoreStub {
     let inner: any CloudControlsPartnerCoreStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any CloudControlsPartnerCoreStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any CloudControlsPartnerCoreStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func getWorkload(
-      request: GetWorkloadRequest, options: GoogleCloudGax.RequestOptions
+      request: GetWorkloadRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.Workload {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetWorkloadRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetWorkloadRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudControlsPartnerV1.Workload
           in
           return try await self.inner.getWorkload(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func listWorkloads(
-      request: ListWorkloadsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWorkloadsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.ListWorkloadsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListWorkloadsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListWorkloadsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudControlsPartnerV1.ListWorkloadsResponse
           in
           return try await self.inner.listWorkloads(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func getCustomer(
-      request: GetCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.Customer {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetCustomerRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCustomerRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudControlsPartnerV1.Customer
           in
           return try await self.inner.getCustomer(request: r, options: o)
@@ -94,14 +94,14 @@ extension Clients {
     }
 
     public func listCustomers(
-      request: ListCustomersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.ListCustomersResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListCustomersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCustomersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudControlsPartnerV1.ListCustomersResponse
           in
           return try await self.inner.listCustomers(request: r, options: o)
@@ -109,14 +109,14 @@ extension Clients {
     }
 
     public func getEkmConnections(
-      request: GetEkmConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEkmConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.EkmConnections {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetEkmConnectionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetEkmConnectionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudControlsPartnerV1.EkmConnections
           in
           return try await self.inner.getEkmConnections(request: r, options: o)
@@ -124,14 +124,14 @@ extension Clients {
     }
 
     public func getPartnerPermissions(
-      request: GetPartnerPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPartnerPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.PartnerPermissions {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetPartnerPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetPartnerPermissionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudControlsPartnerV1.PartnerPermissions
           in
           return try await self.inner.getPartnerPermissions(request: r, options: o)
@@ -139,14 +139,14 @@ extension Clients {
     }
 
     public func listAccessApprovalRequests(
-      request: ListAccessApprovalRequestsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAccessApprovalRequestsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.ListAccessApprovalRequestsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListAccessApprovalRequestsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListAccessApprovalRequestsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudControlsPartnerV1.ListAccessApprovalRequestsResponse
           in
           return try await self.inner.listAccessApprovalRequests(request: r, options: o)
@@ -154,14 +154,14 @@ extension Clients {
     }
 
     public func getPartner(
-      request: GetPartnerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPartnerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.Partner {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetPartnerRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetPartnerRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudControlsPartnerV1.Partner
           in
           return try await self.inner.getPartner(request: r, options: o)
@@ -169,14 +169,14 @@ extension Clients {
     }
 
     public func createCustomer(
-      request: CreateCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.Customer {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateCustomerRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateCustomerRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudControlsPartnerV1.Customer
           in
           return try await self.inner.createCustomer(request: r, options: o)
@@ -184,14 +184,14 @@ extension Clients {
     }
 
     public func updateCustomer(
-      request: UpdateCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.Customer {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateCustomerRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateCustomerRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudControlsPartnerV1.Customer
           in
           return try await self.inner.updateCustomer(request: r, options: o)
@@ -199,14 +199,13 @@ extension Clients {
     }
 
     public func deleteCustomer(
-      request: DeleteCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: {
-          (r: DeleteCustomerRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteCustomerRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteCustomer(request: r, options: o)
         })
     }

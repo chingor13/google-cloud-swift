@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudArtifactRegistryV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: ArtifactRegistryClient, projectId: String, locationId: String, repositoryId: String,
@@ -35,7 +35,7 @@ func sample(
           $0.name =
             "projects/\(projectId)/locations/\(locationId)/repositories/\(repositoryId)/packages/\(packageId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

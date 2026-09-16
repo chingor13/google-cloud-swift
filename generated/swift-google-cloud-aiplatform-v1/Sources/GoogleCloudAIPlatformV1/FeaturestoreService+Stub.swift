@@ -17,136 +17,136 @@
 #if FeaturestoreService
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol FeaturestoreServiceStub: Sendable {
       func createFeaturestore(
-        request: CreateFeaturestoreRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateFeaturestoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func getFeaturestore(
-        request: GetFeaturestoreRequest, options: GoogleCloudGax.RequestOptions
+        request: GetFeaturestoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Featurestore
 
       func listFeaturestores(
-        request: ListFeaturestoresRequest, options: GoogleCloudGax.RequestOptions
+        request: ListFeaturestoresRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListFeaturestoresResponse
 
       func updateFeaturestore(
-        request: UpdateFeaturestoreRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateFeaturestoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteFeaturestore(
-        request: DeleteFeaturestoreRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteFeaturestoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func createEntityType(
-        request: CreateEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateEntityTypeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func getEntityType(
-        request: GetEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+        request: GetEntityTypeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.EntityType
 
       func listEntityTypes(
-        request: ListEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListEntityTypesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListEntityTypesResponse
 
       func updateEntityType(
-        request: UpdateEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateEntityTypeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.EntityType
 
       func deleteEntityType(
-        request: DeleteEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteEntityTypeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func createFeature(
-        request: CreateFeatureRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateFeatureRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func batchCreateFeatures(
-        request: BatchCreateFeaturesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchCreateFeaturesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func getFeature(
-        request: GetFeatureRequest, options: GoogleCloudGax.RequestOptions
+        request: GetFeatureRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Feature
 
       func listFeatures(
-        request: ListFeaturesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListFeaturesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListFeaturesResponse
 
       func updateFeature(
-        request: UpdateFeatureRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateFeatureRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Feature
 
       func deleteFeature(
-        request: DeleteFeatureRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteFeatureRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func importFeatureValues(
-        request: ImportFeatureValuesRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportFeatureValuesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func batchReadFeatureValues(
-        request: BatchReadFeatureValuesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchReadFeatureValuesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func exportFeatureValues(
-        request: ExportFeatureValuesRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportFeatureValuesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteFeatureValues(
-        request: DeleteFeatureValuesRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteFeatureValuesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func searchFeatures(
-        request: SearchFeaturesRequest, options: GoogleCloudGax.RequestOptions
+        request: SearchFeaturesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.SearchFeaturesResponse
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }

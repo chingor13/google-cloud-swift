@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudOracleDatabaseV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: OracleDatabaseClient, projectId: String, locationId: String, odbNetworkId: String,

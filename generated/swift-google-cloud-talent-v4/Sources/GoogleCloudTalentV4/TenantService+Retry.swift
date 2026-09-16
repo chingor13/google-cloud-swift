@@ -18,27 +18,27 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class TenantServiceRetry: TenantServiceStub {
     let inner: any TenantServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any TenantServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any TenantServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@ extension Clients {
     }
 
     public func createTenant(
-      request: CreateTenantRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTenantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Tenant {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateTenantRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateTenantRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTalentV4.Tenant
           in
           return try await self.inner.createTenant(request: r, options: o)
@@ -65,14 +65,14 @@ extension Clients {
     }
 
     public func getTenant(
-      request: GetTenantRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTenantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Tenant {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetTenantRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetTenantRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTalentV4.Tenant
           in
           return try await self.inner.getTenant(request: r, options: o)
@@ -80,14 +80,14 @@ extension Clients {
     }
 
     public func updateTenant(
-      request: UpdateTenantRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTenantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Tenant {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateTenantRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateTenantRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTalentV4.Tenant
           in
           return try await self.inner.updateTenant(request: r, options: o)
@@ -95,26 +95,26 @@ extension Clients {
     }
 
     public func deleteTenant(
-      request: DeleteTenantRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTenantRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: { (r: DeleteTenantRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteTenantRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteTenant(request: r, options: o)
         })
     }
 
     public func listTenants(
-      request: ListTenantsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTenantsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.ListTenantsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListTenantsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListTenantsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTalentV4.ListTenantsResponse
           in
           return try await self.inner.listTenants(request: r, options: o)
@@ -122,14 +122,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

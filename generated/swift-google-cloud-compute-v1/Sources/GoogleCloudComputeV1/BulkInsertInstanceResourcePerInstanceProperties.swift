@@ -16,11 +16,11 @@
 
 #if Instances || RegionInstances
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Per-instance properties to be set on individual instances.
   /// To be extended in the future.
-  public struct BulkInsertInstanceResourcePerInstanceProperties: Codable, Equatable, GoogleCloudWKT
+  public struct BulkInsertInstanceResourcePerInstanceProperties: Codable, Equatable, GoogleWKT
       ._AnyPackable,
     Sendable
   {
@@ -31,7 +31,7 @@
     /// Output only. This field is only temporary. It will be removed. Do not use it.
     public var name: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BulkInsertInstanceResourcePerInstanceProperties`.
     public init() {}
@@ -70,7 +70,7 @@
       self.name = try container.decodeIfPresent(Swift.String.self, forKey: .name)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -87,11 +87,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.BulkInsertInstanceResourcePerInstanceProperties"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

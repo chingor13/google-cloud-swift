@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleBigQueryConnectionV1
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(client: ConnectionServiceClient, parent: String) async throws {
   let items = try client.listConnections(

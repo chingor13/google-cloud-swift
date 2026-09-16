@@ -16,30 +16,29 @@
 
 #if GlobalOperations
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol GlobalOperationsStub: Sendable {
       func aggregatedList(
-        request: GlobalOperationsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationAggregatedList
 
       func delete(
-        request: GlobalOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func `get`(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationList
 
       func wait(
-        request: GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.WaitRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

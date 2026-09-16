@@ -15,29 +15,29 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ResourceRecordSetsStub: Sendable {
     func create(
-      request: ResourceRecordSetsClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.CreateRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSet
 
     func delete(
-      request: ResourceRecordSetsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSetsDeleteResponse
 
     func `get`(
-      request: ResourceRecordSetsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSet
 
     func list(
-      request: ResourceRecordSetsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSetsListResponse
 
     func patch(
-      request: ResourceRecordSetsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSet
   }
 }

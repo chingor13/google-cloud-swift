@@ -16,15 +16,15 @@
 
 #if PipelineService || ScheduleService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The runtime detail of a pipeline executor.
-  public struct PipelineTaskExecutorDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PipelineTaskExecutorDetail: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var details: OneOf_Details? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PipelineTaskExecutorDetail`.
     public init() {}
@@ -83,7 +83,7 @@
       self.details = details
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -105,7 +105,7 @@
 
     /// The detail of a container execution. It contains the job names of the
     /// lifecycle of a container execution.
-    public struct ContainerDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ContainerDetail: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The name of the
@@ -143,7 +143,7 @@
       /// [google.cloud.aiplatform.v1.PipelineJob.pipeline_spec]: <doc:PipelineJob/pipelineSpec>
       public var failedPreCachingCheckJobs: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ContainerDetail`.
       public init() {}
@@ -199,7 +199,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -218,16 +218,16 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.PipelineTaskExecutorDetail.ContainerDetail"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The detailed info for a custom job executor.
-    public struct CustomJobDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct CustomJobDetail: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The name of the
@@ -243,7 +243,7 @@
       /// [google.cloud.aiplatform.v1.CustomJob]: <doc:CustomJob>
       public var failedJobs: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `CustomJobDetail`.
       public init() {}
@@ -286,7 +286,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -303,11 +303,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.PipelineTaskExecutorDetail.CustomJobDetail"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -321,11 +321,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.PipelineTaskExecutorDetail"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

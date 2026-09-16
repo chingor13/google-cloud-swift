@@ -16,63 +16,62 @@
 
 #if SecurityPolicies
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SecurityPoliciesStub: Sendable {
       func addRule(
-        request: SecurityPoliciesClient.AddRuleRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.AddRuleRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func aggregatedList(
-        request: SecurityPoliciesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPoliciesAggregatedList
 
       func delete(
-        request: SecurityPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: SecurityPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicy
 
       func getRule(
-        request: SecurityPoliciesClient.GetRuleRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.GetRuleRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyRule
 
       func insert(
-        request: SecurityPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: SecurityPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyList
 
       func listPreconfiguredExpressionSets(
         request: SecurityPoliciesClient.ListPreconfiguredExpressionSetsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPoliciesListPreconfiguredExpressionSetsResponse
 
       func patch(
-        request: SecurityPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func patchRule(
-        request: SecurityPoliciesClient.PatchRuleRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.PatchRuleRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func removeRule(
-        request: SecurityPoliciesClient.RemoveRuleRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.RemoveRuleRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setLabels(
-        request: SecurityPoliciesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: SecurityPoliciesClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

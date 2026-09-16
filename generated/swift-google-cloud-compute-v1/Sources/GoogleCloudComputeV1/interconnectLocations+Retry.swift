@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class InterconnectLocationsRetry: InterconnectLocationsStub {
       let inner: any InterconnectLocationsStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any InterconnectLocationsStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any InterconnectLocationsStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,30 +50,30 @@
       }
 
       public func `get`(
-        request: InterconnectLocationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectLocationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectLocation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: InterconnectLocationsClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.InterconnectLocation
+            (r: InterconnectLocationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.InterconnectLocation
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func list(
-        request: InterconnectLocationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectLocationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectLocationList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: InterconnectLocationsClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.InterconnectLocationList
+            (r: InterconnectLocationsClient.ListRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.InterconnectLocationList
             in
             return try await self.inner.list(request: r, options: o)
           })

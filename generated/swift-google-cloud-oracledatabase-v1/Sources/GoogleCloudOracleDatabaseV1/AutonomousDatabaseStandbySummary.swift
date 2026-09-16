@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Autonomous Data Guard standby database details.
 /// https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/datatypes/AutonomousDatabaseStandbySummary
-public struct AutonomousDatabaseStandbySummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AutonomousDatabaseStandbySummary: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The amount of time, in seconds, that the data of the standby
   /// database lags in comparison to the data of the primary database.
-  public var lagTimeDuration: GoogleCloudWKT.Duration? = nil
+  public var lagTimeDuration: GoogleWKT.Duration? = nil
 
   /// Output only. The additional details about the current lifecycle state of
   /// the Autonomous Database.
@@ -35,13 +35,13 @@ public struct AutonomousDatabaseStandbySummary: Codable, Equatable, GoogleCloudW
 
   /// Output only. The date and time the Autonomous Data Guard role was switched
   /// for the standby Autonomous Database.
-  public var dataGuardRoleChangedTime: GoogleCloudWKT.Timestamp? = nil
+  public var dataGuardRoleChangedTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The date and time the Disaster Recovery role was switched for
   /// the standby Autonomous Database.
-  public var disasterRecoveryRoleChangedTime: GoogleCloudWKT.Timestamp? = nil
+  public var disasterRecoveryRoleChangedTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AutonomousDatabaseStandbySummary`.
   public init() {}
@@ -84,7 +84,7 @@ public struct AutonomousDatabaseStandbySummary: Codable, Equatable, GoogleCloudW
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.lagTimeDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .lagTimeDuration)
+      GoogleWKT.Duration.self, forKey: .lagTimeDuration)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .lifecycleDetails) {
       self.lifecycleDetails = value
     }
@@ -92,12 +92,12 @@ public struct AutonomousDatabaseStandbySummary: Codable, Equatable, GoogleCloudW
       self.state = value
     }
     self.dataGuardRoleChangedTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .dataGuardRoleChangedTime)
+      GoogleWKT.Timestamp.self, forKey: .dataGuardRoleChangedTime)
     self.disasterRecoveryRoleChangedTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .disasterRecoveryRoleChangedTime)
+      GoogleWKT.Timestamp.self, forKey: .disasterRecoveryRoleChangedTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -117,10 +117,10 @@ public struct AutonomousDatabaseStandbySummary: Codable, Equatable, GoogleCloudW
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.oracledatabase.v1.AutonomousDatabaseStandbySummary"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudBigtableAdminV2
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, instanceId: String, ) async throws {
   let client = try GoogleCloudBigtableAdminV2.BigtableInstanceAdminClient()

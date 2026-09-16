@@ -15,13 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudGax
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleGax
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message for response to listing GoldengateDeploymentVersions
-public struct ListGoldengateDeploymentVersionsResponse: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
-  GoogleCloudGax._PaginatedResponse,
+public struct ListGoldengateDeploymentVersionsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
+  GoogleGax._PaginatedResponse,
   Sendable
 {
   /// The list of GoldengateDeploymentVersion
@@ -34,7 +33,7 @@ public struct ListGoldengateDeploymentVersionsResponse: Codable, Equatable, Goog
   /// Unordered list. Locations that could not be reached.
   public var unreachable: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListGoldengateDeploymentVersionsResponse`.
   public init() {}
@@ -85,7 +84,7 @@ public struct ListGoldengateDeploymentVersionsResponse: Codable, Equatable, Goog
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,11 +102,11 @@ public struct ListGoldengateDeploymentVersionsResponse: Codable, Equatable, Goog
     return
       "type.googleapis.com/google.cloud.oracledatabase.v1.ListGoldengateDeploymentVersionsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 
   public func _getPaginatedItems() -> [GoldengateDeploymentVersion] {

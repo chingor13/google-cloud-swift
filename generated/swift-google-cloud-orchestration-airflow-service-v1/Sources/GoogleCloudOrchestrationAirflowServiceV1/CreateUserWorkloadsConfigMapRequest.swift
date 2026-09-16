@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Create user workloads ConfigMap request.
-public struct CreateUserWorkloadsConfigMapRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateUserWorkloadsConfigMapRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The environment name to create a ConfigMap for, in the form:
@@ -28,7 +28,7 @@ public struct CreateUserWorkloadsConfigMapRequest: Codable, Equatable, GoogleClo
   /// Required. User workloads ConfigMap to create.
   public var userWorkloadsConfigMap: UserWorkloadsConfigMap? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateUserWorkloadsConfigMapRequest`.
   public init() {}
@@ -70,7 +70,7 @@ public struct CreateUserWorkloadsConfigMapRequest: Codable, Equatable, GoogleClo
       UserWorkloadsConfigMap.self, forKey: .userWorkloadsConfigMap)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -87,10 +87,10 @@ public struct CreateUserWorkloadsConfigMapRequest: Codable, Equatable, GoogleClo
     return
       "type.googleapis.com/google.cloud.orchestration.airflow.service.v1.CreateUserWorkloadsConfigMapRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

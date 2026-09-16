@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DnsKeysStub: Sendable {
     func `get`(
-      request: DnsKeysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: DnsKeysClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> DnsKey
 
     func list(
-      request: DnsKeysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: DnsKeysClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> DnsKeysListResponse
   }
 }

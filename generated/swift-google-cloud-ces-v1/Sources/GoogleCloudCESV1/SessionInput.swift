@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Input for the session.
-public struct SessionInput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SessionInput: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. A flag to indicate if the current message is a fragment of a
@@ -35,7 +35,7 @@ public struct SessionInput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The type of the input.
   public var inputType: OneOf_InputType? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SessionInput`.
   public init() {}
@@ -118,9 +118,7 @@ public struct SessionInput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let blob = try container.decodeIfPresent(Blob?.self, forKey: .blob) {
       try inputTypeCheckAndSet(.blob(blob))
     }
-    if let variables = try container.decodeIfPresent(
-      GoogleCloudWKT.Struct?.self, forKey: .variables)
-    {
+    if let variables = try container.decodeIfPresent(GoogleWKT.Struct?.self, forKey: .variables) {
       try inputTypeCheckAndSet(.variables(variables))
     }
     if let event = try container.decodeIfPresent(Event?.self, forKey: .event) {
@@ -129,7 +127,7 @@ public struct SessionInput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.inputType = inputType
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -183,7 +181,7 @@ public struct SessionInput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// agent][Agent.RemoteDialogflowAgent] as additional session parameters.
     ///
     /// [Agent.RemoteDialogflowAgent]: <doc:Agent/RemoteDialogflowAgent>
-    indirect case variables(GoogleCloudWKT.Struct?)
+    indirect case variables(GoogleWKT.Struct?)
     /// Optional. Event input.
     indirect case event(Event?)
   }
@@ -191,10 +189,10 @@ public struct SessionInput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.SessionInput"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

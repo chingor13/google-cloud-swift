@@ -18,11 +18,11 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for creating, configuring, and deleting Cloud Bigtable Instances and
 /// Clusters. Provides access to the Instance and Cluster schemas only, not the
@@ -31,11 +31,11 @@ import GoogleCloudGax
 /// @Snippet(path: "BigtableInstanceAdminQuickstart")
 public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminProtocol, Sendable {
   let inner: any Clients.BigtableInstanceAdminStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `BigtableInstanceAdminClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.BigtableInstanceAdminStub = try Clients.BigtableInstanceAdminTransport(
       options)
     inner = Clients.BigtableInstanceAdminRetry(inner, options: options)
@@ -57,7 +57,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_CreateInstance")
   public func createInstance(
-    request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createInstance(request: request, options: options)
   }
@@ -72,21 +72,21 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_CreateInstance")
   public func createInstance(
-    withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    withPolling: CreateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Instance>.State
+      in
       return try op._extractStatus(Instance.self)
     }
     let rawOp = try await self.createInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -98,7 +98,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_GetInstance")
   public func getInstance(
-    request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Instance {
     try await self.inner.getInstance(request: request, options: options)
   }
@@ -107,7 +107,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_ListInstances")
   public func listInstances(
-    request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListInstancesResponse {
     try await self.inner.listInstances(request: request, options: options)
   }
@@ -118,7 +118,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_UpdateInstance")
   public func updateInstance(
-    request: Instance, options: GoogleCloudGax.RequestOptions
+    request: Instance, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Instance {
     try await self.inner.updateInstance(request: request, options: options)
   }
@@ -128,7 +128,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_PartialUpdateInstance")
   public func partialUpdateInstance(
-    request: PartialUpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: PartialUpdateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.partialUpdateInstance(request: request, options: options)
   }
@@ -138,21 +138,21 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_PartialUpdateInstance")
   public func partialUpdateInstance(
-    withPolling: PartialUpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    withPolling: PartialUpdateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Instance>.State
+      in
       return try op._extractStatus(Instance.self)
     }
     let rawOp = try await self.partialUpdateInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -164,7 +164,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_DeleteInstance")
   public func deleteInstance(
-    request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteInstance(request: request, options: options)
   }
@@ -179,7 +179,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_CreateCluster")
   public func createCluster(
-    request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createCluster(request: request, options: options)
   }
@@ -194,21 +194,20 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_CreateCluster")
   public func createCluster(
-    withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: CreateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.createCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -220,7 +219,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_GetCluster")
   public func getCluster(
-    request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Cluster {
     try await self.inner.getCluster(request: request, options: options)
   }
@@ -229,7 +228,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_ListClusters")
   public func listClusters(
-    request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListClustersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListClustersResponse {
     try await self.inner.listClusters(request: request, options: options)
   }
@@ -242,7 +241,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_UpdateCluster")
   public func updateCluster(
-    request: Cluster, options: GoogleCloudGax.RequestOptions
+    request: Cluster, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateCluster(request: request, options: options)
   }
@@ -255,21 +254,20 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_UpdateCluster")
   public func updateCluster(
-    withPolling: Cluster, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: Cluster, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.updateCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -292,7 +290,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_PartialUpdateCluster")
   public func partialUpdateCluster(
-    request: PartialUpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: PartialUpdateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.partialUpdateCluster(request: request, options: options)
   }
@@ -312,21 +310,20 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_PartialUpdateCluster")
   public func partialUpdateCluster(
-    withPolling: PartialUpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: PartialUpdateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.partialUpdateCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -338,7 +335,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_DeleteCluster")
   public func deleteCluster(
-    request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteClusterRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteCluster(request: request, options: options)
   }
@@ -347,7 +344,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_CreateAppProfile")
   public func createAppProfile(
-    request: CreateAppProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAppProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.AppProfile {
     try await self.inner.createAppProfile(request: request, options: options)
   }
@@ -356,7 +353,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_GetAppProfile")
   public func getAppProfile(
-    request: GetAppProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAppProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.AppProfile {
     try await self.inner.getAppProfile(request: request, options: options)
   }
@@ -365,7 +362,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_ListAppProfiles")
   public func listAppProfiles(
-    request: ListAppProfilesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAppProfilesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListAppProfilesResponse {
     try await self.inner.listAppProfiles(request: request, options: options)
   }
@@ -374,7 +371,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_ListAppProfiles")
   public func listAppProfiles(
-    byItem: ListAppProfilesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAppProfilesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AppProfile, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListAppProfilesResponse in
@@ -382,14 +379,14 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
       request.pageToken = token
       return try await self.listAppProfiles(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates an app profile within an instance.
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_UpdateAppProfile")
   public func updateAppProfile(
-    request: UpdateAppProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAppProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateAppProfile(request: request, options: options)
   }
@@ -398,21 +395,21 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_UpdateAppProfile")
   public func updateAppProfile(
-    withPolling: UpdateAppProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AppProfile> {
+    withPolling: UpdateAppProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AppProfile> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AppProfile>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<AppProfile>.State
+      in
       return try op._extractStatus(AppProfile.self)
     }
     let rawOp = try await self.updateAppProfile(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AppProfile>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AppProfile>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -424,7 +421,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_DeleteAppProfile")
   public func deleteAppProfile(
-    request: DeleteAppProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAppProfileRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteAppProfile(request: request, options: options)
   }
@@ -434,7 +431,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -444,7 +441,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -453,7 +450,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -463,7 +460,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_ListHotTablets")
   public func listHotTablets(
-    request: ListHotTabletsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListHotTabletsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListHotTabletsResponse {
     try await self.inner.listHotTablets(request: request, options: options)
   }
@@ -473,7 +470,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_ListHotTablets")
   public func listHotTablets(
-    byItem: ListHotTabletsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListHotTabletsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<HotTablet, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListHotTabletsResponse in
@@ -481,14 +478,14 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
       request.pageToken = token
       return try await self.listHotTablets(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a logical view within an instance.
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_CreateLogicalView")
   public func createLogicalView(
-    request: CreateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateLogicalViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createLogicalView(request: request, options: options)
   }
@@ -497,21 +494,21 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_CreateLogicalView")
   public func createLogicalView(
-    withPolling: CreateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LogicalView> {
+    withPolling: CreateLogicalViewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LogicalView> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<LogicalView>.State in
+        -> GoogleGax._PollableOperationImpl<LogicalView>.State in
       return try op._extractStatus(LogicalView.self)
     }
     let rawOp = try await self.createLogicalView(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LogicalView>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LogicalView>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -523,7 +520,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_GetLogicalView")
   public func getLogicalView(
-    request: GetLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLogicalViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.LogicalView {
     try await self.inner.getLogicalView(request: request, options: options)
   }
@@ -532,7 +529,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_ListLogicalViews")
   public func listLogicalViews(
-    request: ListLogicalViewsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLogicalViewsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListLogicalViewsResponse {
     try await self.inner.listLogicalViews(request: request, options: options)
   }
@@ -541,7 +538,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_ListLogicalViews")
   public func listLogicalViews(
-    byItem: ListLogicalViewsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLogicalViewsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<LogicalView, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListLogicalViewsResponse in
@@ -549,14 +546,14 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
       request.pageToken = token
       return try await self.listLogicalViews(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates a logical view within an instance.
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_UpdateLogicalView")
   public func updateLogicalView(
-    request: UpdateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateLogicalViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateLogicalView(request: request, options: options)
   }
@@ -565,21 +562,21 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_UpdateLogicalView")
   public func updateLogicalView(
-    withPolling: UpdateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LogicalView> {
+    withPolling: UpdateLogicalViewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LogicalView> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<LogicalView>.State in
+        -> GoogleGax._PollableOperationImpl<LogicalView>.State in
       return try op._extractStatus(LogicalView.self)
     }
     let rawOp = try await self.updateLogicalView(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LogicalView>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LogicalView>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -591,7 +588,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_DeleteLogicalView")
   public func deleteLogicalView(
-    request: DeleteLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteLogicalViewRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteLogicalView(request: request, options: options)
   }
@@ -600,7 +597,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_CreateMaterializedView")
   public func createMaterializedView(
-    request: CreateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateMaterializedViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createMaterializedView(request: request, options: options)
   }
@@ -609,21 +606,21 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_CreateMaterializedView")
   public func createMaterializedView(
-    withPolling: CreateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<MaterializedView> {
+    withPolling: CreateMaterializedViewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<MaterializedView> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<MaterializedView>.State in
+        -> GoogleGax._PollableOperationImpl<MaterializedView>.State in
       return try op._extractStatus(MaterializedView.self)
     }
     let rawOp = try await self.createMaterializedView(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<MaterializedView>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<MaterializedView>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -635,7 +632,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_GetMaterializedView")
   public func getMaterializedView(
-    request: GetMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: GetMaterializedViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.MaterializedView {
     try await self.inner.getMaterializedView(request: request, options: options)
   }
@@ -644,7 +641,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_ListMaterializedViews")
   public func listMaterializedViews(
-    request: ListMaterializedViewsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListMaterializedViewsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListMaterializedViewsResponse {
     try await self.inner.listMaterializedViews(request: request, options: options)
   }
@@ -653,7 +650,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_ListMaterializedViews")
   public func listMaterializedViews(
-    byItem: ListMaterializedViewsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListMaterializedViewsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<MaterializedView, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListMaterializedViewsResponse
@@ -662,14 +659,14 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
       request.pageToken = token
       return try await self.listMaterializedViews(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates a materialized view within an instance.
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_UpdateMaterializedView")
   public func updateMaterializedView(
-    request: UpdateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateMaterializedViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateMaterializedView(request: request, options: options)
   }
@@ -678,21 +675,21 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_UpdateMaterializedView")
   public func updateMaterializedView(
-    withPolling: UpdateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<MaterializedView> {
+    withPolling: UpdateMaterializedViewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<MaterializedView> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<MaterializedView>.State in
+        -> GoogleGax._PollableOperationImpl<MaterializedView>.State in
       return try op._extractStatus(MaterializedView.self)
     }
     let rawOp = try await self.updateMaterializedView(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<MaterializedView>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<MaterializedView>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -704,7 +701,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_DeleteMaterializedView")
   public func deleteMaterializedView(
-    request: DeleteMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteMaterializedViewRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteMaterializedView(request: request, options: options)
   }
@@ -715,7 +712,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -726,7 +723,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -734,7 +731,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -743,7 +740,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -754,7 +751,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -765,7 +762,7 @@ public final class BigtableInstanceAdminClient: Clients.BigtableInstanceAdminPro
   ///
   /// @Snippet(path: "BigtableInstanceAdmin_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -782,7 +779,7 @@ extension Clients {
     func createInstance(request: CreateInstanceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.createInstance`.
-    func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleCloudGax
+    func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleGax
       .PollableOperation<Instance>
 
     /// See `BigtableInstanceAdminClient.createInstance`.
@@ -791,7 +788,7 @@ extension Clients {
       instanceId: Swift.String,
       instance: Instance?,
       clusters: [Swift.String: Cluster],
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `BigtableInstanceAdminClient.getInstance`.
     func getInstance(request: GetInstanceRequest) async throws
@@ -820,13 +817,13 @@ extension Clients {
 
     /// See `BigtableInstanceAdminClient.partialUpdateInstance`.
     func partialUpdateInstance(withPolling: PartialUpdateInstanceRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Instance>
+      -> any GoogleGax.PollableOperation<Instance>
 
     /// See `BigtableInstanceAdminClient.partialUpdateInstance`.
     func partialUpdateInstance(
       instance: Instance?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `BigtableInstanceAdminClient.deleteInstance`.
     func deleteInstance(request: DeleteInstanceRequest) async throws
@@ -840,7 +837,7 @@ extension Clients {
     func createCluster(request: CreateClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.createCluster`.
-    func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleCloudGax
+    func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Cluster>
 
     /// See `BigtableInstanceAdminClient.createCluster`.
@@ -848,7 +845,7 @@ extension Clients {
       parent: Swift.String,
       clusterId: Swift.String,
       cluster: Cluster?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `BigtableInstanceAdminClient.getCluster`.
     func getCluster(request: GetClusterRequest) async throws -> GoogleCloudBigtableAdminV2.Cluster
@@ -871,7 +868,7 @@ extension Clients {
     func updateCluster(request: Cluster) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.updateCluster`.
-    func updateCluster(withPolling: Cluster) async throws -> any GoogleCloudGax.PollableOperation<
+    func updateCluster(withPolling: Cluster) async throws -> any GoogleGax.PollableOperation<
       Cluster
     >
 
@@ -881,13 +878,13 @@ extension Clients {
 
     /// See `BigtableInstanceAdminClient.partialUpdateCluster`.
     func partialUpdateCluster(withPolling: PartialUpdateClusterRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Cluster>
+      -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `BigtableInstanceAdminClient.partialUpdateCluster`.
     func partialUpdateCluster(
       cluster: Cluster?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `BigtableInstanceAdminClient.deleteCluster`.
     func deleteCluster(request: DeleteClusterRequest) async throws
@@ -936,14 +933,14 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.updateAppProfile`.
-    func updateAppProfile(withPolling: UpdateAppProfileRequest) async throws -> any GoogleCloudGax
+    func updateAppProfile(withPolling: UpdateAppProfileRequest) async throws -> any GoogleGax
       .PollableOperation<AppProfile>
 
     /// See `BigtableInstanceAdminClient.updateAppProfile`.
     func updateAppProfile(
       appProfile: AppProfile?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AppProfile>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<AppProfile>
 
     /// See `BigtableInstanceAdminClient.deleteAppProfile`.
     func deleteAppProfile(request: DeleteAppProfileRequest) async throws
@@ -1005,7 +1002,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.createLogicalView`.
-    func createLogicalView(withPolling: CreateLogicalViewRequest) async throws -> any GoogleCloudGax
+    func createLogicalView(withPolling: CreateLogicalViewRequest) async throws -> any GoogleGax
       .PollableOperation<LogicalView>
 
     /// See `BigtableInstanceAdminClient.createLogicalView`.
@@ -1013,7 +1010,7 @@ extension Clients {
       parent: Swift.String,
       logicalView: LogicalView?,
       logicalViewId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<LogicalView>
+    ) async throws -> any GoogleGax.PollableOperation<LogicalView>
 
     /// See `BigtableInstanceAdminClient.getLogicalView`.
     func getLogicalView(request: GetLogicalViewRequest) async throws
@@ -1043,14 +1040,14 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.updateLogicalView`.
-    func updateLogicalView(withPolling: UpdateLogicalViewRequest) async throws -> any GoogleCloudGax
+    func updateLogicalView(withPolling: UpdateLogicalViewRequest) async throws -> any GoogleGax
       .PollableOperation<LogicalView>
 
     /// See `BigtableInstanceAdminClient.updateLogicalView`.
     func updateLogicalView(
       logicalView: LogicalView?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<LogicalView>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<LogicalView>
 
     /// See `BigtableInstanceAdminClient.deleteLogicalView`.
     func deleteLogicalView(request: DeleteLogicalViewRequest) async throws
@@ -1066,14 +1063,14 @@ extension Clients {
 
     /// See `BigtableInstanceAdminClient.createMaterializedView`.
     func createMaterializedView(withPolling: CreateMaterializedViewRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<MaterializedView>
+      -> any GoogleGax.PollableOperation<MaterializedView>
 
     /// See `BigtableInstanceAdminClient.createMaterializedView`.
     func createMaterializedView(
       parent: Swift.String,
       materializedView: MaterializedView?,
       materializedViewId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<MaterializedView>
+    ) async throws -> any GoogleGax.PollableOperation<MaterializedView>
 
     /// See `BigtableInstanceAdminClient.getMaterializedView`.
     func getMaterializedView(request: GetMaterializedViewRequest) async throws
@@ -1104,13 +1101,13 @@ extension Clients {
 
     /// See `BigtableInstanceAdminClient.updateMaterializedView`.
     func updateMaterializedView(withPolling: UpdateMaterializedViewRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<MaterializedView>
+      -> any GoogleGax.PollableOperation<MaterializedView>
 
     /// See `BigtableInstanceAdminClient.updateMaterializedView`.
     func updateMaterializedView(
       materializedView: MaterializedView?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<MaterializedView>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<MaterializedView>
 
     /// See `BigtableInstanceAdminClient.deleteMaterializedView`.
     func deleteMaterializedView(request: DeleteMaterializedViewRequest) async throws
@@ -1153,247 +1150,247 @@ extension Clients {
 
     /// See `BigtableInstanceAdminClient.createInstance`.
     func createInstance(
-      request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.createInstance`.
     func createInstance(
-      withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      withPolling: CreateInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `BigtableInstanceAdminClient.getInstance`.
     func getInstance(
-      request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Instance
 
     /// See `BigtableInstanceAdminClient.listInstances`.
     func listInstances(
-      request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListInstancesResponse
 
     /// See `BigtableInstanceAdminClient.updateInstance`.
     func updateInstance(
-      request: Instance, options: GoogleCloudGax.RequestOptions
+      request: Instance, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Instance
 
     /// See `BigtableInstanceAdminClient.partialUpdateInstance`.
     func partialUpdateInstance(
-      request: PartialUpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: PartialUpdateInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.partialUpdateInstance`.
     func partialUpdateInstance(
-      withPolling: PartialUpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      withPolling: PartialUpdateInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `BigtableInstanceAdminClient.deleteInstance`.
     func deleteInstance(
-      request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigtableInstanceAdminClient.createCluster`.
     func createCluster(
-      request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.createCluster`.
     func createCluster(
-      withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: CreateClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `BigtableInstanceAdminClient.getCluster`.
     func getCluster(
-      request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Cluster
 
     /// See `BigtableInstanceAdminClient.listClusters`.
     func listClusters(
-      request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListClustersResponse
 
     /// See `BigtableInstanceAdminClient.updateCluster`.
     func updateCluster(
-      request: Cluster, options: GoogleCloudGax.RequestOptions
+      request: Cluster, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.updateCluster`.
     func updateCluster(
-      withPolling: Cluster, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: Cluster, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `BigtableInstanceAdminClient.partialUpdateCluster`.
     func partialUpdateCluster(
-      request: PartialUpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: PartialUpdateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.partialUpdateCluster`.
     func partialUpdateCluster(
-      withPolling: PartialUpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: PartialUpdateClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `BigtableInstanceAdminClient.deleteCluster`.
     func deleteCluster(
-      request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteClusterRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigtableInstanceAdminClient.createAppProfile`.
     func createAppProfile(
-      request: CreateAppProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAppProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.AppProfile
 
     /// See `BigtableInstanceAdminClient.getAppProfile`.
     func getAppProfile(
-      request: GetAppProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAppProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.AppProfile
 
     /// See `BigtableInstanceAdminClient.listAppProfiles`.
     func listAppProfiles(
-      request: ListAppProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAppProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListAppProfilesResponse
 
     /// See `BigtableInstanceAdminClient.listAppProfiles`.
     func listAppProfiles(
-      byItem: ListAppProfilesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAppProfilesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AppProfile, Swift.Error>
 
     /// See `BigtableInstanceAdminClient.updateAppProfile`.
     func updateAppProfile(
-      request: UpdateAppProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAppProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.updateAppProfile`.
     func updateAppProfile(
-      withPolling: UpdateAppProfileRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AppProfile>
+      withPolling: UpdateAppProfileRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AppProfile>
 
     /// See `BigtableInstanceAdminClient.deleteAppProfile`.
     func deleteAppProfile(
-      request: DeleteAppProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAppProfileRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigtableInstanceAdminClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `BigtableInstanceAdminClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `BigtableInstanceAdminClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `BigtableInstanceAdminClient.listHotTablets`.
     func listHotTablets(
-      request: ListHotTabletsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListHotTabletsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListHotTabletsResponse
 
     /// See `BigtableInstanceAdminClient.listHotTablets`.
     func listHotTablets(
-      byItem: ListHotTabletsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListHotTabletsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<HotTablet, Swift.Error>
 
     /// See `BigtableInstanceAdminClient.createLogicalView`.
     func createLogicalView(
-      request: CreateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLogicalViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.createLogicalView`.
     func createLogicalView(
-      withPolling: CreateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<LogicalView>
+      withPolling: CreateLogicalViewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<LogicalView>
 
     /// See `BigtableInstanceAdminClient.getLogicalView`.
     func getLogicalView(
-      request: GetLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLogicalViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.LogicalView
 
     /// See `BigtableInstanceAdminClient.listLogicalViews`.
     func listLogicalViews(
-      request: ListLogicalViewsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLogicalViewsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListLogicalViewsResponse
 
     /// See `BigtableInstanceAdminClient.listLogicalViews`.
     func listLogicalViews(
-      byItem: ListLogicalViewsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListLogicalViewsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<LogicalView, Swift.Error>
 
     /// See `BigtableInstanceAdminClient.updateLogicalView`.
     func updateLogicalView(
-      request: UpdateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLogicalViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.updateLogicalView`.
     func updateLogicalView(
-      withPolling: UpdateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<LogicalView>
+      withPolling: UpdateLogicalViewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<LogicalView>
 
     /// See `BigtableInstanceAdminClient.deleteLogicalView`.
     func deleteLogicalView(
-      request: DeleteLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLogicalViewRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigtableInstanceAdminClient.createMaterializedView`.
     func createMaterializedView(
-      request: CreateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMaterializedViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.createMaterializedView`.
     func createMaterializedView(
-      withPolling: CreateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<MaterializedView>
+      withPolling: CreateMaterializedViewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<MaterializedView>
 
     /// See `BigtableInstanceAdminClient.getMaterializedView`.
     func getMaterializedView(
-      request: GetMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMaterializedViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.MaterializedView
 
     /// See `BigtableInstanceAdminClient.listMaterializedViews`.
     func listMaterializedViews(
-      request: ListMaterializedViewsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMaterializedViewsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListMaterializedViewsResponse
 
     /// See `BigtableInstanceAdminClient.listMaterializedViews`.
     func listMaterializedViews(
-      byItem: ListMaterializedViewsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListMaterializedViewsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<MaterializedView, Swift.Error>
 
     /// See `BigtableInstanceAdminClient.updateMaterializedView`.
     func updateMaterializedView(
-      request: UpdateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMaterializedViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BigtableInstanceAdminClient.updateMaterializedView`.
     func updateMaterializedView(
-      withPolling: UpdateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<MaterializedView>
+      withPolling: UpdateMaterializedViewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<MaterializedView>
 
     /// See `BigtableInstanceAdminClient.deleteMaterializedView`.
     func deleteMaterializedView(
-      request: DeleteMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMaterializedViewRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigtableInstanceAdminClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `BigtableInstanceAdminClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `BigtableInstanceAdminClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigtableInstanceAdminClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1407,24 +1404,24 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func createInstance(
-    request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleCloudGax
+  public func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleGax
     .PollableOperation<Instance>
   {
     try await self.createInstance(withPolling: withPolling, options: .init())
   }
 
   public func createInstance(
-    withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1433,7 +1430,7 @@ extension Clients.BigtableInstanceAdminProtocol {
     instanceId: Swift.String,
     instance: Instance?,
     clusters: [Swift.String: Cluster],
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let request = CreateInstanceRequest().with {
       $0.parent = parent
       $0.instanceId = instanceId
@@ -1450,9 +1447,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func getInstance(
-    request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Instance {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getInstance(
@@ -1471,9 +1468,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func listInstances(
-    request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListInstancesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listInstances(
@@ -1491,9 +1488,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func updateInstance(
-    request: Instance, options: GoogleCloudGax.RequestOptions
+    request: Instance, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Instance {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func partialUpdateInstance(request: PartialUpdateInstanceRequest) async throws
@@ -1503,31 +1500,31 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func partialUpdateInstance(
-    request: PartialUpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: PartialUpdateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func partialUpdateInstance(withPolling: PartialUpdateInstanceRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Instance>
+    -> any GoogleGax.PollableOperation<Instance>
   {
     try await self.partialUpdateInstance(withPolling: withPolling, options: .init())
   }
 
   public func partialUpdateInstance(
-    withPolling: PartialUpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: PartialUpdateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func partialUpdateInstance(
     instance: Instance?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let request = PartialUpdateInstanceRequest().with {
       $0.instance = instance
       $0.updateMask = updateMask
@@ -1540,9 +1537,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func deleteInstance(
-    request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteInstance(
@@ -1561,24 +1558,24 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func createCluster(
-    request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleCloudGax
+  public func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleGax
     .PollableOperation<Cluster>
   {
     try await self.createCluster(withPolling: withPolling, options: .init())
   }
 
   public func createCluster(
-    withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1586,7 +1583,7 @@ extension Clients.BigtableInstanceAdminProtocol {
     parent: Swift.String,
     clusterId: Swift.String,
     cluster: Cluster?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let request = CreateClusterRequest().with {
       $0.parent = parent
       $0.clusterId = clusterId
@@ -1602,9 +1599,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func getCluster(
-    request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.Cluster {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCluster(
@@ -1623,9 +1620,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func listClusters(
-    request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListClustersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListClustersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listClusters(
@@ -1642,24 +1639,24 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func updateCluster(
-    request: Cluster, options: GoogleCloudGax.RequestOptions
+    request: Cluster, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateCluster(withPolling: Cluster) async throws -> any GoogleCloudGax
-    .PollableOperation<Cluster>
-  {
+  public func updateCluster(withPolling: Cluster) async throws -> any GoogleGax.PollableOperation<
+    Cluster
+  > {
     try await self.updateCluster(withPolling: withPolling, options: .init())
   }
 
   public func updateCluster(
-    withPolling: Cluster, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: Cluster, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1670,31 +1667,31 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func partialUpdateCluster(
-    request: PartialUpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: PartialUpdateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func partialUpdateCluster(withPolling: PartialUpdateClusterRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Cluster>
+    -> any GoogleGax.PollableOperation<Cluster>
   {
     try await self.partialUpdateCluster(withPolling: withPolling, options: .init())
   }
 
   public func partialUpdateCluster(
-    withPolling: PartialUpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: PartialUpdateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func partialUpdateCluster(
     cluster: Cluster?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let request = PartialUpdateClusterRequest().with {
       $0.cluster = cluster
       $0.updateMask = updateMask
@@ -1707,9 +1704,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func deleteCluster(
-    request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteClusterRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteCluster(
@@ -1728,9 +1725,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func createAppProfile(
-    request: CreateAppProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAppProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.AppProfile {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createAppProfile(
@@ -1753,9 +1750,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func getAppProfile(
-    request: GetAppProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAppProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.AppProfile {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAppProfile(
@@ -1774,9 +1771,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func listAppProfiles(
-    request: ListAppProfilesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAppProfilesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListAppProfilesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAppProfiles(
@@ -1786,13 +1783,13 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func listAppProfiles(
-    byItem: ListAppProfilesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAppProfilesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AppProfile, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListAppProfilesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAppProfiles(
@@ -1811,31 +1808,31 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func updateAppProfile(
-    request: UpdateAppProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAppProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateAppProfile(withPolling: UpdateAppProfileRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AppProfile>
+  public func updateAppProfile(withPolling: UpdateAppProfileRequest) async throws -> any GoogleGax
+    .PollableOperation<AppProfile>
   {
     try await self.updateAppProfile(withPolling: withPolling, options: .init())
   }
 
   public func updateAppProfile(
-    withPolling: UpdateAppProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AppProfile> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AppProfile>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateAppProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AppProfile> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AppProfile>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateAppProfile(
     appProfile: AppProfile?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AppProfile> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<AppProfile> {
     let request = UpdateAppProfileRequest().with {
       $0.appProfile = appProfile
       $0.updateMask = updateMask
@@ -1848,9 +1845,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func deleteAppProfile(
-    request: DeleteAppProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAppProfileRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAppProfile(
@@ -1880,9 +1877,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(
@@ -1901,9 +1898,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(
@@ -1924,9 +1921,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(
@@ -1947,9 +1944,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func listHotTablets(
-    request: ListHotTabletsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListHotTabletsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListHotTabletsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listHotTablets(
@@ -1959,13 +1956,13 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func listHotTablets(
-    byItem: ListHotTabletsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListHotTabletsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<HotTablet, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListHotTabletsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listHotTablets(
@@ -1984,24 +1981,24 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func createLogicalView(
-    request: CreateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateLogicalViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createLogicalView(withPolling: CreateLogicalViewRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<LogicalView>
+  public func createLogicalView(withPolling: CreateLogicalViewRequest) async throws -> any GoogleGax
+    .PollableOperation<LogicalView>
   {
     try await self.createLogicalView(withPolling: withPolling, options: .init())
   }
 
   public func createLogicalView(
-    withPolling: CreateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LogicalView> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LogicalView>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateLogicalViewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LogicalView> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LogicalView>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2009,7 +2006,7 @@ extension Clients.BigtableInstanceAdminProtocol {
     parent: Swift.String,
     logicalView: LogicalView?,
     logicalViewId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<LogicalView> {
+  ) async throws -> any GoogleGax.PollableOperation<LogicalView> {
     let request = CreateLogicalViewRequest().with {
       $0.parent = parent
       $0.logicalView = logicalView
@@ -2025,9 +2022,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func getLogicalView(
-    request: GetLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLogicalViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.LogicalView {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getLogicalView(
@@ -2046,9 +2043,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func listLogicalViews(
-    request: ListLogicalViewsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLogicalViewsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListLogicalViewsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLogicalViews(
@@ -2058,13 +2055,13 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func listLogicalViews(
-    byItem: ListLogicalViewsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLogicalViewsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<LogicalView, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListLogicalViewsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listLogicalViews(
@@ -2083,31 +2080,31 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func updateLogicalView(
-    request: UpdateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateLogicalViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateLogicalView(withPolling: UpdateLogicalViewRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<LogicalView>
+  public func updateLogicalView(withPolling: UpdateLogicalViewRequest) async throws -> any GoogleGax
+    .PollableOperation<LogicalView>
   {
     try await self.updateLogicalView(withPolling: withPolling, options: .init())
   }
 
   public func updateLogicalView(
-    withPolling: UpdateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<LogicalView> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<LogicalView>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateLogicalViewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<LogicalView> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<LogicalView>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateLogicalView(
     logicalView: LogicalView?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<LogicalView> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<LogicalView> {
     let request = UpdateLogicalViewRequest().with {
       $0.logicalView = logicalView
       $0.updateMask = updateMask
@@ -2120,9 +2117,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func deleteLogicalView(
-    request: DeleteLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteLogicalViewRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteLogicalView(
@@ -2141,24 +2138,24 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func createMaterializedView(
-    request: CreateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateMaterializedViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createMaterializedView(withPolling: CreateMaterializedViewRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<MaterializedView>
+    -> any GoogleGax.PollableOperation<MaterializedView>
   {
     try await self.createMaterializedView(withPolling: withPolling, options: .init())
   }
 
   public func createMaterializedView(
-    withPolling: CreateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<MaterializedView> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<MaterializedView>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateMaterializedViewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<MaterializedView> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<MaterializedView>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2166,7 +2163,7 @@ extension Clients.BigtableInstanceAdminProtocol {
     parent: Swift.String,
     materializedView: MaterializedView?,
     materializedViewId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<MaterializedView> {
+  ) async throws -> any GoogleGax.PollableOperation<MaterializedView> {
     let request = CreateMaterializedViewRequest().with {
       $0.parent = parent
       $0.materializedView = materializedView
@@ -2182,9 +2179,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func getMaterializedView(
-    request: GetMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: GetMaterializedViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.MaterializedView {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getMaterializedView(
@@ -2203,9 +2200,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func listMaterializedViews(
-    request: ListMaterializedViewsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListMaterializedViewsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBigtableAdminV2.ListMaterializedViewsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listMaterializedViews(
@@ -2215,14 +2212,14 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func listMaterializedViews(
-    byItem: ListMaterializedViewsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListMaterializedViewsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<MaterializedView, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBigtableAdminV2.ListMaterializedViewsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listMaterializedViews(
@@ -2241,31 +2238,31 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func updateMaterializedView(
-    request: UpdateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateMaterializedViewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateMaterializedView(withPolling: UpdateMaterializedViewRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<MaterializedView>
+    -> any GoogleGax.PollableOperation<MaterializedView>
   {
     try await self.updateMaterializedView(withPolling: withPolling, options: .init())
   }
 
   public func updateMaterializedView(
-    withPolling: UpdateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<MaterializedView> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<MaterializedView>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateMaterializedViewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<MaterializedView> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<MaterializedView>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateMaterializedView(
     materializedView: MaterializedView?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<MaterializedView> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<MaterializedView> {
     let request = UpdateMaterializedViewRequest().with {
       $0.materializedView = materializedView
       $0.updateMask = updateMask
@@ -2278,9 +2275,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func deleteMaterializedView(
-    request: DeleteMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteMaterializedViewRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteMaterializedView(
@@ -2299,9 +2296,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -2311,13 +2308,13 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -2338,9 +2335,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -2357,9 +2354,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -2376,9 +2373,9 @@ extension Clients.BigtableInstanceAdminProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

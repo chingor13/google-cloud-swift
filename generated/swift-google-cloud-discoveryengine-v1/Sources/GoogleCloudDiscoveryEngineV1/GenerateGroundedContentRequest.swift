@@ -16,11 +16,11 @@
 
 #if GroundedGenerationService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Top-level message sent by the client for the `GenerateGroundedContent`
   /// method.
-  public struct GenerateGroundedContentRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GenerateGroundedContentRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Location resource.
@@ -66,7 +66,7 @@
     /// for more details.
     public var userLabels: [Swift.String: Swift.String] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GenerateGroundedContentRequest`.
     public init() {}
@@ -130,7 +130,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -148,7 +148,7 @@
     }
 
     /// Content generation specification.
-    public struct GenerationSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GenerationSpec: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Specifies which Vertex model id to use for generation.
@@ -179,7 +179,7 @@
       /// If specified, custom value for max output tokens will be used.
       public var maxOutputTokens: Swift.Int32? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GenerationSpec`.
       public init() {}
@@ -246,7 +246,7 @@
           Swift.Int32.self, forKey: .maxOutputTokens)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -270,16 +270,16 @@
         return
           "type.googleapis.com/google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.GenerationSpec"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Describes the options to customize dynamic retrieval.
-    public struct DynamicRetrievalConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DynamicRetrievalConfiguration: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Specification for the predictor for dynamic retrieval.
@@ -287,7 +287,7 @@
         GenerateGroundedContentRequest.DynamicRetrievalConfiguration.DynamicRetrievalPredictor? =
           nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DynamicRetrievalConfiguration`.
       public init() {}
@@ -325,7 +325,7 @@
             .self, forKey: .predictor)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -338,7 +338,7 @@
       }
 
       /// Describes the predictor settings for dynamic retrieval.
-      public struct DynamicRetrievalPredictor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct DynamicRetrievalPredictor: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// The version of the predictor to be used in dynamic retrieval.
@@ -351,8 +351,7 @@
         /// value smaller than this, it would suppress grounding in the source.
         public var threshold: Swift.Float? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `DynamicRetrievalPredictor`.
         public init() {}
@@ -396,7 +395,7 @@
           self.threshold = try container.decodeIfPresent(Swift.Float.self, forKey: .threshold)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -511,11 +510,11 @@
           return
             "type.googleapis.com/google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.DynamicRetrievalConfiguration.DynamicRetrievalPredictor"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -523,22 +522,22 @@
         return
           "type.googleapis.com/google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.DynamicRetrievalConfiguration"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Grounding source.
-    public struct GroundingSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GroundingSource: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Sources.
       public var source: OneOf_Source? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GroundingSource`.
       public init() {}
@@ -614,7 +613,7 @@
         self.source = source
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -639,7 +638,7 @@
       }
 
       /// Message to be used for grounding based on inline content.
-      public struct InlineSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct InlineSource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// List of facts to be used for grounding.
@@ -651,8 +650,7 @@
         /// sourced from) and `author` (indicating the author of the content).
         public var attributes: [Swift.String: Swift.String] = [:]
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `InlineSource`.
         public init() {}
@@ -699,7 +697,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -716,16 +714,16 @@
           return
             "type.googleapis.com/google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.GroundingSource.InlineSource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Message to be used for grounding with Vertex AI Search.
-      public struct SearchSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct SearchSource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// The resource name of the Engine to use.
@@ -750,8 +748,7 @@
         /// If set, safe search is enabled in Vertex AI Search requests.
         public var safeSearch: Swift.Bool = Swift.Bool()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `SearchSource`.
         public init() {}
@@ -804,7 +801,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -823,16 +820,16 @@
           return
             "type.googleapis.com/google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.GroundingSource.SearchSource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Google Search config parameters.
-      public struct GoogleSearchSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct GoogleSearchSource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. Specifies the dynamic retrieval configuration for the given
@@ -840,8 +837,7 @@
         public var dynamicRetrievalConfig:
           GenerateGroundedContentRequest.DynamicRetrievalConfiguration? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `GoogleSearchSource`.
         public init() {}
@@ -879,7 +875,7 @@
             forKey: .dynamicRetrievalConfig)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -896,20 +892,19 @@
           return
             "type.googleapis.com/google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.GroundingSource.GoogleSearchSource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Params for using enterprise web retrieval as grounding source.
-      public struct EnterpriseWebRetrievalSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct EnterpriseWebRetrievalSource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `EnterpriseWebRetrievalSource`.
         public init() {}
@@ -940,7 +935,7 @@
           let container = try decoder.container(keyedBy: CodingKeys.self)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -955,11 +950,11 @@
           return
             "type.googleapis.com/google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.GroundingSource.EnterpriseWebRetrievalSource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -981,22 +976,22 @@
         return
           "type.googleapis.com/google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.GroundingSource"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Grounding specification.
-    public struct GroundingSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GroundingSpec: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Grounding sources.
       public var groundingSources: [GenerateGroundedContentRequest.GroundingSource] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GroundingSpec`.
       public init() {}
@@ -1036,7 +1031,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1052,22 +1047,22 @@
         return
           "type.googleapis.com/google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.GroundingSpec"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.GenerateGroundedContentRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

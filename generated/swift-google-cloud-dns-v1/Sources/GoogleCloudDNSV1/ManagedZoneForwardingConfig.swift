@@ -15,9 +15,9 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
-public struct ManagedZoneForwardingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ManagedZoneForwardingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   public var kind: Swift.String? = nil
@@ -25,7 +25,7 @@ public struct ManagedZoneForwardingConfig: Codable, Equatable, GoogleCloudWKT._A
   /// List of target name servers to forward to. Cloud DNS selects the best available name server if more than one target is given.
   public var targetNameServers: [ManagedZoneForwardingConfigNameServerTarget] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ManagedZoneForwardingConfig`.
   public init() {}
@@ -68,7 +68,7 @@ public struct ManagedZoneForwardingConfig: Codable, Equatable, GoogleCloudWKT._A
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -84,10 +84,10 @@ public struct ManagedZoneForwardingConfig: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/.ManagedZoneForwardingConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

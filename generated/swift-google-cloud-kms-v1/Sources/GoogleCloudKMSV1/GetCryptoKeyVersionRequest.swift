@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [KeyManagementService.GetCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.GetCryptoKeyVersion].
 ///
 /// [google.cloud.kms.v1.KeyManagementService.GetCryptoKeyVersion]: <doc:KeyManagementServiceClient/getCryptoKeyVersion(request:options:)>
-public struct GetCryptoKeyVersionRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GetCryptoKeyVersionRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the
@@ -31,7 +31,7 @@ public struct GetCryptoKeyVersionRequest: Codable, Equatable, GoogleCloudWKT._An
   /// [google.cloud.kms.v1.CryptoKeyVersion.name]: <doc:CryptoKeyVersion/name>
   public var name: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GetCryptoKeyVersionRequest`.
   public init() {}
@@ -69,7 +69,7 @@ public struct GetCryptoKeyVersionRequest: Codable, Equatable, GoogleCloudWKT._An
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -84,10 +84,10 @@ public struct GetCryptoKeyVersionRequest: Codable, Equatable, GoogleCloudWKT._An
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.GetCryptoKeyVersionRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

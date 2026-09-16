@@ -15,27 +15,27 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Information about an intrusion attempt event observed on the monitored
 /// resource.
-public struct IntrusionAttemptEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IntrusionAttemptEvent: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// VM and zone in which the intrusion attempt occurred.
   public var vmResource: [Swift.String] = []
 
   /// Detected start time of the intrusion attempt.
-  public var detectedIntrusionStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var detectedIntrusionStartTime: GoogleWKT.Timestamp? = nil
 
   /// Detected end time of the intrusion attempt.
-  public var detectedIntrusionEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var detectedIntrusionEndTime: GoogleWKT.Timestamp? = nil
 
   /// The IP address(es) of the VM associated with the intrusion attempt.
   /// This field may be empty if this information is not available.
   public var vmIp: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IntrusionAttemptEvent`.
   public init() {}
@@ -78,15 +78,15 @@ public struct IntrusionAttemptEvent: Codable, Equatable, GoogleCloudWKT._AnyPack
       self.vmResource = value
     }
     self.detectedIntrusionStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .detectedIntrusionStartTime)
+      GoogleWKT.Timestamp.self, forKey: .detectedIntrusionStartTime)
     self.detectedIntrusionEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .detectedIntrusionEndTime)
+      GoogleWKT.Timestamp.self, forKey: .detectedIntrusionEndTime)
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .vmIp) {
       self.vmIp = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -105,10 +105,10 @@ public struct IntrusionAttemptEvent: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.abuseevent.logging.v1.IntrusionAttemptEvent"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

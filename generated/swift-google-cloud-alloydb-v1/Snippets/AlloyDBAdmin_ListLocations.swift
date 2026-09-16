@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudAlloyDBV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: AlloyDBAdminClient) async throws {
   let items = try client.listLocations(

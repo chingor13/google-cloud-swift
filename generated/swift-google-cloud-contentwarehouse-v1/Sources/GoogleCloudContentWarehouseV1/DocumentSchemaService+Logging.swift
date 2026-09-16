@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func createDocumentSchema(
-      request: CreateDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDocumentSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema {
       try await self._intercept(
         request: request,
         options: options,
         name: "createDocumentSchema",
         action: {
-          (r: CreateDocumentSchemaRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateDocumentSchemaRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.DocumentSchema
           in
           return try await self.inner.createDocumentSchema(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func updateDocumentSchema(
-      request: UpdateDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDocumentSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateDocumentSchema",
         action: {
-          (r: UpdateDocumentSchemaRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateDocumentSchemaRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.DocumentSchema
           in
           return try await self.inner.updateDocumentSchema(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func getDocumentSchema(
-      request: GetDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDocumentSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema {
       try await self._intercept(
         request: request,
         options: options,
         name: "getDocumentSchema",
         action: {
-          (r: GetDocumentSchemaRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetDocumentSchemaRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.DocumentSchema
           in
           return try await self.inner.getDocumentSchema(request: r, options: o)
@@ -103,27 +103,27 @@ extension Clients {
     }
 
     public func deleteDocumentSchema(
-      request: DeleteDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDocumentSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteDocumentSchema",
         action: {
-          (r: DeleteDocumentSchemaRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          (r: DeleteDocumentSchemaRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteDocumentSchema(request: r, options: o)
         })
     }
 
     public func listDocumentSchemas(
-      request: ListDocumentSchemasRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDocumentSchemasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.ListDocumentSchemasResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listDocumentSchemas",
         action: {
-          (r: ListDocumentSchemasRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDocumentSchemasRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.ListDocumentSchemasResponse
           in
           return try await self.inner.listDocumentSchemas(request: r, options: o)
@@ -131,14 +131,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

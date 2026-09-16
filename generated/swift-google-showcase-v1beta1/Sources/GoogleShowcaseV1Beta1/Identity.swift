@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// A simple identity service.
 ///
@@ -31,7 +31,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   let inner: any Clients.IdentityStub
 
   /// Creates a new `IdentityClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.IdentityStub = try Clients.IdentityTransport(options)
     inner = Clients.IdentityRetry(inner, options: options)
     if let logger = options.logger {
@@ -44,7 +44,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_CreateUser")
   public func createUser(
-    request: CreateUserRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.User {
     try await self.inner.createUser(request: request, options: options)
   }
@@ -53,7 +53,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_GetUser")
   public func getUser(
-    request: GetUserRequest, options: GoogleCloudGax.RequestOptions
+    request: GetUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.User {
     try await self.inner.getUser(request: request, options: options)
   }
@@ -62,7 +62,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_UpdateUser")
   public func updateUser(
-    request: UpdateUserRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.User {
     try await self.inner.updateUser(request: request, options: options)
   }
@@ -71,7 +71,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_DeleteUser")
   public func deleteUser(
-    request: DeleteUserRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteUserRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteUser(request: request, options: options)
   }
@@ -80,7 +80,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_ListUsers")
   public func listUsers(
-    request: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUsersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.ListUsersResponse {
     try await self.inner.listUsers(request: request, options: options)
   }
@@ -89,14 +89,14 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_ListUsers")
   public func listUsers(
-    byItem: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUsersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<User, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleShowcaseV1Beta1.ListUsersResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listUsers(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Locations][google.cloud.location.Locations] service functionality in this service.
@@ -105,7 +105,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -116,7 +116,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -124,7 +124,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Locations][google.cloud.location.Locations] service functionality in this service.
@@ -133,7 +133,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -144,7 +144,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -155,7 +155,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -166,7 +166,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -177,7 +177,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -188,7 +188,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -196,7 +196,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -205,7 +205,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -216,7 +216,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -227,7 +227,7 @@ public final class IdentityClient: Clients.IdentityProtocol, Sendable {
   ///
   /// @Snippet(path: "Identity_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -327,82 +327,82 @@ extension Clients {
 
     /// See `IdentityClient.createUser`.
     func createUser(
-      request: CreateUserRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateUserRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.User
 
     /// See `IdentityClient.getUser`.
     func getUser(
-      request: GetUserRequest, options: GoogleCloudGax.RequestOptions
+      request: GetUserRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.User
 
     /// See `IdentityClient.updateUser`.
     func updateUser(
-      request: UpdateUserRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateUserRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.User
 
     /// See `IdentityClient.deleteUser`.
     func deleteUser(
-      request: DeleteUserRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteUserRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `IdentityClient.listUsers`.
     func listUsers(
-      request: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUsersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.ListUsersResponse
 
     /// See `IdentityClient.listUsers`.
     func listUsers(
-      byItem: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListUsersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<User, Swift.Error>
 
     /// See `IdentityClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `IdentityClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `IdentityClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `IdentityClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `IdentityClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `IdentityClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `IdentityClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `IdentityClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `IdentityClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `IdentityClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -414,9 +414,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func createUser(
-    request: CreateUserRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.User {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getUser(request: GetUserRequest) async throws -> GoogleShowcaseV1Beta1.User {
@@ -424,9 +424,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func getUser(
-    request: GetUserRequest, options: GoogleCloudGax.RequestOptions
+    request: GetUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.User {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getUser(
@@ -443,9 +443,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func updateUser(
-    request: UpdateUserRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.User {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteUser(request: DeleteUserRequest) async throws {
@@ -453,9 +453,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func deleteUser(
-    request: DeleteUserRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteUserRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteUser(
@@ -474,9 +474,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func listUsers(
-    request: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUsersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.ListUsersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listUsers(
@@ -486,12 +486,12 @@ extension Clients.IdentityProtocol {
   }
 
   public func listUsers(
-    byItem: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUsersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<User, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleShowcaseV1Beta1.ListUsersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -501,9 +501,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -513,13 +513,13 @@ extension Clients.IdentityProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -529,9 +529,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -541,9 +541,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -553,9 +553,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -565,9 +565,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -577,9 +577,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -589,13 +589,13 @@ extension Clients.IdentityProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -616,9 +616,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -635,9 +635,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -654,9 +654,9 @@ extension Clients.IdentityProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

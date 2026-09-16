@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Private password leak verification info.
-public struct PrivatePasswordLeakVerification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PrivatePasswordLeakVerification: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Exactly 26-bit prefix of the SHA-256 hash of the canonicalized
@@ -41,7 +41,7 @@ public struct PrivatePasswordLeakVerification: Codable, Equatable, GoogleCloudWK
   /// password leaks within `encrypted_leak_match_prefixes`.
   public var reencryptedUserCredentialsHash: Foundation.Data = Foundation.Data()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PrivatePasswordLeakVerification`.
   public init() {}
@@ -102,7 +102,7 @@ public struct PrivatePasswordLeakVerification: Codable, Equatable, GoogleCloudWK
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -121,10 +121,10 @@ public struct PrivatePasswordLeakVerification: Codable, Equatable, GoogleCloudWK
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

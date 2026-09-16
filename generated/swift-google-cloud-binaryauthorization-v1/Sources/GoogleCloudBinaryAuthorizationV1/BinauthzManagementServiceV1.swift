@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Google Cloud Management Service for Binary Authorization admission policies
 /// and attestation authorities.
@@ -40,7 +40,7 @@ public final class BinauthzManagementServiceV1Client: Clients.BinauthzManagement
   let inner: any Clients.BinauthzManagementServiceV1Stub
 
   /// Creates a new `BinauthzManagementServiceV1Client` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.BinauthzManagementServiceV1Stub =
       try Clients.BinauthzManagementServiceV1Transport(options)
     inner = Clients.BinauthzManagementServiceV1Retry(inner, options: options)
@@ -66,7 +66,7 @@ public final class BinauthzManagementServiceV1Client: Clients.BinauthzManagement
   ///
   /// @Snippet(path: "BinauthzManagementServiceV1_GetPolicy")
   public func getPolicy(
-    request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
     try await self.inner.getPolicy(request: request, options: options)
   }
@@ -82,7 +82,7 @@ public final class BinauthzManagementServiceV1Client: Clients.BinauthzManagement
   ///
   /// @Snippet(path: "BinauthzManagementServiceV1_UpdatePolicy")
   public func updatePolicy(
-    request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
     try await self.inner.updatePolicy(request: request, options: options)
   }
@@ -98,7 +98,7 @@ public final class BinauthzManagementServiceV1Client: Clients.BinauthzManagement
   ///
   /// @Snippet(path: "BinauthzManagementServiceV1_CreateAttestor")
   public func createAttestor(
-    request: CreateAttestorRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAttestorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
     try await self.inner.createAttestor(request: request, options: options)
   }
@@ -111,7 +111,7 @@ public final class BinauthzManagementServiceV1Client: Clients.BinauthzManagement
   ///
   /// @Snippet(path: "BinauthzManagementServiceV1_GetAttestor")
   public func getAttestor(
-    request: GetAttestorRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAttestorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
     try await self.inner.getAttestor(request: request, options: options)
   }
@@ -124,7 +124,7 @@ public final class BinauthzManagementServiceV1Client: Clients.BinauthzManagement
   ///
   /// @Snippet(path: "BinauthzManagementServiceV1_UpdateAttestor")
   public func updateAttestor(
-    request: UpdateAttestorRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAttestorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
     try await self.inner.updateAttestor(request: request, options: options)
   }
@@ -136,7 +136,7 @@ public final class BinauthzManagementServiceV1Client: Clients.BinauthzManagement
   ///
   /// @Snippet(path: "BinauthzManagementServiceV1_ListAttestors")
   public func listAttestors(
-    request: ListAttestorsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAttestorsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.ListAttestorsResponse {
     try await self.inner.listAttestors(request: request, options: options)
   }
@@ -148,7 +148,7 @@ public final class BinauthzManagementServiceV1Client: Clients.BinauthzManagement
   ///
   /// @Snippet(path: "BinauthzManagementServiceV1_ListAttestors")
   public func listAttestors(
-    byItem: ListAttestorsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAttestorsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Attestor, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBinaryAuthorizationV1.ListAttestorsResponse
@@ -157,7 +157,7 @@ public final class BinauthzManagementServiceV1Client: Clients.BinauthzManagement
       request.pageToken = token
       return try await self.listAttestors(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes an [attestor][google.cloud.binaryauthorization.v1.Attestor].
@@ -168,7 +168,7 @@ public final class BinauthzManagementServiceV1Client: Clients.BinauthzManagement
   ///
   /// @Snippet(path: "BinauthzManagementServiceV1_DeleteAttestor")
   public func deleteAttestor(
-    request: DeleteAttestorRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAttestorRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteAttestor(request: request, options: options)
   }
@@ -181,7 +181,7 @@ public final class BinauthzManagementServiceV1Client: Clients.BinauthzManagement
   ///
   /// @Snippet(path: "BinauthzManagementServiceV1_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -191,7 +191,7 @@ public final class BinauthzManagementServiceV1Client: Clients.BinauthzManagement
   ///
   /// @Snippet(path: "BinauthzManagementServiceV1_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -206,7 +206,7 @@ public final class BinauthzManagementServiceV1Client: Clients.BinauthzManagement
   ///
   /// @Snippet(path: "BinauthzManagementServiceV1_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -300,57 +300,57 @@ extension Clients {
 
     /// See `BinauthzManagementServiceV1Client.getPolicy`.
     func getPolicy(
-      request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy
 
     /// See `BinauthzManagementServiceV1Client.updatePolicy`.
     func updatePolicy(
-      request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy
 
     /// See `BinauthzManagementServiceV1Client.createAttestor`.
     func createAttestor(
-      request: CreateAttestorRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAttestorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor
 
     /// See `BinauthzManagementServiceV1Client.getAttestor`.
     func getAttestor(
-      request: GetAttestorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAttestorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor
 
     /// See `BinauthzManagementServiceV1Client.updateAttestor`.
     func updateAttestor(
-      request: UpdateAttestorRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAttestorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor
 
     /// See `BinauthzManagementServiceV1Client.listAttestors`.
     func listAttestors(
-      request: ListAttestorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAttestorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBinaryAuthorizationV1.ListAttestorsResponse
 
     /// See `BinauthzManagementServiceV1Client.listAttestors`.
     func listAttestors(
-      byItem: ListAttestorsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAttestorsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Attestor, Swift.Error>
 
     /// See `BinauthzManagementServiceV1Client.deleteAttestor`.
     func deleteAttestor(
-      request: DeleteAttestorRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAttestorRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BinauthzManagementServiceV1Client.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `BinauthzManagementServiceV1Client.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `BinauthzManagementServiceV1Client.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
   }
 }
@@ -364,9 +364,9 @@ extension Clients.BinauthzManagementServiceV1Protocol {
   }
 
   public func getPolicy(
-    request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPolicy(
@@ -385,9 +385,9 @@ extension Clients.BinauthzManagementServiceV1Protocol {
   }
 
   public func updatePolicy(
-    request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updatePolicy(
@@ -406,9 +406,9 @@ extension Clients.BinauthzManagementServiceV1Protocol {
   }
 
   public func createAttestor(
-    request: CreateAttestorRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAttestorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createAttestor(
@@ -431,9 +431,9 @@ extension Clients.BinauthzManagementServiceV1Protocol {
   }
 
   public func getAttestor(
-    request: GetAttestorRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAttestorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAttestor(
@@ -452,9 +452,9 @@ extension Clients.BinauthzManagementServiceV1Protocol {
   }
 
   public func updateAttestor(
-    request: UpdateAttestorRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAttestorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.Attestor {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAttestor(
@@ -473,9 +473,9 @@ extension Clients.BinauthzManagementServiceV1Protocol {
   }
 
   public func listAttestors(
-    request: ListAttestorsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAttestorsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBinaryAuthorizationV1.ListAttestorsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAttestors(
@@ -485,14 +485,14 @@ extension Clients.BinauthzManagementServiceV1Protocol {
   }
 
   public func listAttestors(
-    byItem: ListAttestorsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAttestorsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Attestor, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBinaryAuthorizationV1.ListAttestorsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAttestors(
@@ -509,9 +509,9 @@ extension Clients.BinauthzManagementServiceV1Protocol {
   }
 
   public func deleteAttestor(
-    request: DeleteAttestorRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAttestorRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAttestor(
@@ -530,9 +530,9 @@ extension Clients.BinauthzManagementServiceV1Protocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -542,9 +542,9 @@ extension Clients.BinauthzManagementServiceV1Protocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -554,8 +554,8 @@ extension Clients.BinauthzManagementServiceV1Protocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

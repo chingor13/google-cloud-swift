@@ -20,9 +20,9 @@
   import Foundation
   import GoogleCloudDialogflowV2
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
+  import GoogleWKT
 
   func sample(client: DocumentsClient, projectId: String, knowledgeBaseId: String) async throws {
     let poller = try await client.createDocument(

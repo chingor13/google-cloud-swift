@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request of [ListGcpUserAccessBindings]
 /// [google.identity.accesscontextmanager.v1.AccessContextManager.ListGcpUserAccessBindings].
-public struct ListGcpUserAccessBindingsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ListGcpUserAccessBindingsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Example: "organizations/256"
@@ -35,7 +35,7 @@ public struct ListGcpUserAccessBindingsRequest: Codable, Equatable, GoogleCloudW
   /// from your previous list operation.
   public var pageToken: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListGcpUserAccessBindingsRequest`.
   public init() {}
@@ -83,7 +83,7 @@ public struct ListGcpUserAccessBindingsRequest: Codable, Equatable, GoogleCloudW
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,10 +101,10 @@ public struct ListGcpUserAccessBindingsRequest: Codable, Equatable, GoogleCloudW
     return
       "type.googleapis.com/google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

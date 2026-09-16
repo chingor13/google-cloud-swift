@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request message for [UpdateFramework][].
-public struct UpdateFrameworkRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateFrameworkRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. A field mask is used to specify the fields to be overwritten in
@@ -26,7 +26,7 @@ public struct UpdateFrameworkRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// `update_mask` are relative to the resource, not the full request. A field
   /// is overwritten if it is in the mask. If you don't provide a mask then all
   /// fields present in the request will be overwritten.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Required. The resource that is being updated.
   public var framework: Framework? = nil
@@ -34,7 +34,7 @@ public struct UpdateFrameworkRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// Optional. The major version ID of the framework to update.
   public var majorRevisionId: Swift.Int64 = Swift.Int64()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateFrameworkRequest`.
   public init() {}
@@ -71,15 +71,14 @@ public struct UpdateFrameworkRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.framework = try container.decodeIfPresent(Framework.self, forKey: .framework)
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .majorRevisionId) {
       self.majorRevisionId = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,10 +95,10 @@ public struct UpdateFrameworkRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.cloudsecuritycompliance.v1.UpdateFrameworkRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,51 +16,51 @@
 
 #if IdentityMappingStoreService
   import Foundation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol IdentityMappingStoreServiceStub: Sendable {
       func createIdentityMappingStore(
-        request: CreateIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.IdentityMappingStore
 
       func getIdentityMappingStore(
-        request: GetIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: GetIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.IdentityMappingStore
 
       func deleteIdentityMappingStore(
-        request: DeleteIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func importIdentityMappings(
-        request: ImportIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportIdentityMappingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func purgeIdentityMappings(
-        request: PurgeIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+        request: PurgeIdentityMappingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func listIdentityMappings(
-        request: ListIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListIdentityMappingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingsResponse
 
       func listIdentityMappingStores(
-        request: ListIdentityMappingStoresRequest, options: GoogleCloudGax.RequestOptions
+        request: ListIdentityMappingStoresRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingStoresResponse
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

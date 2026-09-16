@@ -16,14 +16,13 @@
 
 #if ModelService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [ModelService.BatchImportModelEvaluationSlices][google.cloud.aiplatform.v1.ModelService.BatchImportModelEvaluationSlices]
   ///
   /// [google.cloud.aiplatform.v1.ModelService.BatchImportModelEvaluationSlices]: <doc:ModelServiceClient/batchImportModelEvaluationSlices(request:options:)>
-  public struct BatchImportModelEvaluationSlicesRequest: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
+  public struct BatchImportModelEvaluationSlicesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The name of the parent ModelEvaluation resource.
@@ -34,7 +33,7 @@
     /// Required. Model evaluation slice resource to be imported.
     public var modelEvaluationSlices: [ModelEvaluationSlice] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BatchImportModelEvaluationSlicesRequest`.
     public init() {}
@@ -79,7 +78,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -96,11 +95,11 @@
       return
         "type.googleapis.com/google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

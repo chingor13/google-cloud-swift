@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metadata that describes the training and serving parameters of a
 /// [Model][google.cloud.retail.v2.Model]. A
@@ -25,7 +25,7 @@ import Foundation
 ///
 /// [google.cloud.retail.v2.Model]: <doc:Model>
 /// [google.cloud.retail.v2.ServingConfig]: <doc:ServingConfig>
-public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Model: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The fully qualified resource name of the model.
@@ -57,12 +57,12 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var servingState: Model.ServingState = Model.ServingState()
 
   /// Output only. Timestamp the Recommendation Model was created at.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Timestamp the Recommendation Model was last updated. E.g.
   /// if a Recommendation Model was paused - this would be the time the pause was
   /// initiated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Required. The type of model e.g. `home-page`.
   ///
@@ -118,7 +118,7 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var periodicTuningState: Model.PeriodicTuningState = Model.PeriodicTuningState()
 
   /// Output only. The timestamp when the latest successful tune finished.
-  public var lastTuneTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastTuneTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The tune operation associated with the model.
   ///
@@ -147,7 +147,7 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Additional model features config.
   public var modelFeaturesConfig: Model.ModelFeaturesConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Model`.
   public init() {}
@@ -220,10 +220,8 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Model.ServingState.self, forKey: .servingState) {
       self.servingState = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .type) {
       self.type = value
     }
@@ -237,7 +235,7 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.periodicTuningState = value
     }
     self.lastTuneTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastTuneTime)
+      GoogleWKT.Timestamp.self, forKey: .lastTuneTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .tuningOperation) {
       self.tuningOperation = value
     }
@@ -258,7 +256,7 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       Model.ModelFeaturesConfig.self, forKey: .modelFeaturesConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -286,14 +284,14 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Represents an ordered combination of valid serving configs, which
   /// can be used for `PAGE_OPTIMIZATION` recommendations.
-  public struct ServingConfigList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ServingConfigList: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. A set of valid serving configs that may be used for
     /// `PAGE_OPTIMIZATION`.
     public var servingConfigIds: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ServingConfigList`.
     public init() {}
@@ -331,7 +329,7 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -346,17 +344,16 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Model.ServingConfigList"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Additional configs for the frequently-bought-together model type.
-  public struct FrequentlyBoughtTogetherFeaturesConfig: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
+  public struct FrequentlyBoughtTogetherFeaturesConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Specifies the context of the model when it is used in predict
@@ -367,7 +364,7 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.cloud.retail.v2.Model.ContextProductsType.MULTIPLE_CONTEXT_PRODUCTS]: <doc:Model/ContextProductsType/multipleContextProducts>
     public var contextProductsType: Model.ContextProductsType = Model.ContextProductsType()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FrequentlyBoughtTogetherFeaturesConfig`.
     public init() {}
@@ -407,7 +404,7 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -423,21 +420,21 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.retail.v2.Model.FrequentlyBoughtTogetherFeaturesConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Additional model features config.
-  public struct ModelFeaturesConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ModelFeaturesConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var typeDedicatedConfig: OneOf_TypeDedicatedConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ModelFeaturesConfig`.
     public init() {}
@@ -491,7 +488,7 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.typeDedicatedConfig = typeDedicatedConfig
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -517,11 +514,11 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.Model.ModelFeaturesConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1087,10 +1084,10 @@ public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.Model"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

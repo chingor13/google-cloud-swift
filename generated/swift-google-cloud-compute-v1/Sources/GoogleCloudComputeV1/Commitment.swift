@@ -16,7 +16,7 @@
 
 #if RegionCommitments
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a regional resource-based commitment resource.
   ///
@@ -25,7 +25,7 @@
   /// You can purchase resource-based commitments for both hardware and software
   /// resources. For more information, read
   /// Resource-based committed use discounts
-  public struct Commitment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Commitment: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Specifies whether to automatically renew the commitment at the end of its
@@ -158,7 +158,7 @@
     /// applies only to eligible resources of general purpose N1 machine series.
     public var type: Commitment.Type_? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Commitment`.
     public init() {}
@@ -281,7 +281,7 @@
       self.type = try container.decodeIfPresent(Commitment.Type_.self, forKey: .type)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1010,11 +1010,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Commitment"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

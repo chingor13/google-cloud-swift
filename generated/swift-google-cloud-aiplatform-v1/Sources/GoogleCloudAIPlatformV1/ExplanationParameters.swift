@@ -16,10 +16,10 @@
 
 #if DatasetService || DeploymentResourcePoolService || EndpointService || JobService || ModelService || PipelineService || PredictionService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Parameters to configure explaining for Model's predictions.
-  public struct ExplanationParameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExplanationParameters: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// If populated, returns attributions for top K indices of outputs
@@ -43,11 +43,11 @@
     ///
     /// [google.cloud.aiplatform.v1.Attribution.output_index]: <doc:Attribution/outputIndex>
     /// [google.cloud.aiplatform.v1.ExplanationParameters.top_k]: <doc:ExplanationParameters/topK>
-    public var outputIndices: GoogleCloudWKT.ListValue? = nil
+    public var outputIndices: GoogleWKT.ListValue? = nil
 
     public var method: OneOf_Method? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExplanationParameters`.
     public init() {}
@@ -95,7 +95,7 @@
         self.topK = value
       }
       self.outputIndices = try container.decodeIfPresent(
-        GoogleCloudWKT.ListValue.self, forKey: .outputIndices)
+        GoogleWKT.ListValue.self, forKey: .outputIndices)
 
       var method: OneOf_Method? = nil
       let methodCheckAndSet = {
@@ -128,7 +128,7 @@
       self.method = method
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -182,11 +182,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ExplanationParameters"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

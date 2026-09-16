@@ -16,42 +16,41 @@
 
 #if TargetHttpProxies
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol TargetHttpProxiesStub: Sendable {
       func aggregatedList(
-        request: TargetHttpProxiesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetHttpProxiesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpProxyAggregatedList
 
       func delete(
-        request: TargetHttpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetHttpProxiesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: TargetHttpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetHttpProxiesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpProxy
 
       func insert(
-        request: TargetHttpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetHttpProxiesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: TargetHttpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetHttpProxiesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpProxyList
 
       func patch(
-        request: TargetHttpProxiesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetHttpProxiesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setUrlMap(
-        request: TargetHttpProxiesClient.SetUrlMapRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetHttpProxiesClient.SetUrlMapRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

@@ -15,91 +15,91 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AwsClustersStub: Sendable {
     func createAwsCluster(
-      request: CreateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAwsClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateAwsCluster(
-      request: UpdateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAwsClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getAwsCluster(
-      request: GetAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAwsClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AwsCluster
 
     func listAwsClusters(
-      request: ListAwsClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAwsClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.ListAwsClustersResponse
 
     func deleteAwsCluster(
-      request: DeleteAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAwsClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func generateAwsClusterAgentToken(
-      request: GenerateAwsClusterAgentTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAwsClusterAgentTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.GenerateAwsClusterAgentTokenResponse
 
     func generateAwsAccessToken(
-      request: GenerateAwsAccessTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAwsAccessTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.GenerateAwsAccessTokenResponse
 
     func createAwsNodePool(
-      request: CreateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAwsNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateAwsNodePool(
-      request: UpdateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAwsNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func rollbackAwsNodePoolUpdate(
-      request: RollbackAwsNodePoolUpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: RollbackAwsNodePoolUpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getAwsNodePool(
-      request: GetAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAwsNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AwsNodePool
 
     func listAwsNodePools(
-      request: ListAwsNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAwsNodePoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.ListAwsNodePoolsResponse
 
     func deleteAwsNodePool(
-      request: DeleteAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAwsNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getAwsOpenIdConfig(
-      request: GetAwsOpenIdConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAwsOpenIdConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AwsOpenIdConfig
 
     func getAwsJsonWebKeys(
-      request: GetAwsJsonWebKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAwsJsonWebKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AwsJsonWebKeys
 
     func getAwsServerConfig(
-      request: GetAwsServerConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAwsServerConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AwsServerConfig
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

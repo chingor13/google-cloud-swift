@@ -15,49 +15,49 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ServiceMonitoringServiceStub: Sendable {
     func createService(
-      request: CreateServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Service
 
     func getService(
-      request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Service
 
     func listServices(
-      request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListServicesResponse
 
     func updateService(
-      request: UpdateServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Service
 
     func deleteService(
-      request: DeleteServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createServiceLevelObjective(
-      request: CreateServiceLevelObjectiveRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServiceLevelObjectiveRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ServiceLevelObjective
 
     func getServiceLevelObjective(
-      request: GetServiceLevelObjectiveRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceLevelObjectiveRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ServiceLevelObjective
 
     func listServiceLevelObjectives(
-      request: ListServiceLevelObjectivesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServiceLevelObjectivesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListServiceLevelObjectivesResponse
 
     func updateServiceLevelObjective(
-      request: UpdateServiceLevelObjectiveRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServiceLevelObjectiveRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ServiceLevelObjective
 
     func deleteServiceLevelObjective(
-      request: DeleteServiceLevelObjectiveRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceLevelObjectiveRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

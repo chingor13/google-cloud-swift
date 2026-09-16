@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request for the `ConfigureDnsSettings` method.
-public struct ConfigureDnsSettingsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ConfigureDnsSettingsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the `Registration` whose DNS settings are being updated,
@@ -37,12 +37,12 @@ public struct ConfigureDnsSettingsRequest: Codable, Equatable, GoogleCloudWKT._A
   /// provider's field name as part of the field mask. For example, when changing
   /// from a Google Domains DNS configuration to a Custom DNS configuration, the
   /// `update_mask` is `"custom_dns"`. //
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Validate the request without actually updating the DNS settings.
   public var validateOnly: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ConfigureDnsSettingsRequest`.
   public init() {}
@@ -85,14 +85,13 @@ public struct ConfigureDnsSettingsRequest: Codable, Equatable, GoogleCloudWKT._A
       self.registration = value
     }
     self.dnsSettings = try container.decodeIfPresent(DnsSettings.self, forKey: .dnsSettings)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .validateOnly) {
       self.validateOnly = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -110,10 +109,10 @@ public struct ConfigureDnsSettingsRequest: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.domains.v1.ConfigureDnsSettingsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

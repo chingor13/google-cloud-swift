@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// use case 4
 /// A log entry when modification(creation, update, deletion) is made to a
 /// restore.
-public struct RestoreChange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RestoreChange: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The full name of the Restore resource that is being modified.
@@ -33,7 +33,7 @@ public struct RestoreChange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var changeType: ChangeType = ChangeType()
 
   /// Modification details.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// The input Restore resource with the updated fields populated to update
   /// the source Restore to.
@@ -42,7 +42,7 @@ public struct RestoreChange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The error code and message.
   public var error: GoogleRpc.Status? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RestoreChange`.
   public init() {}
@@ -89,13 +89,12 @@ public struct RestoreChange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(ChangeType.self, forKey: .changeType) {
       self.changeType = value
     }
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.inputRestore = try container.decodeIfPresent(LoggedRestore.self, forKey: .inputRestore)
     self.error = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .error)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -114,10 +113,10 @@ public struct RestoreChange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkebackup.logging.v1.RestoreChange"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

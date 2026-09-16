@@ -18,27 +18,27 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class CompanyServiceRetry: CompanyServiceStub {
     let inner: any CompanyServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any CompanyServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any CompanyServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@ extension Clients {
     }
 
     public func createCompany(
-      request: CreateCompanyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCompanyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Company {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateCompanyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateCompanyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTalentV4.Company
           in
           return try await self.inner.createCompany(request: r, options: o)
@@ -65,14 +65,14 @@ extension Clients {
     }
 
     public func getCompany(
-      request: GetCompanyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCompanyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Company {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetCompanyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCompanyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTalentV4.Company
           in
           return try await self.inner.getCompany(request: r, options: o)
@@ -80,14 +80,14 @@ extension Clients {
     }
 
     public func updateCompany(
-      request: UpdateCompanyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCompanyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Company {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateCompanyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateCompanyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTalentV4.Company
           in
           return try await self.inner.updateCompany(request: r, options: o)
@@ -95,27 +95,26 @@ extension Clients {
     }
 
     public func deleteCompany(
-      request: DeleteCompanyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCompanyRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: {
-          (r: DeleteCompanyRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteCompanyRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteCompany(request: r, options: o)
         })
     }
 
     public func listCompanies(
-      request: ListCompaniesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCompaniesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.ListCompaniesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListCompaniesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCompaniesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTalentV4.ListCompaniesResponse
           in
           return try await self.inner.listCompanies(request: r, options: o)
@@ -123,14 +122,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

@@ -15,86 +15,86 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DataTableServiceStub: Sendable {
     func createDataTable(
-      request: CreateDataTableRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DataTable
 
     func listDataTables(
-      request: ListDataTablesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataTablesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListDataTablesResponse
 
     func getDataTable(
-      request: GetDataTableRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DataTable
 
     func updateDataTable(
-      request: UpdateDataTableRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DataTable
 
     func deleteDataTable(
-      request: DeleteDataTableRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataTableRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createDataTableRow(
-      request: CreateDataTableRowRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataTableRowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DataTableRow
 
     func updateDataTableRow(
-      request: UpdateDataTableRowRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataTableRowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DataTableRow
 
     func listDataTableRows(
-      request: ListDataTableRowsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataTableRowsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListDataTableRowsResponse
 
     func getDataTableRow(
-      request: GetDataTableRowRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataTableRowRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DataTableRow
 
     func deleteDataTableRow(
-      request: DeleteDataTableRowRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataTableRowRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func bulkCreateDataTableRows(
-      request: BulkCreateDataTableRowsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkCreateDataTableRowsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.BulkCreateDataTableRowsResponse
 
     func bulkGetDataTableRows(
-      request: BulkGetDataTableRowsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkGetDataTableRowsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.BulkGetDataTableRowsResponse
 
     func bulkReplaceDataTableRows(
-      request: BulkReplaceDataTableRowsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkReplaceDataTableRowsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.BulkReplaceDataTableRowsResponse
 
     func bulkUpdateDataTableRows(
-      request: BulkUpdateDataTableRowsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkUpdateDataTableRowsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.BulkUpdateDataTableRowsResponse
 
     func getDataTableOperationErrors(
-      request: GetDataTableOperationErrorsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataTableOperationErrorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DataTableOperationErrors
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Provides interfaces for managing [Cloud KMS
 /// Autokey](https://cloud.google.com/kms/help/autokey) folder-level or
@@ -42,7 +42,7 @@ public final class AutokeyAdminClient: Clients.AutokeyAdminProtocol, Sendable {
   let inner: any Clients.AutokeyAdminStub
 
   /// Creates a new `AutokeyAdminClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.AutokeyAdminStub = try Clients.AutokeyAdminTransport(options)
     inner = Clients.AutokeyAdminRetry(inner, options: options)
     if let logger = options.logger {
@@ -65,7 +65,7 @@ public final class AutokeyAdminClient: Clients.AutokeyAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AutokeyAdmin_UpdateAutokeyConfig")
   public func updateAutokeyConfig(
-    request: UpdateAutokeyConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAutokeyConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.AutokeyConfig {
     try await self.inner.updateAutokeyConfig(request: request, options: options)
   }
@@ -77,7 +77,7 @@ public final class AutokeyAdminClient: Clients.AutokeyAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AutokeyAdmin_GetAutokeyConfig")
   public func getAutokeyConfig(
-    request: GetAutokeyConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAutokeyConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.AutokeyConfig {
     try await self.inner.getAutokeyConfig(request: request, options: options)
   }
@@ -86,7 +86,7 @@ public final class AutokeyAdminClient: Clients.AutokeyAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AutokeyAdmin_ShowEffectiveAutokeyConfig")
   public func showEffectiveAutokeyConfig(
-    request: ShowEffectiveAutokeyConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: ShowEffectiveAutokeyConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ShowEffectiveAutokeyConfigResponse {
     try await self.inner.showEffectiveAutokeyConfig(request: request, options: options)
   }
@@ -112,7 +112,7 @@ public final class AutokeyAdminClient: Clients.AutokeyAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AutokeyAdmin_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -138,7 +138,7 @@ public final class AutokeyAdminClient: Clients.AutokeyAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AutokeyAdmin_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -146,14 +146,14 @@ public final class AutokeyAdminClient: Clients.AutokeyAdminProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "AutokeyAdmin_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -166,7 +166,7 @@ public final class AutokeyAdminClient: Clients.AutokeyAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AutokeyAdmin_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -176,7 +176,7 @@ public final class AutokeyAdminClient: Clients.AutokeyAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AutokeyAdmin_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -191,7 +191,7 @@ public final class AutokeyAdminClient: Clients.AutokeyAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AutokeyAdmin_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -202,7 +202,7 @@ public final class AutokeyAdminClient: Clients.AutokeyAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AutokeyAdmin_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -222,7 +222,7 @@ extension Clients {
     /// See `AutokeyAdminClient.updateAutokeyConfig`.
     func updateAutokeyConfig(
       autokeyConfig: AutokeyConfig?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudKMSV1.AutokeyConfig
 
     /// See `AutokeyAdminClient.getAutokeyConfig`.
@@ -268,47 +268,47 @@ extension Clients {
 
     /// See `AutokeyAdminClient.updateAutokeyConfig`.
     func updateAutokeyConfig(
-      request: UpdateAutokeyConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAutokeyConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.AutokeyConfig
 
     /// See `AutokeyAdminClient.getAutokeyConfig`.
     func getAutokeyConfig(
-      request: GetAutokeyConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAutokeyConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.AutokeyConfig
 
     /// See `AutokeyAdminClient.showEffectiveAutokeyConfig`.
     func showEffectiveAutokeyConfig(
-      request: ShowEffectiveAutokeyConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: ShowEffectiveAutokeyConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ShowEffectiveAutokeyConfigResponse
 
     /// See `AutokeyAdminClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `AutokeyAdminClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `AutokeyAdminClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `AutokeyAdminClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `AutokeyAdminClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `AutokeyAdminClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
   }
 }
@@ -322,14 +322,14 @@ extension Clients.AutokeyAdminProtocol {
   }
 
   public func updateAutokeyConfig(
-    request: UpdateAutokeyConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAutokeyConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.AutokeyConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAutokeyConfig(
     autokeyConfig: AutokeyConfig?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudKMSV1.AutokeyConfig {
     let request = UpdateAutokeyConfigRequest().with {
       $0.autokeyConfig = autokeyConfig
@@ -345,9 +345,9 @@ extension Clients.AutokeyAdminProtocol {
   }
 
   public func getAutokeyConfig(
-    request: GetAutokeyConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAutokeyConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.AutokeyConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAutokeyConfig(
@@ -366,9 +366,9 @@ extension Clients.AutokeyAdminProtocol {
   }
 
   public func showEffectiveAutokeyConfig(
-    request: ShowEffectiveAutokeyConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: ShowEffectiveAutokeyConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSV1.ShowEffectiveAutokeyConfigResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func showEffectiveAutokeyConfig(
@@ -387,9 +387,9 @@ extension Clients.AutokeyAdminProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -399,13 +399,13 @@ extension Clients.AutokeyAdminProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -415,9 +415,9 @@ extension Clients.AutokeyAdminProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -427,9 +427,9 @@ extension Clients.AutokeyAdminProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -439,9 +439,9 @@ extension Clients.AutokeyAdminProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -451,9 +451,9 @@ extension Clients.AutokeyAdminProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(request: GoogleLongRunning.GetOperationRequest) async throws
@@ -463,9 +463,9 @@ extension Clients.AutokeyAdminProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudVisionV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ProductSearchClient, projectId: String, locationId: String, productId: String)
   async throws
@@ -31,7 +31,7 @@ func sample(client: ProductSearchClient, projectId: String, locationId: String, 
         $0.product = Product().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/products/\(productId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

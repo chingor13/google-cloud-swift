@@ -19,8 +19,8 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func listParameters(
-      request: ListParametersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListParametersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ListParametersResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listParameters",
         action: {
-          (r: ListParametersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListParametersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudParameterManagerV1.ListParametersResponse
           in
           return try await self.inner.listParameters(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func getParameter(
-      request: GetParameterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetParameterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.Parameter {
       try await self._intercept(
         request: request,
         options: options,
         name: "getParameter",
         action: {
-          (r: GetParameterRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetParameterRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudParameterManagerV1.Parameter
           in
           return try await self.inner.getParameter(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func createParameter(
-      request: CreateParameterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateParameterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.Parameter {
       try await self._intercept(
         request: request,
         options: options,
         name: "createParameter",
         action: {
-          (r: CreateParameterRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateParameterRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudParameterManagerV1.Parameter
           in
           return try await self.inner.createParameter(request: r, options: o)
@@ -103,14 +103,14 @@ extension Clients {
     }
 
     public func updateParameter(
-      request: UpdateParameterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateParameterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.Parameter {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateParameter",
         action: {
-          (r: UpdateParameterRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateParameterRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudParameterManagerV1.Parameter
           in
           return try await self.inner.updateParameter(request: r, options: o)
@@ -118,27 +118,26 @@ extension Clients {
     }
 
     public func deleteParameter(
-      request: DeleteParameterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteParameterRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteParameter",
-        action: {
-          (r: DeleteParameterRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteParameterRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteParameter(request: r, options: o)
         })
     }
 
     public func listParameterVersions(
-      request: ListParameterVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListParameterVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ListParameterVersionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listParameterVersions",
         action: {
-          (r: ListParameterVersionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListParameterVersionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudParameterManagerV1.ListParameterVersionsResponse
           in
           return try await self.inner.listParameterVersions(request: r, options: o)
@@ -146,14 +145,14 @@ extension Clients {
     }
 
     public func getParameterVersion(
-      request: GetParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion {
       try await self._intercept(
         request: request,
         options: options,
         name: "getParameterVersion",
         action: {
-          (r: GetParameterVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetParameterVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudParameterManagerV1.ParameterVersion
           in
           return try await self.inner.getParameterVersion(request: r, options: o)
@@ -161,14 +160,14 @@ extension Clients {
     }
 
     public func renderParameterVersion(
-      request: RenderParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: RenderParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.RenderParameterVersionResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "renderParameterVersion",
         action: {
-          (r: RenderParameterVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RenderParameterVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudParameterManagerV1.RenderParameterVersionResponse
           in
           return try await self.inner.renderParameterVersion(request: r, options: o)
@@ -176,14 +175,14 @@ extension Clients {
     }
 
     public func createParameterVersion(
-      request: CreateParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion {
       try await self._intercept(
         request: request,
         options: options,
         name: "createParameterVersion",
         action: {
-          (r: CreateParameterVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateParameterVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudParameterManagerV1.ParameterVersion
           in
           return try await self.inner.createParameterVersion(request: r, options: o)
@@ -191,14 +190,14 @@ extension Clients {
     }
 
     public func updateParameterVersion(
-      request: UpdateParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateParameterVersion",
         action: {
-          (r: UpdateParameterVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateParameterVersionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudParameterManagerV1.ParameterVersion
           in
           return try await self.inner.updateParameterVersion(request: r, options: o)
@@ -206,43 +205,42 @@ extension Clients {
     }
 
     public func deleteParameterVersion(
-      request: DeleteParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteParameterVersion",
         action: {
-          (r: DeleteParameterVersionRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void
-          in
+          (r: DeleteParameterVersionRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteParameterVersion(request: r, options: o)
         })
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLocations",
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLocation",
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)

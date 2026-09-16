@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudAccessApprovalV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample() async throws {
   let client = try GoogleCloudAccessApprovalV1.AccessApprovalClient()

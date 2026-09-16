@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The other cloud starting location for discovery.
-public struct OtherCloudDiscoveryStartingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OtherCloudDiscoveryStartingLocation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The other cloud starting location for discovery.
   public var location: OneOf_Location? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OtherCloudDiscoveryStartingLocation`.
   public init() {}
@@ -76,7 +76,7 @@ public struct OtherCloudDiscoveryStartingLocation: Codable, Equatable, GoogleClo
     self.location = location
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,13 +95,13 @@ public struct OtherCloudDiscoveryStartingLocation: Codable, Equatable, GoogleClo
   }
 
   /// The AWS starting location for discovery.
-  public struct AwsDiscoveryStartingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AwsDiscoveryStartingLocation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The scope of this starting location.
     public var scope: OneOf_Scope? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AwsDiscoveryStartingLocation`.
     public init() {}
@@ -158,7 +158,7 @@ public struct OtherCloudDiscoveryStartingLocation: Codable, Equatable, GoogleClo
       self.scope = scope
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -194,11 +194,11 @@ public struct OtherCloudDiscoveryStartingLocation: Codable, Equatable, GoogleClo
       return
         "type.googleapis.com/google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -211,10 +211,10 @@ public struct OtherCloudDiscoveryStartingLocation: Codable, Equatable, GoogleClo
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

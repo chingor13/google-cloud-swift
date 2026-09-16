@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudPrivilegedAccessManagerV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: PrivilegedAccessManagerClient) async throws {
   let response = try await client.approveGrant(

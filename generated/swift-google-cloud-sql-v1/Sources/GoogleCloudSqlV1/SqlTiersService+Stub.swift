@@ -16,13 +16,13 @@
 
 #if SqlTiersService
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SqlTiersServiceStub: Sendable {
       func list(
-        request: SqlTiersListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlTiersListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.TiersListResponse
     }
   }

@@ -15,38 +15,38 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol GenerativeQuestionServiceStub: Sendable {
     func updateGenerativeQuestionsFeatureConfig(
-      request: UpdateGenerativeQuestionsFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGenerativeQuestionsFeatureConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.GenerativeQuestionsFeatureConfig
 
     func getGenerativeQuestionsFeatureConfig(
-      request: GetGenerativeQuestionsFeatureConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGenerativeQuestionsFeatureConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.GenerativeQuestionsFeatureConfig
 
     func listGenerativeQuestionConfigs(
-      request: ListGenerativeQuestionConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGenerativeQuestionConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ListGenerativeQuestionConfigsResponse
 
     func updateGenerativeQuestionConfig(
-      request: UpdateGenerativeQuestionConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGenerativeQuestionConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.GenerativeQuestionConfig
 
     func batchUpdateGenerativeQuestionConfigs(
-      request: BatchUpdateGenerativeQuestionConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchUpdateGenerativeQuestionConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.BatchUpdateGenerativeQuestionConfigsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

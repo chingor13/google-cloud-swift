@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The protocol for the `UpdateAlertPolicy` request.
-public struct UpdateAlertPolicyRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateAlertPolicyRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. A list of alerting policy field names. If this field is not
@@ -42,7 +42,7 @@ public struct UpdateAlertPolicyRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   ///     the supplied condition includes the `name` field with that
   ///     `[CONDITION_ID]`. If the supplied condition omits the `name` field,
   ///     then a new `[CONDITION_ID]` is created.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Required. The updated alerting policy or the updated values for the
   /// fields listed in `update_mask`.
@@ -50,7 +50,7 @@ public struct UpdateAlertPolicyRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   /// not in `update_mask` are ignored.
   public var alertPolicy: AlertPolicy? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateAlertPolicyRequest`.
   public init() {}
@@ -85,12 +85,11 @@ public struct UpdateAlertPolicyRequest: Codable, Equatable, GoogleCloudWKT._AnyP
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.alertPolicy = try container.decodeIfPresent(AlertPolicy.self, forKey: .alertPolicy)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -106,10 +105,10 @@ public struct UpdateAlertPolicyRequest: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.UpdateAlertPolicyRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

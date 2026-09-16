@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudDeveloperConnectV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: InsightsConfigServiceClient, projectId: String, locationId: String,

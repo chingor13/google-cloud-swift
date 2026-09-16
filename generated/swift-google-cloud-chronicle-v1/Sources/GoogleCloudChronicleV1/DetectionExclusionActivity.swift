@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The activity for a findings refinement that is a detection exclusion. The
 /// activity is broken down per detector.
-public struct DetectionExclusionActivity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DetectionExclusionActivity: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The activity for the detection exclusion broken down by detector.
   public var detectionExclusionDetectorActivities:
     [DetectionExclusionActivity.DetectionExclusionDetectorActivity] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DetectionExclusionActivity`.
   public init() {}
@@ -68,7 +68,7 @@ public struct DetectionExclusionActivity: Codable, Equatable, GoogleCloudWKT._An
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -83,7 +83,7 @@ public struct DetectionExclusionActivity: Codable, Equatable, GoogleCloudWKT._An
 
   /// The activity for a findings refinement that is a detection exclusion broken
   /// down for one specific detector.
-  public struct DetectionExclusionDetectorActivity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DetectionExclusionDetectorActivity: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The number of detections for the detector that were excluded by the
@@ -96,7 +96,7 @@ public struct DetectionExclusionActivity: Codable, Equatable, GoogleCloudWKT._An
 
     public var detectorName: OneOf_DetectorName? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DetectionExclusionDetectorActivity`.
     public init() {}
@@ -177,7 +177,7 @@ public struct DetectionExclusionActivity: Codable, Equatable, GoogleCloudWKT._An
       self.detectorName = detectorName
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -230,21 +230,21 @@ public struct DetectionExclusionActivity: Codable, Equatable, GoogleCloudWKT._An
       return
         "type.googleapis.com/google.cloud.chronicle.v1.DetectionExclusionActivity.DetectionExclusionDetectorActivity"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.chronicle.v1.DetectionExclusionActivity"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

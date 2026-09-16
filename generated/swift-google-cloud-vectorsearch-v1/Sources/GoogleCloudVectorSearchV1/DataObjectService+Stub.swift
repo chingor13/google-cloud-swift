@@ -16,62 +16,62 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DataObjectServiceStub: Sendable {
     func createDataObject(
-      request: CreateDataObjectRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataObjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVectorSearchV1.DataObject
 
     func batchCreateDataObjects(
-      request: BatchCreateDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreateDataObjectsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVectorSearchV1.BatchCreateDataObjectsResponse
 
     func getDataObject(
-      request: GetDataObjectRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataObjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVectorSearchV1.DataObject
 
     func updateDataObject(
-      request: UpdateDataObjectRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataObjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVectorSearchV1.DataObject
 
     func batchUpdateDataObjects(
-      request: BatchUpdateDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchUpdateDataObjectsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVectorSearchV1.BatchUpdateDataObjectsResponse
 
     func deleteDataObject(
-      request: DeleteDataObjectRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataObjectRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func batchDeleteDataObjects(
-      request: BatchDeleteDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchDeleteDataObjectsRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

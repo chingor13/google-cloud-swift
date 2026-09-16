@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Status event.
-public struct StatusEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StatusEvent: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Type of the event.
@@ -28,7 +28,7 @@ public struct StatusEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var description: Swift.String = Swift.String()
 
   /// The time this event occurred.
-  public var eventTime: GoogleCloudWKT.Timestamp? = nil
+  public var eventTime: GoogleWKT.Timestamp? = nil
 
   /// Task Execution.
   /// This field is only defined for task-level status events where the task
@@ -39,7 +39,7 @@ public struct StatusEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// This field is only defined for task-level status events.
   public var taskState: TaskStatus.State = TaskStatus.State()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StatusEvent`.
   public init() {}
@@ -86,15 +86,14 @@ public struct StatusEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
-    self.eventTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .eventTime)
+    self.eventTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .eventTime)
     self.taskExecution = try container.decodeIfPresent(TaskExecution.self, forKey: .taskExecution)
     if let value = try container.decodeIfPresent(TaskStatus.State.self, forKey: .taskState) {
       self.taskState = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -113,10 +112,10 @@ public struct StatusEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.batch.v1.StatusEvent"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Input asset.
-public struct Input: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Input: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A unique key for this input. Must be specified when using advanced
@@ -41,7 +41,7 @@ public struct Input: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Input Attributes.
   public var attributes: InputAttributes? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Input`.
   public init() {}
@@ -91,7 +91,7 @@ public struct Input: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.attributes = try container.decodeIfPresent(InputAttributes.self, forKey: .attributes)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -109,10 +109,10 @@ public struct Input: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.transcoder.v1.Input"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

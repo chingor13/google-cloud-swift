@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The response for querying metrics.
-public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct QueryMetricsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The location of the data.
@@ -27,7 +27,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public var location: Swift.String = Swift.String()
 
   /// The metrics last update time.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// A slice contains a total and (if the request specified a time granularity)
   /// a time series of metric values. Each slice contains a unique combination of
@@ -40,7 +40,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// This field is only populated if the request specifies a Dimension.
   public var macroAverageSlice: QueryMetricsResponse.Slice? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `QueryMetricsResponse`.
   public init() {}
@@ -82,8 +82,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .location) {
       self.location = value
     }
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([QueryMetricsResponse.Slice].self, forKey: .slices)
     {
       self.slices = value
@@ -92,7 +91,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
       QueryMetricsResponse.Slice.self, forKey: .macroAverageSlice)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -117,7 +116,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
   ///
   /// * Slice 1 -> dimensions=[Issue 1]
   /// * Slice 2 -> dimensions=[Issue 2]
-  public struct Slice: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Slice: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A unique combination of dimensions that this slice represents.
@@ -131,7 +130,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// specifies a time granularity other than NONE.
     public var timeSeries: QueryMetricsResponse.Slice.TimeSeries? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Slice`.
     public init() {}
@@ -177,7 +176,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
         QueryMetricsResponse.Slice.TimeSeries.self, forKey: .timeSeries)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -192,7 +191,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
 
     /// A data point contains the metric values mapped to an interval.
-    public struct DataPoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DataPoint: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The interval that this data point represents.
@@ -206,7 +205,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
       /// The measure included in this data point.
       public var measure: OneOf_Measure? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DataPoint`.
       public init() {}
@@ -262,7 +261,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
         self.measure = measure
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -282,7 +281,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
 
       /// The measure related to conversations.
-      public struct ConversationMeasure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct ConversationMeasure: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// The conversation count.
@@ -292,7 +291,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
         public var averageSilencePercentage: Swift.Float? = nil
 
         /// The average duration.
-        public var averageDuration: GoogleCloudWKT.Duration? = nil
+        public var averageDuration: GoogleWKT.Duration? = nil
 
         /// The average turn count.
         public var averageTurnCount: Swift.Float? = nil
@@ -320,8 +319,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
         /// QA_QUESTION_ID.
         public var averageQaQuestionNormalizedScore: Swift.Double? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `ConversationMeasure`.
         public init() {}
@@ -381,7 +379,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
           self.averageSilencePercentage = try container.decodeIfPresent(
             Swift.Float.self, forKey: .averageSilencePercentage)
           self.averageDuration = try container.decodeIfPresent(
-            GoogleCloudWKT.Duration.self, forKey: .averageDuration)
+            GoogleWKT.Duration.self, forKey: .averageDuration)
           self.averageTurnCount = try container.decodeIfPresent(
             Swift.Float.self, forKey: .averageTurnCount)
           self.averageAgentSentimentScore = try container.decodeIfPresent(
@@ -402,7 +400,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
             Swift.Double.self, forKey: .averageQaQuestionNormalizedScore)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -430,7 +428,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
         }
 
         /// Average QA normalized score for the tag.
-        public struct QaTagScore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct QaTagScore: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Tag name.
@@ -439,8 +437,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
           /// Average tag normalized score per tag.
           public var averageTagNormalizedScore: Swift.Double = Swift.Double()
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `QaTagScore`.
           public init() {}
@@ -486,7 +483,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -503,11 +500,11 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
             return
               "type.googleapis.com/google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure.QaTagScore"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -515,11 +512,11 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
           return
             "type.googleapis.com/google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint.ConversationMeasure"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -533,22 +530,22 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
         return
           "type.googleapis.com/google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.DataPoint"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// A time series of metric values.
-    public struct TimeSeries: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct TimeSeries: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The data points that make up the time series .
       public var dataPoints: [QueryMetricsResponse.Slice.DataPoint] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `TimeSeries`.
       public init() {}
@@ -588,7 +585,7 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -604,32 +601,32 @@ public struct QueryMetricsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
         return
           "type.googleapis.com/google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice.TimeSeries"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.contactcenterinsights.v1.QueryMetricsResponse.Slice"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.QueryMetricsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// DEPRECATED. Used to hold per-time-series error status.
-public struct CreateTimeSeriesError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateTimeSeriesError: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// DEPRECATED. Time series ID that resulted in the `status` error.
@@ -30,7 +30,7 @@ public struct CreateTimeSeriesError: Codable, Equatable, GoogleCloudWKT._AnyPack
   @available(*, deprecated)
   public var status: GoogleRpc.Status? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateTimeSeriesError`.
   public init() {}
@@ -69,7 +69,7 @@ public struct CreateTimeSeriesError: Codable, Equatable, GoogleCloudWKT._AnyPack
     self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -85,10 +85,10 @@ public struct CreateTimeSeriesError: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.CreateTimeSeriesError"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// [Service Control API
 /// v2](https://cloud.google.com/service-infrastructure/docs/service-control/access-control)
@@ -33,7 +33,7 @@ public final class ServiceControllerClient: Clients.ServiceControllerProtocol, S
   let inner: any Clients.ServiceControllerStub
 
   /// Creates a new `ServiceControllerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ServiceControllerStub = try Clients.ServiceControllerTransport(options)
     inner = Clients.ServiceControllerRetry(inner, options: options)
     if let logger = options.logger {
@@ -65,7 +65,7 @@ public final class ServiceControllerClient: Clients.ServiceControllerProtocol, S
   ///
   /// @Snippet(path: "ServiceController_Check")
   public func check(
-    request: CheckRequest, options: GoogleCloudGax.RequestOptions
+    request: CheckRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApiServiceControlV2.CheckResponse {
     try await self.inner.check(request: request, options: options)
   }
@@ -88,7 +88,7 @@ public final class ServiceControllerClient: Clients.ServiceControllerProtocol, S
   ///
   /// @Snippet(path: "ServiceController_Report")
   public func report(
-    request: ReportRequest, options: GoogleCloudGax.RequestOptions
+    request: ReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApiServiceControlV2.ReportResponse {
     try await self.inner.report(request: request, options: options)
   }
@@ -109,12 +109,12 @@ extension Clients {
 
     /// See `ServiceControllerClient.check`.
     func check(
-      request: CheckRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceControlV2.CheckResponse
 
     /// See `ServiceControllerClient.report`.
     func report(
-      request: ReportRequest, options: GoogleCloudGax.RequestOptions
+      request: ReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceControlV2.ReportResponse
   }
 }
@@ -126,9 +126,9 @@ extension Clients.ServiceControllerProtocol {
   }
 
   public func check(
-    request: CheckRequest, options: GoogleCloudGax.RequestOptions
+    request: CheckRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApiServiceControlV2.CheckResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func report(request: ReportRequest) async throws
@@ -138,8 +138,8 @@ extension Clients.ServiceControllerProtocol {
   }
 
   public func report(
-    request: ReportRequest, options: GoogleCloudGax.RequestOptions
+    request: ReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApiServiceControlV2.ReportResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The long-running operation metadata for
 /// [BatchProcessDocuments][google.cloud.documentai.v1.DocumentProcessorService.BatchProcessDocuments].
 ///
 /// [google.cloud.documentai.v1.DocumentProcessorService.BatchProcessDocuments]: <doc:DocumentProcessorServiceClient/batchProcessDocuments(request:options:)>
-public struct BatchProcessMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchProcessMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The state of the current batch processing.
@@ -33,15 +33,15 @@ public struct BatchProcessMetadata: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public var stateMessage: Swift.String = Swift.String()
 
   /// The creation time of the operation.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The last update time of the operation.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// The list of response details of each document.
   public var individualProcessStatuses: [BatchProcessMetadata.IndividualProcessStatus] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchProcessMetadata`.
   public init() {}
@@ -88,10 +88,8 @@ public struct BatchProcessMetadata: Codable, Equatable, GoogleCloudWKT._AnyPacka
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .stateMessage) {
       self.stateMessage = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(
       [BatchProcessMetadata.IndividualProcessStatus].self, forKey: .individualProcessStatuses)
     {
@@ -99,7 +97,7 @@ public struct BatchProcessMetadata: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -116,7 +114,7 @@ public struct BatchProcessMetadata: Codable, Equatable, GoogleCloudWKT._AnyPacka
   }
 
   /// The status of a each individual document in the batch process.
-  public struct IndividualProcessStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IndividualProcessStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The source of the document, same as the
@@ -139,7 +137,7 @@ public struct BatchProcessMetadata: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// The status of human review on the processed document.
     public var humanReviewStatus: HumanReviewStatus? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IndividualProcessStatus`.
     public init() {}
@@ -190,7 +188,7 @@ public struct BatchProcessMetadata: Codable, Equatable, GoogleCloudWKT._AnyPacka
         HumanReviewStatus.self, forKey: .humanReviewStatus)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -209,11 +207,11 @@ public struct BatchProcessMetadata: Codable, Equatable, GoogleCloudWKT._AnyPacka
       return
         "type.googleapis.com/google.cloud.documentai.v1.BatchProcessMetadata.IndividualProcessStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -353,10 +351,10 @@ public struct BatchProcessMetadata: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.documentai.v1.BatchProcessMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ComputeEngineDisksTargetDefaults is a collection of details for creating
 /// Persistent Disks in a target Compute Engine project.
-public struct ComputeEngineDisksTargetDefaults: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ComputeEngineDisksTargetDefaults: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The full path of the resource of type TargetProject which represents the
@@ -34,7 +34,7 @@ public struct ComputeEngineDisksTargetDefaults: Codable, Equatable, GoogleCloudW
   /// Details of the VM to attach the disks to as the target of this migration.
   public var vmTarget: OneOf_VmTarget? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ComputeEngineDisksTargetDefaults`.
   public init() {}
@@ -120,7 +120,7 @@ public struct ComputeEngineDisksTargetDefaults: Codable, Equatable, GoogleCloudW
     self.vmTarget = vmTarget
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -165,10 +165,10 @@ public struct ComputeEngineDisksTargetDefaults: Codable, Equatable, GoogleCloudW
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmmigration.v1.ComputeEngineDisksTargetDefaults"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

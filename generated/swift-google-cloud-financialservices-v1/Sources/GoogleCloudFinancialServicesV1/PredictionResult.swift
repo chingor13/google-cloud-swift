@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// PredictionResult is the result of using a model to create predictions.
-public struct PredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PredictionResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the PredictionResult.
@@ -27,10 +27,10 @@ public struct PredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The timestamp of creation of this resource.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp of the most recent update of this resource.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Labels
   public var labels: [Swift.String: Swift.String] = [:]
@@ -55,7 +55,7 @@ public struct PredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// dataset.
   ///
   /// [google.cloud.financialservices.v1.Dataset.date_range]: <doc:Dataset/dateRange>
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// The number of consecutive months to produce predictions for, ending with
   /// the last full month prior to
@@ -72,7 +72,7 @@ public struct PredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// for. Determined by Model, cannot be set by user.
   public var lineOfBusiness: LineOfBusiness = LineOfBusiness()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PredictionResult`.
   public init() {}
@@ -128,10 +128,8 @@ public struct PredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -145,7 +143,7 @@ public struct PredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .model) {
       self.model = value
     }
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .predictionPeriods) {
       self.predictionPeriods = value
     }
@@ -155,7 +153,7 @@ public struct PredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -178,7 +176,7 @@ public struct PredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Outputs is a list of places where the operation will write results.
-  public struct Outputs: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Outputs: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The location to output the predictions.
@@ -188,7 +186,7 @@ public struct PredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// no explainability data will be output.
     public var explainabilityDestination: BigQueryDestination? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Outputs`.
     public init() {}
@@ -229,7 +227,7 @@ public struct PredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         BigQueryDestination.self, forKey: .explainabilityDestination)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -246,11 +244,11 @@ public struct PredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.financialservices.v1.PredictionResult.Outputs"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -376,10 +374,10 @@ public struct PredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.financialservices.v1.PredictionResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

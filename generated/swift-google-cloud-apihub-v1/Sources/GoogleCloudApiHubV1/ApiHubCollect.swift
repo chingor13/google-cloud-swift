@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// This service exposes methods used for collecting various types of data from
 /// different first party and third party sources and push it to Hub's collect
@@ -31,11 +31,11 @@ import GoogleCloudGax
 /// @Snippet(path: "ApiHubCollectQuickstart")
 public final class ApiHubCollectClient: Clients.ApiHubCollectProtocol, Sendable {
   let inner: any Clients.ApiHubCollectStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `ApiHubCollectClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ApiHubCollectStub = try Clients.ApiHubCollectTransport(options)
     inner = Clients.ApiHubCollectRetry(inner, options: options)
     if let logger = options.logger {
@@ -50,7 +50,7 @@ public final class ApiHubCollectClient: Clients.ApiHubCollectProtocol, Sendable 
   ///
   /// @Snippet(path: "ApiHubCollect_CollectApiData")
   public func collectApiData(
-    request: CollectApiDataRequest, options: GoogleCloudGax.RequestOptions
+    request: CollectApiDataRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.collectApiData(request: request, options: options)
   }
@@ -59,22 +59,22 @@ public final class ApiHubCollectClient: Clients.ApiHubCollectProtocol, Sendable 
   ///
   /// @Snippet(path: "ApiHubCollect_CollectApiData")
   public func collectApiData(
-    withPolling: CollectApiDataRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CollectApiDataResponse> {
+    withPolling: CollectApiDataRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CollectApiDataResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CollectApiDataResponse>.State in
+        -> GoogleGax._PollableOperationImpl<CollectApiDataResponse>.State in
       return try op._extractStatus(CollectApiDataResponse.self)
     }
     let rawOp = try await self.collectApiData(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CollectApiDataResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<CollectApiDataResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -86,7 +86,7 @@ public final class ApiHubCollectClient: Clients.ApiHubCollectProtocol, Sendable 
   ///
   /// @Snippet(path: "ApiHubCollect_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -95,7 +95,7 @@ public final class ApiHubCollectClient: Clients.ApiHubCollectProtocol, Sendable 
   ///
   /// @Snippet(path: "ApiHubCollect_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -103,14 +103,14 @@ public final class ApiHubCollectClient: Clients.ApiHubCollectProtocol, Sendable 
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "ApiHubCollect_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -121,7 +121,7 @@ public final class ApiHubCollectClient: Clients.ApiHubCollectProtocol, Sendable 
   ///
   /// @Snippet(path: "ApiHubCollect_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -132,7 +132,7 @@ public final class ApiHubCollectClient: Clients.ApiHubCollectProtocol, Sendable 
   ///
   /// @Snippet(path: "ApiHubCollect_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -140,7 +140,7 @@ public final class ApiHubCollectClient: Clients.ApiHubCollectProtocol, Sendable 
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -149,7 +149,7 @@ public final class ApiHubCollectClient: Clients.ApiHubCollectProtocol, Sendable 
   ///
   /// @Snippet(path: "ApiHubCollect_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -160,7 +160,7 @@ public final class ApiHubCollectClient: Clients.ApiHubCollectProtocol, Sendable 
   ///
   /// @Snippet(path: "ApiHubCollect_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -171,7 +171,7 @@ public final class ApiHubCollectClient: Clients.ApiHubCollectProtocol, Sendable 
   ///
   /// @Snippet(path: "ApiHubCollect_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -188,7 +188,7 @@ extension Clients {
     func collectApiData(request: CollectApiDataRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiHubCollectClient.collectApiData`.
-    func collectApiData(withPolling: CollectApiDataRequest) async throws -> any GoogleCloudGax
+    func collectApiData(withPolling: CollectApiDataRequest) async throws -> any GoogleGax
       .PollableOperation<CollectApiDataResponse>
 
     /// See `ApiHubCollectClient.collectApiData`.
@@ -196,7 +196,7 @@ extension Clients {
       location: Swift.String,
       collectionType: CollectionType,
       apiData: ApiData?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CollectApiDataResponse>
+    ) async throws -> any GoogleGax.PollableOperation<CollectApiDataResponse>
 
     /// See `ApiHubCollectClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -244,47 +244,47 @@ extension Clients {
 
     /// See `ApiHubCollectClient.collectApiData`.
     func collectApiData(
-      request: CollectApiDataRequest, options: GoogleCloudGax.RequestOptions
+      request: CollectApiDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiHubCollectClient.collectApiData`.
     func collectApiData(
-      withPolling: CollectApiDataRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CollectApiDataResponse>
+      withPolling: CollectApiDataRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CollectApiDataResponse>
 
     /// See `ApiHubCollectClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `ApiHubCollectClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `ApiHubCollectClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `ApiHubCollectClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `ApiHubCollectClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `ApiHubCollectClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ApiHubCollectClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -298,25 +298,25 @@ extension Clients.ApiHubCollectProtocol {
   }
 
   public func collectApiData(
-    request: CollectApiDataRequest, options: GoogleCloudGax.RequestOptions
+    request: CollectApiDataRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func collectApiData(withPolling: CollectApiDataRequest) async throws -> any GoogleCloudGax
+  public func collectApiData(withPolling: CollectApiDataRequest) async throws -> any GoogleGax
     .PollableOperation<CollectApiDataResponse>
   {
     try await self.collectApiData(withPolling: withPolling, options: .init())
   }
 
   public func collectApiData(
-    withPolling: CollectApiDataRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CollectApiDataResponse> {
+    withPolling: CollectApiDataRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CollectApiDataResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CollectApiDataResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<CollectApiDataResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -324,7 +324,7 @@ extension Clients.ApiHubCollectProtocol {
     location: Swift.String,
     collectionType: CollectionType,
     apiData: ApiData?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CollectApiDataResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<CollectApiDataResponse> {
     let request = CollectApiDataRequest().with {
       $0.location = location
       $0.collectionType = collectionType
@@ -340,9 +340,9 @@ extension Clients.ApiHubCollectProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -352,13 +352,13 @@ extension Clients.ApiHubCollectProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -368,9 +368,9 @@ extension Clients.ApiHubCollectProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -380,9 +380,9 @@ extension Clients.ApiHubCollectProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -392,13 +392,13 @@ extension Clients.ApiHubCollectProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -419,9 +419,9 @@ extension Clients.ApiHubCollectProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -438,9 +438,9 @@ extension Clients.ApiHubCollectProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -457,9 +457,9 @@ extension Clients.ApiHubCollectProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

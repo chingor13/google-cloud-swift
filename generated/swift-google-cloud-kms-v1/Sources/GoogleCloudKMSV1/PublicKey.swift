@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The public keys for a given
 /// [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. Obtained via
@@ -23,7 +23,7 @@ import Foundation
 ///
 /// [google.cloud.kms.v1.CryptoKeyVersion]: <doc:CryptoKeyVersion>
 /// [google.cloud.kms.v1.KeyManagementService.GetPublicKey]: <doc:KeyManagementServiceClient/getPublicKey(request:options:)>
-public struct PublicKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PublicKey: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The public key, encoded in PEM format. For more information, see the
@@ -57,7 +57,7 @@ public struct PublicKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// NOTE: This field is in Beta.
   ///
   /// [google.cloud.kms.v1.PublicKey.pem]: <doc:PublicKey/pem>
-  public var pemCrc32C: GoogleCloudWKT.Int64Value? = nil
+  public var pemCrc32C: GoogleWKT.Int64Value? = nil
 
   /// The [name][google.cloud.kms.v1.CryptoKeyVersion.name] of the
   /// [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] public key.
@@ -92,7 +92,7 @@ public struct PublicKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.kms.v1.PublicKey.public_key_format]: <doc:PublicKey/publicKeyFormat>
   public var publicKey: ChecksummedData? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PublicKey`.
   public init() {}
@@ -145,8 +145,7 @@ public struct PublicKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.algorithm = value
     }
-    self.pemCrc32C = try container.decodeIfPresent(
-      GoogleCloudWKT.Int64Value.self, forKey: .pemCrc32C)
+    self.pemCrc32C = try container.decodeIfPresent(GoogleWKT.Int64Value.self, forKey: .pemCrc32C)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
@@ -161,7 +160,7 @@ public struct PublicKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.publicKey = try container.decodeIfPresent(ChecksummedData.self, forKey: .publicKey)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -324,10 +323,10 @@ public struct PublicKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.PublicKey"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

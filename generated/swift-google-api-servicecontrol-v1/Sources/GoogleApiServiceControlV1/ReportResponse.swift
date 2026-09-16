@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for the Report method.
-public struct ReportResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ReportResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Partial failures, one for each `Operation` in the request that failed
@@ -44,7 +44,7 @@ public struct ReportResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The current service rollout id used to process the request.
   public var serviceRolloutId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ReportResponse`.
   public init() {}
@@ -94,7 +94,7 @@ public struct ReportResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -112,7 +112,7 @@ public struct ReportResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [Operation][google.api.servicecontrol.v1.Operation] in the request.
   ///
   /// [google.api.servicecontrol.v1.Operation]: <doc:Operation>
-  public struct ReportError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ReportError: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The
@@ -128,7 +128,7 @@ public struct ReportResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.api.servicecontrol.v1.Operation]: <doc:Operation>
     public var status: GoogleRpc.Status? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ReportError`.
     public init() {}
@@ -169,7 +169,7 @@ public struct ReportResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -185,21 +185,21 @@ public struct ReportResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.servicecontrol.v1.ReportResponse.ReportError"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.servicecontrol.v1.ReportResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

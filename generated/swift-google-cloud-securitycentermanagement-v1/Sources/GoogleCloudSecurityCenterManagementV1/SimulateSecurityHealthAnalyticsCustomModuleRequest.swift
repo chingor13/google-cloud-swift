@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleIAMV1
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [SecurityCenterManagement.SimulateSecurityHealthAnalyticsCustomModule][google.cloud.securitycentermanagement.v1.SecurityCenterManagement.SimulateSecurityHealthAnalyticsCustomModule].
 /// The maximum size of the request is 4 MiB.
 ///
 /// [google.cloud.securitycentermanagement.v1.SecurityCenterManagement.SimulateSecurityHealthAnalyticsCustomModule]: <doc:SecurityCenterManagementClient/simulateSecurityHealthAnalyticsCustomModule(request:options:)>
-public struct SimulateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equatable, GoogleCloudWKT
+public struct SimulateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equatable, GoogleWKT
     ._AnyPackable,
   Sendable
 {
@@ -39,7 +39,7 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equat
   /// Required. Resource data to simulate custom module against.
   public var resource: SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SimulateSecurityHealthAnalyticsCustomModuleRequest`.
   public init() {}
@@ -84,7 +84,7 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equat
       SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource.self, forKey: .resource)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -99,7 +99,7 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equat
   }
 
   /// Manually constructed information about a resource.
-  public struct SimulatedResource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SimulatedResource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The type of the resource. For example,
@@ -111,7 +111,7 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equat
     ///
     /// If the custom module evaluates only the IAM allow policy, then you can
     /// omit this field.
-    public var resourceData: GoogleCloudWKT.Struct? = nil
+    public var resourceData: GoogleWKT.Struct? = nil
 
     /// Optional. A representation of the IAM allow policy.
     ///
@@ -119,7 +119,7 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equat
     /// this field.
     public var iamPolicyData: GoogleIAMV1.Policy? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SimulatedResource`.
     public init() {}
@@ -160,12 +160,12 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equat
         self.resourceType = value
       }
       self.resourceData = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .resourceData)
+        GoogleWKT.Struct.self, forKey: .resourceData)
       self.iamPolicyData = try container.decodeIfPresent(
         GoogleIAMV1.Policy.self, forKey: .iamPolicyData)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -183,11 +183,11 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equat
       return
         "type.googleapis.com/google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest.SimulatedResource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -195,10 +195,10 @@ public struct SimulateSecurityHealthAnalyticsCustomModuleRequest: Codable, Equat
     return
       "type.googleapis.com/google.cloud.securitycentermanagement.v1.SimulateSecurityHealthAnalyticsCustomModuleRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

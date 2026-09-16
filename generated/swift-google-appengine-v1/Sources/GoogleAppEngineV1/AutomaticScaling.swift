@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Automatic scaling is based on request rate, response latencies, and other
 /// application metrics.
-public struct AutomaticScaling: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AutomaticScaling: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The time period that the
@@ -28,7 +28,7 @@ public struct AutomaticScaling: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// This prevents the autoscaler from collecting information when the instance
   /// is initializing, during which the collected usage would not be reliable.
   /// Only applicable in the App Engine flexible environment.
-  public var coolDownPeriod: GoogleCloudWKT.Duration? = nil
+  public var coolDownPeriod: GoogleWKT.Duration? = nil
 
   /// Target scaling by CPU usage.
   public var cpuUtilization: CpuUtilization? = nil
@@ -49,7 +49,7 @@ public struct AutomaticScaling: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Maximum amount of time that a request should wait in the pending queue
   /// before starting a new instance to handle it.
-  public var maxPendingLatency: GoogleCloudWKT.Duration? = nil
+  public var maxPendingLatency: GoogleWKT.Duration? = nil
 
   /// Minimum number of idle instances that should be maintained for
   /// this version. Only applicable for the default version of a service.
@@ -61,7 +61,7 @@ public struct AutomaticScaling: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Minimum amount of time a request should wait in the pending queue before
   /// starting a new instance to handle it.
-  public var minPendingLatency: GoogleCloudWKT.Duration? = nil
+  public var minPendingLatency: GoogleWKT.Duration? = nil
 
   /// Target scaling by request utilization.
   public var requestUtilization: RequestUtilization? = nil
@@ -75,7 +75,7 @@ public struct AutomaticScaling: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Scheduler settings for standard environment.
   public var standardSchedulerSettings: StandardSchedulerSettings? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AutomaticScaling`.
   public init() {}
@@ -133,7 +133,7 @@ public struct AutomaticScaling: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.coolDownPeriod = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .coolDownPeriod)
+      GoogleWKT.Duration.self, forKey: .coolDownPeriod)
     self.cpuUtilization = try container.decodeIfPresent(
       CpuUtilization.self, forKey: .cpuUtilization)
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .maxConcurrentRequests) {
@@ -146,7 +146,7 @@ public struct AutomaticScaling: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.maxTotalInstances = value
     }
     self.maxPendingLatency = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .maxPendingLatency)
+      GoogleWKT.Duration.self, forKey: .maxPendingLatency)
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .minIdleInstances) {
       self.minIdleInstances = value
     }
@@ -154,7 +154,7 @@ public struct AutomaticScaling: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.minTotalInstances = value
     }
     self.minPendingLatency = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .minPendingLatency)
+      GoogleWKT.Duration.self, forKey: .minPendingLatency)
     self.requestUtilization = try container.decodeIfPresent(
       RequestUtilization.self, forKey: .requestUtilization)
     self.diskUtilization = try container.decodeIfPresent(
@@ -165,7 +165,7 @@ public struct AutomaticScaling: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       StandardSchedulerSettings.self, forKey: .standardSchedulerSettings)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -193,10 +193,10 @@ public struct AutomaticScaling: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.AutomaticScaling"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

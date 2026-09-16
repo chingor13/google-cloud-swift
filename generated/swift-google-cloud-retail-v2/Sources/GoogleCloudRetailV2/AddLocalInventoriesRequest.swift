@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [ProductService.AddLocalInventories][google.cloud.retail.v2.ProductService.AddLocalInventories]
 /// method.
 ///
 /// [google.cloud.retail.v2.ProductService.AddLocalInventories]: <doc:ProductServiceClient/addLocalInventories(request:options:)>
-public struct AddLocalInventoriesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AddLocalInventoriesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Full resource name of [Product][google.cloud.retail.v2.Product],
@@ -58,12 +58,12 @@ public struct AddLocalInventoriesRequest: Codable, Equatable, GoogleCloudWKT._An
   /// is returned and the entire update will be ignored.
   ///
   /// [google.cloud.retail.v2.LocalInventory]: <doc:LocalInventory>
-  public var addMask: GoogleCloudWKT.FieldMask? = nil
+  public var addMask: GoogleWKT.FieldMask? = nil
 
   /// The time when the inventory updates are issued. Used to prevent
   /// out-of-order updates on local inventory fields. If not provided, the
   /// internal system time will be used.
-  public var addTime: GoogleCloudWKT.Timestamp? = nil
+  public var addTime: GoogleWKT.Timestamp? = nil
 
   /// If set to true, and the [Product][google.cloud.retail.v2.Product] is not
   /// found, the local inventory will still be processed and retained for at most
@@ -74,7 +74,7 @@ public struct AddLocalInventoriesRequest: Codable, Equatable, GoogleCloudWKT._An
   /// [google.cloud.retail.v2.Product]: <doc:Product>
   public var allowMissing: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AddLocalInventoriesRequest`.
   public init() {}
@@ -121,14 +121,14 @@ public struct AddLocalInventoriesRequest: Codable, Equatable, GoogleCloudWKT._An
     if let value = try container.decodeIfPresent([LocalInventory].self, forKey: .localInventories) {
       self.localInventories = value
     }
-    self.addMask = try container.decodeIfPresent(GoogleCloudWKT.FieldMask.self, forKey: .addMask)
-    self.addTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .addTime)
+    self.addMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .addMask)
+    self.addTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .addTime)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .allowMissing) {
       self.allowMissing = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -147,10 +147,10 @@ public struct AddLocalInventoriesRequest: Codable, Equatable, GoogleCloudWKT._An
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.AddLocalInventoriesRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

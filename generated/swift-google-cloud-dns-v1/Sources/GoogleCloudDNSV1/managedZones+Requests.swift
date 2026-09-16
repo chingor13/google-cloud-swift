@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 extension ManagedZonesClient {
   /// Synthetic request message for the [create()][.managedZones.create] method.
-  public struct CreateRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CreateRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
@@ -31,7 +31,7 @@ extension ManagedZonesClient {
     /// Synthetic request body field for the [create()][.managedZones.create] method.
     public var body: ManagedZone? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CreateRequest`.
     public init() {}
@@ -76,7 +76,7 @@ extension ManagedZonesClient {
       self.body = try container.decodeIfPresent(ManagedZone.self, forKey: .body)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -93,16 +93,16 @@ extension ManagedZonesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.managedZones.createRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Synthetic request message for the [delete()][.managedZones.delete] method.
-  public struct DeleteRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DeleteRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
@@ -114,7 +114,7 @@ extension ManagedZonesClient {
     /// Identifies the project addressed by this request.
     public var project: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DeleteRequest`.
     public init() {}
@@ -161,7 +161,7 @@ extension ManagedZonesClient {
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -178,16 +178,16 @@ extension ManagedZonesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.managedZones.deleteRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Synthetic request message for the [get()][.managedZones.get] method.
-  public struct GetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
@@ -199,7 +199,7 @@ extension ManagedZonesClient {
     /// Identifies the project addressed by this request.
     public var project: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GetRequest`.
     public init() {}
@@ -246,7 +246,7 @@ extension ManagedZonesClient {
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -263,16 +263,16 @@ extension ManagedZonesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.managedZones.getRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Synthetic request message for the [getIamPolicy()][.managedZones.getIamPolicy] method.
-  public struct GetIamPolicyRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GetIamPolicyRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.
@@ -281,7 +281,7 @@ extension ManagedZonesClient {
     /// Synthetic request body field for the [getIamPolicy()][.managedZones.getIamPolicy] method.
     public var body: GoogleIamV1GetIamPolicyRequest? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GetIamPolicyRequest`.
     public init() {}
@@ -322,7 +322,7 @@ extension ManagedZonesClient {
       self.body = try container.decodeIfPresent(GoogleIamV1GetIamPolicyRequest.self, forKey: .body)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -338,16 +338,16 @@ extension ManagedZonesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.managedZones.getIamPolicyRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Synthetic request message for the [list()][.managedZones.list] method.
-  public struct ListRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ListRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Restricts the list to return only zones with this domain name.
@@ -362,7 +362,7 @@ extension ManagedZonesClient {
     /// Identifies the project addressed by this request.
     public var project: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ListRequest`.
     public init() {}
@@ -409,7 +409,7 @@ extension ManagedZonesClient {
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -427,16 +427,16 @@ extension ManagedZonesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.managedZones.listRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Synthetic request message for the [patch()][.managedZones.patch] method.
-  public struct PatchRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PatchRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
@@ -451,7 +451,7 @@ extension ManagedZonesClient {
     /// Synthetic request body field for the [patch()][.managedZones.patch] method.
     public var body: ManagedZone? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PatchRequest`.
     public init() {}
@@ -501,7 +501,7 @@ extension ManagedZonesClient {
       self.body = try container.decodeIfPresent(ManagedZone.self, forKey: .body)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -519,16 +519,16 @@ extension ManagedZonesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.managedZones.patchRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Synthetic request message for the [setIamPolicy()][.managedZones.setIamPolicy] method.
-  public struct SetIamPolicyRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SetIamPolicyRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.
@@ -537,7 +537,7 @@ extension ManagedZonesClient {
     /// Synthetic request body field for the [setIamPolicy()][.managedZones.setIamPolicy] method.
     public var body: GoogleIamV1SetIamPolicyRequest? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SetIamPolicyRequest`.
     public init() {}
@@ -578,7 +578,7 @@ extension ManagedZonesClient {
       self.body = try container.decodeIfPresent(GoogleIamV1SetIamPolicyRequest.self, forKey: .body)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -594,16 +594,16 @@ extension ManagedZonesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.managedZones.setIamPolicyRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Synthetic request message for the [testIamPermissions()][.managedZones.testIamPermissions] method.
-  public struct TestIamPermissionsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TestIamPermissionsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.
@@ -612,7 +612,7 @@ extension ManagedZonesClient {
     /// Synthetic request body field for the [testIamPermissions()][.managedZones.testIamPermissions] method.
     public var body: GoogleIamV1TestIamPermissionsRequest? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TestIamPermissionsRequest`.
     public init() {}
@@ -654,7 +654,7 @@ extension ManagedZonesClient {
         GoogleIamV1TestIamPermissionsRequest.self, forKey: .body)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -670,16 +670,16 @@ extension ManagedZonesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.managedZones.testIamPermissionsRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Synthetic request message for the [update()][.managedZones.update] method.
-  public struct UpdateRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UpdateRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
@@ -694,7 +694,7 @@ extension ManagedZonesClient {
     /// Synthetic request body field for the [update()][.managedZones.update] method.
     public var body: ManagedZone? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UpdateRequest`.
     public init() {}
@@ -744,7 +744,7 @@ extension ManagedZonesClient {
       self.body = try container.decodeIfPresent(ManagedZone.self, forKey: .body)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -762,11 +762,11 @@ extension ManagedZonesClient {
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/.managedZones.updateRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 }

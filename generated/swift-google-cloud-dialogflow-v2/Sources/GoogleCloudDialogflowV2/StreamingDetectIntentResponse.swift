@@ -16,8 +16,8 @@
 
 #if Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleRpc
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The top-level message returned from the
   /// [StreamingDetectIntent][] method.
@@ -38,7 +38,7 @@
   ///
   /// [google.cloud.dialogflow.v2.StreamingDetectIntentRequest.input_audio]: <doc:StreamingDetectIntentRequest/inputAudio>
   /// [google.cloud.dialogflow.v2.StreamingRecognitionResult]: <doc:StreamingRecognitionResult>
-  public struct StreamingDetectIntentResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StreamingDetectIntentResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The unique identifier of the response. It can be used to
@@ -76,7 +76,7 @@
     /// [google.cloud.dialogflow.v2.StreamingDetectIntentRequest.enable_debugging_info]: <doc:StreamingDetectIntentRequest/enableDebuggingInfo>
     public var debuggingInfo: CloudConversationDebuggingInfo? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StreamingDetectIntentResponse`.
     public init() {}
@@ -138,7 +138,7 @@
         CloudConversationDebuggingInfo.self, forKey: .debuggingInfo)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -159,11 +159,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.StreamingDetectIntentResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

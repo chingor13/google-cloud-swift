@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The migration task result.
-public struct MigrationTaskResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MigrationTaskResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The map of task output types to the task outputs, e.g. "LINEAGE".
@@ -27,7 +27,7 @@ public struct MigrationTaskResult: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Details specific to the task type.
   public var details: OneOf_Details? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MigrationTaskResult`.
   public init() {}
@@ -86,7 +86,7 @@ public struct MigrationTaskResult: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.details = details
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -114,10 +114,10 @@ public struct MigrationTaskResult: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.migration.v2.MigrationTaskResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,29 +16,29 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol MaintenanceStub: Sendable {
     func summarizeMaintenances(
-      request: SummarizeMaintenancesRequest, options: GoogleCloudGax.RequestOptions
+      request: SummarizeMaintenancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMaintenanceApiV1.SummarizeMaintenancesResponse
 
     func listResourceMaintenances(
-      request: ListResourceMaintenancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListResourceMaintenancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMaintenanceApiV1.ListResourceMaintenancesResponse
 
     func getResourceMaintenance(
-      request: GetResourceMaintenanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetResourceMaintenanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMaintenanceApiV1.ResourceMaintenance
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }

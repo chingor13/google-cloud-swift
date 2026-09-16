@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Includes various configuration options for a workflow invocation.
 /// If both `included_targets` and `included_tags` are unset, all actions
 /// will be included.
-public struct InvocationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct InvocationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The set of action identifiers to include.
@@ -48,7 +48,7 @@ public struct InvocationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// https://cloud.google.com/bigquery/docs/running-queries#queries.
   public var queryPriority: InvocationConfig.QueryPriority? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `InvocationConfig`.
   public init() {}
@@ -124,7 +124,7 @@ public struct InvocationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       InvocationConfig.QueryPriority.self, forKey: .queryPriority)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -256,10 +256,10 @@ public struct InvocationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.InvocationConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

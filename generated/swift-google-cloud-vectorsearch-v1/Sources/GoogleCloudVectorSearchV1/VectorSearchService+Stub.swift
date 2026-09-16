@@ -16,83 +16,83 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol VectorSearchServiceStub: Sendable {
     func listCollections(
-      request: ListCollectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCollectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVectorSearchV1.ListCollectionsResponse
 
     func getCollection(
-      request: GetCollectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCollectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVectorSearchV1.Collection
 
     func createCollection(
-      request: CreateCollectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCollectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateCollection(
-      request: UpdateCollectionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCollectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCollection(
-      request: DeleteCollectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCollectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listIndexes(
-      request: ListIndexesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIndexesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVectorSearchV1.ListIndexesResponse
 
     func getIndex(
-      request: GetIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVectorSearchV1.Index
 
     func createIndex(
-      request: CreateIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateIndex(
-      request: UpdateIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteIndex(
-      request: DeleteIndexRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIndexRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func importDataObjects(
-      request: ImportDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportDataObjectsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func exportDataObjects(
-      request: ExportDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportDataObjectsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request to export insights.
-public struct ExportInsightsDataRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExportInsightsDataRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The parent resource to export data from.
@@ -40,7 +40,7 @@ public struct ExportInsightsDataRequest: Codable, Equatable, GoogleCloudWKT._Any
   /// Exporter destination.
   public var destination: OneOf_Destination? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExportInsightsDataRequest`.
   public init() {}
@@ -114,7 +114,7 @@ public struct ExportInsightsDataRequest: Codable, Equatable, GoogleCloudWKT._Any
     self.destination = destination
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -137,7 +137,7 @@ public struct ExportInsightsDataRequest: Codable, Equatable, GoogleCloudWKT._Any
   }
 
   /// A BigQuery Table Reference.
-  public struct BigQueryDestination: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BigQueryDestination: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A project ID or number. If specified, then export will attempt to
@@ -155,7 +155,7 @@ public struct ExportInsightsDataRequest: Codable, Equatable, GoogleCloudWKT._Any
     /// error.
     public var table: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BigQueryDestination`.
     public init() {}
@@ -203,7 +203,7 @@ public struct ExportInsightsDataRequest: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -221,11 +221,11 @@ public struct ExportInsightsDataRequest: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.BigQueryDestination"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -344,10 +344,10 @@ public struct ExportInsightsDataRequest: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,33 +16,33 @@
 
 import Foundation
 import GoogleApi
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol GroupServiceStub: Sendable {
     func listGroups(
-      request: ListGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListGroupsResponse
 
     func getGroup(
-      request: GetGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Group
 
     func createGroup(
-      request: CreateGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Group
 
     func updateGroup(
-      request: UpdateGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Group
 
     func deleteGroup(
-      request: DeleteGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGroupRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listGroupMembers(
-      request: ListGroupMembersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGroupMembersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListGroupMembersResponse
   }
 }

@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func createSupportEventSubscription(
-      request: CreateSupportEventSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSupportEventSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SupportEventSubscription {
       try await self._intercept(
         request: request,
         options: options,
         name: "createSupportEventSubscription",
         action: {
-          (r: CreateSupportEventSubscriptionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateSupportEventSubscriptionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.SupportEventSubscription
           in
           return try await self.inner.createSupportEventSubscription(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func getSupportEventSubscription(
-      request: GetSupportEventSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSupportEventSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SupportEventSubscription {
       try await self._intercept(
         request: request,
         options: options,
         name: "getSupportEventSubscription",
         action: {
-          (r: GetSupportEventSubscriptionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetSupportEventSubscriptionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.SupportEventSubscription
           in
           return try await self.inner.getSupportEventSubscription(request: r, options: o)
@@ -87,14 +87,14 @@ extension Clients {
     }
 
     public func listSupportEventSubscriptions(
-      request: ListSupportEventSubscriptionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSupportEventSubscriptionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.ListSupportEventSubscriptionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listSupportEventSubscriptions",
         action: {
-          (r: ListSupportEventSubscriptionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListSupportEventSubscriptionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.ListSupportEventSubscriptionsResponse
           in
           return try await self.inner.listSupportEventSubscriptions(request: r, options: o)
@@ -102,14 +102,14 @@ extension Clients {
     }
 
     public func updateSupportEventSubscription(
-      request: UpdateSupportEventSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSupportEventSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SupportEventSubscription {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateSupportEventSubscription",
         action: {
-          (r: UpdateSupportEventSubscriptionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateSupportEventSubscriptionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.SupportEventSubscription
           in
           return try await self.inner.updateSupportEventSubscription(request: r, options: o)
@@ -117,14 +117,14 @@ extension Clients {
     }
 
     public func deleteSupportEventSubscription(
-      request: DeleteSupportEventSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSupportEventSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SupportEventSubscription {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteSupportEventSubscription",
         action: {
-          (r: DeleteSupportEventSubscriptionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteSupportEventSubscriptionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.SupportEventSubscription
           in
           return try await self.inner.deleteSupportEventSubscription(request: r, options: o)
@@ -132,29 +132,29 @@ extension Clients {
     }
 
     public func undeleteSupportEventSubscription(
-      request: UndeleteSupportEventSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteSupportEventSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SupportEventSubscription {
       try await self._intercept(
         request: request,
         options: options,
         name: "undeleteSupportEventSubscription",
         action: {
-          (r: UndeleteSupportEventSubscriptionRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudSupportV2.SupportEventSubscription
+          (r: UndeleteSupportEventSubscriptionRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudSupportV2.SupportEventSubscription
           in
           return try await self.inner.undeleteSupportEventSubscription(request: r, options: o)
         })
     }
 
     public func expungeSupportEventSubscription(
-      request: ExpungeSupportEventSubscriptionRequest, options: GoogleCloudGax.RequestOptions
+      request: ExpungeSupportEventSubscriptionRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "expungeSupportEventSubscription",
         action: {
-          (r: ExpungeSupportEventSubscriptionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ExpungeSupportEventSubscriptionRequest, o: GoogleGax.RequestOptions) async throws
             -> Void in
           return try await self.inner.expungeSupportEventSubscription(request: r, options: o)
         })

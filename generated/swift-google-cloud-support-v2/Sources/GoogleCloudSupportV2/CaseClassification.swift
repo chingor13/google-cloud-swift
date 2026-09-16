@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Case Classification represents the topic that a case is about. It's very
 /// important to use accurate classifications, because they're
@@ -23,7 +23,7 @@ import Foundation
 ///
 /// A classification always has an ID that is its unique identifier.
 /// A valid ID is required when creating a case.
-public struct CaseClassification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CaseClassification: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The unique ID for a classification. Must be specified for case creation.
@@ -43,7 +43,7 @@ public struct CaseClassification: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// identify classifications, use the `CaseClassification.id` field.
   public var displayName: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CaseClassification`.
   public init() {}
@@ -86,7 +86,7 @@ public struct CaseClassification: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,10 +102,10 @@ public struct CaseClassification: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.support.v2.CaseClassification"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

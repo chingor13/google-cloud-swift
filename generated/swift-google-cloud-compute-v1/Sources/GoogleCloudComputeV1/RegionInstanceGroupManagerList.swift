@@ -16,12 +16,12 @@
 
 #if RegionInstanceGroupManagers
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Contains a list of managed instance groups.
-  public struct RegionInstanceGroupManagerList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
-    GoogleCloudGax._PaginatedResponse,
+  public struct RegionInstanceGroupManagerList: Codable, Equatable, GoogleWKT._AnyPackable,
+    GoogleGax._PaginatedResponse,
     Sendable
   {
     /// Output only. Unique identifier for the resource; defined by the server.
@@ -47,7 +47,7 @@
     /// Output only. Informational warning message.
     public var warning: RegionInstanceGroupManagerList.Warning? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RegionInstanceGroupManagerList`.
     public init() {}
@@ -101,7 +101,7 @@
         RegionInstanceGroupManagerList.Warning.self, forKey: .warning)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -121,7 +121,7 @@
     /// The message type for the [warning][google.cloud.compute.v1.RegionInstanceGroupManagerList.warning] field.
     ///
     /// [google.cloud.compute.v1.RegionInstanceGroupManagerList.warning]: <doc:RegionInstanceGroupManagerList/Warning>
-    public struct Warning: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Warning: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// [Output Only] A warning code, if applicable. For example, Compute
@@ -142,7 +142,7 @@
       /// [Output Only] A human-readable description of the warning code.
       public var message: Swift.String? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Warning`.
       public init() {}
@@ -189,7 +189,7 @@
         self.message = try container.decodeIfPresent(Swift.String.self, forKey: .message)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -206,7 +206,7 @@
       /// The message type for the [data][google.cloud.compute.v1.RegionInstanceGroupManagerList.warning.data] field.
       ///
       /// [google.cloud.compute.v1.RegionInstanceGroupManagerList.warning.data]: <doc:RegionInstanceGroupManagerList/Warning/Data>
-      public struct Data: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Data: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// [Output Only] A key that provides more detail on the warning being
@@ -221,8 +221,7 @@
         /// [Output Only] A warning data value corresponding to the key.
         public var value: Swift.String? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Data`.
         public init() {}
@@ -261,7 +260,7 @@
           self.value = try container.decodeIfPresent(Swift.String.self, forKey: .value)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -278,11 +277,11 @@
           return
             "type.googleapis.com/google.cloud.compute.v1.RegionInstanceGroupManagerList.warning.data"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -607,22 +606,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.RegionInstanceGroupManagerList.warning"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.RegionInstanceGroupManagerList"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
 
     public func _getPaginatedItems() -> [InstanceGroupManager] {

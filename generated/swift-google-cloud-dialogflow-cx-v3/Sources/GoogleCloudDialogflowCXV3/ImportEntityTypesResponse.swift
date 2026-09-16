@@ -16,13 +16,13 @@
 
 #if EntityTypes
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The response message for
   /// [EntityTypes.ImportEntityTypes][google.cloud.dialogflow.cx.v3.EntityTypes.ImportEntityTypes].
   ///
   /// [google.cloud.dialogflow.cx.v3.EntityTypes.ImportEntityTypes]: <doc:EntityTypesClient/importEntityTypes(request:options:)>
-  public struct ImportEntityTypesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ImportEntityTypesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The unique identifier of the imported entity types.
@@ -35,7 +35,7 @@
     /// is set in ImportEntityTypesRequest.
     public var conflictingResources: ImportEntityTypesResponse.ConflictingResources? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ImportEntityTypesResponse`.
     public init() {}
@@ -77,7 +77,7 @@
         ImportEntityTypesResponse.ConflictingResources.self, forKey: .conflictingResources)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -93,7 +93,7 @@
     /// Conflicting resources detected during the import process. Only filled when
     /// [REPORT_CONFLICT][ImportEntityTypesResponse.REPORT_CONFLICT] is set in the
     /// request and there are conflicts in the display names.
-    public struct ConflictingResources: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ConflictingResources: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Display names of conflicting entity types.
@@ -102,7 +102,7 @@
       /// Display names of conflicting entities.
       public var entityDisplayNames: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ConflictingResources`.
       public init() {}
@@ -149,7 +149,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -166,22 +166,22 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.ImportEntityTypesResponse.ConflictingResources"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ImportEntityTypesResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

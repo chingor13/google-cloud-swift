@@ -15,26 +15,26 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for
 /// [EnterpriseKnowledgeGraphService.Search][google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.Search].
 ///
 /// [google.cloud.enterpriseknowledgegraph.v1.EnterpriseKnowledgeGraphService.Search]: <doc:EnterpriseKnowledgeGraphServiceClient/search(request:options:)>
-public struct SearchResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SearchResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The local context applicable for the response. See more details at
   /// http://www.w3.org/TR/json-ld/#context-definitions.
-  public var context: GoogleCloudWKT.Value? = nil
+  public var context: GoogleWKT.Value? = nil
 
   /// The schema type of top-level JSON-LD object, e.g. ItemList.
-  public var type: GoogleCloudWKT.Value? = nil
+  public var type: GoogleWKT.Value? = nil
 
   /// The item list of search results.
-  public var itemListElement: GoogleCloudWKT.ListValue? = nil
+  public var itemListElement: GoogleWKT.ListValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SearchResponse`.
   public init() {}
@@ -71,13 +71,13 @@ public struct SearchResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.context = try container.decodeIfPresent(GoogleCloudWKT.Value.self, forKey: .context)
-    self.type = try container.decodeIfPresent(GoogleCloudWKT.Value.self, forKey: .type)
+    self.context = try container.decodeIfPresent(GoogleWKT.Value.self, forKey: .context)
+    self.type = try container.decodeIfPresent(GoogleWKT.Value.self, forKey: .type)
     self.itemListElement = try container.decodeIfPresent(
-      GoogleCloudWKT.ListValue.self, forKey: .itemListElement)
+      GoogleWKT.ListValue.self, forKey: .itemListElement)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -94,10 +94,10 @@ public struct SearchResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.enterpriseknowledgegraph.v1.SearchResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

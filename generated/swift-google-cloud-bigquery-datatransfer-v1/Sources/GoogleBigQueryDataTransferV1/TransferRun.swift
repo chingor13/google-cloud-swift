@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a data transfer run.
-public struct TransferRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TransferRun: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the transfer run.
@@ -29,32 +29,32 @@ public struct TransferRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Minimum time after which a transfer run can be started.
-  public var scheduleTime: GoogleCloudWKT.Timestamp? = nil
+  public var scheduleTime: GoogleWKT.Timestamp? = nil
 
   /// For batch transfer runs, specifies the date and time of the data should be
   /// ingested.
-  public var runTime: GoogleCloudWKT.Timestamp? = nil
+  public var runTime: GoogleWKT.Timestamp? = nil
 
   /// Status of the transfer run.
   public var errorStatus: GoogleRpc.Status? = nil
 
   /// Output only. Time when transfer run was started.
   /// Parameter ignored by server for input requests.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time when transfer run ended.
   /// Parameter ignored by server for input requests.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Last time the data transfer run state was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Parameters specific to each data source. For more information
   /// see the bq tab in the 'Setting up a data transfer' section for each data
   /// source. For example the parameters for Cloud Storage transfers are listed
   /// here:
   /// https://cloud.google.com/bigquery-transfer/docs/cloud-storage-transfer#bq
-  public var params: GoogleCloudWKT.Struct? = nil
+  public var params: GoogleWKT.Struct? = nil
 
   /// Output only. Data source id.
   public var dataSourceId: Swift.String = Swift.String()
@@ -87,7 +87,7 @@ public struct TransferRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Data transfer destination.
   public var destination: OneOf_Destination? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TransferRun`.
   public init() {}
@@ -152,15 +152,13 @@ public struct TransferRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.name = value
     }
     self.scheduleTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .scheduleTime)
-    self.runTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .runTime)
+      GoogleWKT.Timestamp.self, forKey: .scheduleTime)
+    self.runTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .runTime)
     self.errorStatus = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .errorStatus)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
-    self.params = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .params)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
+    self.params = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .params)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .dataSourceId) {
       self.dataSourceId = value
     }
@@ -199,7 +197,7 @@ public struct TransferRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.destination = destination
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -240,10 +238,10 @@ public struct TransferRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.datatransfer.v1.TransferRun"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

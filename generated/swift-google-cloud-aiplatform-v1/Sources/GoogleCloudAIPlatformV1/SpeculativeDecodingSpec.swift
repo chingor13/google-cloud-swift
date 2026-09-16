@@ -16,10 +16,10 @@
 
 #if DeploymentResourcePoolService || EndpointService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Configuration for Speculative Decoding.
-  public struct SpeculativeDecodingSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SpeculativeDecodingSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The number of speculative tokens to generate at each step.
@@ -28,7 +28,7 @@
     /// The type of speculation method to use.
     public var speculation: OneOf_Speculation? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SpeculativeDecodingSpec`.
     public init() {}
@@ -93,7 +93,7 @@
       self.speculation = speculation
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -116,13 +116,13 @@
 
     /// Draft model speculation works by using the smaller model to generate
     /// candidate tokens for speculative decoding.
-    public struct DraftModelSpeculation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DraftModelSpeculation: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The resource name of the draft model.
       public var draftModel: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DraftModelSpeculation`.
       public init() {}
@@ -160,7 +160,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -176,18 +176,18 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.SpeculativeDecodingSpec.DraftModelSpeculation"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// N-Gram speculation works by trying to find matching tokens in the
     /// previous prompt sequence and use those as speculation for generating
     /// new tokens.
-    public struct NgramSpeculation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct NgramSpeculation: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The number of last N input tokens used as ngram to search/match
@@ -196,7 +196,7 @@
       /// The default value is 3 if not specified.
       public var ngramSize: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `NgramSpeculation`.
       public init() {}
@@ -234,7 +234,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -250,11 +250,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.SpeculativeDecodingSpec.NgramSpeculation"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -269,11 +269,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SpeculativeDecodingSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

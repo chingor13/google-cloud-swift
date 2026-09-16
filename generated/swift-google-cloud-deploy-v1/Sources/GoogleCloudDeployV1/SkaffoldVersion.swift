@@ -15,26 +15,26 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Details of a supported Skaffold version.
-public struct SkaffoldVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SkaffoldVersion: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Release version number. For example, "1.20.3".
   public var version: Swift.String = Swift.String()
 
   /// The time at which this version of Skaffold will enter maintenance mode.
-  public var maintenanceModeTime: GoogleCloudWKT.Timestamp? = nil
+  public var maintenanceModeTime: GoogleWKT.Timestamp? = nil
 
   /// The time at which this version of Skaffold will no longer be supported.
-  public var supportExpirationTime: GoogleCloudWKT.Timestamp? = nil
+  public var supportExpirationTime: GoogleWKT.Timestamp? = nil
 
   /// Date when this version is expected to no longer be supported.
   public var supportEndDate: GoogleType.Date? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SkaffoldVersion`.
   public init() {}
@@ -77,14 +77,14 @@ public struct SkaffoldVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.version = value
     }
     self.maintenanceModeTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .maintenanceModeTime)
+      GoogleWKT.Timestamp.self, forKey: .maintenanceModeTime)
     self.supportExpirationTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .supportExpirationTime)
+      GoogleWKT.Timestamp.self, forKey: .supportExpirationTime)
     self.supportEndDate = try container.decodeIfPresent(
       GoogleType.Date.self, forKey: .supportEndDate)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,10 +102,10 @@ public struct SkaffoldVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.deploy.v1.SkaffoldVersion"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

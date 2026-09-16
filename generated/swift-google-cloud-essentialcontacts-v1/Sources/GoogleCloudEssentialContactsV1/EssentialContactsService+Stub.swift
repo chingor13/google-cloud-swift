@@ -15,37 +15,37 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol EssentialContactsServiceStub: Sendable {
     func createContact(
-      request: CreateContactRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateContactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEssentialContactsV1.Contact
 
     func updateContact(
-      request: UpdateContactRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateContactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEssentialContactsV1.Contact
 
     func listContacts(
-      request: ListContactsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListContactsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEssentialContactsV1.ListContactsResponse
 
     func getContact(
-      request: GetContactRequest, options: GoogleCloudGax.RequestOptions
+      request: GetContactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEssentialContactsV1.Contact
 
     func deleteContact(
-      request: DeleteContactRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteContactRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func computeContacts(
-      request: ComputeContactsRequest, options: GoogleCloudGax.RequestOptions
+      request: ComputeContactsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEssentialContactsV1.ComputeContactsResponse
 
     func sendTestMessage(
-      request: SendTestMessageRequest, options: GoogleCloudGax.RequestOptions
+      request: SendTestMessageRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

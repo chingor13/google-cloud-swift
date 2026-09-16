@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudAdvisoryNotificationsV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: AdvisoryNotificationsServiceClient, organizationId: String, locationId: String)
   async throws

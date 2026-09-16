@@ -16,10 +16,10 @@
 
 #if ConversationProfiles || Conversations
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Defines the Human Agent Assist to connect to a conversation.
-  public struct HumanAgentAssistantConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct HumanAgentAssistantConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Pub/Sub topic on which to publish new agent assistant events.
@@ -37,7 +37,7 @@
     /// Configuration for message analysis.
     public var messageAnalysisConfig: HumanAgentAssistantConfig.MessageAnalysisConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `HumanAgentAssistantConfig`.
     public init() {}
@@ -86,7 +86,7 @@
         HumanAgentAssistantConfig.MessageAnalysisConfig.self, forKey: .messageAnalysisConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -103,7 +103,7 @@
     }
 
     /// Settings of suggestion trigger.
-    public struct SuggestionTriggerSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SuggestionTriggerSettings: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Do not trigger if last utterance is small talk.
@@ -113,7 +113,7 @@
       /// END_USER.
       public var onlyEndUser: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SuggestionTriggerSettings`.
       public init() {}
@@ -156,7 +156,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -173,16 +173,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionTriggerSettings"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Config for suggestion features.
-    public struct SuggestionFeatureConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SuggestionFeatureConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The suggestion feature.
@@ -258,7 +258,7 @@
       public var conversationProcessConfig: HumanAgentAssistantConfig.ConversationProcessConfig? =
         nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SuggestionFeatureConfig`.
       public init() {}
@@ -375,7 +375,7 @@
           forKey: .conversationProcessConfig)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -409,16 +409,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionFeatureConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Detail human agent assistant config.
-    public struct SuggestionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SuggestionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Configuration of different suggestion features. One feature can have only
@@ -467,7 +467,7 @@
       /// Optional. If true, enable asynchronous execution of tools.
       public var enableAsyncToolCall: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SuggestionConfig`.
       public init() {}
@@ -549,7 +549,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -575,16 +575,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Config for suggestion query.
-    public struct SuggestionQueryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SuggestionQueryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Maximum number of results to return. Currently, if unset, defaults to 10.
@@ -629,7 +629,7 @@
       /// Source of query.
       public var querySource: OneOf_QuerySource? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SuggestionQueryConfig`.
       public init() {}
@@ -723,7 +723,7 @@
         self.querySource = querySource
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -753,7 +753,7 @@
       /// Knowledge base source settings.
       ///
       /// Supported features: ARTICLE_SUGGESTION, FAQ.
-      public struct KnowledgeBaseQuerySource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct KnowledgeBaseQuerySource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. Knowledge bases to query. Format:
@@ -762,8 +762,7 @@
         /// bases are supported.
         public var knowledgeBases: [Swift.String] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `KnowledgeBaseQuerySource`.
         public init() {}
@@ -802,7 +801,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -818,18 +817,18 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionQueryConfig.KnowledgeBaseQuerySource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Document source settings.
       ///
       /// Supported features: SMART_REPLY, SMART_COMPOSE.
-      public struct DocumentQuerySource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct DocumentQuerySource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. Knowledge documents to query from. Format:
@@ -838,8 +837,7 @@
         /// Currently, at most 5 documents are supported.
         public var documents: [Swift.String] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `DocumentQuerySource`.
         public init() {}
@@ -877,7 +875,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -893,18 +891,18 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionQueryConfig.DocumentQuerySource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Dialogflow source setting.
       ///
       /// Supported feature: DIALOGFLOW_ASSIST.
-      public struct DialogflowQuerySource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct DialogflowQuerySource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The name of a Dialogflow virtual agent used for end user side
@@ -918,8 +916,7 @@
           HumanAgentAssistantConfig.SuggestionQueryConfig.DialogflowQuerySource
             .HumanAgentSideConfig? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `DialogflowQuerySource`.
         public init() {}
@@ -962,7 +959,7 @@
               .HumanAgentSideConfig.self, forKey: .humanAgentSideConfig)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -977,7 +974,7 @@
 
         /// The configuration used for human agent side Dialogflow assist
         /// suggestion.
-        public struct HumanAgentSideConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct HumanAgentSideConfig: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Optional. The name of a dialogflow virtual agent used for intent
@@ -985,8 +982,7 @@
           /// Format: `projects/<Project ID>/locations/<Location ID>/agent`.
           public var agent: Swift.String = Swift.String()
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `HumanAgentSideConfig`.
           public init() {}
@@ -1024,7 +1020,7 @@
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -1040,11 +1036,11 @@
             return
               "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionQueryConfig.DialogflowQuerySource.HumanAgentSideConfig"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -1052,17 +1048,17 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionQueryConfig.DialogflowQuerySource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Settings that determine how to filter recent conversation context when
       /// generating suggestions.
-      public struct ContextFilterSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct ContextFilterSettings: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// If set to true, the last message from virtual agent (hand off message)
@@ -1075,8 +1071,7 @@
         /// If set to true, all messages from ivr stage are dropped.
         public var dropIvrMessages: Swift.Bool = Swift.Bool()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `ContextFilterSettings`.
         public init() {}
@@ -1128,7 +1123,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1146,11 +1141,11 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionQueryConfig.ContextFilterSettings"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -1159,7 +1154,7 @@
       ///
       /// Supported features: CONVERSATION_SUMMARIZATION,
       /// CONVERSATION_SUMMARIZATION_VOICE.
-      public struct Sections: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Sections: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// The selected sections chosen to return when requesting a summary of a
@@ -1169,8 +1164,7 @@
         public var sectionTypes:
           [HumanAgentAssistantConfig.SuggestionQueryConfig.Sections.SectionType] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Sections`.
         public init() {}
@@ -1211,7 +1205,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1371,11 +1365,11 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionQueryConfig.Sections"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -1398,11 +1392,11 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionQueryConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1410,7 +1404,7 @@
     ///
     /// Supported feature: ARTICLE_SUGGESTION, SMART_COMPOSE, SMART_REPLY,
     /// CONVERSATION_SUMMARIZATION
-    public struct ConversationModelConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ConversationModelConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Conversation model resource name. Format: `projects/<Project
@@ -1430,7 +1424,7 @@
       /// [google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationModelConfig.model]: <doc:HumanAgentAssistantConfig/ConversationModelConfig/model>
       public var baselineModelVersion: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ConversationModelConfig`.
       public init() {}
@@ -1475,7 +1469,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1492,23 +1486,23 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationModelConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Config to process conversation.
-    public struct ConversationProcessConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ConversationProcessConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Number of recent non-small-talk sentences to use as context for article
       /// and FAQ suggestion
       public var recentSentencesCount: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ConversationProcessConfig`.
       public init() {}
@@ -1548,7 +1542,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1564,16 +1558,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationProcessConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Configuration for analyses to run on each conversation message.
-    public struct MessageAnalysisConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MessageAnalysisConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Enable entity extraction in conversation messages on [agent assist
@@ -1646,7 +1640,7 @@
       /// [google.cloud.dialogflow.v2.StreamingAnalyzeContentResponse.message]: <doc:StreamingAnalyzeContentResponse/message>
       public var enableSentimentAnalysisV3: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MessageAnalysisConfig`.
       public init() {}
@@ -1700,7 +1694,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1718,22 +1712,22 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig.MessageAnalysisConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.HumanAgentAssistantConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Guest OS runtime information.
-public struct GuestRuntimeDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GuestRuntimeDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Running background services.
@@ -31,7 +31,7 @@ public struct GuestRuntimeDetails: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public var network: RuntimeNetworkInfo? = nil
 
   /// Last time the OS was booted.
-  public var lastBootTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastBootTime: GoogleWKT.Timestamp? = nil
 
   /// Domain, e.g. c.stratozone-development.internal.
   public var domain: Swift.String = Swift.String()
@@ -45,7 +45,7 @@ public struct GuestRuntimeDetails: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Open files information.
   public var openFileList: OpenFileList? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GuestRuntimeDetails`.
   public init() {}
@@ -96,7 +96,7 @@ public struct GuestRuntimeDetails: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.processes = try container.decodeIfPresent(RunningProcessList.self, forKey: .processes)
     self.network = try container.decodeIfPresent(RuntimeNetworkInfo.self, forKey: .network)
     self.lastBootTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastBootTime)
+      GoogleWKT.Timestamp.self, forKey: .lastBootTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .domain) {
       self.domain = value
     }
@@ -108,7 +108,7 @@ public struct GuestRuntimeDetails: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.openFileList = try container.decodeIfPresent(OpenFileList.self, forKey: .openFileList)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -130,10 +130,10 @@ public struct GuestRuntimeDetails: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.migrationcenter.v1.GuestRuntimeDetails"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

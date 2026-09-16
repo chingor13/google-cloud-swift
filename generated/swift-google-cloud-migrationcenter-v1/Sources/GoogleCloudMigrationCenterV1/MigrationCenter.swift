@@ -19,21 +19,21 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service describing handlers for resources.
 ///
 /// @Snippet(path: "MigrationCenterQuickstart")
 public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Sendable {
   let inner: any Clients.MigrationCenterStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `MigrationCenterClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.MigrationCenterStub = try Clients.MigrationCenterTransport(options)
     inner = Clients.MigrationCenterRetry(inner, options: options)
     if let logger = options.logger {
@@ -48,7 +48,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListAssets")
   public func listAssets(
-    request: ListAssetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAssetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListAssetsResponse {
     try await self.inner.listAssets(request: request, options: options)
   }
@@ -57,7 +57,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListAssets")
   public func listAssets(
-    byItem: ListAssetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAssetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Asset, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListAssetsResponse in
@@ -65,14 +65,14 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
       request.pageToken = token
       return try await self.listAssets(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the details of an asset.
   ///
   /// @Snippet(path: "MigrationCenter_GetAsset")
   public func getAsset(
-    request: GetAssetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAssetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.Asset {
     try await self.inner.getAsset(request: request, options: options)
   }
@@ -81,7 +81,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_UpdateAsset")
   public func updateAsset(
-    request: UpdateAssetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAssetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.Asset {
     try await self.inner.updateAsset(request: request, options: options)
   }
@@ -90,7 +90,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_BatchUpdateAssets")
   public func batchUpdateAssets(
-    request: BatchUpdateAssetsRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchUpdateAssetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.BatchUpdateAssetsResponse {
     try await self.inner.batchUpdateAssets(request: request, options: options)
   }
@@ -99,7 +99,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeleteAsset")
   public func deleteAsset(
-    request: DeleteAssetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAssetRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteAsset(request: request, options: options)
   }
@@ -108,7 +108,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_BatchDeleteAssets")
   public func batchDeleteAssets(
-    request: BatchDeleteAssetsRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchDeleteAssetsRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.batchDeleteAssets(request: request, options: options)
   }
@@ -117,7 +117,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ReportAssetFrames")
   public func reportAssetFrames(
-    request: ReportAssetFramesRequest, options: GoogleCloudGax.RequestOptions
+    request: ReportAssetFramesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ReportAssetFramesResponse {
     try await self.inner.reportAssetFrames(request: request, options: options)
   }
@@ -126,7 +126,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_AggregateAssetsValues")
   public func aggregateAssetsValues(
-    request: AggregateAssetsValuesRequest, options: GoogleCloudGax.RequestOptions
+    request: AggregateAssetsValuesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.AggregateAssetsValuesResponse {
     try await self.inner.aggregateAssetsValues(request: request, options: options)
   }
@@ -135,7 +135,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CreateImportJob")
   public func createImportJob(
-    request: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createImportJob(request: request, options: options)
   }
@@ -144,21 +144,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CreateImportJob")
   public func createImportJob(
-    withPolling: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportJob> {
+    withPolling: CreateImportJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportJob> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ImportJob>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<ImportJob>.State
+      in
       return try op._extractStatus(ImportJob.self)
     }
     let rawOp = try await self.createImportJob(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ImportJob>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportJob>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -170,7 +170,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListImportJobs")
   public func listImportJobs(
-    request: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListImportJobsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListImportJobsResponse {
     try await self.inner.listImportJobs(request: request, options: options)
   }
@@ -179,7 +179,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListImportJobs")
   public func listImportJobs(
-    byItem: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListImportJobsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ImportJob, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListImportJobsResponse in
@@ -187,14 +187,14 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
       request.pageToken = token
       return try await self.listImportJobs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the details of an import job.
   ///
   /// @Snippet(path: "MigrationCenter_GetImportJob")
   public func getImportJob(
-    request: GetImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: GetImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ImportJob {
     try await self.inner.getImportJob(request: request, options: options)
   }
@@ -203,7 +203,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeleteImportJob")
   public func deleteImportJob(
-    request: DeleteImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteImportJob(request: request, options: options)
   }
@@ -212,21 +212,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeleteImportJob")
   public func deleteImportJob(
-    withPolling: DeleteImportJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteImportJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteImportJob(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -238,7 +238,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_UpdateImportJob")
   public func updateImportJob(
-    request: UpdateImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateImportJob(request: request, options: options)
   }
@@ -247,21 +247,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_UpdateImportJob")
   public func updateImportJob(
-    withPolling: UpdateImportJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportJob> {
+    withPolling: UpdateImportJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportJob> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ImportJob>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<ImportJob>.State
+      in
       return try op._extractStatus(ImportJob.self)
     }
     let rawOp = try await self.updateImportJob(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ImportJob>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportJob>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -273,7 +273,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ValidateImportJob")
   public func validateImportJob(
-    request: ValidateImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: ValidateImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.validateImportJob(request: request, options: options)
   }
@@ -282,21 +282,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ValidateImportJob")
   public func validateImportJob(
-    withPolling: ValidateImportJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: ValidateImportJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.validateImportJob(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -308,7 +308,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_RunImportJob")
   public func runImportJob(
-    request: RunImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: RunImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.runImportJob(request: request, options: options)
   }
@@ -317,21 +317,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_RunImportJob")
   public func runImportJob(
-    withPolling: RunImportJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: RunImportJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.runImportJob(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -343,7 +343,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_GetImportDataFile")
   public func getImportDataFile(
-    request: GetImportDataFileRequest, options: GoogleCloudGax.RequestOptions
+    request: GetImportDataFileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ImportDataFile {
     try await self.inner.getImportDataFile(request: request, options: options)
   }
@@ -352,7 +352,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListImportDataFiles")
   public func listImportDataFiles(
-    request: ListImportDataFilesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListImportDataFilesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListImportDataFilesResponse {
     try await self.inner.listImportDataFiles(request: request, options: options)
   }
@@ -361,7 +361,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListImportDataFiles")
   public func listImportDataFiles(
-    byItem: ListImportDataFilesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListImportDataFilesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ImportDataFile, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListImportDataFilesResponse
@@ -370,14 +370,14 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
       request.pageToken = token
       return try await self.listImportDataFiles(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates an import data file.
   ///
   /// @Snippet(path: "MigrationCenter_CreateImportDataFile")
   public func createImportDataFile(
-    request: CreateImportDataFileRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateImportDataFileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createImportDataFile(request: request, options: options)
   }
@@ -386,21 +386,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CreateImportDataFile")
   public func createImportDataFile(
-    withPolling: CreateImportDataFileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportDataFile> {
+    withPolling: CreateImportDataFileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportDataFile> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ImportDataFile>.State in
+        -> GoogleGax._PollableOperationImpl<ImportDataFile>.State in
       return try op._extractStatus(ImportDataFile.self)
     }
     let rawOp = try await self.createImportDataFile(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ImportDataFile>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportDataFile>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -412,7 +412,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeleteImportDataFile")
   public func deleteImportDataFile(
-    request: DeleteImportDataFileRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteImportDataFileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteImportDataFile(request: request, options: options)
   }
@@ -421,21 +421,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeleteImportDataFile")
   public func deleteImportDataFile(
-    withPolling: DeleteImportDataFileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteImportDataFileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteImportDataFile(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -447,7 +447,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListGroups")
   public func listGroups(
-    request: ListGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListGroupsResponse {
     try await self.inner.listGroups(request: request, options: options)
   }
@@ -456,7 +456,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListGroups")
   public func listGroups(
-    byItem: ListGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Group, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListGroupsResponse in
@@ -464,14 +464,14 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
       request.pageToken = token
       return try await self.listGroups(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the details of a group.
   ///
   /// @Snippet(path: "MigrationCenter_GetGroup")
   public func getGroup(
-    request: GetGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.Group {
     try await self.inner.getGroup(request: request, options: options)
   }
@@ -480,7 +480,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CreateGroup")
   public func createGroup(
-    request: CreateGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createGroup(request: request, options: options)
   }
@@ -489,21 +489,20 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CreateGroup")
   public func createGroup(
-    withPolling: CreateGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Group> {
+    withPolling: CreateGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Group> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Group>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Group>.State in
       return try op._extractStatus(Group.self)
     }
     let rawOp = try await self.createGroup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Group>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Group>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -515,7 +514,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_UpdateGroup")
   public func updateGroup(
-    request: UpdateGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateGroup(request: request, options: options)
   }
@@ -524,21 +523,20 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_UpdateGroup")
   public func updateGroup(
-    withPolling: UpdateGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Group> {
+    withPolling: UpdateGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Group> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Group>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Group>.State in
       return try op._extractStatus(Group.self)
     }
     let rawOp = try await self.updateGroup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Group>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Group>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -550,7 +548,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeleteGroup")
   public func deleteGroup(
-    request: DeleteGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteGroup(request: request, options: options)
   }
@@ -559,21 +557,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeleteGroup")
   public func deleteGroup(
-    withPolling: DeleteGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteGroup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -585,7 +583,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_AddAssetsToGroup")
   public func addAssetsToGroup(
-    request: AddAssetsToGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: AddAssetsToGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.addAssetsToGroup(request: request, options: options)
   }
@@ -594,21 +592,20 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_AddAssetsToGroup")
   public func addAssetsToGroup(
-    withPolling: AddAssetsToGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Group> {
+    withPolling: AddAssetsToGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Group> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Group>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Group>.State in
       return try op._extractStatus(Group.self)
     }
     let rawOp = try await self.addAssetsToGroup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Group>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Group>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -620,7 +617,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_RemoveAssetsFromGroup")
   public func removeAssetsFromGroup(
-    request: RemoveAssetsFromGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveAssetsFromGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.removeAssetsFromGroup(request: request, options: options)
   }
@@ -629,21 +626,20 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_RemoveAssetsFromGroup")
   public func removeAssetsFromGroup(
-    withPolling: RemoveAssetsFromGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Group> {
+    withPolling: RemoveAssetsFromGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Group> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Group>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Group>.State in
       return try op._extractStatus(Group.self)
     }
     let rawOp = try await self.removeAssetsFromGroup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Group>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Group>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -655,7 +651,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListErrorFrames")
   public func listErrorFrames(
-    request: ListErrorFramesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListErrorFramesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListErrorFramesResponse {
     try await self.inner.listErrorFrames(request: request, options: options)
   }
@@ -664,7 +660,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListErrorFrames")
   public func listErrorFrames(
-    byItem: ListErrorFramesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListErrorFramesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ErrorFrame, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListErrorFramesResponse in
@@ -672,14 +668,14 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
       request.pageToken = token
       return try await self.listErrorFrames(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the details of an error frame.
   ///
   /// @Snippet(path: "MigrationCenter_GetErrorFrame")
   public func getErrorFrame(
-    request: GetErrorFrameRequest, options: GoogleCloudGax.RequestOptions
+    request: GetErrorFrameRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ErrorFrame {
     try await self.inner.getErrorFrame(request: request, options: options)
   }
@@ -688,7 +684,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListSources")
   public func listSources(
-    request: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListSourcesResponse {
     try await self.inner.listSources(request: request, options: options)
   }
@@ -697,7 +693,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListSources")
   public func listSources(
-    byItem: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Source, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListSourcesResponse in
@@ -705,14 +701,14 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
       request.pageToken = token
       return try await self.listSources(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the details of a source.
   ///
   /// @Snippet(path: "MigrationCenter_GetSource")
   public func getSource(
-    request: GetSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.Source {
     try await self.inner.getSource(request: request, options: options)
   }
@@ -721,7 +717,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CreateSource")
   public func createSource(
-    request: CreateSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createSource(request: request, options: options)
   }
@@ -730,21 +726,20 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CreateSource")
   public func createSource(
-    withPolling: CreateSourceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Source> {
+    withPolling: CreateSourceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Source> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Source>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Source>.State in
       return try op._extractStatus(Source.self)
     }
     let rawOp = try await self.createSource(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Source>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Source>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -756,7 +751,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_UpdateSource")
   public func updateSource(
-    request: UpdateSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateSource(request: request, options: options)
   }
@@ -765,21 +760,20 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_UpdateSource")
   public func updateSource(
-    withPolling: UpdateSourceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Source> {
+    withPolling: UpdateSourceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Source> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Source>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Source>.State in
       return try op._extractStatus(Source.self)
     }
     let rawOp = try await self.updateSource(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Source>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Source>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -791,7 +785,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeleteSource")
   public func deleteSource(
-    request: DeleteSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteSource(request: request, options: options)
   }
@@ -800,21 +794,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeleteSource")
   public func deleteSource(
-    withPolling: DeleteSourceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteSourceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteSource(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -826,7 +820,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListPreferenceSets")
   public func listPreferenceSets(
-    request: ListPreferenceSetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPreferenceSetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListPreferenceSetsResponse {
     try await self.inner.listPreferenceSets(request: request, options: options)
   }
@@ -835,7 +829,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListPreferenceSets")
   public func listPreferenceSets(
-    byItem: ListPreferenceSetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPreferenceSetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PreferenceSet, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListPreferenceSetsResponse
@@ -844,14 +838,14 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
       request.pageToken = token
       return try await self.listPreferenceSets(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the details of a preference set.
   ///
   /// @Snippet(path: "MigrationCenter_GetPreferenceSet")
   public func getPreferenceSet(
-    request: GetPreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPreferenceSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.PreferenceSet {
     try await self.inner.getPreferenceSet(request: request, options: options)
   }
@@ -860,7 +854,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CreatePreferenceSet")
   public func createPreferenceSet(
-    request: CreatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePreferenceSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createPreferenceSet(request: request, options: options)
   }
@@ -869,21 +863,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CreatePreferenceSet")
   public func createPreferenceSet(
-    withPolling: CreatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PreferenceSet> {
+    withPolling: CreatePreferenceSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PreferenceSet> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PreferenceSet>.State in
+        -> GoogleGax._PollableOperationImpl<PreferenceSet>.State in
       return try op._extractStatus(PreferenceSet.self)
     }
     let rawOp = try await self.createPreferenceSet(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PreferenceSet>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PreferenceSet>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -895,7 +889,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_UpdatePreferenceSet")
   public func updatePreferenceSet(
-    request: UpdatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePreferenceSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updatePreferenceSet(request: request, options: options)
   }
@@ -904,21 +898,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_UpdatePreferenceSet")
   public func updatePreferenceSet(
-    withPolling: UpdatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PreferenceSet> {
+    withPolling: UpdatePreferenceSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PreferenceSet> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PreferenceSet>.State in
+        -> GoogleGax._PollableOperationImpl<PreferenceSet>.State in
       return try op._extractStatus(PreferenceSet.self)
     }
     let rawOp = try await self.updatePreferenceSet(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PreferenceSet>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PreferenceSet>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -930,7 +924,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeletePreferenceSet")
   public func deletePreferenceSet(
-    request: DeletePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePreferenceSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deletePreferenceSet(request: request, options: options)
   }
@@ -939,21 +933,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeletePreferenceSet")
   public func deletePreferenceSet(
-    withPolling: DeletePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeletePreferenceSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deletePreferenceSet(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -965,7 +959,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_GetSettings")
   public func getSettings(
-    request: GetSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.Settings {
     try await self.inner.getSettings(request: request, options: options)
   }
@@ -974,7 +968,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_UpdateSettings")
   public func updateSettings(
-    request: UpdateSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateSettings(request: request, options: options)
   }
@@ -983,21 +977,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_UpdateSettings")
   public func updateSettings(
-    withPolling: UpdateSettingsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Settings> {
+    withPolling: UpdateSettingsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Settings> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Settings>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Settings>.State
+      in
       return try op._extractStatus(Settings.self)
     }
     let rawOp = try await self.updateSettings(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Settings>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Settings>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1009,7 +1003,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CreateReportConfig")
   public func createReportConfig(
-    request: CreateReportConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateReportConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createReportConfig(request: request, options: options)
   }
@@ -1018,21 +1012,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CreateReportConfig")
   public func createReportConfig(
-    withPolling: CreateReportConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ReportConfig> {
+    withPolling: CreateReportConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ReportConfig> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ReportConfig>.State in
+        -> GoogleGax._PollableOperationImpl<ReportConfig>.State in
       return try op._extractStatus(ReportConfig.self)
     }
     let rawOp = try await self.createReportConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ReportConfig>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ReportConfig>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1044,7 +1038,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_GetReportConfig")
   public func getReportConfig(
-    request: GetReportConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetReportConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ReportConfig {
     try await self.inner.getReportConfig(request: request, options: options)
   }
@@ -1053,7 +1047,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListReportConfigs")
   public func listReportConfigs(
-    request: ListReportConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReportConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListReportConfigsResponse {
     try await self.inner.listReportConfigs(request: request, options: options)
   }
@@ -1062,7 +1056,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListReportConfigs")
   public func listReportConfigs(
-    byItem: ListReportConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReportConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ReportConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListReportConfigsResponse
@@ -1071,14 +1065,14 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
       request.pageToken = token
       return try await self.listReportConfigs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes a ReportConfig.
   ///
   /// @Snippet(path: "MigrationCenter_DeleteReportConfig")
   public func deleteReportConfig(
-    request: DeleteReportConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteReportConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteReportConfig(request: request, options: options)
   }
@@ -1087,21 +1081,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeleteReportConfig")
   public func deleteReportConfig(
-    withPolling: DeleteReportConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteReportConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteReportConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1113,7 +1107,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CreateReport")
   public func createReport(
-    request: CreateReportRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createReport(request: request, options: options)
   }
@@ -1122,21 +1116,20 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CreateReport")
   public func createReport(
-    withPolling: CreateReportRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Report> {
+    withPolling: CreateReportRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Report> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Report>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Report>.State in
       return try op._extractStatus(Report.self)
     }
     let rawOp = try await self.createReport(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Report>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Report>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1148,7 +1141,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_GetReport")
   public func getReport(
-    request: GetReportRequest, options: GoogleCloudGax.RequestOptions
+    request: GetReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.Report {
     try await self.inner.getReport(request: request, options: options)
   }
@@ -1157,7 +1150,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListReports")
   public func listReports(
-    request: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReportsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListReportsResponse {
     try await self.inner.listReports(request: request, options: options)
   }
@@ -1166,7 +1159,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListReports")
   public func listReports(
-    byItem: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReportsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Report, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListReportsResponse in
@@ -1174,14 +1167,14 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
       request.pageToken = token
       return try await self.listReports(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes a Report.
   ///
   /// @Snippet(path: "MigrationCenter_DeleteReport")
   public func deleteReport(
-    request: DeleteReportRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteReport(request: request, options: options)
   }
@@ -1190,21 +1183,21 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeleteReport")
   public func deleteReport(
-    withPolling: DeleteReportRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteReportRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteReport(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1216,7 +1209,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -1225,7 +1218,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -1233,14 +1226,14 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "MigrationCenter_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -1251,7 +1244,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -1262,7 +1255,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -1270,7 +1263,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -1279,7 +1272,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -1290,7 +1283,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -1301,7 +1294,7 @@ public final class MigrationCenterClient: Clients.MigrationCenterProtocol, Senda
   ///
   /// @Snippet(path: "MigrationCenter_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -1342,7 +1335,7 @@ extension Clients {
     /// See `MigrationCenterClient.updateAsset`.
     func updateAsset(
       asset: Asset?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudMigrationCenterV1.Asset
 
     /// See `MigrationCenterClient.batchUpdateAssets`.
@@ -1385,7 +1378,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.createImportJob`.
-    func createImportJob(withPolling: CreateImportJobRequest) async throws -> any GoogleCloudGax
+    func createImportJob(withPolling: CreateImportJobRequest) async throws -> any GoogleGax
       .PollableOperation<ImportJob>
 
     /// See `MigrationCenterClient.createImportJob`.
@@ -1393,7 +1386,7 @@ extension Clients {
       parent: Swift.String,
       importJob: ImportJob?,
       importJobId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportJob>
+    ) async throws -> any GoogleGax.PollableOperation<ImportJob>
 
     /// See `MigrationCenterClient.listImportJobs`.
     func listImportJobs(request: ListImportJobsRequest) async throws
@@ -1423,52 +1416,52 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.deleteImportJob`.
-    func deleteImportJob(withPolling: DeleteImportJobRequest) async throws -> any GoogleCloudGax
+    func deleteImportJob(withPolling: DeleteImportJobRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.deleteImportJob`.
     func deleteImportJob(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.updateImportJob`.
     func updateImportJob(request: UpdateImportJobRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.updateImportJob`.
-    func updateImportJob(withPolling: UpdateImportJobRequest) async throws -> any GoogleCloudGax
+    func updateImportJob(withPolling: UpdateImportJobRequest) async throws -> any GoogleGax
       .PollableOperation<ImportJob>
 
     /// See `MigrationCenterClient.updateImportJob`.
     func updateImportJob(
       importJob: ImportJob?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportJob>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<ImportJob>
 
     /// See `MigrationCenterClient.validateImportJob`.
     func validateImportJob(request: ValidateImportJobRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.validateImportJob`.
-    func validateImportJob(withPolling: ValidateImportJobRequest) async throws -> any GoogleCloudGax
+    func validateImportJob(withPolling: ValidateImportJobRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.validateImportJob`.
     func validateImportJob(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.runImportJob`.
     func runImportJob(request: RunImportJobRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.runImportJob`.
-    func runImportJob(withPolling: RunImportJobRequest) async throws -> any GoogleCloudGax
+    func runImportJob(withPolling: RunImportJobRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.runImportJob`.
     func runImportJob(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.getImportDataFile`.
     func getImportDataFile(request: GetImportDataFileRequest) async throws
@@ -1499,14 +1492,14 @@ extension Clients {
 
     /// See `MigrationCenterClient.createImportDataFile`.
     func createImportDataFile(withPolling: CreateImportDataFileRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ImportDataFile>
+      -> any GoogleGax.PollableOperation<ImportDataFile>
 
     /// See `MigrationCenterClient.createImportDataFile`.
     func createImportDataFile(
       parent: Swift.String,
       importDataFile: ImportDataFile?,
       importDataFileId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportDataFile>
+    ) async throws -> any GoogleGax.PollableOperation<ImportDataFile>
 
     /// See `MigrationCenterClient.deleteImportDataFile`.
     func deleteImportDataFile(request: DeleteImportDataFileRequest) async throws
@@ -1514,12 +1507,12 @@ extension Clients {
 
     /// See `MigrationCenterClient.deleteImportDataFile`.
     func deleteImportDataFile(withPolling: DeleteImportDataFileRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.deleteImportDataFile`.
     func deleteImportDataFile(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.listGroups`.
     func listGroups(request: ListGroupsRequest) async throws
@@ -1547,7 +1540,7 @@ extension Clients {
     func createGroup(request: CreateGroupRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.createGroup`.
-    func createGroup(withPolling: CreateGroupRequest) async throws -> any GoogleCloudGax
+    func createGroup(withPolling: CreateGroupRequest) async throws -> any GoogleGax
       .PollableOperation<Group>
 
     /// See `MigrationCenterClient.createGroup`.
@@ -1555,45 +1548,45 @@ extension Clients {
       parent: Swift.String,
       group: Group?,
       groupId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Group>
+    ) async throws -> any GoogleGax.PollableOperation<Group>
 
     /// See `MigrationCenterClient.updateGroup`.
     func updateGroup(request: UpdateGroupRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.updateGroup`.
-    func updateGroup(withPolling: UpdateGroupRequest) async throws -> any GoogleCloudGax
+    func updateGroup(withPolling: UpdateGroupRequest) async throws -> any GoogleGax
       .PollableOperation<Group>
 
     /// See `MigrationCenterClient.updateGroup`.
     func updateGroup(
       group: Group?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Group>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Group>
 
     /// See `MigrationCenterClient.deleteGroup`.
     func deleteGroup(request: DeleteGroupRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.deleteGroup`.
-    func deleteGroup(withPolling: DeleteGroupRequest) async throws -> any GoogleCloudGax
+    func deleteGroup(withPolling: DeleteGroupRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.deleteGroup`.
     func deleteGroup(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.addAssetsToGroup`.
     func addAssetsToGroup(request: AddAssetsToGroupRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.addAssetsToGroup`.
-    func addAssetsToGroup(withPolling: AddAssetsToGroupRequest) async throws -> any GoogleCloudGax
+    func addAssetsToGroup(withPolling: AddAssetsToGroupRequest) async throws -> any GoogleGax
       .PollableOperation<Group>
 
     /// See `MigrationCenterClient.addAssetsToGroup`.
     func addAssetsToGroup(
       group: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Group>
+    ) async throws -> any GoogleGax.PollableOperation<Group>
 
     /// See `MigrationCenterClient.removeAssetsFromGroup`.
     func removeAssetsFromGroup(request: RemoveAssetsFromGroupRequest) async throws
@@ -1601,12 +1594,12 @@ extension Clients {
 
     /// See `MigrationCenterClient.removeAssetsFromGroup`.
     func removeAssetsFromGroup(withPolling: RemoveAssetsFromGroupRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Group>
+      -> any GoogleGax.PollableOperation<Group>
 
     /// See `MigrationCenterClient.removeAssetsFromGroup`.
     func removeAssetsFromGroup(
       group: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Group>
+    ) async throws -> any GoogleGax.PollableOperation<Group>
 
     /// See `MigrationCenterClient.listErrorFrames`.
     func listErrorFrames(request: ListErrorFramesRequest) async throws
@@ -1657,7 +1650,7 @@ extension Clients {
     func createSource(request: CreateSourceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.createSource`.
-    func createSource(withPolling: CreateSourceRequest) async throws -> any GoogleCloudGax
+    func createSource(withPolling: CreateSourceRequest) async throws -> any GoogleGax
       .PollableOperation<Source>
 
     /// See `MigrationCenterClient.createSource`.
@@ -1665,32 +1658,32 @@ extension Clients {
       parent: Swift.String,
       source: Source?,
       sourceId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Source>
+    ) async throws -> any GoogleGax.PollableOperation<Source>
 
     /// See `MigrationCenterClient.updateSource`.
     func updateSource(request: UpdateSourceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.updateSource`.
-    func updateSource(withPolling: UpdateSourceRequest) async throws -> any GoogleCloudGax
+    func updateSource(withPolling: UpdateSourceRequest) async throws -> any GoogleGax
       .PollableOperation<Source>
 
     /// See `MigrationCenterClient.updateSource`.
     func updateSource(
       source: Source?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Source>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Source>
 
     /// See `MigrationCenterClient.deleteSource`.
     func deleteSource(request: DeleteSourceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.deleteSource`.
-    func deleteSource(withPolling: DeleteSourceRequest) async throws -> any GoogleCloudGax
+    func deleteSource(withPolling: DeleteSourceRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.deleteSource`.
     func deleteSource(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.listPreferenceSets`.
     func listPreferenceSets(request: ListPreferenceSetsRequest) async throws
@@ -1720,42 +1713,42 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.createPreferenceSet`.
-    func createPreferenceSet(withPolling: CreatePreferenceSetRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<PreferenceSet>
+    func createPreferenceSet(withPolling: CreatePreferenceSetRequest) async throws -> any GoogleGax
+      .PollableOperation<PreferenceSet>
 
     /// See `MigrationCenterClient.createPreferenceSet`.
     func createPreferenceSet(
       parent: Swift.String,
       preferenceSet: PreferenceSet?,
       preferenceSetId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PreferenceSet>
+    ) async throws -> any GoogleGax.PollableOperation<PreferenceSet>
 
     /// See `MigrationCenterClient.updatePreferenceSet`.
     func updatePreferenceSet(request: UpdatePreferenceSetRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.updatePreferenceSet`.
-    func updatePreferenceSet(withPolling: UpdatePreferenceSetRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<PreferenceSet>
+    func updatePreferenceSet(withPolling: UpdatePreferenceSetRequest) async throws -> any GoogleGax
+      .PollableOperation<PreferenceSet>
 
     /// See `MigrationCenterClient.updatePreferenceSet`.
     func updatePreferenceSet(
       preferenceSet: PreferenceSet?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PreferenceSet>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<PreferenceSet>
 
     /// See `MigrationCenterClient.deletePreferenceSet`.
     func deletePreferenceSet(request: DeletePreferenceSetRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.deletePreferenceSet`.
-    func deletePreferenceSet(withPolling: DeletePreferenceSetRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    func deletePreferenceSet(withPolling: DeletePreferenceSetRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.deletePreferenceSet`.
     func deletePreferenceSet(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.getSettings`.
     func getSettings(request: GetSettingsRequest) async throws
@@ -1770,29 +1763,29 @@ extension Clients {
     func updateSettings(request: UpdateSettingsRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.updateSettings`.
-    func updateSettings(withPolling: UpdateSettingsRequest) async throws -> any GoogleCloudGax
+    func updateSettings(withPolling: UpdateSettingsRequest) async throws -> any GoogleGax
       .PollableOperation<Settings>
 
     /// See `MigrationCenterClient.updateSettings`.
     func updateSettings(
       settings: Settings?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Settings>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Settings>
 
     /// See `MigrationCenterClient.createReportConfig`.
     func createReportConfig(request: CreateReportConfigRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.createReportConfig`.
-    func createReportConfig(withPolling: CreateReportConfigRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ReportConfig>
+    func createReportConfig(withPolling: CreateReportConfigRequest) async throws -> any GoogleGax
+      .PollableOperation<ReportConfig>
 
     /// See `MigrationCenterClient.createReportConfig`.
     func createReportConfig(
       parent: Swift.String,
       reportConfig: ReportConfig?,
       reportConfigId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ReportConfig>
+    ) async throws -> any GoogleGax.PollableOperation<ReportConfig>
 
     /// See `MigrationCenterClient.getReportConfig`.
     func getReportConfig(request: GetReportConfigRequest) async throws
@@ -1822,19 +1815,19 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.deleteReportConfig`.
-    func deleteReportConfig(withPolling: DeleteReportConfigRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    func deleteReportConfig(withPolling: DeleteReportConfigRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.deleteReportConfig`.
     func deleteReportConfig(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.createReport`.
     func createReport(request: CreateReportRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.createReport`.
-    func createReport(withPolling: CreateReportRequest) async throws -> any GoogleCloudGax
+    func createReport(withPolling: CreateReportRequest) async throws -> any GoogleGax
       .PollableOperation<Report>
 
     /// See `MigrationCenterClient.createReport`.
@@ -1842,7 +1835,7 @@ extension Clients {
       parent: Swift.String,
       report: Report?,
       reportId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Report>
+    ) async throws -> any GoogleGax.PollableOperation<Report>
 
     /// See `MigrationCenterClient.getReport`.
     func getReport(request: GetReportRequest) async throws -> GoogleCloudMigrationCenterV1.Report
@@ -1870,13 +1863,13 @@ extension Clients {
     func deleteReport(request: DeleteReportRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.deleteReport`.
-    func deleteReport(withPolling: DeleteReportRequest) async throws -> any GoogleCloudGax
+    func deleteReport(withPolling: DeleteReportRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.deleteReport`.
     func deleteReport(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -1924,437 +1917,437 @@ extension Clients {
 
     /// See `MigrationCenterClient.listAssets`.
     func listAssets(
-      request: ListAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListAssetsResponse
 
     /// See `MigrationCenterClient.listAssets`.
     func listAssets(
-      byItem: ListAssetsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAssetsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Asset, Swift.Error>
 
     /// See `MigrationCenterClient.getAsset`.
     func getAsset(
-      request: GetAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.Asset
 
     /// See `MigrationCenterClient.updateAsset`.
     func updateAsset(
-      request: UpdateAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.Asset
 
     /// See `MigrationCenterClient.batchUpdateAssets`.
     func batchUpdateAssets(
-      request: BatchUpdateAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchUpdateAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.BatchUpdateAssetsResponse
 
     /// See `MigrationCenterClient.deleteAsset`.
     func deleteAsset(
-      request: DeleteAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAssetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `MigrationCenterClient.batchDeleteAssets`.
     func batchDeleteAssets(
-      request: BatchDeleteAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchDeleteAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `MigrationCenterClient.reportAssetFrames`.
     func reportAssetFrames(
-      request: ReportAssetFramesRequest, options: GoogleCloudGax.RequestOptions
+      request: ReportAssetFramesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ReportAssetFramesResponse
 
     /// See `MigrationCenterClient.aggregateAssetsValues`.
     func aggregateAssetsValues(
-      request: AggregateAssetsValuesRequest, options: GoogleCloudGax.RequestOptions
+      request: AggregateAssetsValuesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.AggregateAssetsValuesResponse
 
     /// See `MigrationCenterClient.createImportJob`.
     func createImportJob(
-      request: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.createImportJob`.
     func createImportJob(
-      withPolling: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportJob>
+      withPolling: CreateImportJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportJob>
 
     /// See `MigrationCenterClient.listImportJobs`.
     func listImportJobs(
-      request: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListImportJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListImportJobsResponse
 
     /// See `MigrationCenterClient.listImportJobs`.
     func listImportJobs(
-      byItem: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListImportJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ImportJob, Swift.Error>
 
     /// See `MigrationCenterClient.getImportJob`.
     func getImportJob(
-      request: GetImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ImportJob
 
     /// See `MigrationCenterClient.deleteImportJob`.
     func deleteImportJob(
-      request: DeleteImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.deleteImportJob`.
     func deleteImportJob(
-      withPolling: DeleteImportJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteImportJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.updateImportJob`.
     func updateImportJob(
-      request: UpdateImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.updateImportJob`.
     func updateImportJob(
-      withPolling: UpdateImportJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportJob>
+      withPolling: UpdateImportJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportJob>
 
     /// See `MigrationCenterClient.validateImportJob`.
     func validateImportJob(
-      request: ValidateImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: ValidateImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.validateImportJob`.
     func validateImportJob(
-      withPolling: ValidateImportJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: ValidateImportJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.runImportJob`.
     func runImportJob(
-      request: RunImportJobRequest, options: GoogleCloudGax.RequestOptions
+      request: RunImportJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.runImportJob`.
     func runImportJob(
-      withPolling: RunImportJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: RunImportJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.getImportDataFile`.
     func getImportDataFile(
-      request: GetImportDataFileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetImportDataFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ImportDataFile
 
     /// See `MigrationCenterClient.listImportDataFiles`.
     func listImportDataFiles(
-      request: ListImportDataFilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListImportDataFilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListImportDataFilesResponse
 
     /// See `MigrationCenterClient.listImportDataFiles`.
     func listImportDataFiles(
-      byItem: ListImportDataFilesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListImportDataFilesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ImportDataFile, Swift.Error>
 
     /// See `MigrationCenterClient.createImportDataFile`.
     func createImportDataFile(
-      request: CreateImportDataFileRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateImportDataFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.createImportDataFile`.
     func createImportDataFile(
-      withPolling: CreateImportDataFileRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportDataFile>
+      withPolling: CreateImportDataFileRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportDataFile>
 
     /// See `MigrationCenterClient.deleteImportDataFile`.
     func deleteImportDataFile(
-      request: DeleteImportDataFileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteImportDataFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.deleteImportDataFile`.
     func deleteImportDataFile(
-      withPolling: DeleteImportDataFileRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteImportDataFileRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.listGroups`.
     func listGroups(
-      request: ListGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListGroupsResponse
 
     /// See `MigrationCenterClient.listGroups`.
     func listGroups(
-      byItem: ListGroupsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListGroupsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Group, Swift.Error>
 
     /// See `MigrationCenterClient.getGroup`.
     func getGroup(
-      request: GetGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.Group
 
     /// See `MigrationCenterClient.createGroup`.
     func createGroup(
-      request: CreateGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.createGroup`.
     func createGroup(
-      withPolling: CreateGroupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Group>
+      withPolling: CreateGroupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Group>
 
     /// See `MigrationCenterClient.updateGroup`.
     func updateGroup(
-      request: UpdateGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.updateGroup`.
     func updateGroup(
-      withPolling: UpdateGroupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Group>
+      withPolling: UpdateGroupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Group>
 
     /// See `MigrationCenterClient.deleteGroup`.
     func deleteGroup(
-      request: DeleteGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.deleteGroup`.
     func deleteGroup(
-      withPolling: DeleteGroupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteGroupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.addAssetsToGroup`.
     func addAssetsToGroup(
-      request: AddAssetsToGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: AddAssetsToGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.addAssetsToGroup`.
     func addAssetsToGroup(
-      withPolling: AddAssetsToGroupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Group>
+      withPolling: AddAssetsToGroupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Group>
 
     /// See `MigrationCenterClient.removeAssetsFromGroup`.
     func removeAssetsFromGroup(
-      request: RemoveAssetsFromGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveAssetsFromGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.removeAssetsFromGroup`.
     func removeAssetsFromGroup(
-      withPolling: RemoveAssetsFromGroupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Group>
+      withPolling: RemoveAssetsFromGroupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Group>
 
     /// See `MigrationCenterClient.listErrorFrames`.
     func listErrorFrames(
-      request: ListErrorFramesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListErrorFramesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListErrorFramesResponse
 
     /// See `MigrationCenterClient.listErrorFrames`.
     func listErrorFrames(
-      byItem: ListErrorFramesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListErrorFramesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ErrorFrame, Swift.Error>
 
     /// See `MigrationCenterClient.getErrorFrame`.
     func getErrorFrame(
-      request: GetErrorFrameRequest, options: GoogleCloudGax.RequestOptions
+      request: GetErrorFrameRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ErrorFrame
 
     /// See `MigrationCenterClient.listSources`.
     func listSources(
-      request: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListSourcesResponse
 
     /// See `MigrationCenterClient.listSources`.
     func listSources(
-      byItem: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSourcesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Source, Swift.Error>
 
     /// See `MigrationCenterClient.getSource`.
     func getSource(
-      request: GetSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.Source
 
     /// See `MigrationCenterClient.createSource`.
     func createSource(
-      request: CreateSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.createSource`.
     func createSource(
-      withPolling: CreateSourceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Source>
+      withPolling: CreateSourceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Source>
 
     /// See `MigrationCenterClient.updateSource`.
     func updateSource(
-      request: UpdateSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.updateSource`.
     func updateSource(
-      withPolling: UpdateSourceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Source>
+      withPolling: UpdateSourceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Source>
 
     /// See `MigrationCenterClient.deleteSource`.
     func deleteSource(
-      request: DeleteSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.deleteSource`.
     func deleteSource(
-      withPolling: DeleteSourceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteSourceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.listPreferenceSets`.
     func listPreferenceSets(
-      request: ListPreferenceSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPreferenceSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListPreferenceSetsResponse
 
     /// See `MigrationCenterClient.listPreferenceSets`.
     func listPreferenceSets(
-      byItem: ListPreferenceSetsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPreferenceSetsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PreferenceSet, Swift.Error>
 
     /// See `MigrationCenterClient.getPreferenceSet`.
     func getPreferenceSet(
-      request: GetPreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPreferenceSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.PreferenceSet
 
     /// See `MigrationCenterClient.createPreferenceSet`.
     func createPreferenceSet(
-      request: CreatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePreferenceSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.createPreferenceSet`.
     func createPreferenceSet(
-      withPolling: CreatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PreferenceSet>
+      withPolling: CreatePreferenceSetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PreferenceSet>
 
     /// See `MigrationCenterClient.updatePreferenceSet`.
     func updatePreferenceSet(
-      request: UpdatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePreferenceSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.updatePreferenceSet`.
     func updatePreferenceSet(
-      withPolling: UpdatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PreferenceSet>
+      withPolling: UpdatePreferenceSetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PreferenceSet>
 
     /// See `MigrationCenterClient.deletePreferenceSet`.
     func deletePreferenceSet(
-      request: DeletePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePreferenceSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.deletePreferenceSet`.
     func deletePreferenceSet(
-      withPolling: DeletePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeletePreferenceSetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.getSettings`.
     func getSettings(
-      request: GetSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.Settings
 
     /// See `MigrationCenterClient.updateSettings`.
     func updateSettings(
-      request: UpdateSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.updateSettings`.
     func updateSettings(
-      withPolling: UpdateSettingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Settings>
+      withPolling: UpdateSettingsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Settings>
 
     /// See `MigrationCenterClient.createReportConfig`.
     func createReportConfig(
-      request: CreateReportConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReportConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.createReportConfig`.
     func createReportConfig(
-      withPolling: CreateReportConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ReportConfig>
+      withPolling: CreateReportConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ReportConfig>
 
     /// See `MigrationCenterClient.getReportConfig`.
     func getReportConfig(
-      request: GetReportConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReportConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ReportConfig
 
     /// See `MigrationCenterClient.listReportConfigs`.
     func listReportConfigs(
-      request: ListReportConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReportConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListReportConfigsResponse
 
     /// See `MigrationCenterClient.listReportConfigs`.
     func listReportConfigs(
-      byItem: ListReportConfigsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListReportConfigsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ReportConfig, Swift.Error>
 
     /// See `MigrationCenterClient.deleteReportConfig`.
     func deleteReportConfig(
-      request: DeleteReportConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReportConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.deleteReportConfig`.
     func deleteReportConfig(
-      withPolling: DeleteReportConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteReportConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.createReport`.
     func createReport(
-      request: CreateReportRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.createReport`.
     func createReport(
-      withPolling: CreateReportRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Report>
+      withPolling: CreateReportRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Report>
 
     /// See `MigrationCenterClient.getReport`.
     func getReport(
-      request: GetReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.Report
 
     /// See `MigrationCenterClient.listReports`.
     func listReports(
-      request: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReportsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMigrationCenterV1.ListReportsResponse
 
     /// See `MigrationCenterClient.listReports`.
     func listReports(
-      byItem: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListReportsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Report, Swift.Error>
 
     /// See `MigrationCenterClient.deleteReport`.
     func deleteReport(
-      request: DeleteReportRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MigrationCenterClient.deleteReport`.
     func deleteReport(
-      withPolling: DeleteReportRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteReportRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `MigrationCenterClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `MigrationCenterClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `MigrationCenterClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `MigrationCenterClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `MigrationCenterClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `MigrationCenterClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `MigrationCenterClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -2368,9 +2361,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listAssets(
-    request: ListAssetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAssetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListAssetsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAssets(
@@ -2380,13 +2373,13 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listAssets(
-    byItem: ListAssetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAssetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Asset, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListAssetsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAssets(
@@ -2404,9 +2397,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func getAsset(
-    request: GetAssetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAssetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.Asset {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAsset(
@@ -2425,14 +2418,14 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func updateAsset(
-    request: UpdateAssetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAssetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.Asset {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAsset(
     asset: Asset?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudMigrationCenterV1.Asset {
     let request = UpdateAssetRequest().with {
       $0.asset = asset
@@ -2448,9 +2441,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func batchUpdateAssets(
-    request: BatchUpdateAssetsRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchUpdateAssetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.BatchUpdateAssetsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func batchUpdateAssets(
@@ -2469,9 +2462,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func deleteAsset(
-    request: DeleteAssetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAssetRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAsset(
@@ -2488,9 +2481,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func batchDeleteAssets(
-    request: BatchDeleteAssetsRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchDeleteAssetsRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func batchDeleteAssets(
@@ -2511,9 +2504,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func reportAssetFrames(
-    request: ReportAssetFramesRequest, options: GoogleCloudGax.RequestOptions
+    request: ReportAssetFramesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ReportAssetFramesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func aggregateAssetsValues(request: AggregateAssetsValuesRequest) async throws
@@ -2523,9 +2516,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func aggregateAssetsValues(
-    request: AggregateAssetsValuesRequest, options: GoogleCloudGax.RequestOptions
+    request: AggregateAssetsValuesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.AggregateAssetsValuesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createImportJob(request: CreateImportJobRequest) async throws
@@ -2535,24 +2528,24 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func createImportJob(
-    request: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createImportJob(withPolling: CreateImportJobRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ImportJob>
+  public func createImportJob(withPolling: CreateImportJobRequest) async throws -> any GoogleGax
+    .PollableOperation<ImportJob>
   {
     try await self.createImportJob(withPolling: withPolling, options: .init())
   }
 
   public func createImportJob(
-    withPolling: CreateImportJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportJob> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ImportJob>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateImportJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportJob> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportJob>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2560,7 +2553,7 @@ extension Clients.MigrationCenterProtocol {
     parent: Swift.String,
     importJob: ImportJob?,
     importJobId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportJob> {
+  ) async throws -> any GoogleGax.PollableOperation<ImportJob> {
     let request = CreateImportJobRequest().with {
       $0.parent = parent
       $0.importJob = importJob
@@ -2576,9 +2569,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listImportJobs(
-    request: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListImportJobsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListImportJobsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listImportJobs(
@@ -2588,13 +2581,13 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listImportJobs(
-    byItem: ListImportJobsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListImportJobsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ImportJob, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListImportJobsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listImportJobs(
@@ -2613,9 +2606,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func getImportJob(
-    request: GetImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: GetImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ImportJob {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getImportJob(
@@ -2634,30 +2627,30 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func deleteImportJob(
-    request: DeleteImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteImportJob(withPolling: DeleteImportJobRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteImportJob(withPolling: DeleteImportJobRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteImportJob(withPolling: withPolling, options: .init())
   }
 
   public func deleteImportJob(
-    withPolling: DeleteImportJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteImportJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteImportJob(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteImportJobRequest().with {
       $0.name = name
     }
@@ -2671,31 +2664,31 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func updateImportJob(
-    request: UpdateImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateImportJob(withPolling: UpdateImportJobRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ImportJob>
+  public func updateImportJob(withPolling: UpdateImportJobRequest) async throws -> any GoogleGax
+    .PollableOperation<ImportJob>
   {
     try await self.updateImportJob(withPolling: withPolling, options: .init())
   }
 
   public func updateImportJob(
-    withPolling: UpdateImportJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportJob> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ImportJob>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateImportJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportJob> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportJob>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateImportJob(
     importJob: ImportJob?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportJob> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<ImportJob> {
     let request = UpdateImportJobRequest().with {
       $0.importJob = importJob
       $0.updateMask = updateMask
@@ -2710,30 +2703,30 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func validateImportJob(
-    request: ValidateImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: ValidateImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func validateImportJob(withPolling: ValidateImportJobRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func validateImportJob(withPolling: ValidateImportJobRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.validateImportJob(withPolling: withPolling, options: .init())
   }
 
   public func validateImportJob(
-    withPolling: ValidateImportJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ValidateImportJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func validateImportJob(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = ValidateImportJobRequest().with {
       $0.name = name
     }
@@ -2746,30 +2739,30 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func runImportJob(
-    request: RunImportJobRequest, options: GoogleCloudGax.RequestOptions
+    request: RunImportJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func runImportJob(withPolling: RunImportJobRequest) async throws -> any GoogleCloudGax
+  public func runImportJob(withPolling: RunImportJobRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.runImportJob(withPolling: withPolling, options: .init())
   }
 
   public func runImportJob(
-    withPolling: RunImportJobRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: RunImportJobRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func runImportJob(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = RunImportJobRequest().with {
       $0.name = name
     }
@@ -2783,9 +2776,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func getImportDataFile(
-    request: GetImportDataFileRequest, options: GoogleCloudGax.RequestOptions
+    request: GetImportDataFileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ImportDataFile {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getImportDataFile(
@@ -2804,9 +2797,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listImportDataFiles(
-    request: ListImportDataFilesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListImportDataFilesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListImportDataFilesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listImportDataFiles(
@@ -2816,14 +2809,14 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listImportDataFiles(
-    byItem: ListImportDataFilesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListImportDataFilesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ImportDataFile, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListImportDataFilesResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listImportDataFiles(
@@ -2842,24 +2835,24 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func createImportDataFile(
-    request: CreateImportDataFileRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateImportDataFileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createImportDataFile(withPolling: CreateImportDataFileRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ImportDataFile>
+    -> any GoogleGax.PollableOperation<ImportDataFile>
   {
     try await self.createImportDataFile(withPolling: withPolling, options: .init())
   }
 
   public func createImportDataFile(
-    withPolling: CreateImportDataFileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportDataFile> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ImportDataFile>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateImportDataFileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportDataFile> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportDataFile>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2867,7 +2860,7 @@ extension Clients.MigrationCenterProtocol {
     parent: Swift.String,
     importDataFile: ImportDataFile?,
     importDataFileId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportDataFile> {
+  ) async throws -> any GoogleGax.PollableOperation<ImportDataFile> {
     let request = CreateImportDataFileRequest().with {
       $0.parent = parent
       $0.importDataFile = importDataFile
@@ -2883,30 +2876,30 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func deleteImportDataFile(
-    request: DeleteImportDataFileRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteImportDataFileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteImportDataFile(withPolling: DeleteImportDataFileRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteImportDataFile(withPolling: withPolling, options: .init())
   }
 
   public func deleteImportDataFile(
-    withPolling: DeleteImportDataFileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteImportDataFileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteImportDataFile(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteImportDataFileRequest().with {
       $0.name = name
     }
@@ -2920,9 +2913,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listGroups(
-    request: ListGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListGroupsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listGroups(
@@ -2932,13 +2925,13 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listGroups(
-    byItem: ListGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Group, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListGroupsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listGroups(
@@ -2956,9 +2949,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func getGroup(
-    request: GetGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.Group {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getGroup(
@@ -2975,24 +2968,24 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func createGroup(
-    request: CreateGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createGroup(withPolling: CreateGroupRequest) async throws -> any GoogleCloudGax
+  public func createGroup(withPolling: CreateGroupRequest) async throws -> any GoogleGax
     .PollableOperation<Group>
   {
     try await self.createGroup(withPolling: withPolling, options: .init())
   }
 
   public func createGroup(
-    withPolling: CreateGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Group> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Group>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Group> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Group>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3000,7 +2993,7 @@ extension Clients.MigrationCenterProtocol {
     parent: Swift.String,
     group: Group?,
     groupId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Group> {
+  ) async throws -> any GoogleGax.PollableOperation<Group> {
     let request = CreateGroupRequest().with {
       $0.parent = parent
       $0.group = group
@@ -3014,31 +3007,31 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func updateGroup(
-    request: UpdateGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateGroup(withPolling: UpdateGroupRequest) async throws -> any GoogleCloudGax
+  public func updateGroup(withPolling: UpdateGroupRequest) async throws -> any GoogleGax
     .PollableOperation<Group>
   {
     try await self.updateGroup(withPolling: withPolling, options: .init())
   }
 
   public func updateGroup(
-    withPolling: UpdateGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Group> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Group>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Group> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Group>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateGroup(
     group: Group?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Group> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Group> {
     let request = UpdateGroupRequest().with {
       $0.group = group
       $0.updateMask = updateMask
@@ -3051,30 +3044,30 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func deleteGroup(
-    request: DeleteGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteGroup(withPolling: DeleteGroupRequest) async throws -> any GoogleCloudGax
+  public func deleteGroup(withPolling: DeleteGroupRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteGroup(withPolling: withPolling, options: .init())
   }
 
   public func deleteGroup(
-    withPolling: DeleteGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteGroup(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteGroupRequest().with {
       $0.name = name
     }
@@ -3088,30 +3081,30 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func addAssetsToGroup(
-    request: AddAssetsToGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: AddAssetsToGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func addAssetsToGroup(withPolling: AddAssetsToGroupRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Group>
+  public func addAssetsToGroup(withPolling: AddAssetsToGroupRequest) async throws -> any GoogleGax
+    .PollableOperation<Group>
   {
     try await self.addAssetsToGroup(withPolling: withPolling, options: .init())
   }
 
   public func addAssetsToGroup(
-    withPolling: AddAssetsToGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Group> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Group>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: AddAssetsToGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Group> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Group>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func addAssetsToGroup(
     group: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Group> {
+  ) async throws -> any GoogleGax.PollableOperation<Group> {
     let request = AddAssetsToGroupRequest().with {
       $0.group = group
     }
@@ -3125,30 +3118,30 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func removeAssetsFromGroup(
-    request: RemoveAssetsFromGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveAssetsFromGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func removeAssetsFromGroup(withPolling: RemoveAssetsFromGroupRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Group>
+    -> any GoogleGax.PollableOperation<Group>
   {
     try await self.removeAssetsFromGroup(withPolling: withPolling, options: .init())
   }
 
   public func removeAssetsFromGroup(
-    withPolling: RemoveAssetsFromGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Group> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Group>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: RemoveAssetsFromGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Group> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Group>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func removeAssetsFromGroup(
     group: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Group> {
+  ) async throws -> any GoogleGax.PollableOperation<Group> {
     let request = RemoveAssetsFromGroupRequest().with {
       $0.group = group
     }
@@ -3162,9 +3155,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listErrorFrames(
-    request: ListErrorFramesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListErrorFramesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListErrorFramesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listErrorFrames(
@@ -3174,13 +3167,13 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listErrorFrames(
-    byItem: ListErrorFramesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListErrorFramesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ErrorFrame, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListErrorFramesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listErrorFrames(
@@ -3199,9 +3192,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func getErrorFrame(
-    request: GetErrorFrameRequest, options: GoogleCloudGax.RequestOptions
+    request: GetErrorFrameRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ErrorFrame {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getErrorFrame(
@@ -3220,9 +3213,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listSources(
-    request: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListSourcesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSources(
@@ -3232,13 +3225,13 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listSources(
-    byItem: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Source, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListSourcesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSources(
@@ -3257,9 +3250,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func getSource(
-    request: GetSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.Source {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSource(
@@ -3277,24 +3270,24 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func createSource(
-    request: CreateSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createSource(withPolling: CreateSourceRequest) async throws -> any GoogleCloudGax
+  public func createSource(withPolling: CreateSourceRequest) async throws -> any GoogleGax
     .PollableOperation<Source>
   {
     try await self.createSource(withPolling: withPolling, options: .init())
   }
 
   public func createSource(
-    withPolling: CreateSourceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Source> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Source>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateSourceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Source> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Source>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3302,7 +3295,7 @@ extension Clients.MigrationCenterProtocol {
     parent: Swift.String,
     source: Source?,
     sourceId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Source> {
+  ) async throws -> any GoogleGax.PollableOperation<Source> {
     let request = CreateSourceRequest().with {
       $0.parent = parent
       $0.source = source
@@ -3317,31 +3310,31 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func updateSource(
-    request: UpdateSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateSource(withPolling: UpdateSourceRequest) async throws -> any GoogleCloudGax
+  public func updateSource(withPolling: UpdateSourceRequest) async throws -> any GoogleGax
     .PollableOperation<Source>
   {
     try await self.updateSource(withPolling: withPolling, options: .init())
   }
 
   public func updateSource(
-    withPolling: UpdateSourceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Source> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Source>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateSourceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Source> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Source>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateSource(
     source: Source?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Source> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Source> {
     let request = UpdateSourceRequest().with {
       $0.source = source
       $0.updateMask = updateMask
@@ -3355,30 +3348,30 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func deleteSource(
-    request: DeleteSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteSource(withPolling: DeleteSourceRequest) async throws -> any GoogleCloudGax
+  public func deleteSource(withPolling: DeleteSourceRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteSource(withPolling: withPolling, options: .init())
   }
 
   public func deleteSource(
-    withPolling: DeleteSourceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteSourceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteSource(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteSourceRequest().with {
       $0.name = name
     }
@@ -3392,9 +3385,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listPreferenceSets(
-    request: ListPreferenceSetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPreferenceSetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListPreferenceSetsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPreferenceSets(
@@ -3404,14 +3397,14 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listPreferenceSets(
-    byItem: ListPreferenceSetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPreferenceSetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PreferenceSet, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListPreferenceSetsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPreferenceSets(
@@ -3430,9 +3423,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func getPreferenceSet(
-    request: GetPreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPreferenceSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.PreferenceSet {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPreferenceSet(
@@ -3451,24 +3444,24 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func createPreferenceSet(
-    request: CreatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePreferenceSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createPreferenceSet(withPolling: CreatePreferenceSetRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PreferenceSet>
+    -> any GoogleGax.PollableOperation<PreferenceSet>
   {
     try await self.createPreferenceSet(withPolling: withPolling, options: .init())
   }
 
   public func createPreferenceSet(
-    withPolling: CreatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PreferenceSet> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PreferenceSet>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreatePreferenceSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PreferenceSet> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PreferenceSet>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3476,7 +3469,7 @@ extension Clients.MigrationCenterProtocol {
     parent: Swift.String,
     preferenceSet: PreferenceSet?,
     preferenceSetId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PreferenceSet> {
+  ) async throws -> any GoogleGax.PollableOperation<PreferenceSet> {
     let request = CreatePreferenceSetRequest().with {
       $0.parent = parent
       $0.preferenceSet = preferenceSet
@@ -3492,31 +3485,31 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func updatePreferenceSet(
-    request: UpdatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePreferenceSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updatePreferenceSet(withPolling: UpdatePreferenceSetRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PreferenceSet>
+    -> any GoogleGax.PollableOperation<PreferenceSet>
   {
     try await self.updatePreferenceSet(withPolling: withPolling, options: .init())
   }
 
   public func updatePreferenceSet(
-    withPolling: UpdatePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PreferenceSet> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PreferenceSet>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdatePreferenceSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PreferenceSet> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PreferenceSet>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updatePreferenceSet(
     preferenceSet: PreferenceSet?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PreferenceSet> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<PreferenceSet> {
     let request = UpdatePreferenceSetRequest().with {
       $0.preferenceSet = preferenceSet
       $0.updateMask = updateMask
@@ -3531,30 +3524,30 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func deletePreferenceSet(
-    request: DeletePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePreferenceSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deletePreferenceSet(withPolling: DeletePreferenceSetRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deletePreferenceSet(withPolling: withPolling, options: .init())
   }
 
   public func deletePreferenceSet(
-    withPolling: DeletePreferenceSetRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeletePreferenceSetRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deletePreferenceSet(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeletePreferenceSetRequest().with {
       $0.name = name
     }
@@ -3568,9 +3561,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func getSettings(
-    request: GetSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.Settings {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSettings(
@@ -3589,31 +3582,31 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func updateSettings(
-    request: UpdateSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateSettings(withPolling: UpdateSettingsRequest) async throws -> any GoogleCloudGax
+  public func updateSettings(withPolling: UpdateSettingsRequest) async throws -> any GoogleGax
     .PollableOperation<Settings>
   {
     try await self.updateSettings(withPolling: withPolling, options: .init())
   }
 
   public func updateSettings(
-    withPolling: UpdateSettingsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Settings> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Settings>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateSettingsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Settings> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Settings>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateSettings(
     settings: Settings?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Settings> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Settings> {
     let request = UpdateSettingsRequest().with {
       $0.settings = settings
       $0.updateMask = updateMask
@@ -3628,24 +3621,24 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func createReportConfig(
-    request: CreateReportConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateReportConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createReportConfig(withPolling: CreateReportConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ReportConfig>
+    -> any GoogleGax.PollableOperation<ReportConfig>
   {
     try await self.createReportConfig(withPolling: withPolling, options: .init())
   }
 
   public func createReportConfig(
-    withPolling: CreateReportConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ReportConfig> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ReportConfig>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateReportConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ReportConfig> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ReportConfig>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3653,7 +3646,7 @@ extension Clients.MigrationCenterProtocol {
     parent: Swift.String,
     reportConfig: ReportConfig?,
     reportConfigId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ReportConfig> {
+  ) async throws -> any GoogleGax.PollableOperation<ReportConfig> {
     let request = CreateReportConfigRequest().with {
       $0.parent = parent
       $0.reportConfig = reportConfig
@@ -3669,9 +3662,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func getReportConfig(
-    request: GetReportConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetReportConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ReportConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getReportConfig(
@@ -3690,9 +3683,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listReportConfigs(
-    request: ListReportConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReportConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListReportConfigsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listReportConfigs(
@@ -3702,14 +3695,14 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listReportConfigs(
-    byItem: ListReportConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReportConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ReportConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListReportConfigsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listReportConfigs(
@@ -3728,30 +3721,30 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func deleteReportConfig(
-    request: DeleteReportConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteReportConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteReportConfig(withPolling: DeleteReportConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteReportConfig(withPolling: withPolling, options: .init())
   }
 
   public func deleteReportConfig(
-    withPolling: DeleteReportConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteReportConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteReportConfig(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteReportConfigRequest().with {
       $0.name = name
     }
@@ -3764,24 +3757,24 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func createReport(
-    request: CreateReportRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createReport(withPolling: CreateReportRequest) async throws -> any GoogleCloudGax
+  public func createReport(withPolling: CreateReportRequest) async throws -> any GoogleGax
     .PollableOperation<Report>
   {
     try await self.createReport(withPolling: withPolling, options: .init())
   }
 
   public func createReport(
-    withPolling: CreateReportRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Report> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Report>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateReportRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Report> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Report>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3789,7 +3782,7 @@ extension Clients.MigrationCenterProtocol {
     parent: Swift.String,
     report: Report?,
     reportId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Report> {
+  ) async throws -> any GoogleGax.PollableOperation<Report> {
     let request = CreateReportRequest().with {
       $0.parent = parent
       $0.report = report
@@ -3805,9 +3798,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func getReport(
-    request: GetReportRequest, options: GoogleCloudGax.RequestOptions
+    request: GetReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.Report {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getReport(
@@ -3826,9 +3819,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listReports(
-    request: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReportsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMigrationCenterV1.ListReportsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listReports(
@@ -3838,13 +3831,13 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listReports(
-    byItem: ListReportsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReportsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Report, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMigrationCenterV1.ListReportsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listReports(
@@ -3862,30 +3855,30 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func deleteReport(
-    request: DeleteReportRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteReport(withPolling: DeleteReportRequest) async throws -> any GoogleCloudGax
+  public func deleteReport(withPolling: DeleteReportRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteReport(withPolling: withPolling, options: .init())
   }
 
   public func deleteReport(
-    withPolling: DeleteReportRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteReportRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteReport(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteReportRequest().with {
       $0.name = name
     }
@@ -3899,9 +3892,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -3911,13 +3904,13 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -3927,9 +3920,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -3939,9 +3932,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -3951,13 +3944,13 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -3978,9 +3971,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -3997,9 +3990,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -4016,9 +4009,9 @@ extension Clients.MigrationCenterProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

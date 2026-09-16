@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func listIngressRules(
-      request: ListIngressRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIngressRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.ListIngressRulesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listIngressRules",
         action: {
-          (r: ListIngressRulesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListIngressRulesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleAppEngineV1.ListIngressRulesResponse
           in
           return try await self.inner.listIngressRules(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func batchUpdateIngressRules(
-      request: BatchUpdateIngressRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchUpdateIngressRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.BatchUpdateIngressRulesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "batchUpdateIngressRules",
         action: {
-          (r: BatchUpdateIngressRulesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BatchUpdateIngressRulesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleAppEngineV1.BatchUpdateIngressRulesResponse
           in
           return try await self.inner.batchUpdateIngressRules(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func createIngressRule(
-      request: CreateIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIngressRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.FirewallRule {
       try await self._intercept(
         request: request,
         options: options,
         name: "createIngressRule",
         action: {
-          (r: CreateIngressRuleRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateIngressRuleRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleAppEngineV1.FirewallRule
           in
           return try await self.inner.createIngressRule(request: r, options: o)
@@ -103,14 +103,14 @@ extension Clients {
     }
 
     public func getIngressRule(
-      request: GetIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIngressRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.FirewallRule {
       try await self._intercept(
         request: request,
         options: options,
         name: "getIngressRule",
         action: {
-          (r: GetIngressRuleRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetIngressRuleRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleAppEngineV1.FirewallRule
           in
           return try await self.inner.getIngressRule(request: r, options: o)
@@ -118,14 +118,14 @@ extension Clients {
     }
 
     public func updateIngressRule(
-      request: UpdateIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIngressRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.FirewallRule {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateIngressRule",
         action: {
-          (r: UpdateIngressRuleRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateIngressRuleRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleAppEngineV1.FirewallRule
           in
           return try await self.inner.updateIngressRule(request: r, options: o)
@@ -133,42 +133,41 @@ extension Clients {
     }
 
     public func deleteIngressRule(
-      request: DeleteIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIngressRuleRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteIngressRule",
-        action: {
-          (r: DeleteIngressRuleRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteIngressRuleRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteIngressRule(request: r, options: o)
         })
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

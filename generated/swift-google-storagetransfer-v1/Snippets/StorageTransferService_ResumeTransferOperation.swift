@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleStorageTransferV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: StorageTransferServiceClient) async throws {
   try await client.resumeTransferOperation(

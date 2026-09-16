@@ -16,12 +16,12 @@
 
 #if Autoscalers || RegionAutoscalers
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Configuration that allows for slower scale in so that even if Autoscaler
   /// recommends an abrupt scale in of a MIG, it will be throttled as specified
   /// by the parameters below.
-  public struct AutoscalingPolicyScaleInControl: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AutoscalingPolicyScaleInControl: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Maximum allowed number (or %) of VMs that can be deducted from the peak
@@ -34,7 +34,7 @@
     /// include directives regarding slower scale in, as described above.
     public var timeWindowSec: Swift.Int32? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AutoscalingPolicyScaleInControl`.
     public init() {}
@@ -74,7 +74,7 @@
       self.timeWindowSec = try container.decodeIfPresent(Swift.Int32.self, forKey: .timeWindowSec)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -90,11 +90,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.AutoscalingPolicyScaleInControl"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

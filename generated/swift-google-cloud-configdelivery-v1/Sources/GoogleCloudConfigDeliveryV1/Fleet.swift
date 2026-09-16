@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The fleet where the `FleetPackage` should be deployed.
-public struct Fleet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Fleet: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The host project for the GKE fleet. Format is
@@ -29,7 +29,7 @@ public struct Fleet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// labels.
   public var selector: Fleet.LabelSelector? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Fleet`.
   public init() {}
@@ -70,7 +70,7 @@ public struct Fleet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.selector = try container.decodeIfPresent(Fleet.LabelSelector.self, forKey: .selector)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -85,7 +85,7 @@ public struct Fleet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// A label selector is a label query over a set of resources. An empty label
   /// selector matches all objects.
-  public struct LabelSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LabelSelector: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. match_labels is a map of {key,value} pairs. Each {key,value}
@@ -93,7 +93,7 @@ public struct Fleet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// satisfy the match.
     public var matchLabels: [Swift.String: Swift.String] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LabelSelector`.
     public init() {}
@@ -133,7 +133,7 @@ public struct Fleet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -148,21 +148,21 @@ public struct Fleet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.configdelivery.v1.Fleet.LabelSelector"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.configdelivery.v1.Fleet"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

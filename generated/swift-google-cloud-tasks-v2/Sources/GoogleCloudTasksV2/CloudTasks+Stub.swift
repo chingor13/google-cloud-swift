@@ -16,82 +16,82 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CloudTasksStub: Sendable {
     func listQueues(
-      request: ListQueuesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQueuesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTasksV2.ListQueuesResponse
 
     func getQueue(
-      request: GetQueueRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQueueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTasksV2.Queue
 
     func createQueue(
-      request: CreateQueueRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateQueueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTasksV2.Queue
 
     func updateQueue(
-      request: UpdateQueueRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateQueueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTasksV2.Queue
 
     func deleteQueue(
-      request: DeleteQueueRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteQueueRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func purgeQueue(
-      request: PurgeQueueRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeQueueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTasksV2.Queue
 
     func pauseQueue(
-      request: PauseQueueRequest, options: GoogleCloudGax.RequestOptions
+      request: PauseQueueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTasksV2.Queue
 
     func resumeQueue(
-      request: ResumeQueueRequest, options: GoogleCloudGax.RequestOptions
+      request: ResumeQueueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTasksV2.Queue
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listTasks(
-      request: ListTasksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTasksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTasksV2.ListTasksResponse
 
     func getTask(
-      request: GetTaskRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTaskRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTasksV2.Task
 
     func createTask(
-      request: CreateTaskRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTaskRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTasksV2.Task
 
     func deleteTask(
-      request: DeleteTaskRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTaskRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func runTask(
-      request: RunTaskRequest, options: GoogleCloudGax.RequestOptions
+      request: RunTaskRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTasksV2.Task
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }

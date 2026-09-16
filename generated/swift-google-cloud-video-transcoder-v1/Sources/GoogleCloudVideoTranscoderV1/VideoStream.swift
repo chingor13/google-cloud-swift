@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Video stream resource.
-public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VideoStream: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Codec settings can be h264, h265, or vp9.
   public var codecSettings: OneOf_CodecSettings? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VideoStream`.
   public init() {}
@@ -86,7 +86,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.codecSettings = codecSettings
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -109,10 +109,10 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Convert the input video to a Standard Dynamic Range (SDR) video.
-  public struct H264ColorFormatSDR: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct H264ColorFormatSDR: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `H264ColorFormatSDR`.
     public init() {}
@@ -143,7 +143,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -157,19 +157,19 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatSDR"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Convert the input video to a Hybrid Log Gamma (HLG) video.
-  public struct H264ColorFormatHLG: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct H264ColorFormatHLG: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `H264ColorFormatHLG`.
     public init() {}
@@ -200,7 +200,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -214,16 +214,16 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.VideoStream.H264ColorFormatHLG"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// H264 codec settings.
-  public struct H264CodecSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct H264CodecSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The width of the video in pixels. Must be an even integer.
@@ -371,7 +371,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Color format can be sdr or hlg.
     public var colorFormat: OneOf_ColorFormat? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `H264CodecSettings`.
     public init() {}
@@ -524,7 +524,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         try gopModeCheckAndSet(.gopFrameCount(gopFrameCount))
       }
       if let gopDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration?.self, forKey: .gopDuration)
+        GoogleWKT.Duration?.self, forKey: .gopDuration)
       {
         try gopModeCheckAndSet(.gopDuration(gopDuration))
       }
@@ -551,7 +551,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.colorFormat = colorFormat
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -609,7 +609,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// [`segmentDuration`](#SegmentSettings), and
       /// [`segmentDuration`](#SegmentSettings) must be divisible by
       /// `gopDuration`.
-      indirect case gopDuration(GoogleCloudWKT.Duration?)
+      indirect case gopDuration(GoogleWKT.Duration?)
     }
 
     /// Color format can be sdr or hlg.
@@ -623,19 +623,19 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.VideoStream.H264CodecSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Convert the input video to a Standard Dynamic Range (SDR) video.
-  public struct H265ColorFormatSDR: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct H265ColorFormatSDR: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `H265ColorFormatSDR`.
     public init() {}
@@ -666,7 +666,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -680,19 +680,19 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatSDR"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Convert the input video to a Hybrid Log Gamma (HLG) video.
-  public struct H265ColorFormatHLG: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct H265ColorFormatHLG: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `H265ColorFormatHLG`.
     public init() {}
@@ -723,7 +723,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -737,19 +737,19 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHLG"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Convert the input video to a High Dynamic Range 10 (HDR10) video.
-  public struct H265ColorFormatHDR10: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct H265ColorFormatHDR10: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `H265ColorFormatHDR10`.
     public init() {}
@@ -780,7 +780,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -794,16 +794,16 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.VideoStream.H265ColorFormatHDR10"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// H265 codec settings.
-  public struct H265CodecSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct H265CodecSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The width of the video in pixels. Must be an even integer.
@@ -955,7 +955,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Color format can be sdr, hlg, hdr10.
     public var colorFormat: OneOf_ColorFormat? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `H265CodecSettings`.
     public init() {}
@@ -1105,7 +1105,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         try gopModeCheckAndSet(.gopFrameCount(gopFrameCount))
       }
       if let gopDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration?.self, forKey: .gopDuration)
+        GoogleWKT.Duration?.self, forKey: .gopDuration)
       {
         try gopModeCheckAndSet(.gopDuration(gopDuration))
       }
@@ -1137,7 +1137,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.colorFormat = colorFormat
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1196,7 +1196,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// [`segmentDuration`](#SegmentSettings), and
       /// [`segmentDuration`](#SegmentSettings) must be divisible by
       /// `gopDuration`.
-      indirect case gopDuration(GoogleCloudWKT.Duration?)
+      indirect case gopDuration(GoogleWKT.Duration?)
     }
 
     /// Color format can be sdr, hlg, hdr10.
@@ -1212,19 +1212,19 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.VideoStream.H265CodecSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Convert the input video to a Standard Dynamic Range (SDR) video.
-  public struct Vp9ColorFormatSDR: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Vp9ColorFormatSDR: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Vp9ColorFormatSDR`.
     public init() {}
@@ -1255,7 +1255,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1269,19 +1269,19 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatSDR"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Convert the input video to a Hybrid Log Gamma (HLG) video.
-  public struct Vp9ColorFormatHLG: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Vp9ColorFormatHLG: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Vp9ColorFormatHLG`.
     public init() {}
@@ -1312,7 +1312,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1326,16 +1326,16 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.VideoStream.Vp9ColorFormatHLG"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// VP9 codec settings.
-  public struct Vp9CodecSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Vp9CodecSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The width of the video in pixels. Must be an even integer.
@@ -1420,7 +1420,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Color format can be sdr or hlg.
     public var colorFormat: OneOf_ColorFormat? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Vp9CodecSettings`.
     public init() {}
@@ -1523,7 +1523,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         try gopModeCheckAndSet(.gopFrameCount(gopFrameCount))
       }
       if let gopDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration?.self, forKey: .gopDuration)
+        GoogleWKT.Duration?.self, forKey: .gopDuration)
       {
         try gopModeCheckAndSet(.gopDuration(gopDuration))
       }
@@ -1550,7 +1550,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.colorFormat = colorFormat
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1598,7 +1598,7 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// [`segmentDuration`](#SegmentSettings), and
       /// [`segmentDuration`](#SegmentSettings) must be divisible by
       /// `gopDuration`.
-      indirect case gopDuration(GoogleCloudWKT.Duration?)
+      indirect case gopDuration(GoogleWKT.Duration?)
     }
 
     /// Color format can be sdr or hlg.
@@ -1612,11 +1612,11 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.VideoStream.Vp9CodecSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1745,10 +1745,10 @@ public struct VideoStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.transcoder.v1.VideoStream"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

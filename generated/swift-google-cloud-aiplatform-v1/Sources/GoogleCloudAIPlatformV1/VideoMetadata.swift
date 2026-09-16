@@ -16,23 +16,23 @@
 
 #if DataFoundryService || EvaluationService || GenAiCacheService || GenAiTuningService || LlmUtilityService || PredictionService || SessionService || VertexRagService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Metadata describes the input video content.
-  public struct VideoMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct VideoMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The start offset of the video.
-    public var startOffset: GoogleCloudWKT.Duration? = nil
+    public var startOffset: GoogleWKT.Duration? = nil
 
     /// Optional. The end offset of the video.
-    public var endOffset: GoogleCloudWKT.Duration? = nil
+    public var endOffset: GoogleWKT.Duration? = nil
 
     /// Optional. The frame rate of the video sent to the model. If not specified,
     /// the default value is 1.0. The valid range is (0.0, 24.0].
     public var fps: Swift.Double = Swift.Double()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `VideoMetadata`.
     public init() {}
@@ -70,15 +70,14 @@
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.startOffset = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .startOffset)
-      self.endOffset = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .endOffset)
+        GoogleWKT.Duration.self, forKey: .startOffset)
+      self.endOffset = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .endOffset)
       if let value = try container.decodeIfPresent(Swift.Double.self, forKey: .fps) {
         self.fps = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -95,11 +94,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.VideoMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// OmnichannelIntegrationConfig contains all App integration configs.
-public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Various of configuration for handling App events.
@@ -31,7 +31,7 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
   /// `RoutingConfig`, which contains subscriber's key.
   public var routingConfigs: [Swift.String: OmnichannelIntegrationConfig.RoutingConfig] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OmnichannelIntegrationConfig`.
   public init() {}
@@ -85,7 +85,7 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -100,13 +100,13 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
   }
 
   /// ChannelConfig contains config for various of app integration.
-  public struct ChannelConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ChannelConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The config for the app.
     public var channelConfig: OneOf_ChannelConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ChannelConfig`.
     public init() {}
@@ -158,7 +158,7 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
       self.channelConfig = channelConfig
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -185,16 +185,16 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.OmnichannelIntegrationConfig.ChannelConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// How Omnichannel should receive/reply events from WhatsApp.
-  public struct WhatsappConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct WhatsappConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The Phone Number ID associated with the WhatsApp Business Account.
@@ -218,7 +218,7 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
     /// https://www.facebook.com/business/help/1710077379203657
     public var metaBusinessPortfolioId: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `WhatsappConfig`.
     public init() {}
@@ -287,7 +287,7 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -307,22 +307,22 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.OmnichannelIntegrationConfig.WhatsappConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configs of subscribers.
-  public struct SubscriberConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SubscriberConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The config for the subscriber.
     public var subscriberConfig: OneOf_SubscriberConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SubscriberConfig`.
     public init() {}
@@ -374,7 +374,7 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
       self.subscriberConfig = subscriberConfig
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -401,23 +401,23 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.OmnichannelIntegrationConfig.SubscriberConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configs for CES app.
-  public struct CesAppConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CesAppConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The unique identifier of the CES app.
     /// Format: `projects/{project}/locations/{location}/apps/{app}`
     public var app: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CesAppConfig`.
     public init() {}
@@ -455,7 +455,7 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -470,22 +470,22 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.OmnichannelIntegrationConfig.CesAppConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Routing config specify how/who to route app events to a subscriber.
-  public struct RoutingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RoutingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The key of the subscriber.
     public var subscriberKey: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RoutingConfig`.
     public init() {}
@@ -523,7 +523,7 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -538,21 +538,21 @@ public struct OmnichannelIntegrationConfig: Codable, Equatable, GoogleCloudWKT._
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.OmnichannelIntegrationConfig.RoutingConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.OmnichannelIntegrationConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

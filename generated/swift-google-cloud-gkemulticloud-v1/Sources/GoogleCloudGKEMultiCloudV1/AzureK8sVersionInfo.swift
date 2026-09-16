@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Kubernetes version information of GKE cluster on Azure.
 @available(*, deprecated)
-public struct AzureK8sVersionInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AzureK8sVersionInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Kubernetes version name (for example, `1.19.10-gke.1000`)
@@ -46,7 +46,7 @@ public struct AzureK8sVersionInfo: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Optional. The date (in Pacific Time) when the cluster version was released.
   public var releaseDate: GoogleType.Date? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AzureK8sVersionInfo`.
   public init() {}
@@ -100,7 +100,7 @@ public struct AzureK8sVersionInfo: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.releaseDate = try container.decodeIfPresent(GoogleType.Date.self, forKey: .releaseDate)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -119,10 +119,10 @@ public struct AzureK8sVersionInfo: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkemulticloud.v1.AzureK8sVersionInfo"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

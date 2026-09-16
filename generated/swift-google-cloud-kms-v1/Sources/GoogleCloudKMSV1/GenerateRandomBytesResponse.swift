@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for
 /// [KeyManagementService.GenerateRandomBytes][google.cloud.kms.v1.KeyManagementService.GenerateRandomBytes].
 ///
 /// [google.cloud.kms.v1.KeyManagementService.GenerateRandomBytes]: <doc:KeyManagementServiceClient/generateRandomBytes(request:options:)>
-public struct GenerateRandomBytesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GenerateRandomBytesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The generated data.
@@ -42,9 +42,9 @@ public struct GenerateRandomBytesResponse: Codable, Equatable, GoogleCloudWKT._A
   /// languages that support this type.
   ///
   /// [google.cloud.kms.v1.GenerateRandomBytesResponse.data]: <doc:GenerateRandomBytesResponse/data>
-  public var dataCrc32C: GoogleCloudWKT.Int64Value? = nil
+  public var dataCrc32C: GoogleWKT.Int64Value? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GenerateRandomBytesResponse`.
   public init() {}
@@ -82,11 +82,10 @@ public struct GenerateRandomBytesResponse: Codable, Equatable, GoogleCloudWKT._A
     if let value = try container.decodeIfPresent(Foundation.Data.self, forKey: .data) {
       self.data = value
     }
-    self.dataCrc32C = try container.decodeIfPresent(
-      GoogleCloudWKT.Int64Value.self, forKey: .dataCrc32C)
+    self.dataCrc32C = try container.decodeIfPresent(GoogleWKT.Int64Value.self, forKey: .dataCrc32C)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,10 +101,10 @@ public struct GenerateRandomBytesResponse: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.GenerateRandomBytesResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

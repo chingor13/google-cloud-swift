@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Properties of the provided event token.
-public struct TokenProperties: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TokenProperties: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Indicates whether the provided user response token is valid.
@@ -30,7 +30,7 @@ public struct TokenProperties: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var invalidReason: TokenProperties.InvalidReason = TokenProperties.InvalidReason()
 
   /// Output only. The timestamp corresponding to the generation of the token.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The hostname of the page on which the token was generated (Web
   /// keys only).
@@ -47,7 +47,7 @@ public struct TokenProperties: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. Action name provided at token generation.
   public var action: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TokenProperties`.
   public init() {}
@@ -100,8 +100,7 @@ public struct TokenProperties: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.invalidReason = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .hostname) {
       self.hostname = value
     }
@@ -116,7 +115,7 @@ public struct TokenProperties: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -301,10 +300,10 @@ public struct TokenProperties: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.TokenProperties"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

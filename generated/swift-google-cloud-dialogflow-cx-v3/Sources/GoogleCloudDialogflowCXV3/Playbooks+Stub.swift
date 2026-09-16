@@ -17,79 +17,79 @@
 #if Playbooks
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol PlaybooksStub: Sendable {
       func createPlaybook(
-        request: CreatePlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: CreatePlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Playbook
 
       func deletePlaybook(
-        request: DeletePlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: DeletePlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func listPlaybooks(
-        request: ListPlaybooksRequest, options: GoogleCloudGax.RequestOptions
+        request: ListPlaybooksRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListPlaybooksResponse
 
       func getPlaybook(
-        request: GetPlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: GetPlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Playbook
 
       func exportPlaybook(
-        request: ExportPlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportPlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func importPlaybook(
-        request: ImportPlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportPlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func updatePlaybook(
-        request: UpdatePlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdatePlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Playbook
 
       func createPlaybookVersion(
-        request: CreatePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: CreatePlaybookVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.PlaybookVersion
 
       func getPlaybookVersion(
-        request: GetPlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: GetPlaybookVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.PlaybookVersion
 
       func restorePlaybookVersion(
-        request: RestorePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: RestorePlaybookVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.RestorePlaybookVersionResponse
 
       func listPlaybookVersions(
-        request: ListPlaybookVersionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListPlaybookVersionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListPlaybookVersionsResponse
 
       func deletePlaybookVersion(
-        request: DeletePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: DeletePlaybookVersionRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

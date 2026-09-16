@@ -15,49 +15,49 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ManagedZonesStub: Sendable {
     func create(
-      request: ManagedZonesClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.CreateRequest, options: GoogleGax.RequestOptions
     ) async throws -> ManagedZone
 
     func delete(
-      request: ManagedZonesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func `get`(
-      request: ManagedZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> ManagedZone
 
     func getIamPolicy(
-      request: ManagedZonesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIamV1Policy
 
     func list(
-      request: ManagedZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> ManagedZonesListResponse
 
     func patch(
-      request: ManagedZonesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> Operation
 
     func setIamPolicy(
-      request: ManagedZonesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIamV1Policy
 
     func testIamPermissions(
-      request: ManagedZonesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIamV1TestIamPermissionsResponse
 
     func update(
-      request: ManagedZonesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZonesClient.UpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> Operation
 
     func getOperation(
-      request: ManagedZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> Operation
   }
 }

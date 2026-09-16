@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A deployment represents a zonal mirroring backend ready to accept
 /// GENEVE-encapsulated replica traffic, e.g. a zonal instance group fronted by
 /// an internal passthrough load balancer. Deployments are always part of a
 /// global deployment group which represents a global mirroring service.
-public struct MirroringDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MirroringDeployment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Immutable. Identifier. The resource name of this deployment, for example:
@@ -31,11 +31,11 @@ public struct MirroringDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackab
 
   /// Output only. The timestamp when the resource was created.
   /// See https://google.aip.dev/148#timestamps.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when the resource was most recently updated.
   /// See https://google.aip.dev/148#timestamps.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Labels are key/value pairs that help to organize and filter
   /// resources.
@@ -67,7 +67,7 @@ public struct MirroringDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Used as additional context for the deployment.
   public var description: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MirroringDeployment`.
   public init() {}
@@ -119,10 +119,8 @@ public struct MirroringDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackab
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -146,7 +144,7 @@ public struct MirroringDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -300,10 +298,10 @@ public struct MirroringDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networksecurity.v1.MirroringDeployment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

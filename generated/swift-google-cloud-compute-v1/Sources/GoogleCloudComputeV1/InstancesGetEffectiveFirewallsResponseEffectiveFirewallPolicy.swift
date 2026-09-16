@@ -16,10 +16,10 @@
 
 #if Instances
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   public struct InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy: Codable, Equatable,
-    GoogleCloudWKT._AnyPackable,
+    GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. [Output Only] Deprecated, please use short name instead. The display name
@@ -49,7 +49,7 @@
     /// NETWORK, NETWORK_REGIONAL, SYSTEM_GLOBAL, SYSTEM_REGIONAL.
     public var type: InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy.Type_? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy`.
     public init() {}
@@ -110,7 +110,7 @@
         InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy.Type_.self, forKey: .type)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -254,11 +254,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

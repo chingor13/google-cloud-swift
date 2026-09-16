@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An asset represents a cloud resource that is being managed within a lake as a
 /// member of a zone.
-public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Asset: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The relative resource name of the asset, of the form:
@@ -35,10 +35,10 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var uid: Swift.String = Swift.String()
 
   /// Output only. The time when the asset was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the asset was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. User defined labels for the asset.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -68,7 +68,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// this asset.
   public var discoveryStatus: Asset.DiscoveryStatus? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Asset`.
   public init() {}
@@ -134,10 +134,8 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .uid) {
       self.uid = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -160,7 +158,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       Asset.DiscoveryStatus.self, forKey: .discoveryStatus)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -186,7 +184,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Security policy status of the asset. Data security policy, i.e., readers,
   /// writers & owners, should be specified in the lake/zone/asset IAM policy.
-  public struct SecurityStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SecurityStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The current state of the security policy applied to the attached
@@ -197,9 +195,9 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var message: Swift.String = Swift.String()
 
     /// Last update time of the status.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SecurityStatus`.
     public init() {}
@@ -243,11 +241,10 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .message) {
         self.message = value
       }
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -378,16 +375,16 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Asset.SecurityStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Settings to manage the metadata discovery and publishing for an asset.
-  public struct DiscoverySpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DiscoverySpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Whether discovery is enabled.
@@ -415,7 +412,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Determines when discovery is triggered.
     public var trigger: OneOf_Trigger? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DiscoverySpec`.
     public init() {}
@@ -488,7 +485,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.trigger = trigger
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -512,7 +509,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Describe CSV and similar semi-structured data formats.
-    public struct CsvOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct CsvOptions: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The number of rows to interpret as header rows that should be
@@ -530,7 +527,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// If true, all columns will be registered as strings.
       public var disableTypeInference: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `CsvOptions`.
       public init() {}
@@ -584,7 +581,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -602,16 +599,16 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dataplex.v1.Asset.DiscoverySpec.CsvOptions"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Describe JSON data format.
-    public struct JsonOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct JsonOptions: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The character encoding of the data. The default is UTF-8.
@@ -622,7 +619,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// (strings, number or boolean).
       public var disableTypeInference: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `JsonOptions`.
       public init() {}
@@ -666,7 +663,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -682,11 +679,11 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dataplex.v1.Asset.DiscoverySpec.JsonOptions"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -708,16 +705,16 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Asset.DiscoverySpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Identifies the cloud resource that is referenced by this asset.
-  public struct ResourceSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ResourceSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. Relative name of the cloud resource that contains the data
@@ -733,7 +730,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// their associated tables. Only available to storage buckets assets.
     public var readAccessMode: Asset.ResourceSpec.AccessMode = Asset.ResourceSpec.AccessMode()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ResourceSpec`.
     public init() {}
@@ -783,7 +780,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1011,16 +1008,16 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Asset.ResourceSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Status of the resource referenced by an asset.
-  public struct ResourceStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ResourceStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The current state of the managed resource.
@@ -1030,12 +1027,12 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var message: Swift.String = Swift.String()
 
     /// Last update time of the status.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Service account associated with the BigQuery Connection.
     public var managedAccessIdentity: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ResourceStatus`.
     public init() {}
@@ -1081,8 +1078,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .message) {
         self.message = value
       }
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(
         Swift.String.self, forKey: .managedAccessIdentity)
       {
@@ -1090,7 +1086,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1213,16 +1209,16 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Asset.ResourceStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Status of discovery for an asset.
-  public struct DiscoveryStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DiscoveryStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The current status of the discovery feature.
@@ -1232,18 +1228,18 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var message: Swift.String = Swift.String()
 
     /// Last update time of the status.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// The start time of the last discovery run.
-    public var lastRunTime: GoogleCloudWKT.Timestamp? = nil
+    public var lastRunTime: GoogleWKT.Timestamp? = nil
 
     /// Data Stats of the asset reported by discovery.
     public var stats: Asset.DiscoveryStatus.Stats? = nil
 
     /// The duration of the last discovery run.
-    public var lastRunDuration: GoogleCloudWKT.Duration? = nil
+    public var lastRunDuration: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DiscoveryStatus`.
     public init() {}
@@ -1293,16 +1289,15 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .message) {
         self.message = value
       }
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       self.lastRunTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .lastRunTime)
+        GoogleWKT.Timestamp.self, forKey: .lastRunTime)
       self.stats = try container.decodeIfPresent(Asset.DiscoveryStatus.Stats.self, forKey: .stats)
       self.lastRunDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .lastRunDuration)
+        GoogleWKT.Duration.self, forKey: .lastRunDuration)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1320,7 +1315,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// The aggregated data statistics for the asset reported by discovery.
-    public struct Stats: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Stats: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The count of data items within the referenced resource.
@@ -1335,7 +1330,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// The count of fileset entities within the referenced resource.
       public var filesets: Swift.Int64 = Swift.Int64()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Stats`.
       public init() {}
@@ -1388,7 +1383,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1406,11 +1401,11 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dataplex.v1.Asset.DiscoveryStatus.Stats"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1537,21 +1532,21 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Asset.DiscoveryStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.Asset"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

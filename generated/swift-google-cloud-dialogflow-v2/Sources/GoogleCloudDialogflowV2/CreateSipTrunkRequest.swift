@@ -16,13 +16,13 @@
 
 #if SipTrunks
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The request message for
   /// [SipTrunks.CreateSipTrunk][google.cloud.dialogflow.v2.SipTrunks.CreateSipTrunk].
   ///
   /// [google.cloud.dialogflow.v2.SipTrunks.CreateSipTrunk]: <doc:SipTrunksClient/createSipTrunk(request:options:)>
-  public struct CreateSipTrunkRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CreateSipTrunkRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The location to create a SIP trunk for.
@@ -32,7 +32,7 @@
     /// Required. The SIP trunk to create.
     public var sipTrunk: SipTrunk? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CreateSipTrunkRequest`.
     public init() {}
@@ -73,7 +73,7 @@
       self.sipTrunk = try container.decodeIfPresent(SipTrunk.self, forKey: .sipTrunk)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -89,11 +89,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.CreateSipTrunkRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

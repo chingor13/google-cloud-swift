@@ -16,14 +16,14 @@
 
 #if DocumentService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Response message for
   /// [DocumentService.BatchGetDocumentsMetadata][google.cloud.discoveryengine.v1.DocumentService.BatchGetDocumentsMetadata]
   /// method.
   ///
   /// [google.cloud.discoveryengine.v1.DocumentService.BatchGetDocumentsMetadata]: <doc:DocumentServiceClient/batchGetDocumentsMetadata(request:options:)>
-  public struct BatchGetDocumentsMetadataResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BatchGetDocumentsMetadataResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The metadata of the [Document][google.cloud.discoveryengine.v1.Document]s.
@@ -31,7 +31,7 @@
     /// [google.cloud.discoveryengine.v1.Document]: <doc:Document>
     public var documentsMetadata: [BatchGetDocumentsMetadataResponse.DocumentMetadata] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BatchGetDocumentsMetadataResponse`.
     public init() {}
@@ -71,7 +71,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -86,7 +86,7 @@
     /// The metadata of a [Document][google.cloud.discoveryengine.v1.Document].
     ///
     /// [google.cloud.discoveryengine.v1.Document]: <doc:Document>
-    public struct DocumentMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DocumentMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The value of the matcher that was used to match the
@@ -104,7 +104,7 @@
       /// [Document][google.cloud.discoveryengine.v1.Document] was last indexed.
       ///
       /// [google.cloud.discoveryengine.v1.Document]: <doc:Document>
-      public var lastRefreshedTime: GoogleCloudWKT.Timestamp? = nil
+      public var lastRefreshedTime: GoogleWKT.Timestamp? = nil
 
       /// The data ingestion source of the
       /// [Document][google.cloud.discoveryengine.v1.Document].
@@ -117,7 +117,7 @@
       /// [google.cloud.discoveryengine.v1.Document]: <doc:Document>
       public var dataIngestionSource: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DocumentMetadata`.
       public init() {}
@@ -165,7 +165,7 @@
           self.state = value
         }
         self.lastRefreshedTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .lastRefreshedTime)
+          GoogleWKT.Timestamp.self, forKey: .lastRefreshedTime)
         if let value = try container.decodeIfPresent(
           Swift.String.self, forKey: .dataIngestionSource)
         {
@@ -173,7 +173,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -192,7 +192,7 @@
       /// [Document][google.cloud.discoveryengine.v1.Document].
       ///
       /// [google.cloud.discoveryengine.v1.Document]: <doc:Document>
-      public struct MatcherValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct MatcherValue: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// The value of the matcher that was used to match the
@@ -201,8 +201,7 @@
         /// [google.cloud.discoveryengine.v1.Document]: <doc:Document>
         public var matcherValue: OneOf_MatcherValue? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `MatcherValue`.
         public init() {}
@@ -259,7 +258,7 @@
           self.matcherValue = matcherValue
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -298,11 +297,11 @@
           return
             "type.googleapis.com/google.cloud.discoveryengine.v1.BatchGetDocumentsMetadataResponse.DocumentMetadata.MatcherValue"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -310,11 +309,11 @@
         return
           "type.googleapis.com/google.cloud.discoveryengine.v1.BatchGetDocumentsMetadataResponse.DocumentMetadata"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -444,11 +443,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.BatchGetDocumentsMetadataResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

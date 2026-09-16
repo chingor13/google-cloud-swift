@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// An abstract interface that provides location-related information for
 /// a service. Service-specific metadata is provided through the
@@ -32,7 +32,7 @@ public final class LocationsClient: Clients.LocationsProtocol, Sendable {
   let inner: any Clients.LocationsStub
 
   /// Creates a new `LocationsClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.LocationsStub = try Clients.LocationsTransport(options)
     inner = Clients.LocationsRetry(inner, options: options)
     if let logger = options.logger {
@@ -45,7 +45,7 @@ public final class LocationsClient: Clients.LocationsProtocol, Sendable {
   ///
   /// @Snippet(path: "Locations_ListLocations")
   public func listLocations(
-    request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -54,7 +54,7 @@ public final class LocationsClient: Clients.LocationsProtocol, Sendable {
   ///
   /// @Snippet(path: "Locations_ListLocations")
   public func listLocations(
-    byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -62,14 +62,14 @@ public final class LocationsClient: Clients.LocationsProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "Locations_GetLocation")
   public func getLocation(
-    request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -96,17 +96,17 @@ extension Clients {
 
     /// See `LocationsClient.listLocations`.
     func listLocations(
-      request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `LocationsClient.listLocations`.
     func listLocations(
-      byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Location, Swift.Error>
 
     /// See `LocationsClient.getLocation`.
     func getLocation(
-      request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }
@@ -120,9 +120,9 @@ extension Clients.LocationsProtocol {
   }
 
   public func listLocations(
-    request: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -132,13 +132,13 @@ extension Clients.LocationsProtocol {
   }
 
   public func listLocations(
-    byItem: ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GetLocationRequest) async throws -> GoogleCloudLocation.Location
@@ -147,8 +147,8 @@ extension Clients.LocationsProtocol {
   }
 
   public func getLocation(
-    request: GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

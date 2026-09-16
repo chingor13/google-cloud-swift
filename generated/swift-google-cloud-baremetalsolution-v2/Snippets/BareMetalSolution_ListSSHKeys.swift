@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudBareMetalSolutionV2
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: BareMetalSolutionClient, parent: String) async throws {
   let items = try client.listSshkeys(

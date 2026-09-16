@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// GrpcRoute is the resource defining how gRPC traffic routed by a Mesh
 /// or Gateway resource is routed.
-public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GrpcRoute: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Name of the GrpcRoute resource. It matches pattern
@@ -30,10 +30,10 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var selfLink: Swift.String = Swift.String()
 
   /// Output only. The timestamp when the resource was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when the resource was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Set of label tags associated with the GrpcRoute resource.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -97,7 +97,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// must be supplied.
   public var rules: [GrpcRoute.RouteRule] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GrpcRoute`.
   public init() {}
@@ -154,10 +154,8 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .selfLink) {
       self.selfLink = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -179,7 +177,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -201,7 +199,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Specifies a match against a method.
-  public struct MethodMatch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MethodMatch: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Specifies how to match against the name. If not specified, a
@@ -221,7 +219,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// REGULAR_EXPRESSION.
     public var caseSensitive: Swift.Bool? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MethodMatch`.
     public init() {}
@@ -273,7 +271,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.caseSensitive = try container.decodeIfPresent(Swift.Bool.self, forKey: .caseSensitive)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -397,16 +395,16 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.GrpcRoute.MethodMatch"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A match against a collection of headers.
-  public struct HeaderMatch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct HeaderMatch: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Specifies how to match against the value of the header. If not
@@ -419,7 +417,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Required. The value of the header.
     public var value: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `HeaderMatch`.
     public init() {}
@@ -468,7 +466,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -591,17 +589,17 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.GrpcRoute.HeaderMatch"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Criteria for matching traffic. A RouteMatch will be considered to match
   /// when all supplied fields match.
-  public struct RouteMatch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RouteMatch: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. A gRPC method to match against. If this field is empty or
@@ -611,7 +609,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. Specifies a collection of headers to match.
     public var headers: [GrpcRoute.HeaderMatch] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RouteMatch`.
     public init() {}
@@ -652,7 +650,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -668,16 +666,16 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.GrpcRoute.RouteMatch"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The destination to which traffic will be routed.
-  public struct Destination: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Destination: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Specifies the proportion of requests forwarded to the backend
@@ -699,7 +697,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Specifies the kind of destination to which traffic will be routed.
     public var destinationType: OneOf_DestinationType? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Destination`.
     public init() {}
@@ -752,7 +750,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.destinationType = destinationType
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -781,11 +779,11 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.GrpcRoute.Destination"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -795,7 +793,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// introduced on a percentage of requests before sending those requests to the
   /// destination service. Similarly requests from clients can be aborted by for
   /// a percentage of requests.
-  public struct FaultInjectionPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FaultInjectionPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The specification for injecting delay to client requests.
@@ -804,7 +802,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The specification for aborting to client requests.
     public var abort: GrpcRoute.FaultInjectionPolicy.Abort? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FaultInjectionPolicy`.
     public init() {}
@@ -845,7 +843,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         GrpcRoute.FaultInjectionPolicy.Abort.self, forKey: .abort)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -860,18 +858,18 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     /// Specification of how client requests are delayed as part of fault
     /// injection before being sent to a destination.
-    public struct Delay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Delay: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Specify a fixed delay before forwarding the request.
-      public var fixedDelay: GoogleCloudWKT.Duration? = nil
+      public var fixedDelay: GoogleWKT.Duration? = nil
 
       /// The percentage of traffic on which delay will be injected.
       ///
       /// The value must be between [0, 100]
       public var percentage: Swift.Int32? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Delay`.
       public init() {}
@@ -907,11 +905,11 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.fixedDelay = try container.decodeIfPresent(
-          GoogleCloudWKT.Duration.self, forKey: .fixedDelay)
+          GoogleWKT.Duration.self, forKey: .fixedDelay)
         self.percentage = try container.decodeIfPresent(Swift.Int32.self, forKey: .percentage)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -928,17 +926,17 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy.Delay"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Specification of how client requests are aborted as part of fault
     /// injection before being sent to a destination.
-    public struct Abort: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Abort: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The HTTP status code used to abort the request.
@@ -951,7 +949,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// The value must be between [0, 100]
       public var percentage: Swift.Int32? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Abort`.
       public init() {}
@@ -990,7 +988,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.percentage = try container.decodeIfPresent(Swift.Int32.self, forKey: .percentage)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1007,22 +1005,22 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy.Abort"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.GrpcRoute.FaultInjectionPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1035,7 +1033,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The gRPC proxyless mesh library or sidecar proxy will manage the session
   /// cookie but the client application code is responsible for copying the
   /// cookie from each RPC in the session to the next.
-  public struct StatefulSessionAffinityPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StatefulSessionAffinityPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The cookie TTL value for the Set-Cookie header generated by the
@@ -1043,9 +1041,9 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// 86400 seconds (24 hours) inclusive.
     ///
     /// Set this to 0s to use a session cookie and disable cookie expiration.
-    public var cookieTtl: GoogleCloudWKT.Duration? = nil
+    public var cookieTtl: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StatefulSessionAffinityPolicy`.
     public init() {}
@@ -1078,11 +1076,10 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.cookieTtl = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .cookieTtl)
+      self.cookieTtl = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .cookieTtl)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1098,18 +1095,18 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.networkservices.v1.GrpcRoute.StatefulSessionAffinityPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The specifications for retries.
   /// Specifies one or more conditions for which this retry rule applies. Valid
   /// values are:
-  public struct RetryPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RetryPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// - connect-failure: Router will retry on failures connecting to Backend
@@ -1134,7 +1131,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// specified, default to 1.
     public var numRetries: Swift.UInt32 = Swift.UInt32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RetryPolicy`.
     public init() {}
@@ -1177,7 +1174,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1193,16 +1190,16 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.GrpcRoute.RetryPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Specifies how to route matched traffic.
-  public struct RouteAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RouteAction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The destination services to which traffic should be forwarded.
@@ -1225,7 +1222,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// from the time the request has been fully processed (i.e. end of stream)
     /// up until the response has been completely processed. Timeout includes all
     /// retries.
-    public var timeout: GoogleCloudWKT.Duration? = nil
+    public var timeout: GoogleWKT.Duration? = nil
 
     /// Optional. Specifies the retry policy associated with this route.
     public var retryPolicy: GrpcRoute.RetryPolicy? = nil
@@ -1238,9 +1235,9 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// received on either the upstream or downstream connection. If not set, the
     /// default idle timeout is 1 hour. If set to 0s, the timeout will be
     /// disabled.
-    public var idleTimeout: GoogleCloudWKT.Duration? = nil
+    public var idleTimeout: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RouteAction`.
     public init() {}
@@ -1290,16 +1287,16 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       self.faultInjectionPolicy = try container.decodeIfPresent(
         GrpcRoute.FaultInjectionPolicy.self, forKey: .faultInjectionPolicy)
-      self.timeout = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .timeout)
+      self.timeout = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeout)
       self.retryPolicy = try container.decodeIfPresent(
         GrpcRoute.RetryPolicy.self, forKey: .retryPolicy)
       self.statefulSessionAffinity = try container.decodeIfPresent(
         GrpcRoute.StatefulSessionAffinityPolicy.self, forKey: .statefulSessionAffinity)
       self.idleTimeout = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .idleTimeout)
+        GoogleWKT.Duration.self, forKey: .idleTimeout)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1319,16 +1316,16 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.GrpcRoute.RouteAction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Describes how to route traffic.
-  public struct RouteRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RouteRule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Matches define conditions used for matching the rule against
@@ -1341,7 +1338,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// required.
     public var action: GrpcRoute.RouteAction? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RouteRule`.
     public init() {}
@@ -1382,7 +1379,7 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.action = try container.decodeIfPresent(GrpcRoute.RouteAction.self, forKey: .action)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1398,21 +1395,21 @@ public struct GrpcRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.GrpcRoute.RouteRule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkservices.v1.GrpcRoute"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

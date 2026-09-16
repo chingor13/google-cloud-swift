@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Transaction data associated with a payment protected by reCAPTCHA Enterprise.
-public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TransactionData: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Unique identifier for the transaction. This custom identifier can be used
@@ -75,7 +75,7 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// transaction.
   public var gatewayInfo: TransactionData.GatewayInfo? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TransactionData`.
   public init() {}
@@ -166,7 +166,7 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       TransactionData.GatewayInfo.self, forKey: .gatewayInfo)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -191,7 +191,7 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Structured address format for billing and shipping addresses.
-  public struct Address: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Address: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The recipient name, potentially including information such as
@@ -216,7 +216,7 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The postal or ZIP code of the address.
     public var postalCode: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Address`.
     public init() {}
@@ -279,7 +279,7 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -299,16 +299,16 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.TransactionData.Address"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Details about a user's account involved in the transaction.
-  public struct User: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct User: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Unique account identifier for this user. If using Account
@@ -333,7 +333,7 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// the user (OTP or similar).
     public var phoneVerified: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `User`.
     public init() {}
@@ -396,7 +396,7 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -416,16 +416,16 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.TransactionData.User"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Line items being purchased in this transaction.
-  public struct Item: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Item: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The full name of the item.
@@ -442,7 +442,7 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Necessary to populate marketplace-style transactions.
     public var merchantAccountId: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Item`.
     public init() {}
@@ -495,7 +495,7 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -513,16 +513,16 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.TransactionData.Item"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Details about the transaction from the gateway.
-  public struct GatewayInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GatewayInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Name of the gateway service (for example, stripe, square,
@@ -540,7 +540,7 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// (available only when reCAPTCHA Enterprise is called after authorization).
     public var cvvResponseCode: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GatewayInfo`.
     public init() {}
@@ -594,7 +594,7 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -612,21 +612,21 @@ public struct TransactionData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.TransactionData.GatewayInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.TransactionData"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

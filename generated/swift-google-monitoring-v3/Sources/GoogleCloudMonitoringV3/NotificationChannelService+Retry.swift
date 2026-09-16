@@ -18,27 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class NotificationChannelServiceRetry: NotificationChannelServiceStub {
     let inner: any NotificationChannelServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any NotificationChannelServiceStub, options: GoogleCloudGax.ClientOptions)
-    {
+    public init(_ inner: any NotificationChannelServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,44 +49,44 @@ extension Clients {
     }
 
     public func listNotificationChannelDescriptors(
-      request: ListNotificationChannelDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNotificationChannelDescriptorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListNotificationChannelDescriptorsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListNotificationChannelDescriptorsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudMonitoringV3.ListNotificationChannelDescriptorsResponse
+          (r: ListNotificationChannelDescriptorsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudMonitoringV3.ListNotificationChannelDescriptorsResponse
           in
           return try await self.inner.listNotificationChannelDescriptors(request: r, options: o)
         })
     }
 
     public func getNotificationChannelDescriptor(
-      request: GetNotificationChannelDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNotificationChannelDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.NotificationChannelDescriptor {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetNotificationChannelDescriptorRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudMonitoringV3.NotificationChannelDescriptor
+          (r: GetNotificationChannelDescriptorRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudMonitoringV3.NotificationChannelDescriptor
           in
           return try await self.inner.getNotificationChannelDescriptor(request: r, options: o)
         })
     }
 
     public func listNotificationChannels(
-      request: ListNotificationChannelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNotificationChannelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListNotificationChannelsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListNotificationChannelsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListNotificationChannelsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ListNotificationChannelsResponse
           in
           return try await self.inner.listNotificationChannels(request: r, options: o)
@@ -95,14 +94,14 @@ extension Clients {
     }
 
     public func getNotificationChannel(
-      request: GetNotificationChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNotificationChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.NotificationChannel {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetNotificationChannelRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetNotificationChannelRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.NotificationChannel
           in
           return try await self.inner.getNotificationChannel(request: r, options: o)
@@ -110,14 +109,14 @@ extension Clients {
     }
 
     public func createNotificationChannel(
-      request: CreateNotificationChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNotificationChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.NotificationChannel {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateNotificationChannelRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateNotificationChannelRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.NotificationChannel
           in
           return try await self.inner.createNotificationChannel(request: r, options: o)
@@ -125,14 +124,14 @@ extension Clients {
     }
 
     public func updateNotificationChannel(
-      request: UpdateNotificationChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNotificationChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.NotificationChannel {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateNotificationChannelRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateNotificationChannelRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.NotificationChannel
           in
           return try await self.inner.updateNotificationChannel(request: r, options: o)
@@ -140,29 +139,27 @@ extension Clients {
     }
 
     public func deleteNotificationChannel(
-      request: DeleteNotificationChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNotificationChannelRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteNotificationChannelRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> Void in
+          (r: DeleteNotificationChannelRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteNotificationChannel(request: r, options: o)
         })
     }
 
     public func sendNotificationChannelVerificationCode(
-      request: SendNotificationChannelVerificationCodeRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: SendNotificationChannelVerificationCodeRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: SendNotificationChannelVerificationCodeRequest, o: GoogleCloudGax.RequestOptions)
+          (r: SendNotificationChannelVerificationCodeRequest, o: GoogleGax.RequestOptions)
             async throws -> Void in
           return try await self.inner.sendNotificationChannelVerificationCode(
             request: r, options: o)
@@ -170,14 +167,14 @@ extension Clients {
     }
 
     public func getNotificationChannelVerificationCode(
-      request: GetNotificationChannelVerificationCodeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNotificationChannelVerificationCodeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.GetNotificationChannelVerificationCodeResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GetNotificationChannelVerificationCodeRequest, o: GoogleCloudGax.RequestOptions)
+          (r: GetNotificationChannelVerificationCodeRequest, o: GoogleGax.RequestOptions)
             async throws -> GoogleCloudMonitoringV3.GetNotificationChannelVerificationCodeResponse
           in
           return try await self.inner.getNotificationChannelVerificationCode(request: r, options: o)
@@ -185,14 +182,14 @@ extension Clients {
     }
 
     public func verifyNotificationChannel(
-      request: VerifyNotificationChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyNotificationChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.NotificationChannel {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: VerifyNotificationChannelRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: VerifyNotificationChannelRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.NotificationChannel
           in
           return try await self.inner.verifyNotificationChannel(request: r, options: o)

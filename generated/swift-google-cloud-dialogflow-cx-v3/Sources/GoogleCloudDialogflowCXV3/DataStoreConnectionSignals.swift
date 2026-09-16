@@ -16,13 +16,13 @@
 
 #if Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Data store connection feature output signals.
   /// Might be only partially field if processing stop before the final answer.
   /// Reasons for this can be, but are not limited to: empty UCS search results,
   /// positive RAI check outcome, grounding failure, ...
-  public struct DataStoreConnectionSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DataStoreConnectionSignals: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Diagnostic info related to the rewriter model call.
@@ -56,7 +56,7 @@
     /// Optional. Safety check result.
     public var safetySignals: DataStoreConnectionSignals.SafetySignals? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DataStoreConnectionSignals`.
     public init() {}
@@ -138,7 +138,7 @@
         DataStoreConnectionSignals.SafetySignals.self, forKey: .safetySignals)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -161,7 +161,7 @@
     }
 
     /// Diagnostic info related to the rewriter model call.
-    public struct RewriterModelCallSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RewriterModelCallSignals: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Prompt as sent to the model.
@@ -174,7 +174,7 @@
       /// "gemini-1.5-flash" etc. Defaults to "Other" if the model is unknown.
       public var model: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RewriterModelCallSignals`.
       public init() {}
@@ -222,7 +222,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -240,16 +240,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.RewriterModelCallSignals"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Search snippet details.
-    public struct SearchSnippet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SearchSnippet: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Title of the enclosing document.
@@ -262,9 +262,9 @@
       public var text: Swift.String = Swift.String()
 
       /// Metadata associated with the document.
-      public var metadata: GoogleCloudWKT.Struct? = nil
+      public var metadata: GoogleWKT.Struct? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SearchSnippet`.
       public init() {}
@@ -312,10 +312,10 @@
         if let value = try container.decodeIfPresent(Swift.String.self, forKey: .text) {
           self.text = value
         }
-        self.metadata = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .metadata)
+        self.metadata = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .metadata)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -334,16 +334,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.SearchSnippet"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Diagnostic info related to the answer generation model call.
-    public struct AnswerGenerationModelCallSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AnswerGenerationModelCallSignals: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Prompt as sent to the model.
@@ -356,7 +356,7 @@
       /// "gemini-1.5-flash" etc. Defaults to "Other" if the model is unknown.
       public var model: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AnswerGenerationModelCallSignals`.
       public init() {}
@@ -404,7 +404,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -422,16 +422,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.AnswerGenerationModelCallSignals"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Answer part with citation.
-    public struct AnswerPart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AnswerPart: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Substring of the answer.
@@ -440,7 +440,7 @@
       /// Citations for this answer part. Indices of `search_snippets`.
       public var supportingIndices: [Swift.Int32] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AnswerPart`.
       public init() {}
@@ -484,7 +484,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -501,16 +501,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.AnswerPart"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Snippet cited by the answer generation model.
-    public struct CitedSnippet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct CitedSnippet: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Details of the snippet.
@@ -519,7 +519,7 @@
       /// Index of the snippet in `search_snippets` field.
       public var snippetIndex: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `CitedSnippet`.
       public init() {}
@@ -561,7 +561,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -578,16 +578,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.CitedSnippet"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Grounding signals.
-    public struct GroundingSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GroundingSignals: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Represents the decision of the grounding check.
@@ -598,7 +598,7 @@
       public var score: DataStoreConnectionSignals.GroundingSignals.GroundingScoreBucket =
         DataStoreConnectionSignals.GroundingSignals.GroundingScoreBucket()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GroundingSignals`.
       public init() {}
@@ -645,7 +645,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -893,16 +893,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.GroundingSignals"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Safety check results.
-    public struct SafetySignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SafetySignals: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Safety decision.
@@ -916,7 +916,7 @@
       /// The matched banned phrase if there was a match.
       public var matchedBannedPhrase: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SafetySignals`.
       public init() {}
@@ -971,7 +971,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1208,22 +1208,22 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals.SafetySignals"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.DataStoreConnectionSignals"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

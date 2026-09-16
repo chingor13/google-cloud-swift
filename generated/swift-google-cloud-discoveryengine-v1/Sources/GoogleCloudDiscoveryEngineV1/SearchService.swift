@@ -19,9 +19,9 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for search.
   ///
@@ -30,7 +30,7 @@
     let inner: any Clients.SearchServiceStub
 
     /// Creates a new `SearchServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SearchServiceStub = try Clients.SearchServiceTransport(options)
       inner = Clients.SearchServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -43,7 +43,7 @@
     ///
     /// @Snippet(path: "SearchService_Search")
     public func search(
-      request: SearchRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.SearchResponse {
       try await self.inner.search(request: request, options: options)
     }
@@ -52,7 +52,7 @@
     ///
     /// @Snippet(path: "SearchService_Search")
     public func search(
-      byItem: SearchRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SearchResponse.SearchResult, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.SearchResponse in
@@ -60,7 +60,7 @@
         request.pageToken = token
         return try await self.search(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Performs a search. Similar to the
@@ -81,7 +81,7 @@
     ///
     /// @Snippet(path: "SearchService_SearchLite")
     public func searchLite(
-      request: SearchRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.SearchResponse {
       try await self.inner.searchLite(request: request, options: options)
     }
@@ -104,7 +104,7 @@
     ///
     /// @Snippet(path: "SearchService_SearchLite")
     public func searchLite(
-      byItem: SearchRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SearchResponse.SearchResult, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.SearchResponse in
@@ -112,7 +112,7 @@
         request.pageToken = token
         return try await self.searchLite(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -121,7 +121,7 @@
     ///
     /// @Snippet(path: "SearchService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -132,7 +132,7 @@
     ///
     /// @Snippet(path: "SearchService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -140,7 +140,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -149,7 +149,7 @@
     ///
     /// @Snippet(path: "SearchService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -160,7 +160,7 @@
     ///
     /// @Snippet(path: "SearchService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -216,37 +216,37 @@
 
       /// See `SearchServiceClient.search`.
       func search(
-        request: SearchRequest, options: GoogleCloudGax.RequestOptions
+        request: SearchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.SearchResponse
 
       /// See `SearchServiceClient.search`.
       func search(
-        byItem: SearchRequest, options: GoogleCloudGax.RequestOptions
+        byItem: SearchRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<SearchResponse.SearchResult, Swift.Error>
 
       /// See `SearchServiceClient.searchLite`.
       func searchLite(
-        request: SearchRequest, options: GoogleCloudGax.RequestOptions
+        request: SearchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.SearchResponse
 
       /// See `SearchServiceClient.searchLite`.
       func searchLite(
-        byItem: SearchRequest, options: GoogleCloudGax.RequestOptions
+        byItem: SearchRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<SearchResponse.SearchResult, Swift.Error>
 
       /// See `SearchServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `SearchServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `SearchServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -260,9 +260,9 @@
     }
 
     public func search(
-      request: SearchRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.SearchResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func search(
@@ -272,13 +272,13 @@
     }
 
     public func search(
-      byItem: SearchRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SearchResponse.SearchResult, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.SearchResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func searchLite(request: SearchRequest) async throws
@@ -288,9 +288,9 @@
     }
 
     public func searchLite(
-      request: SearchRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.SearchResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func searchLite(
@@ -300,13 +300,13 @@
     }
 
     public func searchLite(
-      byItem: SearchRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SearchResponse.SearchResult, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.SearchResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -316,9 +316,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -328,13 +328,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -355,9 +355,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -374,9 +374,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

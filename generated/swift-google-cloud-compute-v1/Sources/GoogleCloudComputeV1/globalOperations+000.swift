@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `globalOperations` resource.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.GlobalOperationsStub
 
     /// Creates a new `GlobalOperationsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.GlobalOperationsStub = try Clients.GlobalOperationsTransport(options)
       inner = Clients.GlobalOperationsRetry(inner, options: options)
       if let logger = options.logger {
@@ -45,7 +45,7 @@
     ///
     /// @Snippet(path: "globalOperations_aggregatedList")
     public func aggregatedList(
-      request: GlobalOperationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.OperationAggregatedList {
       try await self.inner.aggregatedList(request: request, options: options)
     }
@@ -57,7 +57,7 @@
     ///
     /// @Snippet(path: "globalOperations_aggregatedList")
     public func aggregatedList(
-      byItem: GlobalOperationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GlobalOperationsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.OperationAggregatedList in
@@ -65,14 +65,14 @@
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes the specified Operations resource.
     ///
     /// @Snippet(path: "globalOperations_delete")
     public func delete(
-      request: GlobalOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.delete(request: request, options: options)
     }
@@ -81,7 +81,7 @@
     ///
     /// @Snippet(path: "globalOperations_get")
     public func `get`(
-      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -91,7 +91,7 @@
     ///
     /// @Snippet(path: "globalOperations_list")
     public func list(
-      request: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.OperationList {
       try await self.inner.list(request: request, options: options)
     }
@@ -101,14 +101,14 @@
     ///
     /// @Snippet(path: "globalOperations_list")
     public func list(
-      byItem: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GlobalOperationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.OperationList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Waits for the specified Operation resource to return as `DONE`
@@ -130,7 +130,7 @@
     ///
     /// @Snippet(path: "globalOperations_wait")
     public func wait(
-      request: GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.WaitRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.wait(request: request, options: options)
     }
@@ -202,38 +202,37 @@
 
       /// See `GlobalOperationsClient.aggregatedList`.
       func aggregatedList(
-        request: GlobalOperationsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationAggregatedList
 
       /// See `GlobalOperationsClient.aggregatedList`.
       func aggregatedList(
-        byItem: GlobalOperationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GlobalOperationsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error>
 
       /// See `GlobalOperationsClient.delete`.
       func delete(
-        request: GlobalOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `GlobalOperationsClient.`get``.
       func `get`(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `GlobalOperationsClient.list`.
       func list(
-        request: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationList
 
       /// See `GlobalOperationsClient.list`.
       func list(
-        byItem: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GlobalOperationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Operation, Swift.Error>
 
       /// See `GlobalOperationsClient.wait`.
       func wait(
-        request: GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.WaitRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }
@@ -247,9 +246,9 @@
     }
 
     public func aggregatedList(
-      request: GlobalOperationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.OperationAggregatedList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
@@ -259,13 +258,13 @@
     }
 
     public func aggregatedList(
-      byItem: GlobalOperationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GlobalOperationsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, OperationsScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.OperationAggregatedList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func aggregatedList(
@@ -282,9 +281,9 @@
     }
 
     public func delete(
-      request: GlobalOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func delete(
@@ -305,9 +304,9 @@
     }
 
     public func `get`(
-      request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -328,9 +327,9 @@
     }
 
     public func list(
-      request: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.OperationList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -340,12 +339,12 @@
     }
 
     public func list(
-      byItem: GlobalOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GlobalOperationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.OperationList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(
@@ -364,9 +363,9 @@
     }
 
     public func wait(
-      request: GlobalOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+      request: GlobalOperationsClient.WaitRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func wait(

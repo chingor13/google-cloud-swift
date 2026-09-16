@@ -15,80 +15,80 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
 import GoogleType
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DomainsStub: Sendable {
     func searchDomains(
-      request: SearchDomainsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchDomainsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDomainsV1.SearchDomainsResponse
 
     func retrieveRegisterParameters(
-      request: RetrieveRegisterParametersRequest, options: GoogleCloudGax.RequestOptions
+      request: RetrieveRegisterParametersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDomainsV1.RetrieveRegisterParametersResponse
 
     func registerDomain(
-      request: RegisterDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: RegisterDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func retrieveTransferParameters(
-      request: RetrieveTransferParametersRequest, options: GoogleCloudGax.RequestOptions
+      request: RetrieveTransferParametersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDomainsV1.RetrieveTransferParametersResponse
 
     func transferDomain(
-      request: TransferDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: TransferDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listRegistrations(
-      request: ListRegistrationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRegistrationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDomainsV1.ListRegistrationsResponse
 
     func getRegistration(
-      request: GetRegistrationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRegistrationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDomainsV1.Registration
 
     func updateRegistration(
-      request: UpdateRegistrationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRegistrationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func configureManagementSettings(
-      request: ConfigureManagementSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ConfigureManagementSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func configureDnsSettings(
-      request: ConfigureDnsSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ConfigureDnsSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func configureContactSettings(
-      request: ConfigureContactSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ConfigureContactSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func exportRegistration(
-      request: ExportRegistrationRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportRegistrationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteRegistration(
-      request: DeleteRegistrationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRegistrationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func retrieveAuthorizationCode(
-      request: RetrieveAuthorizationCodeRequest, options: GoogleCloudGax.RequestOptions
+      request: RetrieveAuthorizationCodeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDomainsV1.AuthorizationCode
 
     func resetAuthorizationCode(
-      request: ResetAuthorizationCodeRequest, options: GoogleCloudGax.RequestOptions
+      request: ResetAuthorizationCodeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDomainsV1.AuthorizationCode
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

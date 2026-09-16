@@ -16,10 +16,10 @@
 
 #if ConversationProfiles || Conversations || Environments || Participants || Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Description of which voice to use for speech synthesis.
-  public struct VoiceSelectionParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct VoiceSelectionParams: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The name of the voice. If not set, the service will choose a
@@ -39,7 +39,7 @@
     /// [google.cloud.dialogflow.v2.VoiceSelectionParams.name]: <doc:VoiceSelectionParams/name>
     public var ssmlGender: SsmlVoiceGender = SsmlVoiceGender()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `VoiceSelectionParams`.
     public init() {}
@@ -82,7 +82,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -98,11 +98,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.VoiceSelectionParams"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

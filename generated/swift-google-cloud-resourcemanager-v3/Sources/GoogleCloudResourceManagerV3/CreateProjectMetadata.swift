@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A status object which is used as the `metadata` field for the Operation
 /// returned by CreateProject. It provides insight for when significant phases of
 /// Project creation have completed.
-public struct CreateProjectMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateProjectMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Creation time of the project creation workflow.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// True if the project can be retrieved using `GetProject`. No other
   /// operations on the project are guaranteed to work until the project creation
@@ -34,7 +34,7 @@ public struct CreateProjectMetadata: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// True if the project creation process is complete.
   public var ready: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateProjectMetadata`.
   public init() {}
@@ -71,8 +71,7 @@ public struct CreateProjectMetadata: Codable, Equatable, GoogleCloudWKT._AnyPack
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .gettable) {
       self.gettable = value
     }
@@ -81,7 +80,7 @@ public struct CreateProjectMetadata: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,10 +97,10 @@ public struct CreateProjectMetadata: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.resourcemanager.v3.CreateProjectMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

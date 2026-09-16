@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// A catalog of Google Cloud Platform services and SKUs.
 /// Provides pricing information and metadata on Google Cloud Platform services
@@ -30,7 +30,7 @@ public final class CloudCatalogClient: Clients.CloudCatalogProtocol, Sendable {
   let inner: any Clients.CloudCatalogStub
 
   /// Creates a new `CloudCatalogClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CloudCatalogStub = try Clients.CloudCatalogTransport(options)
     inner = Clients.CloudCatalogRetry(inner, options: options)
     if let logger = options.logger {
@@ -43,7 +43,7 @@ public final class CloudCatalogClient: Clients.CloudCatalogProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudCatalog_ListServices")
   public func listServices(
-    request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListServicesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.ListServicesResponse {
     try await self.inner.listServices(request: request, options: options)
   }
@@ -52,7 +52,7 @@ public final class CloudCatalogClient: Clients.CloudCatalogProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudCatalog_ListServices")
   public func listServices(
-    byItem: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListServicesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Service, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBillingV1.ListServicesResponse in
@@ -60,14 +60,14 @@ public final class CloudCatalogClient: Clients.CloudCatalogProtocol, Sendable {
       request.pageToken = token
       return try await self.listServices(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists all publicly available SKUs for a given cloud service.
   ///
   /// @Snippet(path: "CloudCatalog_ListSkus")
   public func listSkus(
-    request: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSkusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.ListSkusResponse {
     try await self.inner.listSkus(request: request, options: options)
   }
@@ -76,14 +76,14 @@ public final class CloudCatalogClient: Clients.CloudCatalogProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudCatalog_ListSkus")
   public func listSkus(
-    byItem: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSkusRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Sku, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudBillingV1.ListSkusResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listSkus(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 }
 
@@ -118,22 +118,22 @@ extension Clients {
 
     /// See `CloudCatalogClient.listServices`.
     func listServices(
-      request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ListServicesResponse
 
     /// See `CloudCatalogClient.listServices`.
     func listServices(
-      byItem: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListServicesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Service, Swift.Error>
 
     /// See `CloudCatalogClient.listSkus`.
     func listSkus(
-      request: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ListSkusResponse
 
     /// See `CloudCatalogClient.listSkus`.
     func listSkus(
-      byItem: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSkusRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Sku, Swift.Error>
   }
 }
@@ -147,9 +147,9 @@ extension Clients.CloudCatalogProtocol {
   }
 
   public func listServices(
-    request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListServicesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.ListServicesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listServices(
@@ -159,13 +159,13 @@ extension Clients.CloudCatalogProtocol {
   }
 
   public func listServices(
-    byItem: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListServicesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Service, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBillingV1.ListServicesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSkus(request: ListSkusRequest) async throws
@@ -175,9 +175,9 @@ extension Clients.CloudCatalogProtocol {
   }
 
   public func listSkus(
-    request: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSkusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.ListSkusResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSkus(
@@ -187,12 +187,12 @@ extension Clients.CloudCatalogProtocol {
   }
 
   public func listSkus(
-    byItem: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSkusRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Sku, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudBillingV1.ListSkusResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSkus(

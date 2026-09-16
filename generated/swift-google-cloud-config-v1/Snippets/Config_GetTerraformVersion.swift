@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudConfigV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ConfigClient, projectId: String, locationId: String, terraformVersionId: String)
   async throws

@@ -16,13 +16,13 @@
 
 #if InstanceGroupManagers
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   extension InstanceGroupManagersClient {
     /// Synthetic request message for the [abandonInstances()][google.cloud.compute.v1.instanceGroupManagers.abandonInstances] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.abandonInstances]: <doc:InstanceGroupManagersClient/abandonInstances(request:options:)>
-    public struct AbandonInstancesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AbandonInstancesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -55,7 +55,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.abandonInstances]: <doc:InstanceGroupManagersClient/abandonInstances(request:options:)>
       public var body: InstanceGroupManagersAbandonInstancesRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AbandonInstancesRequest`.
       public init() {}
@@ -112,7 +112,7 @@
           InstanceGroupManagersAbandonInstancesRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -132,18 +132,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.abandonInstancesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [aggregatedList()][google.cloud.compute.v1.instanceGroupManagers.aggregatedList] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.aggregatedList]: <doc:InstanceGroupManagersClient/aggregatedList(request:options:)>
-    public struct AggregatedListRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AggregatedListRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -255,7 +255,7 @@
       /// aggregated list request is invoked for subnetworks list-usable api.
       public var serviceProjectNumber: Swift.Int64? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AggregatedListRequest`.
       public init() {}
@@ -317,7 +317,7 @@
           Swift.Int64.self, forKey: .serviceProjectNumber)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -340,18 +340,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.aggregatedListRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [applyUpdatesToInstances()][google.cloud.compute.v1.instanceGroupManagers.applyUpdatesToInstances] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.applyUpdatesToInstances]: <doc:InstanceGroupManagersClient/applyUpdatesToInstances(request:options:)>
-    public struct ApplyUpdatesToInstancesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ApplyUpdatesToInstancesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group, should conform to RFC1035.
@@ -369,7 +369,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.applyUpdatesToInstances]: <doc:InstanceGroupManagersClient/applyUpdatesToInstances(request:options:)>
       public var body: InstanceGroupManagersApplyUpdatesRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ApplyUpdatesToInstancesRequest`.
       public init() {}
@@ -423,7 +423,7 @@
           InstanceGroupManagersApplyUpdatesRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -442,18 +442,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.applyUpdatesToInstancesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [createInstances()][google.cloud.compute.v1.instanceGroupManagers.createInstances] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.createInstances]: <doc:InstanceGroupManagersClient/createInstances(request:options:)>
-    public struct CreateInstancesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct CreateInstancesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -487,7 +487,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.createInstances]: <doc:InstanceGroupManagersClient/createInstances(request:options:)>
       public var body: InstanceGroupManagersCreateInstancesRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `CreateInstancesRequest`.
       public init() {}
@@ -544,7 +544,7 @@
           InstanceGroupManagersCreateInstancesRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -564,18 +564,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.createInstancesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.instanceGroupManagers.delete] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.delete]: <doc:InstanceGroupManagersClient/delete(request:options:)>
-    public struct DeleteRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DeleteRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group to delete.
@@ -607,7 +607,7 @@
       /// instance group is located.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DeleteRequest`.
       public init() {}
@@ -664,7 +664,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -683,18 +683,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.deleteRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [deleteInstances()][google.cloud.compute.v1.instanceGroupManagers.deleteInstances] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.deleteInstances]: <doc:InstanceGroupManagersClient/deleteInstances(request:options:)>
-    public struct DeleteInstancesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DeleteInstancesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -731,7 +731,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.deleteInstances]: <doc:InstanceGroupManagersClient/deleteInstances(request:options:)>
       public var body: InstanceGroupManagersDeleteInstancesRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DeleteInstancesRequest`.
       public init() {}
@@ -792,7 +792,7 @@
           InstanceGroupManagersDeleteInstancesRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -813,18 +813,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.deleteInstancesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [deletePerInstanceConfigs()][google.cloud.compute.v1.instanceGroupManagers.deletePerInstanceConfigs] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.deletePerInstanceConfigs]: <doc:InstanceGroupManagersClient/deletePerInstanceConfigs(request:options:)>
-    public struct DeletePerInstanceConfigsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DeletePerInstanceConfigsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -845,7 +845,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.deletePerInstanceConfigs]: <doc:InstanceGroupManagersClient/deletePerInstanceConfigs(request:options:)>
       public var body: InstanceGroupManagersDeletePerInstanceConfigsReq? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DeletePerInstanceConfigsRequest`.
       public init() {}
@@ -899,7 +899,7 @@
           InstanceGroupManagersDeletePerInstanceConfigsReq.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -918,18 +918,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.deletePerInstanceConfigsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [get()][google.cloud.compute.v1.instanceGroupManagers.get] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.get]: <doc:InstanceGroupManagersClient/`get`(request:options:)>
-    public struct GetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -942,7 +942,7 @@
       /// instance group is located.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetRequest`.
       public init() {}
@@ -992,7 +992,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1009,18 +1009,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.getRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [insert()][google.cloud.compute.v1.instanceGroupManagers.insert] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.insert]: <doc:InstanceGroupManagersClient/insert(request:options:)>
-    public struct InsertRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct InsertRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Project ID for this request.
@@ -1050,7 +1050,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.insert]: <doc:InstanceGroupManagersClient/insert(request:options:)>
       public var body: InstanceGroupManager? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `InsertRequest`.
       public init() {}
@@ -1099,7 +1099,7 @@
         self.body = try container.decodeIfPresent(InstanceGroupManager.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1117,18 +1117,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.insertRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [list()][google.cloud.compute.v1.instanceGroupManagers.list] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.list]: <doc:InstanceGroupManagersClient/list(request:options:)>
-    public struct ListRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ListRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -1231,7 +1231,7 @@
       /// instance group is located.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListRequest`.
       public init() {}
@@ -1290,7 +1290,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1311,18 +1311,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.listRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [listErrors()][google.cloud.compute.v1.instanceGroupManagers.listErrors] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.listErrors]: <doc:InstanceGroupManagersClient/listErrors(request:options:)>
-    public struct ListErrorsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ListErrorsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -1432,7 +1432,7 @@
       /// It should conform to RFC1035.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListErrorsRequest`.
       public init() {}
@@ -1498,7 +1498,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1520,18 +1520,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.listErrorsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [listManagedInstances()][google.cloud.compute.v1.instanceGroupManagers.listManagedInstances] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.listManagedInstances]: <doc:InstanceGroupManagersClient/listManagedInstances(request:options:)>
-    public struct ListManagedInstancesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ListManagedInstancesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -1637,7 +1637,7 @@
       /// instance group is located.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListManagedInstancesRequest`.
       public init() {}
@@ -1703,7 +1703,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1726,18 +1726,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.listManagedInstancesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [listPerInstanceConfigs()][google.cloud.compute.v1.instanceGroupManagers.listPerInstanceConfigs] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.listPerInstanceConfigs]: <doc:InstanceGroupManagersClient/listPerInstanceConfigs(request:options:)>
-    public struct ListPerInstanceConfigsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ListPerInstanceConfigsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -1844,7 +1844,7 @@
       /// It should conform to RFC1035.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListPerInstanceConfigsRequest`.
       public init() {}
@@ -1910,7 +1910,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1933,18 +1933,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.listPerInstanceConfigsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [patch()][google.cloud.compute.v1.instanceGroupManagers.patch] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.patch]: <doc:InstanceGroupManagersClient/patch(request:options:)>
-    public struct PatchRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PatchRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the instance group manager.
@@ -1977,7 +1977,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.patch]: <doc:InstanceGroupManagersClient/patch(request:options:)>
       public var body: InstanceGroupManager? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PatchRequest`.
       public init() {}
@@ -2033,7 +2033,7 @@
         self.body = try container.decodeIfPresent(InstanceGroupManager.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2052,18 +2052,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.patchRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [patchPerInstanceConfigs()][google.cloud.compute.v1.instanceGroupManagers.patchPerInstanceConfigs] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.patchPerInstanceConfigs]: <doc:InstanceGroupManagersClient/patchPerInstanceConfigs(request:options:)>
-    public struct PatchPerInstanceConfigsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PatchPerInstanceConfigsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -2098,7 +2098,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.patchPerInstanceConfigs]: <doc:InstanceGroupManagersClient/patchPerInstanceConfigs(request:options:)>
       public var body: InstanceGroupManagersPatchPerInstanceConfigsReq? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PatchPerInstanceConfigsRequest`.
       public init() {}
@@ -2155,7 +2155,7 @@
           InstanceGroupManagersPatchPerInstanceConfigsReq.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2175,18 +2175,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.patchPerInstanceConfigsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [recreateInstances()][google.cloud.compute.v1.instanceGroupManagers.recreateInstances] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.recreateInstances]: <doc:InstanceGroupManagersClient/recreateInstances(request:options:)>
-    public struct RecreateInstancesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RecreateInstancesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -2223,7 +2223,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.recreateInstances]: <doc:InstanceGroupManagersClient/recreateInstances(request:options:)>
       public var body: InstanceGroupManagersRecreateInstancesRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RecreateInstancesRequest`.
       public init() {}
@@ -2284,7 +2284,7 @@
           InstanceGroupManagersRecreateInstancesRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2305,18 +2305,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.recreateInstancesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [resize()][google.cloud.compute.v1.instanceGroupManagers.resize] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.resize]: <doc:InstanceGroupManagersClient/resize(request:options:)>
-    public struct ResizeRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ResizeRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -2349,7 +2349,7 @@
       /// instance group is located.
       public var zone: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ResizeRequest`.
       public init() {}
@@ -2407,7 +2407,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2426,18 +2426,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.resizeRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [resumeInstances()][google.cloud.compute.v1.instanceGroupManagers.resumeInstances] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.resumeInstances]: <doc:InstanceGroupManagersClient/resumeInstances(request:options:)>
-    public struct ResumeInstancesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ResumeInstancesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -2470,7 +2470,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.resumeInstances]: <doc:InstanceGroupManagersClient/resumeInstances(request:options:)>
       public var body: InstanceGroupManagersResumeInstancesRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ResumeInstancesRequest`.
       public init() {}
@@ -2527,7 +2527,7 @@
           InstanceGroupManagersResumeInstancesRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2547,18 +2547,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.resumeInstancesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setInstanceTemplate()][google.cloud.compute.v1.instanceGroupManagers.setInstanceTemplate] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.setInstanceTemplate]: <doc:InstanceGroupManagersClient/setInstanceTemplate(request:options:)>
-    public struct SetInstanceTemplateRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetInstanceTemplateRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -2591,7 +2591,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.setInstanceTemplate]: <doc:InstanceGroupManagersClient/setInstanceTemplate(request:options:)>
       public var body: InstanceGroupManagersSetInstanceTemplateRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetInstanceTemplateRequest`.
       public init() {}
@@ -2648,7 +2648,7 @@
           InstanceGroupManagersSetInstanceTemplateRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2668,18 +2668,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.setInstanceTemplateRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [setTargetPools()][google.cloud.compute.v1.instanceGroupManagers.setTargetPools] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.setTargetPools]: <doc:InstanceGroupManagersClient/setTargetPools(request:options:)>
-    public struct SetTargetPoolsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetTargetPoolsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -2712,7 +2712,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.setTargetPools]: <doc:InstanceGroupManagersClient/setTargetPools(request:options:)>
       public var body: InstanceGroupManagersSetTargetPoolsRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetTargetPoolsRequest`.
       public init() {}
@@ -2769,7 +2769,7 @@
           InstanceGroupManagersSetTargetPoolsRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2789,18 +2789,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.setTargetPoolsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [startInstances()][google.cloud.compute.v1.instanceGroupManagers.startInstances] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.startInstances]: <doc:InstanceGroupManagersClient/startInstances(request:options:)>
-    public struct StartInstancesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct StartInstancesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -2833,7 +2833,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.startInstances]: <doc:InstanceGroupManagersClient/startInstances(request:options:)>
       public var body: InstanceGroupManagersStartInstancesRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `StartInstancesRequest`.
       public init() {}
@@ -2890,7 +2890,7 @@
           InstanceGroupManagersStartInstancesRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2910,18 +2910,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.startInstancesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [stopInstances()][google.cloud.compute.v1.instanceGroupManagers.stopInstances] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.stopInstances]: <doc:InstanceGroupManagersClient/stopInstances(request:options:)>
-    public struct StopInstancesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct StopInstancesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -2958,7 +2958,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.stopInstances]: <doc:InstanceGroupManagersClient/stopInstances(request:options:)>
       public var body: InstanceGroupManagersStopInstancesRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `StopInstancesRequest`.
       public init() {}
@@ -3019,7 +3019,7 @@
           InstanceGroupManagersStopInstancesRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -3040,18 +3040,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.stopInstancesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [suspendInstances()][google.cloud.compute.v1.instanceGroupManagers.suspendInstances] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.suspendInstances]: <doc:InstanceGroupManagersClient/suspendInstances(request:options:)>
-    public struct SuspendInstancesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SuspendInstancesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -3084,7 +3084,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.suspendInstances]: <doc:InstanceGroupManagersClient/suspendInstances(request:options:)>
       public var body: InstanceGroupManagersSuspendInstancesRequest? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SuspendInstancesRequest`.
       public init() {}
@@ -3141,7 +3141,7 @@
           InstanceGroupManagersSuspendInstancesRequest.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -3161,18 +3161,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.suspendInstancesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [updatePerInstanceConfigs()][google.cloud.compute.v1.instanceGroupManagers.updatePerInstanceConfigs] method.
     ///
     /// [google.cloud.compute.v1.instanceGroupManagers.updatePerInstanceConfigs]: <doc:InstanceGroupManagersClient/updatePerInstanceConfigs(request:options:)>
-    public struct UpdatePerInstanceConfigsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct UpdatePerInstanceConfigsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the managed instance group.
@@ -3207,7 +3207,7 @@
       /// [google.cloud.compute.v1.instanceGroupManagers.updatePerInstanceConfigs]: <doc:InstanceGroupManagersClient/updatePerInstanceConfigs(request:options:)>
       public var body: InstanceGroupManagersUpdatePerInstanceConfigsReq? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `UpdatePerInstanceConfigsRequest`.
       public init() {}
@@ -3264,7 +3264,7 @@
           InstanceGroupManagersUpdatePerInstanceConfigsReq.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -3284,11 +3284,11 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.instanceGroupManagers.updatePerInstanceConfigsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
   }

@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// A service to manage comments on cases.
 ///
@@ -28,7 +28,7 @@ public final class CommentServiceClient: Clients.CommentServiceProtocol, Sendabl
   let inner: any Clients.CommentServiceStub
 
   /// Creates a new `CommentServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CommentServiceStub = try Clients.CommentServiceTransport(options)
     inner = Clients.CommentServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -41,7 +41,7 @@ public final class CommentServiceClient: Clients.CommentServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CommentService_ListComments")
   public func listComments(
-    request: ListCommentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCommentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSupportV2.ListCommentsResponse {
     try await self.inner.listComments(request: request, options: options)
   }
@@ -50,7 +50,7 @@ public final class CommentServiceClient: Clients.CommentServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CommentService_ListComments")
   public func listComments(
-    byItem: ListCommentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCommentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Comment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSupportV2.ListCommentsResponse in
@@ -58,7 +58,7 @@ public final class CommentServiceClient: Clients.CommentServiceProtocol, Sendabl
       request.pageToken = token
       return try await self.listComments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Add a new comment to a case.
@@ -67,7 +67,7 @@ public final class CommentServiceClient: Clients.CommentServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CommentService_CreateComment")
   public func createComment(
-    request: CreateCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSupportV2.Comment {
     try await self.inner.createComment(request: request, options: options)
   }
@@ -105,7 +105,7 @@ public final class CommentServiceClient: Clients.CommentServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CommentService_GetComment")
   public func getComment(
-    request: GetCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSupportV2.Comment {
     try await self.inner.getComment(request: request, options: options)
   }
@@ -151,22 +151,22 @@ extension Clients {
 
     /// See `CommentServiceClient.listComments`.
     func listComments(
-      request: ListCommentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCommentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.ListCommentsResponse
 
     /// See `CommentServiceClient.listComments`.
     func listComments(
-      byItem: ListCommentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCommentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Comment, Swift.Error>
 
     /// See `CommentServiceClient.createComment`.
     func createComment(
-      request: CreateCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Comment
 
     /// See `CommentServiceClient.getComment`.
     func getComment(
-      request: GetCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Comment
   }
 }
@@ -180,9 +180,9 @@ extension Clients.CommentServiceProtocol {
   }
 
   public func listComments(
-    request: ListCommentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCommentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSupportV2.ListCommentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listComments(
@@ -192,13 +192,13 @@ extension Clients.CommentServiceProtocol {
   }
 
   public func listComments(
-    byItem: ListCommentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCommentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Comment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSupportV2.ListCommentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listComments(
@@ -217,9 +217,9 @@ extension Clients.CommentServiceProtocol {
   }
 
   public func createComment(
-    request: CreateCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSupportV2.Comment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createComment(
@@ -238,9 +238,9 @@ extension Clients.CommentServiceProtocol {
   }
 
   public func getComment(
-    request: GetCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSupportV2.Comment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getComment(

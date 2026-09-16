@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Information about a verification endpoint that can be used for 2FA.
-public struct EndpointVerificationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EndpointVerificationInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Token to provide to the client to trigger endpoint
@@ -27,11 +27,11 @@ public struct EndpointVerificationInfo: Codable, Equatable, GoogleCloudWKT._AnyP
 
   /// Output only. Timestamp of the last successful verification for the
   /// endpoint, if any.
-  public var lastVerificationTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastVerificationTime: GoogleWKT.Timestamp? = nil
 
   public var endpoint: OneOf_Endpoint? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EndpointVerificationInfo`.
   public init() {}
@@ -74,7 +74,7 @@ public struct EndpointVerificationInfo: Codable, Equatable, GoogleCloudWKT._AnyP
       self.requestToken = value
     }
     self.lastVerificationTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastVerificationTime)
+      GoogleWKT.Timestamp.self, forKey: .lastVerificationTime)
 
     var endpoint: OneOf_Endpoint? = nil
     let endpointCheckAndSet = {
@@ -95,7 +95,7 @@ public struct EndpointVerificationInfo: Codable, Equatable, GoogleCloudWKT._AnyP
     self.endpoint = endpoint
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -128,10 +128,10 @@ public struct EndpointVerificationInfo: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.EndpointVerificationInfo"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudChronicleV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, instanceId: String, ) async throws {
   let client = try GoogleCloudChronicleV1.EntityServiceClient()

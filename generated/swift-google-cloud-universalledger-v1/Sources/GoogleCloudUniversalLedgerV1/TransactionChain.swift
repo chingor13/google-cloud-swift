@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A transaction chain including multiple transaction units to execute in
 /// sequence.
@@ -24,7 +24,7 @@ import Foundation
 /// of the units succeed, their cumulative effects will be committed atomically
 /// to the world state. Otherwise, if any of them fails, the whole chain will be
 /// failed and none of its effects will be applied.
-public struct TransactionChain: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TransactionChain: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The individual units of the chain. Each unit must be a serialized
@@ -36,7 +36,7 @@ public struct TransactionChain: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.universalledger.v1.SignedTransaction]: <doc:SignedTransaction>
   public var units: [Foundation.Data] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TransactionChain`.
   public init() {}
@@ -74,7 +74,7 @@ public struct TransactionChain: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -89,10 +89,10 @@ public struct TransactionChain: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.universalledger.v1.TransactionChain"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

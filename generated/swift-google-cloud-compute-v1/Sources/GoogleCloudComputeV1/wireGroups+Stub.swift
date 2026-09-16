@@ -16,33 +16,33 @@
 
 #if WireGroups
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol WireGroupsStub: Sendable {
       func delete(
-        request: WireGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: WireGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.WireGroup
 
       func insert(
-        request: WireGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: WireGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.WireGroupList
 
       func patch(
-        request: WireGroupsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: WireGroupsClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

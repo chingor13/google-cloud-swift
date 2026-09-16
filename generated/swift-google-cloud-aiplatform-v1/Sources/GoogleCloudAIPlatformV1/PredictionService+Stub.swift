@@ -18,91 +18,91 @@
   import Foundation
   import GoogleApi
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol PredictionServiceStub: Sendable {
       func predict(
-        request: PredictRequest, options: GoogleCloudGax.RequestOptions
+        request: PredictRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.PredictResponse
 
       func rawPredict(
-        request: RawPredictRequest, options: GoogleCloudGax.RequestOptions
+        request: RawPredictRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleApi.HttpBody
 
       func streamRawPredict(
-        request: StreamRawPredictRequest, options: GoogleCloudGax.RequestOptions
+        request: StreamRawPredictRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleApi.HttpBody
 
       func directPredict(
-        request: DirectPredictRequest, options: GoogleCloudGax.RequestOptions
+        request: DirectPredictRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.DirectPredictResponse
 
       func directRawPredict(
-        request: DirectRawPredictRequest, options: GoogleCloudGax.RequestOptions
+        request: DirectRawPredictRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.DirectRawPredictResponse
 
       func serverStreamingPredict(
-        request: StreamingPredictRequest, options: GoogleCloudGax.RequestOptions
+        request: StreamingPredictRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.StreamingPredictResponse
 
       func explain(
-        request: ExplainRequest, options: GoogleCloudGax.RequestOptions
+        request: ExplainRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ExplainResponse
 
       func generateContent(
-        request: GenerateContentRequest, options: GoogleCloudGax.RequestOptions
+        request: GenerateContentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.GenerateContentResponse
 
       func streamGenerateContent(
-        request: GenerateContentRequest, options: GoogleCloudGax.RequestOptions
+        request: GenerateContentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.GenerateContentResponse
 
       func embedContent(
-        request: EmbedContentRequest, options: GoogleCloudGax.RequestOptions
+        request: EmbedContentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.EmbedContentResponse
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }

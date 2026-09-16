@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for how a distributor will rebill a channel partner
 /// (also known as a distributor-authorized reseller).
-public struct ChannelPartnerRepricingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ChannelPartnerRepricingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Resource name of the ChannelPartnerRepricingConfig.
@@ -37,9 +37,9 @@ public struct ChannelPartnerRepricingConfig: Codable, Equatable, GoogleCloudWKT.
   /// then it indicates this was set mid-month.
   ///
   /// [google.cloud.channel.v1.RepricingConfig.effective_invoice_month]: <doc:RepricingConfig/effectiveInvoiceMonth>
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ChannelPartnerRepricingConfig`.
   public init() {}
@@ -81,11 +81,10 @@ public struct ChannelPartnerRepricingConfig: Codable, Equatable, GoogleCloudWKT.
     }
     self.repricingConfig = try container.decodeIfPresent(
       RepricingConfig.self, forKey: .repricingConfig)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,10 +101,10 @@ public struct ChannelPartnerRepricingConfig: Codable, Equatable, GoogleCloudWKT.
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.channel.v1.ChannelPartnerRepricingConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

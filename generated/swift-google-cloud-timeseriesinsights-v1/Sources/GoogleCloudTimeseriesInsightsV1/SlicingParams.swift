@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Parameters that control how we slice the dataset and, optionally, filter
 /// slices that have some specific values on some dimensions (pinned dimensions).
-public struct SlicingParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SlicingParams: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Dimensions over which we will group the events in slices. The names
@@ -76,7 +76,7 @@ public struct SlicingParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.timeseriesinsights.v1.SlicingParams.pinned_dimensions]: <doc:SlicingParams/pinnedDimensions>
   public var pinnedDimensions: [PinnedDimension] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SlicingParams`.
   public init() {}
@@ -120,7 +120,7 @@ public struct SlicingParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -136,10 +136,10 @@ public struct SlicingParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.timeseriesinsights.v1.SlicingParams"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudOSConfigV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: OsConfigServiceClient, projectId: String, patchDeploymentId: String)
   async throws

@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The response for exporting an artifact to a destination.
-public struct ExportArtifactResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExportArtifactResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The exported version. Should be the same as the request version with
   /// fingerprint resource name.
   public var exportedVersion: Version? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExportArtifactResponse`.
   public init() {}
@@ -61,7 +61,7 @@ public struct ExportArtifactResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
     self.exportedVersion = try container.decodeIfPresent(Version.self, forKey: .exportedVersion)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -76,10 +76,10 @@ public struct ExportArtifactResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.ExportArtifactResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

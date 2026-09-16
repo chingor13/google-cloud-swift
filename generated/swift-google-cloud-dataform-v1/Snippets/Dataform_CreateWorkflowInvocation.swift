@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudDataFormV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: DataformClient, projectId: String, locationId: String, repositoryId: String)
   async throws

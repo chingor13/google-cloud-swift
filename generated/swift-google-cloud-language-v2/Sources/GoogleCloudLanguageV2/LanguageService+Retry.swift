@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class LanguageServiceRetry: LanguageServiceStub {
     let inner: any LanguageServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any LanguageServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any LanguageServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func analyzeSentiment(
-      request: AnalyzeSentimentRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeSentimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.AnalyzeSentimentResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: AnalyzeSentimentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AnalyzeSentimentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLanguageV2.AnalyzeSentimentResponse
           in
           return try await self.inner.analyzeSentiment(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func analyzeEntities(
-      request: AnalyzeEntitiesRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeEntitiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.AnalyzeEntitiesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: AnalyzeEntitiesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AnalyzeEntitiesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLanguageV2.AnalyzeEntitiesResponse
           in
           return try await self.inner.analyzeEntities(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func classifyText(
-      request: ClassifyTextRequest, options: GoogleCloudGax.RequestOptions
+      request: ClassifyTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.ClassifyTextResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: ClassifyTextRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ClassifyTextRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLanguageV2.ClassifyTextResponse
           in
           return try await self.inner.classifyText(request: r, options: o)
@@ -94,14 +94,14 @@ extension Clients {
     }
 
     public func moderateText(
-      request: ModerateTextRequest, options: GoogleCloudGax.RequestOptions
+      request: ModerateTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.ModerateTextResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: ModerateTextRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ModerateTextRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLanguageV2.ModerateTextResponse
           in
           return try await self.inner.moderateText(request: r, options: o)
@@ -109,14 +109,14 @@ extension Clients {
     }
 
     public func annotateText(
-      request: AnnotateTextRequest, options: GoogleCloudGax.RequestOptions
+      request: AnnotateTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.AnnotateTextResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: AnnotateTextRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AnnotateTextRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLanguageV2.AnnotateTextResponse
           in
           return try await self.inner.annotateText(request: r, options: o)

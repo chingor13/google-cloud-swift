@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// GitConfig is a configuration for git operations.
-public struct GitConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GitConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Configuration for HTTP related git operations.
   public var http: GitConfig.HttpConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GitConfig`.
   public init() {}
@@ -60,7 +60,7 @@ public struct GitConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.http = try container.decodeIfPresent(GitConfig.HttpConfig.self, forKey: .http)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -73,7 +73,7 @@ public struct GitConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// HttpConfig is a configuration for HTTP related git operations.
-  public struct HttpConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct HttpConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// SecretVersion resource of the HTTP proxy URL. The Service Account used in
@@ -83,7 +83,7 @@ public struct GitConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// should be in format `[protocol://][user[:password]@]proxyhost[:port]`.
     public var proxySecretVersionName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `HttpConfig`.
     public init() {}
@@ -123,7 +123,7 @@ public struct GitConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -138,21 +138,21 @@ public struct GitConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudbuild.v1.GitConfig.HttpConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudbuild.v1.GitConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

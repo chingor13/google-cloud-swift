@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class AutoscalersRetry: AutoscalersStub {
       let inner: any AutoscalersStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any AutoscalersStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any AutoscalersStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,29 +50,29 @@
       }
 
       public func aggregatedList(
-        request: AutoscalersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AutoscalerAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: AutoscalersClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.AutoscalerAggregatedList
+            (r: AutoscalersClient.AggregatedListRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.AutoscalerAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
           })
       }
 
       public func delete(
-        request: AutoscalersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: AutoscalersClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: AutoscalersClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -80,14 +80,14 @@
       }
 
       public func `get`(
-        request: AutoscalersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Autoscaler {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: AutoscalersClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: AutoscalersClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Autoscaler
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -95,14 +95,14 @@
       }
 
       public func insert(
-        request: AutoscalersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: AutoscalersClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: AutoscalersClient.InsertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -110,14 +110,14 @@
       }
 
       public func list(
-        request: AutoscalersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AutoscalerList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: AutoscalersClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: AutoscalersClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.AutoscalerList
             in
             return try await self.inner.list(request: r, options: o)
@@ -125,14 +125,14 @@
       }
 
       public func patch(
-        request: AutoscalersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: AutoscalersClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: AutoscalersClient.PatchRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -140,14 +140,14 @@
       }
 
       public func testIamPermissions(
-        request: AutoscalersClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: AutoscalersClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: AutoscalersClient.TestIamPermissionsRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
@@ -155,14 +155,14 @@
       }
 
       public func update(
-        request: AutoscalersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: AutoscalersClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: AutoscalersClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: AutoscalersClient.UpdateRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
@@ -170,14 +170,14 @@
       }
 
       public func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ZoneOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ZoneOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An HTTP-based API Operation, sometimes called a "REST" Operation.
-public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct HttpOperationDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. An HTTP Operation.
@@ -36,7 +36,7 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// Optional. Response metadata.
   public var response: HttpOperationDetails.HttpResponse? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `HttpOperationDetails`.
   public init() {}
@@ -94,7 +94,7 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
       HttpOperationDetails.HttpResponse.self, forKey: .response)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -111,7 +111,7 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
   }
 
   /// HTTP Path parameter.
-  public struct PathParam: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PathParam: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Segment location in the path, 1-indexed
@@ -120,7 +120,7 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Optional. Data type of path param
     public var dataType: HttpOperationDetails.DataType = HttpOperationDetails.DataType()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PathParam`.
     public init() {}
@@ -165,7 +165,7 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -181,16 +181,16 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.apihub.v1.HttpOperationDetails.PathParam"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// An aggregation of HTTP query parameter occurrences.
-  public struct QueryParam: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QueryParam: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Name of query param
@@ -203,7 +203,7 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Optional. Data type of path param
     public var dataType: HttpOperationDetails.DataType = HttpOperationDetails.DataType()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QueryParam`.
     public init() {}
@@ -253,7 +253,7 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -270,16 +270,16 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.apihub.v1.HttpOperationDetails.QueryParam"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// An aggregation of HTTP header occurrences.
-  public struct Header: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Header: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Header name.
@@ -291,7 +291,7 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Data type of header
     public var dataType: HttpOperationDetails.DataType = HttpOperationDetails.DataType()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Header`.
     public init() {}
@@ -341,7 +341,7 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -358,22 +358,22 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.apihub.v1.HttpOperationDetails.Header"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// An aggregation of HTTP requests.
-  public struct HttpRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct HttpRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Unordered map from header name to header metadata
     public var headers: [Swift.String: HttpOperationDetails.Header] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `HttpRequest`.
     public init() {}
@@ -413,7 +413,7 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -428,16 +428,16 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.apihub.v1.HttpOperationDetails.HttpRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// An aggregation of HTTP responses.
-  public struct HttpResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct HttpResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Unordered map from header name to header metadata
@@ -446,7 +446,7 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Optional. Map of status code to observed count
     public var responseCodes: [Swift.Int32: Swift.Int64] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `HttpResponse`.
     public init() {}
@@ -503,7 +503,7 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -524,11 +524,11 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.apihub.v1.HttpOperationDetails.HttpResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -661,10 +661,10 @@ public struct HttpOperationDetails: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apihub.v1.HttpOperationDetails"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

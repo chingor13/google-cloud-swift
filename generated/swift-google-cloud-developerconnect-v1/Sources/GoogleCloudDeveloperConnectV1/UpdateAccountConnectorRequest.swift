@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message for updating a AccountConnector
-public struct UpdateAccountConnectorRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateAccountConnectorRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The list of fields to be updated.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Required. The AccountConnector to update.
   public var accountConnector: AccountConnector? = nil
@@ -51,7 +51,7 @@ public struct UpdateAccountConnectorRequest: Codable, Equatable, GoogleCloudWKT.
   /// Optional. If set, validate the request, but do not actually post it.
   public var validateOnly: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateAccountConnectorRequest`.
   public init() {}
@@ -92,8 +92,7 @@ public struct UpdateAccountConnectorRequest: Codable, Equatable, GoogleCloudWKT.
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.accountConnector = try container.decodeIfPresent(
       AccountConnector.self, forKey: .accountConnector)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .requestId) {
@@ -107,7 +106,7 @@ public struct UpdateAccountConnectorRequest: Codable, Equatable, GoogleCloudWKT.
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -126,10 +125,10 @@ public struct UpdateAccountConnectorRequest: Codable, Equatable, GoogleCloudWKT.
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.developerconnect.v1.UpdateAccountConnectorRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

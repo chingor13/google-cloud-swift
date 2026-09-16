@@ -18,30 +18,29 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class PrincipalAccessBoundaryPoliciesRetry: PrincipalAccessBoundaryPoliciesStub {
     let inner: any PrincipalAccessBoundaryPoliciesStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(
-      _ inner: any PrincipalAccessBoundaryPoliciesStub, options: GoogleCloudGax.ClientOptions
-    ) {
+    public init(_ inner: any PrincipalAccessBoundaryPoliciesStub, options: GoogleGax.ClientOptions)
+    {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -53,90 +52,89 @@ extension Clients {
     }
 
     public func createPrincipalAccessBoundaryPolicy(
-      request: CreatePrincipalAccessBoundaryPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePrincipalAccessBoundaryPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreatePrincipalAccessBoundaryPolicyRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.Operation
+          (r: CreatePrincipalAccessBoundaryPolicyRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.Operation
           in
           return try await self.inner.createPrincipalAccessBoundaryPolicy(request: r, options: o)
         })
     }
 
     public func getPrincipalAccessBoundaryPolicy(
-      request: GetPrincipalAccessBoundaryPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPrincipalAccessBoundaryPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV3.PrincipalAccessBoundaryPolicy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetPrincipalAccessBoundaryPolicyRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleIAMV3.PrincipalAccessBoundaryPolicy
+          (r: GetPrincipalAccessBoundaryPolicyRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleIAMV3.PrincipalAccessBoundaryPolicy
           in
           return try await self.inner.getPrincipalAccessBoundaryPolicy(request: r, options: o)
         })
     }
 
     public func updatePrincipalAccessBoundaryPolicy(
-      request: UpdatePrincipalAccessBoundaryPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePrincipalAccessBoundaryPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdatePrincipalAccessBoundaryPolicyRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.Operation
+          (r: UpdatePrincipalAccessBoundaryPolicyRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.Operation
           in
           return try await self.inner.updatePrincipalAccessBoundaryPolicy(request: r, options: o)
         })
     }
 
     public func deletePrincipalAccessBoundaryPolicy(
-      request: DeletePrincipalAccessBoundaryPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePrincipalAccessBoundaryPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeletePrincipalAccessBoundaryPolicyRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.Operation
+          (r: DeletePrincipalAccessBoundaryPolicyRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.Operation
           in
           return try await self.inner.deletePrincipalAccessBoundaryPolicy(request: r, options: o)
         })
     }
 
     public func listPrincipalAccessBoundaryPolicies(
-      request: ListPrincipalAccessBoundaryPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPrincipalAccessBoundaryPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV3.ListPrincipalAccessBoundaryPoliciesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListPrincipalAccessBoundaryPoliciesRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleIAMV3.ListPrincipalAccessBoundaryPoliciesResponse
+          (r: ListPrincipalAccessBoundaryPoliciesRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleIAMV3.ListPrincipalAccessBoundaryPoliciesResponse
           in
           return try await self.inner.listPrincipalAccessBoundaryPolicies(request: r, options: o)
         })
     }
 
     public func searchPrincipalAccessBoundaryPolicyBindings(
-      request: SearchPrincipalAccessBoundaryPolicyBindingsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: SearchPrincipalAccessBoundaryPolicyBindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV3.SearchPrincipalAccessBoundaryPolicyBindingsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: SearchPrincipalAccessBoundaryPolicyBindingsRequest, o: GoogleCloudGax.RequestOptions)
+          (r: SearchPrincipalAccessBoundaryPolicyBindingsRequest, o: GoogleGax.RequestOptions)
             async throws -> GoogleIAMV3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
           in
           return try await self.inner.searchPrincipalAccessBoundaryPolicyBindings(
@@ -145,14 +143,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudSecurityPrivateCAV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CertificateAuthorityServiceClient) async throws {
   let response = try await client.getLocation(

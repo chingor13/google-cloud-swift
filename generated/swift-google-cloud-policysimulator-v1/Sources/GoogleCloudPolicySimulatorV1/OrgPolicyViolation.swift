@@ -16,12 +16,12 @@
 
 import Foundation
 import GoogleCloudOrgPolicyV2
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// OrgPolicyViolation is a resource representing a single resource violating a
 /// single OrgPolicy constraint.
-public struct OrgPolicyViolation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OrgPolicyViolation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the `OrgPolicyViolation`. Example:
@@ -37,7 +37,7 @@ public struct OrgPolicyViolation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// Any error encountered during the evaluation.
   public var error: GoogleRpc.Status? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OrgPolicyViolation`.
   public init() {}
@@ -85,7 +85,7 @@ public struct OrgPolicyViolation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     self.error = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .error)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,10 +103,10 @@ public struct OrgPolicyViolation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.policysimulator.v1.OrgPolicyViolation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Google Cloud Storage destination configuration
-public struct GcsDestinationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GcsDestinationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Path inside the Cloud Storage bucket to write data to.
@@ -30,12 +30,12 @@ public struct GcsDestinationConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// The maximum duration for which new events are added before a file is
   /// closed and a new file is created. Values within the range of 15-60 seconds
   /// are allowed.
-  public var fileRotationInterval: GoogleCloudWKT.Duration? = nil
+  public var fileRotationInterval: GoogleWKT.Duration? = nil
 
   /// File Format that the data should be written in.
   public var fileFormat: OneOf_FileFormat? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GcsDestinationConfig`.
   public init() {}
@@ -83,7 +83,7 @@ public struct GcsDestinationConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
       self.fileRotationMb = value
     }
     self.fileRotationInterval = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .fileRotationInterval)
+      GoogleWKT.Duration.self, forKey: .fileRotationInterval)
 
     var fileFormat: OneOf_FileFormat? = nil
     let fileFormatCheckAndSet = {
@@ -108,7 +108,7 @@ public struct GcsDestinationConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
     self.fileFormat = fileFormat
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -142,10 +142,10 @@ public struct GcsDestinationConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datastream.v1.GcsDestinationConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

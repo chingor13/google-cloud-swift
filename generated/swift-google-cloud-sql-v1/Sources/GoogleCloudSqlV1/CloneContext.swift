@@ -16,10 +16,10 @@
 
 #if SqlInstancesService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Database instance clone context.
-  public struct CloneContext: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CloneContext: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// This is always `sql#cloneContext`.
@@ -38,7 +38,7 @@
 
     /// Timestamp, if specified, identifies the time to which the source instance
     /// is cloned.
-    public var pointInTime: GoogleCloudWKT.Timestamp? = nil
+    public var pointInTime: GoogleWKT.Timestamp? = nil
 
     /// The name of the allocated ip range for the private ip Cloud SQL instance.
     /// For example: "google-managed-services-default". If set, the cloned instance
@@ -66,7 +66,7 @@
 
     /// The timestamp used to identify the time when the source instance is
     /// deleted. If this instance is deleted, then you must set the timestamp.
-    public var sourceInstanceDeletionTime: GoogleCloudWKT.Timestamp? = nil
+    public var sourceInstanceDeletionTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. The project ID of the destination project where the cloned
     /// instance will be created. To perform a cross-project clone, this field is
@@ -80,7 +80,7 @@
     /// field is only required for cross-project cloning.
     public var destinationNetwork: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CloneContext`.
     public init() {}
@@ -149,7 +149,7 @@
       self.binLogCoordinates = try container.decodeIfPresent(
         BinLogCoordinates.self, forKey: .binLogCoordinates)
       self.pointInTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .pointInTime)
+        GoogleWKT.Timestamp.self, forKey: .pointInTime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .allocatedIpRange) {
         self.allocatedIpRange = value
       }
@@ -160,14 +160,14 @@
       self.preferredSecondaryZone = try container.decodeIfPresent(
         Swift.String.self, forKey: .preferredSecondaryZone)
       self.sourceInstanceDeletionTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .sourceInstanceDeletionTime)
+        GoogleWKT.Timestamp.self, forKey: .sourceInstanceDeletionTime)
       self.destinationProject = try container.decodeIfPresent(
         Swift.String.self, forKey: .destinationProject)
       self.destinationNetwork = try container.decodeIfPresent(
         Swift.String.self, forKey: .destinationNetwork)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -194,11 +194,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.CloneContext"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

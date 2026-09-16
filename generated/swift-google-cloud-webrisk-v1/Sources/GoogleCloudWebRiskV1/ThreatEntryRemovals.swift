@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Contains the set of entries to remove from a local database.
-public struct ThreatEntryRemovals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ThreatEntryRemovals: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The raw removal indices for a local list.
@@ -30,7 +30,7 @@ public struct ThreatEntryRemovals: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// and stored as encoded_data.
   public var riceIndices: RiceDeltaEncoding? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ThreatEntryRemovals`.
   public init() {}
@@ -69,7 +69,7 @@ public struct ThreatEntryRemovals: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.riceIndices = try container.decodeIfPresent(RiceDeltaEncoding.self, forKey: .riceIndices)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -85,10 +85,10 @@ public struct ThreatEntryRemovals: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.webrisk.v1.ThreatEntryRemovals"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

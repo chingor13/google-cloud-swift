@@ -15,65 +15,65 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol GrafeasStub: Sendable {
     func getOccurrence(
-      request: GetOccurrenceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOccurrenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Occurrence
 
     func listOccurrences(
-      request: ListOccurrencesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOccurrencesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.ListOccurrencesResponse
 
     func deleteOccurrence(
-      request: DeleteOccurrenceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteOccurrenceRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createOccurrence(
-      request: CreateOccurrenceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateOccurrenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Occurrence
 
     func batchCreateOccurrences(
-      request: BatchCreateOccurrencesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreateOccurrencesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.BatchCreateOccurrencesResponse
 
     func updateOccurrence(
-      request: UpdateOccurrenceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateOccurrenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Occurrence
 
     func getOccurrenceNote(
-      request: GetOccurrenceNoteRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOccurrenceNoteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Note
 
     func getNote(
-      request: GetNoteRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNoteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Note
 
     func listNotes(
-      request: ListNotesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNotesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.ListNotesResponse
 
     func deleteNote(
-      request: DeleteNoteRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNoteRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createNote(
-      request: CreateNoteRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNoteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Note
 
     func batchCreateNotes(
-      request: BatchCreateNotesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreateNotesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.BatchCreateNotesResponse
 
     func updateNote(
-      request: UpdateNoteRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNoteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Note
 
     func listNoteOccurrences(
-      request: ListNoteOccurrencesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNoteOccurrencesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.ListNoteOccurrencesResponse
   }
 }

@@ -16,33 +16,33 @@
 
 #if CrossSiteNetworks
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol CrossSiteNetworksStub: Sendable {
       func delete(
-        request: CrossSiteNetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: CrossSiteNetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CrossSiteNetwork
 
       func insert(
-        request: CrossSiteNetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: CrossSiteNetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CrossSiteNetworkList
 
       func patch(
-        request: CrossSiteNetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

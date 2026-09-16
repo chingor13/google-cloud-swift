@@ -16,183 +16,183 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AlloyDBAdminStub: Sendable {
     func listClusters(
-      request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ListClustersResponse
 
     func getCluster(
-      request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.Cluster
 
     func createCluster(
-      request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateCluster(
-      request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func exportCluster(
-      request: ExportClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func importCluster(
-      request: ImportClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func upgradeCluster(
-      request: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpgradeClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCluster(
-      request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func promoteCluster(
-      request: PromoteClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: PromoteClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func switchoverCluster(
-      request: SwitchoverClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: SwitchoverClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func restoreCluster(
-      request: RestoreClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createSecondaryCluster(
-      request: CreateSecondaryClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSecondaryClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listInstances(
-      request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ListInstancesResponse
 
     func getInstance(
-      request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.Instance
 
     func createInstance(
-      request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createSecondaryInstance(
-      request: CreateSecondaryInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSecondaryInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func batchCreateInstances(
-      request: BatchCreateInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreateInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateInstance(
-      request: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteInstance(
-      request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func failoverInstance(
-      request: FailoverInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: FailoverInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func injectFault(
-      request: InjectFaultRequest, options: GoogleCloudGax.RequestOptions
+      request: InjectFaultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func restartInstance(
-      request: RestartInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: RestartInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func executeSql(
-      request: ExecuteSqlRequest, options: GoogleCloudGax.RequestOptions
+      request: ExecuteSqlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ExecuteSqlResponse
 
     func listBackups(
-      request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBackupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ListBackupsResponse
 
     func getBackup(
-      request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.Backup
 
     func createBackup(
-      request: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateBackup(
-      request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteBackup(
-      request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listSupportedDatabaseFlags(
-      request: ListSupportedDatabaseFlagsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSupportedDatabaseFlagsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ListSupportedDatabaseFlagsResponse
 
     func generateClientCertificate(
-      request: GenerateClientCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateClientCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.GenerateClientCertificateResponse
 
     func getConnectionInfo(
-      request: GetConnectionInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectionInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ConnectionInfo
 
     func listUsers(
-      request: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUsersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ListUsersResponse
 
     func getUser(
-      request: GetUserRequest, options: GoogleCloudGax.RequestOptions
+      request: GetUserRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.User
 
     func createUser(
-      request: CreateUserRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateUserRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.User
 
     func updateUser(
-      request: UpdateUserRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateUserRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.User
 
     func deleteUser(
-      request: DeleteUserRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteUserRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listDatabases(
-      request: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDatabasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ListDatabasesResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

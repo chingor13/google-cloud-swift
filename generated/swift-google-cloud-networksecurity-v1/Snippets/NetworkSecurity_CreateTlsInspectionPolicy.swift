@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudNetworkSecurityV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: NetworkSecurityClient, projectId: String, locationId: String) async throws {
   let poller = try await client.createTlsInspectionPolicy(

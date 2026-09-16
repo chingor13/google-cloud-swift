@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The metadata for the Operation returned by CreateTableFromSnapshot.
 ///
@@ -23,7 +23,7 @@ import Foundation
 /// feature is not currently available to most Cloud Bigtable customers. This
 /// feature might be changed in backward-incompatible ways and is not recommended
 /// for production use. It is not subject to any SLA or deprecation policy.
-public struct CreateTableFromSnapshotMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateTableFromSnapshotMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The request that prompted the initiation of this CreateTableFromSnapshot
@@ -31,12 +31,12 @@ public struct CreateTableFromSnapshotMetadata: Codable, Equatable, GoogleCloudWK
   public var originalRequest: CreateTableFromSnapshotRequest? = nil
 
   /// The time at which the original request was received.
-  public var requestTime: GoogleCloudWKT.Timestamp? = nil
+  public var requestTime: GoogleWKT.Timestamp? = nil
 
   /// The time at which the operation failed or was completed successfully.
-  public var finishTime: GoogleCloudWKT.Timestamp? = nil
+  public var finishTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateTableFromSnapshotMetadata`.
   public init() {}
@@ -75,13 +75,11 @@ public struct CreateTableFromSnapshotMetadata: Codable, Equatable, GoogleCloudWK
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.originalRequest = try container.decodeIfPresent(
       CreateTableFromSnapshotRequest.self, forKey: .originalRequest)
-    self.requestTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .requestTime)
-    self.finishTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .finishTime)
+    self.requestTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .requestTime)
+    self.finishTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .finishTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,10 +96,10 @@ public struct CreateTableFromSnapshotMetadata: Codable, Equatable, GoogleCloudWK
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.CreateTableFromSnapshotMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

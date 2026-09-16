@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The export settings for a data source.
-public struct DataSourceExportSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataSourceExportSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Whether the data source is enabled for export.
@@ -32,12 +32,12 @@ public struct DataSourceExportSettings: Codable, Equatable, GoogleCloudWKT._AnyP
 
   /// Output only. The data freshness of the given export which represents the
   /// time bucket at which the latest event was exported.
-  public var dataFreshnessTime: GoogleCloudWKT.Timestamp? = nil
+  public var dataFreshnessTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The stored data volume of all the exports.
   public var dataVolume: Swift.Int64 = Swift.Int64()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataSourceExportSettings`.
   public init() {}
@@ -90,13 +90,13 @@ public struct DataSourceExportSettings: Codable, Equatable, GoogleCloudWKT._AnyP
       self.latestExportJobState = value
     }
     self.dataFreshnessTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .dataFreshnessTime)
+      GoogleWKT.Timestamp.self, forKey: .dataFreshnessTime)
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .dataVolume) {
       self.dataVolume = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -115,10 +115,10 @@ public struct DataSourceExportSettings: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.chronicle.v1.DataSourceExportSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

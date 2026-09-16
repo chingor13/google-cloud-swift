@@ -16,14 +16,14 @@
 
 #if ConversationModels
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Metadata for a
   /// [ConversationModels.CreateConversationModel][google.cloud.dialogflow.v2.ConversationModels.CreateConversationModel]
   /// operation.
   ///
   /// [google.cloud.dialogflow.v2.ConversationModels.CreateConversationModel]: <doc:ConversationModelsClient/createConversationModel(request:options:)>
-  public struct CreateConversationModelOperationMetadata: Codable, Equatable, GoogleCloudWKT
+  public struct CreateConversationModelOperationMetadata: Codable, Equatable, GoogleWKT
       ._AnyPackable,
     Sendable
   {
@@ -37,12 +37,12 @@
 
     /// Timestamp when the request to create conversation model is submitted. The
     /// time is measured on server side.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// The time when the operation finished.
-    public var doneTime: GoogleCloudWKT.Timestamp? = nil
+    public var doneTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CreateConversationModelOperationMetadata`.
     public init() {}
@@ -89,13 +89,11 @@
       {
         self.state = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.doneTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .doneTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.doneTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .doneTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -249,11 +247,11 @@
       return
         "type.googleapis.com/google.cloud.dialogflow.v2.CreateConversationModelOperationMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

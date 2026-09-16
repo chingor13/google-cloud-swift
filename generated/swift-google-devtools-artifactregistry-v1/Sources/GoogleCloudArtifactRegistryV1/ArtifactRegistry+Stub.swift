@@ -16,224 +16,224 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ArtifactRegistryStub: Sendable {
     func listDockerImages(
-      request: ListDockerImagesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDockerImagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.ListDockerImagesResponse
 
     func getDockerImage(
-      request: GetDockerImageRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDockerImageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.DockerImage
 
     func listMavenArtifacts(
-      request: ListMavenArtifactsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMavenArtifactsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.ListMavenArtifactsResponse
 
     func getMavenArtifact(
-      request: GetMavenArtifactRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMavenArtifactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.MavenArtifact
 
     func listNpmPackages(
-      request: ListNpmPackagesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNpmPackagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.ListNpmPackagesResponse
 
     func getNpmPackage(
-      request: GetNpmPackageRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNpmPackageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.NpmPackage
 
     func listPythonPackages(
-      request: ListPythonPackagesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPythonPackagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.ListPythonPackagesResponse
 
     func getPythonPackage(
-      request: GetPythonPackageRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPythonPackageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.PythonPackage
 
     func importAptArtifacts(
-      request: ImportAptArtifactsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportAptArtifactsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func importYumArtifacts(
-      request: ImportYumArtifactsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportYumArtifactsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listRepositories(
-      request: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRepositoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.ListRepositoriesResponse
 
     func getRepository(
-      request: GetRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.Repository
 
     func createRepository(
-      request: CreateRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateRepository(
-      request: UpdateRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.Repository
 
     func deleteRepository(
-      request: DeleteRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listPackages(
-      request: ListPackagesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPackagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.ListPackagesResponse
 
     func getPackage(
-      request: GetPackageRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPackageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.Package
 
     func deletePackage(
-      request: DeletePackageRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePackageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listVersions(
-      request: ListVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.ListVersionsResponse
 
     func getVersion(
-      request: GetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.Version
 
     func deleteVersion(
-      request: DeleteVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func batchDeleteVersions(
-      request: BatchDeleteVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchDeleteVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateVersion(
-      request: UpdateVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.Version
 
     func listFiles(
-      request: ListFilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.ListFilesResponse
 
     func getFile(
-      request: GetFileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.File
 
     func deleteFile(
-      request: DeleteFileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateFile(
-      request: UpdateFileRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.File
 
     func listTags(
-      request: ListTagsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTagsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.ListTagsResponse
 
     func getTag(
-      request: GetTagRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTagRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.Tag
 
     func createTag(
-      request: CreateTagRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTagRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.Tag
 
     func updateTag(
-      request: UpdateTagRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTagRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.Tag
 
     func deleteTag(
-      request: DeleteTagRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTagRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createRule(
-      request: CreateRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.Rule
 
     func listRules(
-      request: ListRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.ListRulesResponse
 
     func getRule(
-      request: GetRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.Rule
 
     func updateRule(
-      request: UpdateRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.Rule
 
     func deleteRule(
-      request: DeleteRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRuleRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func getProjectSettings(
-      request: GetProjectSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProjectSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.ProjectSettings
 
     func updateProjectSettings(
-      request: UpdateProjectSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProjectSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.ProjectSettings
 
     func getVpcscconfig(
-      request: GetVPCSCConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVPCSCConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.VPCSCConfig
 
     func updateVpcscconfig(
-      request: UpdateVPCSCConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateVPCSCConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.VPCSCConfig
 
     func updatePackage(
-      request: UpdatePackageRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePackageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.Package
 
     func listAttachments(
-      request: ListAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAttachmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.ListAttachmentsResponse
 
     func getAttachment(
-      request: GetAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudArtifactRegistryV1.Attachment
 
     func createAttachment(
-      request: CreateAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteAttachment(
-      request: DeleteAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func exportArtifact(
-      request: ExportArtifactRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportArtifactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Canary represents the canary deployment strategy.
-public struct Canary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Canary: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Runtime specific configurations for the deployment strategy. The
@@ -29,7 +29,7 @@ public struct Canary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The mode to use for the canary deployment strategy.
   public var mode: OneOf_Mode? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Canary`.
   public init() {}
@@ -91,7 +91,7 @@ public struct Canary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.mode = mode
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -125,10 +125,10 @@ public struct Canary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.deploy.v1.Canary"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

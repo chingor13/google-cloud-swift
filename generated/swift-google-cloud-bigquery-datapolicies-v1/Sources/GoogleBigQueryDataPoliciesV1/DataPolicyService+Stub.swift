@@ -15,46 +15,46 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DataPolicyServiceStub: Sendable {
     func createDataPolicy(
-      request: CreateDataPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataPoliciesV1.DataPolicy
 
     func updateDataPolicy(
-      request: UpdateDataPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataPoliciesV1.DataPolicy
 
     func renameDataPolicy(
-      request: RenameDataPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: RenameDataPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataPoliciesV1.DataPolicy
 
     func deleteDataPolicy(
-      request: DeleteDataPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getDataPolicy(
-      request: GetDataPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataPoliciesV1.DataPolicy
 
     func listDataPolicies(
-      request: ListDataPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataPoliciesV1.ListDataPoliciesResponse
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
   }
 }

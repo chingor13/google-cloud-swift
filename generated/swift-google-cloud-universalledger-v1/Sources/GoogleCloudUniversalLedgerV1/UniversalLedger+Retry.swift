@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class UniversalLedgerRetry: UniversalLedgerStub {
     let inner: any UniversalLedgerStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any UniversalLedgerStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any UniversalLedgerStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func submitTransaction(
-      request: SubmitTransactionRequest, options: GoogleCloudGax.RequestOptions
+      request: SubmitTransactionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.SubmitTransactionResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: SubmitTransactionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SubmitTransactionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudUniversalLedgerV1.SubmitTransactionResponse
           in
           return try await self.inner.submitTransaction(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func listEndpoints(
-      request: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEndpointsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.ListEndpointsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListEndpointsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListEndpointsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudUniversalLedgerV1.ListEndpointsResponse
           in
           return try await self.inner.listEndpoints(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func getEndpoint(
-      request: GetEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.Endpoint {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetEndpointRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetEndpointRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudUniversalLedgerV1.Endpoint
           in
           return try await self.inner.getEndpoint(request: r, options: o)
@@ -94,14 +94,14 @@ extension Clients {
     }
 
     public func submitOperationalTransaction(
-      request: SubmitOperationalTransactionRequest, options: GoogleCloudGax.RequestOptions
+      request: SubmitOperationalTransactionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.SubmitOperationalTransactionResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: SubmitOperationalTransactionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SubmitOperationalTransactionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudUniversalLedgerV1.SubmitOperationalTransactionResponse
           in
           return try await self.inner.submitOperationalTransaction(request: r, options: o)
@@ -109,14 +109,14 @@ extension Clients {
     }
 
     public func queryTransactionState(
-      request: QueryTransactionStateRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryTransactionStateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.QueryTransactionStateResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: QueryTransactionStateRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: QueryTransactionStateRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudUniversalLedgerV1.QueryTransactionStateResponse
           in
           return try await self.inner.queryTransactionState(request: r, options: o)
@@ -124,14 +124,14 @@ extension Clients {
     }
 
     public func queryAccount(
-      request: QueryAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.QueryAccountResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: QueryAccountRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: QueryAccountRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudUniversalLedgerV1.QueryAccountResponse
           in
           return try await self.inner.queryAccount(request: r, options: o)
@@ -139,14 +139,14 @@ extension Clients {
     }
 
     public func queryData(
-      request: QueryDataRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.QueryDataResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: QueryDataRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: QueryDataRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudUniversalLedgerV1.QueryDataResponse
           in
           return try await self.inner.queryData(request: r, options: o)

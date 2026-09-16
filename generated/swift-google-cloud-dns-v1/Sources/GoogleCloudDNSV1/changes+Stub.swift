@@ -15,21 +15,21 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ChangesStub: Sendable {
     func create(
-      request: ChangesClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangesClient.CreateRequest, options: GoogleGax.RequestOptions
     ) async throws -> Change
 
     func `get`(
-      request: ChangesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> Change
 
     func list(
-      request: ChangesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> ChangesListResponse
   }
 }

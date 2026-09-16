@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleBigQueryAnalyticsHubV1
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: AnalyticsHubServiceClient) async throws {
   let response = try await client.revokeSubscription(

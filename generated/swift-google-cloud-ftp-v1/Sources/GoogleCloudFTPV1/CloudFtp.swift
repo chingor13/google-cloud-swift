@@ -19,21 +19,21 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service describing handlers for resources
 ///
 /// @Snippet(path: "CloudFtpQuickstart")
 public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   let inner: any Clients.CloudFtpStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `CloudFtpClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CloudFtpStub = try Clients.CloudFtpTransport(options)
     inner = Clients.CloudFtpRetry(inner, options: options)
     if let logger = options.logger {
@@ -48,7 +48,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_ListServers")
   public func listServers(
-    request: ListServersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListServersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudFTPV1.ListServersResponse {
     try await self.inner.listServers(request: request, options: options)
   }
@@ -57,21 +57,21 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_ListServers")
   public func listServers(
-    byItem: ListServersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListServersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Server, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudFTPV1.ListServersResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listServers(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Server.
   ///
   /// @Snippet(path: "CloudFtp_GetServer")
   public func getServer(
-    request: GetServerRequest, options: GoogleCloudGax.RequestOptions
+    request: GetServerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudFTPV1.Server {
     try await self.inner.getServer(request: request, options: options)
   }
@@ -80,7 +80,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_CreateServer")
   public func createServer(
-    request: CreateServerRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateServerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createServer(request: request, options: options)
   }
@@ -89,21 +89,20 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_CreateServer")
   public func createServer(
-    withPolling: CreateServerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Server> {
+    withPolling: CreateServerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Server> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Server>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Server>.State in
       return try op._extractStatus(Server.self)
     }
     let rawOp = try await self.createServer(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Server>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Server>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -115,7 +114,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_UpdateServer")
   public func updateServer(
-    request: UpdateServerRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateServerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateServer(request: request, options: options)
   }
@@ -124,21 +123,20 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_UpdateServer")
   public func updateServer(
-    withPolling: UpdateServerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Server> {
+    withPolling: UpdateServerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Server> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Server>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Server>.State in
       return try op._extractStatus(Server.self)
     }
     let rawOp = try await self.updateServer(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Server>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Server>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -150,7 +148,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_DeleteServer")
   public func deleteServer(
-    request: DeleteServerRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteServerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteServer(request: request, options: options)
   }
@@ -159,21 +157,21 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_DeleteServer")
   public func deleteServer(
-    withPolling: DeleteServerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteServerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteServer(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -185,7 +183,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_ListUsers")
   public func listUsers(
-    request: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUsersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudFTPV1.ListUsersResponse {
     try await self.inner.listUsers(request: request, options: options)
   }
@@ -194,21 +192,21 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_ListUsers")
   public func listUsers(
-    byItem: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUsersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<User, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudFTPV1.ListUsersResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listUsers(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single User.
   ///
   /// @Snippet(path: "CloudFtp_GetUser")
   public func getUser(
-    request: GetUserRequest, options: GoogleCloudGax.RequestOptions
+    request: GetUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudFTPV1.User {
     try await self.inner.getUser(request: request, options: options)
   }
@@ -217,7 +215,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_CreateUser")
   public func createUser(
-    request: CreateUserRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createUser(request: request, options: options)
   }
@@ -226,21 +224,20 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_CreateUser")
   public func createUser(
-    withPolling: CreateUserRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<User> {
+    withPolling: CreateUserRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<User> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<User>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<User>.State in
       return try op._extractStatus(User.self)
     }
     let rawOp = try await self.createUser(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<User>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<User>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -252,7 +249,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_UpdateUser")
   public func updateUser(
-    request: UpdateUserRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateUser(request: request, options: options)
   }
@@ -261,21 +258,20 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_UpdateUser")
   public func updateUser(
-    withPolling: UpdateUserRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<User> {
+    withPolling: UpdateUserRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<User> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<User>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<User>.State in
       return try op._extractStatus(User.self)
     }
     let rawOp = try await self.updateUser(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<User>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<User>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -287,7 +283,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_DeleteUser")
   public func deleteUser(
-    request: DeleteUserRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteUser(request: request, options: options)
   }
@@ -296,21 +292,21 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_DeleteUser")
   public func deleteUser(
-    withPolling: DeleteUserRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteUserRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteUser(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -322,7 +318,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_StartServer")
   public func startServer(
-    request: StartServerRequest, options: GoogleCloudGax.RequestOptions
+    request: StartServerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.startServer(request: request, options: options)
   }
@@ -331,21 +327,20 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_StartServer")
   public func startServer(
-    withPolling: StartServerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Server> {
+    withPolling: StartServerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Server> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Server>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Server>.State in
       return try op._extractStatus(Server.self)
     }
     let rawOp = try await self.startServer(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Server>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Server>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -357,7 +352,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_StopServer")
   public func stopServer(
-    request: StopServerRequest, options: GoogleCloudGax.RequestOptions
+    request: StopServerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.stopServer(request: request, options: options)
   }
@@ -366,21 +361,20 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_StopServer")
   public func stopServer(
-    withPolling: StopServerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Server> {
+    withPolling: StopServerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Server> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Server>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Server>.State in
       return try op._extractStatus(Server.self)
     }
     let rawOp = try await self.stopServer(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Server>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Server>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -409,7 +403,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -435,7 +429,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -443,14 +437,14 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "CloudFtp_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -461,7 +455,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -472,7 +466,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -480,7 +474,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -489,7 +483,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -500,7 +494,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -511,7 +505,7 @@ public final class CloudFtpClient: Clients.CloudFtpProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudFtp_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -550,7 +544,7 @@ extension Clients {
     func createServer(request: CreateServerRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.createServer`.
-    func createServer(withPolling: CreateServerRequest) async throws -> any GoogleCloudGax
+    func createServer(withPolling: CreateServerRequest) async throws -> any GoogleGax
       .PollableOperation<Server>
 
     /// See `CloudFtpClient.createServer`.
@@ -558,32 +552,32 @@ extension Clients {
       parent: Swift.String,
       server: Server?,
       serverId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Server>
+    ) async throws -> any GoogleGax.PollableOperation<Server>
 
     /// See `CloudFtpClient.updateServer`.
     func updateServer(request: UpdateServerRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.updateServer`.
-    func updateServer(withPolling: UpdateServerRequest) async throws -> any GoogleCloudGax
+    func updateServer(withPolling: UpdateServerRequest) async throws -> any GoogleGax
       .PollableOperation<Server>
 
     /// See `CloudFtpClient.updateServer`.
     func updateServer(
       server: Server?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Server>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Server>
 
     /// See `CloudFtpClient.deleteServer`.
     func deleteServer(request: DeleteServerRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.deleteServer`.
-    func deleteServer(withPolling: DeleteServerRequest) async throws -> any GoogleCloudGax
+    func deleteServer(withPolling: DeleteServerRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `CloudFtpClient.deleteServer`.
     func deleteServer(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CloudFtpClient.listUsers`.
     func listUsers(request: ListUsersRequest) async throws -> GoogleCloudFTPV1.ListUsersResponse
@@ -610,64 +604,68 @@ extension Clients {
     func createUser(request: CreateUserRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.createUser`.
-    func createUser(withPolling: CreateUserRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<User>
+    func createUser(withPolling: CreateUserRequest) async throws -> any GoogleGax.PollableOperation<
+      User
+    >
 
     /// See `CloudFtpClient.createUser`.
     func createUser(
       parent: Swift.String,
       user: User?,
       userId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<User>
+    ) async throws -> any GoogleGax.PollableOperation<User>
 
     /// See `CloudFtpClient.updateUser`.
     func updateUser(request: UpdateUserRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.updateUser`.
-    func updateUser(withPolling: UpdateUserRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<User>
+    func updateUser(withPolling: UpdateUserRequest) async throws -> any GoogleGax.PollableOperation<
+      User
+    >
 
     /// See `CloudFtpClient.updateUser`.
     func updateUser(
       user: User?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<User>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<User>
 
     /// See `CloudFtpClient.deleteUser`.
     func deleteUser(request: DeleteUserRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.deleteUser`.
-    func deleteUser(withPolling: DeleteUserRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Swift.Void>
+    func deleteUser(withPolling: DeleteUserRequest) async throws -> any GoogleGax.PollableOperation<
+      Swift.Void
+    >
 
     /// See `CloudFtpClient.deleteUser`.
     func deleteUser(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CloudFtpClient.startServer`.
     func startServer(request: StartServerRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.startServer`.
-    func startServer(withPolling: StartServerRequest) async throws -> any GoogleCloudGax
+    func startServer(withPolling: StartServerRequest) async throws -> any GoogleGax
       .PollableOperation<Server>
 
     /// See `CloudFtpClient.startServer`.
     func startServer(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Server>
+    ) async throws -> any GoogleGax.PollableOperation<Server>
 
     /// See `CloudFtpClient.stopServer`.
     func stopServer(request: StopServerRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.stopServer`.
-    func stopServer(withPolling: StopServerRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Server>
+    func stopServer(withPolling: StopServerRequest) async throws -> any GoogleGax.PollableOperation<
+      Server
+    >
 
     /// See `CloudFtpClient.stopServer`.
     func stopServer(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Server>
+    ) async throws -> any GoogleGax.PollableOperation<Server>
 
     /// See `CloudFtpClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -715,147 +713,147 @@ extension Clients {
 
     /// See `CloudFtpClient.listServers`.
     func listServers(
-      request: ListServersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudFTPV1.ListServersResponse
 
     /// See `CloudFtpClient.listServers`.
     func listServers(
-      byItem: ListServersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListServersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Server, Swift.Error>
 
     /// See `CloudFtpClient.getServer`.
     func getServer(
-      request: GetServerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudFTPV1.Server
 
     /// See `CloudFtpClient.createServer`.
     func createServer(
-      request: CreateServerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.createServer`.
     func createServer(
-      withPolling: CreateServerRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Server>
+      withPolling: CreateServerRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Server>
 
     /// See `CloudFtpClient.updateServer`.
     func updateServer(
-      request: UpdateServerRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.updateServer`.
     func updateServer(
-      withPolling: UpdateServerRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Server>
+      withPolling: UpdateServerRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Server>
 
     /// See `CloudFtpClient.deleteServer`.
     func deleteServer(
-      request: DeleteServerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.deleteServer`.
     func deleteServer(
-      withPolling: DeleteServerRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteServerRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CloudFtpClient.listUsers`.
     func listUsers(
-      request: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUsersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudFTPV1.ListUsersResponse
 
     /// See `CloudFtpClient.listUsers`.
     func listUsers(
-      byItem: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListUsersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<User, Swift.Error>
 
     /// See `CloudFtpClient.getUser`.
     func getUser(
-      request: GetUserRequest, options: GoogleCloudGax.RequestOptions
+      request: GetUserRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudFTPV1.User
 
     /// See `CloudFtpClient.createUser`.
     func createUser(
-      request: CreateUserRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateUserRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.createUser`.
     func createUser(
-      withPolling: CreateUserRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<User>
+      withPolling: CreateUserRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<User>
 
     /// See `CloudFtpClient.updateUser`.
     func updateUser(
-      request: UpdateUserRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateUserRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.updateUser`.
     func updateUser(
-      withPolling: UpdateUserRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<User>
+      withPolling: UpdateUserRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<User>
 
     /// See `CloudFtpClient.deleteUser`.
     func deleteUser(
-      request: DeleteUserRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteUserRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.deleteUser`.
     func deleteUser(
-      withPolling: DeleteUserRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteUserRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CloudFtpClient.startServer`.
     func startServer(
-      request: StartServerRequest, options: GoogleCloudGax.RequestOptions
+      request: StartServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.startServer`.
     func startServer(
-      withPolling: StartServerRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Server>
+      withPolling: StartServerRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Server>
 
     /// See `CloudFtpClient.stopServer`.
     func stopServer(
-      request: StopServerRequest, options: GoogleCloudGax.RequestOptions
+      request: StopServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudFtpClient.stopServer`.
     func stopServer(
-      withPolling: StopServerRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Server>
+      withPolling: StopServerRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Server>
 
     /// See `CloudFtpClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `CloudFtpClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `CloudFtpClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `CloudFtpClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `CloudFtpClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `CloudFtpClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `CloudFtpClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -869,9 +867,9 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func listServers(
-    request: ListServersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListServersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudFTPV1.ListServersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listServers(
@@ -881,12 +879,12 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func listServers(
-    byItem: ListServersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListServersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Server, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudFTPV1.ListServersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listServers(
@@ -903,9 +901,9 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func getServer(
-    request: GetServerRequest, options: GoogleCloudGax.RequestOptions
+    request: GetServerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudFTPV1.Server {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getServer(
@@ -923,24 +921,24 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func createServer(
-    request: CreateServerRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateServerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createServer(withPolling: CreateServerRequest) async throws -> any GoogleCloudGax
+  public func createServer(withPolling: CreateServerRequest) async throws -> any GoogleGax
     .PollableOperation<Server>
   {
     try await self.createServer(withPolling: withPolling, options: .init())
   }
 
   public func createServer(
-    withPolling: CreateServerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Server> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Server>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateServerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Server> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Server>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -948,7 +946,7 @@ extension Clients.CloudFtpProtocol {
     parent: Swift.String,
     server: Server?,
     serverId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Server> {
+  ) async throws -> any GoogleGax.PollableOperation<Server> {
     let request = CreateServerRequest().with {
       $0.parent = parent
       $0.server = server
@@ -963,31 +961,31 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func updateServer(
-    request: UpdateServerRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateServerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateServer(withPolling: UpdateServerRequest) async throws -> any GoogleCloudGax
+  public func updateServer(withPolling: UpdateServerRequest) async throws -> any GoogleGax
     .PollableOperation<Server>
   {
     try await self.updateServer(withPolling: withPolling, options: .init())
   }
 
   public func updateServer(
-    withPolling: UpdateServerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Server> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Server>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateServerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Server> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Server>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateServer(
     server: Server?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Server> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Server> {
     let request = UpdateServerRequest().with {
       $0.server = server
       $0.updateMask = updateMask
@@ -1001,30 +999,30 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func deleteServer(
-    request: DeleteServerRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteServerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteServer(withPolling: DeleteServerRequest) async throws -> any GoogleCloudGax
+  public func deleteServer(withPolling: DeleteServerRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteServer(withPolling: withPolling, options: .init())
   }
 
   public func deleteServer(
-    withPolling: DeleteServerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteServerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteServer(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteServerRequest().with {
       $0.name = name
     }
@@ -1038,9 +1036,9 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func listUsers(
-    request: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUsersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudFTPV1.ListUsersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listUsers(
@@ -1050,12 +1048,12 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func listUsers(
-    byItem: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUsersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<User, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudFTPV1.ListUsersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listUsers(
@@ -1072,9 +1070,9 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func getUser(
-    request: GetUserRequest, options: GoogleCloudGax.RequestOptions
+    request: GetUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudFTPV1.User {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getUser(
@@ -1091,24 +1089,24 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func createUser(
-    request: CreateUserRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createUser(withPolling: CreateUserRequest) async throws -> any GoogleCloudGax
+  public func createUser(withPolling: CreateUserRequest) async throws -> any GoogleGax
     .PollableOperation<User>
   {
     try await self.createUser(withPolling: withPolling, options: .init())
   }
 
   public func createUser(
-    withPolling: CreateUserRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<User> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<User>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateUserRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<User> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<User>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1116,7 +1114,7 @@ extension Clients.CloudFtpProtocol {
     parent: Swift.String,
     user: User?,
     userId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<User> {
+  ) async throws -> any GoogleGax.PollableOperation<User> {
     let request = CreateUserRequest().with {
       $0.parent = parent
       $0.user = user
@@ -1130,31 +1128,31 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func updateUser(
-    request: UpdateUserRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateUser(withPolling: UpdateUserRequest) async throws -> any GoogleCloudGax
+  public func updateUser(withPolling: UpdateUserRequest) async throws -> any GoogleGax
     .PollableOperation<User>
   {
     try await self.updateUser(withPolling: withPolling, options: .init())
   }
 
   public func updateUser(
-    withPolling: UpdateUserRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<User> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<User>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateUserRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<User> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<User>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateUser(
     user: User?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<User> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<User> {
     let request = UpdateUserRequest().with {
       $0.user = user
       $0.updateMask = updateMask
@@ -1167,30 +1165,30 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func deleteUser(
-    request: DeleteUserRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteUser(withPolling: DeleteUserRequest) async throws -> any GoogleCloudGax
+  public func deleteUser(withPolling: DeleteUserRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteUser(withPolling: withPolling, options: .init())
   }
 
   public func deleteUser(
-    withPolling: DeleteUserRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteUserRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteUser(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteUserRequest().with {
       $0.name = name
     }
@@ -1202,30 +1200,30 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func startServer(
-    request: StartServerRequest, options: GoogleCloudGax.RequestOptions
+    request: StartServerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func startServer(withPolling: StartServerRequest) async throws -> any GoogleCloudGax
+  public func startServer(withPolling: StartServerRequest) async throws -> any GoogleGax
     .PollableOperation<Server>
   {
     try await self.startServer(withPolling: withPolling, options: .init())
   }
 
   public func startServer(
-    withPolling: StartServerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Server> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Server>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: StartServerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Server> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Server>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func startServer(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Server> {
+  ) async throws -> any GoogleGax.PollableOperation<Server> {
     let request = StartServerRequest().with {
       $0.name = name
     }
@@ -1237,30 +1235,30 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func stopServer(
-    request: StopServerRequest, options: GoogleCloudGax.RequestOptions
+    request: StopServerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func stopServer(withPolling: StopServerRequest) async throws -> any GoogleCloudGax
+  public func stopServer(withPolling: StopServerRequest) async throws -> any GoogleGax
     .PollableOperation<Server>
   {
     try await self.stopServer(withPolling: withPolling, options: .init())
   }
 
   public func stopServer(
-    withPolling: StopServerRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Server> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Server>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: StopServerRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Server> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Server>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func stopServer(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Server> {
+  ) async throws -> any GoogleGax.PollableOperation<Server> {
     let request = StopServerRequest().with {
       $0.name = name
     }
@@ -1274,9 +1272,9 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -1286,13 +1284,13 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1302,9 +1300,9 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1314,9 +1312,9 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1326,13 +1324,13 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1353,9 +1351,9 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1372,9 +1370,9 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1391,9 +1389,9 @@ extension Clients.CloudFtpProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

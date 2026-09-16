@@ -16,45 +16,45 @@
 
 import Foundation
 import GoogleApi
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol MetricServiceStub: Sendable {
     func listMonitoredResourceDescriptors(
-      request: ListMonitoredResourceDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMonitoredResourceDescriptorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListMonitoredResourceDescriptorsResponse
 
     func getMonitoredResourceDescriptor(
-      request: GetMonitoredResourceDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMonitoredResourceDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.MonitoredResourceDescriptor
 
     func listMetricDescriptors(
-      request: ListMetricDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMetricDescriptorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListMetricDescriptorsResponse
 
     func getMetricDescriptor(
-      request: GetMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetricDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.MetricDescriptor
 
     func createMetricDescriptor(
-      request: CreateMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMetricDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.MetricDescriptor
 
     func deleteMetricDescriptor(
-      request: DeleteMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMetricDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listTimeSeries(
-      request: ListTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTimeSeriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListTimeSeriesResponse
 
     func createTimeSeries(
-      request: CreateTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTimeSeriesRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createServiceTimeSeries(
-      request: CreateTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTimeSeriesRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

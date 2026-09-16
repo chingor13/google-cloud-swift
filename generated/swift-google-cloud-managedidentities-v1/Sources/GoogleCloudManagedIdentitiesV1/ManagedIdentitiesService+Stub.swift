@@ -15,67 +15,67 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ManagedIdentitiesServiceStub: Sendable {
     func createMicrosoftAdDomain(
-      request: CreateMicrosoftAdDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMicrosoftAdDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func resetAdminPassword(
-      request: ResetAdminPasswordRequest, options: GoogleCloudGax.RequestOptions
+      request: ResetAdminPasswordRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedIdentitiesV1.ResetAdminPasswordResponse
 
     func listDomains(
-      request: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDomainsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedIdentitiesV1.ListDomainsResponse
 
     func getDomain(
-      request: GetDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedIdentitiesV1.Domain
 
     func updateDomain(
-      request: UpdateDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteDomain(
-      request: DeleteDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func attachTrust(
-      request: AttachTrustRequest, options: GoogleCloudGax.RequestOptions
+      request: AttachTrustRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func reconfigureTrust(
-      request: ReconfigureTrustRequest, options: GoogleCloudGax.RequestOptions
+      request: ReconfigureTrustRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func detachTrust(
-      request: DetachTrustRequest, options: GoogleCloudGax.RequestOptions
+      request: DetachTrustRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func validateTrust(
-      request: ValidateTrustRequest, options: GoogleCloudGax.RequestOptions
+      request: ValidateTrustRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

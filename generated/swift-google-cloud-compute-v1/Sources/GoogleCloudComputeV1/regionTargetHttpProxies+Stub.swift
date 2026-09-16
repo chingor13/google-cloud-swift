@@ -16,34 +16,33 @@
 
 #if RegionTargetHttpProxies
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionTargetHttpProxiesStub: Sendable {
       func delete(
-        request: RegionTargetHttpProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpProxiesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RegionTargetHttpProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpProxiesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpProxy
 
       func insert(
-        request: RegionTargetHttpProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpProxiesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RegionTargetHttpProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpProxiesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetHttpProxyList
 
       func setUrlMap(
-        request: RegionTargetHttpProxiesClient.SetUrlMapRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionTargetHttpProxiesClient.SetUrlMapRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

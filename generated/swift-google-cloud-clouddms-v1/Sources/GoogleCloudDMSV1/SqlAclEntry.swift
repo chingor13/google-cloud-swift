@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An entry for an Access Control list.
-public struct SqlAclEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SqlAclEntry: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The allowlisted value for the access control list.
@@ -30,7 +30,7 @@ public struct SqlAclEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The access control entry entry expiration.
   public var expiration: OneOf_Expiration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SqlAclEntry`.
   public init() {}
@@ -87,17 +87,17 @@ public struct SqlAclEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       expiration = $0
     }
     if let expireTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp?.self, forKey: .expireTime)
+      GoogleWKT.Timestamp?.self, forKey: .expireTime)
     {
       try expirationCheckAndSet(.expireTime(expireTime))
     }
-    if let ttl = try container.decodeIfPresent(GoogleCloudWKT.Duration?.self, forKey: .ttl) {
+    if let ttl = try container.decodeIfPresent(GoogleWKT.Duration?.self, forKey: .ttl) {
       try expirationCheckAndSet(.ttl(ttl))
     }
     self.expiration = expiration
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -124,18 +124,18 @@ public struct SqlAclEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The time when this access control entry expires in
     /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example:
     /// `2012-11-15T16:19:00.094Z`.
-    indirect case expireTime(GoogleCloudWKT.Timestamp?)
+    indirect case expireTime(GoogleWKT.Timestamp?)
     /// Input only. The time-to-leave of this access control entry.
-    indirect case ttl(GoogleCloudWKT.Duration?)
+    indirect case ttl(GoogleWKT.Duration?)
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.clouddms.v1.SqlAclEntry"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

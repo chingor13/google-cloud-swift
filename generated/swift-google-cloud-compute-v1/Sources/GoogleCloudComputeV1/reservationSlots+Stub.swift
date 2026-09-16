@@ -16,33 +16,33 @@
 
 #if ReservationSlots
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ReservationSlotsStub: Sendable {
       func `get`(
-        request: ReservationSlotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSlotsGetResponse
 
       func getHealth(
-        request: ReservationSlotsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetHealthRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getVersion(
-        request: ReservationSlotsClient.GetVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.GetVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: ReservationSlotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationSlotsListResponse
 
       func update(
-        request: ReservationSlotsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationSlotsClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

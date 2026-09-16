@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A dependency resource defined in the API hub describes a dependency directed
 /// from a consumer to a supplier entity. A dependency can be defined between two
@@ -25,7 +25,7 @@ import Foundation
 ///
 /// [google.cloud.apihub.v1.ApiOperation]: <doc:ApiOperation>
 /// [google.cloud.apihub.v1.ExternalApi]: <doc:ExternalApi>
-public struct Dependency: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Dependency: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The name of the dependency in the API Hub.
@@ -53,10 +53,10 @@ public struct Dependency: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var errorDetail: DependencyErrorDetail? = nil
 
   /// Output only. The time at which the dependency was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time at which the dependency was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The list of user defined attributes associated with the
   /// dependency resource. The key is the attribute name. It will be of the
@@ -64,7 +64,7 @@ public struct Dependency: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The value is the attribute values associated with the resource.
   public var attributes: [Swift.String: AttributeValues] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Dependency`.
   public init() {}
@@ -133,10 +133,8 @@ public struct Dependency: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     self.errorDetail = try container.decodeIfPresent(
       DependencyErrorDetail.self, forKey: .errorDetail)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(
       [Swift.String: AttributeValues].self, forKey: .attributes)
     {
@@ -144,7 +142,7 @@ public struct Dependency: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -373,10 +371,10 @@ public struct Dependency: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apihub.v1.Dependency"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

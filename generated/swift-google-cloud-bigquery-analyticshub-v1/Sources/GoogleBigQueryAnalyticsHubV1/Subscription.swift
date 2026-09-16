@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A subscription represents a subscribers' access to a particular set of
 /// published data. It contains references to associated listings,
 /// data exchanges, and linked datasets.
-public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Subscription: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the subscription.
@@ -28,10 +28,10 @@ public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. Timestamp when the subscription was created.
-  public var creationTime: GoogleCloudWKT.Timestamp? = nil
+  public var creationTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Timestamp when the subscription was last modified.
-  public var lastModifyTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastModifyTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Organization of the project this subscription belongs to.
   public var organizationId: Swift.String = Swift.String()
@@ -75,7 +75,7 @@ public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public var resourceName: OneOf_ResourceName? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Subscription`.
   public init() {}
@@ -141,9 +141,9 @@ public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.name = value
     }
     self.creationTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .creationTime)
+      GoogleWKT.Timestamp.self, forKey: .creationTime)
     self.lastModifyTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastModifyTime)
+      GoogleWKT.Timestamp.self, forKey: .lastModifyTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .organizationId) {
       self.organizationId = value
     }
@@ -197,7 +197,7 @@ public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.resourceName = resourceName
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -232,7 +232,7 @@ public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Reference to a linked resource tracked by this Subscription.
-  public struct LinkedResource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LinkedResource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Listing for which linked resource is created.
@@ -240,7 +240,7 @@ public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public var reference: OneOf_Reference? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LinkedResource`.
     public init() {}
@@ -304,7 +304,7 @@ public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.reference = reference
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -337,23 +337,23 @@ public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Subscription.LinkedResource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Commercial info metadata for this subscription.
-  public struct CommercialInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CommercialInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. This is set when the subscription is commercialised via
     /// Cloud Marketplace.
     public var cloudMarketplace: Subscription.CommercialInfo.GoogleCloudMarketplaceInfo? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CommercialInfo`.
     public init() {}
@@ -390,7 +390,7 @@ public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         Subscription.CommercialInfo.GoogleCloudMarketplaceInfo.self, forKey: .cloudMarketplace)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -403,13 +403,13 @@ public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Cloud Marketplace commercial metadata for this subscription.
-    public struct GoogleCloudMarketplaceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GoogleCloudMarketplaceInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Resource name of the Marketplace Order.
       public var order: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GoogleCloudMarketplaceInfo`.
       public init() {}
@@ -447,7 +447,7 @@ public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -463,22 +463,22 @@ public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo.GoogleCloudMarketplaceInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Subscription.CommercialInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -608,10 +608,10 @@ public struct Subscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.Subscription"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

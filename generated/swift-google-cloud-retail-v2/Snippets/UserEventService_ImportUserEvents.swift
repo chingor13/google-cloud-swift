@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudRetailV2
 import GoogleApi
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: UserEventServiceClient) async throws {
   let poller = try await client.importUserEvents(

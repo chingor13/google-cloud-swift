@@ -16,16 +16,16 @@
 
 #if MigrationService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Config of migrating one resource from automl.googleapis.com,
   /// datalabeling.googleapis.com and ml.googleapis.com to Vertex AI.
-  public struct MigrateResourceRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MigrateResourceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var request: OneOf_Request? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MigrateResourceRequest`.
     public init() {}
@@ -103,7 +103,7 @@
       self.request = request
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -128,8 +128,7 @@
     }
 
     /// Config for migrating version in ml.googleapis.com to Vertex AI's Model.
-    public struct MigrateMlEngineModelVersionConfig: Codable, Equatable, GoogleCloudWKT
-        ._AnyPackable,
+    public struct MigrateMlEngineModelVersionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The ml.googleapis.com endpoint that this model version should
@@ -152,7 +151,7 @@
       /// System will pick a display name if unspecified.
       public var modelDisplayName: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MigrateMlEngineModelVersionConfig`.
       public init() {}
@@ -200,7 +199,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -218,16 +217,16 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.MigrateResourceRequest.MigrateMlEngineModelVersionConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Config for migrating Model in automl.googleapis.com to Vertex AI's Model.
-    public struct MigrateAutomlModelConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MigrateAutomlModelConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Full resource name of automl Model.
@@ -239,7 +238,7 @@
       /// System will pick a display name if unspecified.
       public var modelDisplayName: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MigrateAutomlModelConfig`.
       public init() {}
@@ -282,7 +281,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -299,17 +298,17 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.MigrateResourceRequest.MigrateAutomlModelConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Config for migrating Dataset in automl.googleapis.com to Vertex AI's
     /// Dataset.
-    public struct MigrateAutomlDatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MigrateAutomlDatasetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Full resource name of automl Dataset.
@@ -321,7 +320,7 @@
       /// System will pick a display name if unspecified.
       public var datasetDisplayName: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MigrateAutomlDatasetConfig`.
       public init() {}
@@ -365,7 +364,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -382,17 +381,17 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.MigrateResourceRequest.MigrateAutomlDatasetConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Config for migrating Dataset in datalabeling.googleapis.com to Vertex
     /// AI's Dataset.
-    public struct MigrateDataLabelingDatasetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MigrateDataLabelingDatasetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Full resource name of data labeling Dataset.
@@ -411,7 +410,7 @@
         [MigrateResourceRequest.MigrateDataLabelingDatasetConfig
           .MigrateDataLabelingAnnotatedDatasetConfig] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MigrateDataLabelingDatasetConfig`.
       public init() {}
@@ -466,7 +465,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -484,7 +483,7 @@
 
       /// Config for migrating AnnotatedDataset in datalabeling.googleapis.com to
       /// Vertex AI's SavedQuery.
-      public struct MigrateDataLabelingAnnotatedDatasetConfig: Codable, Equatable, GoogleCloudWKT
+      public struct MigrateDataLabelingAnnotatedDatasetConfig: Codable, Equatable, GoogleWKT
           ._AnyPackable,
         Sendable
       {
@@ -493,8 +492,7 @@
         /// `projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}`.
         public var annotatedDataset: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `MigrateDataLabelingAnnotatedDatasetConfig`.
         public init() {}
@@ -533,7 +531,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -549,11 +547,11 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.MigrateResourceRequest.MigrateDataLabelingDatasetConfig.MigrateDataLabelingAnnotatedDatasetConfig"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -561,11 +559,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.MigrateResourceRequest.MigrateDataLabelingDatasetConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -588,11 +586,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.MigrateResourceRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

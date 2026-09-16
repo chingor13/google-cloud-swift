@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configures how to deliver Findings to BigQuery Instance.
-public struct BigQueryExport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BigQueryExport: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The relative resource name of this export. See:
@@ -69,12 +69,12 @@ public struct BigQueryExport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The time at which the BigQuery export was created.
   /// This field is set by the server and will be ignored if provided on export
   /// on creation.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The most recent time at which the BigQuery export was updated.
   /// This field is set by the server and will be ignored if provided on export
   /// creation or update.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Email address of the user who last edited the BigQuery export.
   /// This field is set by the server and will be ignored if provided on export
@@ -85,7 +85,7 @@ public struct BigQueryExport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// upload data to the BigQuery dataset.
   public var principal: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BigQueryExport`.
   public init() {}
@@ -144,10 +144,8 @@ public struct BigQueryExport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .dataset) {
       self.dataset = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .mostRecentEditor) {
       self.mostRecentEditor = value
     }
@@ -156,7 +154,7 @@ public struct BigQueryExport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -178,10 +176,10 @@ public struct BigQueryExport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.BigQueryExport"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

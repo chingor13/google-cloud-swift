@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Filestore instance.
-public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Instance: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the instance, in the format
@@ -35,7 +35,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var statusMessage: Swift.String = Swift.String()
 
   /// Output only. The time when the instance was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The service tier of the instance.
   public var tier: Instance.Tier = Instance.Tier()
@@ -56,7 +56,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var etag: Swift.String = Swift.String()
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzs: GoogleCloudWKT.BoolValue? = nil
+  public var satisfiesPzs: GoogleWKT.BoolValue? = nil
 
   /// Output only. Reserved for future use.
   public var satisfiesPzi: Swift.Bool = Swift.Bool()
@@ -105,7 +105,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. The reason for enabling deletion protection.
   public var deletionProtectionReason: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Instance`.
   public init() {}
@@ -192,8 +192,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .statusMessage) {
       self.statusMessage = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Instance.Tier.self, forKey: .tier) {
       self.tier = value
     }
@@ -211,7 +210,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.etag = value
     }
     self.satisfiesPzs = try container.decodeIfPresent(
-      GoogleCloudWKT.BoolValue.self, forKey: .satisfiesPzs)
+      GoogleWKT.BoolValue.self, forKey: .satisfiesPzs)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .satisfiesPzi) {
       self.satisfiesPzi = value
     }
@@ -251,7 +250,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -286,13 +285,13 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// IOPS per TB.
   /// Filestore defines TB as 1024^4 bytes (TiB).
-  public struct IOPSPerTB: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IOPSPerTB: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Maximum IOPS per TiB.
     public var maxIopsPerTb: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IOPSPerTB`.
     public init() {}
@@ -330,7 +329,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -345,22 +344,22 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.filestore.v1.Instance.IOPSPerTB"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Fixed IOPS (input/output operations per second) parameters.
-  public struct FixedIOPS: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FixedIOPS: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Maximum IOPS.
     public var maxIops: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FixedIOPS`.
     public init() {}
@@ -398,7 +397,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -413,11 +412,11 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.filestore.v1.Instance.FixedIOPS"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -428,12 +427,12 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// be linearly set to more IOPS. If the instance's capacity is increased or
   /// decreased, its performance will be automatically adjusted upwards or
   /// downwards accordingly (respectively).
-  public struct PerformanceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PerformanceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var mode: OneOf_Mode? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PerformanceConfig`.
     public init() {}
@@ -490,7 +489,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.mode = mode
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -538,17 +537,17 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.filestore.v1.Instance.PerformanceConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The enforced performance limits, calculated from the instance's performance
   /// configuration.
-  public struct PerformanceLimits: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PerformanceLimits: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The max IOPS.
@@ -566,7 +565,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. The max write throughput in bytes per second.
     public var maxWriteThroughputBps: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PerformanceLimits`.
     public init() {}
@@ -626,7 +625,7 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -645,11 +644,11 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.filestore.v1.Instance.PerformanceLimits"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1188,10 +1187,10 @@ public struct Instance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.filestore.v1.Instance"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

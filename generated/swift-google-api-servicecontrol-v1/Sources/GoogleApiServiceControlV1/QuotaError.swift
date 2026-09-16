@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents error information for
 /// [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation].
 ///
 /// [google.api.servicecontrol.v1.QuotaOperation]: <doc:QuotaOperation>
-public struct QuotaError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct QuotaError: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Error code.
@@ -40,7 +40,7 @@ public struct QuotaError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// If available, `status.code` will be non zero.
   public var status: GoogleRpc.Status? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `QuotaError`.
   public init() {}
@@ -91,7 +91,7 @@ public struct QuotaError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -242,10 +242,10 @@ public struct QuotaError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.servicecontrol.v1.QuotaError"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

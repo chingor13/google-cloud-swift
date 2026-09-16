@@ -19,9 +19,9 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service Directory API for registering services. It defines the following
 /// resource model:
@@ -48,7 +48,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   let inner: any Clients.RegistrationServiceStub
 
   /// Creates a new `RegistrationServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.RegistrationServiceStub = try Clients.RegistrationServiceTransport(
       options)
     inner = Clients.RegistrationServiceRetry(inner, options: options)
@@ -62,7 +62,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_CreateNamespace")
   public func createNamespace(
-    request: CreateNamespaceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateNamespaceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Namespace {
     try await self.inner.createNamespace(request: request, options: options)
   }
@@ -71,7 +71,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_ListNamespaces")
   public func listNamespaces(
-    request: ListNamespacesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListNamespacesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.ListNamespacesResponse {
     try await self.inner.listNamespaces(request: request, options: options)
   }
@@ -80,7 +80,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_ListNamespaces")
   public func listNamespaces(
-    byItem: ListNamespacesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListNamespacesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Namespace, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudServiceDirectoryV1.ListNamespacesResponse in
@@ -88,14 +88,14 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
       request.pageToken = token
       return try await self.listNamespaces(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a namespace.
   ///
   /// @Snippet(path: "RegistrationService_GetNamespace")
   public func getNamespace(
-    request: GetNamespaceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetNamespaceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Namespace {
     try await self.inner.getNamespace(request: request, options: options)
   }
@@ -104,7 +104,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_UpdateNamespace")
   public func updateNamespace(
-    request: UpdateNamespaceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateNamespaceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Namespace {
     try await self.inner.updateNamespace(request: request, options: options)
   }
@@ -114,7 +114,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_DeleteNamespace")
   public func deleteNamespace(
-    request: DeleteNamespaceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteNamespaceRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteNamespace(request: request, options: options)
   }
@@ -123,7 +123,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_CreateService")
   public func createService(
-    request: CreateServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Service {
     try await self.inner.createService(request: request, options: options)
   }
@@ -132,7 +132,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_ListServices")
   public func listServices(
-    request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListServicesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.ListServicesResponse {
     try await self.inner.listServices(request: request, options: options)
   }
@@ -141,7 +141,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_ListServices")
   public func listServices(
-    byItem: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListServicesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Service, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudServiceDirectoryV1.ListServicesResponse in
@@ -149,14 +149,14 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
       request.pageToken = token
       return try await self.listServices(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a service.
   ///
   /// @Snippet(path: "RegistrationService_GetService")
   public func getService(
-    request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Service {
     try await self.inner.getService(request: request, options: options)
   }
@@ -165,7 +165,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_UpdateService")
   public func updateService(
-    request: UpdateServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Service {
     try await self.inner.updateService(request: request, options: options)
   }
@@ -175,7 +175,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_DeleteService")
   public func deleteService(
-    request: DeleteServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteServiceRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteService(request: request, options: options)
   }
@@ -184,7 +184,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_CreateEndpoint")
   public func createEndpoint(
-    request: CreateEndpointRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEndpointRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint {
     try await self.inner.createEndpoint(request: request, options: options)
   }
@@ -193,7 +193,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_ListEndpoints")
   public func listEndpoints(
-    request: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEndpointsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.ListEndpointsResponse {
     try await self.inner.listEndpoints(request: request, options: options)
   }
@@ -202,7 +202,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_ListEndpoints")
   public func listEndpoints(
-    byItem: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEndpointsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Endpoint, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudServiceDirectoryV1.ListEndpointsResponse in
@@ -210,14 +210,14 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
       request.pageToken = token
       return try await self.listEndpoints(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets an endpoint.
   ///
   /// @Snippet(path: "RegistrationService_GetEndpoint")
   public func getEndpoint(
-    request: GetEndpointRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEndpointRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint {
     try await self.inner.getEndpoint(request: request, options: options)
   }
@@ -226,7 +226,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_UpdateEndpoint")
   public func updateEndpoint(
-    request: UpdateEndpointRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEndpointRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint {
     try await self.inner.updateEndpoint(request: request, options: options)
   }
@@ -235,7 +235,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_DeleteEndpoint")
   public func deleteEndpoint(
-    request: DeleteEndpointRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteEndpointRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteEndpoint(request: request, options: options)
   }
@@ -244,7 +244,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -253,7 +253,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -262,7 +262,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -271,7 +271,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -280,7 +280,7 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
   ///
   /// @Snippet(path: "RegistrationService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -288,14 +288,14 @@ public final class RegistrationServiceClient: Clients.RegistrationServiceProtoco
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "RegistrationService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -349,7 +349,7 @@ extension Clients {
     /// See `RegistrationServiceClient.updateNamespace`.
     func updateNamespace(
       namespace: Namespace?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudServiceDirectoryV1.Namespace
 
     /// See `RegistrationServiceClient.deleteNamespace`.
@@ -401,7 +401,7 @@ extension Clients {
     /// See `RegistrationServiceClient.updateService`.
     func updateService(
       service: Service?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudServiceDirectoryV1.Service
 
     /// See `RegistrationServiceClient.deleteService`.
@@ -453,7 +453,7 @@ extension Clients {
     /// See `RegistrationServiceClient.updateEndpoint`.
     func updateEndpoint(
       endpoint: Endpoint?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint
 
     /// See `RegistrationServiceClient.deleteEndpoint`.
@@ -489,122 +489,122 @@ extension Clients {
 
     /// See `RegistrationServiceClient.createNamespace`.
     func createNamespace(
-      request: CreateNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Namespace
 
     /// See `RegistrationServiceClient.listNamespaces`.
     func listNamespaces(
-      request: ListNamespacesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNamespacesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.ListNamespacesResponse
 
     /// See `RegistrationServiceClient.listNamespaces`.
     func listNamespaces(
-      byItem: ListNamespacesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListNamespacesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Namespace, Swift.Error>
 
     /// See `RegistrationServiceClient.getNamespace`.
     func getNamespace(
-      request: GetNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Namespace
 
     /// See `RegistrationServiceClient.updateNamespace`.
     func updateNamespace(
-      request: UpdateNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Namespace
 
     /// See `RegistrationServiceClient.deleteNamespace`.
     func deleteNamespace(
-      request: DeleteNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `RegistrationServiceClient.createService`.
     func createService(
-      request: CreateServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Service
 
     /// See `RegistrationServiceClient.listServices`.
     func listServices(
-      request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.ListServicesResponse
 
     /// See `RegistrationServiceClient.listServices`.
     func listServices(
-      byItem: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListServicesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Service, Swift.Error>
 
     /// See `RegistrationServiceClient.getService`.
     func getService(
-      request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Service
 
     /// See `RegistrationServiceClient.updateService`.
     func updateService(
-      request: UpdateServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Service
 
     /// See `RegistrationServiceClient.deleteService`.
     func deleteService(
-      request: DeleteServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `RegistrationServiceClient.createEndpoint`.
     func createEndpoint(
-      request: CreateEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint
 
     /// See `RegistrationServiceClient.listEndpoints`.
     func listEndpoints(
-      request: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEndpointsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.ListEndpointsResponse
 
     /// See `RegistrationServiceClient.listEndpoints`.
     func listEndpoints(
-      byItem: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEndpointsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Endpoint, Swift.Error>
 
     /// See `RegistrationServiceClient.getEndpoint`.
     func getEndpoint(
-      request: GetEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint
 
     /// See `RegistrationServiceClient.updateEndpoint`.
     func updateEndpoint(
-      request: UpdateEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint
 
     /// See `RegistrationServiceClient.deleteEndpoint`.
     func deleteEndpoint(
-      request: DeleteEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `RegistrationServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `RegistrationServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `RegistrationServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `RegistrationServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `RegistrationServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `RegistrationServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }
@@ -618,9 +618,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func createNamespace(
-    request: CreateNamespaceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateNamespaceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Namespace {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createNamespace(
@@ -643,9 +643,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func listNamespaces(
-    request: ListNamespacesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListNamespacesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.ListNamespacesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listNamespaces(
@@ -655,13 +655,13 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func listNamespaces(
-    byItem: ListNamespacesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListNamespacesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Namespace, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudServiceDirectoryV1.ListNamespacesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listNamespaces(
@@ -680,9 +680,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func getNamespace(
-    request: GetNamespaceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetNamespaceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Namespace {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getNamespace(
@@ -701,14 +701,14 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func updateNamespace(
-    request: UpdateNamespaceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateNamespaceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Namespace {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateNamespace(
     namespace: Namespace?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudServiceDirectoryV1.Namespace {
     let request = UpdateNamespaceRequest().with {
       $0.namespace = namespace
@@ -722,9 +722,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func deleteNamespace(
-    request: DeleteNamespaceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteNamespaceRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteNamespace(
@@ -743,9 +743,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func createService(
-    request: CreateServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Service {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createService(
@@ -768,9 +768,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func listServices(
-    request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListServicesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.ListServicesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listServices(
@@ -780,13 +780,13 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func listServices(
-    byItem: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListServicesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Service, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudServiceDirectoryV1.ListServicesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listServices(
@@ -805,9 +805,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func getService(
-    request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Service {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getService(
@@ -826,14 +826,14 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func updateService(
-    request: UpdateServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Service {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateService(
     service: Service?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudServiceDirectoryV1.Service {
     let request = UpdateServiceRequest().with {
       $0.service = service
@@ -847,9 +847,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func deleteService(
-    request: DeleteServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteServiceRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteService(
@@ -868,9 +868,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func createEndpoint(
-    request: CreateEndpointRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEndpointRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createEndpoint(
@@ -893,9 +893,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func listEndpoints(
-    request: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEndpointsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.ListEndpointsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listEndpoints(
@@ -905,13 +905,13 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func listEndpoints(
-    byItem: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEndpointsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Endpoint, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudServiceDirectoryV1.ListEndpointsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listEndpoints(
@@ -930,9 +930,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func getEndpoint(
-    request: GetEndpointRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEndpointRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getEndpoint(
@@ -951,14 +951,14 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func updateEndpoint(
-    request: UpdateEndpointRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEndpointRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateEndpoint(
     endpoint: Endpoint?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint {
     let request = UpdateEndpointRequest().with {
       $0.endpoint = endpoint
@@ -972,9 +972,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func deleteEndpoint(
-    request: DeleteEndpointRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteEndpointRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteEndpoint(
@@ -993,9 +993,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -1005,9 +1005,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -1017,9 +1017,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -1029,9 +1029,9 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -1041,13 +1041,13 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1057,8 +1057,8 @@ extension Clients.RegistrationServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

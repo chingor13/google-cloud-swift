@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Catalog level attribute config for an attribute. For example, if customers
 /// want to enable/disable facet for a specific attribute.
-public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CatalogAttribute: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Attribute name.
@@ -138,7 +138,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Contains facet options.
   public var facetConfig: CatalogAttribute.FacetConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CatalogAttribute`.
   public init() {}
@@ -226,7 +226,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       CatalogAttribute.FacetConfig.self, forKey: .facetConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -248,7 +248,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Possible options for the facet that corresponds to the current attribute
   /// config.
-  public struct FacetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FacetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// If you don't set the facet
@@ -295,7 +295,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// facetable textual keys.
     public var rerankConfig: CatalogAttribute.FacetConfig.RerankConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FacetConfig`.
     public init() {}
@@ -355,7 +355,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         CatalogAttribute.FacetConfig.RerankConfig.self, forKey: .rerankConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -380,7 +380,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.cloud.retail.v2.SearchResponse.Facet]: <doc:SearchResponse/Facet>
     /// [google.cloud.retail.v2.SearchResponse.Facet.key]: <doc:SearchResponse/Facet/key>
     /// [google.cloud.retail.v2.SearchResponse.Facet.values]: <doc:SearchResponse/Facet/values>
-    public struct IgnoredFacetValues: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct IgnoredFacetValues: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// List of facet values to ignore for the following time range. The facet
@@ -396,13 +396,13 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// must be before end time.
       /// If start time is not empty and end time is empty, then will ignore
       /// these facet values after the start time.
-      public var startTime: GoogleCloudWKT.Timestamp? = nil
+      public var startTime: GoogleWKT.Timestamp? = nil
 
       /// If start time is empty and end time is not empty, then ignore these
       /// facet values before end time.
-      public var endTime: GoogleCloudWKT.Timestamp? = nil
+      public var endTime: GoogleWKT.Timestamp? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `IgnoredFacetValues`.
       public init() {}
@@ -442,13 +442,11 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         if let value = try container.decodeIfPresent([Swift.String].self, forKey: .values) {
           self.values = value
         }
-        self.startTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-        self.endTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+        self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+        self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -466,11 +464,11 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.retail.v2.CatalogAttribute.FacetConfig.IgnoredFacetValues"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -480,7 +478,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// This feature is available only for textual custom attributes.
     ///
     /// [google.cloud.retail.v2.CatalogAttribute]: <doc:CatalogAttribute>
-    public struct MergedFacetValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MergedFacetValue: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// All the facet values that are replaces by the same
@@ -495,7 +493,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// This merged_value must be non-empty and can have up to 128 characters.
       public var mergedValue: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MergedFacetValue`.
       public init() {}
@@ -538,7 +536,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -555,11 +553,11 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.retail.v2.CatalogAttribute.FacetConfig.MergedFacetValue"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -570,7 +568,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// numerical custom attributes (same type).
     ///
     /// [google.cloud.retail.v2.CatalogAttribute.FacetConfig.MergedFacet.merged_facet_key]: <doc:CatalogAttribute/FacetConfig/MergedFacet/mergedFacetKey>
-    public struct MergedFacet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MergedFacet: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The merged facet key should be a valid facet key that is different than
@@ -581,7 +579,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// textual custom attribute or a numerical custom attribute.
       public var mergedFacetKey: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MergedFacet`.
       public init() {}
@@ -619,7 +617,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -634,11 +632,11 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.retail.v2.CatalogAttribute.FacetConfig.MergedFacet"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -650,7 +648,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// rerank on, this control won't be effective. Moreover, to obtain better
     /// results, the facet values that you want to rerank on should be close to
     /// English (ideally made of words, underscores, and spaces).
-    public struct RerankConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RerankConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// If set to true, then we also rerank the dynamic facets based on the
@@ -662,7 +660,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// will rerank on the facet values from this list only.
       public var facetValues: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RerankConfig`.
       public init() {}
@@ -705,7 +703,7 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -722,22 +720,22 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.retail.v2.CatalogAttribute.FacetConfig.RerankConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.CatalogAttribute.FacetConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1379,10 +1377,10 @@ public struct CatalogAttribute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.CatalogAttribute"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

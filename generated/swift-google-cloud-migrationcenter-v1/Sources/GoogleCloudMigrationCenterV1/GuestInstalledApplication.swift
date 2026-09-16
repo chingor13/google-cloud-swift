@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Guest installed application information.
-public struct GuestInstalledApplication: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GuestInstalledApplication: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Installed application name.
@@ -28,7 +28,7 @@ public struct GuestInstalledApplication: Codable, Equatable, GoogleCloudWKT._Any
   public var vendor: Swift.String = Swift.String()
 
   /// The time when the application was installed.
-  public var installTime: GoogleCloudWKT.Timestamp? = nil
+  public var installTime: GoogleWKT.Timestamp? = nil
 
   /// Source path.
   public var path: Swift.String = Swift.String()
@@ -36,7 +36,7 @@ public struct GuestInstalledApplication: Codable, Equatable, GoogleCloudWKT._Any
   /// Installed application version.
   public var version: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GuestInstalledApplication`.
   public init() {}
@@ -83,8 +83,7 @@ public struct GuestInstalledApplication: Codable, Equatable, GoogleCloudWKT._Any
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .vendor) {
       self.vendor = value
     }
-    self.installTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .installTime)
+    self.installTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .installTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .path) {
       self.path = value
     }
@@ -93,7 +92,7 @@ public struct GuestInstalledApplication: Codable, Equatable, GoogleCloudWKT._Any
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -112,10 +111,10 @@ public struct GuestInstalledApplication: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.migrationcenter.v1.GuestInstalledApplication"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

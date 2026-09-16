@@ -15,103 +15,103 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AzureClustersStub: Sendable {
     func createAzureClient(
-      request: CreateAzureClientRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAzureClientRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getAzureClient(
-      request: GetAzureClientRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAzureClientRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AzureClient
 
     func listAzureClients(
-      request: ListAzureClientsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAzureClientsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.ListAzureClientsResponse
 
     func deleteAzureClient(
-      request: DeleteAzureClientRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAzureClientRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createAzureCluster(
-      request: CreateAzureClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAzureClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateAzureCluster(
-      request: UpdateAzureClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAzureClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getAzureCluster(
-      request: GetAzureClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAzureClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AzureCluster
 
     func listAzureClusters(
-      request: ListAzureClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAzureClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.ListAzureClustersResponse
 
     func deleteAzureCluster(
-      request: DeleteAzureClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAzureClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func generateAzureClusterAgentToken(
-      request: GenerateAzureClusterAgentTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAzureClusterAgentTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.GenerateAzureClusterAgentTokenResponse
 
     func generateAzureAccessToken(
-      request: GenerateAzureAccessTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAzureAccessTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.GenerateAzureAccessTokenResponse
 
     func createAzureNodePool(
-      request: CreateAzureNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAzureNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateAzureNodePool(
-      request: UpdateAzureNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAzureNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getAzureNodePool(
-      request: GetAzureNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAzureNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AzureNodePool
 
     func listAzureNodePools(
-      request: ListAzureNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAzureNodePoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.ListAzureNodePoolsResponse
 
     func deleteAzureNodePool(
-      request: DeleteAzureNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAzureNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getAzureOpenIdConfig(
-      request: GetAzureOpenIdConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAzureOpenIdConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AzureOpenIdConfig
 
     func getAzureJsonWebKeys(
-      request: GetAzureJsonWebKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAzureJsonWebKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AzureJsonWebKeys
 
     func getAzureServerConfig(
-      request: GetAzureServerConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAzureServerConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AzureServerConfig
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

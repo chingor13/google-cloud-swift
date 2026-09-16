@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A report of the results of a sequence of unary responses
-public struct SequenceReport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SequenceReport: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   public var name: Swift.String = Swift.String()
@@ -27,7 +27,7 @@ public struct SequenceReport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The set of RPC attempts received by the server for a Sequence.
   public var attempts: [SequenceReport.Attempt] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SequenceReport`.
   public init() {}
@@ -70,7 +70,7 @@ public struct SequenceReport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -84,27 +84,27 @@ public struct SequenceReport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Contains metrics on individual RPC Attempts in a sequence.
-  public struct Attempt: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Attempt: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The attempt number - starting at 0.
     public var attemptNumber: Swift.Int32 = Swift.Int32()
 
     /// The deadline dictated by the attempt to the server.
-    public var attemptDeadline: GoogleCloudWKT.Timestamp? = nil
+    public var attemptDeadline: GoogleWKT.Timestamp? = nil
 
     /// The time that the server responded to the RPC attempt. Used for
     /// calculating attempt_delay.
-    public var responseTime: GoogleCloudWKT.Timestamp? = nil
+    public var responseTime: GoogleWKT.Timestamp? = nil
 
     /// The server perceived delay between sending the last response and
     /// receiving this attempt. Used for validating attempt delay backoff.
-    public var attemptDelay: GoogleCloudWKT.Duration? = nil
+    public var attemptDelay: GoogleWKT.Duration? = nil
 
     /// The status returned to the attempt.
     public var status: GoogleRpc.Status? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Attempt`.
     public init() {}
@@ -149,15 +149,15 @@ public struct SequenceReport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.attemptNumber = value
       }
       self.attemptDeadline = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .attemptDeadline)
+        GoogleWKT.Timestamp.self, forKey: .attemptDeadline)
       self.responseTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .responseTime)
+        GoogleWKT.Timestamp.self, forKey: .responseTime)
       self.attemptDelay = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .attemptDelay)
+        GoogleWKT.Duration.self, forKey: .attemptDelay)
       self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -176,21 +176,21 @@ public struct SequenceReport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.showcase.v1beta1.SequenceReport.Attempt"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.showcase.v1beta1.SequenceReport"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

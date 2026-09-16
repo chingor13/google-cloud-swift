@@ -16,7 +16,7 @@
 
 #if Environments
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents an environment for an agent. You can create multiple versions
   /// of your agent and publish them to separate environments. When you edit an
@@ -26,7 +26,7 @@
   /// you create agent versions, you can publish them to custom environments. You
   /// can create a variety of custom environments for testing, development,
   /// production, etc.
-  public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Environment: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the environment.
@@ -51,7 +51,7 @@
     public var versionConfigs: [Environment.VersionConfig] = []
 
     /// Output only. Update time of this environment.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// The test cases config for continuous tests of this environment.
     public var testCasesConfig: Environment.TestCasesConfig? = nil
@@ -59,7 +59,7 @@
     /// The webhook configuration for this environment.
     public var webhookConfig: Environment.WebhookConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Environment`.
     public init() {}
@@ -118,15 +118,14 @@
       {
         self.versionConfigs = value
       }
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       self.testCasesConfig = try container.decodeIfPresent(
         Environment.TestCasesConfig.self, forKey: .testCasesConfig)
       self.webhookConfig = try container.decodeIfPresent(
         Environment.WebhookConfig.self, forKey: .webhookConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -145,7 +144,7 @@
     }
 
     /// Configuration for the version.
-    public struct VersionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct VersionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Flow, playbook and tool versions are supported.
@@ -157,7 +156,7 @@
       /// projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/tools/<ToolID>/versions/<VersionID>.
       public var version: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `VersionConfig`.
       public init() {}
@@ -195,7 +194,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -210,16 +209,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Environment.VersionConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The configuration for continuous tests.
-    public struct TestCasesConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct TestCasesConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A list of test case names to run. They should be under the same agent.
@@ -241,7 +240,7 @@
       /// [google.cloud.dialogflow.cx.v3.Environment.TestCasesConfig.test_cases]: <doc:Environment/TestCasesConfig/testCases>
       public var enablePredeploymentRun: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `TestCasesConfig`.
       public init() {}
@@ -292,7 +291,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -309,16 +308,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Environment.TestCasesConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Configuration for webhooks.
-    public struct WebhookConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct WebhookConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The list of webhooks to override for the agent environment. The webhook
@@ -331,7 +330,7 @@
       /// [google.cloud.dialogflow.cx.v3.Webhook.service_directory]: <doc:Webhook/OneOf_Webhook/serviceDirectory(_:)>
       public var webhookOverrides: [Webhook] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `WebhookConfig`.
       public init() {}
@@ -369,7 +368,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -384,22 +383,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Environment.WebhookConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Environment"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

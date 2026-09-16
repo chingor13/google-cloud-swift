@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: swift
-version: v0.44.1-0.20260916175338-acced014d60e
+version: v0.44.1-0.20260917024435-e0e498e8eaa7
 repo: googleapis/google-cloud-swift
 sources:
   conformance:
@@ -92,10 +92,6 @@ default:
       - name: GoogleCloudGKEHubRBACRoleBindingActuationV1
         url: https://github.com/googleapis/swift-google-cloud-gkehub-rbacrolebindingactuation-v1
         api_package: google.cloud.gkehub.rbacrolebindingactuation.v1
-      - name: GoogleCloudGax
-        url: https://github.com/googleapis/swift-google-gax
-        required_by_services: true
-        spi: GoogleCloudInternal
       - name: GoogleCloudKMSV1
         url: https://github.com/googleapis/swift-google-cloud-kms-v1
         api_package: google.cloud.kms.v1
@@ -120,9 +116,9 @@ default:
       - name: GoogleCloudRecommenderV1
         url: https://github.com/googleapis/swift-google-cloud-recommender-v1
         api_package: google.cloud.recommender.v1
-      - name: GoogleCloudWKT
-        url: https://github.com/googleapis/swift-google-wkt
-        api_package: google.protobuf
+      - name: GoogleGax
+        url: https://github.com/googleapis/swift-google-gax
+        required_by_services: true
         spi: GoogleCloudInternal
       - name: GoogleGrafeasV1
         url: https://github.com/googleapis/swift-grafeas-v1
@@ -151,6 +147,10 @@ default:
       - name: GoogleType
         url: https://github.com/googleapis/swift-google-type
         api_package: google.type
+      - name: GoogleWKT
+        url: https://github.com/googleapis/swift-google-wkt
+        api_package: google.protobuf
+        spi: GoogleCloudInternal
       - name: Logging
         url: https://github.com/apple/swift-log
         version: 1.12.0
@@ -676,15 +676,6 @@ libraries:
   - name: google-cloud-functions-v2
     version: 0.1.0-preview
     copyright_year: "2026"
-  - name: google-cloud-gax
-    version: 0.0.0-preview
-    copyright_year: "2026"
-    output: pkgs/swift-google-gax/Sources/GoogleCloudGax/generated
-    swift:
-      modules:
-        - output: pkgs/swift-google-gax/Sources/GoogleCloudGax/generated
-          api_path: ""
-          module_type: package-version
   - name: google-cloud-gkebackup-logging-v1
     version: 0.1.0-preview
     copyright_year: "2026"
@@ -1222,25 +1213,6 @@ libraries:
     copyright_year: "2026"
     swift:
       library_name_override: GoogleCloudWebSecurityScannerV1
-  - name: google-cloud-wkt
-    version: 0.1.0-preview
-    copyright_year: "2026"
-    output: pkgs/swift-google-wkt/Sources/GoogleCloudWKT/generated
-    roots:
-      - protobuf-src
-    swift:
-      library_name_override: GoogleCloudWKT
-      include_list:
-        - api.proto
-        - type.proto
-        - source_context.proto
-      modules:
-        - output: pkgs/swift-google-wkt/Sources/GoogleCloudWKT/generated/messages
-          api_path: google/protobuf
-          module_type: default
-        - output: pkgs/swift-google-wkt/Sources/GoogleCloudWKT/generated/version
-          api_path: google/protobuf
-          module_type: package-version
   - name: google-cloud-workflows-executions-v1
     version: 0.1.0-preview
     copyright_year: "2026"
@@ -1305,6 +1277,15 @@ libraries:
     copyright_year: "2026"
     swift:
       library_name_override: GoogleDevToolsSourceV1
+  - name: google-gax
+    version: 0.0.0-preview
+    copyright_year: "2026"
+    output: pkgs/swift-google-gax/Sources/GoogleCloudGax/generated
+    swift:
+      modules:
+        - output: pkgs/swift-google-gax/Sources/GoogleCloudGax/generated
+          api_path: ""
+          module_type: package-version
   - name: google-iam-admin-v1
     version: 0.1.0-preview
     copyright_year: "2026"
@@ -1403,6 +1384,25 @@ libraries:
   - name: google-type
     version: 0.1.0-preview
     copyright_year: "2026"
+  - name: google-wkt
+    version: 0.1.0-preview
+    copyright_year: "2026"
+    output: pkgs/swift-google-wkt/Sources/GoogleCloudWKT/generated
+    roots:
+      - protobuf-src
+    swift:
+      library_name_override: GoogleWKT
+      include_list:
+        - api.proto
+        - type.proto
+        - source_context.proto
+      modules:
+        - output: pkgs/swift-google-wkt/Sources/GoogleCloudWKT/generated/messages
+          api_path: google/protobuf
+          module_type: default
+        - output: pkgs/swift-google-wkt/Sources/GoogleCloudWKT/generated/version
+          api_path: google/protobuf
+          module_type: package-version
   - name: grafeas-v1
     version: 0.1.0-preview
     copyright_year: "2026"

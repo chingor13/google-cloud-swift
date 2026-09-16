@@ -16,10 +16,10 @@
 
 #if SqlBackupsService || SqlInstancesService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Database instance backup configuration.
-  public struct BackupConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BackupConfiguration: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Start time for the daily backup configuration in UTC timezone in the 24
@@ -27,14 +27,14 @@
     public var startTime: Swift.String = Swift.String()
 
     /// Whether this configuration is enabled.
-    public var enabled: GoogleCloudWKT.BoolValue? = nil
+    public var enabled: GoogleWKT.BoolValue? = nil
 
     /// This is always `sql#backupConfiguration`.
     public var kind: Swift.String = Swift.String()
 
     /// (MySQL only) Whether binary log is enabled. If backup configuration is
     /// disabled, binarylog must be disabled as well.
-    public var binaryLogEnabled: GoogleCloudWKT.BoolValue? = nil
+    public var binaryLogEnabled: GoogleWKT.BoolValue? = nil
 
     /// Optional. Deprecated: replication_log_archiving_enabled is deprecated and
     /// will be removed from a future version of the API. Use
@@ -43,20 +43,20 @@
     ///
     /// [google.cloud.sql.v1.BackupConfiguration.point_in_time_recovery_enabled]: <doc:BackupConfiguration/pointInTimeRecoveryEnabled>
     @available(*, deprecated)
-    public var replicationLogArchivingEnabled: GoogleCloudWKT.BoolValue? = nil
+    public var replicationLogArchivingEnabled: GoogleWKT.BoolValue? = nil
 
     /// Location of the backup
     public var location: Swift.String = Swift.String()
 
     /// Whether point in time recovery is enabled.
-    public var pointInTimeRecoveryEnabled: GoogleCloudWKT.BoolValue? = nil
+    public var pointInTimeRecoveryEnabled: GoogleWKT.BoolValue? = nil
 
     /// Backup retention settings.
     public var backupRetentionSettings: BackupRetentionSettings? = nil
 
     /// The number of days of transaction logs we retain for point in time
     /// restore, from 1-7.
-    public var transactionLogRetentionDays: GoogleCloudWKT.Int32Value? = nil
+    public var transactionLogRetentionDays: GoogleWKT.Int32Value? = nil
 
     /// Output only. This value contains the storage location of transactional logs
     /// used to perform point-in-time recovery (PITR) for the database.
@@ -65,7 +65,7 @@
     /// Output only. Backup tier that manages the backups for the instance.
     public var backupTier: BackupConfiguration.BackupTier? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BackupConfiguration`.
     public init() {}
@@ -124,23 +124,23 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .startTime) {
         self.startTime = value
       }
-      self.enabled = try container.decodeIfPresent(GoogleCloudWKT.BoolValue.self, forKey: .enabled)
+      self.enabled = try container.decodeIfPresent(GoogleWKT.BoolValue.self, forKey: .enabled)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .kind) {
         self.kind = value
       }
       self.binaryLogEnabled = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .binaryLogEnabled)
+        GoogleWKT.BoolValue.self, forKey: .binaryLogEnabled)
       self.replicationLogArchivingEnabled = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .replicationLogArchivingEnabled)
+        GoogleWKT.BoolValue.self, forKey: .replicationLogArchivingEnabled)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .location) {
         self.location = value
       }
       self.pointInTimeRecoveryEnabled = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .pointInTimeRecoveryEnabled)
+        GoogleWKT.BoolValue.self, forKey: .pointInTimeRecoveryEnabled)
       self.backupRetentionSettings = try container.decodeIfPresent(
         BackupRetentionSettings.self, forKey: .backupRetentionSettings)
       self.transactionLogRetentionDays = try container.decodeIfPresent(
-        GoogleCloudWKT.Int32Value.self, forKey: .transactionLogRetentionDays)
+        GoogleWKT.Int32Value.self, forKey: .transactionLogRetentionDays)
       self.transactionalLogStorageState = try container.decodeIfPresent(
         BackupConfiguration.TransactionalLogStorageState.self, forKey: .transactionalLogStorageState
       )
@@ -148,7 +148,7 @@
         BackupConfiguration.BackupTier.self, forKey: .backupTier)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -417,11 +417,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.BackupConfiguration"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

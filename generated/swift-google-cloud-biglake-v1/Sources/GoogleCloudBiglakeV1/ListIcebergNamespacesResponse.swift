@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The response message for the `ListIcebergNamespaces` API.
-public struct ListIcebergNamespacesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ListIcebergNamespacesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The list of namespaces.
-  public var namespaces: [GoogleCloudWKT.ListValue] = []
+  public var namespaces: [GoogleWKT.ListValue] = []
 
   /// The next page token for pagination.
   public var nextPageToken: Swift.String = Swift.String()
@@ -31,7 +31,7 @@ public struct ListIcebergNamespacesResponse: Codable, Equatable, GoogleCloudWKT.
   /// non-empty, the result set might be incomplete.
   public var unreachable: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListIcebergNamespacesResponse`.
   public init() {}
@@ -68,9 +68,7 @@ public struct ListIcebergNamespacesResponse: Codable, Equatable, GoogleCloudWKT.
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    if let value = try container.decodeIfPresent(
-      [GoogleCloudWKT.ListValue].self, forKey: .namespaces)
-    {
+    if let value = try container.decodeIfPresent([GoogleWKT.ListValue].self, forKey: .namespaces) {
       self.namespaces = value
     }
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .nextPageToken) {
@@ -81,7 +79,7 @@ public struct ListIcebergNamespacesResponse: Codable, Equatable, GoogleCloudWKT.
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,10 +96,10 @@ public struct ListIcebergNamespacesResponse: Codable, Equatable, GoogleCloudWKT.
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.biglake.v1.ListIcebergNamespacesResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

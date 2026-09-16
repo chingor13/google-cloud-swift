@@ -16,13 +16,13 @@
 
 #if RegionZones
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionZonesStub: Sendable {
       func list(
-        request: RegionZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionZonesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ZoneList
     }
   }

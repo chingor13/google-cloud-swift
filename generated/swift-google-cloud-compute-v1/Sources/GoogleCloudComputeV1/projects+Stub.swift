@@ -16,70 +16,69 @@
 
 #if Projects
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ProjectsStub: Sendable {
       func disableXpnHost(
-        request: ProjectsClient.DisableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.DisableXpnHostRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func disableXpnResource(
-        request: ProjectsClient.DisableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.DisableXpnResourceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func enableXpnHost(
-        request: ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.EnableXpnHostRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func enableXpnResource(
-        request: ProjectsClient.EnableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.EnableXpnResourceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Project
 
       func getXpnHost(
-        request: ProjectsClient.GetXpnHostRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.GetXpnHostRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Project
 
       func getXpnResources(
-        request: ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.GetXpnResourcesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources
 
       func listXpnHosts(
-        request: ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.ListXpnHostsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.XpnHostList
 
       func moveDisk(
-        request: ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.MoveDiskRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func moveInstance(
-        request: ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.MoveInstanceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setCloudArmorTier(
-        request: ProjectsClient.SetCloudArmorTierRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetCloudArmorTierRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setCommonInstanceMetadata(
-        request: ProjectsClient.SetCommonInstanceMetadataRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetCommonInstanceMetadataRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setDefaultNetworkTier(
-        request: ProjectsClient.SetDefaultNetworkTierRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetDefaultNetworkTierRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setUsageExportBucket(
-        request: ProjectsClient.SetUsageExportBucketRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetUsageExportBucketRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

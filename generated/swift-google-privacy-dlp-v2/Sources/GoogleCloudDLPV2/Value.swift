@@ -15,8 +15,8 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Set of primitive values supported by the system.
 /// Note that for the purposes of inspection or transformation, the number
@@ -24,13 +24,13 @@ import GoogleType
 /// as a UTF-8 encoded string. For example, if 'integer_value' is set to
 /// 123456789, the number of bytes would be counted as 9, even though an
 /// int64 only holds up to 8 bytes of data.
-public struct Value: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Value: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Value types
   public var type: OneOf_Type? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Value`.
   public init() {}
@@ -101,7 +101,7 @@ public struct Value: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       try typeCheckAndSet(.booleanValue(booleanValue))
     }
     if let timestampValue = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp?.self, forKey: .timestampValue)
+      GoogleWKT.Timestamp?.self, forKey: .timestampValue)
     {
       try typeCheckAndSet(.timestampValue(timestampValue))
     }
@@ -120,7 +120,7 @@ public struct Value: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.type = type
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -163,7 +163,7 @@ public struct Value: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// boolean
     case booleanValue(Swift.Bool)
     /// timestamp
-    indirect case timestampValue(GoogleCloudWKT.Timestamp?)
+    indirect case timestampValue(GoogleWKT.Timestamp?)
     /// time of day
     indirect case timeValue(GoogleType.TimeOfDay?)
     /// date
@@ -175,10 +175,10 @@ public struct Value: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.Value"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

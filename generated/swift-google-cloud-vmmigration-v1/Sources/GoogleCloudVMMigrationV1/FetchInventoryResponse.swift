@@ -15,22 +15,22 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for
 /// [fetchInventory][google.cloud.vmmigration.v1.VmMigration.FetchInventory].
 ///
 /// [google.cloud.vmmigration.v1.VmMigration.FetchInventory]: <doc:VmMigrationClient/fetchInventory(request:options:)>
-public struct FetchInventoryResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FetchInventoryResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The timestamp when the source was last queried (if the result
   /// is from the cache).
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   public var sourceVms: OneOf_SourceVms? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FetchInventoryResponse`.
   public init() {}
@@ -69,8 +69,7 @@ public struct FetchInventoryResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
 
     var sourceVms: OneOf_SourceVms? = nil
     let sourceVmsCheckAndSet = {
@@ -94,7 +93,7 @@ public struct FetchInventoryResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
     self.sourceVms = sourceVms
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -129,10 +128,10 @@ public struct FetchInventoryResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmmigration.v1.FetchInventoryResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

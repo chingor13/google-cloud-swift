@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Export cluster request.
-public struct ExportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExportClusterRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the cluster.
@@ -35,7 +35,7 @@ public struct ExportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// Required field to specify export file type and options.
   public var exportOptions: OneOf_ExportOptions? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExportClusterRequest`.
   public init() {}
@@ -123,7 +123,7 @@ public struct ExportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     self.exportOptions = exportOptions
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -153,7 +153,7 @@ public struct ExportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   }
 
   /// Options for exporting data in CSV format.
-  public struct CsvExportOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CsvExportOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The SELECT query used to extract the data.
@@ -175,7 +175,7 @@ public struct ExportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Code.
     public var escapeCharacter: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CsvExportOptions`.
     public init() {}
@@ -228,7 +228,7 @@ public struct ExportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -246,16 +246,16 @@ public struct ExportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.ExportClusterRequest.CsvExportOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Options for exporting data in SQL format.
-  public struct SqlExportOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SqlExportOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Tables to export from.
@@ -272,7 +272,7 @@ public struct ExportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// object's existence before dropping it in clean_target_objects mode.
     public var ifExistTargetObjects: Swift.Bool? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SqlExportOptions`.
     public init() {}
@@ -321,7 +321,7 @@ public struct ExportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
         Swift.Bool.self, forKey: .ifExistTargetObjects)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -339,11 +339,11 @@ public struct ExportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.ExportClusterRequest.SqlExportOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -366,10 +366,10 @@ public struct ExportClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.ExportClusterRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

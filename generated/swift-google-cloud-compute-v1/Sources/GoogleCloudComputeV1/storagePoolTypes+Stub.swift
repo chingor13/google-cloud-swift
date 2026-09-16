@@ -16,22 +16,21 @@
 
 #if StoragePoolTypes
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol StoragePoolTypesStub: Sendable {
       func aggregatedList(
-        request: StoragePoolTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: StoragePoolTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolTypeAggregatedList
 
       func `get`(
-        request: StoragePoolTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolTypesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolType
 
       func list(
-        request: StoragePoolTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: StoragePoolTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.StoragePoolTypeList
     }
   }

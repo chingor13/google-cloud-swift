@@ -19,10 +19,10 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -41,9 +41,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -60,14 +60,14 @@
       }
 
       public func getSiteSearchEngine(
-        request: GetSiteSearchEngineRequest, options: GoogleCloudGax.RequestOptions
+        request: GetSiteSearchEngineRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.SiteSearchEngine {
         try await self._intercept(
           request: request,
           options: options,
           name: "getSiteSearchEngine",
           action: {
-            (r: GetSiteSearchEngineRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetSiteSearchEngineRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.SiteSearchEngine
             in
             return try await self.inner.getSiteSearchEngine(request: r, options: o)
@@ -75,14 +75,14 @@
       }
 
       public func createTargetSite(
-        request: CreateTargetSiteRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateTargetSiteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "createTargetSite",
           action: {
-            (r: CreateTargetSiteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateTargetSiteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.createTargetSite(request: r, options: o)
@@ -90,14 +90,14 @@
       }
 
       public func batchCreateTargetSites(
-        request: BatchCreateTargetSitesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchCreateTargetSitesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "batchCreateTargetSites",
           action: {
-            (r: BatchCreateTargetSitesRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: BatchCreateTargetSitesRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.batchCreateTargetSites(request: r, options: o)
@@ -105,14 +105,14 @@
       }
 
       public func getTargetSite(
-        request: GetTargetSiteRequest, options: GoogleCloudGax.RequestOptions
+        request: GetTargetSiteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.TargetSite {
         try await self._intercept(
           request: request,
           options: options,
           name: "getTargetSite",
           action: {
-            (r: GetTargetSiteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetTargetSiteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.TargetSite
             in
             return try await self.inner.getTargetSite(request: r, options: o)
@@ -120,14 +120,14 @@
       }
 
       public func updateTargetSite(
-        request: UpdateTargetSiteRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateTargetSiteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "updateTargetSite",
           action: {
-            (r: UpdateTargetSiteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateTargetSiteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.updateTargetSite(request: r, options: o)
@@ -135,14 +135,14 @@
       }
 
       public func deleteTargetSite(
-        request: DeleteTargetSiteRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteTargetSiteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteTargetSite",
           action: {
-            (r: DeleteTargetSiteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteTargetSiteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteTargetSite(request: r, options: o)
@@ -150,14 +150,14 @@
       }
 
       public func listTargetSites(
-        request: ListTargetSitesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListTargetSitesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListTargetSitesResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listTargetSites",
           action: {
-            (r: ListTargetSitesRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListTargetSitesRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.ListTargetSitesResponse
             in
             return try await self.inner.listTargetSites(request: r, options: o)
@@ -165,14 +165,14 @@
       }
 
       public func createSitemap(
-        request: CreateSitemapRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateSitemapRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "createSitemap",
           action: {
-            (r: CreateSitemapRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateSitemapRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.createSitemap(request: r, options: o)
@@ -180,14 +180,14 @@
       }
 
       public func deleteSitemap(
-        request: DeleteSitemapRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteSitemapRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteSitemap",
           action: {
-            (r: DeleteSitemapRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteSitemapRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteSitemap(request: r, options: o)
@@ -195,14 +195,14 @@
       }
 
       public func fetchSitemaps(
-        request: FetchSitemapsRequest, options: GoogleCloudGax.RequestOptions
+        request: FetchSitemapsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.FetchSitemapsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "fetchSitemaps",
           action: {
-            (r: FetchSitemapsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: FetchSitemapsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.FetchSitemapsResponse
             in
             return try await self.inner.fetchSitemaps(request: r, options: o)
@@ -210,14 +210,14 @@
       }
 
       public func enableAdvancedSiteSearch(
-        request: EnableAdvancedSiteSearchRequest, options: GoogleCloudGax.RequestOptions
+        request: EnableAdvancedSiteSearchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "enableAdvancedSiteSearch",
           action: {
-            (r: EnableAdvancedSiteSearchRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: EnableAdvancedSiteSearchRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.enableAdvancedSiteSearch(request: r, options: o)
@@ -225,14 +225,14 @@
       }
 
       public func disableAdvancedSiteSearch(
-        request: DisableAdvancedSiteSearchRequest, options: GoogleCloudGax.RequestOptions
+        request: DisableAdvancedSiteSearchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "disableAdvancedSiteSearch",
           action: {
-            (r: DisableAdvancedSiteSearchRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DisableAdvancedSiteSearchRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.disableAdvancedSiteSearch(request: r, options: o)
@@ -240,14 +240,14 @@
       }
 
       public func recrawlUris(
-        request: RecrawlUrisRequest, options: GoogleCloudGax.RequestOptions
+        request: RecrawlUrisRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "recrawlUris",
           action: {
-            (r: RecrawlUrisRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RecrawlUrisRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.recrawlUris(request: r, options: o)
@@ -255,14 +255,14 @@
       }
 
       public func batchVerifyTargetSites(
-        request: BatchVerifyTargetSitesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchVerifyTargetSitesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "batchVerifyTargetSites",
           action: {
-            (r: BatchVerifyTargetSitesRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: BatchVerifyTargetSitesRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.batchVerifyTargetSites(request: r, options: o)
@@ -270,14 +270,14 @@
       }
 
       public func fetchDomainVerificationStatus(
-        request: FetchDomainVerificationStatusRequest, options: GoogleCloudGax.RequestOptions
+        request: FetchDomainVerificationStatusRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.FetchDomainVerificationStatusResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "fetchDomainVerificationStatus",
           action: {
-            (r: FetchDomainVerificationStatusRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: FetchDomainVerificationStatusRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.FetchDomainVerificationStatusResponse
             in
             return try await self.inner.fetchDomainVerificationStatus(request: r, options: o)
@@ -285,45 +285,45 @@
       }
 
       public func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listOperations",
           action: {
-            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.ListOperationsResponse
+            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.ListOperationsResponse
             in
             return try await self.inner.listOperations(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)
           })
       }
 
       public func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "cancelOperation",
           action: {
-            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.cancelOperation(request: r, options: o)
           })
       }

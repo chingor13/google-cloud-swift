@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// WebhookConfig describes the configuration of a trigger that
 /// creates a build whenever a webhook is sent to a trigger's webhook URL.
-public struct WebhookConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct WebhookConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Potential issues with the underlying Pub/Sub subscription configuration.
@@ -29,7 +29,7 @@ public struct WebhookConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Auth method specifies how the webhook authenticates with GCP.
   public var authMethod: OneOf_AuthMethod? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `WebhookConfig`.
   public init() {}
@@ -84,7 +84,7 @@ public struct WebhookConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.authMethod = authMethod
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -218,10 +218,10 @@ public struct WebhookConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudbuild.v1.WebhookConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

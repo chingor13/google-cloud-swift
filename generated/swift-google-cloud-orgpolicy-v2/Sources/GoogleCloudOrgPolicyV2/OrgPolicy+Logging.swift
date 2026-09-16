@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func listConstraints(
-      request: ListConstraintsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConstraintsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.ListConstraintsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listConstraints",
         action: {
-          (r: ListConstraintsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListConstraintsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOrgPolicyV2.ListConstraintsResponse
           in
           return try await self.inner.listConstraints(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func listPolicies(
-      request: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.ListPoliciesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listPolicies",
         action: {
-          (r: ListPoliciesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListPoliciesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOrgPolicyV2.ListPoliciesResponse
           in
           return try await self.inner.listPolicies(request: r, options: o)
@@ -87,14 +87,14 @@ extension Clients {
     }
 
     public func getPolicy(
-      request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getPolicy",
         action: {
-          (r: GetPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOrgPolicyV2.Policy
           in
           return try await self.inner.getPolicy(request: r, options: o)
@@ -102,14 +102,14 @@ extension Clients {
     }
 
     public func getEffectivePolicy(
-      request: GetEffectivePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEffectivePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getEffectivePolicy",
         action: {
-          (r: GetEffectivePolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetEffectivePolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOrgPolicyV2.Policy
           in
           return try await self.inner.getEffectivePolicy(request: r, options: o)
@@ -117,14 +117,14 @@ extension Clients {
     }
 
     public func createPolicy(
-      request: CreatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "createPolicy",
         action: {
-          (r: CreatePolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreatePolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOrgPolicyV2.Policy
           in
           return try await self.inner.createPolicy(request: r, options: o)
@@ -132,14 +132,14 @@ extension Clients {
     }
 
     public func updatePolicy(
-      request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "updatePolicy",
         action: {
-          (r: UpdatePolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdatePolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOrgPolicyV2.Policy
           in
           return try await self.inner.updatePolicy(request: r, options: o)
@@ -147,26 +147,26 @@ extension Clients {
     }
 
     public func deletePolicy(
-      request: DeletePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deletePolicy",
-        action: { (r: DeletePolicyRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeletePolicyRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deletePolicy(request: r, options: o)
         })
     }
 
     public func createCustomConstraint(
-      request: CreateCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomConstraintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint {
       try await self._intercept(
         request: request,
         options: options,
         name: "createCustomConstraint",
         action: {
-          (r: CreateCustomConstraintRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateCustomConstraintRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOrgPolicyV2.CustomConstraint
           in
           return try await self.inner.createCustomConstraint(request: r, options: o)
@@ -174,14 +174,14 @@ extension Clients {
     }
 
     public func updateCustomConstraint(
-      request: UpdateCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomConstraintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateCustomConstraint",
         action: {
-          (r: UpdateCustomConstraintRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateCustomConstraintRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOrgPolicyV2.CustomConstraint
           in
           return try await self.inner.updateCustomConstraint(request: r, options: o)
@@ -189,14 +189,14 @@ extension Clients {
     }
 
     public func getCustomConstraint(
-      request: GetCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomConstraintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint {
       try await self._intercept(
         request: request,
         options: options,
         name: "getCustomConstraint",
         action: {
-          (r: GetCustomConstraintRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCustomConstraintRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOrgPolicyV2.CustomConstraint
           in
           return try await self.inner.getCustomConstraint(request: r, options: o)
@@ -204,14 +204,14 @@ extension Clients {
     }
 
     public func listCustomConstraints(
-      request: ListCustomConstraintsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomConstraintsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.ListCustomConstraintsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listCustomConstraints",
         action: {
-          (r: ListCustomConstraintsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCustomConstraintsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOrgPolicyV2.ListCustomConstraintsResponse
           in
           return try await self.inner.listCustomConstraints(request: r, options: o)
@@ -219,15 +219,14 @@ extension Clients {
     }
 
     public func deleteCustomConstraint(
-      request: DeleteCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomConstraintRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteCustomConstraint",
         action: {
-          (r: DeleteCustomConstraintRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void
-          in
+          (r: DeleteCustomConstraintRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteCustomConstraint(request: r, options: o)
         })
     }

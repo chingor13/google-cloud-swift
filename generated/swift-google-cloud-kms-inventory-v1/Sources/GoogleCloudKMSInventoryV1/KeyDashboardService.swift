@@ -19,8 +19,8 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudKMSV1
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Provides a cross-region view of all Cloud KMS keys in a given Cloud project.
 ///
@@ -29,7 +29,7 @@ public final class KeyDashboardServiceClient: Clients.KeyDashboardServiceProtoco
   let inner: any Clients.KeyDashboardServiceStub
 
   /// Creates a new `KeyDashboardServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.KeyDashboardServiceStub = try Clients.KeyDashboardServiceTransport(
       options)
     inner = Clients.KeyDashboardServiceRetry(inner, options: options)
@@ -45,7 +45,7 @@ public final class KeyDashboardServiceClient: Clients.KeyDashboardServiceProtoco
   ///
   /// @Snippet(path: "KeyDashboardService_ListCryptoKeys")
   public func listCryptoKeys(
-    request: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSInventoryV1.ListCryptoKeysResponse {
     try await self.inner.listCryptoKeys(request: request, options: options)
   }
@@ -56,7 +56,7 @@ public final class KeyDashboardServiceClient: Clients.KeyDashboardServiceProtoco
   ///
   /// @Snippet(path: "KeyDashboardService_ListCryptoKeys")
   public func listCryptoKeys(
-    byItem: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudKMSV1.CryptoKey, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudKMSInventoryV1.ListCryptoKeysResponse in
@@ -64,7 +64,7 @@ public final class KeyDashboardServiceClient: Clients.KeyDashboardServiceProtoco
       request.pageToken = token
       return try await self.listCryptoKeys(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 }
 
@@ -91,12 +91,12 @@ extension Clients {
 
     /// See `KeyDashboardServiceClient.listCryptoKeys`.
     func listCryptoKeys(
-      request: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSInventoryV1.ListCryptoKeysResponse
 
     /// See `KeyDashboardServiceClient.listCryptoKeys`.
     func listCryptoKeys(
-      byItem: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudKMSV1.CryptoKey, Swift.Error>
   }
 }
@@ -110,9 +110,9 @@ extension Clients.KeyDashboardServiceProtocol {
   }
 
   public func listCryptoKeys(
-    request: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudKMSInventoryV1.ListCryptoKeysResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCryptoKeys(
@@ -122,13 +122,13 @@ extension Clients.KeyDashboardServiceProtocol {
   }
 
   public func listCryptoKeys(
-    byItem: ListCryptoKeysRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCryptoKeysRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudKMSV1.CryptoKey, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudKMSInventoryV1.ListCryptoKeysResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCryptoKeys(

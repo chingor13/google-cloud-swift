@@ -16,16 +16,16 @@
 
 #if InstanceGroupManagers || RegionInstanceGroupManagers
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct ManagedInstanceLastAttempt: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ManagedInstanceLastAttempt: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. [Output Only] Encountered errors during the last attempt to create or
     /// delete the instance.
     public var errors: ManagedInstanceLastAttempt.Errors? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ManagedInstanceLastAttempt`.
     public init() {}
@@ -62,7 +62,7 @@
         ManagedInstanceLastAttempt.Errors.self, forKey: .errors)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -77,14 +77,14 @@
     /// The message type for the [errors][google.cloud.compute.v1.ManagedInstanceLastAttempt.errors] field.
     ///
     /// [google.cloud.compute.v1.ManagedInstanceLastAttempt.errors]: <doc:ManagedInstanceLastAttempt/Errors>
-    public struct Errors: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Errors: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// [Output Only] The array of errors encountered while processing this
       /// operation.
       public var errors: [ManagedInstanceLastAttempt.Errors.Errors] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Errors`.
       public init() {}
@@ -124,7 +124,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -139,7 +139,7 @@
       /// The message type for the [errors][google.cloud.compute.v1.ManagedInstanceLastAttempt.errors.errors] field.
       ///
       /// [google.cloud.compute.v1.ManagedInstanceLastAttempt.errors.errors]: <doc:ManagedInstanceLastAttempt/Errors/Errors>
-      public struct Errors: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Errors: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// [Output Only] The error type identifier for this error.
@@ -159,8 +159,7 @@
         /// [Output Only] An optional, human-readable error message.
         public var message: Swift.String? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Errors`.
         public init() {}
@@ -209,7 +208,7 @@
           self.message = try container.decodeIfPresent(Swift.String.self, forKey: .message)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -227,7 +226,7 @@
         /// The message type for the [errorDetails][google.cloud.compute.v1.ManagedInstanceLastAttempt.errors.errors.errorDetails] field.
         ///
         /// [google.cloud.compute.v1.ManagedInstanceLastAttempt.errors.errors.errorDetails]: <doc:ManagedInstanceLastAttempt/Errors/Errors/ErrorDetails>
-        public struct ErrorDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct ErrorDetails: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Error information containing structured domain, reason, and metadata.
@@ -242,8 +241,7 @@
           /// Details about quota limits and metrics when a quota is exceeded.
           public var quotaInfo: QuotaExceededInfo? = nil
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `ErrorDetails`.
           public init() {}
@@ -290,7 +288,7 @@
               QuotaExceededInfo.self, forKey: .quotaInfo)
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -309,11 +307,11 @@
             return
               "type.googleapis.com/google.cloud.compute.v1.ManagedInstanceLastAttempt.errors.errors.errorDetails"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -321,33 +319,33 @@
           return
             "type.googleapis.com/google.cloud.compute.v1.ManagedInstanceLastAttempt.errors.errors"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.ManagedInstanceLastAttempt.errors"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.ManagedInstanceLastAttempt"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudConnectorsV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ConnectorsClient, projectId: String, locationId: String, connectionId: String)
   async throws
@@ -33,7 +33,7 @@ func sample(client: ConnectorsClient, projectId: String, locationId: String, con
         $0.connection = Connection().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/connections/\(connectionId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

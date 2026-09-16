@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A change made on a line item.
-public struct LineItemChange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct LineItemChange: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Change ID.
@@ -52,16 +52,16 @@ public struct LineItemChange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. A time at which the change became or will become (in case of
   /// pending change) effective.
-  public var changeEffectiveTime: GoogleCloudWKT.Timestamp? = nil
+  public var changeEffectiveTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when change was initiated.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when change was updated, e.g. approved/rejected by
   /// partners or cancelled by the user.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `LineItemChange`.
   public init() {}
@@ -134,14 +134,12 @@ public struct LineItemChange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.changeStateReasonType = value
     }
     self.changeEffectiveTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .changeEffectiveTime)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      GoogleWKT.Timestamp.self, forKey: .changeEffectiveTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -165,10 +163,10 @@ public struct LineItemChange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.commerce.consumer.procurement.v1.LineItemChange"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

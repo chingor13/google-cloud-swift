@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The configuration of a GKE node pool used by a [Dataproc-on-GKE
 /// cluster](https://cloud.google.com/dataproc/docs/concepts/jobs/dataproc-gke#create-a-dataproc-on-gke-cluster).
-public struct GkeNodePoolConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GkeNodePoolConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The node pool configuration.
@@ -42,7 +42,7 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// is enabled only when a valid configuration is present.
   public var autoscaling: GkeNodePoolConfig.GkeNodePoolAutoscalingConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GkeNodePoolConfig`.
   public init() {}
@@ -88,7 +88,7 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       GkeNodePoolConfig.GkeNodePoolAutoscalingConfig.self, forKey: .autoscaling)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,7 +103,7 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
   }
 
   /// Parameters that describe cluster nodes.
-  public struct GkeNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GkeNodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The name of a Compute Engine [machine
@@ -162,7 +162,7 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// [google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.preemptible]: <doc:GkeNodePoolConfig/GkeNodeConfig/preemptible>
     public var spot: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GkeNodeConfig`.
     public init() {}
@@ -232,7 +232,7 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -253,17 +253,17 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A GkeNodeConfigAcceleratorConfig represents a Hardware Accelerator request
   /// for a node pool.
-  public struct GkeNodePoolAcceleratorConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GkeNodePoolAcceleratorConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The number of accelerator cards exposed to an instance.
@@ -277,7 +277,7 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// guide](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#partitioning).
     public var gpuPartitionSize: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GkeNodePoolAcceleratorConfig`.
     public init() {}
@@ -325,7 +325,7 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -343,17 +343,17 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       return
         "type.googleapis.com/google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// GkeNodePoolAutoscaling contains information the cluster autoscaler needs to
   /// adjust the size of the node pool to the current cluster usage.
-  public struct GkeNodePoolAutoscalingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GkeNodePoolAutoscalingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The minimum number of nodes in the node pool. Must be >= 0 and <=
@@ -365,7 +365,7 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// **Note:** Quota must be sufficient to scale up the cluster.
     public var maxNodeCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GkeNodePoolAutoscalingConfig`.
     public init() {}
@@ -408,7 +408,7 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -425,21 +425,21 @@ public struct GkeNodePoolConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       return
         "type.googleapis.com/google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.v1.GkeNodePoolConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

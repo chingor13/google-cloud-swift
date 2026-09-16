@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Zypper patching is performed by running `zypper patch`.
 /// See also https://en.opensuse.org/SDB:Zypper_manual.
-public struct ZypperSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ZypperSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Adds the `--with-optional` flag to `zypper patch`.
@@ -44,7 +44,7 @@ public struct ZypperSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// This field must not be used with any other patch configuration fields.
   public var exclusivePatches: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ZypperSettings`.
   public init() {}
@@ -107,7 +107,7 @@ public struct ZypperSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -127,10 +127,10 @@ public struct ZypperSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.osconfig.v1.ZypperSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class TargetSslProxiesRetry: TargetSslProxiesStub {
       let inner: any TargetSslProxiesStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any TargetSslProxiesStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any TargetSslProxiesStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@
       }
 
       public func delete(
-        request: TargetSslProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetSslProxiesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: TargetSslProxiesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: TargetSslProxiesClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -65,14 +65,14 @@
       }
 
       public func `get`(
-        request: TargetSslProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetSslProxiesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetSslProxy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: TargetSslProxiesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: TargetSslProxiesClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.TargetSslProxy
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -80,14 +80,14 @@
       }
 
       public func insert(
-        request: TargetSslProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetSslProxiesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: TargetSslProxiesClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: TargetSslProxiesClient.InsertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -95,14 +95,14 @@
       }
 
       public func list(
-        request: TargetSslProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetSslProxiesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetSslProxyList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: TargetSslProxiesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: TargetSslProxiesClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.TargetSslProxyList
             in
             return try await self.inner.list(request: r, options: o)
@@ -110,15 +110,14 @@
       }
 
       public func setBackendService(
-        request: TargetSslProxiesClient.SetBackendServiceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetSslProxiesClient.SetBackendServiceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: TargetSslProxiesClient.SetBackendServiceRequest, o: GoogleCloudGax.RequestOptions)
+            (r: TargetSslProxiesClient.SetBackendServiceRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setBackendService(request: r, options: o)
@@ -126,15 +125,14 @@
       }
 
       public func setCertificateMap(
-        request: TargetSslProxiesClient.SetCertificateMapRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetSslProxiesClient.SetCertificateMapRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: TargetSslProxiesClient.SetCertificateMapRequest, o: GoogleCloudGax.RequestOptions)
+            (r: TargetSslProxiesClient.SetCertificateMapRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setCertificateMap(request: r, options: o)
@@ -142,15 +140,14 @@
       }
 
       public func setProxyHeader(
-        request: TargetSslProxiesClient.SetProxyHeaderRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetSslProxiesClient.SetProxyHeaderRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: TargetSslProxiesClient.SetProxyHeaderRequest, o: GoogleCloudGax.RequestOptions)
+            (r: TargetSslProxiesClient.SetProxyHeaderRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setProxyHeader(request: r, options: o)
@@ -158,15 +155,14 @@
       }
 
       public func setSslCertificates(
-        request: TargetSslProxiesClient.SetSslCertificatesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetSslProxiesClient.SetSslCertificatesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: TargetSslProxiesClient.SetSslCertificatesRequest, o: GoogleCloudGax.RequestOptions)
+            (r: TargetSslProxiesClient.SetSslCertificatesRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setSslCertificates(request: r, options: o)
@@ -174,14 +170,14 @@
       }
 
       public func setSslPolicy(
-        request: TargetSslProxiesClient.SetSslPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetSslProxiesClient.SetSslPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: TargetSslProxiesClient.SetSslPolicyRequest, o: GoogleCloudGax.RequestOptions)
+            (r: TargetSslProxiesClient.SetSslPolicyRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setSslPolicy(request: r, options: o)
@@ -189,15 +185,14 @@
       }
 
       public func testIamPermissions(
-        request: TargetSslProxiesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: TargetSslProxiesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: TargetSslProxiesClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: TargetSslProxiesClient.TestIamPermissionsRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
@@ -205,14 +200,14 @@
       }
 
       public func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GlobalOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GlobalOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

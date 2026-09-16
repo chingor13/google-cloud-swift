@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// OrgPolicyViolationsPreview is a resource providing a preview of the
 /// violations that will exist if an OrgPolicy change is made.
@@ -24,7 +24,7 @@ import Foundation
 /// [ListOrgPolicyViolations][] API call. There are potentially more
 /// [OrgPolicyViolations][] than could fit in an embedded field. Thus, the use of
 /// a child resource instead of a field.
-public struct OrgPolicyViolationsPreview: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OrgPolicyViolationsPreview: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the `OrgPolicyViolationsPreview`. It has
@@ -70,9 +70,9 @@ public struct OrgPolicyViolationsPreview: Codable, Equatable, GoogleCloudWKT._An
   public var customConstraints: [Swift.String] = []
 
   /// Output only. Time when this `OrgPolicyViolationsPreview` was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OrgPolicyViolationsPreview`.
   public init() {}
@@ -132,11 +132,10 @@ public struct OrgPolicyViolationsPreview: Codable, Equatable, GoogleCloudWKT._An
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .customConstraints) {
       self.customConstraints = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -156,7 +155,7 @@ public struct OrgPolicyViolationsPreview: Codable, Equatable, GoogleCloudWKT._An
 
   /// A summary of the state of all resources scanned for compliance with the
   /// changed OrgPolicy.
-  public struct ResourceCounts: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ResourceCounts: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Number of resources checked for compliance.
@@ -177,7 +176,7 @@ public struct OrgPolicyViolationsPreview: Codable, Equatable, GoogleCloudWKT._An
     /// Output only. Number of resources that returned an error when scanned.
     public var errors: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ResourceCounts`.
     public init() {}
@@ -235,7 +234,7 @@ public struct OrgPolicyViolationsPreview: Codable, Equatable, GoogleCloudWKT._An
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -255,21 +254,21 @@ public struct OrgPolicyViolationsPreview: Codable, Equatable, GoogleCloudWKT._An
       return
         "type.googleapis.com/google.cloud.policysimulator.v1.OrgPolicyViolationsPreview.ResourceCounts"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.policysimulator.v1.OrgPolicyViolationsPreview"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

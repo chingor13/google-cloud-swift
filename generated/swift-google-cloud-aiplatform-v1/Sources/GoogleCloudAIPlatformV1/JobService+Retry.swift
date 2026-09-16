@@ -20,29 +20,29 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class JobServiceRetry: JobServiceStub {
       let inner: any JobServiceStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any JobServiceStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any JobServiceStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -54,14 +54,14 @@
       }
 
       public func createCustomJob(
-        request: CreateCustomJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateCustomJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.CustomJob {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: CreateCustomJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateCustomJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.CustomJob
             in
             return try await self.inner.createCustomJob(request: r, options: o)
@@ -69,14 +69,14 @@
       }
 
       public func getCustomJob(
-        request: GetCustomJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetCustomJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.CustomJob {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetCustomJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetCustomJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.CustomJob
             in
             return try await self.inner.getCustomJob(request: r, options: o)
@@ -84,14 +84,14 @@
       }
 
       public func listCustomJobs(
-        request: ListCustomJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListCustomJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListCustomJobsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListCustomJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListCustomJobsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListCustomJobsResponse
             in
             return try await self.inner.listCustomJobs(request: r, options: o)
@@ -99,14 +99,14 @@
       }
 
       public func deleteCustomJob(
-        request: DeleteCustomJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteCustomJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: DeleteCustomJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteCustomJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteCustomJob(request: r, options: o)
@@ -114,27 +114,26 @@
       }
 
       public func cancelCustomJob(
-        request: CancelCustomJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelCustomJobRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
-          action: {
-            (r: CancelCustomJobRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          action: { (r: CancelCustomJobRequest, o: GoogleGax.RequestOptions) async throws -> Void in
             return try await self.inner.cancelCustomJob(request: r, options: o)
           })
       }
 
       public func createDataLabelingJob(
-        request: CreateDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateDataLabelingJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.DataLabelingJob {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: CreateDataLabelingJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateDataLabelingJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.DataLabelingJob
             in
             return try await self.inner.createDataLabelingJob(request: r, options: o)
@@ -142,14 +141,14 @@
       }
 
       public func getDataLabelingJob(
-        request: GetDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetDataLabelingJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.DataLabelingJob {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetDataLabelingJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetDataLabelingJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.DataLabelingJob
             in
             return try await self.inner.getDataLabelingJob(request: r, options: o)
@@ -157,14 +156,14 @@
       }
 
       public func listDataLabelingJobs(
-        request: ListDataLabelingJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListDataLabelingJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListDataLabelingJobsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListDataLabelingJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListDataLabelingJobsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListDataLabelingJobsResponse
             in
             return try await self.inner.listDataLabelingJobs(request: r, options: o)
@@ -172,14 +171,14 @@
       }
 
       public func deleteDataLabelingJob(
-        request: DeleteDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteDataLabelingJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: DeleteDataLabelingJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteDataLabelingJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteDataLabelingJob(request: r, options: o)
@@ -187,28 +186,27 @@
       }
 
       public func cancelDataLabelingJob(
-        request: CancelDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelDataLabelingJobRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: CancelDataLabelingJobRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void
-            in
+            (r: CancelDataLabelingJobRequest, o: GoogleGax.RequestOptions) async throws -> Void in
             return try await self.inner.cancelDataLabelingJob(request: r, options: o)
           })
       }
 
       public func createHyperparameterTuningJob(
-        request: CreateHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.HyperparameterTuningJob {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: CreateHyperparameterTuningJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateHyperparameterTuningJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.HyperparameterTuningJob
             in
             return try await self.inner.createHyperparameterTuningJob(request: r, options: o)
@@ -216,14 +214,14 @@
       }
 
       public func getHyperparameterTuningJob(
-        request: GetHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.HyperparameterTuningJob {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetHyperparameterTuningJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetHyperparameterTuningJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.HyperparameterTuningJob
             in
             return try await self.inner.getHyperparameterTuningJob(request: r, options: o)
@@ -231,14 +229,14 @@
       }
 
       public func listHyperparameterTuningJobs(
-        request: ListHyperparameterTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListHyperparameterTuningJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListHyperparameterTuningJobsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListHyperparameterTuningJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListHyperparameterTuningJobsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListHyperparameterTuningJobsResponse
             in
             return try await self.inner.listHyperparameterTuningJobs(request: r, options: o)
@@ -246,14 +244,14 @@
       }
 
       public func deleteHyperparameterTuningJob(
-        request: DeleteHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: DeleteHyperparameterTuningJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteHyperparameterTuningJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteHyperparameterTuningJob(request: r, options: o)
@@ -261,28 +259,28 @@
       }
 
       public func cancelHyperparameterTuningJob(
-        request: CancelHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: CancelHyperparameterTuningJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CancelHyperparameterTuningJobRequest, o: GoogleGax.RequestOptions) async throws
               -> Void in
             return try await self.inner.cancelHyperparameterTuningJob(request: r, options: o)
           })
       }
 
       public func createNasJob(
-        request: CreateNasJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateNasJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.NasJob {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: CreateNasJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateNasJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.NasJob
             in
             return try await self.inner.createNasJob(request: r, options: o)
@@ -290,14 +288,14 @@
       }
 
       public func getNasJob(
-        request: GetNasJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetNasJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.NasJob {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetNasJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetNasJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.NasJob
             in
             return try await self.inner.getNasJob(request: r, options: o)
@@ -305,14 +303,14 @@
       }
 
       public func listNasJobs(
-        request: ListNasJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListNasJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListNasJobsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListNasJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListNasJobsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListNasJobsResponse
             in
             return try await self.inner.listNasJobs(request: r, options: o)
@@ -320,14 +318,14 @@
       }
 
       public func deleteNasJob(
-        request: DeleteNasJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteNasJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: DeleteNasJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteNasJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteNasJob(request: r, options: o)
@@ -335,27 +333,26 @@
       }
 
       public func cancelNasJob(
-        request: CancelNasJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelNasJobRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
-          action: {
-            (r: CancelNasJobRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          action: { (r: CancelNasJobRequest, o: GoogleGax.RequestOptions) async throws -> Void in
             return try await self.inner.cancelNasJob(request: r, options: o)
           })
       }
 
       public func getNasTrialDetail(
-        request: GetNasTrialDetailRequest, options: GoogleCloudGax.RequestOptions
+        request: GetNasTrialDetailRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.NasTrialDetail {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetNasTrialDetailRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetNasTrialDetailRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.NasTrialDetail
             in
             return try await self.inner.getNasTrialDetail(request: r, options: o)
@@ -363,14 +360,14 @@
       }
 
       public func listNasTrialDetails(
-        request: ListNasTrialDetailsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListNasTrialDetailsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListNasTrialDetailsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListNasTrialDetailsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListNasTrialDetailsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListNasTrialDetailsResponse
             in
             return try await self.inner.listNasTrialDetails(request: r, options: o)
@@ -378,14 +375,14 @@
       }
 
       public func createBatchPredictionJob(
-        request: CreateBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateBatchPredictionJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.BatchPredictionJob {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: CreateBatchPredictionJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateBatchPredictionJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.BatchPredictionJob
             in
             return try await self.inner.createBatchPredictionJob(request: r, options: o)
@@ -393,14 +390,14 @@
       }
 
       public func getBatchPredictionJob(
-        request: GetBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetBatchPredictionJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.BatchPredictionJob {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetBatchPredictionJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetBatchPredictionJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.BatchPredictionJob
             in
             return try await self.inner.getBatchPredictionJob(request: r, options: o)
@@ -408,14 +405,14 @@
       }
 
       public func listBatchPredictionJobs(
-        request: ListBatchPredictionJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListBatchPredictionJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListBatchPredictionJobsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListBatchPredictionJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListBatchPredictionJobsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudAIPlatformV1.ListBatchPredictionJobsResponse
             in
             return try await self.inner.listBatchPredictionJobs(request: r, options: o)
@@ -423,14 +420,14 @@
       }
 
       public func deleteBatchPredictionJob(
-        request: DeleteBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteBatchPredictionJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: DeleteBatchPredictionJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteBatchPredictionJobRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteBatchPredictionJob(request: r, options: o)
@@ -438,29 +435,29 @@
       }
 
       public func cancelBatchPredictionJob(
-        request: CancelBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelBatchPredictionJobRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: CancelBatchPredictionJobRequest, o: GoogleCloudGax.RequestOptions) async throws
-              -> Void in
+            (r: CancelBatchPredictionJobRequest, o: GoogleGax.RequestOptions) async throws -> Void
+            in
             return try await self.inner.cancelBatchPredictionJob(request: r, options: o)
           })
       }
 
       public func createModelDeploymentMonitoringJob(
-        request: CreateModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: CreateModelDeploymentMonitoringJobRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob
+            (r: CreateModelDeploymentMonitoringJobRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob
             in
             return try await self.inner.createModelDeploymentMonitoringJob(request: r, options: o)
           })
@@ -468,7 +465,7 @@
 
       public func searchModelDeploymentMonitoringStatsAnomalies(
         request: SearchModelDeploymentMonitoringStatsAnomaliesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws
         -> GoogleCloudAIPlatformV1.SearchModelDeploymentMonitoringStatsAnomaliesResponse
       {
@@ -477,10 +474,8 @@
           options: options,
           idempotent: false,
           action: {
-            (
-              r: SearchModelDeploymentMonitoringStatsAnomaliesRequest,
-              o: GoogleCloudGax.RequestOptions
-            ) async throws
+            (r: SearchModelDeploymentMonitoringStatsAnomaliesRequest, o: GoogleGax.RequestOptions)
+              async throws
               -> GoogleCloudAIPlatformV1.SearchModelDeploymentMonitoringStatsAnomaliesResponse
             in
             return try await self.inner.searchModelDeploymentMonitoringStatsAnomalies(
@@ -489,132 +484,132 @@
       }
 
       public func getModelDeploymentMonitoringJob(
-        request: GetModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetModelDeploymentMonitoringJobRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob
+            (r: GetModelDeploymentMonitoringJobRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob
             in
             return try await self.inner.getModelDeploymentMonitoringJob(request: r, options: o)
           })
       }
 
       public func listModelDeploymentMonitoringJobs(
-        request: ListModelDeploymentMonitoringJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListModelDeploymentMonitoringJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListModelDeploymentMonitoringJobsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListModelDeploymentMonitoringJobsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudAIPlatformV1.ListModelDeploymentMonitoringJobsResponse
+            (r: ListModelDeploymentMonitoringJobsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudAIPlatformV1.ListModelDeploymentMonitoringJobsResponse
             in
             return try await self.inner.listModelDeploymentMonitoringJobs(request: r, options: o)
           })
       }
 
       public func updateModelDeploymentMonitoringJob(
-        request: UpdateModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: UpdateModelDeploymentMonitoringJobRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: UpdateModelDeploymentMonitoringJobRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.updateModelDeploymentMonitoringJob(request: r, options: o)
           })
       }
 
       public func deleteModelDeploymentMonitoringJob(
-        request: DeleteModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: DeleteModelDeploymentMonitoringJobRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: DeleteModelDeploymentMonitoringJobRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteModelDeploymentMonitoringJob(request: r, options: o)
           })
       }
 
       public func pauseModelDeploymentMonitoringJob(
-        request: PauseModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: PauseModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: PauseModelDeploymentMonitoringJobRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: PauseModelDeploymentMonitoringJobRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.pauseModelDeploymentMonitoringJob(request: r, options: o)
           })
       }
 
       public func resumeModelDeploymentMonitoringJob(
-        request: ResumeModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: ResumeModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ResumeModelDeploymentMonitoringJobRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: ResumeModelDeploymentMonitoringJobRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.resumeModelDeploymentMonitoringJob(request: r, options: o)
           })
       }
 
       public func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.ListLocationsResponse
+            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.ListLocationsResponse
             in
             return try await self.inner.listLocations(request: r, options: o)
           })
       }
 
       public func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.Location
+            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.Location
             in
             return try await self.inner.getLocation(request: r, options: o)
           })
       }
 
       public func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleIAMV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
@@ -622,14 +617,14 @@
       }
 
       public func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleIAMV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
@@ -637,88 +632,88 @@
       }
 
       public func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleIAMV1.TestIamPermissionsResponse
+            (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleIAMV1.TestIamPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
           })
       }
 
       public func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.ListOperationsResponse
+            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.ListOperationsResponse
             in
             return try await self.inner.listOperations(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)
           })
       }
 
       public func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.deleteOperation(request: r, options: o)
           })
       }
 
       public func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.cancelOperation(request: r, options: o)
           })
       }
 
       public func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleLongRunning.WaitOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.WaitOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.waitOperation(request: r, options: o)
           })

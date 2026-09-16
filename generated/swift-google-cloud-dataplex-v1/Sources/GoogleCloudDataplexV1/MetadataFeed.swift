@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// MetadataFeed contains information related to the metadata feed.
-public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MetadataFeed: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the metadata feed, in the format
@@ -39,10 +39,10 @@ public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var filters: MetadataFeed.Filters? = nil
 
   /// Output only. The time when the feed was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the feed was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. User-defined labels.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -51,7 +51,7 @@ public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// published.
   public var endpoint: OneOf_Endpoint? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MetadataFeed`.
   public init() {}
@@ -106,10 +106,8 @@ public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     self.scope = try container.decodeIfPresent(MetadataFeed.Scope.self, forKey: .scope)
     self.filters = try container.decodeIfPresent(MetadataFeed.Filters.self, forKey: .filters)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -131,7 +129,7 @@ public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.endpoint = endpoint
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -158,7 +156,7 @@ public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Scope defines the scope of the metadata feed.
   /// Scopes are exclusive. Only one of the scopes can be specified.
-  public struct Scope: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Scope: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Whether the metadata feed is at the organization-level.
@@ -181,7 +179,7 @@ public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
     public var entryGroups: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Scope`.
     public init() {}
@@ -229,7 +227,7 @@ public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -246,11 +244,11 @@ public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.MetadataFeed.Scope"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -259,7 +257,7 @@ public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// All of the entry type filters are OR'ed together.
   /// All of the aspect type filters are OR'ed together.
   /// All of the entry type filters and aspect type filters are AND'ed together.
-  public struct Filters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Filters: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The entry types that you want to listen to, specified as
@@ -277,7 +275,7 @@ public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// If not specified, all changes are published.
     public var changeTypes: [MetadataFeed.Filters.ChangeType] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Filters`.
     public init() {}
@@ -327,7 +325,7 @@ public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -456,11 +454,11 @@ public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.MetadataFeed.Filters"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -477,10 +475,10 @@ public struct MetadataFeed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.MetadataFeed"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

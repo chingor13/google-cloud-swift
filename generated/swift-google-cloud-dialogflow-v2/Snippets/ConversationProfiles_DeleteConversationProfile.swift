@@ -20,9 +20,9 @@
   import Foundation
   import GoogleCloudDialogflowV2
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
+  import GoogleWKT
 
   func sample(client: ConversationProfilesClient, projectId: String, conversationProfileId: String)
     async throws

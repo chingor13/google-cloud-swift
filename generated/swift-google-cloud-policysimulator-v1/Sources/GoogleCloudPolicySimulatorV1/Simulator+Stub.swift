@@ -15,31 +15,31 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol SimulatorStub: Sendable {
     func getReplay(
-      request: GetReplayRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReplayRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPolicySimulatorV1.Replay
 
     func createReplay(
-      request: CreateReplayRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReplayRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listReplayResults(
-      request: ListReplayResultsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReplayResultsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPolicySimulatorV1.ListReplayResultsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

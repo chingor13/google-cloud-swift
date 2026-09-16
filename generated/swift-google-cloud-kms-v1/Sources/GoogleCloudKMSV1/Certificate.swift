@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A [Certificate][google.cloud.kms.v1.Certificate] represents an X.509
 /// certificate used to authenticate HTTPS connections to EKM replicas.
 ///
 /// [google.cloud.kms.v1.Certificate]: <doc:Certificate>
-public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Certificate: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The raw certificate bytes in DER format.
@@ -52,13 +52,13 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [parsed][google.cloud.kms.v1.Certificate.parsed] is true.
   ///
   /// [google.cloud.kms.v1.Certificate.parsed]: <doc:Certificate/parsed>
-  public var notBeforeTime: GoogleCloudWKT.Timestamp? = nil
+  public var notBeforeTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The certificate is not valid after this time. Only present if
   /// [parsed][google.cloud.kms.v1.Certificate.parsed] is true.
   ///
   /// [google.cloud.kms.v1.Certificate.parsed]: <doc:Certificate/parsed>
-  public var notAfterTime: GoogleCloudWKT.Timestamp? = nil
+  public var notAfterTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The certificate serial number as a hex string. Only present if
   /// [parsed][google.cloud.kms.v1.Certificate.parsed] is true.
@@ -72,7 +72,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.kms.v1.Certificate.parsed]: <doc:Certificate/parsed>
   public var sha256Fingerprint: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Certificate`.
   public init() {}
@@ -139,9 +139,9 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.subjectAlternativeDnsNames = value
     }
     self.notBeforeTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .notBeforeTime)
+      GoogleWKT.Timestamp.self, forKey: .notBeforeTime)
     self.notAfterTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .notAfterTime)
+      GoogleWKT.Timestamp.self, forKey: .notAfterTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .serialNumber) {
       self.serialNumber = value
     }
@@ -150,7 +150,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -173,10 +173,10 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.Certificate"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudGax
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleGax
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response for the FetchDataSourceReferencesForResourceType method.
-public struct FetchDataSourceReferencesForResourceTypeResponse: Codable, Equatable, GoogleCloudWKT
+public struct FetchDataSourceReferencesForResourceTypeResponse: Codable, Equatable, GoogleWKT
     ._AnyPackable,
-  GoogleCloudGax._PaginatedResponse,
+  GoogleGax._PaginatedResponse,
   Sendable
 {
   /// The DataSourceReferences from the specified parent.
@@ -31,7 +31,7 @@ public struct FetchDataSourceReferencesForResourceTypeResponse: Codable, Equatab
   /// If this field is omitted, there are no subsequent pages.
   public var nextPageToken: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FetchDataSourceReferencesForResourceTypeResponse`.
   public init() {}
@@ -76,7 +76,7 @@ public struct FetchDataSourceReferencesForResourceTypeResponse: Codable, Equatab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -93,11 +93,11 @@ public struct FetchDataSourceReferencesForResourceTypeResponse: Codable, Equatab
     return
       "type.googleapis.com/google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 
   public func _getPaginatedItems() -> [DataSourceReference] {

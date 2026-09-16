@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metadata for the Bulk Upload Feedback Labels API.
-public struct BulkUploadFeedbackLabelsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BulkUploadFeedbackLabelsMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The time the operation was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time the operation finished running.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The original request for ingest.
   public var request: BulkUploadFeedbackLabelsRequest? = nil
@@ -38,7 +38,7 @@ public struct BulkUploadFeedbackLabelsMetadata: Codable, Equatable, GoogleCloudW
   /// Output only. Statistics for BulkUploadFeedbackLabels operation.
   public var uploadStats: BulkUploadFeedbackLabelsMetadata.UploadStats? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BulkUploadFeedbackLabelsMetadata`.
   public init() {}
@@ -79,9 +79,8 @@ public struct BulkUploadFeedbackLabelsMetadata: Codable, Equatable, GoogleCloudW
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     self.request = try container.decodeIfPresent(
       BulkUploadFeedbackLabelsRequest.self, forKey: .request)
     if let value = try container.decodeIfPresent([GoogleRpc.Status].self, forKey: .partialErrors) {
@@ -91,7 +90,7 @@ public struct BulkUploadFeedbackLabelsMetadata: Codable, Equatable, GoogleCloudW
       BulkUploadFeedbackLabelsMetadata.UploadStats.self, forKey: .uploadStats)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -108,7 +107,7 @@ public struct BulkUploadFeedbackLabelsMetadata: Codable, Equatable, GoogleCloudW
   }
 
   /// Statistics for BulkUploadFeedbackLabels operation.
-  public struct UploadStats: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UploadStats: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The number of objects processed during the upload operation.
@@ -120,7 +119,7 @@ public struct BulkUploadFeedbackLabelsMetadata: Codable, Equatable, GoogleCloudW
     /// The number of new feedback labels added during this ingest operation.
     public var successfulUploadCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UploadStats`.
     public init() {}
@@ -171,7 +170,7 @@ public struct BulkUploadFeedbackLabelsMetadata: Codable, Equatable, GoogleCloudW
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -189,11 +188,11 @@ public struct BulkUploadFeedbackLabelsMetadata: Codable, Equatable, GoogleCloudW
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata.UploadStats"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -201,10 +200,10 @@ public struct BulkUploadFeedbackLabelsMetadata: Codable, Equatable, GoogleCloudW
     return
       "type.googleapis.com/google.cloud.contactcenterinsights.v1.BulkUploadFeedbackLabelsMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,11 +18,11 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -41,9 +41,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -60,14 +60,14 @@ extension Clients {
     }
 
     public func batchCreateResourceValueConfigs(
-      request: BatchCreateResourceValueConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreateResourceValueConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.BatchCreateResourceValueConfigsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "batchCreateResourceValueConfigs",
         action: {
-          (r: BatchCreateResourceValueConfigsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BatchCreateResourceValueConfigsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.BatchCreateResourceValueConfigsResponse
           in
           return try await self.inner.batchCreateResourceValueConfigs(request: r, options: o)
@@ -75,14 +75,14 @@ extension Clients {
     }
 
     public func bulkMuteFindings(
-      request: BulkMuteFindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkMuteFindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "bulkMuteFindings",
         action: {
-          (r: BulkMuteFindingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BulkMuteFindingsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.bulkMuteFindings(request: r, options: o)
@@ -90,14 +90,14 @@ extension Clients {
     }
 
     public func createBigQueryExport(
-      request: CreateBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport {
       try await self._intercept(
         request: request,
         options: options,
         name: "createBigQueryExport",
         action: {
-          (r: CreateBigQueryExportRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateBigQueryExportRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.BigQueryExport
           in
           return try await self.inner.createBigQueryExport(request: r, options: o)
@@ -105,14 +105,14 @@ extension Clients {
     }
 
     public func createFinding(
-      request: CreateFindingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Finding {
       try await self._intercept(
         request: request,
         options: options,
         name: "createFinding",
         action: {
-          (r: CreateFindingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateFindingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.Finding
           in
           return try await self.inner.createFinding(request: r, options: o)
@@ -120,14 +120,14 @@ extension Clients {
     }
 
     public func createMuteConfig(
-      request: CreateMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMuteConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "createMuteConfig",
         action: {
-          (r: CreateMuteConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateMuteConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.MuteConfig
           in
           return try await self.inner.createMuteConfig(request: r, options: o)
@@ -135,14 +135,14 @@ extension Clients {
     }
 
     public func createNotificationConfig(
-      request: CreateNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNotificationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "createNotificationConfig",
         action: {
-          (r: CreateNotificationConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateNotificationConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.NotificationConfig
           in
           return try await self.inner.createNotificationConfig(request: r, options: o)
@@ -150,14 +150,14 @@ extension Clients {
     }
 
     public func createSource(
-      request: CreateSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Source {
       try await self._intercept(
         request: request,
         options: options,
         name: "createSource",
         action: {
-          (r: CreateSourceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateSourceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.Source
           in
           return try await self.inner.createSource(request: r, options: o)
@@ -165,68 +165,65 @@ extension Clients {
     }
 
     public func deleteBigQueryExport(
-      request: DeleteBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteBigQueryExport",
         action: {
-          (r: DeleteBigQueryExportRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          (r: DeleteBigQueryExportRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteBigQueryExport(request: r, options: o)
         })
     }
 
     public func deleteMuteConfig(
-      request: DeleteMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMuteConfigRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteMuteConfig",
-        action: {
-          (r: DeleteMuteConfigRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteMuteConfigRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteMuteConfig(request: r, options: o)
         })
     }
 
     public func deleteNotificationConfig(
-      request: DeleteNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNotificationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteNotificationConfig",
         action: {
-          (r: DeleteNotificationConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> Void in
+          (r: DeleteNotificationConfigRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteNotificationConfig(request: r, options: o)
         })
     }
 
     public func deleteResourceValueConfig(
-      request: DeleteResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteResourceValueConfigRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteResourceValueConfig",
         action: {
-          (r: DeleteResourceValueConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> Void in
+          (r: DeleteResourceValueConfigRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteResourceValueConfig(request: r, options: o)
         })
     }
 
     public func getBigQueryExport(
-      request: GetBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport {
       try await self._intercept(
         request: request,
         options: options,
         name: "getBigQueryExport",
         action: {
-          (r: GetBigQueryExportRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetBigQueryExportRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.BigQueryExport
           in
           return try await self.inner.getBigQueryExport(request: r, options: o)
@@ -234,14 +231,14 @@ extension Clients {
     }
 
     public func getSimulation(
-      request: GetSimulationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSimulationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Simulation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getSimulation",
         action: {
-          (r: GetSimulationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetSimulationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.Simulation
           in
           return try await self.inner.getSimulation(request: r, options: o)
@@ -249,14 +246,14 @@ extension Clients {
     }
 
     public func getValuedResource(
-      request: GetValuedResourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetValuedResourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ValuedResource {
       try await self._intercept(
         request: request,
         options: options,
         name: "getValuedResource",
         action: {
-          (r: GetValuedResourceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetValuedResourceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.ValuedResource
           in
           return try await self.inner.getValuedResource(request: r, options: o)
@@ -264,14 +261,14 @@ extension Clients {
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getIamPolicy",
         action: {
-          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.getIamPolicy(request: r, options: o)
@@ -279,14 +276,14 @@ extension Clients {
     }
 
     public func getMuteConfig(
-      request: GetMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMuteConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "getMuteConfig",
         action: {
-          (r: GetMuteConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetMuteConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.MuteConfig
           in
           return try await self.inner.getMuteConfig(request: r, options: o)
@@ -294,14 +291,14 @@ extension Clients {
     }
 
     public func getNotificationConfig(
-      request: GetNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNotificationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "getNotificationConfig",
         action: {
-          (r: GetNotificationConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetNotificationConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.NotificationConfig
           in
           return try await self.inner.getNotificationConfig(request: r, options: o)
@@ -309,14 +306,14 @@ extension Clients {
     }
 
     public func getResourceValueConfig(
-      request: GetResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetResourceValueConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ResourceValueConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "getResourceValueConfig",
         action: {
-          (r: GetResourceValueConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetResourceValueConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.ResourceValueConfig
           in
           return try await self.inner.getResourceValueConfig(request: r, options: o)
@@ -324,14 +321,14 @@ extension Clients {
     }
 
     public func getSource(
-      request: GetSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Source {
       try await self._intercept(
         request: request,
         options: options,
         name: "getSource",
         action: {
-          (r: GetSourceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetSourceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.Source
           in
           return try await self.inner.getSource(request: r, options: o)
@@ -339,14 +336,14 @@ extension Clients {
     }
 
     public func groupFindings(
-      request: GroupFindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GroupFindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.GroupFindingsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "groupFindings",
         action: {
-          (r: GroupFindingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GroupFindingsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.GroupFindingsResponse
           in
           return try await self.inner.groupFindings(request: r, options: o)
@@ -354,14 +351,14 @@ extension Clients {
     }
 
     public func listAttackPaths(
-      request: ListAttackPathsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAttackPathsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListAttackPathsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listAttackPaths",
         action: {
-          (r: ListAttackPathsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListAttackPathsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.ListAttackPathsResponse
           in
           return try await self.inner.listAttackPaths(request: r, options: o)
@@ -369,14 +366,14 @@ extension Clients {
     }
 
     public func listBigQueryExports(
-      request: ListBigQueryExportsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBigQueryExportsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListBigQueryExportsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listBigQueryExports",
         action: {
-          (r: ListBigQueryExportsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListBigQueryExportsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.ListBigQueryExportsResponse
           in
           return try await self.inner.listBigQueryExports(request: r, options: o)
@@ -384,14 +381,14 @@ extension Clients {
     }
 
     public func listFindings(
-      request: ListFindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListFindingsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listFindings",
         action: {
-          (r: ListFindingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListFindingsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.ListFindingsResponse
           in
           return try await self.inner.listFindings(request: r, options: o)
@@ -399,14 +396,14 @@ extension Clients {
     }
 
     public func listMuteConfigs(
-      request: ListMuteConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMuteConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListMuteConfigsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listMuteConfigs",
         action: {
-          (r: ListMuteConfigsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListMuteConfigsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.ListMuteConfigsResponse
           in
           return try await self.inner.listMuteConfigs(request: r, options: o)
@@ -414,14 +411,14 @@ extension Clients {
     }
 
     public func listNotificationConfigs(
-      request: ListNotificationConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNotificationConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListNotificationConfigsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listNotificationConfigs",
         action: {
-          (r: ListNotificationConfigsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListNotificationConfigsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.ListNotificationConfigsResponse
           in
           return try await self.inner.listNotificationConfigs(request: r, options: o)
@@ -429,14 +426,14 @@ extension Clients {
     }
 
     public func listResourceValueConfigs(
-      request: ListResourceValueConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListResourceValueConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListResourceValueConfigsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listResourceValueConfigs",
         action: {
-          (r: ListResourceValueConfigsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListResourceValueConfigsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.ListResourceValueConfigsResponse
           in
           return try await self.inner.listResourceValueConfigs(request: r, options: o)
@@ -444,14 +441,14 @@ extension Clients {
     }
 
     public func listSources(
-      request: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListSourcesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listSources",
         action: {
-          (r: ListSourcesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListSourcesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.ListSourcesResponse
           in
           return try await self.inner.listSources(request: r, options: o)
@@ -459,14 +456,14 @@ extension Clients {
     }
 
     public func listValuedResources(
-      request: ListValuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListValuedResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListValuedResourcesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listValuedResources",
         action: {
-          (r: ListValuedResourcesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListValuedResourcesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.ListValuedResourcesResponse
           in
           return try await self.inner.listValuedResources(request: r, options: o)
@@ -474,14 +471,14 @@ extension Clients {
     }
 
     public func setFindingState(
-      request: SetFindingStateRequest, options: GoogleCloudGax.RequestOptions
+      request: SetFindingStateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Finding {
       try await self._intercept(
         request: request,
         options: options,
         name: "setFindingState",
         action: {
-          (r: SetFindingStateRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SetFindingStateRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.Finding
           in
           return try await self.inner.setFindingState(request: r, options: o)
@@ -489,14 +486,14 @@ extension Clients {
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "setIamPolicy",
         action: {
-          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.setIamPolicy(request: r, options: o)
@@ -504,14 +501,14 @@ extension Clients {
     }
 
     public func setMute(
-      request: SetMuteRequest, options: GoogleCloudGax.RequestOptions
+      request: SetMuteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Finding {
       try await self._intercept(
         request: request,
         options: options,
         name: "setMute",
         action: {
-          (r: SetMuteRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SetMuteRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.Finding
           in
           return try await self.inner.setMute(request: r, options: o)
@@ -519,14 +516,14 @@ extension Clients {
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "testIamPermissions",
         action: {
-          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.TestIamPermissionsResponse
           in
           return try await self.inner.testIamPermissions(request: r, options: o)
@@ -534,14 +531,14 @@ extension Clients {
     }
 
     public func updateBigQueryExport(
-      request: UpdateBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateBigQueryExport",
         action: {
-          (r: UpdateBigQueryExportRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateBigQueryExportRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.BigQueryExport
           in
           return try await self.inner.updateBigQueryExport(request: r, options: o)
@@ -549,14 +546,14 @@ extension Clients {
     }
 
     public func updateExternalSystem(
-      request: UpdateExternalSystemRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExternalSystemRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ExternalSystem {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateExternalSystem",
         action: {
-          (r: UpdateExternalSystemRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateExternalSystemRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.ExternalSystem
           in
           return try await self.inner.updateExternalSystem(request: r, options: o)
@@ -564,14 +561,14 @@ extension Clients {
     }
 
     public func updateFinding(
-      request: UpdateFindingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Finding {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateFinding",
         action: {
-          (r: UpdateFindingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateFindingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.Finding
           in
           return try await self.inner.updateFinding(request: r, options: o)
@@ -579,14 +576,14 @@ extension Clients {
     }
 
     public func updateMuteConfig(
-      request: UpdateMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMuteConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateMuteConfig",
         action: {
-          (r: UpdateMuteConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateMuteConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.MuteConfig
           in
           return try await self.inner.updateMuteConfig(request: r, options: o)
@@ -594,14 +591,14 @@ extension Clients {
     }
 
     public func updateNotificationConfig(
-      request: UpdateNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNotificationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateNotificationConfig",
         action: {
-          (r: UpdateNotificationConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateNotificationConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.NotificationConfig
           in
           return try await self.inner.updateNotificationConfig(request: r, options: o)
@@ -609,14 +606,14 @@ extension Clients {
     }
 
     public func updateResourceValueConfig(
-      request: UpdateResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateResourceValueConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ResourceValueConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateResourceValueConfig",
         action: {
-          (r: UpdateResourceValueConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateResourceValueConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.ResourceValueConfig
           in
           return try await self.inner.updateResourceValueConfig(request: r, options: o)
@@ -624,14 +621,14 @@ extension Clients {
     }
 
     public func updateSecurityMarks(
-      request: UpdateSecurityMarksRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSecurityMarksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.SecurityMarks {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateSecurityMarks",
         action: {
-          (r: UpdateSecurityMarksRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateSecurityMarksRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.SecurityMarks
           in
           return try await self.inner.updateSecurityMarks(request: r, options: o)
@@ -639,14 +636,14 @@ extension Clients {
     }
 
     public func updateSource(
-      request: UpdateSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Source {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateSource",
         action: {
-          (r: UpdateSourceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateSourceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSecurityCenterV2.Source
           in
           return try await self.inner.updateSource(request: r, options: o)
@@ -654,29 +651,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -684,29 +681,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteOperation",
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "cancelOperation",
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

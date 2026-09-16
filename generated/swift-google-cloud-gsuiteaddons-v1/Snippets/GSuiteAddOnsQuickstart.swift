@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudGSuiteAddOnsV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(parent: String, ) async throws {
   let client = try GoogleCloudGSuiteAddOnsV1.GSuiteAddOnsClient()

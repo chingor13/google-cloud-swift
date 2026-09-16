@@ -15,8 +15,8 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A span represents a single operation within a trace. Spans can be
 /// nested to form a trace tree. Often, a trace contains a root span
@@ -26,7 +26,7 @@ import GoogleRpc
 /// A trace can also contain multiple root spans, or none at all.
 /// Spans do not need to be contiguous. There might be
 /// gaps or overlaps between spans in a trace.
-public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Span: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the span in the following format:
@@ -63,12 +63,12 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// kept by the local machine where the span execution starts. On the server
   /// side, this is the time when the server's application handler starts
   /// running.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Required. The end time of the span. On the client side, this is the time
   /// kept by the local machine where the span execution ends. On the server
   /// side, this is the time when the server application handler stops running.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// A set of attributes on the span. You can have up to 32 attributes per
   /// span.
@@ -90,18 +90,18 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Set this parameter to indicate whether this span is in
   /// the same process as its parent. If you do not set this parameter,
   /// Trace is unable to take advantage of this helpful information.
-  public var sameProcessAsParentSpan: GoogleCloudWKT.BoolValue? = nil
+  public var sameProcessAsParentSpan: GoogleWKT.BoolValue? = nil
 
   /// Optional. The number of child spans that were generated while this span
   /// was active. If set, allows implementation to detect missing child spans.
-  public var childSpanCount: GoogleCloudWKT.Int32Value? = nil
+  public var childSpanCount: GoogleWKT.Int32Value? = nil
 
   /// Optional. Distinguishes between spans generated in a particular context.
   /// For example, two spans with the same name may be distinguished using
   /// `CLIENT` (caller) and `SERVER` (callee) to identify an RPC call.
   public var spanKind: Span.SpanKind = Span.SpanKind()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Span`.
   public init() {}
@@ -170,24 +170,23 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.parentSpanId = value
     }
     self.displayName = try container.decodeIfPresent(TruncatableString.self, forKey: .displayName)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     self.attributes = try container.decodeIfPresent(Span.Attributes.self, forKey: .attributes)
     self.stackTrace = try container.decodeIfPresent(StackTrace.self, forKey: .stackTrace)
     self.timeEvents = try container.decodeIfPresent(Span.TimeEvents.self, forKey: .timeEvents)
     self.links = try container.decodeIfPresent(Span.Links.self, forKey: .links)
     self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
     self.sameProcessAsParentSpan = try container.decodeIfPresent(
-      GoogleCloudWKT.BoolValue.self, forKey: .sameProcessAsParentSpan)
+      GoogleWKT.BoolValue.self, forKey: .sameProcessAsParentSpan)
     self.childSpanCount = try container.decodeIfPresent(
-      GoogleCloudWKT.Int32Value.self, forKey: .childSpanCount)
+      GoogleWKT.Int32Value.self, forKey: .childSpanCount)
     if let value = try container.decodeIfPresent(Span.SpanKind.self, forKey: .spanKind) {
       self.spanKind = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -213,7 +212,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// A set of attributes as key-value pairs.
-  public struct Attributes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Attributes: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A set of attributes. Each attribute's key can be up to 128 bytes
@@ -230,7 +229,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// If this value is 0 then all attributes are valid.
     public var droppedAttributesCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Attributes`.
     public init() {}
@@ -277,7 +276,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -293,26 +292,26 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudtrace.v2.Span.Attributes"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A time-stamped annotation or message event in the Span.
-  public struct TimeEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TimeEvent: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The timestamp indicating the time the event occurred.
-    public var time: GoogleCloudWKT.Timestamp? = nil
+    public var time: GoogleWKT.Timestamp? = nil
 
     /// A `TimeEvent` can contain either an `Annotation` object or a
     /// `MessageEvent` object, but not both.
     public var value: OneOf_Value? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TimeEvent`.
     public init() {}
@@ -349,7 +348,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.time = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .time)
+      self.time = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .time)
 
       var value: OneOf_Value? = nil
       let valueCheckAndSet = {
@@ -374,7 +373,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.value = value
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -396,7 +395,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Text annotation with a set of attributes.
-    public struct Annotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Annotation: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A user-supplied message describing the event. The maximum length for
@@ -407,7 +406,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// per Annotation.
       public var attributes: Span.Attributes? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Annotation`.
       public init() {}
@@ -447,7 +446,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.attributes = try container.decodeIfPresent(Span.Attributes.self, forKey: .attributes)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -463,16 +462,16 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.devtools.cloudtrace.v2.Span.TimeEvent.Annotation"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// An event describing a message sent/received between Spans.
-    public struct MessageEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MessageEvent: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Type of MessageEvent. Indicates whether the message was sent or
@@ -491,7 +490,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// size.
       public var compressedSizeBytes: Swift.Int64 = Swift.Int64()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MessageEvent`.
       public init() {}
@@ -549,7 +548,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -672,11 +671,11 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.devtools.cloudtrace.v2.Span.TimeEvent.MessageEvent"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -692,18 +691,18 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudtrace.v2.Span.TimeEvent"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A collection of `TimeEvent`s. A `TimeEvent` is a time-stamped annotation
   /// on the span, consisting of either user-supplied key:value pairs, or
   /// details of a message sent/received between Spans.
-  public struct TimeEvents: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TimeEvents: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A collection of `TimeEvent`s.
@@ -717,7 +716,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// If the value is 0, then no message events were dropped.
     public var droppedMessageEventsCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TimeEvents`.
     public init() {}
@@ -769,7 +768,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -786,11 +785,11 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudtrace.v2.Span.TimeEvents"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -798,7 +797,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// different trace. For example, this can be used in batching operations,
   /// where a single batch handler processes multiple requests from different
   /// traces or when the handler receives a request from a different project.
-  public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Link: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The `[TRACE_ID]` for a trace within a project.
@@ -814,7 +813,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// specified per link.
     public var attributes: Span.Attributes? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Link`.
     public init() {}
@@ -865,7 +864,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.attributes = try container.decodeIfPresent(Span.Attributes.self, forKey: .attributes)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -989,17 +988,17 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudtrace.v2.Span.Link"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A collection of links, which are references from this span to a span
   /// in the same or different trace.
-  public struct Links: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Links: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A collection of links.
@@ -1009,7 +1008,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// this value is 0, then no links were dropped.
     public var droppedLinksCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Links`.
     public init() {}
@@ -1052,7 +1051,7 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1068,11 +1067,11 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudtrace.v2.Span.Links"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1215,10 +1214,10 @@ public struct Span: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudtrace.v2.Span"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

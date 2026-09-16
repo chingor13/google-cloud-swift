@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudTalentV4
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: CompanyServiceClient, projectId: String, tenantId: String, companyId: String)
   async throws
@@ -30,7 +30,7 @@ func sample(client: CompanyServiceClient, projectId: String, tenantId: String, c
         $0.company = Company().with {
           $0.name = "projects/\(projectId)/tenants/\(tenantId)/companies/\(companyId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Malicious URI Filter Result.
-public struct MaliciousUriFilterResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MaliciousUriFilterResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Reports whether Malicious URI filter was successfully executed
@@ -38,7 +38,7 @@ public struct MaliciousUriFilterResult: Codable, Equatable, GoogleCloudWKT._AnyP
   /// List of Malicious URIs found in data.
   public var maliciousUriMatchedItems: [MaliciousUriFilterResult.MaliciousUriMatchedItem] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MaliciousUriFilterResult`.
   public init() {}
@@ -94,7 +94,7 @@ public struct MaliciousUriFilterResult: Codable, Equatable, GoogleCloudWKT._AnyP
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -111,7 +111,7 @@ public struct MaliciousUriFilterResult: Codable, Equatable, GoogleCloudWKT._AnyP
 
   /// Information regarding malicious URI and its location within the input
   /// content.
-  public struct MaliciousUriMatchedItem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MaliciousUriMatchedItem: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Malicious URI.
@@ -122,7 +122,7 @@ public struct MaliciousUriFilterResult: Codable, Equatable, GoogleCloudWKT._AnyP
     /// ByteItemType.PLAINTEXT_UTF8
     public var locations: [RangeInfo] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MaliciousUriMatchedItem`.
     public init() {}
@@ -165,7 +165,7 @@ public struct MaliciousUriFilterResult: Codable, Equatable, GoogleCloudWKT._AnyP
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -182,21 +182,21 @@ public struct MaliciousUriFilterResult: Codable, Equatable, GoogleCloudWKT._AnyP
       return
         "type.googleapis.com/google.cloud.modelarmor.v1.MaliciousUriFilterResult.MaliciousUriMatchedItem"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.modelarmor.v1.MaliciousUriFilterResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

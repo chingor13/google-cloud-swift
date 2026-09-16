@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func createDashboard(
-      request: CreateDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringDashboardV1.Dashboard {
       try await self._intercept(
         request: request,
         options: options,
         name: "createDashboard",
         action: {
-          (r: CreateDashboardRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateDashboardRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringDashboardV1.Dashboard
           in
           return try await self.inner.createDashboard(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func listDashboards(
-      request: ListDashboardsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDashboardsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringDashboardV1.ListDashboardsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listDashboards",
         action: {
-          (r: ListDashboardsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDashboardsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringDashboardV1.ListDashboardsResponse
           in
           return try await self.inner.listDashboards(request: r, options: o)
@@ -87,14 +87,14 @@ extension Clients {
     }
 
     public func getDashboard(
-      request: GetDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringDashboardV1.Dashboard {
       try await self._intercept(
         request: request,
         options: options,
         name: "getDashboard",
         action: {
-          (r: GetDashboardRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetDashboardRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringDashboardV1.Dashboard
           in
           return try await self.inner.getDashboard(request: r, options: o)
@@ -102,27 +102,26 @@ extension Clients {
     }
 
     public func deleteDashboard(
-      request: DeleteDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteDashboard",
-        action: {
-          (r: DeleteDashboardRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteDashboardRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteDashboard(request: r, options: o)
         })
     }
 
     public func updateDashboard(
-      request: UpdateDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringDashboardV1.Dashboard {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateDashboard",
         action: {
-          (r: UpdateDashboardRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateDashboardRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringDashboardV1.Dashboard
           in
           return try await self.inner.updateDashboard(request: r, options: o)

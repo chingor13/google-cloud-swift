@@ -16,67 +16,67 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AuditManagerStub: Sendable {
     func enrollResource(
-      request: EnrollResourceRequest, options: GoogleCloudGax.RequestOptions
+      request: EnrollResourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.Enrollment
 
     func generateAuditScopeReport(
-      request: GenerateAuditScopeReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAuditScopeReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.AuditScopeReport
 
     func generateAuditReport(
-      request: GenerateAuditReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAuditReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listAuditReports(
-      request: ListAuditReportsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAuditReportsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.ListAuditReportsResponse
 
     func getAuditReport(
-      request: GetAuditReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAuditReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.AuditReport
 
     func getResourceEnrollmentStatus(
-      request: GetResourceEnrollmentStatusRequest, options: GoogleCloudGax.RequestOptions
+      request: GetResourceEnrollmentStatusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.ResourceEnrollmentStatus
 
     func listResourceEnrollmentStatuses(
-      request: ListResourceEnrollmentStatusesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListResourceEnrollmentStatusesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.ListResourceEnrollmentStatusesResponse
 
     func listControls(
-      request: ListControlsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListControlsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAuditManagerV1.ListControlsResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

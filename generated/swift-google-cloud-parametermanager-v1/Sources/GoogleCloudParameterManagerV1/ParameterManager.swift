@@ -19,8 +19,8 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service describing handlers for resources
 ///
@@ -29,7 +29,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   let inner: any Clients.ParameterManagerStub
 
   /// Creates a new `ParameterManagerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ParameterManagerStub = try Clients.ParameterManagerTransport(options)
     inner = Clients.ParameterManagerRetry(inner, options: options)
     if let logger = options.logger {
@@ -42,7 +42,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   ///
   /// @Snippet(path: "ParameterManager_ListParameters")
   public func listParameters(
-    request: ListParametersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListParametersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.ListParametersResponse {
     try await self.inner.listParameters(request: request, options: options)
   }
@@ -51,7 +51,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   ///
   /// @Snippet(path: "ParameterManager_ListParameters")
   public func listParameters(
-    byItem: ListParametersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListParametersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Parameter, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudParameterManagerV1.ListParametersResponse in
@@ -59,14 +59,14 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
       request.pageToken = token
       return try await self.listParameters(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Parameter.
   ///
   /// @Snippet(path: "ParameterManager_GetParameter")
   public func getParameter(
-    request: GetParameterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetParameterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.Parameter {
     try await self.inner.getParameter(request: request, options: options)
   }
@@ -75,7 +75,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   ///
   /// @Snippet(path: "ParameterManager_CreateParameter")
   public func createParameter(
-    request: CreateParameterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateParameterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.Parameter {
     try await self.inner.createParameter(request: request, options: options)
   }
@@ -84,7 +84,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   ///
   /// @Snippet(path: "ParameterManager_UpdateParameter")
   public func updateParameter(
-    request: UpdateParameterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateParameterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.Parameter {
     try await self.inner.updateParameter(request: request, options: options)
   }
@@ -93,7 +93,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   ///
   /// @Snippet(path: "ParameterManager_DeleteParameter")
   public func deleteParameter(
-    request: DeleteParameterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteParameterRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteParameter(request: request, options: options)
   }
@@ -102,7 +102,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   ///
   /// @Snippet(path: "ParameterManager_ListParameterVersions")
   public func listParameterVersions(
-    request: ListParameterVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListParameterVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.ListParameterVersionsResponse {
     try await self.inner.listParameterVersions(request: request, options: options)
   }
@@ -111,7 +111,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   ///
   /// @Snippet(path: "ParameterManager_ListParameterVersions")
   public func listParameterVersions(
-    byItem: ListParameterVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListParameterVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ParameterVersion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -120,14 +120,14 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
       request.pageToken = token
       return try await self.listParameterVersions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single ParameterVersion.
   ///
   /// @Snippet(path: "ParameterManager_GetParameterVersion")
   public func getParameterVersion(
-    request: GetParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetParameterVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion {
     try await self.inner.getParameterVersion(request: request, options: options)
   }
@@ -136,7 +136,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   ///
   /// @Snippet(path: "ParameterManager_RenderParameterVersion")
   public func renderParameterVersion(
-    request: RenderParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: RenderParameterVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.RenderParameterVersionResponse {
     try await self.inner.renderParameterVersion(request: request, options: options)
   }
@@ -145,7 +145,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   ///
   /// @Snippet(path: "ParameterManager_CreateParameterVersion")
   public func createParameterVersion(
-    request: CreateParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateParameterVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion {
     try await self.inner.createParameterVersion(request: request, options: options)
   }
@@ -154,7 +154,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   ///
   /// @Snippet(path: "ParameterManager_UpdateParameterVersion")
   public func updateParameterVersion(
-    request: UpdateParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateParameterVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion {
     try await self.inner.updateParameterVersion(request: request, options: options)
   }
@@ -163,7 +163,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   ///
   /// @Snippet(path: "ParameterManager_DeleteParameterVersion")
   public func deleteParameterVersion(
-    request: DeleteParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteParameterVersionRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteParameterVersion(request: request, options: options)
   }
@@ -172,7 +172,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   ///
   /// @Snippet(path: "ParameterManager_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -181,7 +181,7 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
   ///
   /// @Snippet(path: "ParameterManager_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -189,14 +189,14 @@ public final class ParameterManagerClient: Clients.ParameterManagerProtocol, Sen
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "ParameterManager_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -250,7 +250,7 @@ extension Clients {
     /// See `ParameterManagerClient.updateParameter`.
     func updateParameter(
       parameter: Parameter?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudParameterManagerV1.Parameter
 
     /// See `ParameterManagerClient.deleteParameter`.
@@ -311,7 +311,7 @@ extension Clients {
     /// See `ParameterManagerClient.updateParameterVersion`.
     func updateParameterVersion(
       parameterVersion: ParameterVersion?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion
 
     /// See `ParameterManagerClient.deleteParameterVersion`.
@@ -337,82 +337,82 @@ extension Clients {
 
     /// See `ParameterManagerClient.listParameters`.
     func listParameters(
-      request: ListParametersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListParametersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ListParametersResponse
 
     /// See `ParameterManagerClient.listParameters`.
     func listParameters(
-      byItem: ListParametersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListParametersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Parameter, Swift.Error>
 
     /// See `ParameterManagerClient.getParameter`.
     func getParameter(
-      request: GetParameterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetParameterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.Parameter
 
     /// See `ParameterManagerClient.createParameter`.
     func createParameter(
-      request: CreateParameterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateParameterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.Parameter
 
     /// See `ParameterManagerClient.updateParameter`.
     func updateParameter(
-      request: UpdateParameterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateParameterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.Parameter
 
     /// See `ParameterManagerClient.deleteParameter`.
     func deleteParameter(
-      request: DeleteParameterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteParameterRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ParameterManagerClient.listParameterVersions`.
     func listParameterVersions(
-      request: ListParameterVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListParameterVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ListParameterVersionsResponse
 
     /// See `ParameterManagerClient.listParameterVersions`.
     func listParameterVersions(
-      byItem: ListParameterVersionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListParameterVersionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ParameterVersion, Swift.Error>
 
     /// See `ParameterManagerClient.getParameterVersion`.
     func getParameterVersion(
-      request: GetParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion
 
     /// See `ParameterManagerClient.renderParameterVersion`.
     func renderParameterVersion(
-      request: RenderParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: RenderParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.RenderParameterVersionResponse
 
     /// See `ParameterManagerClient.createParameterVersion`.
     func createParameterVersion(
-      request: CreateParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion
 
     /// See `ParameterManagerClient.updateParameterVersion`.
     func updateParameterVersion(
-      request: UpdateParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion
 
     /// See `ParameterManagerClient.deleteParameterVersion`.
     func deleteParameterVersion(
-      request: DeleteParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ParameterManagerClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `ParameterManagerClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `ParameterManagerClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }
@@ -426,9 +426,9 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func listParameters(
-    request: ListParametersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListParametersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.ListParametersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listParameters(
@@ -438,13 +438,13 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func listParameters(
-    byItem: ListParametersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListParametersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Parameter, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudParameterManagerV1.ListParametersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listParameters(
@@ -463,9 +463,9 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func getParameter(
-    request: GetParameterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetParameterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.Parameter {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getParameter(
@@ -484,9 +484,9 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func createParameter(
-    request: CreateParameterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateParameterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.Parameter {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createParameter(
@@ -509,14 +509,14 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func updateParameter(
-    request: UpdateParameterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateParameterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.Parameter {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateParameter(
     parameter: Parameter?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudParameterManagerV1.Parameter {
     let request = UpdateParameterRequest().with {
       $0.parameter = parameter
@@ -530,9 +530,9 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func deleteParameter(
-    request: DeleteParameterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteParameterRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteParameter(
@@ -551,9 +551,9 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func listParameterVersions(
-    request: ListParameterVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListParameterVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.ListParameterVersionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listParameterVersions(
@@ -563,14 +563,14 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func listParameterVersions(
-    byItem: ListParameterVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListParameterVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ParameterVersion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudParameterManagerV1.ListParameterVersionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listParameterVersions(
@@ -589,9 +589,9 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func getParameterVersion(
-    request: GetParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetParameterVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getParameterVersion(
@@ -610,9 +610,9 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func renderParameterVersion(
-    request: RenderParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: RenderParameterVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.RenderParameterVersionResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func renderParameterVersion(
@@ -631,9 +631,9 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func createParameterVersion(
-    request: CreateParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateParameterVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createParameterVersion(
@@ -656,14 +656,14 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func updateParameterVersion(
-    request: UpdateParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateParameterVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateParameterVersion(
     parameterVersion: ParameterVersion?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion {
     let request = UpdateParameterVersionRequest().with {
       $0.parameterVersion = parameterVersion
@@ -677,9 +677,9 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func deleteParameterVersion(
-    request: DeleteParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteParameterVersionRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteParameterVersion(
@@ -698,9 +698,9 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -710,13 +710,13 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -726,8 +726,8 @@ extension Clients.ParameterManagerProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

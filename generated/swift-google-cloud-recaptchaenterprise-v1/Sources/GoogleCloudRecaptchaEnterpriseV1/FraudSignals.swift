@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Fraud signals describing users and cards involved in the transaction.
-public struct FraudSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FraudSignals: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Signals describing the end user in this transaction.
@@ -28,7 +28,7 @@ public struct FraudSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// transaction.
   public var cardSignals: FraudSignals.CardSignals? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FraudSignals`.
   public init() {}
@@ -69,7 +69,7 @@ public struct FraudSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       FraudSignals.CardSignals.self, forKey: .cardSignals)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -83,7 +83,7 @@ public struct FraudSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Signals describing the user involved in this transaction.
-  public struct UserSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UserSignals: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. This user (based on email, phone, and other identifiers) has
@@ -95,7 +95,7 @@ public struct FraudSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// temporary phone number, or fake shipping address.
     public var syntheticRisk: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UserSignals`.
     public init() {}
@@ -139,7 +139,7 @@ public struct FraudSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -155,22 +155,22 @@ public struct FraudSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.FraudSignals.UserSignals"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Signals describing the payment card used in this transaction.
-  public struct CardSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CardSignals: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The labels for the payment card in this transaction.
     public var cardLabels: [FraudSignals.CardSignals.CardLabel] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CardSignals`.
     public init() {}
@@ -210,7 +210,7 @@ public struct FraudSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -341,21 +341,21 @@ public struct FraudSignals: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.FraudSignals.CardSignals"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.FraudSignals"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

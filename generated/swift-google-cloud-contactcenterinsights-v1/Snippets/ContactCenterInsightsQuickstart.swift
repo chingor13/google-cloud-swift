@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudContactCenterInsightsV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(parent: String, ) async throws {
   let client = try GoogleCloudContactCenterInsightsV1.ContactCenterInsightsClient()

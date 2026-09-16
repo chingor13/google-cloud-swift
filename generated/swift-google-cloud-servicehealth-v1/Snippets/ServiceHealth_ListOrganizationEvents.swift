@@ -19,7 +19,7 @@
 import Foundation
 import GoogleCloudServiceHealthV1
 import GoogleCloudLocation
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: ServiceHealthClient, organizationId: String, locationId: String) async throws {
   let items = try client.listOrganizationEvents(

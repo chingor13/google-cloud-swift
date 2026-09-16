@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Enables services that service consumers want to use on Google Cloud Platform,
 /// lists the available or enabled services, or disables services that service
@@ -32,11 +32,11 @@ import GoogleCloudGax
 /// @Snippet(path: "ServiceUsageQuickstart")
 public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   let inner: any Clients.ServiceUsageStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `ServiceUsageClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ServiceUsageStub = try Clients.ServiceUsageTransport(options)
     inner = Clients.ServiceUsageRetry(inner, options: options)
     if let logger = options.logger {
@@ -51,7 +51,7 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   ///
   /// @Snippet(path: "ServiceUsage_EnableService")
   public func enableService(
-    request: EnableServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: EnableServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.enableService(request: request, options: options)
   }
@@ -60,22 +60,21 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   ///
   /// @Snippet(path: "ServiceUsage_EnableService")
   public func enableService(
-    withPolling: EnableServiceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<EnableServiceResponse> {
+    withPolling: EnableServiceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<EnableServiceResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<EnableServiceResponse>.State in
+        -> GoogleGax._PollableOperationImpl<EnableServiceResponse>.State in
       return try op._extractStatus(EnableServiceResponse.self)
     }
     let rawOp = try await self.enableService(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<EnableServiceResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<EnableServiceResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -93,7 +92,7 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   ///
   /// @Snippet(path: "ServiceUsage_DisableService")
   public func disableService(
-    request: DisableServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: DisableServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.disableService(request: request, options: options)
   }
@@ -108,22 +107,22 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   ///
   /// @Snippet(path: "ServiceUsage_DisableService")
   public func disableService(
-    withPolling: DisableServiceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DisableServiceResponse> {
+    withPolling: DisableServiceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DisableServiceResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DisableServiceResponse>.State in
+        -> GoogleGax._PollableOperationImpl<DisableServiceResponse>.State in
       return try op._extractStatus(DisableServiceResponse.self)
     }
     let rawOp = try await self.disableService(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DisableServiceResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<DisableServiceResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -135,7 +134,7 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   ///
   /// @Snippet(path: "ServiceUsage_GetService")
   public func getService(
-    request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApiServiceUsageV1.Service {
     try await self.inner.getService(request: request, options: options)
   }
@@ -156,7 +155,7 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   ///
   /// @Snippet(path: "ServiceUsage_ListServices")
   public func listServices(
-    request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListServicesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApiServiceUsageV1.ListServicesResponse {
     try await self.inner.listServices(request: request, options: options)
   }
@@ -177,7 +176,7 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   ///
   /// @Snippet(path: "ServiceUsage_ListServices")
   public func listServices(
-    byItem: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListServicesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Service, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleApiServiceUsageV1.ListServicesResponse in
@@ -185,7 +184,7 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
       request.pageToken = token
       return try await self.listServices(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Enable multiple services on a project. The operation is atomic: if enabling
@@ -194,7 +193,7 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   ///
   /// @Snippet(path: "ServiceUsage_BatchEnableServices")
   public func batchEnableServices(
-    request: BatchEnableServicesRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchEnableServicesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.batchEnableServices(request: request, options: options)
   }
@@ -205,22 +204,22 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   ///
   /// @Snippet(path: "ServiceUsage_BatchEnableServices")
   public func batchEnableServices(
-    withPolling: BatchEnableServicesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchEnableServicesResponse> {
+    withPolling: BatchEnableServicesRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BatchEnableServicesResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<BatchEnableServicesResponse>.State in
+        -> GoogleGax._PollableOperationImpl<BatchEnableServicesResponse>.State in
       return try op._extractStatus(BatchEnableServicesResponse.self)
     }
     let rawOp = try await self.batchEnableServices(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<BatchEnableServicesResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<BatchEnableServicesResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -233,7 +232,7 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   ///
   /// @Snippet(path: "ServiceUsage_BatchGetServices")
   public func batchGetServices(
-    request: BatchGetServicesRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchGetServicesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApiServiceUsageV1.BatchGetServicesResponse {
     try await self.inner.batchGetServices(request: request, options: options)
   }
@@ -244,7 +243,7 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   ///
   /// @Snippet(path: "ServiceUsage_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -255,7 +254,7 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   ///
   /// @Snippet(path: "ServiceUsage_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -263,7 +262,7 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -272,7 +271,7 @@ public final class ServiceUsageClient: Clients.ServiceUsageProtocol, Sendable {
   ///
   /// @Snippet(path: "ServiceUsage_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -289,14 +288,14 @@ extension Clients {
     func enableService(request: EnableServiceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ServiceUsageClient.enableService`.
-    func enableService(withPolling: EnableServiceRequest) async throws -> any GoogleCloudGax
+    func enableService(withPolling: EnableServiceRequest) async throws -> any GoogleGax
       .PollableOperation<EnableServiceResponse>
 
     /// See `ServiceUsageClient.disableService`.
     func disableService(request: DisableServiceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ServiceUsageClient.disableService`.
-    func disableService(withPolling: DisableServiceRequest) async throws -> any GoogleCloudGax
+    func disableService(withPolling: DisableServiceRequest) async throws -> any GoogleGax
       .PollableOperation<DisableServiceResponse>
 
     /// See `ServiceUsageClient.getService`.
@@ -316,8 +315,8 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `ServiceUsageClient.batchEnableServices`.
-    func batchEnableServices(withPolling: BatchEnableServicesRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<BatchEnableServicesResponse>
+    func batchEnableServices(withPolling: BatchEnableServicesRequest) async throws -> any GoogleGax
+      .PollableOperation<BatchEnableServicesResponse>
 
     /// See `ServiceUsageClient.batchGetServices`.
     func batchGetServices(request: BatchGetServicesRequest) async throws
@@ -340,62 +339,62 @@ extension Clients {
 
     /// See `ServiceUsageClient.enableService`.
     func enableService(
-      request: EnableServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: EnableServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ServiceUsageClient.enableService`.
     func enableService(
-      withPolling: EnableServiceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<EnableServiceResponse>
+      withPolling: EnableServiceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<EnableServiceResponse>
 
     /// See `ServiceUsageClient.disableService`.
     func disableService(
-      request: DisableServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: DisableServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ServiceUsageClient.disableService`.
     func disableService(
-      withPolling: DisableServiceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DisableServiceResponse>
+      withPolling: DisableServiceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DisableServiceResponse>
 
     /// See `ServiceUsageClient.getService`.
     func getService(
-      request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceUsageV1.Service
 
     /// See `ServiceUsageClient.listServices`.
     func listServices(
-      request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceUsageV1.ListServicesResponse
 
     /// See `ServiceUsageClient.listServices`.
     func listServices(
-      byItem: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListServicesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Service, Swift.Error>
 
     /// See `ServiceUsageClient.batchEnableServices`.
     func batchEnableServices(
-      request: BatchEnableServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchEnableServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ServiceUsageClient.batchEnableServices`.
     func batchEnableServices(
-      withPolling: BatchEnableServicesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchEnableServicesResponse>
+      withPolling: BatchEnableServicesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BatchEnableServicesResponse>
 
     /// See `ServiceUsageClient.batchGetServices`.
     func batchGetServices(
-      request: BatchGetServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchGetServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceUsageV1.BatchGetServicesResponse
 
     /// See `ServiceUsageClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `ServiceUsageClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
   }
 }
@@ -409,25 +408,24 @@ extension Clients.ServiceUsageProtocol {
   }
 
   public func enableService(
-    request: EnableServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: EnableServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func enableService(withPolling: EnableServiceRequest) async throws -> any GoogleCloudGax
+  public func enableService(withPolling: EnableServiceRequest) async throws -> any GoogleGax
     .PollableOperation<EnableServiceResponse>
   {
     try await self.enableService(withPolling: withPolling, options: .init())
   }
 
   public func enableService(
-    withPolling: EnableServiceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<EnableServiceResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<EnableServiceResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: EnableServiceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<EnableServiceResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<EnableServiceResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -438,25 +436,25 @@ extension Clients.ServiceUsageProtocol {
   }
 
   public func disableService(
-    request: DisableServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: DisableServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func disableService(withPolling: DisableServiceRequest) async throws -> any GoogleCloudGax
+  public func disableService(withPolling: DisableServiceRequest) async throws -> any GoogleGax
     .PollableOperation<DisableServiceResponse>
   {
     try await self.disableService(withPolling: withPolling, options: .init())
   }
 
   public func disableService(
-    withPolling: DisableServiceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DisableServiceResponse> {
+    withPolling: DisableServiceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DisableServiceResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<DisableServiceResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<DisableServiceResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -466,9 +464,9 @@ extension Clients.ServiceUsageProtocol {
   }
 
   public func getService(
-    request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApiServiceUsageV1.Service {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listServices(request: ListServicesRequest) async throws
@@ -478,9 +476,9 @@ extension Clients.ServiceUsageProtocol {
   }
 
   public func listServices(
-    request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListServicesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApiServiceUsageV1.ListServicesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listServices(
@@ -490,13 +488,13 @@ extension Clients.ServiceUsageProtocol {
   }
 
   public func listServices(
-    byItem: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListServicesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Service, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleApiServiceUsageV1.ListServicesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func batchEnableServices(request: BatchEnableServicesRequest) async throws
@@ -506,25 +504,25 @@ extension Clients.ServiceUsageProtocol {
   }
 
   public func batchEnableServices(
-    request: BatchEnableServicesRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchEnableServicesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func batchEnableServices(withPolling: BatchEnableServicesRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<BatchEnableServicesResponse>
+    -> any GoogleGax.PollableOperation<BatchEnableServicesResponse>
   {
     try await self.batchEnableServices(withPolling: withPolling, options: .init())
   }
 
   public func batchEnableServices(
-    withPolling: BatchEnableServicesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchEnableServicesResponse> {
+    withPolling: BatchEnableServicesRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BatchEnableServicesResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<BatchEnableServicesResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<BatchEnableServicesResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -535,9 +533,9 @@ extension Clients.ServiceUsageProtocol {
   }
 
   public func batchGetServices(
-    request: BatchGetServicesRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchGetServicesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApiServiceUsageV1.BatchGetServicesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -547,9 +545,9 @@ extension Clients.ServiceUsageProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -559,13 +557,13 @@ extension Clients.ServiceUsageProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -586,9 +584,9 @@ extension Clients.ServiceUsageProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

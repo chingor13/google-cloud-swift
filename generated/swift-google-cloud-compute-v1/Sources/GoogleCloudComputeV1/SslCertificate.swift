@@ -16,7 +16,7 @@
 
 #if RegionSslCertificates || SslCertificates
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents an SSL certificate resource.
   ///
@@ -51,7 +51,7 @@
   /// Creating and using SSL certificates,SSL certificates
   /// quotas and limits, and
   /// Troubleshooting SSL certificates.
-  public struct SslCertificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SslCertificate: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A value read into memory from a certificate file. The certificate file must
@@ -112,7 +112,7 @@
     /// "MANAGED". If not specified, the certificate is self-managed and the fieldscertificate and private_key are used.
     public var type: SslCertificate.Type_? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SslCertificate`.
     public init() {}
@@ -194,7 +194,7 @@
       self.type = try container.decodeIfPresent(SslCertificate.Type_.self, forKey: .type)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -328,11 +328,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.SslCertificate"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

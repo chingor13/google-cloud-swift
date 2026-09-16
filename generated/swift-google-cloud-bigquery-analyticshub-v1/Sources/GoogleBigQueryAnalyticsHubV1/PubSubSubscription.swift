@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines the destination Pub/Sub subscription.
 /// If none of `push_config`, `bigquery_config`, `cloud_storage_config`,
 /// `pubsub_export_config`, or `pubsublite_export_config`
 /// is set, then the subscriber will pull and ack messages using API methods. At
 /// most one of these fields may be set.
-public struct PubSubSubscription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PubSubSubscription: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Name of the subscription.
@@ -76,7 +76,7 @@ public struct PubSubSubscription: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// is true, then this also configures the retention of acknowledged messages,
   /// and thus configures how far back in time a `Seek` can be done. Defaults to
   /// 7 days. Cannot be more than 31 days or less than 10 minutes.
-  public var messageRetentionDuration: GoogleCloudWKT.Duration? = nil
+  public var messageRetentionDuration: GoogleWKT.Duration? = nil
 
   /// Optional. See [Creating and managing
   /// labels](https://cloud.google.com/pubsub/docs/labels).
@@ -154,7 +154,7 @@ public struct PubSubSubscription: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   ///   "123/costCenter": "marketing"
   public var tags: [Swift.String: Swift.String] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PubSubSubscription`.
   public init() {}
@@ -234,7 +234,7 @@ public struct PubSubSubscription: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       self.retainAckedMessages = value
     }
     self.messageRetentionDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .messageRetentionDuration)
+      GoogleWKT.Duration.self, forKey: .messageRetentionDuration)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -268,7 +268,7 @@ public struct PubSubSubscription: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -299,10 +299,10 @@ public struct PubSubSubscription: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.analyticshub.v1.PubSubSubscription"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

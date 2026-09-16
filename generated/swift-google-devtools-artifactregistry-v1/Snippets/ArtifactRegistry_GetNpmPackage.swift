@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudArtifactRegistryV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: ArtifactRegistryClient, projectId: String, locationId: String, repositoryId: String,

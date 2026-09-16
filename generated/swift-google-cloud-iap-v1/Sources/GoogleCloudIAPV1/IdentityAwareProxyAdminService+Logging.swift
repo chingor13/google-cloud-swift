@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "setIamPolicy",
         action: {
-          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.setIamPolicy(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getIamPolicy",
         action: {
-          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.getIamPolicy(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "testIamPermissions",
         action: {
-          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.TestIamPermissionsResponse
           in
           return try await self.inner.testIamPermissions(request: r, options: o)
@@ -103,14 +103,14 @@ extension Clients {
     }
 
     public func getIapSettings(
-      request: GetIapSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIapSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.IapSettings {
       try await self._intercept(
         request: request,
         options: options,
         name: "getIapSettings",
         action: {
-          (r: GetIapSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetIapSettingsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudIAPV1.IapSettings
           in
           return try await self.inner.getIapSettings(request: r, options: o)
@@ -118,14 +118,14 @@ extension Clients {
     }
 
     public func updateIapSettings(
-      request: UpdateIapSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIapSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.IapSettings {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateIapSettings",
         action: {
-          (r: UpdateIapSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateIapSettingsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudIAPV1.IapSettings
           in
           return try await self.inner.updateIapSettings(request: r, options: o)
@@ -133,14 +133,14 @@ extension Clients {
     }
 
     public func validateIapAttributeExpression(
-      request: ValidateIapAttributeExpressionRequest, options: GoogleCloudGax.RequestOptions
+      request: ValidateIapAttributeExpressionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.ValidateIapAttributeExpressionResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "validateIapAttributeExpression",
         action: {
-          (r: ValidateIapAttributeExpressionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ValidateIapAttributeExpressionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudIAPV1.ValidateIapAttributeExpressionResponse
           in
           return try await self.inner.validateIapAttributeExpression(request: r, options: o)
@@ -148,14 +148,14 @@ extension Clients {
     }
 
     public func listTunnelDestGroups(
-      request: ListTunnelDestGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTunnelDestGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.ListTunnelDestGroupsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listTunnelDestGroups",
         action: {
-          (r: ListTunnelDestGroupsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListTunnelDestGroupsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudIAPV1.ListTunnelDestGroupsResponse
           in
           return try await self.inner.listTunnelDestGroups(request: r, options: o)
@@ -163,14 +163,14 @@ extension Clients {
     }
 
     public func createTunnelDestGroup(
-      request: CreateTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTunnelDestGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.TunnelDestGroup {
       try await self._intercept(
         request: request,
         options: options,
         name: "createTunnelDestGroup",
         action: {
-          (r: CreateTunnelDestGroupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateTunnelDestGroupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudIAPV1.TunnelDestGroup
           in
           return try await self.inner.createTunnelDestGroup(request: r, options: o)
@@ -178,14 +178,14 @@ extension Clients {
     }
 
     public func getTunnelDestGroup(
-      request: GetTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTunnelDestGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.TunnelDestGroup {
       try await self._intercept(
         request: request,
         options: options,
         name: "getTunnelDestGroup",
         action: {
-          (r: GetTunnelDestGroupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetTunnelDestGroupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudIAPV1.TunnelDestGroup
           in
           return try await self.inner.getTunnelDestGroup(request: r, options: o)
@@ -193,28 +193,27 @@ extension Clients {
     }
 
     public func deleteTunnelDestGroup(
-      request: DeleteTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTunnelDestGroupRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteTunnelDestGroup",
         action: {
-          (r: DeleteTunnelDestGroupRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void
-          in
+          (r: DeleteTunnelDestGroupRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteTunnelDestGroup(request: r, options: o)
         })
     }
 
     public func updateTunnelDestGroup(
-      request: UpdateTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTunnelDestGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.TunnelDestGroup {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateTunnelDestGroup",
         action: {
-          (r: UpdateTunnelDestGroupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateTunnelDestGroupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudIAPV1.TunnelDestGroup
           in
           return try await self.inner.updateTunnelDestGroup(request: r, options: o)

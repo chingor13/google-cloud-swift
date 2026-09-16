@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudStorageInsightsV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: StorageInsightsClient, projectId: String, locationId: String) async throws {
   let response = try await client.createReportConfig(

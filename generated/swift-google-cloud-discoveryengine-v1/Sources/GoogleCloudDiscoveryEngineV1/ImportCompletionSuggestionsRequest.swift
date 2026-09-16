@@ -16,14 +16,14 @@
 
 #if CompletionService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [CompletionService.ImportCompletionSuggestions][google.cloud.discoveryengine.v1.CompletionService.ImportCompletionSuggestions]
   /// method.
   ///
   /// [google.cloud.discoveryengine.v1.CompletionService.ImportCompletionSuggestions]: <doc:CompletionServiceClient/importCompletionSuggestions(request:options:)>
-  public struct ImportCompletionSuggestionsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ImportCompletionSuggestionsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The parent data store resource name for which to import customer
@@ -38,7 +38,7 @@
     /// The source of the autocomplete suggestions.
     public var source: OneOf_Source? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ImportCompletionSuggestionsRequest`.
     public init() {}
@@ -110,7 +110,7 @@
       self.source = source
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -135,13 +135,13 @@
     }
 
     /// The inline source for CompletionSuggestions.
-    public struct InlineSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct InlineSource: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. A list of all denylist entries to import. Max of 1000 items.
       public var suggestions: [CompletionSuggestion] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `InlineSource`.
       public init() {}
@@ -181,7 +181,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -197,11 +197,11 @@
         return
           "type.googleapis.com/google.cloud.discoveryengine.v1.ImportCompletionSuggestionsRequest.InlineSource"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -219,11 +219,11 @@
       return
         "type.googleapis.com/google.cloud.discoveryengine.v1.ImportCompletionSuggestionsRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

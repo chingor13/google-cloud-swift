@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request for the
 /// [UpdateWorkflow][google.cloud.workflows.v1.Workflows.UpdateWorkflow]
 /// method.
 ///
 /// [google.cloud.workflows.v1.Workflows.UpdateWorkflow]: <doc:WorkflowsClient/updateWorkflow(request:options:)>
-public struct UpdateWorkflowRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateWorkflowRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Workflow to be updated.
@@ -30,9 +30,9 @@ public struct UpdateWorkflowRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
 
   /// List of fields to be updated. If not present, the entire workflow
   /// will be updated.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateWorkflowRequest`.
   public init() {}
@@ -68,11 +68,10 @@ public struct UpdateWorkflowRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.workflow = try container.decodeIfPresent(Workflow.self, forKey: .workflow)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -88,10 +87,10 @@ public struct UpdateWorkflowRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.workflows.v1.UpdateWorkflowRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

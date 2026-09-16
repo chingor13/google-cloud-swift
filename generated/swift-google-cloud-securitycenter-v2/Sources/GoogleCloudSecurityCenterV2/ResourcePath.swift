@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents the path of resources leading up to the resource this finding is
 /// about.
-public struct ResourcePath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ResourcePath: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The list of nodes that make the up resource path, ordered from lowest
   /// level to highest level.
   public var nodes: [ResourcePath.ResourcePathNode] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ResourcePath`.
   public init() {}
@@ -66,7 +66,7 @@ public struct ResourcePath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -80,7 +80,7 @@ public struct ResourcePath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// A node within the resource path. Each node represents a resource within the
   /// resource hierarchy.
-  public struct ResourcePathNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ResourcePathNode: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The type of resource this node represents.
@@ -92,7 +92,7 @@ public struct ResourcePath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The display name of the resource this node represents.
     public var displayName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ResourcePathNode`.
     public init() {}
@@ -142,7 +142,7 @@ public struct ResourcePath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -159,11 +159,11 @@ public struct ResourcePath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.ResourcePath.ResourcePathNode"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -324,10 +324,10 @@ public struct ResourcePath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.ResourcePath"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

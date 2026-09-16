@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A cluster instance.
-public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Identifier. Unique name of the resource in this scope including
@@ -27,7 +27,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The timestamp associated with the cluster creation request.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The current state of this cluster.
   /// Can be CREATING, READY, UPDATING, DELETING and SUSPENDED
@@ -141,7 +141,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The source to import from.
   public var importSources: OneOf_ImportSources? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Cluster`.
   public init() {}
@@ -245,8 +245,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Cluster.State.self, forKey: .state) {
       self.state = value
     }
@@ -344,7 +343,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.importSources = importSources
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -400,12 +399,12 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Represents additional information about the state of the cluster.
-  public struct StateInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StateInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var info: OneOf_Info? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StateInfo`.
     public init() {}
@@ -457,7 +456,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.info = info
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -476,7 +475,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Represents information about an updating cluster.
-    public struct UpdateInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct UpdateInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Target number of shards for redis cluster
@@ -485,7 +484,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Target number of replica nodes per shard.
       public var targetReplicaCount: Swift.Int32? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `UpdateInfo`.
       public init() {}
@@ -526,7 +525,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           Swift.Int32.self, forKey: .targetReplicaCount)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -542,11 +541,11 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.redis.cluster.v1.Cluster.StateInfo.UpdateInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -558,24 +557,24 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.redis.cluster.v1.Cluster.StateInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Backups stored in Cloud Storage buckets.
   /// The Cloud Storage buckets need to be the same region as the clusters.
-  public struct GcsBackupSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GcsBackupSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. URIs of the GCS objects to import.
     /// Example: gs://bucket1/object1, gs://bucket2/folder2/object2
     public var uris: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GcsBackupSource`.
     public init() {}
@@ -613,7 +612,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -628,16 +627,16 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.redis.cluster.v1.Cluster.GcsBackupSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Backups that generated and managed by memorystore.
-  public struct ManagedBackupSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ManagedBackupSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Example:
@@ -648,7 +647,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// In this case, it assumes the backup is under redis.googleapis.com.
     public var backup: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ManagedBackupSource`.
     public init() {}
@@ -686,7 +685,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -701,11 +700,11 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.redis.cluster.v1.Cluster.ManagedBackupSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -842,10 +841,10 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.redis.cluster.v1.Cluster"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

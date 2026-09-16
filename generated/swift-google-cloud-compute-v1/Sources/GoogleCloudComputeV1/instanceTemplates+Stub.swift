@@ -16,47 +16,46 @@
 
 #if InstanceTemplates
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol InstanceTemplatesStub: Sendable {
       func aggregatedList(
-        request: InstanceTemplatesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstanceTemplatesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceTemplateAggregatedList
 
       func delete(
-        request: InstanceTemplatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceTemplatesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: InstanceTemplatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceTemplatesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceTemplate
 
       func getIamPolicy(
-        request: InstanceTemplatesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceTemplatesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: InstanceTemplatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceTemplatesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: InstanceTemplatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceTemplatesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceTemplateList
 
       func setIamPolicy(
-        request: InstanceTemplatesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceTemplatesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
         request: InstanceTemplatesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

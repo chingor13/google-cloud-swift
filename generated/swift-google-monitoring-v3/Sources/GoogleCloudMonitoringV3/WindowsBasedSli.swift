@@ -15,22 +15,22 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A `WindowsBasedSli` defines `good_service` as the count of time windows for
 /// which the provided service was of good quality. Criteria for determining
 /// if service was good are embedded in the `window_criterion`.
-public struct WindowsBasedSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct WindowsBasedSli: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Duration over which window quality is evaluated. Must be an integer
   /// fraction of a day and at least `60s`.
-  public var windowPeriod: GoogleCloudWKT.Duration? = nil
+  public var windowPeriod: GoogleWKT.Duration? = nil
 
   /// The criterion to use for evaluating window goodness.
   public var windowCriterion: OneOf_WindowCriterion? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `WindowsBasedSli`.
   public init() {}
@@ -72,7 +72,7 @@ public struct WindowsBasedSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.windowPeriod = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .windowPeriod)
+      GoogleWKT.Duration.self, forKey: .windowPeriod)
 
     var windowCriterion: OneOf_WindowCriterion? = nil
     let windowCriterionCheckAndSet = {
@@ -107,7 +107,7 @@ public struct WindowsBasedSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.windowCriterion = windowCriterion
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -134,7 +134,7 @@ public struct WindowsBasedSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// A `PerformanceThreshold` is used when each window is good when that window
   /// has a sufficiently high `performance`.
-  public struct PerformanceThreshold: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PerformanceThreshold: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// If window `performance >= threshold`, the window is counted as good.
@@ -144,7 +144,7 @@ public struct WindowsBasedSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// performance over a window.
     public var type: OneOf_Type? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PerformanceThreshold`.
     public init() {}
@@ -208,7 +208,7 @@ public struct WindowsBasedSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.type = type
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -241,11 +241,11 @@ public struct WindowsBasedSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.WindowsBasedSli.PerformanceThreshold"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -253,7 +253,7 @@ public struct WindowsBasedSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// single `TimeSeries` satisfies `range.min <= x <= range.max`. The provided
   /// `TimeSeries` must have `ValueType = INT64` or `ValueType = DOUBLE` and
   /// `MetricKind = GAUGE`.
-  public struct MetricRange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MetricRange: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
@@ -264,7 +264,7 @@ public struct WindowsBasedSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// to an infinite value.
     public var range: Range? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MetricRange`.
     public init() {}
@@ -305,7 +305,7 @@ public struct WindowsBasedSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.range = try container.decodeIfPresent(Range.self, forKey: .range)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -321,11 +321,11 @@ public struct WindowsBasedSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.WindowsBasedSli.MetricRange"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -348,10 +348,10 @@ public struct WindowsBasedSli: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.WindowsBasedSli"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

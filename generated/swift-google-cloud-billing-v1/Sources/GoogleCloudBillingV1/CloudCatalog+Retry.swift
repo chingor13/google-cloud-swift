@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class CloudCatalogRetry: CloudCatalogStub {
     let inner: any CloudCatalogStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any CloudCatalogStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any CloudCatalogStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func listServices(
-      request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ListServicesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListServicesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListServicesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingV1.ListServicesResponse
           in
           return try await self.inner.listServices(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func listSkus(
-      request: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ListSkusResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListSkusRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListSkusRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingV1.ListSkusResponse
           in
           return try await self.inner.listSkus(request: r, options: o)

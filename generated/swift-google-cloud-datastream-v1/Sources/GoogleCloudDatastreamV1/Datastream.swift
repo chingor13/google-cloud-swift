@@ -19,21 +19,21 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Datastream service
 ///
 /// @Snippet(path: "DatastreamQuickstart")
 public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   let inner: any Clients.DatastreamStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `DatastreamClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DatastreamStub = try Clients.DatastreamTransport(options)
     inner = Clients.DatastreamRetry(inner, options: options)
     if let logger = options.logger {
@@ -49,7 +49,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListConnectionProfiles")
   public func listConnectionProfiles(
-    request: ListConnectionProfilesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConnectionProfilesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.ListConnectionProfilesResponse {
     try await self.inner.listConnectionProfiles(request: request, options: options)
   }
@@ -59,7 +59,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListConnectionProfiles")
   public func listConnectionProfiles(
-    byItem: ListConnectionProfilesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConnectionProfilesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ConnectionProfile, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDatastreamV1.ListConnectionProfilesResponse
@@ -68,14 +68,14 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
       request.pageToken = token
       return try await self.listConnectionProfiles(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Use this method to get details about a connection profile.
   ///
   /// @Snippet(path: "Datastream_GetConnectionProfile")
   public func getConnectionProfile(
-    request: GetConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConnectionProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.ConnectionProfile {
     try await self.inner.getConnectionProfile(request: request, options: options)
   }
@@ -84,7 +84,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_CreateConnectionProfile")
   public func createConnectionProfile(
-    request: CreateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateConnectionProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createConnectionProfile(request: request, options: options)
   }
@@ -93,22 +93,21 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_CreateConnectionProfile")
   public func createConnectionProfile(
-    withPolling: CreateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectionProfile> {
+    withPolling: CreateConnectionProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ConnectionProfile> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ConnectionProfile>.State in
+        -> GoogleGax._PollableOperationImpl<ConnectionProfile>.State in
       return try op._extractStatus(ConnectionProfile.self)
     }
     let rawOp = try await self.createConnectionProfile(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ConnectionProfile>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConnectionProfile>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -120,7 +119,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_UpdateConnectionProfile")
   public func updateConnectionProfile(
-    request: UpdateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConnectionProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateConnectionProfile(request: request, options: options)
   }
@@ -129,22 +128,21 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_UpdateConnectionProfile")
   public func updateConnectionProfile(
-    withPolling: UpdateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectionProfile> {
+    withPolling: UpdateConnectionProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ConnectionProfile> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ConnectionProfile>.State in
+        -> GoogleGax._PollableOperationImpl<ConnectionProfile>.State in
       return try op._extractStatus(ConnectionProfile.self)
     }
     let rawOp = try await self.updateConnectionProfile(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ConnectionProfile>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConnectionProfile>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -156,7 +154,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_DeleteConnectionProfile")
   public func deleteConnectionProfile(
-    request: DeleteConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConnectionProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteConnectionProfile(request: request, options: options)
   }
@@ -165,21 +163,21 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_DeleteConnectionProfile")
   public func deleteConnectionProfile(
-    withPolling: DeleteConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteConnectionProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteConnectionProfile(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -194,7 +192,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_DiscoverConnectionProfile")
   public func discoverConnectionProfile(
-    request: DiscoverConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: DiscoverConnectionProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.DiscoverConnectionProfileResponse {
     try await self.inner.discoverConnectionProfile(request: request, options: options)
   }
@@ -203,7 +201,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListStreams")
   public func listStreams(
-    request: ListStreamsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListStreamsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.ListStreamsResponse {
     try await self.inner.listStreams(request: request, options: options)
   }
@@ -212,7 +210,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListStreams")
   public func listStreams(
-    byItem: ListStreamsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListStreamsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Stream, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDatastreamV1.ListStreamsResponse in
@@ -220,14 +218,14 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
       request.pageToken = token
       return try await self.listStreams(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Use this method to get details about a stream.
   ///
   /// @Snippet(path: "Datastream_GetStream")
   public func getStream(
-    request: GetStreamRequest, options: GoogleCloudGax.RequestOptions
+    request: GetStreamRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.Stream {
     try await self.inner.getStream(request: request, options: options)
   }
@@ -236,7 +234,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_CreateStream")
   public func createStream(
-    request: CreateStreamRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateStreamRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createStream(request: request, options: options)
   }
@@ -245,21 +243,20 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_CreateStream")
   public func createStream(
-    withPolling: CreateStreamRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Stream> {
+    withPolling: CreateStreamRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Stream> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Stream>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Stream>.State in
       return try op._extractStatus(Stream.self)
     }
     let rawOp = try await self.createStream(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Stream>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Stream>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -271,7 +268,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_UpdateStream")
   public func updateStream(
-    request: UpdateStreamRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateStreamRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateStream(request: request, options: options)
   }
@@ -280,21 +277,20 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_UpdateStream")
   public func updateStream(
-    withPolling: UpdateStreamRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Stream> {
+    withPolling: UpdateStreamRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Stream> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Stream>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Stream>.State in
       return try op._extractStatus(Stream.self)
     }
     let rawOp = try await self.updateStream(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Stream>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Stream>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -306,7 +302,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_DeleteStream")
   public func deleteStream(
-    request: DeleteStreamRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteStreamRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteStream(request: request, options: options)
   }
@@ -315,21 +311,21 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_DeleteStream")
   public func deleteStream(
-    withPolling: DeleteStreamRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteStreamRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteStream(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -342,7 +338,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_RunStream")
   public func runStream(
-    request: RunStreamRequest, options: GoogleCloudGax.RequestOptions
+    request: RunStreamRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.runStream(request: request, options: options)
   }
@@ -352,21 +348,20 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_RunStream")
   public func runStream(
-    withPolling: RunStreamRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Stream> {
+    withPolling: RunStreamRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Stream> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Stream>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Stream>.State in
       return try op._extractStatus(Stream.self)
     }
     let rawOp = try await self.runStream(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Stream>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Stream>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -378,7 +373,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_GetStreamObject")
   public func getStreamObject(
-    request: GetStreamObjectRequest, options: GoogleCloudGax.RequestOptions
+    request: GetStreamObjectRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.StreamObject {
     try await self.inner.getStreamObject(request: request, options: options)
   }
@@ -387,7 +382,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_LookupStreamObject")
   public func lookupStreamObject(
-    request: LookupStreamObjectRequest, options: GoogleCloudGax.RequestOptions
+    request: LookupStreamObjectRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.StreamObject {
     try await self.inner.lookupStreamObject(request: request, options: options)
   }
@@ -396,7 +391,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListStreamObjects")
   public func listStreamObjects(
-    request: ListStreamObjectsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListStreamObjectsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.ListStreamObjectsResponse {
     try await self.inner.listStreamObjects(request: request, options: options)
   }
@@ -405,7 +400,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListStreamObjects")
   public func listStreamObjects(
-    byItem: ListStreamObjectsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListStreamObjectsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<StreamObject, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDatastreamV1.ListStreamObjectsResponse in
@@ -413,14 +408,14 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
       request.pageToken = token
       return try await self.listStreamObjects(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Use this method to start a backfill job for the specified stream object.
   ///
   /// @Snippet(path: "Datastream_StartBackfillJob")
   public func startBackfillJob(
-    request: StartBackfillJobRequest, options: GoogleCloudGax.RequestOptions
+    request: StartBackfillJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.StartBackfillJobResponse {
     try await self.inner.startBackfillJob(request: request, options: options)
   }
@@ -429,7 +424,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_StopBackfillJob")
   public func stopBackfillJob(
-    request: StopBackfillJobRequest, options: GoogleCloudGax.RequestOptions
+    request: StopBackfillJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.StopBackfillJobResponse {
     try await self.inner.stopBackfillJob(request: request, options: options)
   }
@@ -439,7 +434,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_FetchStaticIps")
   public func fetchStaticIps(
-    request: FetchStaticIpsRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchStaticIpsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.FetchStaticIpsResponse {
     try await self.inner.fetchStaticIps(request: request, options: options)
   }
@@ -448,7 +443,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_CreatePrivateConnection")
   public func createPrivateConnection(
-    request: CreatePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePrivateConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createPrivateConnection(request: request, options: options)
   }
@@ -457,22 +452,21 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_CreatePrivateConnection")
   public func createPrivateConnection(
-    withPolling: CreatePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PrivateConnection> {
+    withPolling: CreatePrivateConnectionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PrivateConnection> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PrivateConnection>.State in
+        -> GoogleGax._PollableOperationImpl<PrivateConnection>.State in
       return try op._extractStatus(PrivateConnection.self)
     }
     let rawOp = try await self.createPrivateConnection(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<PrivateConnection>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PrivateConnection>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -484,7 +478,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_GetPrivateConnection")
   public func getPrivateConnection(
-    request: GetPrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPrivateConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.PrivateConnection {
     try await self.inner.getPrivateConnection(request: request, options: options)
   }
@@ -494,7 +488,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListPrivateConnections")
   public func listPrivateConnections(
-    request: ListPrivateConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPrivateConnectionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.ListPrivateConnectionsResponse {
     try await self.inner.listPrivateConnections(request: request, options: options)
   }
@@ -504,7 +498,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListPrivateConnections")
   public func listPrivateConnections(
-    byItem: ListPrivateConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPrivateConnectionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PrivateConnection, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDatastreamV1.ListPrivateConnectionsResponse
@@ -513,14 +507,14 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
       request.pageToken = token
       return try await self.listPrivateConnections(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Use this method to delete a private connectivity configuration.
   ///
   /// @Snippet(path: "Datastream_DeletePrivateConnection")
   public func deletePrivateConnection(
-    request: DeletePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePrivateConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deletePrivateConnection(request: request, options: options)
   }
@@ -529,21 +523,21 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_DeletePrivateConnection")
   public func deletePrivateConnection(
-    withPolling: DeletePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeletePrivateConnectionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deletePrivateConnection(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -556,7 +550,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_CreateRoute")
   public func createRoute(
-    request: CreateRouteRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateRouteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createRoute(request: request, options: options)
   }
@@ -566,21 +560,20 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_CreateRoute")
   public func createRoute(
-    withPolling: CreateRouteRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Route> {
+    withPolling: CreateRouteRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Route> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Route>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Route>.State in
       return try op._extractStatus(Route.self)
     }
     let rawOp = try await self.createRoute(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Route>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Route>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -592,7 +585,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_GetRoute")
   public func getRoute(
-    request: GetRouteRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRouteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.Route {
     try await self.inner.getRoute(request: request, options: options)
   }
@@ -602,7 +595,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListRoutes")
   public func listRoutes(
-    request: ListRoutesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRoutesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.ListRoutesResponse {
     try await self.inner.listRoutes(request: request, options: options)
   }
@@ -612,7 +605,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListRoutes")
   public func listRoutes(
-    byItem: ListRoutesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRoutesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Route, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDatastreamV1.ListRoutesResponse in
@@ -620,14 +613,14 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
       request.pageToken = token
       return try await self.listRoutes(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Use this method to delete a route.
   ///
   /// @Snippet(path: "Datastream_DeleteRoute")
   public func deleteRoute(
-    request: DeleteRouteRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteRouteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteRoute(request: request, options: options)
   }
@@ -636,21 +629,21 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_DeleteRoute")
   public func deleteRoute(
-    withPolling: DeleteRouteRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteRouteRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteRoute(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -662,7 +655,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -671,7 +664,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -679,14 +672,14 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "Datastream_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -697,7 +690,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -708,7 +701,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -716,7 +709,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -725,7 +718,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -736,7 +729,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -747,7 +740,7 @@ public final class DatastreamClient: Clients.DatastreamProtocol, Sendable {
   ///
   /// @Snippet(path: "Datastream_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -789,14 +782,14 @@ extension Clients {
 
     /// See `DatastreamClient.createConnectionProfile`.
     func createConnectionProfile(withPolling: CreateConnectionProfileRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ConnectionProfile>
+      -> any GoogleGax.PollableOperation<ConnectionProfile>
 
     /// See `DatastreamClient.createConnectionProfile`.
     func createConnectionProfile(
       parent: Swift.String,
       connectionProfile: ConnectionProfile?,
       connectionProfileId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConnectionProfile>
+    ) async throws -> any GoogleGax.PollableOperation<ConnectionProfile>
 
     /// See `DatastreamClient.updateConnectionProfile`.
     func updateConnectionProfile(request: UpdateConnectionProfileRequest) async throws
@@ -804,13 +797,13 @@ extension Clients {
 
     /// See `DatastreamClient.updateConnectionProfile`.
     func updateConnectionProfile(withPolling: UpdateConnectionProfileRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ConnectionProfile>
+      -> any GoogleGax.PollableOperation<ConnectionProfile>
 
     /// See `DatastreamClient.updateConnectionProfile`.
     func updateConnectionProfile(
       connectionProfile: ConnectionProfile?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConnectionProfile>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<ConnectionProfile>
 
     /// See `DatastreamClient.deleteConnectionProfile`.
     func deleteConnectionProfile(request: DeleteConnectionProfileRequest) async throws
@@ -818,12 +811,12 @@ extension Clients {
 
     /// See `DatastreamClient.deleteConnectionProfile`.
     func deleteConnectionProfile(withPolling: DeleteConnectionProfileRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DatastreamClient.deleteConnectionProfile`.
     func deleteConnectionProfile(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DatastreamClient.discoverConnectionProfile`.
     func discoverConnectionProfile(request: DiscoverConnectionProfileRequest) async throws
@@ -855,7 +848,7 @@ extension Clients {
     func createStream(request: CreateStreamRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.createStream`.
-    func createStream(withPolling: CreateStreamRequest) async throws -> any GoogleCloudGax
+    func createStream(withPolling: CreateStreamRequest) async throws -> any GoogleGax
       .PollableOperation<Stream>
 
     /// See `DatastreamClient.createStream`.
@@ -863,39 +856,40 @@ extension Clients {
       parent: Swift.String,
       stream: Stream?,
       streamId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Stream>
+    ) async throws -> any GoogleGax.PollableOperation<Stream>
 
     /// See `DatastreamClient.updateStream`.
     func updateStream(request: UpdateStreamRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.updateStream`.
-    func updateStream(withPolling: UpdateStreamRequest) async throws -> any GoogleCloudGax
+    func updateStream(withPolling: UpdateStreamRequest) async throws -> any GoogleGax
       .PollableOperation<Stream>
 
     /// See `DatastreamClient.updateStream`.
     func updateStream(
       stream: Stream?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Stream>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Stream>
 
     /// See `DatastreamClient.deleteStream`.
     func deleteStream(request: DeleteStreamRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.deleteStream`.
-    func deleteStream(withPolling: DeleteStreamRequest) async throws -> any GoogleCloudGax
+    func deleteStream(withPolling: DeleteStreamRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `DatastreamClient.deleteStream`.
     func deleteStream(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DatastreamClient.runStream`.
     func runStream(request: RunStreamRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.runStream`.
-    func runStream(withPolling: RunStreamRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Stream>
+    func runStream(withPolling: RunStreamRequest) async throws -> any GoogleGax.PollableOperation<
+      Stream
+    >
 
     /// See `DatastreamClient.getStreamObject`.
     func getStreamObject(request: GetStreamObjectRequest) async throws
@@ -957,14 +951,14 @@ extension Clients {
 
     /// See `DatastreamClient.createPrivateConnection`.
     func createPrivateConnection(withPolling: CreatePrivateConnectionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<PrivateConnection>
+      -> any GoogleGax.PollableOperation<PrivateConnection>
 
     /// See `DatastreamClient.createPrivateConnection`.
     func createPrivateConnection(
       parent: Swift.String,
       privateConnection: PrivateConnection?,
       privateConnectionId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PrivateConnection>
+    ) async throws -> any GoogleGax.PollableOperation<PrivateConnection>
 
     /// See `DatastreamClient.getPrivateConnection`.
     func getPrivateConnection(request: GetPrivateConnectionRequest) async throws
@@ -995,18 +989,18 @@ extension Clients {
 
     /// See `DatastreamClient.deletePrivateConnection`.
     func deletePrivateConnection(withPolling: DeletePrivateConnectionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DatastreamClient.deletePrivateConnection`.
     func deletePrivateConnection(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DatastreamClient.createRoute`.
     func createRoute(request: CreateRouteRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.createRoute`.
-    func createRoute(withPolling: CreateRouteRequest) async throws -> any GoogleCloudGax
+    func createRoute(withPolling: CreateRouteRequest) async throws -> any GoogleGax
       .PollableOperation<Route>
 
     /// See `DatastreamClient.createRoute`.
@@ -1014,7 +1008,7 @@ extension Clients {
       parent: Swift.String,
       route: Route?,
       routeId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Route>
+    ) async throws -> any GoogleGax.PollableOperation<Route>
 
     /// See `DatastreamClient.getRoute`.
     func getRoute(request: GetRouteRequest) async throws -> GoogleCloudDatastreamV1.Route
@@ -1042,13 +1036,13 @@ extension Clients {
     func deleteRoute(request: DeleteRouteRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.deleteRoute`.
-    func deleteRoute(withPolling: DeleteRouteRequest) async throws -> any GoogleCloudGax
+    func deleteRoute(withPolling: DeleteRouteRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `DatastreamClient.deleteRoute`.
     func deleteRoute(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DatastreamClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -1096,247 +1090,247 @@ extension Clients {
 
     /// See `DatastreamClient.listConnectionProfiles`.
     func listConnectionProfiles(
-      request: ListConnectionProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConnectionProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.ListConnectionProfilesResponse
 
     /// See `DatastreamClient.listConnectionProfiles`.
     func listConnectionProfiles(
-      byItem: ListConnectionProfilesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConnectionProfilesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ConnectionProfile, Swift.Error>
 
     /// See `DatastreamClient.getConnectionProfile`.
     func getConnectionProfile(
-      request: GetConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.ConnectionProfile
 
     /// See `DatastreamClient.createConnectionProfile`.
     func createConnectionProfile(
-      request: CreateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.createConnectionProfile`.
     func createConnectionProfile(
-      withPolling: CreateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConnectionProfile>
+      withPolling: CreateConnectionProfileRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ConnectionProfile>
 
     /// See `DatastreamClient.updateConnectionProfile`.
     func updateConnectionProfile(
-      request: UpdateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.updateConnectionProfile`.
     func updateConnectionProfile(
-      withPolling: UpdateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ConnectionProfile>
+      withPolling: UpdateConnectionProfileRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ConnectionProfile>
 
     /// See `DatastreamClient.deleteConnectionProfile`.
     func deleteConnectionProfile(
-      request: DeleteConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.deleteConnectionProfile`.
     func deleteConnectionProfile(
-      withPolling: DeleteConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteConnectionProfileRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DatastreamClient.discoverConnectionProfile`.
     func discoverConnectionProfile(
-      request: DiscoverConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DiscoverConnectionProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.DiscoverConnectionProfileResponse
 
     /// See `DatastreamClient.listStreams`.
     func listStreams(
-      request: ListStreamsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListStreamsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.ListStreamsResponse
 
     /// See `DatastreamClient.listStreams`.
     func listStreams(
-      byItem: ListStreamsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListStreamsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Stream, Swift.Error>
 
     /// See `DatastreamClient.getStream`.
     func getStream(
-      request: GetStreamRequest, options: GoogleCloudGax.RequestOptions
+      request: GetStreamRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.Stream
 
     /// See `DatastreamClient.createStream`.
     func createStream(
-      request: CreateStreamRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateStreamRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.createStream`.
     func createStream(
-      withPolling: CreateStreamRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Stream>
+      withPolling: CreateStreamRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Stream>
 
     /// See `DatastreamClient.updateStream`.
     func updateStream(
-      request: UpdateStreamRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateStreamRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.updateStream`.
     func updateStream(
-      withPolling: UpdateStreamRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Stream>
+      withPolling: UpdateStreamRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Stream>
 
     /// See `DatastreamClient.deleteStream`.
     func deleteStream(
-      request: DeleteStreamRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteStreamRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.deleteStream`.
     func deleteStream(
-      withPolling: DeleteStreamRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteStreamRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DatastreamClient.runStream`.
     func runStream(
-      request: RunStreamRequest, options: GoogleCloudGax.RequestOptions
+      request: RunStreamRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.runStream`.
     func runStream(
-      withPolling: RunStreamRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Stream>
+      withPolling: RunStreamRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Stream>
 
     /// See `DatastreamClient.getStreamObject`.
     func getStreamObject(
-      request: GetStreamObjectRequest, options: GoogleCloudGax.RequestOptions
+      request: GetStreamObjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.StreamObject
 
     /// See `DatastreamClient.lookupStreamObject`.
     func lookupStreamObject(
-      request: LookupStreamObjectRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupStreamObjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.StreamObject
 
     /// See `DatastreamClient.listStreamObjects`.
     func listStreamObjects(
-      request: ListStreamObjectsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListStreamObjectsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.ListStreamObjectsResponse
 
     /// See `DatastreamClient.listStreamObjects`.
     func listStreamObjects(
-      byItem: ListStreamObjectsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListStreamObjectsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<StreamObject, Swift.Error>
 
     /// See `DatastreamClient.startBackfillJob`.
     func startBackfillJob(
-      request: StartBackfillJobRequest, options: GoogleCloudGax.RequestOptions
+      request: StartBackfillJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.StartBackfillJobResponse
 
     /// See `DatastreamClient.stopBackfillJob`.
     func stopBackfillJob(
-      request: StopBackfillJobRequest, options: GoogleCloudGax.RequestOptions
+      request: StopBackfillJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.StopBackfillJobResponse
 
     /// See `DatastreamClient.fetchStaticIps`.
     func fetchStaticIps(
-      request: FetchStaticIpsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchStaticIpsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.FetchStaticIpsResponse
 
     /// See `DatastreamClient.createPrivateConnection`.
     func createPrivateConnection(
-      request: CreatePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePrivateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.createPrivateConnection`.
     func createPrivateConnection(
-      withPolling: CreatePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PrivateConnection>
+      withPolling: CreatePrivateConnectionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PrivateConnection>
 
     /// See `DatastreamClient.getPrivateConnection`.
     func getPrivateConnection(
-      request: GetPrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPrivateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.PrivateConnection
 
     /// See `DatastreamClient.listPrivateConnections`.
     func listPrivateConnections(
-      request: ListPrivateConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPrivateConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.ListPrivateConnectionsResponse
 
     /// See `DatastreamClient.listPrivateConnections`.
     func listPrivateConnections(
-      byItem: ListPrivateConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPrivateConnectionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PrivateConnection, Swift.Error>
 
     /// See `DatastreamClient.deletePrivateConnection`.
     func deletePrivateConnection(
-      request: DeletePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePrivateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.deletePrivateConnection`.
     func deletePrivateConnection(
-      withPolling: DeletePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeletePrivateConnectionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DatastreamClient.createRoute`.
     func createRoute(
-      request: CreateRouteRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRouteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.createRoute`.
     func createRoute(
-      withPolling: CreateRouteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Route>
+      withPolling: CreateRouteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Route>
 
     /// See `DatastreamClient.getRoute`.
     func getRoute(
-      request: GetRouteRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRouteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.Route
 
     /// See `DatastreamClient.listRoutes`.
     func listRoutes(
-      request: ListRoutesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRoutesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDatastreamV1.ListRoutesResponse
 
     /// See `DatastreamClient.listRoutes`.
     func listRoutes(
-      byItem: ListRoutesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListRoutesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Route, Swift.Error>
 
     /// See `DatastreamClient.deleteRoute`.
     func deleteRoute(
-      request: DeleteRouteRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRouteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DatastreamClient.deleteRoute`.
     func deleteRoute(
-      withPolling: DeleteRouteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteRouteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DatastreamClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `DatastreamClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `DatastreamClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `DatastreamClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `DatastreamClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `DatastreamClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `DatastreamClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1350,9 +1344,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listConnectionProfiles(
-    request: ListConnectionProfilesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConnectionProfilesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.ListConnectionProfilesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listConnectionProfiles(
@@ -1362,14 +1356,14 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listConnectionProfiles(
-    byItem: ListConnectionProfilesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConnectionProfilesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ConnectionProfile, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDatastreamV1.ListConnectionProfilesResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listConnectionProfiles(
@@ -1388,9 +1382,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func getConnectionProfile(
-    request: GetConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConnectionProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.ConnectionProfile {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getConnectionProfile(
@@ -1409,25 +1403,24 @@ extension Clients.DatastreamProtocol {
   }
 
   public func createConnectionProfile(
-    request: CreateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateConnectionProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createConnectionProfile(withPolling: CreateConnectionProfileRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ConnectionProfile>
+    -> any GoogleGax.PollableOperation<ConnectionProfile>
   {
     try await self.createConnectionProfile(withPolling: withPolling, options: .init())
   }
 
   public func createConnectionProfile(
-    withPolling: CreateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectionProfile> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ConnectionProfile>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateConnectionProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ConnectionProfile> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConnectionProfile>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1435,7 +1428,7 @@ extension Clients.DatastreamProtocol {
     parent: Swift.String,
     connectionProfile: ConnectionProfile?,
     connectionProfileId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectionProfile> {
+  ) async throws -> any GoogleGax.PollableOperation<ConnectionProfile> {
     let request = CreateConnectionProfileRequest().with {
       $0.parent = parent
       $0.connectionProfile = connectionProfile
@@ -1451,32 +1444,31 @@ extension Clients.DatastreamProtocol {
   }
 
   public func updateConnectionProfile(
-    request: UpdateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConnectionProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateConnectionProfile(withPolling: UpdateConnectionProfileRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ConnectionProfile>
+    -> any GoogleGax.PollableOperation<ConnectionProfile>
   {
     try await self.updateConnectionProfile(withPolling: withPolling, options: .init())
   }
 
   public func updateConnectionProfile(
-    withPolling: UpdateConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectionProfile> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ConnectionProfile>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateConnectionProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ConnectionProfile> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ConnectionProfile>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateConnectionProfile(
     connectionProfile: ConnectionProfile?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ConnectionProfile> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<ConnectionProfile> {
     let request = UpdateConnectionProfileRequest().with {
       $0.connectionProfile = connectionProfile
       $0.updateMask = updateMask
@@ -1491,30 +1483,30 @@ extension Clients.DatastreamProtocol {
   }
 
   public func deleteConnectionProfile(
-    request: DeleteConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConnectionProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteConnectionProfile(withPolling: DeleteConnectionProfileRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteConnectionProfile(withPolling: withPolling, options: .init())
   }
 
   public func deleteConnectionProfile(
-    withPolling: DeleteConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteConnectionProfileRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteConnectionProfile(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteConnectionProfileRequest().with {
       $0.name = name
     }
@@ -1528,9 +1520,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func discoverConnectionProfile(
-    request: DiscoverConnectionProfileRequest, options: GoogleCloudGax.RequestOptions
+    request: DiscoverConnectionProfileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.DiscoverConnectionProfileResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listStreams(request: ListStreamsRequest) async throws
@@ -1540,9 +1532,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listStreams(
-    request: ListStreamsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListStreamsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.ListStreamsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listStreams(
@@ -1552,13 +1544,13 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listStreams(
-    byItem: ListStreamsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListStreamsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Stream, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDatastreamV1.ListStreamsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listStreams(
@@ -1575,9 +1567,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func getStream(
-    request: GetStreamRequest, options: GoogleCloudGax.RequestOptions
+    request: GetStreamRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.Stream {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getStream(
@@ -1595,24 +1587,24 @@ extension Clients.DatastreamProtocol {
   }
 
   public func createStream(
-    request: CreateStreamRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateStreamRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createStream(withPolling: CreateStreamRequest) async throws -> any GoogleCloudGax
+  public func createStream(withPolling: CreateStreamRequest) async throws -> any GoogleGax
     .PollableOperation<Stream>
   {
     try await self.createStream(withPolling: withPolling, options: .init())
   }
 
   public func createStream(
-    withPolling: CreateStreamRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Stream> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Stream>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateStreamRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Stream> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Stream>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1620,7 +1612,7 @@ extension Clients.DatastreamProtocol {
     parent: Swift.String,
     stream: Stream?,
     streamId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Stream> {
+  ) async throws -> any GoogleGax.PollableOperation<Stream> {
     let request = CreateStreamRequest().with {
       $0.parent = parent
       $0.stream = stream
@@ -1635,31 +1627,31 @@ extension Clients.DatastreamProtocol {
   }
 
   public func updateStream(
-    request: UpdateStreamRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateStreamRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateStream(withPolling: UpdateStreamRequest) async throws -> any GoogleCloudGax
+  public func updateStream(withPolling: UpdateStreamRequest) async throws -> any GoogleGax
     .PollableOperation<Stream>
   {
     try await self.updateStream(withPolling: withPolling, options: .init())
   }
 
   public func updateStream(
-    withPolling: UpdateStreamRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Stream> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Stream>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateStreamRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Stream> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Stream>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateStream(
     stream: Stream?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Stream> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Stream> {
     let request = UpdateStreamRequest().with {
       $0.stream = stream
       $0.updateMask = updateMask
@@ -1673,30 +1665,30 @@ extension Clients.DatastreamProtocol {
   }
 
   public func deleteStream(
-    request: DeleteStreamRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteStreamRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteStream(withPolling: DeleteStreamRequest) async throws -> any GoogleCloudGax
+  public func deleteStream(withPolling: DeleteStreamRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteStream(withPolling: withPolling, options: .init())
   }
 
   public func deleteStream(
-    withPolling: DeleteStreamRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteStreamRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteStream(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteStreamRequest().with {
       $0.name = name
     }
@@ -1708,24 +1700,24 @@ extension Clients.DatastreamProtocol {
   }
 
   public func runStream(
-    request: RunStreamRequest, options: GoogleCloudGax.RequestOptions
+    request: RunStreamRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func runStream(withPolling: RunStreamRequest) async throws -> any GoogleCloudGax
+  public func runStream(withPolling: RunStreamRequest) async throws -> any GoogleGax
     .PollableOperation<Stream>
   {
     try await self.runStream(withPolling: withPolling, options: .init())
   }
 
   public func runStream(
-    withPolling: RunStreamRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Stream> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Stream>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: RunStreamRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Stream> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Stream>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1736,9 +1728,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func getStreamObject(
-    request: GetStreamObjectRequest, options: GoogleCloudGax.RequestOptions
+    request: GetStreamObjectRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.StreamObject {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getStreamObject(
@@ -1757,9 +1749,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func lookupStreamObject(
-    request: LookupStreamObjectRequest, options: GoogleCloudGax.RequestOptions
+    request: LookupStreamObjectRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.StreamObject {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listStreamObjects(request: ListStreamObjectsRequest) async throws
@@ -1769,9 +1761,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listStreamObjects(
-    request: ListStreamObjectsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListStreamObjectsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.ListStreamObjectsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listStreamObjects(
@@ -1781,13 +1773,13 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listStreamObjects(
-    byItem: ListStreamObjectsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListStreamObjectsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<StreamObject, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDatastreamV1.ListStreamObjectsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listStreamObjects(
@@ -1806,9 +1798,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func startBackfillJob(
-    request: StartBackfillJobRequest, options: GoogleCloudGax.RequestOptions
+    request: StartBackfillJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.StartBackfillJobResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func startBackfillJob(
@@ -1827,9 +1819,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func stopBackfillJob(
-    request: StopBackfillJobRequest, options: GoogleCloudGax.RequestOptions
+    request: StopBackfillJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.StopBackfillJobResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func stopBackfillJob(
@@ -1848,9 +1840,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func fetchStaticIps(
-    request: FetchStaticIpsRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchStaticIpsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.FetchStaticIpsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func fetchStaticIps(
@@ -1869,25 +1861,24 @@ extension Clients.DatastreamProtocol {
   }
 
   public func createPrivateConnection(
-    request: CreatePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePrivateConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createPrivateConnection(withPolling: CreatePrivateConnectionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PrivateConnection>
+    -> any GoogleGax.PollableOperation<PrivateConnection>
   {
     try await self.createPrivateConnection(withPolling: withPolling, options: .init())
   }
 
   public func createPrivateConnection(
-    withPolling: CreatePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PrivateConnection> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<PrivateConnection>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreatePrivateConnectionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PrivateConnection> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PrivateConnection>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1895,7 +1886,7 @@ extension Clients.DatastreamProtocol {
     parent: Swift.String,
     privateConnection: PrivateConnection?,
     privateConnectionId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PrivateConnection> {
+  ) async throws -> any GoogleGax.PollableOperation<PrivateConnection> {
     let request = CreatePrivateConnectionRequest().with {
       $0.parent = parent
       $0.privateConnection = privateConnection
@@ -1911,9 +1902,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func getPrivateConnection(
-    request: GetPrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPrivateConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.PrivateConnection {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPrivateConnection(
@@ -1932,9 +1923,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listPrivateConnections(
-    request: ListPrivateConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPrivateConnectionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.ListPrivateConnectionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPrivateConnections(
@@ -1944,14 +1935,14 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listPrivateConnections(
-    byItem: ListPrivateConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPrivateConnectionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PrivateConnection, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDatastreamV1.ListPrivateConnectionsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPrivateConnections(
@@ -1970,30 +1961,30 @@ extension Clients.DatastreamProtocol {
   }
 
   public func deletePrivateConnection(
-    request: DeletePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePrivateConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deletePrivateConnection(withPolling: DeletePrivateConnectionRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deletePrivateConnection(withPolling: withPolling, options: .init())
   }
 
   public func deletePrivateConnection(
-    withPolling: DeletePrivateConnectionRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeletePrivateConnectionRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deletePrivateConnection(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeletePrivateConnectionRequest().with {
       $0.name = name
     }
@@ -2005,24 +1996,24 @@ extension Clients.DatastreamProtocol {
   }
 
   public func createRoute(
-    request: CreateRouteRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateRouteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createRoute(withPolling: CreateRouteRequest) async throws -> any GoogleCloudGax
+  public func createRoute(withPolling: CreateRouteRequest) async throws -> any GoogleGax
     .PollableOperation<Route>
   {
     try await self.createRoute(withPolling: withPolling, options: .init())
   }
 
   public func createRoute(
-    withPolling: CreateRouteRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Route> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Route>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateRouteRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Route> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Route>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2030,7 +2021,7 @@ extension Clients.DatastreamProtocol {
     parent: Swift.String,
     route: Route?,
     routeId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Route> {
+  ) async throws -> any GoogleGax.PollableOperation<Route> {
     let request = CreateRouteRequest().with {
       $0.parent = parent
       $0.route = route
@@ -2044,9 +2035,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func getRoute(
-    request: GetRouteRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRouteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.Route {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getRoute(
@@ -2065,9 +2056,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listRoutes(
-    request: ListRoutesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRoutesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDatastreamV1.ListRoutesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listRoutes(
@@ -2077,13 +2068,13 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listRoutes(
-    byItem: ListRoutesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRoutesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Route, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDatastreamV1.ListRoutesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listRoutes(
@@ -2100,30 +2091,30 @@ extension Clients.DatastreamProtocol {
   }
 
   public func deleteRoute(
-    request: DeleteRouteRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteRouteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteRoute(withPolling: DeleteRouteRequest) async throws -> any GoogleCloudGax
+  public func deleteRoute(withPolling: DeleteRouteRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteRoute(withPolling: withPolling, options: .init())
   }
 
   public func deleteRoute(
-    withPolling: DeleteRouteRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteRouteRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteRoute(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteRouteRequest().with {
       $0.name = name
     }
@@ -2137,9 +2128,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -2149,13 +2140,13 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -2165,9 +2156,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -2177,9 +2168,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -2189,13 +2180,13 @@ extension Clients.DatastreamProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -2216,9 +2207,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -2235,9 +2226,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -2254,9 +2245,9 @@ extension Clients.DatastreamProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

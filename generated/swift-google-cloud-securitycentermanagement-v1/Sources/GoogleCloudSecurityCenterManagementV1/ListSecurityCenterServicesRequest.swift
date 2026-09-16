@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [SecurityCenterManagement.ListSecurityCenterServices][google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ListSecurityCenterServices].
 ///
 /// [google.cloud.securitycentermanagement.v1.SecurityCenterManagement.ListSecurityCenterServices]: <doc:SecurityCenterManagementClient/listSecurityCenterServices(request:options:)>
-public struct ListSecurityCenterServicesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ListSecurityCenterServicesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the parent to list Security Command Center services,
@@ -47,7 +47,7 @@ public struct ListSecurityCenterServicesRequest: Codable, Equatable, GoogleCloud
   /// The default setting is that all modules are shown.
   public var showEligibleModulesOnly: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListSecurityCenterServicesRequest`.
   public init() {}
@@ -101,7 +101,7 @@ public struct ListSecurityCenterServicesRequest: Codable, Equatable, GoogleCloud
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -120,10 +120,10 @@ public struct ListSecurityCenterServicesRequest: Codable, Equatable, GoogleCloud
     return
       "type.googleapis.com/google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,7 +16,7 @@
 
 #if BackendServices || RegionBackendServices
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// For load balancers that have configurable
   /// failover:
@@ -32,7 +32,7 @@
   /// draining traffic. A setting of false allows existing TCP
   /// connections to persist, even on VMs no longer in the active pool, for up
   /// to the duration of the connection draining timeout (10 minutes).
-  public struct BackendServiceFailoverPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BackendServiceFailoverPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// This can be set to true if the protocol isTCP, UDP, or UNSPECIFIED.
@@ -68,7 +68,7 @@
     /// Balancing](https://cloud.google.com/load-balancing/docs/network/networklb-failover-overview).
     public var failoverRatio: Swift.Float? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BackendServiceFailoverPolicy`.
     public init() {}
@@ -113,7 +113,7 @@
       self.failoverRatio = try container.decodeIfPresent(Swift.Float.self, forKey: .failoverRatio)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -131,11 +131,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.BackendServiceFailoverPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Parameters needed for commute search.
-public struct CommuteFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CommuteFilter: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The method of transportation to calculate the commute time for.
@@ -31,7 +31,7 @@ public struct CommuteFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Required. The maximum travel time in seconds. The maximum allowed value is
   /// `3600s` (one hour). Format is `123s`.
-  public var travelDuration: GoogleCloudWKT.Duration? = nil
+  public var travelDuration: GoogleWKT.Duration? = nil
 
   /// If `true`, jobs without street level addresses may also be returned.
   /// For city level addresses, the city center is used. For state and coarser
@@ -43,7 +43,7 @@ public struct CommuteFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Traffic factor to take into account while searching by commute.
   public var trafficOption: OneOf_TrafficOption? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CommuteFilter`.
   public init() {}
@@ -92,7 +92,7 @@ public struct CommuteFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.startCoordinates = try container.decodeIfPresent(
       GoogleType.LatLng.self, forKey: .startCoordinates)
     self.travelDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .travelDuration)
+      GoogleWKT.Duration.self, forKey: .travelDuration)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .allowImpreciseAddresses)
     {
       self.allowImpreciseAddresses = value
@@ -121,7 +121,7 @@ public struct CommuteFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.trafficOption = trafficOption
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -266,10 +266,10 @@ public struct CommuteFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.talent.v4.CommuteFilter"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

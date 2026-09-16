@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The response for
 /// [ReservationService.SplitCapacityCommitment][google.cloud.bigquery.reservation.v1.ReservationService.SplitCapacityCommitment].
 ///
 /// [google.cloud.bigquery.reservation.v1.ReservationService.SplitCapacityCommitment]: <doc:ReservationServiceClient/splitCapacityCommitment(request:options:)>
-public struct SplitCapacityCommitmentResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SplitCapacityCommitmentResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// First capacity commitment, result of a split.
@@ -30,7 +30,7 @@ public struct SplitCapacityCommitmentResponse: Codable, Equatable, GoogleCloudWK
   /// Second capacity commitment, result of a split.
   public var second: CapacityCommitment? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SplitCapacityCommitmentResponse`.
   public init() {}
@@ -69,7 +69,7 @@ public struct SplitCapacityCommitmentResponse: Codable, Equatable, GoogleCloudWK
     self.second = try container.decodeIfPresent(CapacityCommitment.self, forKey: .second)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -86,10 +86,10 @@ public struct SplitCapacityCommitmentResponse: Codable, Equatable, GoogleCloudWK
     return
       "type.googleapis.com/google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

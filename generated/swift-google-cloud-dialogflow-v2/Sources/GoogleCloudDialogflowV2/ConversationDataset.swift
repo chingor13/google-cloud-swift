@@ -16,13 +16,13 @@
 
 #if ConversationDatasets
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a conversation dataset that a user imports raw data into.
   /// The data inside ConversationDataset can not be changed after
   /// ImportConversationData finishes (and calling ImportConversationData on a
   /// dataset that already has data is not allowed).
-  public struct ConversationDataset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConversationDataset: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. ConversationDataset resource name. Format:
@@ -37,7 +37,7 @@
     public var description: Swift.String = Swift.String()
 
     /// Output only. Creation time of this dataset.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Input configurations set during conversation data import.
     public var inputConfig: InputConfig? = nil
@@ -57,7 +57,7 @@
     /// the dataset.
     public var satisfiesPzs: Swift.Bool? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConversationDataset`.
     public init() {}
@@ -115,8 +115,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
         self.description = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
       self.inputConfig = try container.decodeIfPresent(InputConfig.self, forKey: .inputConfig)
       self.conversationInfo = try container.decodeIfPresent(
         ConversationInfo.self, forKey: .conversationInfo)
@@ -127,7 +126,7 @@
       self.satisfiesPzs = try container.decodeIfPresent(Swift.Bool.self, forKey: .satisfiesPzs)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -150,11 +149,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.ConversationDataset"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

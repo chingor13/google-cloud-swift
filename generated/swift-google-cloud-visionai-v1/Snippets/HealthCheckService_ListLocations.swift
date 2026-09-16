@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudVideoAIV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: HealthCheckServiceClient) async throws {
   let items = try client.listLocations(

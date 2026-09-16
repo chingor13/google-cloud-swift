@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudRedisClusterV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: CloudRedisClusterClient, projectId: String, locationId: String, clusterId: String

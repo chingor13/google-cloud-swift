@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudVideoAIV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(parent: String, ) async throws {
   let client = try GoogleCloudVideoAIV1.LiveVideoAnalyticsClient()

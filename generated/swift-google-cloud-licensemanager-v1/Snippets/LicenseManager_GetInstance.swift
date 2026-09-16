@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudLicenseManagerV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: LicenseManagerClient, projectId: String, locationId: String, instanceId: String)
   async throws

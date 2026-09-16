@@ -16,131 +16,128 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol MirroringStub: Sendable {
     func listMirroringEndpointGroups(
-      request: ListMirroringEndpointGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMirroringEndpointGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListMirroringEndpointGroupsResponse
 
     func getMirroringEndpointGroup(
-      request: GetMirroringEndpointGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMirroringEndpointGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.MirroringEndpointGroup
 
     func createMirroringEndpointGroup(
-      request: CreateMirroringEndpointGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMirroringEndpointGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateMirroringEndpointGroup(
-      request: UpdateMirroringEndpointGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMirroringEndpointGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteMirroringEndpointGroup(
-      request: DeleteMirroringEndpointGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMirroringEndpointGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listMirroringEndpointGroupAssociations(
-      request: ListMirroringEndpointGroupAssociationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMirroringEndpointGroupAssociationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListMirroringEndpointGroupAssociationsResponse
 
     func getMirroringEndpointGroupAssociation(
-      request: GetMirroringEndpointGroupAssociationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMirroringEndpointGroupAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.MirroringEndpointGroupAssociation
 
     func createMirroringEndpointGroupAssociation(
-      request: CreateMirroringEndpointGroupAssociationRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: CreateMirroringEndpointGroupAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateMirroringEndpointGroupAssociation(
-      request: UpdateMirroringEndpointGroupAssociationRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: UpdateMirroringEndpointGroupAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteMirroringEndpointGroupAssociation(
-      request: DeleteMirroringEndpointGroupAssociationRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: DeleteMirroringEndpointGroupAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listMirroringDeploymentGroups(
-      request: ListMirroringDeploymentGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMirroringDeploymentGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListMirroringDeploymentGroupsResponse
 
     func getMirroringDeploymentGroup(
-      request: GetMirroringDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMirroringDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.MirroringDeploymentGroup
 
     func createMirroringDeploymentGroup(
-      request: CreateMirroringDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMirroringDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateMirroringDeploymentGroup(
-      request: UpdateMirroringDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMirroringDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteMirroringDeploymentGroup(
-      request: DeleteMirroringDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMirroringDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listMirroringDeployments(
-      request: ListMirroringDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMirroringDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListMirroringDeploymentsResponse
 
     func getMirroringDeployment(
-      request: GetMirroringDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMirroringDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.MirroringDeployment
 
     func createMirroringDeployment(
-      request: CreateMirroringDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMirroringDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateMirroringDeployment(
-      request: UpdateMirroringDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMirroringDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteMirroringDeployment(
-      request: DeleteMirroringDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMirroringDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

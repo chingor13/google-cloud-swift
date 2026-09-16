@@ -15,21 +15,21 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// BackupLock represents a single lock on a Backup resource.  An unexpired
 /// lock on a Backup prevents the Backup from being deleted.
-public struct BackupLock: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BackupLock: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The time after which this lock is not considered valid and will
   /// no longer protect the Backup from deletion.
-  public var lockUntilTime: GoogleCloudWKT.Timestamp? = nil
+  public var lockUntilTime: GoogleWKT.Timestamp? = nil
 
   /// Metadata about the owner and reason for the lock.
   public var clientLockInfo: OneOf_ClientLockInfo? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BackupLock`.
   public init() {}
@@ -67,7 +67,7 @@ public struct BackupLock: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.lockUntilTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lockUntilTime)
+      GoogleWKT.Timestamp.self, forKey: .lockUntilTime)
 
     var clientLockInfo: OneOf_ClientLockInfo? = nil
     let clientLockInfoCheckAndSet = {
@@ -92,7 +92,7 @@ public struct BackupLock: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.clientLockInfo = clientLockInfo
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -126,10 +126,10 @@ public struct BackupLock: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.v1.BackupLock"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

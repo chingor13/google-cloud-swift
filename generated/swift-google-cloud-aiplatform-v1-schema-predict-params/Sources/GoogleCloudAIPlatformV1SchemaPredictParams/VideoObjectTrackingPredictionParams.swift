@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Prediction model parameters for Video Object Tracking.
-public struct VideoObjectTrackingPredictionParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VideoObjectTrackingPredictionParams: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The Model only returns predictions with at least this confidence score.
@@ -34,7 +34,7 @@ public struct VideoObjectTrackingPredictionParams: Codable, Equatable, GoogleClo
   /// value of video frame size are returned. Default value is 0.0.
   public var minBoundingBoxSize: Swift.Float = Swift.Float()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VideoObjectTrackingPredictionParams`.
   public init() {}
@@ -82,7 +82,7 @@ public struct VideoObjectTrackingPredictionParams: Codable, Equatable, GoogleClo
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -100,10 +100,10 @@ public struct VideoObjectTrackingPredictionParams: Codable, Equatable, GoogleClo
     return
       "type.googleapis.com/google.cloud.aiplatform.v1.schema.predict.params.VideoObjectTrackingPredictionParams"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

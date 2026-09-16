@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudConfigDeliveryV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: ConfigDeliveryClient, projectId: String, locationId: String, fleetPackageId: String
@@ -32,7 +32,7 @@ func sample(
         $0.fleetPackage = FleetPackage().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/fleetPackages/\(fleetPackageId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

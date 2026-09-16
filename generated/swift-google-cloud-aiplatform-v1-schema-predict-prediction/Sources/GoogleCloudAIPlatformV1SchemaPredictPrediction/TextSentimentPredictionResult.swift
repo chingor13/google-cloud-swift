@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Prediction output format for Text Sentiment
-public struct TextSentimentPredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TextSentimentPredictionResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The integer sentiment labels between 0 (inclusive) and sentimentMax label
@@ -28,7 +28,7 @@ public struct TextSentimentPredictionResult: Codable, Equatable, GoogleCloudWKT.
   /// an integer value between 1 (inclusive) and 10 (inclusive).
   public var sentiment: Swift.Int32 = Swift.Int32()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TextSentimentPredictionResult`.
   public init() {}
@@ -66,7 +66,7 @@ public struct TextSentimentPredictionResult: Codable, Equatable, GoogleCloudWKT.
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -82,10 +82,10 @@ public struct TextSentimentPredictionResult: Codable, Equatable, GoogleCloudWKT.
     return
       "type.googleapis.com/google.cloud.aiplatform.v1.schema.predict.prediction.TextSentimentPredictionResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

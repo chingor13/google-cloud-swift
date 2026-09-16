@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Windows Update represents the metadata about the update for the Windows
 /// operating system. The fields in this message come from the Windows Update API
 /// documented at
 /// https://docs.microsoft.com/en-us/windows/win32/api/wuapi/nn-wuapi-iupdate.
-public struct WindowsUpdate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct WindowsUpdate: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required - The unique identifier for the update.
@@ -44,9 +44,9 @@ public struct WindowsUpdate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var supportUrl: Swift.String = Swift.String()
 
   /// The last published timestamp of the update.
-  public var lastPublishedTimestamp: GoogleCloudWKT.Timestamp? = nil
+  public var lastPublishedTimestamp: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `WindowsUpdate`.
   public init() {}
@@ -109,10 +109,10 @@ public struct WindowsUpdate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.supportUrl = value
     }
     self.lastPublishedTimestamp = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastPublishedTimestamp)
+      GoogleWKT.Timestamp.self, forKey: .lastPublishedTimestamp)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -131,7 +131,7 @@ public struct WindowsUpdate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The unique identifier of the update.
-  public struct Identity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Identity: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The revision independent identifier of the update.
@@ -140,7 +140,7 @@ public struct WindowsUpdate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The revision number of the update.
     public var revision: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Identity`.
     public init() {}
@@ -183,7 +183,7 @@ public struct WindowsUpdate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -199,16 +199,16 @@ public struct WindowsUpdate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.WindowsUpdate.Identity"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The category to which the update belongs.
-  public struct Category: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Category: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The identifier of the category.
@@ -217,7 +217,7 @@ public struct WindowsUpdate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The localized name of the category.
     public var name: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Category`.
     public init() {}
@@ -260,7 +260,7 @@ public struct WindowsUpdate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -276,21 +276,21 @@ public struct WindowsUpdate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.WindowsUpdate.Category"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.WindowsUpdate"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

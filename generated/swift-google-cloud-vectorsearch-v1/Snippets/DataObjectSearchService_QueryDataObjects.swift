@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudVectorSearchV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: DataObjectSearchServiceClient) async throws {
   let items = try client.queryDataObjects(

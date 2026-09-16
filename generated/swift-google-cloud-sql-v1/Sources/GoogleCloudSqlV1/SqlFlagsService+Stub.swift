@@ -16,13 +16,13 @@
 
 #if SqlFlagsService
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SqlFlagsServiceStub: Sendable {
       func list(
-        request: SqlFlagsListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlFlagsListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.FlagsListResponse
     }
   }

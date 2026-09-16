@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A shipment model contains a set of shipments which must be performed by a
 /// set of vehicles, while minimizing the overall cost, which is the sum of:
@@ -24,7 +24,7 @@ import Foundation
 ///   travel time, and fixed cost over all vehicles).
 /// * the unperformed shipment penalties.
 /// * the cost of the global duration of the shipments
-public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ShipmentModel: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Set of shipments which must be performed in the model.
@@ -52,11 +52,11 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// you should set the global time limits to that day).
   /// If unset, 00:00:00 UTC, January 1, 1970 (i.e. seconds: 0, nanos: 0) is used
   /// as default.
-  public var globalStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var globalStartTime: GoogleWKT.Timestamp? = nil
 
   /// If unset, 00:00:00 UTC, January 1, 1971 (i.e. seconds: 31536000, nanos: 0)
   /// is used as default.
-  public var globalEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var globalEndTime: GoogleWKT.Timestamp? = nil
 
   /// The "global duration" of the overall plan is the difference between the
   /// earliest effective start time and the latest effective end time of
@@ -217,7 +217,7 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   @available(*, deprecated)
   public var breakRules: [ShipmentModel.BreakRule] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ShipmentModel`.
   public init() {}
@@ -288,9 +288,9 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.maxActiveVehicles = try container.decodeIfPresent(
       Swift.Int32.self, forKey: .maxActiveVehicles)
     self.globalStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .globalStartTime)
+      GoogleWKT.Timestamp.self, forKey: .globalStartTime)
     self.globalEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .globalEndTime)
+      GoogleWKT.Timestamp.self, forKey: .globalEndTime)
     if let value = try container.decodeIfPresent(
       Swift.Double.self, forKey: .globalDurationCostPerHour)
     {
@@ -338,7 +338,7 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -365,7 +365,7 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Specifies a duration and distance matrix from visit and vehicle start
   /// locations to visit and vehicle end locations.
-  public struct DurationDistanceMatrix: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DurationDistanceMatrix: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Specifies the rows of the duration and distance matrix. It must have as
@@ -386,7 +386,7 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// All matrices must have a different `vehicle_start_tag`.
     public var vehicleStartTag: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DurationDistanceMatrix`.
     public init() {}
@@ -431,7 +431,7 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -445,21 +445,21 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Specifies a row of the duration and distance matrix.
-    public struct Row: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Row: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Duration values for a given row. It must have as many elements as
       /// [ShipmentModel.duration_distance_matrix_dst_tags][google.cloud.optimization.v1.ShipmentModel.duration_distance_matrix_dst_tags].
       ///
       /// [google.cloud.optimization.v1.ShipmentModel.duration_distance_matrix_dst_tags]: <doc:ShipmentModel/durationDistanceMatrixDstTags>
-      public var durations: [GoogleCloudWKT.Duration] = []
+      public var durations: [GoogleWKT.Duration] = []
 
       /// Distance values for a given row. If no costs or constraints refer to
       /// distances in the model, this can be left empty; otherwise it must have
       /// as many elements as `durations`.
       public var meters: [Swift.Double] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Row`.
       public init() {}
@@ -494,8 +494,7 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        if let value = try container.decodeIfPresent(
-          [GoogleCloudWKT.Duration].self, forKey: .durations)
+        if let value = try container.decodeIfPresent([GoogleWKT.Duration].self, forKey: .durations)
         {
           self.durations = value
         }
@@ -504,7 +503,7 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -521,22 +520,22 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.optimization.v1.ShipmentModel.DurationDistanceMatrix.Row"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.optimization.v1.ShipmentModel.DurationDistanceMatrix"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -550,7 +549,7 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// Furthermore, precedences only apply when both shipments are performed and
   /// are otherwise ignored.
-  public struct PrecedenceRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PrecedenceRule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Shipment index of the "first" event. This field must be specified.
@@ -566,9 +565,9 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var secondIsDelivery: Swift.Bool = Swift.Bool()
 
     /// The offset between the "first" and "second" event. It can be negative.
-    public var offsetDuration: GoogleCloudWKT.Duration? = nil
+    public var offsetDuration: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PrecedenceRule`.
     public init() {}
@@ -618,10 +617,10 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.secondIsDelivery = value
       }
       self.offsetDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .offsetDuration)
+        GoogleWKT.Duration.self, forKey: .offsetDuration)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -640,11 +639,11 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.optimization.v1.ShipmentModel.PrecedenceRule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -664,7 +663,7 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// [google.cloud.optimization.v1.ShipmentModel.BreakRule]: <doc:ShipmentModel/BreakRule>
   @available(*, deprecated)
-  public struct BreakRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BreakRule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Sequence of breaks. See the `BreakRequest` message.
@@ -674,7 +673,7 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// the `BreakRequest`s of this `BreakRule`. See `FrequencyConstraint`.
     public var frequencyConstraints: [ShipmentModel.BreakRule.FrequencyConstraint] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BreakRule`.
     public init() {}
@@ -721,7 +720,7 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -739,19 +738,19 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// that sequence, in the order in which they must occur. Their time windows
     /// (`earliest_start_time` / `latest_start_time`) may overlap, but they must
     /// be compatible with the order (this is checked).
-    public struct BreakRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BreakRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Lower bound (inclusive) on the start of the break.
-      public var earliestStartTime: GoogleCloudWKT.Timestamp? = nil
+      public var earliestStartTime: GoogleWKT.Timestamp? = nil
 
       /// Required. Upper bound (inclusive) on the start of the break.
-      public var latestStartTime: GoogleCloudWKT.Timestamp? = nil
+      public var latestStartTime: GoogleWKT.Timestamp? = nil
 
       /// Required. Minimum duration of the break. Must be positive.
-      public var minDuration: GoogleCloudWKT.Duration? = nil
+      public var minDuration: GoogleWKT.Duration? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BreakRequest`.
       public init() {}
@@ -789,14 +788,14 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.earliestStartTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .earliestStartTime)
+          GoogleWKT.Timestamp.self, forKey: .earliestStartTime)
         self.latestStartTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .latestStartTime)
+          GoogleWKT.Timestamp.self, forKey: .latestStartTime)
         self.minDuration = try container.decodeIfPresent(
-          GoogleCloudWKT.Duration.self, forKey: .minDuration)
+          GoogleWKT.Duration.self, forKey: .minDuration)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -814,11 +813,11 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.optimization.v1.ShipmentModel.BreakRule.BreakRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -855,19 +854,19 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     ///    .. performing travel and visits ..
     ///   23:59 vehicle end
     /// ```
-    public struct FrequencyConstraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct FrequencyConstraint: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Minimum break duration for this constraint. Nonnegative.
       /// See description of `FrequencyConstraint`.
-      public var minBreakDuration: GoogleCloudWKT.Duration? = nil
+      public var minBreakDuration: GoogleWKT.Duration? = nil
 
       /// Required. Maximum allowed span of any interval of time in the route
       /// that does not include at least partially a break of `duration >=
       /// min_break_duration`. Must be positive.
-      public var maxInterBreakDuration: GoogleCloudWKT.Duration? = nil
+      public var maxInterBreakDuration: GoogleWKT.Duration? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `FrequencyConstraint`.
       public init() {}
@@ -903,12 +902,12 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.minBreakDuration = try container.decodeIfPresent(
-          GoogleCloudWKT.Duration.self, forKey: .minBreakDuration)
+          GoogleWKT.Duration.self, forKey: .minBreakDuration)
         self.maxInterBreakDuration = try container.decodeIfPresent(
-          GoogleCloudWKT.Duration.self, forKey: .maxInterBreakDuration)
+          GoogleWKT.Duration.self, forKey: .maxInterBreakDuration)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -925,32 +924,32 @@ public struct ShipmentModel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.optimization.v1.ShipmentModel.BreakRule.FrequencyConstraint"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.optimization.v1.ShipmentModel.BreakRule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.optimization.v1.ShipmentModel"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

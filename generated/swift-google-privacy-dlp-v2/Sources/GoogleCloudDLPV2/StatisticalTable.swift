@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An auxiliary table containing statistical information on the relative
 /// frequency of different quasi-identifiers values. It has one or several
@@ -24,7 +24,7 @@ import Foundation
 /// If a tuple is present in the data but not in the auxiliary table, the
 /// corresponding relative frequency is assumed to be zero (and thus, the
 /// tuple is highly reidentifiable).
-public struct StatisticalTable: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StatisticalTable: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Auxiliary table location.
@@ -37,7 +37,7 @@ public struct StatisticalTable: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// number between 0 and 1 (inclusive). Null values are assumed to be zero.
   public var relativeFrequency: FieldId? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StatisticalTable`.
   public init() {}
@@ -83,7 +83,7 @@ public struct StatisticalTable: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.relativeFrequency = try container.decodeIfPresent(FieldId.self, forKey: .relativeFrequency)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -99,7 +99,7 @@ public struct StatisticalTable: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// A quasi-identifier column has a custom_tag, used to know which column
   /// in the data corresponds to which column in the statistical model.
-  public struct QuasiIdentifierField: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QuasiIdentifierField: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Identifies the column.
@@ -110,7 +110,7 @@ public struct StatisticalTable: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// the possible values of this column.
     public var customTag: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QuasiIdentifierField`.
     public init() {}
@@ -151,7 +151,7 @@ public struct StatisticalTable: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -167,21 +167,21 @@ public struct StatisticalTable: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.StatisticalTable.QuasiIdentifierField"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.StatisticalTable"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

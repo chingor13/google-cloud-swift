@@ -16,9 +16,9 @@
 
 #if HealthChecks || RegionHealthChecks
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct GRPCTLSHealthCheck: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GRPCTLSHealthCheck: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The gRPC service name for the health check. This field is optional. The
@@ -61,7 +61,7 @@
     /// the instance group's list of named ports.
     public var portSpecification: GRPCTLSHealthCheck.PortSpecification? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GRPCTLSHealthCheck`.
     public init() {}
@@ -105,7 +105,7 @@
         GRPCTLSHealthCheck.PortSpecification.self, forKey: .portSpecification)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -233,11 +233,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.GRPCTLSHealthCheck"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

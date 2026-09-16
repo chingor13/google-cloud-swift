@@ -16,42 +16,41 @@
 
 #if SslPolicies
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SslPoliciesStub: Sendable {
       func aggregatedList(
-        request: SslPoliciesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPoliciesAggregatedList
 
       func delete(
-        request: SslPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: SslPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPolicy
 
       func insert(
-        request: SslPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: SslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPoliciesList
 
       func listAvailableFeatures(
-        request: SslPoliciesClient.ListAvailableFeaturesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.ListAvailableFeaturesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse
 
       func patch(
-        request: SslPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SslPoliciesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

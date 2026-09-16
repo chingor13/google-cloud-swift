@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Dataproc job for running [Trino](https://trino.io/) queries.
 /// **IMPORTANT**: The [Dataproc Trino Optional
 /// Component](https://cloud.google.com/dataproc/docs/concepts/components/trino)
 /// must be enabled when the cluster is created to submit a Trino job to the
 /// cluster.
-public struct TrinoJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TrinoJob: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Whether to continue executing queries if a query fails.
@@ -49,7 +49,7 @@ public struct TrinoJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// either an HCFS file URI or as a list of queries.
   public var queries: OneOf_Queries? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TrinoJob`.
   public init() {}
@@ -129,7 +129,7 @@ public struct TrinoJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.queries = queries
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -166,10 +166,10 @@ public struct TrinoJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.v1.TrinoJob"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

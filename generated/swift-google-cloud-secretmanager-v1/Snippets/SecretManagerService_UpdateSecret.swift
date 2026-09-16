@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudSecretManagerV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(client: SecretManagerServiceClient, projectId: String, secretId: String) async throws {
   let response = try await client.updateSecret(
@@ -29,7 +29,7 @@ func sample(client: SecretManagerServiceClient, projectId: String, secretId: Str
         $0.secret = Secret().with {
           $0.name = "projects/\(projectId)/secrets/\(secretId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// A service providing functionality for managing dashboards' queries.
 ///
@@ -29,7 +29,7 @@ public final class DashboardQueryServiceClient: Clients.DashboardQueryServicePro
   let inner: any Clients.DashboardQueryServiceStub
 
   /// Creates a new `DashboardQueryServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DashboardQueryServiceStub = try Clients.DashboardQueryServiceTransport(
       options)
     inner = Clients.DashboardQueryServiceRetry(inner, options: options)
@@ -43,7 +43,7 @@ public final class DashboardQueryServiceClient: Clients.DashboardQueryServicePro
   ///
   /// @Snippet(path: "DashboardQueryService_GetDashboardQuery")
   public func getDashboardQuery(
-    request: GetDashboardQueryRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDashboardQueryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.DashboardQuery {
     try await self.inner.getDashboardQuery(request: request, options: options)
   }
@@ -52,7 +52,7 @@ public final class DashboardQueryServiceClient: Clients.DashboardQueryServicePro
   ///
   /// @Snippet(path: "DashboardQueryService_ExecuteDashboardQuery")
   public func executeDashboardQuery(
-    request: ExecuteDashboardQueryRequest, options: GoogleCloudGax.RequestOptions
+    request: ExecuteDashboardQueryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ExecuteDashboardQueryResponse {
     try await self.inner.executeDashboardQuery(request: request, options: options)
   }
@@ -63,7 +63,7 @@ public final class DashboardQueryServiceClient: Clients.DashboardQueryServicePro
   ///
   /// @Snippet(path: "DashboardQueryService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -74,7 +74,7 @@ public final class DashboardQueryServiceClient: Clients.DashboardQueryServicePro
   ///
   /// @Snippet(path: "DashboardQueryService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -82,7 +82,7 @@ public final class DashboardQueryServiceClient: Clients.DashboardQueryServicePro
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -91,7 +91,7 @@ public final class DashboardQueryServiceClient: Clients.DashboardQueryServicePro
   ///
   /// @Snippet(path: "DashboardQueryService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -102,7 +102,7 @@ public final class DashboardQueryServiceClient: Clients.DashboardQueryServicePro
   ///
   /// @Snippet(path: "DashboardQueryService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -113,7 +113,7 @@ public final class DashboardQueryServiceClient: Clients.DashboardQueryServicePro
   ///
   /// @Snippet(path: "DashboardQueryService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -178,32 +178,32 @@ extension Clients {
 
     /// See `DashboardQueryServiceClient.getDashboardQuery`.
     func getDashboardQuery(
-      request: GetDashboardQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDashboardQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DashboardQuery
 
     /// See `DashboardQueryServiceClient.executeDashboardQuery`.
     func executeDashboardQuery(
-      request: ExecuteDashboardQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: ExecuteDashboardQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ExecuteDashboardQueryResponse
 
     /// See `DashboardQueryServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `DashboardQueryServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `DashboardQueryServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `DashboardQueryServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -217,9 +217,9 @@ extension Clients.DashboardQueryServiceProtocol {
   }
 
   public func getDashboardQuery(
-    request: GetDashboardQueryRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDashboardQueryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.DashboardQuery {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDashboardQuery(
@@ -238,9 +238,9 @@ extension Clients.DashboardQueryServiceProtocol {
   }
 
   public func executeDashboardQuery(
-    request: ExecuteDashboardQueryRequest, options: GoogleCloudGax.RequestOptions
+    request: ExecuteDashboardQueryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ExecuteDashboardQueryResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func executeDashboardQuery(
@@ -261,9 +261,9 @@ extension Clients.DashboardQueryServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -273,13 +273,13 @@ extension Clients.DashboardQueryServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -300,9 +300,9 @@ extension Clients.DashboardQueryServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -319,9 +319,9 @@ extension Clients.DashboardQueryServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -338,9 +338,9 @@ extension Clients.DashboardQueryServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

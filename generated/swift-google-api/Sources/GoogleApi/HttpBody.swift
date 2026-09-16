@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message that represents an arbitrary HTTP body. It should only be used for
 /// payload formats that can't be represented as JSON, such as raw binary or
@@ -60,7 +60,7 @@ import Foundation
 ///
 /// Use of this type only changes how the request and response bodies are
 /// handled, all other features will continue to work unchanged.
-public struct HttpBody: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct HttpBody: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The HTTP Content-Type header value specifying the content type of the body.
@@ -71,9 +71,9 @@ public struct HttpBody: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Application specific response metadata. Must be set in the first response
   /// for streaming APIs.
-  public var extensions: [GoogleCloudWKT.`Any`] = []
+  public var extensions: [GoogleWKT.`Any`] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `HttpBody`.
   public init() {}
@@ -116,12 +116,12 @@ public struct HttpBody: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Foundation.Data.self, forKey: .data) {
       self.data = value
     }
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.`Any`].self, forKey: .extensions) {
+    if let value = try container.decodeIfPresent([GoogleWKT.`Any`].self, forKey: .extensions) {
       self.extensions = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -138,10 +138,10 @@ public struct HttpBody: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.HttpBody"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

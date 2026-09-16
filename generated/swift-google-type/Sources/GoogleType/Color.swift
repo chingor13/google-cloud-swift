@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a color in the RGBA color space. This representation is designed
 /// for simplicity of conversion to and from color representations in various
@@ -141,7 +141,7 @@ import Foundation
 ///     };
 ///
 ///     // ...
-public struct Color: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Color: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The amount of red in the color as a value in the interval [0, 1].
@@ -164,9 +164,9 @@ public struct Color: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// possible to distinguish between a default value and the value being unset.
   /// If omitted, this color object is rendered as a solid color
   /// (as if the alpha value had been explicitly given a value of 1.0).
-  public var alpha: GoogleCloudWKT.FloatValue? = nil
+  public var alpha: GoogleWKT.FloatValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Color`.
   public init() {}
@@ -214,10 +214,10 @@ public struct Color: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Float.self, forKey: .blue) {
       self.blue = value
     }
-    self.alpha = try container.decodeIfPresent(GoogleCloudWKT.FloatValue.self, forKey: .alpha)
+    self.alpha = try container.decodeIfPresent(GoogleWKT.FloatValue.self, forKey: .alpha)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -235,10 +235,10 @@ public struct Color: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.type.Color"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

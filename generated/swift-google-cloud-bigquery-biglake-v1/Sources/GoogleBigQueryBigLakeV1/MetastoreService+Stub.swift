@@ -15,69 +15,69 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol MetastoreServiceStub: Sendable {
     func createCatalog(
-      request: CreateCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Catalog
 
     func deleteCatalog(
-      request: DeleteCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Catalog
 
     func getCatalog(
-      request: GetCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Catalog
 
     func listCatalogs(
-      request: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCatalogsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.ListCatalogsResponse
 
     func createDatabase(
-      request: CreateDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Database
 
     func deleteDatabase(
-      request: DeleteDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Database
 
     func updateDatabase(
-      request: UpdateDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Database
 
     func getDatabase(
-      request: GetDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Database
 
     func listDatabases(
-      request: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDatabasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.ListDatabasesResponse
 
     func createTable(
-      request: CreateTableRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Table
 
     func deleteTable(
-      request: DeleteTableRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Table
 
     func updateTable(
-      request: UpdateTableRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Table
 
     func renameTable(
-      request: RenameTableRequest, options: GoogleCloudGax.RequestOptions
+      request: RenameTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Table
 
     func getTable(
-      request: GetTableRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.Table
 
     func listTables(
-      request: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTablesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryBigLakeV1.ListTablesResponse
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A ScanConfig resource contains the configurations to launch a scan.
-public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ScanConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the ScanConfig. The name follows the format of
@@ -71,7 +71,7 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Whether to keep scanning even if most requests return HTTP error codes.
   public var ignoreHttpStatusErrors: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ScanConfig`.
   public init() {}
@@ -169,7 +169,7 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -194,14 +194,14 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Scan authentication configuration.
-  public struct Authentication: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Authentication: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required.
     /// Authentication configuration
     public var authentication: OneOf_Authentication? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Authentication`.
     public init() {}
@@ -267,7 +267,7 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.authentication = authentication
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -291,7 +291,7 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     /// Describes authentication configuration that uses a Google account.
     @available(*, deprecated)
-    public struct GoogleAccount: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GoogleAccount: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The user name of the Google account.
@@ -301,7 +301,7 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// and not returned in any response nor included in audit logs.
       public var password: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GoogleAccount`.
       public init() {}
@@ -344,7 +344,7 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -361,16 +361,16 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.websecurityscanner.v1.ScanConfig.Authentication.GoogleAccount"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Describes authentication configuration that uses a custom account.
-    public struct CustomAccount: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct CustomAccount: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The user name of the custom account.
@@ -383,7 +383,7 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Required. The login form URL of the website.
       public var loginUrl: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `CustomAccount`.
       public init() {}
@@ -431,7 +431,7 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -449,22 +449,22 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.websecurityscanner.v1.ScanConfig.Authentication.CustomAccount"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Describes authentication configuration for Identity-Aware-Proxy (IAP).
-    public struct IapCredential: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct IapCredential: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Identity-Aware-Proxy (IAP) Authentication Configuration
       public var iapCredentials: OneOf_IapCredentials? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `IapCredential`.
       public init() {}
@@ -517,7 +517,7 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.iapCredentials = iapCredentials
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -537,15 +537,14 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
       /// Describes authentication configuration when Web-Security-Scanner
       /// service account is added in Identity-Aware-Proxy (IAP) access policies.
-      public struct IapTestServiceAccountInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct IapTestServiceAccountInfo: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. Describes OAuth2 client id of resources protected by
         /// Identity-Aware-Proxy (IAP).
         public var targetAudienceClientId: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `IapTestServiceAccountInfo`.
         public init() {}
@@ -585,7 +584,7 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -601,11 +600,11 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           return
             "type.googleapis.com/google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential.IapTestServiceAccountInfo"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -621,11 +620,11 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.websecurityscanner.v1.ScanConfig.Authentication.IapCredential"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -644,28 +643,28 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.websecurityscanner.v1.ScanConfig.Authentication"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Scan schedule configuration.
-  public struct Schedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Schedule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A timestamp indicates when the next run will be scheduled. The value is
     /// refreshed by the server after each run. If unspecified, it will default
     /// to current server time, which means the scan will be scheduled to start
     /// immediately.
-    public var scheduleTime: GoogleCloudWKT.Timestamp? = nil
+    public var scheduleTime: GoogleWKT.Timestamp? = nil
 
     /// Required. The duration of time between executions in days.
     public var intervalDurationDays: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Schedule`.
     public init() {}
@@ -701,14 +700,14 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.scheduleTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .scheduleTime)
+        GoogleWKT.Timestamp.self, forKey: .scheduleTime)
       if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .intervalDurationDays)
       {
         self.intervalDurationDays = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -724,11 +723,11 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.websecurityscanner.v1.ScanConfig.Schedule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1061,10 +1060,10 @@ public struct ScanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.websecurityscanner.v1.ScanConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

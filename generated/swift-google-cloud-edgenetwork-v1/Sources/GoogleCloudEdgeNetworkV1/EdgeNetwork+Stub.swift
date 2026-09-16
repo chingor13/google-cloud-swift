@@ -16,139 +16,139 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol EdgeNetworkStub: Sendable {
     func initializeZone(
-      request: InitializeZoneRequest, options: GoogleCloudGax.RequestOptions
+      request: InitializeZoneRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.InitializeZoneResponse
 
     func listZones(
-      request: ListZonesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListZonesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.ListZonesResponse
 
     func getZone(
-      request: GetZoneRequest, options: GoogleCloudGax.RequestOptions
+      request: GetZoneRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.Zone
 
     func listNetworks(
-      request: ListNetworksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNetworksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.ListNetworksResponse
 
     func getNetwork(
-      request: GetNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.Network
 
     func diagnoseNetwork(
-      request: DiagnoseNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: DiagnoseNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.DiagnoseNetworkResponse
 
     func createNetwork(
-      request: CreateNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteNetwork(
-      request: DeleteNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listSubnets(
-      request: ListSubnetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSubnetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.ListSubnetsResponse
 
     func getSubnet(
-      request: GetSubnetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSubnetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.Subnet
 
     func createSubnet(
-      request: CreateSubnetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSubnetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateSubnet(
-      request: UpdateSubnetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSubnetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteSubnet(
-      request: DeleteSubnetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSubnetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listInterconnects(
-      request: ListInterconnectsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInterconnectsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.ListInterconnectsResponse
 
     func getInterconnect(
-      request: GetInterconnectRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInterconnectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.Interconnect
 
     func diagnoseInterconnect(
-      request: DiagnoseInterconnectRequest, options: GoogleCloudGax.RequestOptions
+      request: DiagnoseInterconnectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.DiagnoseInterconnectResponse
 
     func listInterconnectAttachments(
-      request: ListInterconnectAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInterconnectAttachmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.ListInterconnectAttachmentsResponse
 
     func getInterconnectAttachment(
-      request: GetInterconnectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInterconnectAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.InterconnectAttachment
 
     func createInterconnectAttachment(
-      request: CreateInterconnectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInterconnectAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteInterconnectAttachment(
-      request: DeleteInterconnectAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInterconnectAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listRouters(
-      request: ListRoutersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRoutersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.ListRoutersResponse
 
     func getRouter(
-      request: GetRouterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRouterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.Router
 
     func diagnoseRouter(
-      request: DiagnoseRouterRequest, options: GoogleCloudGax.RequestOptions
+      request: DiagnoseRouterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEdgeNetworkV1.DiagnoseRouterResponse
 
     func createRouter(
-      request: CreateRouterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRouterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateRouter(
-      request: UpdateRouterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRouterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteRouter(
-      request: DeleteRouterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRouterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The status of a cluster and its instances.
-public struct ClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ClusterStatus: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The cluster's state.
@@ -29,13 +29,13 @@ public struct ClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. Time when this state was entered (see JSON representation of
   /// [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
-  public var stateStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var stateStartTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Additional state information that includes
   /// status reported by the agent.
   public var substate: ClusterStatus.Substate = ClusterStatus.Substate()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ClusterStatus`.
   public init() {}
@@ -81,13 +81,13 @@ public struct ClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.detail = value
     }
     self.stateStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .stateStartTime)
+      GoogleWKT.Timestamp.self, forKey: .stateStartTime)
     if let value = try container.decodeIfPresent(ClusterStatus.Substate.self, forKey: .substate) {
       self.substate = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -383,10 +383,10 @@ public struct ClusterStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.v1.ClusterStatus"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

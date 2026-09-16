@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudEdgeNetworkV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: EdgeNetworkClient, projectId: String, locationId: String) async throws {
   let items = try client.listZones(

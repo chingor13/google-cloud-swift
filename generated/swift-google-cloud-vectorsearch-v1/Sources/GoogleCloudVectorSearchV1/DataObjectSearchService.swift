@@ -19,9 +19,9 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for searching data objects.
 ///
@@ -31,7 +31,7 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
   let inner: any Clients.DataObjectSearchServiceStub
 
   /// Creates a new `DataObjectSearchServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DataObjectSearchServiceStub =
       try Clients.DataObjectSearchServiceTransport(options)
     inner = Clients.DataObjectSearchServiceRetry(inner, options: options)
@@ -45,7 +45,7 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
   ///
   /// @Snippet(path: "DataObjectSearchService_SearchDataObjects")
   public func searchDataObjects(
-    request: SearchDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchDataObjectsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVectorSearchV1.SearchDataObjectsResponse {
     try await self.inner.searchDataObjects(request: request, options: options)
   }
@@ -54,7 +54,7 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
   ///
   /// @Snippet(path: "DataObjectSearchService_SearchDataObjects")
   public func searchDataObjects(
-    byItem: SearchDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: SearchDataObjectsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SearchResult, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVectorSearchV1.SearchDataObjectsResponse in
@@ -62,14 +62,14 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
       request.pageToken = token
       return try await self.searchDataObjects(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Queries data objects.
   ///
   /// @Snippet(path: "DataObjectSearchService_QueryDataObjects")
   public func queryDataObjects(
-    request: QueryDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryDataObjectsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVectorSearchV1.QueryDataObjectsResponse {
     try await self.inner.queryDataObjects(request: request, options: options)
   }
@@ -78,7 +78,7 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
   ///
   /// @Snippet(path: "DataObjectSearchService_QueryDataObjects")
   public func queryDataObjects(
-    byItem: QueryDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: QueryDataObjectsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataObject, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVectorSearchV1.QueryDataObjectsResponse in
@@ -86,14 +86,14 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
       request.pageToken = token
       return try await self.queryDataObjects(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Aggregates data objects.
   ///
   /// @Snippet(path: "DataObjectSearchService_AggregateDataObjects")
   public func aggregateDataObjects(
-    request: AggregateDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+    request: AggregateDataObjectsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVectorSearchV1.AggregateDataObjectsResponse {
     try await self.inner.aggregateDataObjects(request: request, options: options)
   }
@@ -102,7 +102,7 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
   ///
   /// @Snippet(path: "DataObjectSearchService_BatchSearchDataObjects")
   public func batchSearchDataObjects(
-    request: BatchSearchDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchSearchDataObjectsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVectorSearchV1.BatchSearchDataObjectsResponse {
     try await self.inner.batchSearchDataObjects(request: request, options: options)
   }
@@ -128,7 +128,7 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
   ///
   /// @Snippet(path: "DataObjectSearchService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -154,7 +154,7 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
   ///
   /// @Snippet(path: "DataObjectSearchService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -162,14 +162,14 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "DataObjectSearchService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -180,7 +180,7 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
   ///
   /// @Snippet(path: "DataObjectSearchService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -191,7 +191,7 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
   ///
   /// @Snippet(path: "DataObjectSearchService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -199,7 +199,7 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -208,7 +208,7 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
   ///
   /// @Snippet(path: "DataObjectSearchService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -219,7 +219,7 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
   ///
   /// @Snippet(path: "DataObjectSearchService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -230,7 +230,7 @@ public final class DataObjectSearchServiceClient: Clients.DataObjectSearchServic
   ///
   /// @Snippet(path: "DataObjectSearchService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -315,67 +315,67 @@ extension Clients {
 
     /// See `DataObjectSearchServiceClient.searchDataObjects`.
     func searchDataObjects(
-      request: SearchDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchDataObjectsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVectorSearchV1.SearchDataObjectsResponse
 
     /// See `DataObjectSearchServiceClient.searchDataObjects`.
     func searchDataObjects(
-      byItem: SearchDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchDataObjectsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SearchResult, Swift.Error>
 
     /// See `DataObjectSearchServiceClient.queryDataObjects`.
     func queryDataObjects(
-      request: QueryDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryDataObjectsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVectorSearchV1.QueryDataObjectsResponse
 
     /// See `DataObjectSearchServiceClient.queryDataObjects`.
     func queryDataObjects(
-      byItem: QueryDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: QueryDataObjectsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataObject, Swift.Error>
 
     /// See `DataObjectSearchServiceClient.aggregateDataObjects`.
     func aggregateDataObjects(
-      request: AggregateDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+      request: AggregateDataObjectsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVectorSearchV1.AggregateDataObjectsResponse
 
     /// See `DataObjectSearchServiceClient.batchSearchDataObjects`.
     func batchSearchDataObjects(
-      request: BatchSearchDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchSearchDataObjectsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVectorSearchV1.BatchSearchDataObjectsResponse
 
     /// See `DataObjectSearchServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `DataObjectSearchServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `DataObjectSearchServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `DataObjectSearchServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `DataObjectSearchServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `DataObjectSearchServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `DataObjectSearchServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -389,9 +389,9 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func searchDataObjects(
-    request: SearchDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchDataObjectsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVectorSearchV1.SearchDataObjectsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func searchDataObjects(
@@ -401,13 +401,13 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func searchDataObjects(
-    byItem: SearchDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: SearchDataObjectsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SearchResult, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVectorSearchV1.SearchDataObjectsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func queryDataObjects(request: QueryDataObjectsRequest) async throws
@@ -417,9 +417,9 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func queryDataObjects(
-    request: QueryDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryDataObjectsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVectorSearchV1.QueryDataObjectsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func queryDataObjects(
@@ -429,13 +429,13 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func queryDataObjects(
-    byItem: QueryDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: QueryDataObjectsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataObject, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudVectorSearchV1.QueryDataObjectsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func aggregateDataObjects(request: AggregateDataObjectsRequest) async throws
@@ -445,9 +445,9 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func aggregateDataObjects(
-    request: AggregateDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+    request: AggregateDataObjectsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVectorSearchV1.AggregateDataObjectsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func batchSearchDataObjects(request: BatchSearchDataObjectsRequest) async throws
@@ -457,9 +457,9 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func batchSearchDataObjects(
-    request: BatchSearchDataObjectsRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchSearchDataObjectsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVectorSearchV1.BatchSearchDataObjectsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -469,9 +469,9 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -481,13 +481,13 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -497,9 +497,9 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -509,9 +509,9 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -521,13 +521,13 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -548,9 +548,9 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -567,9 +567,9 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -586,9 +586,9 @@ extension Clients.DataObjectSearchServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

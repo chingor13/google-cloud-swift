@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service to fetch operations for database instances.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.SqlOperationsServiceStub
 
     /// Creates a new `SqlOperationsServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlOperationsServiceStub = try Clients.SqlOperationsServiceTransport(
         options)
       inner = Clients.SqlOperationsServiceRetry(inner, options: options)
@@ -43,7 +43,7 @@
     ///
     /// @Snippet(path: "SqlOperationsService_Get")
     public func `get`(
-      request: SqlOperationsGetRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlOperationsGetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -53,7 +53,7 @@
     ///
     /// @Snippet(path: "SqlOperationsService_List")
     public func list(
-      request: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlOperationsListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.OperationsListResponse {
       try await self.inner.list(request: request, options: options)
     }
@@ -63,7 +63,7 @@
     ///
     /// @Snippet(path: "SqlOperationsService_List")
     public func list(
-      byItem: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SqlOperationsListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudSqlV1.OperationsListResponse in
@@ -71,14 +71,14 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Cancels an instance operation that has been performed on an instance.
     ///
     /// @Snippet(path: "SqlOperationsService_Cancel")
     public func cancel(
-      request: SqlOperationsCancelRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlOperationsCancelRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancel(request: request, options: options)
     }
@@ -108,22 +108,22 @@
 
       /// See `SqlOperationsServiceClient.`get``.
       func `get`(
-        request: SqlOperationsGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlOperationsGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlOperationsServiceClient.list`.
       func list(
-        request: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlOperationsListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.OperationsListResponse
 
       /// See `SqlOperationsServiceClient.list`.
       func list(
-        byItem: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: SqlOperationsListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Operation, Swift.Error>
 
       /// See `SqlOperationsServiceClient.cancel`.
       func cancel(
-        request: SqlOperationsCancelRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlOperationsCancelRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -135,9 +135,9 @@
     }
 
     public func `get`(
-      request: SqlOperationsGetRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlOperationsGetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(request: SqlOperationsListRequest) async throws
@@ -147,9 +147,9 @@
     }
 
     public func list(
-      request: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlOperationsListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.OperationsListResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -159,13 +159,13 @@
     }
 
     public func list(
-      byItem: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SqlOperationsListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudSqlV1.OperationsListResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func cancel(request: SqlOperationsCancelRequest) async throws {
@@ -173,9 +173,9 @@
     }
 
     public func cancel(
-      request: SqlOperationsCancelRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlOperationsCancelRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

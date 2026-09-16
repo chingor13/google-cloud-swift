@@ -15,22 +15,22 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The metadata for the Operation returned by PartialUpdateCluster.
-public struct PartialUpdateClusterMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PartialUpdateClusterMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The time at which the original request was received.
-  public var requestTime: GoogleCloudWKT.Timestamp? = nil
+  public var requestTime: GoogleWKT.Timestamp? = nil
 
   /// The time at which the operation failed or was completed successfully.
-  public var finishTime: GoogleCloudWKT.Timestamp? = nil
+  public var finishTime: GoogleWKT.Timestamp? = nil
 
   /// The original request for PartialUpdateCluster.
   public var originalRequest: PartialUpdateClusterRequest? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PartialUpdateClusterMetadata`.
   public init() {}
@@ -67,15 +67,13 @@ public struct PartialUpdateClusterMetadata: Codable, Equatable, GoogleCloudWKT._
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.requestTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .requestTime)
-    self.finishTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .finishTime)
+    self.requestTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .requestTime)
+    self.finishTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .finishTime)
     self.originalRequest = try container.decodeIfPresent(
       PartialUpdateClusterRequest.self, forKey: .originalRequest)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -92,10 +90,10 @@ public struct PartialUpdateClusterMetadata: Codable, Equatable, GoogleCloudWKT._
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.PartialUpdateClusterMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

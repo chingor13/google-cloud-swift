@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A request to perform a batch of search operations.
-public struct BatchSearchDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchSearchDataObjectsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the Collection for which to search.
@@ -31,7 +31,7 @@ public struct BatchSearchDataObjectsRequest: Codable, Equatable, GoogleCloudWKT.
   /// Optional. Options for combining the results of the batch search operations.
   public var combine: BatchSearchDataObjectsRequest.CombineResultsOptions? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchSearchDataObjectsRequest`.
   public init() {}
@@ -78,7 +78,7 @@ public struct BatchSearchDataObjectsRequest: Codable, Equatable, GoogleCloudWKT.
       BatchSearchDataObjectsRequest.CombineResultsOptions.self, forKey: .combine)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -93,7 +93,7 @@ public struct BatchSearchDataObjectsRequest: Codable, Equatable, GoogleCloudWKT.
   }
 
   /// Options for combining the results of the batch search operations.
-  public struct CombineResultsOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CombineResultsOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The ranker to use for combining the results.
@@ -106,7 +106,7 @@ public struct BatchSearchDataObjectsRequest: Codable, Equatable, GoogleCloudWKT.
     /// will be used.
     public var topK: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CombineResultsOptions`.
     public init() {}
@@ -150,7 +150,7 @@ public struct BatchSearchDataObjectsRequest: Codable, Equatable, GoogleCloudWKT.
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -168,21 +168,21 @@ public struct BatchSearchDataObjectsRequest: Codable, Equatable, GoogleCloudWKT.
       return
         "type.googleapis.com/google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest.CombineResultsOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vectorsearch.v1.BatchSearchDataObjectsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

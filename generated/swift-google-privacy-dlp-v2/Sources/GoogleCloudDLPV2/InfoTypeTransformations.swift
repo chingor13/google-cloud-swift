@@ -15,20 +15,20 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A type of transformation that will scan unstructured text and
 /// apply various `PrimitiveTransformation`s to each finding, where the
 /// transformation is applied to only values that were identified as a specific
 /// info_type.
-public struct InfoTypeTransformations: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct InfoTypeTransformations: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Transformation for each infoType. Cannot specify more than one
   /// for a given infoType.
   public var transformations: [InfoTypeTransformations.InfoTypeTransformation] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `InfoTypeTransformations`.
   public init() {}
@@ -68,7 +68,7 @@ public struct InfoTypeTransformations: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -82,7 +82,7 @@ public struct InfoTypeTransformations: Codable, Equatable, GoogleCloudWKT._AnyPa
 
   /// A transformation to apply to text that is identified as a specific
   /// info_type.
-  public struct InfoTypeTransformation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InfoTypeTransformation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// InfoTypes to apply the transformation to. An empty list will cause
@@ -93,7 +93,7 @@ public struct InfoTypeTransformations: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// Required. Primitive transformation to apply to the infoType.
     public var primitiveTransformation: PrimitiveTransformation? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InfoTypeTransformation`.
     public init() {}
@@ -135,7 +135,7 @@ public struct InfoTypeTransformations: Codable, Equatable, GoogleCloudWKT._AnyPa
         PrimitiveTransformation.self, forKey: .primitiveTransformation)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -152,21 +152,21 @@ public struct InfoTypeTransformations: Codable, Equatable, GoogleCloudWKT._AnyPa
       return
         "type.googleapis.com/google.privacy.dlp.v2.InfoTypeTransformations.InfoTypeTransformation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.InfoTypeTransformations"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration options for the master authorized networks feature. Enabled
 /// master authorized networks will disallow all external traffic to access
 /// Kubernetes master through HTTPS except traffic from the given CIDR blocks,
 /// Google Compute Engine Public IPs and Google Prod IPs.
-public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Whether or not master authorized networks feature is enabled.
@@ -31,7 +31,7 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT
   /// HTTPS.
   public var cidrBlocks: [MasterAuthorizedNetworksConfig.CidrBlock] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MasterAuthorizedNetworksConfig`.
   public init() {}
@@ -76,7 +76,7 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -90,7 +90,7 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT
   }
 
   /// CIDR block with an optional name.
-  public struct CidrBlock: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CidrBlock: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// User-defined name that identifies the CIDR block.
@@ -99,7 +99,7 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT
     /// CIDR block that must be specified in CIDR notation.
     public var cidrBlock: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CidrBlock`.
     public init() {}
@@ -142,7 +142,7 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -159,11 +159,11 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT
       return
         "type.googleapis.com/google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig.CidrBlock"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -171,10 +171,10 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT
     return
       "type.googleapis.com/google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

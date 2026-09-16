@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Security Command Center resource that contains the configuration and
 /// enablement state of a custom module, which enables Event Threat Detection to
 /// write certain findings to Security Command Center.
-public struct EventThreatDetectionCustomModule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EventThreatDetectionCustomModule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the Event Threat Detection custom module,
@@ -34,7 +34,7 @@ public struct EventThreatDetectionCustomModule: Codable, Equatable, GoogleCloudW
   /// Optional. Configuration for the module. For the resident module, its
   /// configuration value is defined at this level. For the inherited module, its
   /// configuration value is inherited from the ancestor module.
-  public var config: GoogleCloudWKT.Struct? = nil
+  public var config: GoogleWKT.Struct? = nil
 
   /// Output only. The closest ancestor module that this module inherits the
   /// enablement state from. If empty, indicates that the custom module was
@@ -57,12 +57,12 @@ public struct EventThreatDetectionCustomModule: Codable, Equatable, GoogleCloudW
   public var description: Swift.String = Swift.String()
 
   /// Output only. The time the module was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The editor the module was last updated by.
   public var lastEditor: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EventThreatDetectionCustomModule`.
   public init() {}
@@ -114,7 +114,7 @@ public struct EventThreatDetectionCustomModule: Codable, Equatable, GoogleCloudW
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.config = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .config)
+    self.config = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .config)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .ancestorModule) {
       self.ancestorModule = value
     }
@@ -132,14 +132,13 @@ public struct EventThreatDetectionCustomModule: Codable, Equatable, GoogleCloudW
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .lastEditor) {
       self.lastEditor = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -279,10 +278,10 @@ public struct EventThreatDetectionCustomModule: Codable, Equatable, GoogleCloudW
     return
       "type.googleapis.com/google.cloud.securitycentermanagement.v1.EventThreatDetectionCustomModule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

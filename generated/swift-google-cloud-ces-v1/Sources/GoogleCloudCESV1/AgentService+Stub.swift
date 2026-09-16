@@ -16,227 +16,227 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AgentServiceStub: Sendable {
     func listApps(
-      request: ListAppsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAppsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListAppsResponse
 
     func getApp(
-      request: GetAppRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAppRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.App
 
     func createApp(
-      request: CreateAppRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAppRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateApp(
-      request: UpdateAppRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAppRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.App
 
     func deleteApp(
-      request: DeleteAppRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAppRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func exportApp(
-      request: ExportAppRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportAppRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func importApp(
-      request: ImportAppRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportAppRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listAgents(
-      request: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAgentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListAgentsResponse
 
     func getAgent(
-      request: GetAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Agent
 
     func createAgent(
-      request: CreateAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Agent
 
     func updateAgent(
-      request: UpdateAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Agent
 
     func deleteAgent(
-      request: DeleteAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAgentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listExamples(
-      request: ListExamplesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExamplesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListExamplesResponse
 
     func getExample(
-      request: GetExampleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExampleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Example
 
     func createExample(
-      request: CreateExampleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExampleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Example
 
     func updateExample(
-      request: UpdateExampleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExampleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Example
 
     func deleteExample(
-      request: DeleteExampleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExampleRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listTools(
-      request: ListToolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListToolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListToolsResponse
 
     func getTool(
-      request: GetToolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetToolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Tool
 
     func listConversations(
-      request: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListConversationsResponse
 
     func getConversation(
-      request: GetConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Conversation
 
     func deleteConversation(
-      request: DeleteConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConversationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func batchDeleteConversations(
-      request: BatchDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchDeleteConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createTool(
-      request: CreateToolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateToolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Tool
 
     func updateTool(
-      request: UpdateToolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateToolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Tool
 
     func deleteTool(
-      request: DeleteToolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteToolRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listGuardrails(
-      request: ListGuardrailsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGuardrailsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListGuardrailsResponse
 
     func getGuardrail(
-      request: GetGuardrailRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGuardrailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Guardrail
 
     func createGuardrail(
-      request: CreateGuardrailRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGuardrailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Guardrail
 
     func updateGuardrail(
-      request: UpdateGuardrailRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGuardrailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Guardrail
 
     func deleteGuardrail(
-      request: DeleteGuardrailRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGuardrailRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listDeployments(
-      request: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListDeploymentsResponse
 
     func getDeployment(
-      request: GetDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Deployment
 
     func createDeployment(
-      request: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Deployment
 
     func updateDeployment(
-      request: UpdateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Deployment
 
     func deleteDeployment(
-      request: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listToolsets(
-      request: ListToolsetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListToolsetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListToolsetsResponse
 
     func getToolset(
-      request: GetToolsetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetToolsetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Toolset
 
     func createToolset(
-      request: CreateToolsetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateToolsetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Toolset
 
     func updateToolset(
-      request: UpdateToolsetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateToolsetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Toolset
 
     func deleteToolset(
-      request: DeleteToolsetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteToolsetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listAppVersions(
-      request: ListAppVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAppVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListAppVersionsResponse
 
     func getAppVersion(
-      request: GetAppVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAppVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.AppVersion
 
     func createAppVersion(
-      request: CreateAppVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAppVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.AppVersion
 
     func deleteAppVersion(
-      request: DeleteAppVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAppVersionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func restoreAppVersion(
-      request: RestoreAppVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreAppVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listChangelogs(
-      request: ListChangelogsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListChangelogsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.ListChangelogsResponse
 
     func getChangelog(
-      request: GetChangelogRequest, options: GoogleCloudGax.RequestOptions
+      request: GetChangelogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCESV1.Changelog
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

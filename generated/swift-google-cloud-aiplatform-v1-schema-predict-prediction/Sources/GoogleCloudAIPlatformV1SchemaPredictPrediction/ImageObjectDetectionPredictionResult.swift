@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Prediction output format for Image Object Detection.
-public struct ImageObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ImageObjectDetectionPredictionResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource IDs of the AnnotationSpecs that had been identified, ordered
@@ -39,9 +39,9 @@ public struct ImageObjectDetectionPredictionResult: Codable, Equatable, GoogleCl
   /// `yMax`, which represent the extremal coordinates of the box. They are
   /// relative to the image size, and the point 0,0 is in the top left
   /// of the image.
-  public var bboxes: [GoogleCloudWKT.ListValue] = []
+  public var bboxes: [GoogleWKT.ListValue] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ImageObjectDetectionPredictionResult`.
   public init() {}
@@ -89,12 +89,12 @@ public struct ImageObjectDetectionPredictionResult: Codable, Equatable, GoogleCl
     if let value = try container.decodeIfPresent([Swift.Float].self, forKey: .confidences) {
       self.confidences = value
     }
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.ListValue].self, forKey: .bboxes) {
+    if let value = try container.decodeIfPresent([GoogleWKT.ListValue].self, forKey: .bboxes) {
       self.bboxes = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -113,10 +113,10 @@ public struct ImageObjectDetectionPredictionResult: Codable, Equatable, GoogleCl
     return
       "type.googleapis.com/google.cloud.aiplatform.v1.schema.predict.prediction.ImageObjectDetectionPredictionResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

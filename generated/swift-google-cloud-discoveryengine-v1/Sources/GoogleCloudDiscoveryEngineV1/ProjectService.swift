@@ -19,10 +19,10 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for operations on the
   /// [Project][google.cloud.discoveryengine.v1.Project].
@@ -32,11 +32,11 @@
   /// @Snippet(path: "ProjectServiceQuickstart")
   public final class ProjectServiceClient: Clients.ProjectServiceProtocol, Sendable {
     let inner: any Clients.ProjectServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `ProjectServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.ProjectServiceStub = try Clients.ProjectServiceTransport(options)
       inner = Clients.ProjectServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -56,7 +56,7 @@
     ///
     /// @Snippet(path: "ProjectService_ProvisionProject")
     public func provisionProject(
-      request: ProvisionProjectRequest, options: GoogleCloudGax.RequestOptions
+      request: ProvisionProjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.provisionProject(request: request, options: options)
     }
@@ -70,21 +70,21 @@
     ///
     /// @Snippet(path: "ProjectService_ProvisionProject")
     public func provisionProject(
-      withPolling: ProvisionProjectRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
+      withPolling: ProvisionProjectRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Project> {
       let extractStatus = {
-        (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Project>.State in
+        (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Project>.State
+        in
         return try op._extractStatus(Project.self)
       }
       let rawOp = try await self.provisionProject(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Project>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Project>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -98,7 +98,7 @@
     ///
     /// @Snippet(path: "ProjectService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -109,7 +109,7 @@
     ///
     /// @Snippet(path: "ProjectService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -117,7 +117,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -126,7 +126,7 @@
     ///
     /// @Snippet(path: "ProjectService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -137,7 +137,7 @@
     ///
     /// @Snippet(path: "ProjectService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -155,13 +155,13 @@
         -> GoogleLongRunning.Operation
 
       /// See `ProjectServiceClient.provisionProject`.
-      func provisionProject(withPolling: ProvisionProjectRequest) async throws -> any GoogleCloudGax
+      func provisionProject(withPolling: ProvisionProjectRequest) async throws -> any GoogleGax
         .PollableOperation<Project>
 
       /// See `ProjectServiceClient.provisionProject`.
       func provisionProject(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+      ) async throws -> any GoogleGax.PollableOperation<Project>
 
       /// See `ProjectServiceClient.listOperations`.
       func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -188,27 +188,27 @@
 
       /// See `ProjectServiceClient.provisionProject`.
       func provisionProject(
-        request: ProvisionProjectRequest, options: GoogleCloudGax.RequestOptions
+        request: ProvisionProjectRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `ProjectServiceClient.provisionProject`.
       func provisionProject(
-        withPolling: ProvisionProjectRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Project>
+        withPolling: ProvisionProjectRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Project>
 
       /// See `ProjectServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `ProjectServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `ProjectServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -222,30 +222,30 @@
     }
 
     public func provisionProject(
-      request: ProvisionProjectRequest, options: GoogleCloudGax.RequestOptions
+      request: ProvisionProjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func provisionProject(withPolling: ProvisionProjectRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Project>
+    public func provisionProject(withPolling: ProvisionProjectRequest) async throws -> any GoogleGax
+      .PollableOperation<Project>
     {
       try await self.provisionProject(withPolling: withPolling, options: .init())
     }
 
     public func provisionProject(
-      withPolling: ProvisionProjectRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Project>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: ProvisionProjectRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Project> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Project>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func provisionProject(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Project> {
+    ) async throws -> any GoogleGax.PollableOperation<Project> {
       let request = ProvisionProjectRequest().with {
         $0.name = name
       }
@@ -259,9 +259,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -271,13 +271,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -298,9 +298,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -317,9 +317,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

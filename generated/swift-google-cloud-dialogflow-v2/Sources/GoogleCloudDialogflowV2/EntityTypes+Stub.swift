@@ -17,71 +17,71 @@
 #if EntityTypes
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol EntityTypesStub: Sendable {
       func listEntityTypes(
-        request: ListEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListEntityTypesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListEntityTypesResponse
 
       func getEntityType(
-        request: GetEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+        request: GetEntityTypeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.EntityType
 
       func createEntityType(
-        request: CreateEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateEntityTypeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.EntityType
 
       func updateEntityType(
-        request: UpdateEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateEntityTypeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.EntityType
 
       func deleteEntityType(
-        request: DeleteEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteEntityTypeRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func batchUpdateEntityTypes(
-        request: BatchUpdateEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchUpdateEntityTypesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func batchDeleteEntityTypes(
-        request: BatchDeleteEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchDeleteEntityTypesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func batchCreateEntities(
-        request: BatchCreateEntitiesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchCreateEntitiesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func batchUpdateEntities(
-        request: BatchUpdateEntitiesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchUpdateEntitiesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func batchDeleteEntities(
-        request: BatchDeleteEntitiesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchDeleteEntitiesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

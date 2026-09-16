@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The AlertPolicyService API is used to manage (list, create, delete,
 /// edit) alert policies in Cloud Monitoring. An alerting policy is
@@ -36,7 +36,7 @@ public final class AlertPolicyServiceClient: Clients.AlertPolicyServiceProtocol,
   let inner: any Clients.AlertPolicyServiceStub
 
   /// Creates a new `AlertPolicyServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.AlertPolicyServiceStub = try Clients.AlertPolicyServiceTransport(options)
     inner = Clients.AlertPolicyServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -49,7 +49,7 @@ public final class AlertPolicyServiceClient: Clients.AlertPolicyServiceProtocol,
   ///
   /// @Snippet(path: "AlertPolicyService_ListAlertPolicies")
   public func listAlertPolicies(
-    request: ListAlertPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAlertPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListAlertPoliciesResponse {
     try await self.inner.listAlertPolicies(request: request, options: options)
   }
@@ -58,7 +58,7 @@ public final class AlertPolicyServiceClient: Clients.AlertPolicyServiceProtocol,
   ///
   /// @Snippet(path: "AlertPolicyService_ListAlertPolicies")
   public func listAlertPolicies(
-    byItem: ListAlertPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAlertPoliciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AlertPolicy, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.ListAlertPoliciesResponse in
@@ -66,14 +66,14 @@ public final class AlertPolicyServiceClient: Clients.AlertPolicyServiceProtocol,
       request.pageToken = token
       return try await self.listAlertPolicies(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a single alerting policy.
   ///
   /// @Snippet(path: "AlertPolicyService_GetAlertPolicy")
   public func getAlertPolicy(
-    request: GetAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAlertPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.AlertPolicy {
     try await self.inner.getAlertPolicy(request: request, options: options)
   }
@@ -86,7 +86,7 @@ public final class AlertPolicyServiceClient: Clients.AlertPolicyServiceProtocol,
   ///
   /// @Snippet(path: "AlertPolicyService_CreateAlertPolicy")
   public func createAlertPolicy(
-    request: CreateAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAlertPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.AlertPolicy {
     try await self.inner.createAlertPolicy(request: request, options: options)
   }
@@ -99,7 +99,7 @@ public final class AlertPolicyServiceClient: Clients.AlertPolicyServiceProtocol,
   ///
   /// @Snippet(path: "AlertPolicyService_DeleteAlertPolicy")
   public func deleteAlertPolicy(
-    request: DeleteAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAlertPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteAlertPolicy(request: request, options: options)
   }
@@ -115,7 +115,7 @@ public final class AlertPolicyServiceClient: Clients.AlertPolicyServiceProtocol,
   ///
   /// @Snippet(path: "AlertPolicyService_UpdateAlertPolicy")
   public func updateAlertPolicy(
-    request: UpdateAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAlertPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.AlertPolicy {
     try await self.inner.updateAlertPolicy(request: request, options: options)
   }
@@ -175,38 +175,38 @@ extension Clients {
 
     /// See `AlertPolicyServiceClient.updateAlertPolicy`.
     func updateAlertPolicy(
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
       alertPolicy: AlertPolicy?,
     ) async throws -> GoogleCloudMonitoringV3.AlertPolicy
 
     /// See `AlertPolicyServiceClient.listAlertPolicies`.
     func listAlertPolicies(
-      request: ListAlertPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAlertPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListAlertPoliciesResponse
 
     /// See `AlertPolicyServiceClient.listAlertPolicies`.
     func listAlertPolicies(
-      byItem: ListAlertPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAlertPoliciesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AlertPolicy, Swift.Error>
 
     /// See `AlertPolicyServiceClient.getAlertPolicy`.
     func getAlertPolicy(
-      request: GetAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAlertPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.AlertPolicy
 
     /// See `AlertPolicyServiceClient.createAlertPolicy`.
     func createAlertPolicy(
-      request: CreateAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAlertPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.AlertPolicy
 
     /// See `AlertPolicyServiceClient.deleteAlertPolicy`.
     func deleteAlertPolicy(
-      request: DeleteAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAlertPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AlertPolicyServiceClient.updateAlertPolicy`.
     func updateAlertPolicy(
-      request: UpdateAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAlertPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.AlertPolicy
   }
 }
@@ -220,9 +220,9 @@ extension Clients.AlertPolicyServiceProtocol {
   }
 
   public func listAlertPolicies(
-    request: ListAlertPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAlertPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListAlertPoliciesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAlertPolicies(
@@ -232,13 +232,13 @@ extension Clients.AlertPolicyServiceProtocol {
   }
 
   public func listAlertPolicies(
-    byItem: ListAlertPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAlertPoliciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AlertPolicy, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.ListAlertPoliciesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAlertPolicies(
@@ -257,9 +257,9 @@ extension Clients.AlertPolicyServiceProtocol {
   }
 
   public func getAlertPolicy(
-    request: GetAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAlertPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.AlertPolicy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAlertPolicy(
@@ -278,9 +278,9 @@ extension Clients.AlertPolicyServiceProtocol {
   }
 
   public func createAlertPolicy(
-    request: CreateAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAlertPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.AlertPolicy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createAlertPolicy(
@@ -299,9 +299,9 @@ extension Clients.AlertPolicyServiceProtocol {
   }
 
   public func deleteAlertPolicy(
-    request: DeleteAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAlertPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAlertPolicy(
@@ -320,13 +320,13 @@ extension Clients.AlertPolicyServiceProtocol {
   }
 
   public func updateAlertPolicy(
-    request: UpdateAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAlertPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.AlertPolicy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAlertPolicy(
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
     alertPolicy: AlertPolicy?,
   ) async throws -> GoogleCloudMonitoringV3.AlertPolicy {
     let request = UpdateAlertPolicyRequest().with {

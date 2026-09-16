@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudVMMigrationV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: VmMigrationClient) async throws {
   let poller = try await client.startMigration(

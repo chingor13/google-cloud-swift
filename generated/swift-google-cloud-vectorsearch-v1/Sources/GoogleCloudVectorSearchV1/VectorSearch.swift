@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines a search operation using a query vector.
-public struct VectorSearch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VectorSearch: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The vector field to search.
@@ -26,7 +26,7 @@ public struct VectorSearch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Optional. A JSON filter expression, e.g. {"genre": {"$eq": "sci-fi"}},
   /// represented as a google.protobuf.Struct.
-  public var filter: GoogleCloudWKT.Struct? = nil
+  public var filter: GoogleWKT.Struct? = nil
 
   /// Optional. The number of nearest neighbors to return.
   public var topK: Swift.Int32? = nil
@@ -46,7 +46,7 @@ public struct VectorSearch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Specifies the type of vector to use for the query.
   public var vectorType: OneOf_VectorType? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VectorSearch`.
   public init() {}
@@ -96,7 +96,7 @@ public struct VectorSearch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .searchField) {
       self.searchField = value
     }
-    self.filter = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .filter)
+    self.filter = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .filter)
     self.topK = try container.decodeIfPresent(Swift.Int32.self, forKey: .topK)
     self.outputFields = try container.decodeIfPresent(OutputFields.self, forKey: .outputFields)
     self.searchHint = try container.decodeIfPresent(SearchHint.self, forKey: .searchHint)
@@ -123,7 +123,7 @@ public struct VectorSearch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.vectorType = vectorType
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -160,10 +160,10 @@ public struct VectorSearch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vectorsearch.v1.VectorSearch"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

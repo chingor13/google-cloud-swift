@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for getting refreshable clones for an Autonomous Database.
-public struct GetAutonomousDatabaseRefreshableClonesRequest: Codable, Equatable, GoogleCloudWKT
+public struct GetAutonomousDatabaseRefreshableClonesRequest: Codable, Equatable, GoogleWKT
     ._AnyPackable,
   Sendable
 {
@@ -27,7 +27,7 @@ public struct GetAutonomousDatabaseRefreshableClonesRequest: Codable, Equatable,
   /// projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}
   public var name: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GetAutonomousDatabaseRefreshableClonesRequest`.
   public init() {}
@@ -65,7 +65,7 @@ public struct GetAutonomousDatabaseRefreshableClonesRequest: Codable, Equatable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -81,10 +81,10 @@ public struct GetAutonomousDatabaseRefreshableClonesRequest: Codable, Equatable,
     return
       "type.googleapis.com/google.cloud.oracledatabase.v1.GetAutonomousDatabaseRefreshableClonesRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

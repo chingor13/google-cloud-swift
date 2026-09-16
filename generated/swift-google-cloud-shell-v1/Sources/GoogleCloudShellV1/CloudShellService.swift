@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// API for interacting with Google Cloud Shell. Each user of Cloud Shell has at
 /// least one environment, which has the ID "default". Environment consists of a
@@ -34,11 +34,11 @@ import GoogleCloudGax
 /// @Snippet(path: "CloudShellServiceQuickstart")
 public final class CloudShellServiceClient: Clients.CloudShellServiceProtocol, Sendable {
   let inner: any Clients.CloudShellServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `CloudShellServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CloudShellServiceStub = try Clients.CloudShellServiceTransport(options)
     inner = Clients.CloudShellServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -53,7 +53,7 @@ public final class CloudShellServiceClient: Clients.CloudShellServiceProtocol, S
   ///
   /// @Snippet(path: "CloudShellService_GetEnvironment")
   public func getEnvironment(
-    request: GetEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudShellV1.Environment {
     try await self.inner.getEnvironment(request: request, options: options)
   }
@@ -67,7 +67,7 @@ public final class CloudShellServiceClient: Clients.CloudShellServiceProtocol, S
   ///
   /// @Snippet(path: "CloudShellService_StartEnvironment")
   public func startEnvironment(
-    request: StartEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: StartEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.startEnvironment(request: request, options: options)
   }
@@ -81,22 +81,22 @@ public final class CloudShellServiceClient: Clients.CloudShellServiceProtocol, S
   ///
   /// @Snippet(path: "CloudShellService_StartEnvironment")
   public func startEnvironment(
-    withPolling: StartEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<StartEnvironmentResponse> {
+    withPolling: StartEnvironmentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<StartEnvironmentResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<StartEnvironmentResponse>.State in
+        -> GoogleGax._PollableOperationImpl<StartEnvironmentResponse>.State in
       return try op._extractStatus(StartEnvironmentResponse.self)
     }
     let rawOp = try await self.startEnvironment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<StartEnvironmentResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<StartEnvironmentResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -111,7 +111,7 @@ public final class CloudShellServiceClient: Clients.CloudShellServiceProtocol, S
   ///
   /// @Snippet(path: "CloudShellService_AuthorizeEnvironment")
   public func authorizeEnvironment(
-    request: AuthorizeEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: AuthorizeEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.authorizeEnvironment(request: request, options: options)
   }
@@ -123,23 +123,22 @@ public final class CloudShellServiceClient: Clients.CloudShellServiceProtocol, S
   ///
   /// @Snippet(path: "CloudShellService_AuthorizeEnvironment")
   public func authorizeEnvironment(
-    withPolling: AuthorizeEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthorizeEnvironmentResponse> {
+    withPolling: AuthorizeEnvironmentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AuthorizeEnvironmentResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AuthorizeEnvironmentResponse>.State in
+        -> GoogleGax._PollableOperationImpl<AuthorizeEnvironmentResponse>.State in
       return try op._extractStatus(AuthorizeEnvironmentResponse.self)
     }
     let rawOp = try await self.authorizeEnvironment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<AuthorizeEnvironmentResponse>.State
-      in
+      () async throws -> GoogleGax._PollableOperationImpl<AuthorizeEnvironmentResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -153,7 +152,7 @@ public final class CloudShellServiceClient: Clients.CloudShellServiceProtocol, S
   ///
   /// @Snippet(path: "CloudShellService_AddPublicKey")
   public func addPublicKey(
-    request: AddPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: AddPublicKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.addPublicKey(request: request, options: options)
   }
@@ -164,22 +163,21 @@ public final class CloudShellServiceClient: Clients.CloudShellServiceProtocol, S
   ///
   /// @Snippet(path: "CloudShellService_AddPublicKey")
   public func addPublicKey(
-    withPolling: AddPublicKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AddPublicKeyResponse> {
+    withPolling: AddPublicKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AddPublicKeyResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AddPublicKeyResponse>.State in
+        -> GoogleGax._PollableOperationImpl<AddPublicKeyResponse>.State in
       return try op._extractStatus(AddPublicKeyResponse.self)
     }
     let rawOp = try await self.addPublicKey(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<AddPublicKeyResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AddPublicKeyResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -194,7 +192,7 @@ public final class CloudShellServiceClient: Clients.CloudShellServiceProtocol, S
   ///
   /// @Snippet(path: "CloudShellService_RemovePublicKey")
   public func removePublicKey(
-    request: RemovePublicKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: RemovePublicKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.removePublicKey(request: request, options: options)
   }
@@ -206,22 +204,22 @@ public final class CloudShellServiceClient: Clients.CloudShellServiceProtocol, S
   ///
   /// @Snippet(path: "CloudShellService_RemovePublicKey")
   public func removePublicKey(
-    withPolling: RemovePublicKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RemovePublicKeyResponse> {
+    withPolling: RemovePublicKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RemovePublicKeyResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<RemovePublicKeyResponse>.State in
+        -> GoogleGax._PollableOperationImpl<RemovePublicKeyResponse>.State in
       return try op._extractStatus(RemovePublicKeyResponse.self)
     }
     let rawOp = try await self.removePublicKey(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<RemovePublicKeyResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<RemovePublicKeyResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -235,7 +233,7 @@ public final class CloudShellServiceClient: Clients.CloudShellServiceProtocol, S
   ///
   /// @Snippet(path: "CloudShellService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -262,7 +260,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `CloudShellServiceClient.startEnvironment`.
-    func startEnvironment(withPolling: StartEnvironmentRequest) async throws -> any GoogleCloudGax
+    func startEnvironment(withPolling: StartEnvironmentRequest) async throws -> any GoogleGax
       .PollableOperation<StartEnvironmentResponse>
 
     /// See `CloudShellServiceClient.authorizeEnvironment`.
@@ -271,13 +269,13 @@ extension Clients {
 
     /// See `CloudShellServiceClient.authorizeEnvironment`.
     func authorizeEnvironment(withPolling: AuthorizeEnvironmentRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<AuthorizeEnvironmentResponse>
+      -> any GoogleGax.PollableOperation<AuthorizeEnvironmentResponse>
 
     /// See `CloudShellServiceClient.addPublicKey`.
     func addPublicKey(request: AddPublicKeyRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudShellServiceClient.addPublicKey`.
-    func addPublicKey(withPolling: AddPublicKeyRequest) async throws -> any GoogleCloudGax
+    func addPublicKey(withPolling: AddPublicKeyRequest) async throws -> any GoogleGax
       .PollableOperation<AddPublicKeyResponse>
 
     /// See `CloudShellServiceClient.removePublicKey`.
@@ -285,53 +283,53 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `CloudShellServiceClient.removePublicKey`.
-    func removePublicKey(withPolling: RemovePublicKeyRequest) async throws -> any GoogleCloudGax
+    func removePublicKey(withPolling: RemovePublicKeyRequest) async throws -> any GoogleGax
       .PollableOperation<RemovePublicKeyResponse>
 
     /// See `CloudShellServiceClient.getEnvironment`.
     func getEnvironment(
-      request: GetEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudShellV1.Environment
 
     /// See `CloudShellServiceClient.startEnvironment`.
     func startEnvironment(
-      request: StartEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: StartEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudShellServiceClient.startEnvironment`.
     func startEnvironment(
-      withPolling: StartEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<StartEnvironmentResponse>
+      withPolling: StartEnvironmentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<StartEnvironmentResponse>
 
     /// See `CloudShellServiceClient.authorizeEnvironment`.
     func authorizeEnvironment(
-      request: AuthorizeEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: AuthorizeEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudShellServiceClient.authorizeEnvironment`.
     func authorizeEnvironment(
-      withPolling: AuthorizeEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AuthorizeEnvironmentResponse>
+      withPolling: AuthorizeEnvironmentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AuthorizeEnvironmentResponse>
 
     /// See `CloudShellServiceClient.addPublicKey`.
     func addPublicKey(
-      request: AddPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: AddPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudShellServiceClient.addPublicKey`.
     func addPublicKey(
-      withPolling: AddPublicKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AddPublicKeyResponse>
+      withPolling: AddPublicKeyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AddPublicKeyResponse>
 
     /// See `CloudShellServiceClient.removePublicKey`.
     func removePublicKey(
-      request: RemovePublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: RemovePublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudShellServiceClient.removePublicKey`.
     func removePublicKey(
-      withPolling: RemovePublicKeyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<RemovePublicKeyResponse>
+      withPolling: RemovePublicKeyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<RemovePublicKeyResponse>
   }
 }
 
@@ -344,9 +342,9 @@ extension Clients.CloudShellServiceProtocol {
   }
 
   public func getEnvironment(
-    request: GetEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudShellV1.Environment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getEnvironment(
@@ -365,25 +363,25 @@ extension Clients.CloudShellServiceProtocol {
   }
 
   public func startEnvironment(
-    request: StartEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: StartEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func startEnvironment(withPolling: StartEnvironmentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<StartEnvironmentResponse>
+  public func startEnvironment(withPolling: StartEnvironmentRequest) async throws -> any GoogleGax
+    .PollableOperation<StartEnvironmentResponse>
   {
     try await self.startEnvironment(withPolling: withPolling, options: .init())
   }
 
   public func startEnvironment(
-    withPolling: StartEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<StartEnvironmentResponse> {
+    withPolling: StartEnvironmentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<StartEnvironmentResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<StartEnvironmentResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<StartEnvironmentResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -394,26 +392,25 @@ extension Clients.CloudShellServiceProtocol {
   }
 
   public func authorizeEnvironment(
-    request: AuthorizeEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+    request: AuthorizeEnvironmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func authorizeEnvironment(withPolling: AuthorizeEnvironmentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AuthorizeEnvironmentResponse>
+    -> any GoogleGax.PollableOperation<AuthorizeEnvironmentResponse>
   {
     try await self.authorizeEnvironment(withPolling: withPolling, options: .init())
   }
 
   public func authorizeEnvironment(
-    withPolling: AuthorizeEnvironmentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AuthorizeEnvironmentResponse> {
+    withPolling: AuthorizeEnvironmentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AuthorizeEnvironmentResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<AuthorizeEnvironmentResponse>.State
-      in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<AuthorizeEnvironmentResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -423,25 +420,24 @@ extension Clients.CloudShellServiceProtocol {
   }
 
   public func addPublicKey(
-    request: AddPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: AddPublicKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func addPublicKey(withPolling: AddPublicKeyRequest) async throws -> any GoogleCloudGax
+  public func addPublicKey(withPolling: AddPublicKeyRequest) async throws -> any GoogleGax
     .PollableOperation<AddPublicKeyResponse>
   {
     try await self.addPublicKey(withPolling: withPolling, options: .init())
   }
 
   public func addPublicKey(
-    withPolling: AddPublicKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AddPublicKeyResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<AddPublicKeyResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: AddPublicKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AddPublicKeyResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AddPublicKeyResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -452,25 +448,25 @@ extension Clients.CloudShellServiceProtocol {
   }
 
   public func removePublicKey(
-    request: RemovePublicKeyRequest, options: GoogleCloudGax.RequestOptions
+    request: RemovePublicKeyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func removePublicKey(withPolling: RemovePublicKeyRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<RemovePublicKeyResponse>
+  public func removePublicKey(withPolling: RemovePublicKeyRequest) async throws -> any GoogleGax
+    .PollableOperation<RemovePublicKeyResponse>
   {
     try await self.removePublicKey(withPolling: withPolling, options: .init())
   }
 
   public func removePublicKey(
-    withPolling: RemovePublicKeyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RemovePublicKeyResponse> {
+    withPolling: RemovePublicKeyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RemovePublicKeyResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<RemovePublicKeyResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<RemovePublicKeyResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -481,9 +477,9 @@ extension Clients.CloudShellServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The Rule resource represents a user-created rule.
 /// NEXT TAG: 21
-public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Full resource name for the rule.
@@ -55,11 +55,11 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. The timestamp of when the rule was created.
   /// Populated in FULL view.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp of when the rule revision was created.
   /// Populated in FULL, REVISION_METADATA_ONLY views.
-  public var revisionCreateTime: GoogleCloudWKT.Timestamp? = nil
+  public var revisionCreateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The current compilation state of the rule.
   /// Populated in FULL view.
@@ -107,7 +107,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// uses $e.principal.hostname, then the uses_udm field will be true.
   public var inputsUsed: InputsUsed? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Rule`.
   public init() {}
@@ -196,10 +196,9 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.metadata = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.revisionCreateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .revisionCreateTime)
+      GoogleWKT.Timestamp.self, forKey: .revisionCreateTime)
     if let value = try container.decodeIfPresent(
       Rule.CompilationState.self, forKey: .compilationState)
     {
@@ -235,7 +234,7 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.inputsUsed = try container.decodeIfPresent(InputsUsed.self, forKey: .inputsUsed)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -374,10 +373,10 @@ public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.chronicle.v1.Rule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

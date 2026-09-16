@@ -16,59 +16,54 @@
 
 #if InterconnectAttachmentGroups
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol InterconnectAttachmentGroupsStub: Sendable {
       func delete(
-        request: InterconnectAttachmentGroupsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: InterconnectAttachmentGroupsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentGroupsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentGroup
 
       func getIamPolicy(
         request: InterconnectAttachmentGroupsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func getOperationalStatus(
         request: InterconnectAttachmentGroupsClient.GetOperationalStatusRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws
         -> GoogleCloudComputeV1.InterconnectAttachmentGroupsGetOperationalStatusResponse
 
       func insert(
-        request: InterconnectAttachmentGroupsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: InterconnectAttachmentGroupsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentGroupsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectAttachmentGroupsListResponse
 
       func patch(
-        request: InterconnectAttachmentGroupsClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectAttachmentGroupsClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
         request: InterconnectAttachmentGroupsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
         request: InterconnectAttachmentGroupsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

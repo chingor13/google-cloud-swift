@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -40,9 +40,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,14 +59,14 @@ extension Clients {
     }
 
     public func createDocument(
-      request: CreateDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.CreateDocumentResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "createDocument",
         action: {
-          (r: CreateDocumentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateDocumentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.CreateDocumentResponse
           in
           return try await self.inner.createDocument(request: r, options: o)
@@ -74,14 +74,14 @@ extension Clients {
     }
 
     public func getDocument(
-      request: GetDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.Document {
       try await self._intercept(
         request: request,
         options: options,
         name: "getDocument",
         action: {
-          (r: GetDocumentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetDocumentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.Document
           in
           return try await self.inner.getDocument(request: r, options: o)
@@ -89,14 +89,14 @@ extension Clients {
     }
 
     public func updateDocument(
-      request: UpdateDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.UpdateDocumentResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateDocument",
         action: {
-          (r: UpdateDocumentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateDocumentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.UpdateDocumentResponse
           in
           return try await self.inner.updateDocument(request: r, options: o)
@@ -104,27 +104,26 @@ extension Clients {
     }
 
     public func deleteDocument(
-      request: DeleteDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteDocument",
-        action: {
-          (r: DeleteDocumentRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteDocumentRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteDocument(request: r, options: o)
         })
     }
 
     public func searchDocuments(
-      request: SearchDocumentsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchDocumentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SearchDocumentsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "searchDocuments",
         action: {
-          (r: SearchDocumentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchDocumentsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.SearchDocumentsResponse
           in
           return try await self.inner.searchDocuments(request: r, options: o)
@@ -132,14 +131,14 @@ extension Clients {
     }
 
     public func lockDocument(
-      request: LockDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: LockDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.Document {
       try await self._intercept(
         request: request,
         options: options,
         name: "lockDocument",
         action: {
-          (r: LockDocumentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: LockDocumentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.Document
           in
           return try await self.inner.lockDocument(request: r, options: o)
@@ -147,14 +146,14 @@ extension Clients {
     }
 
     public func fetchAcl(
-      request: FetchAclRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchAclRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.FetchAclResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "fetchAcl",
         action: {
-          (r: FetchAclRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FetchAclRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.FetchAclResponse
           in
           return try await self.inner.fetchAcl(request: r, options: o)
@@ -162,14 +161,14 @@ extension Clients {
     }
 
     public func setAcl(
-      request: SetAclRequest, options: GoogleCloudGax.RequestOptions
+      request: SetAclRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SetAclResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "setAcl",
         action: {
-          (r: SetAclRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SetAclRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.SetAclResponse
           in
           return try await self.inner.setAcl(request: r, options: o)
@@ -177,14 +176,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

@@ -16,13 +16,13 @@
 
 #if JobService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleRpc
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a job that runs periodically to monitor the deployed models in an
   /// endpoint. It will analyze the logged training & prediction data to detect any
   /// abnormal behaviors.
-  public struct ModelDeploymentMonitoringJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ModelDeploymentMonitoringJob: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Resource name of a ModelDeploymentMonitoringJob.
@@ -83,7 +83,7 @@
     ///
     /// [google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.predict_instance_schema_uri]: <doc:ModelDeploymentMonitoringJob/predictInstanceSchemaUri>
     /// [google.cloud.aiplatform.v1.PredictRequest.instances]: <doc:PredictRequest/instances>
-    public var samplePredictInstance: GoogleCloudWKT.Value? = nil
+    public var samplePredictInstance: GoogleWKT.Value? = nil
 
     /// YAML schema file uri describing the format of a single instance that you
     /// want Tensorflow Data Validation (TFDV) to analyze.
@@ -110,7 +110,7 @@
     /// The TTL of BigQuery tables in user projects which stores logs.
     /// A day is the basic unit of the TTL and we take the ceil of TTL/86400(a
     /// day). e.g. { second: 3600} indicates ttl = 1 day.
-    public var logTtl: GoogleCloudWKT.Duration? = nil
+    public var logTtl: GoogleWKT.Duration? = nil
 
     /// The labels with user-defined metadata to organize your
     /// ModelDeploymentMonitoringJob.
@@ -123,15 +123,15 @@
     public var labels: [Swift.String: Swift.String] = [:]
 
     /// Output only. Timestamp when this ModelDeploymentMonitoringJob was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when this ModelDeploymentMonitoringJob was updated
     /// most recently.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when this monitoring pipeline will be scheduled to
     /// run for the next round.
-    public var nextScheduleTime: GoogleCloudWKT.Timestamp? = nil
+    public var nextScheduleTime: GoogleWKT.Timestamp? = nil
 
     /// Stats anomalies base folder path.
     public var statsAnomaliesBaseDirectory: GcsDestination? = nil
@@ -157,7 +157,7 @@
     /// Output only. Reserved for future use.
     public var satisfiesPzi: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ModelDeploymentMonitoringJob`.
     public init() {}
@@ -282,7 +282,7 @@
         self.predictInstanceSchemaUri = value
       }
       self.samplePredictInstance = try container.decodeIfPresent(
-        GoogleCloudWKT.Value.self, forKey: .samplePredictInstance)
+        GoogleWKT.Value.self, forKey: .samplePredictInstance)
       if let value = try container.decodeIfPresent(
         Swift.String.self, forKey: .analysisInstanceSchemaUri)
       {
@@ -293,18 +293,16 @@
       {
         self.bigqueryTables = value
       }
-      self.logTtl = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .logTtl)
+      self.logTtl = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .logTtl)
       if let value = try container.decodeIfPresent(
         [Swift.String: Swift.String].self, forKey: .labels)
       {
         self.labels = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       self.nextScheduleTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .nextScheduleTime)
+        GoogleWKT.Timestamp.self, forKey: .nextScheduleTime)
       self.statsAnomaliesBaseDirectory = try container.decodeIfPresent(
         GcsDestination.self, forKey: .statsAnomaliesBaseDirectory)
       self.encryptionSpec = try container.decodeIfPresent(
@@ -323,7 +321,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -367,17 +365,17 @@
     }
 
     /// All metadata of most recent monitoring pipelines.
-    public struct LatestMonitoringPipelineMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct LatestMonitoringPipelineMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The time that most recent monitoring pipelines that is related to this
       /// run.
-      public var runTime: GoogleCloudWKT.Timestamp? = nil
+      public var runTime: GoogleWKT.Timestamp? = nil
 
       /// The status of the most recent monitoring pipeline.
       public var status: GoogleRpc.Status? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `LatestMonitoringPipelineMetadata`.
       public init() {}
@@ -412,12 +410,11 @@
 
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.runTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .runTime)
+        self.runTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .runTime)
         self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -434,11 +431,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.LatestMonitoringPipelineMetadata"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -557,11 +554,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

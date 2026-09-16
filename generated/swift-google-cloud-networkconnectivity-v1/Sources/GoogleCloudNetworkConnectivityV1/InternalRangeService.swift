@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The CLH-based service for internal range resources used to perform IPAM
 /// operations within a VPC network.
@@ -31,11 +31,11 @@ import GoogleCloudGax
 /// @Snippet(path: "InternalRangeServiceQuickstart")
 public final class InternalRangeServiceClient: Clients.InternalRangeServiceProtocol, Sendable {
   let inner: any Clients.InternalRangeServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `InternalRangeServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.InternalRangeServiceStub = try Clients.InternalRangeServiceTransport(
       options)
     inner = Clients.InternalRangeServiceRetry(inner, options: options)
@@ -51,7 +51,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_ListInternalRanges")
   public func listInternalRanges(
-    request: ListInternalRangesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInternalRangesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkConnectivityV1.ListInternalRangesResponse {
     try await self.inner.listInternalRanges(request: request, options: options)
   }
@@ -60,7 +60,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_ListInternalRanges")
   public func listInternalRanges(
-    byItem: ListInternalRangesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListInternalRangesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<InternalRange, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -69,14 +69,14 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
       request.pageToken = token
       return try await self.listInternalRanges(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single internal range.
   ///
   /// @Snippet(path: "InternalRangeService_GetInternalRange")
   public func getInternalRange(
-    request: GetInternalRangeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInternalRangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkConnectivityV1.InternalRange {
     try await self.inner.getInternalRange(request: request, options: options)
   }
@@ -85,7 +85,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_CreateInternalRange")
   public func createInternalRange(
-    request: CreateInternalRangeRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateInternalRangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createInternalRange(request: request, options: options)
   }
@@ -94,21 +94,21 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_CreateInternalRange")
   public func createInternalRange(
-    withPolling: CreateInternalRangeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<InternalRange> {
+    withPolling: CreateInternalRangeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<InternalRange> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<InternalRange>.State in
+        -> GoogleGax._PollableOperationImpl<InternalRange>.State in
       return try op._extractStatus(InternalRange.self)
     }
     let rawOp = try await self.createInternalRange(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<InternalRange>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<InternalRange>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -120,7 +120,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_UpdateInternalRange")
   public func updateInternalRange(
-    request: UpdateInternalRangeRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateInternalRangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateInternalRange(request: request, options: options)
   }
@@ -129,21 +129,21 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_UpdateInternalRange")
   public func updateInternalRange(
-    withPolling: UpdateInternalRangeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<InternalRange> {
+    withPolling: UpdateInternalRangeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<InternalRange> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<InternalRange>.State in
+        -> GoogleGax._PollableOperationImpl<InternalRange>.State in
       return try op._extractStatus(InternalRange.self)
     }
     let rawOp = try await self.updateInternalRange(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<InternalRange>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<InternalRange>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -155,7 +155,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_DeleteInternalRange")
   public func deleteInternalRange(
-    request: DeleteInternalRangeRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteInternalRangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteInternalRange(request: request, options: options)
   }
@@ -164,21 +164,21 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_DeleteInternalRange")
   public func deleteInternalRange(
-    withPolling: DeleteInternalRangeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteInternalRangeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteInternalRange(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -190,7 +190,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -199,7 +199,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -207,14 +207,14 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "InternalRangeService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -227,7 +227,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -237,7 +237,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -252,7 +252,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -263,7 +263,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -274,7 +274,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -282,7 +282,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -291,7 +291,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -302,7 +302,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -313,7 +313,7 @@ public final class InternalRangeServiceClient: Clients.InternalRangeServiceProto
   ///
   /// @Snippet(path: "InternalRangeService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -354,42 +354,42 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `InternalRangeServiceClient.createInternalRange`.
-    func createInternalRange(withPolling: CreateInternalRangeRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<InternalRange>
+    func createInternalRange(withPolling: CreateInternalRangeRequest) async throws -> any GoogleGax
+      .PollableOperation<InternalRange>
 
     /// See `InternalRangeServiceClient.createInternalRange`.
     func createInternalRange(
       parent: Swift.String,
       internalRange: InternalRange?,
       internalRangeId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<InternalRange>
+    ) async throws -> any GoogleGax.PollableOperation<InternalRange>
 
     /// See `InternalRangeServiceClient.updateInternalRange`.
     func updateInternalRange(request: UpdateInternalRangeRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `InternalRangeServiceClient.updateInternalRange`.
-    func updateInternalRange(withPolling: UpdateInternalRangeRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<InternalRange>
+    func updateInternalRange(withPolling: UpdateInternalRangeRequest) async throws -> any GoogleGax
+      .PollableOperation<InternalRange>
 
     /// See `InternalRangeServiceClient.updateInternalRange`.
     func updateInternalRange(
       internalRange: InternalRange?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<InternalRange>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<InternalRange>
 
     /// See `InternalRangeServiceClient.deleteInternalRange`.
     func deleteInternalRange(request: DeleteInternalRangeRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `InternalRangeServiceClient.deleteInternalRange`.
-    func deleteInternalRange(withPolling: DeleteInternalRangeRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    func deleteInternalRange(withPolling: DeleteInternalRangeRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
 
     /// See `InternalRangeServiceClient.deleteInternalRange`.
     func deleteInternalRange(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `InternalRangeServiceClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -447,97 +447,97 @@ extension Clients {
 
     /// See `InternalRangeServiceClient.listInternalRanges`.
     func listInternalRanges(
-      request: ListInternalRangesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInternalRangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.ListInternalRangesResponse
 
     /// See `InternalRangeServiceClient.listInternalRanges`.
     func listInternalRanges(
-      byItem: ListInternalRangesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListInternalRangesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<InternalRange, Swift.Error>
 
     /// See `InternalRangeServiceClient.getInternalRange`.
     func getInternalRange(
-      request: GetInternalRangeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInternalRangeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.InternalRange
 
     /// See `InternalRangeServiceClient.createInternalRange`.
     func createInternalRange(
-      request: CreateInternalRangeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInternalRangeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `InternalRangeServiceClient.createInternalRange`.
     func createInternalRange(
-      withPolling: CreateInternalRangeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<InternalRange>
+      withPolling: CreateInternalRangeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<InternalRange>
 
     /// See `InternalRangeServiceClient.updateInternalRange`.
     func updateInternalRange(
-      request: UpdateInternalRangeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateInternalRangeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `InternalRangeServiceClient.updateInternalRange`.
     func updateInternalRange(
-      withPolling: UpdateInternalRangeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<InternalRange>
+      withPolling: UpdateInternalRangeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<InternalRange>
 
     /// See `InternalRangeServiceClient.deleteInternalRange`.
     func deleteInternalRange(
-      request: DeleteInternalRangeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInternalRangeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `InternalRangeServiceClient.deleteInternalRange`.
     func deleteInternalRange(
-      withPolling: DeleteInternalRangeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteInternalRangeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `InternalRangeServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `InternalRangeServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `InternalRangeServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `InternalRangeServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `InternalRangeServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `InternalRangeServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `InternalRangeServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `InternalRangeServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `InternalRangeServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `InternalRangeServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -551,9 +551,9 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func listInternalRanges(
-    request: ListInternalRangesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInternalRangesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkConnectivityV1.ListInternalRangesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listInternalRanges(
@@ -563,14 +563,14 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func listInternalRanges(
-    byItem: ListInternalRangesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListInternalRangesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<InternalRange, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudNetworkConnectivityV1.ListInternalRangesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listInternalRanges(
@@ -589,9 +589,9 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func getInternalRange(
-    request: GetInternalRangeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInternalRangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkConnectivityV1.InternalRange {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getInternalRange(
@@ -610,24 +610,24 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func createInternalRange(
-    request: CreateInternalRangeRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateInternalRangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createInternalRange(withPolling: CreateInternalRangeRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<InternalRange>
+    -> any GoogleGax.PollableOperation<InternalRange>
   {
     try await self.createInternalRange(withPolling: withPolling, options: .init())
   }
 
   public func createInternalRange(
-    withPolling: CreateInternalRangeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<InternalRange> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<InternalRange>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateInternalRangeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<InternalRange> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<InternalRange>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -635,7 +635,7 @@ extension Clients.InternalRangeServiceProtocol {
     parent: Swift.String,
     internalRange: InternalRange?,
     internalRangeId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<InternalRange> {
+  ) async throws -> any GoogleGax.PollableOperation<InternalRange> {
     let request = CreateInternalRangeRequest().with {
       $0.parent = parent
       $0.internalRange = internalRange
@@ -651,31 +651,31 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func updateInternalRange(
-    request: UpdateInternalRangeRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateInternalRangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateInternalRange(withPolling: UpdateInternalRangeRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<InternalRange>
+    -> any GoogleGax.PollableOperation<InternalRange>
   {
     try await self.updateInternalRange(withPolling: withPolling, options: .init())
   }
 
   public func updateInternalRange(
-    withPolling: UpdateInternalRangeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<InternalRange> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<InternalRange>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateInternalRangeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<InternalRange> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<InternalRange>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateInternalRange(
     internalRange: InternalRange?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<InternalRange> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<InternalRange> {
     let request = UpdateInternalRangeRequest().with {
       $0.internalRange = internalRange
       $0.updateMask = updateMask
@@ -690,30 +690,30 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func deleteInternalRange(
-    request: DeleteInternalRangeRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteInternalRangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteInternalRange(withPolling: DeleteInternalRangeRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteInternalRange(withPolling: withPolling, options: .init())
   }
 
   public func deleteInternalRange(
-    withPolling: DeleteInternalRangeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteInternalRangeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteInternalRange(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteInternalRangeRequest().with {
       $0.name = name
     }
@@ -727,9 +727,9 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -739,13 +739,13 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -755,9 +755,9 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -767,9 +767,9 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -779,9 +779,9 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -791,9 +791,9 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -803,9 +803,9 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -815,13 +815,13 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -842,9 +842,9 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -861,9 +861,9 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -880,9 +880,9 @@ extension Clients.InternalRangeServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for IngestAsset API.
-public struct IngestAssetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IngestAssetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   public var streamingRequest: OneOf_StreamingRequest? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IngestAssetRequest`.
   public init() {}
@@ -81,7 +81,7 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     self.streamingRequest = streamingRequest
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,7 +102,7 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   }
 
   /// Configuration for the data.
-  public struct Config: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Config: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The resource name of the asset that the ingested data belongs
@@ -111,7 +111,7 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
 
     public var dataType: OneOf_DataType? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Config`.
     public init() {}
@@ -168,7 +168,7 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       self.dataType = dataType
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -188,14 +188,14 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
 
     /// Type information for video data.
-    public struct VideoType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct VideoType: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Container format of the video data.
       public var containerFormat: IngestAssetRequest.Config.VideoType.ContainerFormat =
         IngestAssetRequest.Config.VideoType.ContainerFormat()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `VideoType`.
       public init() {}
@@ -235,7 +235,7 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -348,11 +348,11 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.visionai.v1.IngestAssetRequest.Config.VideoType"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -364,16 +364,16 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.IngestAssetRequest.Config"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Contains the data and the corresponding time range this data is for.
-  public struct TimeIndexedData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TimeIndexedData: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Data to be ingested.
@@ -382,7 +382,7 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// Time range of the data.
     public var temporalPartition: Partition.TemporalPartition? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TimeIndexedData`.
     public init() {}
@@ -424,7 +424,7 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
         Partition.TemporalPartition.self, forKey: .temporalPartition)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -440,11 +440,11 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.IngestAssetRequest.TimeIndexedData"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -460,10 +460,10 @@ public struct IngestAssetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.IngestAssetRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

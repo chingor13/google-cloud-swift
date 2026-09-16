@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a tool to perform Google web searches for grounding.
 /// See
 /// https://cloud.google.com/customer-engagement-ai/conversational-agents/ps/tool#google-search.
-public struct GoogleSearchTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GoogleSearchTool: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the tool.
@@ -48,7 +48,7 @@ public struct GoogleSearchTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// should be processed for text and voice.
   public var promptConfig: GoogleSearchTool.PromptConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GoogleSearchTool`.
   public init() {}
@@ -110,7 +110,7 @@ public struct GoogleSearchTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       GoogleSearchTool.PromptConfig.self, forKey: .promptConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -129,7 +129,7 @@ public struct GoogleSearchTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Prompt settings used by the model when processing or summarizing the
   /// google search results.
-  public struct PromptConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PromptConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Defines the prompt used for the system instructions when
@@ -142,7 +142,7 @@ public struct GoogleSearchTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// prompt will be used.
     public var voicePrompt: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PromptConfig`.
     public init() {}
@@ -185,7 +185,7 @@ public struct GoogleSearchTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -201,21 +201,21 @@ public struct GoogleSearchTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.GoogleSearchTool.PromptConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.GoogleSearchTool"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

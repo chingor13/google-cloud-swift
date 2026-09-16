@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// TaskTemplate describes the data a task should have when created
 /// from a template.
-public struct TaskTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TaskTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Holds the single container that defines the unit of execution for this
@@ -33,7 +33,7 @@ public struct TaskTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// system will actively try to mark it failed and kill associated containers.
   /// This applies per attempt of a task, meaning each retry can run for the full
   /// timeout. Defaults to 600 seconds.
-  public var timeout: GoogleCloudWKT.Duration? = nil
+  public var timeout: GoogleWKT.Duration? = nil
 
   /// Optional. Email address of the IAM service account associated with the Task
   /// of a Job. The service account represents the identity of the running task,
@@ -62,7 +62,7 @@ public struct TaskTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public var retries: OneOf_Retries? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TaskTemplate`.
   public init() {}
@@ -119,7 +119,7 @@ public struct TaskTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent([Volume].self, forKey: .volumes) {
       self.volumes = value
     }
-    self.timeout = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .timeout)
+    self.timeout = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeout)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .serviceAccount) {
       self.serviceAccount = value
     }
@@ -152,7 +152,7 @@ public struct TaskTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.retries = retries
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -189,10 +189,10 @@ public struct TaskTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.TaskTemplate"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

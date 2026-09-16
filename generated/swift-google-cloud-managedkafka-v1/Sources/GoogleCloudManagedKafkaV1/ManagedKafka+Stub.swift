@@ -16,119 +16,119 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ManagedKafkaStub: Sendable {
     func listClusters(
-      request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.ListClustersResponse
 
     func getCluster(
-      request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Cluster
 
     func createCluster(
-      request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateCluster(
-      request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCluster(
-      request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listTopics(
-      request: ListTopicsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTopicsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.ListTopicsResponse
 
     func getTopic(
-      request: GetTopicRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTopicRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Topic
 
     func createTopic(
-      request: CreateTopicRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTopicRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Topic
 
     func updateTopic(
-      request: UpdateTopicRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTopicRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Topic
 
     func deleteTopic(
-      request: DeleteTopicRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTopicRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listConsumerGroups(
-      request: ListConsumerGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConsumerGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.ListConsumerGroupsResponse
 
     func getConsumerGroup(
-      request: GetConsumerGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConsumerGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.ConsumerGroup
 
     func updateConsumerGroup(
-      request: UpdateConsumerGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConsumerGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.ConsumerGroup
 
     func deleteConsumerGroup(
-      request: DeleteConsumerGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConsumerGroupRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listAcls(
-      request: ListAclsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAclsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.ListAclsResponse
 
     func getAcl(
-      request: GetAclRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAclRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Acl
 
     func createAcl(
-      request: CreateAclRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAclRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Acl
 
     func updateAcl(
-      request: UpdateAclRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAclRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Acl
 
     func deleteAcl(
-      request: DeleteAclRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAclRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func addAclEntry(
-      request: AddAclEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: AddAclEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.AddAclEntryResponse
 
     func removeAclEntry(
-      request: RemoveAclEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveAclEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.RemoveAclEntryResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

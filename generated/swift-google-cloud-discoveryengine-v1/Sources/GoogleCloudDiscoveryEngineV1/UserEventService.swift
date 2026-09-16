@@ -20,21 +20,21 @@
     import FoundationNetworking
   #endif
   import GoogleApi
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for ingesting end user actions on a website to Discovery Engine API.
   ///
   /// @Snippet(path: "UserEventServiceQuickstart")
   public final class UserEventServiceClient: Clients.UserEventServiceProtocol, Sendable {
     let inner: any Clients.UserEventServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `UserEventServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.UserEventServiceStub = try Clients.UserEventServiceTransport(options)
       inner = Clients.UserEventServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -49,7 +49,7 @@
     ///
     /// @Snippet(path: "UserEventService_WriteUserEvent")
     public func writeUserEvent(
-      request: WriteUserEventRequest, options: GoogleCloudGax.RequestOptions
+      request: WriteUserEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.UserEvent {
       try await self.inner.writeUserEvent(request: request, options: options)
     }
@@ -62,7 +62,7 @@
     ///
     /// @Snippet(path: "UserEventService_CollectUserEvent")
     public func collectUserEvent(
-      request: CollectUserEventRequest, options: GoogleCloudGax.RequestOptions
+      request: CollectUserEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody {
       try await self.inner.collectUserEvent(request: request, options: options)
     }
@@ -74,7 +74,7 @@
     ///
     /// @Snippet(path: "UserEventService_PurgeUserEvents")
     public func purgeUserEvents(
-      request: PurgeUserEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeUserEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.purgeUserEvents(request: request, options: options)
     }
@@ -86,22 +86,22 @@
     ///
     /// @Snippet(path: "UserEventService_PurgeUserEvents")
     public func purgeUserEvents(
-      withPolling: PurgeUserEventsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PurgeUserEventsResponse> {
+      withPolling: PurgeUserEventsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PurgeUserEventsResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<PurgeUserEventsResponse>.State in
+          -> GoogleGax._PollableOperationImpl<PurgeUserEventsResponse>.State in
         return try op._extractStatus(PurgeUserEventsResponse.self)
       }
       let rawOp = try await self.purgeUserEvents(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<PurgeUserEventsResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<PurgeUserEventsResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -119,7 +119,7 @@
     ///
     /// @Snippet(path: "UserEventService_ImportUserEvents")
     public func importUserEvents(
-      request: ImportUserEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportUserEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.importUserEvents(request: request, options: options)
     }
@@ -134,22 +134,22 @@
     ///
     /// @Snippet(path: "UserEventService_ImportUserEvents")
     public func importUserEvents(
-      withPolling: ImportUserEventsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportUserEventsResponse> {
+      withPolling: ImportUserEventsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportUserEventsResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ImportUserEventsResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ImportUserEventsResponse>.State in
         return try op._extractStatus(ImportUserEventsResponse.self)
       }
       let rawOp = try await self.importUserEvents(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportUserEventsResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<ImportUserEventsResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -163,7 +163,7 @@
     ///
     /// @Snippet(path: "UserEventService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -174,7 +174,7 @@
     ///
     /// @Snippet(path: "UserEventService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -182,7 +182,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -191,7 +191,7 @@
     ///
     /// @Snippet(path: "UserEventService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -202,7 +202,7 @@
     ///
     /// @Snippet(path: "UserEventService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -227,7 +227,7 @@
         -> GoogleLongRunning.Operation
 
       /// See `UserEventServiceClient.purgeUserEvents`.
-      func purgeUserEvents(withPolling: PurgeUserEventsRequest) async throws -> any GoogleCloudGax
+      func purgeUserEvents(withPolling: PurgeUserEventsRequest) async throws -> any GoogleGax
         .PollableOperation<PurgeUserEventsResponse>
 
       /// See `UserEventServiceClient.importUserEvents`.
@@ -235,7 +235,7 @@
         -> GoogleLongRunning.Operation
 
       /// See `UserEventServiceClient.importUserEvents`.
-      func importUserEvents(withPolling: ImportUserEventsRequest) async throws -> any GoogleCloudGax
+      func importUserEvents(withPolling: ImportUserEventsRequest) async throws -> any GoogleGax
         .PollableOperation<ImportUserEventsResponse>
 
       /// See `UserEventServiceClient.listOperations`.
@@ -263,47 +263,47 @@
 
       /// See `UserEventServiceClient.writeUserEvent`.
       func writeUserEvent(
-        request: WriteUserEventRequest, options: GoogleCloudGax.RequestOptions
+        request: WriteUserEventRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.UserEvent
 
       /// See `UserEventServiceClient.collectUserEvent`.
       func collectUserEvent(
-        request: CollectUserEventRequest, options: GoogleCloudGax.RequestOptions
+        request: CollectUserEventRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleApi.HttpBody
 
       /// See `UserEventServiceClient.purgeUserEvents`.
       func purgeUserEvents(
-        request: PurgeUserEventsRequest, options: GoogleCloudGax.RequestOptions
+        request: PurgeUserEventsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `UserEventServiceClient.purgeUserEvents`.
       func purgeUserEvents(
-        withPolling: PurgeUserEventsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<PurgeUserEventsResponse>
+        withPolling: PurgeUserEventsRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<PurgeUserEventsResponse>
 
       /// See `UserEventServiceClient.importUserEvents`.
       func importUserEvents(
-        request: ImportUserEventsRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportUserEventsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `UserEventServiceClient.importUserEvents`.
       func importUserEvents(
-        withPolling: ImportUserEventsRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ImportUserEventsResponse>
+        withPolling: ImportUserEventsRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ImportUserEventsResponse>
 
       /// See `UserEventServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `UserEventServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `UserEventServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -317,9 +317,9 @@
     }
 
     public func writeUserEvent(
-      request: WriteUserEventRequest, options: GoogleCloudGax.RequestOptions
+      request: WriteUserEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.UserEvent {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func collectUserEvent(request: CollectUserEventRequest) async throws
@@ -329,9 +329,9 @@
     }
 
     public func collectUserEvent(
-      request: CollectUserEventRequest, options: GoogleCloudGax.RequestOptions
+      request: CollectUserEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func purgeUserEvents(request: PurgeUserEventsRequest) async throws
@@ -341,25 +341,25 @@
     }
 
     public func purgeUserEvents(
-      request: PurgeUserEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeUserEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func purgeUserEvents(withPolling: PurgeUserEventsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<PurgeUserEventsResponse>
+    public func purgeUserEvents(withPolling: PurgeUserEventsRequest) async throws -> any GoogleGax
+      .PollableOperation<PurgeUserEventsResponse>
     {
       try await self.purgeUserEvents(withPolling: withPolling, options: .init())
     }
 
     public func purgeUserEvents(
-      withPolling: PurgeUserEventsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PurgeUserEventsResponse> {
+      withPolling: PurgeUserEventsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PurgeUserEventsResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<PurgeUserEventsResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<PurgeUserEventsResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -370,25 +370,25 @@
     }
 
     public func importUserEvents(
-      request: ImportUserEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportUserEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func importUserEvents(withPolling: ImportUserEventsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ImportUserEventsResponse>
+    public func importUserEvents(withPolling: ImportUserEventsRequest) async throws -> any GoogleGax
+      .PollableOperation<ImportUserEventsResponse>
     {
       try await self.importUserEvents(withPolling: withPolling, options: .init())
     }
 
     public func importUserEvents(
-      withPolling: ImportUserEventsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportUserEventsResponse> {
+      withPolling: ImportUserEventsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportUserEventsResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportUserEventsResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<ImportUserEventsResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -399,9 +399,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -411,13 +411,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -438,9 +438,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -457,9 +457,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

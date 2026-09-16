@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Information about the IP or IP range override.
-public struct IpOverrideData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IpOverrideData: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The IP address to override (can be IPv4, IPv6 or CIDR).
@@ -33,7 +33,7 @@ public struct IpOverrideData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Required. Describes the type of IP override.
   public var overrideType: IpOverrideData.OverrideType = IpOverrideData.OverrideType()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IpOverrideData`.
   public init() {}
@@ -78,7 +78,7 @@ public struct IpOverrideData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -194,10 +194,10 @@ public struct IpOverrideData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.IpOverrideData"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

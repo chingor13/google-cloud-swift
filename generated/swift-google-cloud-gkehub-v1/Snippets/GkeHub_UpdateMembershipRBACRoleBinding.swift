@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudGKEHubV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: GkeHubClient, projectId: String, locationId: String, scopeId: String,
@@ -33,7 +33,7 @@ func sample(
           $0.name =
             "projects/\(projectId)/locations/\(locationId)/scopes/\(scopeId)/rbacrolebindings/\(rbacrolebindingId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

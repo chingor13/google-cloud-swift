@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudUniversalLedgerV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: UniversalLedgerClient, projectId: String, locationId: String) async throws {
   let items = try client.listEndpoints(

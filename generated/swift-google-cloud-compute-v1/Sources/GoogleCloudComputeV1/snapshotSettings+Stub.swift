@@ -16,21 +16,21 @@
 
 #if SnapshotSettings
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SnapshotSettingsStub: Sendable {
       func `get`(
-        request: SnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotSettingsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SnapshotSettings
 
       func patch(
-        request: SnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotSettingsClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

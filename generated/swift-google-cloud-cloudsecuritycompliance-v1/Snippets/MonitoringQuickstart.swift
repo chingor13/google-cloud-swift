@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudSecurityComplianceV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudSecurityComplianceV1.MonitoringClient()

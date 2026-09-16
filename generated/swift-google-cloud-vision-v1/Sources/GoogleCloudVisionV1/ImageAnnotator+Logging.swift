@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -40,9 +40,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,14 +59,14 @@ extension Clients {
     }
 
     public func batchAnnotateImages(
-      request: BatchAnnotateImagesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchAnnotateImagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.BatchAnnotateImagesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "batchAnnotateImages",
         action: {
-          (r: BatchAnnotateImagesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BatchAnnotateImagesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVisionV1.BatchAnnotateImagesResponse
           in
           return try await self.inner.batchAnnotateImages(request: r, options: o)
@@ -74,14 +74,14 @@ extension Clients {
     }
 
     public func batchAnnotateFiles(
-      request: BatchAnnotateFilesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchAnnotateFilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.BatchAnnotateFilesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "batchAnnotateFiles",
         action: {
-          (r: BatchAnnotateFilesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BatchAnnotateFilesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVisionV1.BatchAnnotateFilesResponse
           in
           return try await self.inner.batchAnnotateFiles(request: r, options: o)
@@ -89,14 +89,14 @@ extension Clients {
     }
 
     public func asyncBatchAnnotateImages(
-      request: AsyncBatchAnnotateImagesRequest, options: GoogleCloudGax.RequestOptions
+      request: AsyncBatchAnnotateImagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "asyncBatchAnnotateImages",
         action: {
-          (r: AsyncBatchAnnotateImagesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AsyncBatchAnnotateImagesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.asyncBatchAnnotateImages(request: r, options: o)
@@ -104,14 +104,14 @@ extension Clients {
     }
 
     public func asyncBatchAnnotateFiles(
-      request: AsyncBatchAnnotateFilesRequest, options: GoogleCloudGax.RequestOptions
+      request: AsyncBatchAnnotateFilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "asyncBatchAnnotateFiles",
         action: {
-          (r: AsyncBatchAnnotateFilesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AsyncBatchAnnotateFilesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.asyncBatchAnnotateFiles(request: r, options: o)
@@ -119,14 +119,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

@@ -16,12 +16,11 @@
 
 #if Rollouts
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// This message is used if the resource type follows the Orchestrated
   /// integration model with ProgressiveRollout.
-  public struct RolloutRolloutEntityOrchestratedEntity: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
+  public struct RolloutRolloutEntityOrchestratedEntity: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Specifies the behavior of the Rollout if an out of band update is
@@ -49,7 +48,7 @@
     /// //osconfig.googleapis.com/projects/1/locations/global/policyOrchestrators/po1
     public var orchestrationSource: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RolloutRolloutEntityOrchestratedEntity`.
     public init() {}
@@ -94,7 +93,7 @@
         Swift.String.self, forKey: .orchestrationSource)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -111,11 +110,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.RolloutRolloutEntityOrchestratedEntity"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

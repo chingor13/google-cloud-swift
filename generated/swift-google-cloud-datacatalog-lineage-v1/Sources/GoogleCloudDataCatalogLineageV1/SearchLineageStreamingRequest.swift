@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [SearchLineageStreaming][google.cloud.datacatalog.lineage.v1.Lineage.SearchLineageStreaming].
 ///
 /// [google.cloud.datacatalog.lineage.v1.Lineage.SearchLineageStreaming]: <doc:LineageClient/searchLineageStreaming(request:options:)>
-public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The project and location to initiate the search from.
@@ -44,7 +44,7 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleCloudWKT.
   /// Optional. Limits for the search.
   public var limits: SearchLineageStreamingRequest.SearchLimits? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SearchLineageStreamingRequest`.
   public init() {}
@@ -106,7 +106,7 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleCloudWKT.
       SearchLineageStreamingRequest.SearchLimits.self, forKey: .limits)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -124,7 +124,7 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleCloudWKT.
   }
 
   /// Filters for the search.
-  public struct SearchFilters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SearchFilters: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Types of dependencies between entities to retrieve.
@@ -141,7 +141,7 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleCloudWKT.
     /// `end_time` can be set.
     public var timeRange: GoogleType.Interval? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SearchFilters`.
     public init() {}
@@ -190,7 +190,7 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleCloudWKT.
       self.timeRange = try container.decodeIfPresent(GoogleType.Interval.self, forKey: .timeRange)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -208,16 +208,16 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleCloudWKT.
       return
         "type.googleapis.com/google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Limits for the search results.
-  public struct SearchLimits: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SearchLimits: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The maximum depth of the search. The default value is 5 and
@@ -235,7 +235,7 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleCloudWKT.
     /// [FieldMask](https://developers.google.com/workspace/docs/api/how-tos/field-masks#read_with_a_field_mask).
     public var maxProcessPerLink: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SearchLimits`.
     public init() {}
@@ -283,7 +283,7 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleCloudWKT.
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -301,22 +301,22 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleCloudWKT.
       return
         "type.googleapis.com/google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Criteria for the root of the search.
-  public struct RootCriteria: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RootCriteria: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Criteria for the root of the search.
     public var criteria: OneOf_Criteria? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RootCriteria`.
     public init() {}
@@ -368,7 +368,7 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleCloudWKT.
       self.criteria = criteria
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -398,11 +398,11 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleCloudWKT.
       return
         "type.googleapis.com/google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -613,10 +613,10 @@ public struct SearchLineageStreamingRequest: Codable, Equatable, GoogleCloudWKT.
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

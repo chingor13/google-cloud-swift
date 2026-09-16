@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Recursive graph pattern matcher to select and constrain the returned
 /// topology.
 /// AppTopology API allows cycle in the graph traversal and will return unique
 /// node and edge results in the response.
 /// SLO is guaranteed for at most 5 hops in the graph traversal.
-public struct GraphPattern: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GraphPattern: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Pattern matcher to select the starting nodes in the graph.
@@ -32,7 +32,7 @@ public struct GraphPattern: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// are ANDed.
   public var neighbors: [ConnectedNodePattern] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GraphPattern`.
   public init() {}
@@ -73,7 +73,7 @@ public struct GraphPattern: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -89,10 +89,10 @@ public struct GraphPattern: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apptopology.v1.GraphPattern"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

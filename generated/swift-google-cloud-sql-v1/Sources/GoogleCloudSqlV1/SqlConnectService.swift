@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Cloud SQL connect service.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.SqlConnectServiceStub
 
     /// Creates a new `SqlConnectServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlConnectServiceStub = try Clients.SqlConnectServiceTransport(options)
       inner = Clients.SqlConnectServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -42,7 +42,7 @@
     ///
     /// @Snippet(path: "SqlConnectService_GetConnectSettings")
     public func getConnectSettings(
-      request: GetConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.ConnectSettings {
       try await self.inner.getConnectSettings(request: request, options: options)
     }
@@ -52,7 +52,7 @@
     ///
     /// @Snippet(path: "SqlConnectService_ResolveConnectSettings")
     public func resolveConnectSettings(
-      request: ResolveConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ResolveConnectSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.ConnectSettings {
       try await self.inner.resolveConnectSettings(request: request, options: options)
     }
@@ -64,7 +64,7 @@
     ///
     /// @Snippet(path: "SqlConnectService_GenerateEphemeralCert")
     public func generateEphemeralCert(
-      request: GenerateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateEphemeralCertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.GenerateEphemeralCertResponse {
       try await self.inner.generateEphemeralCert(request: request, options: options)
     }
@@ -91,17 +91,17 @@
 
       /// See `SqlConnectServiceClient.getConnectSettings`.
       func getConnectSettings(
-        request: GetConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: GetConnectSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.ConnectSettings
 
       /// See `SqlConnectServiceClient.resolveConnectSettings`.
       func resolveConnectSettings(
-        request: ResolveConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: ResolveConnectSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.ConnectSettings
 
       /// See `SqlConnectServiceClient.generateEphemeralCert`.
       func generateEphemeralCert(
-        request: GenerateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
+        request: GenerateEphemeralCertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.GenerateEphemeralCertResponse
     }
   }
@@ -115,9 +115,9 @@
     }
 
     public func getConnectSettings(
-      request: GetConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.ConnectSettings {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func resolveConnectSettings(request: ResolveConnectSettingsRequest) async throws
@@ -127,9 +127,9 @@
     }
 
     public func resolveConnectSettings(
-      request: ResolveConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ResolveConnectSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.ConnectSettings {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func generateEphemeralCert(request: GenerateEphemeralCertRequest) async throws
@@ -139,9 +139,9 @@
     }
 
     public func generateEphemeralCert(
-      request: GenerateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateEphemeralCertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.GenerateEphemeralCertResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

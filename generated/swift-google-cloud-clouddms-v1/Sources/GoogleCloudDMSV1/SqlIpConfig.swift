@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// IP Management configuration.
-public struct SqlIpConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SqlIpConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Whether the instance should be assigned an IPv4 address or not.
-  public var enableIpv4: GoogleCloudWKT.BoolValue? = nil
+  public var enableIpv4: GoogleWKT.BoolValue? = nil
 
   /// The resource link for the VPC network from which the Cloud SQL instance is
   /// accessible for private IP. For example,
@@ -39,7 +39,7 @@ public struct SqlIpConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var allocatedIpRange: Swift.String = Swift.String()
 
   /// Whether SSL connections over IP should be enforced or not.
-  public var requireSsl: GoogleCloudWKT.BoolValue? = nil
+  public var requireSsl: GoogleWKT.BoolValue? = nil
 
   /// The list of external networks that are allowed to connect to the instance
   /// using the IP. See
@@ -47,7 +47,7 @@ public struct SqlIpConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// 'slash' notation (e.g. `192.168.100.0/24`).
   public var authorizedNetworks: [SqlAclEntry] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SqlIpConfig`.
   public init() {}
@@ -88,22 +88,20 @@ public struct SqlIpConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.enableIpv4 = try container.decodeIfPresent(
-      GoogleCloudWKT.BoolValue.self, forKey: .enableIpv4)
+    self.enableIpv4 = try container.decodeIfPresent(GoogleWKT.BoolValue.self, forKey: .enableIpv4)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .privateNetwork) {
       self.privateNetwork = value
     }
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .allocatedIpRange) {
       self.allocatedIpRange = value
     }
-    self.requireSsl = try container.decodeIfPresent(
-      GoogleCloudWKT.BoolValue.self, forKey: .requireSsl)
+    self.requireSsl = try container.decodeIfPresent(GoogleWKT.BoolValue.self, forKey: .requireSsl)
     if let value = try container.decodeIfPresent([SqlAclEntry].self, forKey: .authorizedNetworks) {
       self.authorizedNetworks = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -122,10 +120,10 @@ public struct SqlIpConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.clouddms.v1.SqlIpConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

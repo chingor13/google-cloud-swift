@@ -15,45 +15,45 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AccessApprovalStub: Sendable {
     func listApprovalRequests(
-      request: ListApprovalRequestsMessage, options: GoogleCloudGax.RequestOptions
+      request: ListApprovalRequestsMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.ListApprovalRequestsResponse
 
     func getApprovalRequest(
-      request: GetApprovalRequestMessage, options: GoogleCloudGax.RequestOptions
+      request: GetApprovalRequestMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.ApprovalRequest
 
     func approveApprovalRequest(
-      request: ApproveApprovalRequestMessage, options: GoogleCloudGax.RequestOptions
+      request: ApproveApprovalRequestMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.ApprovalRequest
 
     func dismissApprovalRequest(
-      request: DismissApprovalRequestMessage, options: GoogleCloudGax.RequestOptions
+      request: DismissApprovalRequestMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.ApprovalRequest
 
     func invalidateApprovalRequest(
-      request: InvalidateApprovalRequestMessage, options: GoogleCloudGax.RequestOptions
+      request: InvalidateApprovalRequestMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.ApprovalRequest
 
     func getAccessApprovalSettings(
-      request: GetAccessApprovalSettingsMessage, options: GoogleCloudGax.RequestOptions
+      request: GetAccessApprovalSettingsMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.AccessApprovalSettings
 
     func updateAccessApprovalSettings(
-      request: UpdateAccessApprovalSettingsMessage, options: GoogleCloudGax.RequestOptions
+      request: UpdateAccessApprovalSettingsMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.AccessApprovalSettings
 
     func deleteAccessApprovalSettings(
-      request: DeleteAccessApprovalSettingsMessage, options: GoogleCloudGax.RequestOptions
+      request: DeleteAccessApprovalSettingsMessage, options: GoogleGax.RequestOptions
     ) async throws
 
     func getAccessApprovalServiceAccount(
-      request: GetAccessApprovalServiceAccountMessage, options: GoogleCloudGax.RequestOptions
+      request: GetAccessApprovalServiceAccountMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.AccessApprovalServiceAccount
   }
 }

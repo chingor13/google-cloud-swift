@@ -15,19 +15,19 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Details describing error condition of a dependency.
-public struct DependencyErrorDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DependencyErrorDetail: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Error in the dependency.
   public var error: DependencyErrorDetail.Error = DependencyErrorDetail.Error()
 
   /// Optional. Timestamp at which the error was found.
-  public var errorTime: GoogleCloudWKT.Timestamp? = nil
+  public var errorTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DependencyErrorDetail`.
   public init() {}
@@ -65,11 +65,10 @@ public struct DependencyErrorDetail: Codable, Equatable, GoogleCloudWKT._AnyPack
     if let value = try container.decodeIfPresent(DependencyErrorDetail.Error.self, forKey: .error) {
       self.error = value
     }
-    self.errorTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .errorTime)
+    self.errorTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .errorTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -190,10 +189,10 @@ public struct DependencyErrorDetail: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apihub.v1.DependencyErrorDetail"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

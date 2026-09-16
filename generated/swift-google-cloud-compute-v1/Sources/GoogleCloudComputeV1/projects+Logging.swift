@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@
       }
 
       public func disableXpnHost(
-        request: ProjectsClient.DisableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.DisableXpnHostRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "disableXpnHost",
           action: {
-            (r: ProjectsClient.DisableXpnHostRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ProjectsClient.DisableXpnHostRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.disableXpnHost(request: r, options: o)
@@ -73,29 +73,29 @@
       }
 
       public func disableXpnResource(
-        request: ProjectsClient.DisableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.DisableXpnResourceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "disableXpnResource",
           action: {
-            (r: ProjectsClient.DisableXpnResourceRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: ProjectsClient.DisableXpnResourceRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.disableXpnResource(request: r, options: o)
           })
       }
 
       public func enableXpnHost(
-        request: ProjectsClient.EnableXpnHostRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.EnableXpnHostRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "enableXpnHost",
           action: {
-            (r: ProjectsClient.EnableXpnHostRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ProjectsClient.EnableXpnHostRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.enableXpnHost(request: r, options: o)
@@ -103,29 +103,29 @@
       }
 
       public func enableXpnResource(
-        request: ProjectsClient.EnableXpnResourceRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.EnableXpnResourceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "enableXpnResource",
           action: {
-            (r: ProjectsClient.EnableXpnResourceRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: ProjectsClient.EnableXpnResourceRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.enableXpnResource(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Project {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: ProjectsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ProjectsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Project
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -133,14 +133,14 @@
       }
 
       public func getXpnHost(
-        request: ProjectsClient.GetXpnHostRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.GetXpnHostRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Project {
         try await self._intercept(
           request: request,
           options: options,
           name: "getXpnHost",
           action: {
-            (r: ProjectsClient.GetXpnHostRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ProjectsClient.GetXpnHostRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Project
             in
             return try await self.inner.getXpnHost(request: r, options: o)
@@ -148,29 +148,29 @@
       }
 
       public func getXpnResources(
-        request: ProjectsClient.GetXpnResourcesRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.GetXpnResourcesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources {
         try await self._intercept(
           request: request,
           options: options,
           name: "getXpnResources",
           action: {
-            (r: ProjectsClient.GetXpnResourcesRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.ProjectsGetXpnResources
+            (r: ProjectsClient.GetXpnResourcesRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.ProjectsGetXpnResources
             in
             return try await self.inner.getXpnResources(request: r, options: o)
           })
       }
 
       public func listXpnHosts(
-        request: ProjectsClient.ListXpnHostsRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.ListXpnHostsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.XpnHostList {
         try await self._intercept(
           request: request,
           options: options,
           name: "listXpnHosts",
           action: {
-            (r: ProjectsClient.ListXpnHostsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ProjectsClient.ListXpnHostsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.XpnHostList
             in
             return try await self.inner.listXpnHosts(request: r, options: o)
@@ -178,14 +178,14 @@
       }
 
       public func moveDisk(
-        request: ProjectsClient.MoveDiskRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.MoveDiskRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "moveDisk",
           action: {
-            (r: ProjectsClient.MoveDiskRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ProjectsClient.MoveDiskRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.moveDisk(request: r, options: o)
@@ -193,14 +193,14 @@
       }
 
       public func moveInstance(
-        request: ProjectsClient.MoveInstanceRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.MoveInstanceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "moveInstance",
           action: {
-            (r: ProjectsClient.MoveInstanceRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ProjectsClient.MoveInstanceRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.moveInstance(request: r, options: o)
@@ -208,30 +208,29 @@
       }
 
       public func setCloudArmorTier(
-        request: ProjectsClient.SetCloudArmorTierRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetCloudArmorTierRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "setCloudArmorTier",
           action: {
-            (r: ProjectsClient.SetCloudArmorTierRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: ProjectsClient.SetCloudArmorTierRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setCloudArmorTier(request: r, options: o)
           })
       }
 
       public func setCommonInstanceMetadata(
-        request: ProjectsClient.SetCommonInstanceMetadataRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetCommonInstanceMetadataRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "setCommonInstanceMetadata",
           action: {
-            (r: ProjectsClient.SetCommonInstanceMetadataRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ProjectsClient.SetCommonInstanceMetadataRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setCommonInstanceMetadata(request: r, options: o)
@@ -239,14 +238,14 @@
       }
 
       public func setDefaultNetworkTier(
-        request: ProjectsClient.SetDefaultNetworkTierRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetDefaultNetworkTierRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "setDefaultNetworkTier",
           action: {
-            (r: ProjectsClient.SetDefaultNetworkTierRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ProjectsClient.SetDefaultNetworkTierRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setDefaultNetworkTier(request: r, options: o)
@@ -254,14 +253,14 @@
       }
 
       public func setUsageExportBucket(
-        request: ProjectsClient.SetUsageExportBucketRequest, options: GoogleCloudGax.RequestOptions
+        request: ProjectsClient.SetUsageExportBucketRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "setUsageExportBucket",
           action: {
-            (r: ProjectsClient.SetUsageExportBucketRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ProjectsClient.SetUsageExportBucketRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setUsageExportBucket(request: r, options: o)
@@ -269,14 +268,14 @@
       }
 
       public func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: GlobalOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GlobalOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

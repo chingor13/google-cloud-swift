@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func troubleshootIamPolicy(
-      request: TroubleshootIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: TroubleshootIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPolicyTroubleshooterIAMV3.TroubleshootIamPolicyResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "troubleshootIamPolicy",
         action: {
-          (r: TroubleshootIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: TroubleshootIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudPolicyTroubleshooterIAMV3.TroubleshootIamPolicyResponse
           in
           return try await self.inner.troubleshootIamPolicy(request: r, options: o)

@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// BigQuery destination configuration
-public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BigQueryDestinationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The guaranteed data freshness (in seconds) when querying tables created by
   /// the stream. Editing this field will only affect new tables created in the
   /// future, but existing tables will not be impacted. Lower values mean that
   /// queries will return fresher data, but may result in higher cost.
-  public var dataFreshness: GoogleCloudWKT.Duration? = nil
+  public var dataFreshness: GoogleWKT.Duration? = nil
 
   /// Optional. Big Lake Managed Tables (BLMT) configuration.
   public var blmtConfig: BigQueryDestinationConfig.BlmtConfig? = nil
@@ -35,7 +35,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
 
   public var writeMode: OneOf_WriteMode? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BigQueryDestinationConfig`.
   public init() {}
@@ -79,7 +79,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.dataFreshness = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .dataFreshness)
+      GoogleWKT.Duration.self, forKey: .dataFreshness)
     self.blmtConfig = try container.decodeIfPresent(
       BigQueryDestinationConfig.BlmtConfig.self, forKey: .blmtConfig)
 
@@ -128,7 +128,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
     self.writeMode = writeMode
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -160,7 +160,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
   }
 
   /// A single target dataset to which all data will be streamed.
-  public struct SingleTargetDataset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SingleTargetDataset: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The dataset ID of the target dataset.
@@ -168,7 +168,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
     /// https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets#datasetreference.
     public var datasetId: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SingleTargetDataset`.
     public init() {}
@@ -206,7 +206,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -222,17 +222,17 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Destination datasets are created so that hierarchy of the destination data
   /// objects matches the source hierarchy.
-  public struct SourceHierarchyDatasets: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SourceHierarchyDatasets: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The dataset template to use for dynamic dataset creation.
@@ -243,7 +243,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
     /// project will be inferred from the stream resource.
     public var projectId: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SourceHierarchyDatasets`.
     public init() {}
@@ -284,7 +284,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
       self.projectId = try container.decodeIfPresent(Swift.String.self, forKey: .projectId)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -298,7 +298,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
     }
 
     /// Dataset template used for dynamic dataset creation.
-    public struct DatasetTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DatasetTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The geographic location where the dataset should reside. See
@@ -320,7 +320,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
       /// for more information.
       public var kmsKeyName: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DatasetTemplate`.
       public init() {}
@@ -368,7 +368,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -386,11 +386,11 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
         return
           "type.googleapis.com/google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -398,16 +398,16 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The configuration for BLMT.
-  public struct BlmtConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BlmtConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The Cloud Storage bucket name.
@@ -428,7 +428,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
     public var tableFormat: BigQueryDestinationConfig.BlmtConfig.TableFormat =
       BigQueryDestinationConfig.BlmtConfig.TableFormat()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BlmtConfig`.
     public init() {}
@@ -490,7 +490,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -705,20 +705,20 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.datastream.v1.BigQueryDestinationConfig.BlmtConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// AppendOnly mode defines that all changes to a table will be written to the
   /// destination table.
-  public struct AppendOnly: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AppendOnly: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AppendOnly`.
     public init() {}
@@ -749,7 +749,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -763,20 +763,20 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.datastream.v1.BigQueryDestinationConfig.AppendOnly"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Merge mode defines that all changes to a table will be merged at the
   /// destination table.
-  public struct Merge: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Merge: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Merge`.
     public init() {}
@@ -807,7 +807,7 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -821,11 +821,11 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.datastream.v1.BigQueryDestinationConfig.Merge"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -847,10 +847,10 @@ public struct BigQueryDestinationConfig: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datastream.v1.BigQueryDestinationConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

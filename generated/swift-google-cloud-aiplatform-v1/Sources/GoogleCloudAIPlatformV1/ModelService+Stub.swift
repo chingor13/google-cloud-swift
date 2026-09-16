@@ -17,128 +17,128 @@
 #if ModelService
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ModelServiceStub: Sendable {
       func uploadModel(
-        request: UploadModelRequest, options: GoogleCloudGax.RequestOptions
+        request: UploadModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func getModel(
-        request: GetModelRequest, options: GoogleCloudGax.RequestOptions
+        request: GetModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Model
 
       func listModels(
-        request: ListModelsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListModelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListModelsResponse
 
       func listModelVersions(
-        request: ListModelVersionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListModelVersionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListModelVersionsResponse
 
       func listModelVersionCheckpoints(
-        request: ListModelVersionCheckpointsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListModelVersionCheckpointsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListModelVersionCheckpointsResponse
 
       func updateModel(
-        request: UpdateModelRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Model
 
       func updateExplanationDataset(
-        request: UpdateExplanationDatasetRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateExplanationDatasetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteModel(
-        request: DeleteModelRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteModelVersion(
-        request: DeleteModelVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteModelVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func mergeVersionAliases(
-        request: MergeVersionAliasesRequest, options: GoogleCloudGax.RequestOptions
+        request: MergeVersionAliasesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Model
 
       func exportModel(
-        request: ExportModelRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func copyModel(
-        request: CopyModelRequest, options: GoogleCloudGax.RequestOptions
+        request: CopyModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func importModelEvaluation(
-        request: ImportModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportModelEvaluationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ModelEvaluation
 
       func batchImportModelEvaluationSlices(
-        request: BatchImportModelEvaluationSlicesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchImportModelEvaluationSlicesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.BatchImportModelEvaluationSlicesResponse
 
       func batchImportEvaluatedAnnotations(
-        request: BatchImportEvaluatedAnnotationsRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchImportEvaluatedAnnotationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.BatchImportEvaluatedAnnotationsResponse
 
       func getModelEvaluation(
-        request: GetModelEvaluationRequest, options: GoogleCloudGax.RequestOptions
+        request: GetModelEvaluationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ModelEvaluation
 
       func listModelEvaluations(
-        request: ListModelEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListModelEvaluationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListModelEvaluationsResponse
 
       func getModelEvaluationSlice(
-        request: GetModelEvaluationSliceRequest, options: GoogleCloudGax.RequestOptions
+        request: GetModelEvaluationSliceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ModelEvaluationSlice
 
       func listModelEvaluationSlices(
-        request: ListModelEvaluationSlicesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListModelEvaluationSlicesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListModelEvaluationSlicesResponse
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }

@@ -16,10 +16,10 @@
 
 import Foundation
 import GoogleApi
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The configuration of the service.
-public struct ServiceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ServiceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The DNS address at which this service is available.
@@ -33,7 +33,7 @@ public struct ServiceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// A list of API interfaces exported by this service. Contains only the names,
   /// versions, and method names of the interfaces.
-  public var apis: [GoogleCloudWKT.Api] = []
+  public var apis: [GoogleWKT.Api] = []
 
   /// Additional API documentation. Contains only the summary and the
   /// documentation URL.
@@ -61,7 +61,7 @@ public struct ServiceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// This should not include the 'producer_destinations' field.
   public var monitoring: GoogleApi.Monitoring? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ServiceConfig`.
   public init() {}
@@ -118,7 +118,7 @@ public struct ServiceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .title) {
       self.title = value
     }
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.Api].self, forKey: .apis) {
+    if let value = try container.decodeIfPresent([GoogleWKT.Api].self, forKey: .apis) {
       self.apis = value
     }
     self.documentation = try container.decodeIfPresent(
@@ -138,7 +138,7 @@ public struct ServiceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.monitoring = try container.decodeIfPresent(GoogleApi.Monitoring.self, forKey: .monitoring)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -162,10 +162,10 @@ public struct ServiceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.serviceusage.v1.ServiceConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }
