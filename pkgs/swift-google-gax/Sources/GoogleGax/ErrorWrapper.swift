@@ -17,13 +17,13 @@ import struct AsyncHTTPClient.HTTPClientResponse
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 import GoogleRpc
 
 /// The services send errors using this structure.
 @_spi(GoogleCloudInternal) public struct _ErrorWrapper: Decodable {
   public init?(data: Data) {
-    let decoder = GoogleCloudWKT._ProtoJSONDecoder()
+    let decoder = GoogleWKT._ProtoJSONDecoder()
     guard let w = try? decoder.decode(Self.self, from: data) else {
       return nil
     }
@@ -42,7 +42,7 @@ import GoogleRpc
     /// The sequence of error details, wrapped as anys.
     ///
     /// Always use `_ProtoJSONDecoder` as the ProtoJSON encoding  may omit this field when empty.
-    let details: [GoogleCloudWKT.`Any`]
+    let details: [GoogleWKT.`Any`]
   }
 }
 

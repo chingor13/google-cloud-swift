@@ -14,7 +14,7 @@
 
 import Foundation
 import GoogleRpc
-import GoogleCloudWKT
+import GoogleWKT
 
 /// Additional information accompanying service errors.
 public enum StatusDetail: Equatable, Sendable {
@@ -69,11 +69,11 @@ public enum StatusDetail: Equatable, Sendable {
   case retryInfo(GoogleRpc.RetryInfo)
 
   /// Other details (represented as Any).
-  case other(GoogleCloudWKT.`Any`)
+  case other(GoogleWKT.`Any`)
 }
 
 extension StatusDetail {
-  init(from: GoogleCloudWKT.`Any`) {
+  init(from: GoogleWKT.`Any`) {
     if let v = try? GoogleRpc.BadRequest(fromAny: from) {
       self = .badRequest(v)
     } else if let v = try? GoogleRpc.DebugInfo(fromAny: from) {

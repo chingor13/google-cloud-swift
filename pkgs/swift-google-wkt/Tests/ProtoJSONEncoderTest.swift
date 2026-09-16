@@ -14,7 +14,7 @@
 
 import Foundation
 import Testing
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 @Suite struct ProtoJSONEncoderTest {
   struct FloatModel: Codable, Equatable {

@@ -15,7 +15,7 @@
 // [START storage_set_object_retention_policy]
 import Foundation
 import GoogleCloudStorage
-import GoogleCloudWKT
+import GoogleWKT
 
 public func setObjectRetentionPolicy(
   client: StorageControlClient, bucketId: String
@@ -28,7 +28,7 @@ public func setObjectRetentionPolicy(
     }
   )
 
-  let retainUntilTime = try GoogleCloudWKT.Timestamp(
+  let retainUntilTime = try GoogleWKT.Timestamp(
     seconds: Int64(Date().timeIntervalSince1970) + 24 * 60 * 60,
     nanos: 0
   )

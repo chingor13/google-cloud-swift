@@ -65,4 +65,5 @@ jobs:
           echo ==== gax ====
           swift package "${cache_flags[@]}" --package-path pkgs/swift-google-gax edit --path "$PWD/pkgs/swift-google-wkt" swift-google-wkt || true
           swift package "${cache_flags[@]}" --package-path pkgs/swift-google-gax edit --path "$PWD/pkgs/swift-google-auth" swift-google-auth || true
+          swift package "${cache_flags[@]}" --package-path pkgs/swift-google-gax edit --path "$PWD/generated/swift-google-rpc" swift-google-rpc || true
           swift test "${flags[@]}" --package-path pkgs/swift-google-gax

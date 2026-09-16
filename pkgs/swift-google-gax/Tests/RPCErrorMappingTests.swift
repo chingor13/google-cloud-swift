@@ -17,7 +17,7 @@ import GRPCCore
 import GRPCProtobuf
 import GoogleGax
 @testable import GoogleGaxGRPC
-import GoogleCloudWKT
+import GoogleWKT
 import GoogleRpc
 import SwiftProtobuf
 import Testing

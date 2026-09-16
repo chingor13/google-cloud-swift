@@ -13,12 +13,12 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
+import GoogleWKT
 import Testing
 
 @Suite struct StringValueTests {
   struct WrappedStringValueEncode: Encodable {
-    let value: GoogleCloudWKT.StringValue?
+    let value: GoogleWKT.StringValue?
   }
 
   @Test(
@@ -45,7 +45,7 @@ import Testing
   }
 
   struct WrappedStringValueDecode: Decodable {
-    let value: GoogleCloudWKT.StringValue?
+    let value: GoogleWKT.StringValue?
   }
 
   @Test(
@@ -70,7 +70,7 @@ import Testing
   }
 
   struct WrappedAny: Codable {
-    let content: GoogleCloudWKT.`Any`
+    let content: GoogleWKT.`Any`
   }
 
   @Test("Unpack StringValue from Any")

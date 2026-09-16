@@ -1387,7 +1387,7 @@ libraries:
   - name: google-wkt
     version: 0.1.0-preview
     copyright_year: "2026"
-    output: pkgs/swift-google-wkt/Sources/GoogleCloudWKT/generated
+    output: pkgs/swift-google-wkt/Sources/GoogleWKT/generated
     roots:
       - protobuf-src
     swift:
@@ -1397,10 +1397,10 @@ libraries:
         - type.proto
         - source_context.proto
       modules:
-        - output: pkgs/swift-google-wkt/Sources/GoogleCloudWKT/generated/messages
+        - output: pkgs/swift-google-wkt/Sources/GoogleWKT/generated/messages
           api_path: google/protobuf
           module_type: default
-        - output: pkgs/swift-google-wkt/Sources/GoogleCloudWKT/generated/version
+        - output: pkgs/swift-google-wkt/Sources/GoogleWKT/generated/version
           api_path: google/protobuf
           module_type: package-version
   - name: grafeas-v1

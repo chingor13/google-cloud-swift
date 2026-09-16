@@ -29,7 +29,7 @@ clean_flags=(
     --warnings-as-errors
 )
 clean_targets=(
-    GoogleCloudWKT
+    GoogleWKT
     GoogleAuth
     GoogleGax
     GoogleCloudStorage

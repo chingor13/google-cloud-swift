@@ -284,7 +284,7 @@ To preview one of the hand-crated packages use:
 
 ```bash
 swift package --disable-sandbox preview-documentation --target GoogleAuth
-swift package --disable-sandbox preview-documentation --target GoogleCloudWKT
+swift package --disable-sandbox preview-documentation --target GoogleWKT
 swift package --disable-sandbox preview-documentation --target GoogleGax
 ```
 

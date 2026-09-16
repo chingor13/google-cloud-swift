@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import GoogleGax
-import GoogleCloudWKT
+import GoogleWKT
 import GoogleRpc
 
 extension Operation {

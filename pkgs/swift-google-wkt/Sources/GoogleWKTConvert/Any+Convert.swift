@@ -12,17 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import GoogleCloudWKT
+import Foundation
+import GoogleWKT
 import SwiftProtobuf
 
-extension GoogleCloudWKT.FieldMask {
-  public init(proto: SwiftProtobuf.Google_Protobuf_FieldMask) throws {
-    self.init(paths: proto.paths)
+extension GoogleWKT.`Any` {
+  public init(proto: SwiftProtobuf.Google_Protobuf_Any) throws {
+    let json = try proto.jsonUTF8Data()
+    self = try JSONDecoder().decode(GoogleWKT.`Any`.self, from: json)
   }
 
-  public func toProto() throws -> SwiftProtobuf.Google_Protobuf_FieldMask {
-    var proto = SwiftProtobuf.Google_Protobuf_FieldMask()
-    proto.paths = self.paths
-    return proto
+  public func toProto() throws -> SwiftProtobuf.Google_Protobuf_Any {
+    let json = try JSONEncoder().encode(self)
+    return try SwiftProtobuf.Google_Protobuf_Any(jsonUTF8Data: json)
   }
 }

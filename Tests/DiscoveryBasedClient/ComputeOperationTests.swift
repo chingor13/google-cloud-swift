@@ -16,7 +16,7 @@ import Testing
 @testable import GoogleCloudComputeV1
 import GoogleGax
 import GoogleRpc
-import GoogleCloudWKT
+import GoogleWKT
 
 @Suite struct ComputeOperationTests {
   @Test func throwErrorsNoError() throws {

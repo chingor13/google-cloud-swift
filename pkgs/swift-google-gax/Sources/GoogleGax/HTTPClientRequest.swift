@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import class GoogleCloudWKT._ProtoJSONEncoder
+@_spi(GoogleCloudInternal) import class GoogleWKT._ProtoJSONEncoder
 import struct AsyncHTTPClient.HTTPClientRequest
 import struct NIOCore.ByteBuffer
 import struct NIOHTTP1.HTTPHeaders

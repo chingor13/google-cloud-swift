@@ -325,7 +325,7 @@ specification (AIP-160), including:
   related wrappers into native scalar JSON types.
 
 Where interoperability with `swift-protobuf` is required, the
-`GoogleCloudWKTConvert` target provides explicit conversions between WKT types
+`GoogleWKTConvert` target provides explicit conversions between WKT types
 and protobuf messages.
 
 ### Separate namespace for fields vs. options

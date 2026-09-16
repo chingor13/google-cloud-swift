@@ -15,7 +15,7 @@
 import Foundation
 import GoogleGax
 import GoogleCloudTestHelpers
-import GoogleCloudWKT
+import GoogleWKT
 import GoogleCloudWorkflowsV1
 import Logging
 import Testing

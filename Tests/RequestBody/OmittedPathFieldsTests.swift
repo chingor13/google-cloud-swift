@@ -18,7 +18,7 @@ import GoogleCloudBuildV1
 import GoogleGax
 import GoogleCloudSecretManagerV1
 import GoogleCloudTestHelpers
-import GoogleCloudWKT
+import GoogleWKT
 import GoogleIAMV1
 import Testing
 

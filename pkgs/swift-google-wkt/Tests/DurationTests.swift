@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
+import GoogleWKT
 import Testing
 
 @Suite struct DurationTests {
@@ -21,24 +21,24 @@ import Testing
     "Duration initializer",
     arguments: [(123, 456), (-123, -456), (123, 0), (-123, 0), (0, 456), (0, -456)])
   func initNormal(_ args: (Int64, Int64)) throws {
-    let got = try GoogleCloudWKT.Duration(seconds: args.0, nanos: args.1)
+    let got = try GoogleWKT.Duration(seconds: args.0, nanos: args.1)
     #expect(got.seconds == args.0)
     #expect(got.nanos == args.1)
   }
 
   @Test("Duration detect mismatched signs", arguments: [(123, -456), (-123, 456)])
   func mismatchedSigns(_ args: (Int64, Int64)) throws {
-    #expect(throws: GoogleCloudWKT.DurationError.mismatchedSigns) {
-      try GoogleCloudWKT.Duration(seconds: args.0, nanos: args.1)
+    #expect(throws: GoogleWKT.DurationError.mismatchedSigns) {
+      try GoogleWKT.Duration(seconds: args.0, nanos: args.1)
     }
   }
 
   @Test(
     "Duration detect out of range seconds",
-    arguments: [GoogleCloudWKT.Duration.maxSeconds + 1, GoogleCloudWKT.Duration.minSeconds - 1])
+    arguments: [GoogleWKT.Duration.maxSeconds + 1, GoogleWKT.Duration.minSeconds - 1])
   func outOfRangeSeconds(_ seconds: Int64) throws {
-    #expect(throws: GoogleCloudWKT.DurationError.outOfRange) {
-      try GoogleCloudWKT.Duration(seconds: seconds, nanos: 0)
+    #expect(throws: GoogleWKT.DurationError.outOfRange) {
+      try GoogleWKT.Duration(seconds: seconds, nanos: 0)
     }
   }
 
@@ -46,13 +46,13 @@ import Testing
     "Duration detect out of range nanos",
     arguments: [1_000_000_000, -1_000_000_000])
   func outOfRangeNanos(_ nanos: Int64) throws {
-    #expect(throws: GoogleCloudWKT.DurationError.outOfRange) {
-      try GoogleCloudWKT.Duration(seconds: 0, nanos: nanos)
+    #expect(throws: GoogleWKT.DurationError.outOfRange) {
+      try GoogleWKT.Duration(seconds: 0, nanos: nanos)
     }
   }
 
   struct WrappedDuration: Encodable {
-    let value: GoogleCloudWKT.Duration
+    let value: GoogleWKT.Duration
   }
 
   @Test(
@@ -81,7 +81,7 @@ import Testing
       (-315_576_000_000, -999_999_999, "{\"value\":\"-315576000000.999999999s\"}"),
     ])
   func encodeJSON(_ args: (Int64, Int64, String)) throws {
-    let duration = try GoogleCloudWKT.Duration(seconds: args.0, nanos: args.1)
+    let duration = try GoogleWKT.Duration(seconds: args.0, nanos: args.1)
     let wrapped = WrappedDuration(value: duration)
     let encoder = JSONEncoder()
     let data = try encoder.encode(wrapped)
@@ -90,7 +90,7 @@ import Testing
   }
 
   struct WrappedDurationDecode: Decodable {
-    let value: GoogleCloudWKT.Duration
+    let value: GoogleWKT.Duration
   }
 
   @Test(
