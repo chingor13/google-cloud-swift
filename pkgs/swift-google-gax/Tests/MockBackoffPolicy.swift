@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudGax
+import GoogleGax
 
 struct MockBackoff: BackoffPolicy {
   var delay: Duration = .zero

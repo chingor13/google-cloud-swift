@@ -17,7 +17,7 @@ import GRPCCore
 import GRPCNIOTransportHTTP2Posix
 import GRPCProtobuf
 import GoogleAuth
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+@_spi(GoogleCloudInternal) import GoogleGax
 import SwiftProtobuf
 
 /// Implements a generic gRPC client for the Swift SDK client libraries.
@@ -127,7 +127,7 @@ public final class _GRPCClient: Sendable {
       metadata.addString(effectiveQuotaProject, forKey: _HeaderNames.userProject)
     }
 
-    metadata.addString(clientHeader, forKey: GoogleCloudGax._HeaderNames.apiClient)
+    metadata.addString(clientHeader, forKey: GoogleGax._HeaderNames.apiClient)
     if !routingParams.isEmpty {
       metadata.addString(
         routingParams.joined(separator: "&"),

@@ -157,7 +157,7 @@ for try await secret in stream {
 }
 ```
 
-The underlying sequence (`GoogleCloudGax.PaginatedResponseSequence`) lazily
+The underlying sequence (`GoogleGax.PaginatedResponseSequence`) lazily
 fetches new pages using the previous response's `nextPageToken`, buffers
 retrieved elements, and handles intermediate empty pages as permitted by
 AIP-158.
@@ -258,12 +258,12 @@ REST/JSON over HTTP by default. This choice offers several benefits:
   observability tools.
 
 For services that require gRPC (such as the Cloud Storage Control plane or
-high-performance streaming APIs), `GoogleCloudGaxGRPC` provides a dedicated gRPC
+high-performance streaming APIs), `GoogleGaxGRPC` provides a dedicated gRPC
 transport layer.
 
 ### Hidden HTTP client
 
-The HTTP transport in `GoogleCloudGax` uses `AsyncHTTPClient` (from the Swift on
+The HTTP transport in `GoogleGax` uses `AsyncHTTPClient` (from the Swift on
 Server ecosystem) internally via `_HTTPClientHolder`. However, this dependency
 is entirely encapsulated and never exposed in public APIs:
 

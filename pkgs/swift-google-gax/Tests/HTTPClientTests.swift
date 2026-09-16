@@ -15,7 +15,7 @@
 import Foundation
 import Testing
 import struct Logging.Logger
-@_spi(GoogleCloudInternal) @testable import GoogleCloudGax
+@_spi(GoogleCloudInternal) @testable import GoogleGax
 import GoogleAuth
 import GoogleRpc
 import struct GoogleCloudWKT.Empty
@@ -372,7 +372,7 @@ import NIOHTTP1
 
   @Test("verify the client when used as GAPICs do for Create-like operations")
   func useAsGAPICCreate() async throws {
-    let clientHeader = GoogleCloudGax._gapicApiClientHeader(packageVersion: "1.2.3")
+    let clientHeader = GoogleGax._gapicApiClientHeader(packageVersion: "1.2.3")
     var wantURL = URLComponents()
     wantURL.scheme = "https"
     wantURL.host = "test-only.googleapis.com"
@@ -419,7 +419,7 @@ import NIOHTTP1
     var query = [
       URLQueryItem(name: "$alt", value: "json;enum-encoding=int")
     ]
-    let encoder = GoogleCloudGax._QueryParameterEncoder()
+    let encoder = GoogleGax._QueryParameterEncoder()
     query.append(contentsOf: try encoder.encode("test-only-thing-id", prefix: "thingId"))
     var req = try await client.newRequest(path: path, query: query)
     req.setMethod(.POST)
@@ -431,7 +431,7 @@ import NIOHTTP1
 
   @Test("verify the client when used as GAPICs do for Get-like operations")
   func useAsGAPICGet() async throws {
-    let clientHeader = GoogleCloudGax._gapicApiClientHeader(packageVersion: "1.2.3")
+    let clientHeader = GoogleGax._gapicApiClientHeader(packageVersion: "1.2.3")
     var wantURL = URLComponents()
     wantURL.scheme = "https"
     wantURL.host = "test-only.googleapis.com"
@@ -484,7 +484,7 @@ import NIOHTTP1
 
   @Test("verify the client when used as GAPICs do for Delete-like operations")
   func useAsGAPICDelete() async throws {
-    let clientHeader = GoogleCloudGax._gapicApiClientHeader(packageVersion: "1.2.3")
+    let clientHeader = GoogleGax._gapicApiClientHeader(packageVersion: "1.2.3")
     var wantURL = URLComponents()
     wantURL.scheme = "https"
     wantURL.host = "test-only.googleapis.com"
@@ -534,7 +534,7 @@ import NIOHTTP1
 
   @Test("verify the client when used as GAPICs do for Delete-like operations")
   func useAsGAPICDeleteWithError() async throws {
-    let clientHeader = GoogleCloudGax._gapicApiClientHeader(packageVersion: "1.2.3")
+    let clientHeader = GoogleGax._gapicApiClientHeader(packageVersion: "1.2.3")
     var wantURL = URLComponents()
     wantURL.scheme = "https"
     wantURL.host = "test-only.googleapis.com"
@@ -579,7 +579,7 @@ import NIOHTTP1
     var req = try await client.newRequest(path: path, query: query)
     req.setMethod(.GET)
     req.addHeader(name: _HeaderNames.apiClient, value: clientHeader)
-    let e = await #expect(throws: GoogleCloudGax.RequestError.self) {
+    let e = await #expect(throws: GoogleGax.RequestError.self) {
       _ = try (await req.rpc(GoogleCloudWKT.Empty.self)).get()
     }
     guard case .service(let serviceError) = e else {
@@ -593,7 +593,7 @@ import NIOHTTP1
 
   @Test("verify the client when used as GAPICs do for Delete-like operations")
   func useAsGAPICDeleteWithTransportError() async throws {
-    let clientHeader = GoogleCloudGax._gapicApiClientHeader(packageVersion: "1.2.3")
+    let clientHeader = GoogleGax._gapicApiClientHeader(packageVersion: "1.2.3")
     var wantURL = URLComponents()
     wantURL.scheme = "https"
     wantURL.host = "test-only.googleapis.com"
@@ -642,7 +642,7 @@ import NIOHTTP1
     var req = try await client.newRequest(path: path, query: query)
     req.setMethod(.GET)
     req.addHeader(name: _HeaderNames.apiClient, value: clientHeader)
-    let e = await #expect(throws: GoogleCloudGax.RequestError.self) {
+    let e = await #expect(throws: GoogleGax.RequestError.self) {
       _ = try (await req.rpc(GoogleCloudWKT.Empty.self)).get()
     }
     guard case .http(let httpError) = e else {

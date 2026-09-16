@@ -15,7 +15,7 @@
 import Foundation
 import GoogleAuth
 import GoogleCloudBuildV1
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudSecretManagerV1
 import GoogleCloudTestHelpers
 import GoogleCloudWKT

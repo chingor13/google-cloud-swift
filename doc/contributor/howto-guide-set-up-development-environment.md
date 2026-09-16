@@ -285,7 +285,7 @@ To preview one of the hand-crated packages use:
 ```bash
 swift package --disable-sandbox preview-documentation --target GoogleAuth
 swift package --disable-sandbox preview-documentation --target GoogleCloudWKT
-swift package --disable-sandbox preview-documentation --target GoogleCloudGax
+swift package --disable-sandbox preview-documentation --target GoogleGax
 ```
 
 You can also preview the GAPICs used by the top-level tests, for example:

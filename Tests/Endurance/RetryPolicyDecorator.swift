@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudGax
+import GoogleGax
 
 /// A retry policy decorator that counts each retry attempt and logs errors with the retry attempt
 /// and the name of the method that failed.

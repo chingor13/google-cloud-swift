@@ -13,8 +13,8 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudGax
-@_spi(GoogleCloudInternal) import GoogleCloudGaxGRPC
+@_spi(GoogleCloudInternal) import GoogleGax
+@_spi(GoogleCloudInternal) import GoogleGaxGRPC
 import Testing
 
 @Suite struct RoutingMatcherTests {
@@ -183,9 +183,9 @@ import Testing
   }
 
   @Test func grpcTypealiasCompatibility() {
-    let segment: GoogleCloudGaxGRPC._RoutingSegment = .literal("test")
-    #expect(segment == GoogleCloudGax._RoutingSegment.literal("test"))
-    #expect(GoogleCloudGaxGRPC._RoutingMatcher.encode("foo/bar") == "foo%2Fbar")
+    let segment: GoogleGaxGRPC._RoutingSegment = .literal("test")
+    #expect(segment == GoogleGax._RoutingSegment.literal("test"))
+    #expect(GoogleGaxGRPC._RoutingMatcher.encode("foo/bar") == "foo%2Fbar")
   }
 
   @Test func restUriPercentEncoding() {

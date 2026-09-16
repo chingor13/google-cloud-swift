@@ -1280,10 +1280,10 @@ libraries:
   - name: google-gax
     version: 0.0.0-preview
     copyright_year: "2026"
-    output: pkgs/swift-google-gax/Sources/GoogleCloudGax/generated
+    output: pkgs/swift-google-gax/Sources/GoogleGax/generated
     swift:
       modules:
-        - output: pkgs/swift-google-gax/Sources/GoogleCloudGax/generated
+        - output: pkgs/swift-google-gax/Sources/GoogleGax/generated
           api_path: ""
           module_type: package-version
   - name: google-iam-admin-v1

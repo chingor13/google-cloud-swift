@@ -14,7 +14,7 @@
 
 import Crypto
 import Foundation
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudWKT
 
 /// Errors thrown when validating or creating a `CustomerEncryptionKeyOptions`.

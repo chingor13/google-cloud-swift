@@ -15,7 +15,7 @@
 import Foundation
 import Testing
 
-@testable import GoogleCloudGax
+@testable import GoogleGax
 
 @Suite struct ExponentialBackoffTests {
   @Test func defaults() throws {

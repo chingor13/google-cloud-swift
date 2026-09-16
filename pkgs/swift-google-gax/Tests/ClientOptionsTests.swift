@@ -18,7 +18,7 @@ import Foundation
 #endif
 import Testing
 
-import GoogleCloudGax
+import GoogleGax
 
 @Suite struct ClientOptionsTests {
   @Test func then() {

@@ -15,7 +15,7 @@
 import Foundation
 import Testing
 
-import GoogleCloudGax
+import GoogleGax
 
 @Suite struct RetryStateTests {
   @Test func defaults() {

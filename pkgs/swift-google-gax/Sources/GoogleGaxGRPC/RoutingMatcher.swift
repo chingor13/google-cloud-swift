@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+@_spi(GoogleCloudInternal) import GoogleGax
 
 @_spi(GoogleCloudInternal)
-public typealias _RoutingSegment = GoogleCloudGax._RoutingSegment
+public typealias _RoutingSegment = GoogleGax._RoutingSegment
 
 @_spi(GoogleCloudInternal)
-public typealias _RoutingMatcher = GoogleCloudGax._RoutingMatcher
+public typealias _RoutingMatcher = GoogleGax._RoutingMatcher

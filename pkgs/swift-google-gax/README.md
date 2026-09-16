@@ -19,11 +19,11 @@ and long-running operations.
 
 This package provides two products:
 
-- **`GoogleCloudGax`**: Core HTTP transport (using `AsyncHTTPClient` and
+- **`GoogleGax`**: Core HTTP transport (using `AsyncHTTPClient` and
   `SwiftNIO`), client and request configuration options (`ClientOptions`,
   `RequestOptions`), retry and backoff loops, circuit breakers, adaptive
   throttlers, LRO polling policies, and error models.
-- **`GoogleCloudGaxGRPC`**: gRPC transport client built on `grpc-swift-2` and
+- **`GoogleGaxGRPC`**: gRPC transport client built on `grpc-swift-2` and
   `SwiftProtobuf` for services supporting or requiring gRPC.
 
 ## Features
@@ -67,16 +67,16 @@ Add `swift-google-gax` as a package dependency:
 swift package add-dependency https://github.com/googleapis/swift-google-gax.git --from 0.1.0
 ```
 
-Then add `GoogleCloudGax` to your target's dependencies:
+Then add `GoogleGax` to your target's dependencies:
 
 ```bash
-swift package add-target-dependency GoogleCloudGax <target-name> --package swift-google-gax
+swift package add-target-dependency GoogleGax <target-name> --package swift-google-gax
 ```
 
-If your service uses the gRPC transport, also add `GoogleCloudGaxGRPC`:
+If your service uses the gRPC transport, also add `GoogleGaxGRPC`:
 
 ```bash
-swift package add-target-dependency GoogleCloudGaxGRPC <target-name> --package swift-google-gax
+swift package add-target-dependency GoogleGaxGRPC <target-name> --package swift-google-gax
 ```
 
 ## Usage
@@ -89,7 +89,7 @@ policies, and backoff parameters:
 ```swift
 import Foundation
 import GoogleAuth
-import GoogleCloudGax
+import GoogleGax
 
 let options = try ClientOptions().with {
     // Custom endpoint (e.g. for VPC-SC, private access, or emulators)
@@ -119,7 +119,7 @@ let options = try ClientOptions().with {
 When a specific request needs distinct handling, pass a `RequestOptions` instance:
 
 ```swift
-import GoogleCloudGax
+import GoogleGax
 
 // Disable retries for a specific call
 let requestOptions = RequestOptions().with {
@@ -132,7 +132,7 @@ let requestOptions = RequestOptions().with {
 When an operation fails, the client libraries throw a `RequestError`:
 
 ```swift
-import GoogleCloudGax
+import GoogleGax
 
 do {
     // Perform API call using a client

@@ -14,7 +14,7 @@
 
 import Testing
 @testable import GoogleCloudComputeV1
-import GoogleCloudGax
+import GoogleGax
 import GoogleRpc
 import GoogleCloudWKT
 

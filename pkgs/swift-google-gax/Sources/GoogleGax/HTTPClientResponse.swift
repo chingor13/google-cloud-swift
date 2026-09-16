@@ -87,7 +87,7 @@ import struct NIOCore.ByteBuffer
     .mapValues { values in values.map { $0.value } }
     .mapValues { values in values.joined(separator: ";") }
     return .http(
-      GoogleCloudGax.HTTPDetails(
+      GoogleGax.HTTPDetails(
         httpStatusCode: Int(response.status.code),
         headers: headers,
         payload: data,

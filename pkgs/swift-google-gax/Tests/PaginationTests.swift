@@ -15,7 +15,7 @@
 import Foundation
 import Testing
 
-@testable import GoogleCloudGax
+@testable import GoogleGax
 
 @Suite struct PaginatedResponseTest {
   struct Item: Codable, Equatable { var name: String }

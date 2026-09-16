@@ -15,7 +15,7 @@
 import Foundation
 import Testing
 import GoogleRpc
-import GoogleCloudGax
+import GoogleGax
 
 @Suite struct AggregatedPaginatedResponseTest {
   public struct Item: Codable, Equatable { var name: String }
@@ -55,7 +55,7 @@ import GoogleCloudGax
       -> Response
     {
       if mockResponses.isEmpty {
-        throw GoogleCloudGax.RequestError.service(
+        throw GoogleGax.RequestError.service(
           ServiceError.init(code: GoogleRpc.Code.invalidArgument, message: "no more mocks"))
       }
       return mockResponses.removeFirst()

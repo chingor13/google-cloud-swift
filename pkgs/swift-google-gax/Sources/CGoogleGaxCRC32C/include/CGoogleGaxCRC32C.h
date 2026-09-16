@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef C_GOOGLE_CLOUD_GAX_CRC32C_H
-#define C_GOOGLE_CLOUD_GAX_CRC32C_H
+#ifndef C_GOOGLE_GAX_CRC32C_H
+#define C_GOOGLE_GAX_CRC32C_H
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -25,21 +25,21 @@ extern "C" {
 
 /// Returns true if hardware-accelerated CRC32C is supported by the current host
 /// CPU.
-bool googleCloudGax_crc32c_hw_available(void);
+bool googleGax_crc32c_hw_available(void);
 
 /// Computes an updated CRC32C checksum over `data` of length `len` using CPU
-/// instructions. Must only be called if `googleCloudGax_crc32c_hw_available()`
+/// instructions. Must only be called if `googleGax_crc32c_hw_available()`
 /// returns true.
 ///
 /// @param crc The running inverted CRC value (seed ^ 0xFFFFFFFF).
 /// @param data Pointer to input buffer.
 /// @param len Number of bytes.
 /// @return The updated inverted CRC value.
-uint32_t googleCloudGax_crc32c_hw(uint32_t crc, const void* data,
+uint32_t googleGax_crc32c_hw(uint32_t crc, const void* data,
                                   size_t len);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* C_GOOGLE_CLOUD_GAX_CRC32C_H */
+#endif /* C_GOOGLE_GAX_CRC32C_H */

@@ -13,8 +13,8 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudGax
-@testable import GoogleCloudGax
+@_spi(GoogleCloudInternal) import GoogleGax
+@testable import GoogleGax
 import Testing
 
 @Suite struct CRC32CTests {

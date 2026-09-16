@@ -14,7 +14,7 @@
 
 import Foundation
 import Testing
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudTestHelpers
 
 // All the code is compiled by default.

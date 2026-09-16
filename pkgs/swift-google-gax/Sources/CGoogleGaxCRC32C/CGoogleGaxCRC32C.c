@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "CGoogleCloudGaxCRC32C.h"
+#include "CGoogleGaxCRC32C.h"
 
 #include <string.h>
 
@@ -20,21 +20,21 @@
      defined(__AARCH64EB__) || defined(__ARMEB__))
 // Big-endian targets produce reversed byte order with multi-byte CRC instructions.
 // Fall back to the endian-neutral software implementation.
-#define GOOGLE_CLOUD_GAX_CRC32C_ARCH_UNSUPPORTED 1
+#define GOOGLE_GAX_CRC32C_ARCH_UNSUPPORTED 1
 #elif (defined(__GNUC__) || defined(__clang__)) && (defined(__x86_64__) || defined(_M_X64))
-#define GOOGLE_CLOUD_GAX_CRC32C_ARCH_X86_64 1
+#define GOOGLE_GAX_CRC32C_ARCH_X86_64 1
 #elif (defined(__GNUC__) || defined(__clang__)) && \
     (defined(__aarch64__) || defined(_M_ARM64) || defined(__arm64__))
-#define GOOGLE_CLOUD_GAX_CRC32C_ARCH_ARM64 1
+#define GOOGLE_GAX_CRC32C_ARCH_ARM64 1
 #else
 // Unsupported architecture, MSVC without Clang, or other: fall back to software.
-#define GOOGLE_CLOUD_GAX_CRC32C_ARCH_UNSUPPORTED 1
+#define GOOGLE_GAX_CRC32C_ARCH_UNSUPPORTED 1
 #endif
 
-#if defined(GOOGLE_CLOUD_GAX_CRC32C_ARCH_X86_64)
+#if defined(GOOGLE_GAX_CRC32C_ARCH_X86_64)
 #include <cpuid.h>
 
-bool googleCloudGax_crc32c_hw_available(void) {
+bool googleGax_crc32c_hw_available(void) {
 #if defined(__has_builtin)
 #if __has_builtin(__builtin_cpu_supports)
   return __builtin_cpu_supports("sse4.2") != 0;
@@ -50,7 +50,7 @@ bool googleCloudGax_crc32c_hw_available(void) {
 #if defined(__clang__) || defined(__GNUC__)
 __attribute__((target("sse4.2")))
 #endif
-uint32_t googleCloudGax_crc32c_hw(uint32_t crc, const void* buffer,
+uint32_t googleGax_crc32c_hw(uint32_t crc, const void* buffer,
                                   size_t len) {
   if (buffer == NULL || len == 0) {
     return crc;
@@ -101,7 +101,7 @@ uint32_t googleCloudGax_crc32c_hw(uint32_t crc, const void* buffer,
   return crc;
 }
 
-#elif defined(GOOGLE_CLOUD_GAX_CRC32C_ARCH_ARM64)
+#elif defined(GOOGLE_GAX_CRC32C_ARCH_ARM64)
 #if defined(__linux__)
 #include <sys/auxv.h>
 #ifndef HWCAP_CRC32
@@ -116,7 +116,7 @@ uint32_t googleCloudGax_crc32c_hw(uint32_t crc, const void* buffer,
 #include <windows.h>
 #endif
 
-bool googleCloudGax_crc32c_hw_available(void) {
+bool googleGax_crc32c_hw_available(void) {
 #if defined(__APPLE__)
   int val = 0;
   size_t size = sizeof(val);
@@ -138,7 +138,7 @@ __attribute__((target("crc")))
 #elif defined(__GNUC__)
 __attribute__((target("+crc")))
 #endif
-uint32_t googleCloudGax_crc32c_hw(uint32_t crc, const void* buffer,
+uint32_t googleGax_crc32c_hw(uint32_t crc, const void* buffer,
                                   size_t len) {
   if (buffer == NULL || len == 0) {
     return crc;
@@ -190,9 +190,9 @@ uint32_t googleCloudGax_crc32c_hw(uint32_t crc, const void* buffer,
 }
 
 #else
-bool googleCloudGax_crc32c_hw_available(void) { return false; }
+bool googleGax_crc32c_hw_available(void) { return false; }
 
-uint32_t googleCloudGax_crc32c_hw(uint32_t crc, const void* buffer,
+uint32_t googleGax_crc32c_hw(uint32_t crc, const void* buffer,
                                   size_t len) {
   (void)buffer;
   (void)len;

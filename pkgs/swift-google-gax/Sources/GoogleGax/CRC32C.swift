@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import CGoogleCloudGaxCRC32C
+import CGoogleGaxCRC32C
 import Foundation
 
 /// A hardware-accelerated and lookup-table based implementation of the CRC32C (Castagnoli) checksum algorithm.
 @_spi(GoogleCloudInternal) public struct _CRC32C: Sendable {
   /// Whether hardware acceleration is supported and active on the current host CPU.
   /// Dynamically detected once per process.
-  static let isHardwareAccelerated: Bool = googleCloudGax_crc32c_hw_available()
+  static let isHardwareAccelerated: Bool = googleGax_crc32c_hw_available()
 
   private static let table: [UInt32] = {
     (0..<256).map { i in
@@ -46,7 +46,7 @@ import Foundation
   public mutating func update(_ buffer: UnsafeRawBufferPointer) {
     guard let baseAddress = buffer.baseAddress, !buffer.isEmpty else { return }
     if Self.isHardwareAccelerated {
-      value = googleCloudGax_crc32c_hw(value, baseAddress, buffer.count)
+      value = googleGax_crc32c_hw(value, baseAddress, buffer.count)
     } else {
       updateSoftware(buffer)
     }

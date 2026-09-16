@@ -17,13 +17,13 @@
 import PackageDescription
 
 let package = Package(
-  name: "GoogleCloudGax",
+  name: "GoogleGax",
   platforms: [
     .macOS(.v15)
   ],
   products: [
-    .library(name: "GoogleCloudGax", targets: ["GoogleCloudGax"]),
-    .library(name: "GoogleCloudGaxGRPC", targets: ["GoogleCloudGaxGRPC"]),
+    .library(name: "GoogleGax", targets: ["GoogleGax"]),
+    .library(name: "GoogleGaxGRPC", targets: ["GoogleGaxGRPC"]),
   ],
   dependencies: [
     .package(url: "https://github.com/googleapis/swift-google-auth", from: "0.0.0-preview"),
@@ -40,12 +40,12 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "CGoogleCloudGaxCRC32C"
+      name: "CGoogleGaxCRC32C"
     ),
     .target(
-      name: "GoogleCloudGax",
+      name: "GoogleGax",
       dependencies: [
-        "CGoogleCloudGaxCRC32C",
+        "CGoogleGaxCRC32C",
         .product(name: "AsyncHTTPClient", package: "async-http-client"),
         .product(name: "GoogleAuth", package: "swift-google-auth"),
         .product(name: "GoogleCloudWKT", package: "swift-google-wkt"),
@@ -56,11 +56,12 @@ let package = Package(
       ]
     ),
     .target(
-      name: "GoogleCloudGaxGRPC",
+      name: "GoogleGaxGRPC",
       dependencies: [
-        "GoogleCloudGax",
+        "GoogleGax",
         .product(name: "GoogleAuth", package: "swift-google-auth"),
         .product(name: "GoogleCloudWKT", package: "swift-google-wkt"),
+        .product(name: "GoogleCloudWKTConvert", package: "swift-google-wkt"),
         .product(name: "GoogleRpc", package: "swift-google-rpc"),
         .product(name: "GRPCCore", package: "grpc-swift-2"),
         .product(name: "GRPCNIOTransportHTTP2Posix", package: "grpc-swift-nio-transport"),
@@ -70,10 +71,10 @@ let package = Package(
       ]
     ),
     .testTarget(
-      name: "GoogleCloudGaxTests",
+      name: "GoogleGaxTests",
       dependencies: [
-        "GoogleCloudGax",
-        "GoogleCloudGaxGRPC",
+        "GoogleGax",
+        "GoogleGaxGRPC",
         .product(name: "DequeModule", package: "swift-collections"),
         .product(name: "GoogleRpc", package: "swift-google-rpc"),
         .product(name: "GoogleCloudWKT", package: "swift-google-wkt"),

@@ -1,4 +1,4 @@
-# ```GoogleCloudGax```
+# ```GoogleGax```
 
 The GAX library provides protocols, types and functions to configure the Coogle
 Cloud Client libraries for Swift.

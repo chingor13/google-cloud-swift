@@ -17,7 +17,7 @@ import Foundation
   import FoundationNetworking
 #endif
 import Testing
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+@_spi(GoogleCloudInternal) import GoogleGax
 import GoogleRpc
 
 @Suite struct ErrorWrapperTests {

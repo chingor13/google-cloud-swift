@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import GoogleCloudGax
+import GoogleGax
 
 extension ThrottleResult: Equatable {
   public static func == (lhs: ThrottleResult, rhs: ThrottleResult) -> Bool {

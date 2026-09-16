@@ -16,7 +16,7 @@ import Foundation
 import Testing
 import GoogleCloudWKT
 import GoogleRpc
-@testable import GoogleCloudGax
+@testable import GoogleGax
 
 @Suite struct StatusDetailTests {
   @Test func badRequest() throws {

@@ -31,7 +31,7 @@ clean_flags=(
 clean_targets=(
     GoogleCloudWKT
     GoogleAuth
-    GoogleCloudGax
+    GoogleGax
     GoogleCloudStorage
     GoogleCloudSecretManagerV1
     GoogleCloudWorkflowsV1

@@ -14,7 +14,7 @@
 
 import Foundation
 import Testing
-@_spi(GoogleCloudInternal) @testable import GoogleCloudGax
+@_spi(GoogleCloudInternal) @testable import GoogleGax
 
 @Suite struct HostTests {
   @Test(arguments: [

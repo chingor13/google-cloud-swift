@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudGax
+import GoogleGax
 
 struct MockPollingPolicy: PollingErrorPolicy {
   var onError: @Sendable (PollingState, RequestError) -> PollingResult = { _, e in .permanent(e) }

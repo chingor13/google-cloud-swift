@@ -14,7 +14,7 @@
 
 import Foundation
 import GoogleAuth
-import GoogleCloudGax
+import GoogleGax
 @testable import GoogleCloudStorage
 import GoogleCloudWKT
 import GoogleIAMV1

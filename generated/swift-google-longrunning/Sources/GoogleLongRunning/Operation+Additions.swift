@@ -13,14 +13,14 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudWKT
 import GoogleRpc
 
 extension Operation {
   // Extracts the state of an operation.
   public func _extractStatus<Response>(_ type: Response.Type) throws
-    -> GoogleCloudGax._PollableOperationImpl<Response>.State
+    -> GoogleGax._PollableOperationImpl<Response>.State
   where Response: GoogleCloudWKT._AnyPackable {
     guard self.done else {
       return .init(done: false, result: nil)
@@ -32,7 +32,7 @@ extension Operation {
         return .init(
           done: true,
           result: .failure(
-            GoogleCloudGax.RequestError.malformedResponse(
+            GoogleGax.RequestError.malformedResponse(
               "Operation completed but response value was missing")))
       }
       let response = try Response(fromAny: anyValueUnwrapped)
@@ -45,7 +45,7 @@ extension Operation {
   }
 
   public func _extractStatusEmpty() throws
-    -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State
+    -> GoogleGax._PollableOperationImpl<Swift.Void>.State
   {
     guard self.done else {
       return .init(done: false, result: nil)
@@ -62,27 +62,27 @@ extension Operation {
   }
 
   static func _extractError<T>(_ type: T.Type, status: GoogleRpc.Status?)
-    -> GoogleCloudGax._PollableOperationImpl<T>.State
+    -> GoogleGax._PollableOperationImpl<T>.State
   {
     guard let statusUnwrapped = status else {
       return .init(
         done: true,
         result: .failure(
-          GoogleCloudGax.RequestError.malformedResponse(
+          GoogleGax.RequestError.malformedResponse(
             "Operation completed but error value was missing")))
     }
-    let error = GoogleCloudGax.RequestError.service(
-      GoogleCloudGax.ServiceError(
+    let error = GoogleGax.RequestError.service(
+      GoogleGax.ServiceError(
         code: GoogleRpc.Code(intValue: Int(statusUnwrapped.code)),
         message: statusUnwrapped.message))
     return .init(done: true, result: .failure(error))
   }
 
-  static func _missingResult<T>(_ type: T.Type) -> GoogleCloudGax._PollableOperationImpl<T>.State {
+  static func _missingResult<T>(_ type: T.Type) -> GoogleGax._PollableOperationImpl<T>.State {
     .init(
       done: true,
       result: .failure(
-        GoogleCloudGax.RequestError.malformedResponse("Operation completed but result was missing"))
+        GoogleGax.RequestError.malformedResponse("Operation completed but result was missing"))
     )
   }
 }

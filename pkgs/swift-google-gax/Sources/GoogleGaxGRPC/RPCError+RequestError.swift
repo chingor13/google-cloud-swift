@@ -15,7 +15,7 @@
 import Foundation
 import GRPCCore
 import GRPCProtobuf
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudWKT
 import GoogleCloudWKTConvert
 import GoogleRpc
@@ -149,7 +149,7 @@ private func fallbackAny(typeUrl: String = "") -> GoogleCloudWKT.`Any` {
 }
 
 extension RPCError {
-  /// Converts an `RPCError` to a `GoogleCloudGax.RequestError`.
+  /// Converts an `RPCError` to a `GoogleGax.RequestError`.
   func toRequestError() -> RequestError {
     if self.cause != nil {
       return .io(self)

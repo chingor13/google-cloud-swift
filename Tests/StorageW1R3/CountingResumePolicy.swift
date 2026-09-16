@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudStorage
 
 /// A resume policy decorator that counts each policy consultation and logs details

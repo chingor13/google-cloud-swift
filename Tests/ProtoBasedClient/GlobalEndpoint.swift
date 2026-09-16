@@ -13,8 +13,8 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudGax
-@_spi(GoogleCloudInternal) import struct GoogleCloudGax._CRC32C
+import GoogleGax
+@_spi(GoogleCloudInternal) import struct GoogleGax._CRC32C
 import GoogleCloudLocation
 import GoogleCloudSecretManagerV1
 import GoogleCloudTestHelpers

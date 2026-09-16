@@ -43,8 +43,8 @@ let package = Package(
       name: "GoogleCloudStorage",
       dependencies: [
         .product(name: "GoogleAuth", package: "swift-google-auth"),
-        .product(name: "GoogleCloudGax", package: "swift-google-gax"),
-        .product(name: "GoogleCloudGaxGRPC", package: "swift-google-gax"),
+        .product(name: "GoogleGax", package: "swift-google-gax"),
+        .product(name: "GoogleGaxGRPC", package: "swift-google-gax"),
         .product(name: "GoogleCloudWKT", package: "swift-google-wkt"),
         .product(name: "GoogleCloudWKTConvert", package: "swift-google-wkt"),
         .product(name: "GoogleIAMV1", package: "swift-google-iam-v1"),
@@ -81,7 +81,7 @@ let package = Package(
       dependencies: [
         "GoogleCloudStorage",
         .product(name: "GoogleAuth", package: "swift-google-auth"),
-        .product(name: "GoogleCloudGax", package: "swift-google-gax"),
+        .product(name: "GoogleGax", package: "swift-google-gax"),
         .product(name: "NIOCore", package: "swift-nio"),
       ],
       path: "Tests/IntegrationTests"

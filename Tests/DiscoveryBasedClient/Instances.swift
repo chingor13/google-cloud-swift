@@ -14,7 +14,7 @@
 
 import GoogleCloudComputeV1
 import GoogleCloudTestHelpers
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudWKT
 import Logging
 
